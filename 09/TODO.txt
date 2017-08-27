@@ -1,0 +1,4 @@
+Stark überarbeiten:
+- Regeln vernünftig angeben
+- Material von Anderen einbinden
+- VL-Material einbinden

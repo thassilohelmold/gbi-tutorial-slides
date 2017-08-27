@@ -1,0 +1,74 @@
+\begin{frame}
+	\frametitle{Zum Aufwärmen: Sprache gesucht!} $\Sigma = \{ \triangle, \square, \circ \}$.\\
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Zum Aufwärmen: Sprache gesucht!}
+%	
+%	Ihr erhaltet eine Karte mit einer Beschreibung einer formalen Sprache über dem Alphabet $\Sigma = \{ \triangle, \square, \circ \}$.\\
+%	Ziel ist es, jeweils alle Beschreibungen von gleichen Sprachen zu sammeln.\\
+%	Dazu überlegt ihr euch zunächst in 4er-Gruppen, ob ihr Beschreibungen von gleichen Sprachen habt oder was andere Beschreibungen wären. \\
+%	Dann tauschen sich jeweils 3 4er-Gruppen aus und sammeln die Beschreibungen.
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Zum Aufwärmen: Sprache gesucht!}
+	
+	Die Sprache der Wörter, die mit einem Kreis beginnen und danach keinen Kreis mehr enthalten.
+	\vspace{15mm}
+	\pause
+	
+	$$ \{\circ\} \cdot \{\triangle, \square\}^* $$
+	\vspace{15mm}
+	\pause
+	
+	$$ \{w \in \Sigma^* \mid w = \circ \cdot v, v \in \{\triangle, \square\}^* \} $$
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Zum Aufwärmen: Sprache gesucht!}
+	
+	Die Sprache der Wörter, deren vorletztes Zeichen ein Dreieck ist.
+	\vspace{15mm}
+	\pause
+	
+	$$ \{\triangle, \square, \circ\}^* \cdot \triangle \cdot \{\triangle, \square, \circ\} $$
+	\vspace{15mm}
+	\pause
+
+	$$ \{w \in \Sigma^* \mid w = v \cdot \triangle \cdot \mu, v \in \Sigma^*, \mu \in \Sigma \} $$
+
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Zum Aufwärmen: Sprache gesucht!}
+	
+	$$ (\{\square, \circ\}^* \cdot \{\triangle\triangle\}^* )^* $$
+	\vspace{15mm}
+	\pause
+
+	Die Sprache der Wörter, in denen nirgends eine ungerade Anzahl an Dreiecken nebeneinander steht.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Zum Aufwärmen: Sprache gesucht!}
+	
+	$$ \{\triangle, \circ\}^* \cdot ( \{\square\} \cdot \{\triangle, \circ\}^* \cdot \{\square\} \cdot \{\triangle, \circ\}^* )^* $$
+	\vspace{15mm}
+	\pause
+	
+	Die Sprache der Wörter, in denen eine gerade Anzahl an Vierecken vorkommt.
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Zum Aufwärmen: Sprache gesucht!}
+	
+	$$ \{\square, \triangle\}^* \cdot ( \{\circ\} \cdot \{\square, \triangle\}^+ )^* \cdot \{\circ, \varepsilon\} $$
+	\vspace{15mm}
+	\pause
+
+	Die Sprache der Wörter, in denen nirgends zwei Kreise aufeinander folgen.
+\end{frame}

@@ -1,0 +1,122 @@
+% This video for Turing:
+% https://www.youtube.com/watch?v=VxvY4rI15sM
+
+% Define a global usable date. Must come before StyleTut
+\newcommand{\mydate}{10.02.2017}
+
+% Comment/uncomment this line to toggle handout mode
+\newcommand{\handout}{}
+
+\input{../TutTexbib/Style_Tut.tex}
+\input{../TutTexbib/PraeambelTut.tex}
+\graphicspath{{../figures/}}
+
+\begin{document}
+\starttut{14}
+
+\lastframe{0.55}{20}{xkcd/turing_test.png}{https://www.xkcd.com/}
+
+\framePrevEpisode
+
+\begin{frame}{Rückblick: Reguläre Sprachen}
+	\begin{itemize}[<+->]
+		\item Endliche Akzeptoren
+		\item Reguläre Ausdrücke
+		\item Rechtslineare Grammatiken
+		\item Strukturelle Induktion
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Wahr oder Falsch?}
+	\begin{itemize}
+		\truefalseQ{1}{myRed}{Jede kontextfreie Grammatik lässt sich als regulärer Ausdruck darstellen}{F $\qquad$ Die Grammatik muss rechtslinear sein, kontextfrei kann \enquote{mehr}}
+		\truefalseQ{3}{myGreen}{Jeder regulären Ausdruck lässt sich durch eine kontextfreie Grammatik darstellen}{W}
+		\truefalseQ{5}{myGreen}{Für jede Sprache $L$ und jedes Wort $w \in L$ gilt: Es existiert ein endlicher Automat, der $w$ erkennt}{W}
+		\truefalseQ{7}{myRed}{Die Sprache der gültigen Klammerausdrücke ist regulär}{F}
+		\truefalseQ{9}{myGreen}{Die Sprache der gültigen Klammerausdrücke ist kontextfrei}{W}
+	\end{itemize}
+\end{frame}
+
+% TODO: Zum Aufwärmen
+% Mal was ganz anderes: Monkey Island 1, Unterwasserszene
+% Mal wieder keine Zeit für die Vorbereitung, aber dafür gibt's Kuchen...
+
+\begin{frame}
+	\centering \Large
+	Dr. Meta ist zurück!
+\end{frame}
+
+\input{../Bloecke/Turing}
+
+\input{../Bloecke/TMKomplexitaet}
+
+\begin{frame}{Turingmaschinen: Klausur}
+	Noch ein Hinweis zum Schluss:\\
+	Bisher kam in \textbf{jeder}, wirklich jeder Klausur eine Aufgabe zu Turingmaschinen dran.\\
+	Diese gibt meist relativ viele Punkte.\\
+	
+	\bigskip
+	Zu 99 \% wird auch dieses Mal wieder eine TM-Aufgabe drankommen.\\
+	\textbf{Also übt das!} Hier zählt vor allem Geschwindigkeit (und Präzision).
+\end{frame}
+
+\begin{frame}	
+	\begin{block}{Was ihr nun wissen solltet}
+		\begin{itemize}
+			\item Turingmaschinen
+			\item Komplexität
+			\item Entscheidbarkeit -- Wir können nicht alles lösen!
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Und so geht es weiter...}
+		\begin{itemize}
+			\item Algorithmen I -- Mehr zu Algorithmen, Laufzeiten, Datenstrukturen, Graphen
+			\item TI -- Realisierung von Schaltungen, Prozessoren (MIMA, ...)
+			\item TGI -- Mehr zu Komplexität, Entscheidbarkeit, Turingmaschinen
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Falls ihr mehr wollt...}
+	\begin{block}{Persönliche Empfehlungen}
+		\begin{itemize}
+			\item Design and Analysis of Algorithms (für Algorithmen I)
+			\item CS50x
+			\item From Nand to Tetris
+		\end{itemize}
+	\end{block}
+
+	\begin{itemize}
+		\item EDX (edx.org)
+		\item Coursera (coursera.org)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Das war GBI}
+	\begin{columns}
+		\pause
+		\column{0.4\linewidth}
+		\begin{figure}[H]
+			\vspace{-20pt}
+			\includegraphics[scale=0.45]{xkcd/heaven}
+		\end{figure}
+	
+		\pause
+		\column{0.5\linewidth}
+		\begin{figure}[H]
+			\vspace{-20pt}
+			\includegraphics[scale=0.45]{xkcd/hell}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\huge \centering Viel Erfolg bei der Klausur!
+\end{frame}
+
+\xkcdframe{5.8}{30}{xkcd/np_complete.png}{http://www.xkcd.com}{}
+
+\slideThanks
+
+\end{document}

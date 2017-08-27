@@ -1,0 +1,105 @@
+% TODO: Negations-Besipiel beim ZK (schrittweise def. einer induktiven ZK-Fkt.)
+
+% Define a global usable date. Must come before StyleTut
+\newcommand{\mydate}{25.11.2016}
+
+% Comment/uncomment this line to toggle handout mode
+\newcommand{\handout}{}
+
+\input{../TutTexbib/Style_Tut.tex}
+\input{../TutTexbib/PraeambelTut.tex}
+
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
+
+\begin{document}
+\starttut{5}
+
+% Zum Aufwärmen: PEBA Tutorenprogramm Aktivierung Code merken (PDF im gleichen Ordner zu finden)
+
+\framePrevEpisode
+
+\begin{frame}{Rückblick: Zahlendarstellung}
+	\begin{itemize}
+		\item Zahlen sind Objekte, die einen festen numerischen Wert haben.\\
+			Um eine Zahl aufzuschreiben, benötigen wir aber eine Darstellung. \\
+			Die gleiche Zahl kann viele verschiedenen Darstellungen annehmen.
+		\item Mit der Auswertungsfunktion $Num_b(\cdot)$ berechnen wir von einer Zahlendarstellung den numerischen Wert.
+		\item Mit der Funktion $Repr_b(\cdot)$ können wir eine Zahl in einer beliebigen Darstellung angeben.
+	\end{itemize}
+	
+	Bis jetzt haben wir das alles nur für positive Zahlen gesehen!
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Wahr oder falsch?}
+	\begin{itemize}
+		\truefalseQ{1}{2}{myGreen}{$\forall x \in \nZ : x \mod 2 = 0 \iff x \text{ ist gerade}$}{W $\qquad \text{Und auch: } x \mod 2 = 1 \iff \text{x ist ungerade}$}
+		\truefalseQ{3}{4}{myRed}{$4 \cdot (x \div 4) = x$}{F $\qquad 4 \cdot (x \div 4) + (x \mod 4) = x$}
+		\truefalseQ{5}{6}{myGreen}{$\left(\{a\}^\ast\cdot \{b,\epsilon\}\right)^\ast = \{a,b\}^\ast$}{W}
+		\truefalseQ{7}{8}{myRed}{Jede Abbildung besitzt eine Umkehrabbildung}{F Nur bijektive Abbildungen besitzen eine Umkehrabbildung}
+		\truefalseQ{9}{10}{myGreen}{Für jede Abbildung können wir das Urbild angeben}{W}
+	\end{itemize}
+	\end{block}	
+\end{frame}
+
+\begin{frame}{Aufgabe: Zahlendarstellung}
+	Berechnet die folgenden Zahlenwerte:
+	\begin{align*}
+		Num_2(1) &= \only<2->{1} \\
+		Num_2(11) &= \only<3->{3} \\
+		Num_2(111) &= \only<4->{7} \\
+		Num_2(1111) &= \only<5->{15}
+	\end{align*}
+	
+	Gibt es ein allgemeines Muster? \\ \pause[6]
+	Ja, es gilt $$Num_2(1^l) = 2^l - 1$$ und allgemein $$Num_b((b-1)^l) = b^l - 1$$
+\end{frame}
+
+\input{../Bloecke/Zweierkomplement.tex}
+
+\begin{frame}{Von einer Zahlendarstellung zur Anderen}
+	Eigentlich recht intuitiv:
+	$$Trans_{3,5} = Repr_3 \circ Num_5$$
+	
+	\begin{block}{Aufgabe}
+		Berechne folgende Darstellungen:\\
+		$Repr_2(42) = \visible<2->{ 101010_2}$ \\
+		$Trans_{4,2}(101010) = \visible<3->{ 222_4}$ \\
+		$Trans_{8,10}(42) = \visible<4->{ 52_8}$ \\
+		$Trans_{16,10}(42) = \visible<5->{ 2A_{16}}$
+	\end{block}
+
+	Was ist bei allen Wörtern gleich? \only<6->{Die Bedeutung!} \\
+	Was macht die Rechnungen 2 - 4 vergleichsweise einfach? \pause[6] Wir können die Struktur ausnutzen und zeichenweise vorgehen! ($Trans_{8,10}(42) = Trans_{8,2}(101 \cdot 010) = Trans_{8,2}(101) \cdot Trans_{8,2}(010)$)
+\end{frame}
+
+\input{../Bloecke/Codierungen.tex}
+
+\lastframe{0.5}{0}{xkcd/digital_data.png}{https://www.xkcd.com/1683/}
+
+\input{../Bloecke/Huffmann.tex}
+
+%\input{../Bloecke/Speicher.tex}
+
+\begin{frame}	
+	\begin{block}{Was ihr nun wissen solltet}
+		\begin{itemize}
+			\item Wie man das Zweierkomplement bildet
+			\item Übersetzungen und Codierungen
+			\item Huffman-Codierung
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Was nächstes Mal kommt}
+		\begin{itemize}
+			\item Speicher - Damit wir nicht alles gleich wieder vergessen
+			\item MIMA - Den Bits beim Arbeiten zuschauen
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\lastframe{0.75}{0}{xkcd/tar.png}{https://www.xkcd.com/1168/}
+\slideThanks
+
+\end{document}

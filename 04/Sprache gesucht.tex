@@ -1,0 +1,59 @@
+\documentclass[a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{palatino}
+\begin{document}
+
+	\Large
+	
+	% S1
+
+	$$ \{\circ\} \cdot \{\triangle, \square\}^* $$
+	\vspace{15mm}
+	
+	$$ \{w \in \Sigma^* \mid w = \circ \cdot v, v \in \{\triangle, \square\}^* \} $$
+	\vspace{15mm}
+	
+	Die Sprache der Wörter, die mit einem Kreis beginnen und danach keinen Kreis mehr enthalten.
+	\vspace{15mm}
+	
+	% S2
+
+	$$ \{\triangle, \square, \circ\}^* \cdot \triangle \cdot \{\triangle, \square, \circ\} $$
+	\vspace{15mm}
+	
+	$$ \{w \in \Sigma^* \mid w = v \cdot \triangle \cdot \mu, v \in \Sigma^*, \mu \in \Sigma \} $$
+	\vspace{15mm}
+	
+	Die Sprache der Wörter, deren vorletztes Zeichen ein Dreieck ist.
+	\pagebreak
+	
+	
+	% S3
+	
+	$$ (\{\square, \circ\}^* \cdot \{\triangle\triangle\}^* )^* $$
+	\vspace{15mm}
+	
+	Die Sprache der Wörter, in denen nirgends eine ungerade Anzahl an Dreiecken nebeneinander steht.
+	\vspace{15mm}
+	
+	% S4
+	
+	$$ \{\triangle, \circ\}^* \cdot ( \{\square\} \cdot \{\triangle, \circ\}^* \cdot \{\square\} \cdot \{\triangle, \circ\}^* )^* $$
+	\vspace{15mm}
+	
+	Die Sprache der Wörter, in denen eine gerade Anzahl an Vierecken vorkommt.
+	\vspace{15mm}
+	
+	% S3
+	
+	$$ \{\square, \triangle\}^* \cdot ( \{\circ\} \cdot \{\square, \triangle\}^+ )^* $$
+	\vspace{15mm}
+	
+	Die Sprache der Wörter, in denen nirgends zwei Kreise aufeinander folgen.
+	\vspace{15mm}
+	
+\end{document}

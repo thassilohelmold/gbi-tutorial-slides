@@ -1,0 +1,44 @@
+% Dieser Foliensatz wurde noch nicht überarbeitet, da es nur 14 Tutorien gab.
+
+% Define a global usable date. Must come before StyleTut
+\newcommand{\mydate}{05.02.2013}
+
+% Comment/uncomment this line to toggle handout mode
+\newcommand{\handout}{}
+
+\input{../TutTexbib/Style_Tut.tex}
+\input{../TutTexbib/PraeambelTut.tex}
+\graphicspath{{../figures/}}
+
+
+\begin{document}
+\starttut{14}
+
+\subsection{Quiz}
+\begin{frame}
+	\begin{itemize}
+		\item<1->\color<2->[rgb]{1,0,0} Jedes Problem kann von einer Turingmaschine entschieden werden.
+		\item<3->\color<4->[rgb]{0,1,0} Es gilt $ \textbf{P} \subset \textbf{PSPACE} $
+		\item<5->\color<6->[rgb]{1,0,0} Es gibt einen endlichen Akzeptor, der weniger Zustände hat als die entsprechende Anzahl von Nerode-Äquivalenzklassen.
+	\end{itemize}
+\end{frame}
+
+\input{../Bloecke/NerodeRelation}
+
+\input{../Bloecke/Halbordnungen}
+
+%% Was ihr nun wissen solltet
+\section{Schluss}
+\begin{frame}
+	\frametitle{Was ihr nun wissen solltet}
+	\begin{itemize}
+		\item Was ein Hasse-Diagramm ist
+		\item Das man manchmal Triviales wirklich beweisen muss
+		\item Das es nun zu Ende ist.
+	\end{itemize}
+\end{frame}
+
+%% Letzte Seite
+\lastframe{0.45}{xkcd/turing_test.png}{http://xkcd.com/329/}
+
+\end{document}

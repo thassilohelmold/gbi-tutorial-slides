@@ -1,0 +1,64 @@
+% Define a global usable date. Must come before StyleTut
+\newcommand{\mydate}{13.01.2017}
+
+% Comment/uncomment this line to toggle handout mode
+\newcommand{\handout}{}
+
+\input{../TutTexbib/Style_Tut.tex}
+\input{../TutTexbib/PraeambelTut.tex}
+
+\graphicspath{{../figures/}}
+
+
+\begin{document}
+\starttut{10}
+
+\lastframe{0.42}{35}{xkcd/dfs_761.png}{https://www.xkcd.com/761}
+
+\framePrevEpisode
+
+\begin{frame}{Rückblick: Algorithmen}
+	\begin{itemize}[<+->]
+		%TODO
+		\item Siehe letztes Tutorium
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Wahr oder Falsch?}
+	\begin{itemize}
+		\truefalseQ{1}{2}{myRed}{Die Korrektheit eines Algorithmus kann man durch Testen beweisen}{\linebreak Nein, nein, nein! Testen kann nur vorhandene Fehler aufzeigen, aber niemals die Fehlerfreiheit garantieren.}
+		\truefalseQ{3}{4}{myRed}{Sinnvolle Schleifeninvarianten kann man \enquote{nach Kochrezept} aufstellen.}{\linebreak Nein, das Aufstellen sinnvoller Schleifeninvarianten erfordert viel Übung und kann insbesondere noch nicht von einem Rechner durchgeführt werden.}
+		\truefalseQ{5}{6}{myRed}{Ein Algorithmus ist ein (compilierbares/ausführbares) Programm}{\linebreak Nein, der Algorithmus selbst ist nur die Beschreibung der (Rechen-)Vorschriften, nicht die tatsächliche Umsetzung.}
+	\end{itemize}
+\end{frame}
+
+
+% TODO: Zum Aufwärmen: Ist da überhaupt Zeit für? Nein, 16/17 zumindest nicht!
+
+
+\input{../Bloecke/Graphen}
+
+\input{../Bloecke/Graphen2}
+
+\begin{frame}	
+	\begin{block}{Was ihr nun wissen solltet}
+		\begin{itemize}
+			\item Grundbegriffe der Graphen
+			\item Zentrale Eigenschaften von Graphen
+			\item Verschiedene Darstellungen von Graphen und deren Vorteile
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Was nächstes Mal kommt}
+		\begin{itemize}
+			\item Graphen schön und gut - Aber jetzt wollen wir auch etwas damit machen!
+			\item Warum dauert das so lange? - Laufzeitbetrachtungen
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\lastframe{0.65}{0}{xkcd/the_general_problem_974.png}{http://www.xkcd.com/974}
+\slideThanks
+
+\end{document}

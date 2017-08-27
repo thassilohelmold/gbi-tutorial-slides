@@ -1,0 +1,127 @@
+% Define a global usable date. Must come before StyleTut
+\newcommand{\mydate}{16.12.2016}
+
+% Comment/uncomment this line to toggle handout mode
+\newcommand{\handout}{}
+
+\input{../TutTexbib/Style_Tut.tex}
+\input{../TutTexbib/PraeambelTut.tex}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+   \usetikzlibrary{automata}
+   \usetikzlibrary{matrix}
+\usepackage{url}
+
+\graphicspath{{../figures/}}
+
+
+\begin{document}
+\starttut{8}
+
+\lastframe{0.50}{0}{xkcd/logic_principle_of_explosion.png}{https://www.xkcd.com/}
+
+\framePrevEpisode
+
+\begin{frame}{Rückblick: Kontextfreie Grammatiken}
+	\begin{itemize}[<+->]
+		\item Ein Vier-Tupel: $G = (N, T, S, P)$
+		\item Produktionen definieren Ersetzungen eines Nichtterminals mit Wörtern über $N \cup T$
+		\item Wir wenden Produktionen in Ableitungsschritten an: $v \Rightarrow w, v \Rightarrow^* w$
+		\item $L(G)$ sind alle aus $S$ ableitbaren Wörter über $T$ (die also nur aus Terminalsymbolen bestehen)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Wahr oder Falsch?}
+	Sei $G=(\{X,Y\},\{a,b\},X,P)$ eine kontextfreie Grammatik.
+	\begin{itemize}
+		\truefalseQ{1}{2}{myRed}{Die Produktion $XY \to a$ ist gültig}{F}
+		\truefalseQ{3}{4}{myRed}{Die Produktion $a \to XY$ ist gültig}{F}
+		\truefalseQ{5}{6}{myGreen}{Die Produktion $X \to XaX$ ist gültig}{W}
+		\truefalseQ{7}{8}{myGreen}{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \Rightarrow w$}{W}
+		\truefalseQ{9}{10}{myRed}{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{F\\ Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	Weihnachten steht vor der Tür, aber Geschenke sind von Jahr zu Jahr teurer geworden! Um den Staatshaushalt des Nordpols zu schonen, hat sich der Weihnachtsmann etwas einfallen lassen: Dieses Jahr bringt er nur den Haushalten Geschenke, bei denen das für ihn bereitgestellte Gebäck seinen speziellen Qualitätsanforderungen genügt.\\[1em]
+	
+	Dazu hat der Weihnachtsmann drei Gebäckarten (Lebkuchen $L$, Zimtstern $Z$, Dominostein $D$) normiert und eine kontextfreie Grammatik aufgestellt, die gültige Kombinationen beschreibt.
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	\begin{align*}
+		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
+		S &\to A \mid B\\
+		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
+		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
+		\})
+	\end{align*}
+	\begin{enumerate}
+		\item Welche Kombinationen sind gültig?\\[0.5em]
+		\item Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
+		3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
+		Stelle eine Kontextfreie Grammatik dafür auf.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	\begin{align*}
+		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
+		S &\to A \mid B\\
+		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
+		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
+		\})
+	\end{align*}
+
+	Welche Kombinationen sind gültig?\\[0.5em] \pause
+	$\{ L^n \mid n \geq 10\} \cup \{w \mid \text{w ist Palindrom und } |w|_L \leq 1\}$
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
+	3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
+	Stelle eine Kontextfreie Grammatik dafür auf.
+	
+	\pause
+	\begin{align*}
+		G &= (\{S\} \cup \{F_i \mid 0 \leq i \leq 42 \}, \{L, Z, D\}, S, P)\\
+		P &= \{S \to F_{42}LF_{17}LF_{41} \}\\
+		  &\cup \{F_i \to ZF_{i-1}, F_i \to DF_{i-1} \mid 1 \leq i \leq 42 \} \\
+		  &\cup \{F_0 \to \eps \}
+	\end{align*}
+\end{frame}
+
+\input{../Bloecke/Prädikatenlogik.tex}
+
+% Evtl. Übung: Nicht-Palindrome?
+
+\begin{frame}	
+	\begin{block}{Was ihr nun wissen solltet}
+		\begin{itemize}
+			\item Wie Prädikatenlogische Formeln aufgebaut sind...
+			\item ... und was sie bedeuten.
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Was nächstes Mal kommt}
+		\begin{itemize}
+			\item Alles Korrekt? - Beweise mit dem Hoare-Kalkül
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[plain]
+	\begin{center}
+		\large
+		Vergesst nicht: Nächste Woche findet noch ein Tutorium statt!
+	\end{center}
+	\bigskip
+	Für alle die nicht kommen: \\
+	Frohe Weihnachten und einen guten Start in das neue Jahr!
+\end{frame}
+
+\lastframe{0.50}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835}
+\slideThanks
+
+\end{document}

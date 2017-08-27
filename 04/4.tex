@@ -1,0 +1,136 @@
+
+% Define a global usable date. Must come before StyleTut
+\newcommand{\mydate}{18.11.2016}
+
+% Comment/uncomment this line to toggle handout mode
+\newcommand{\handout}{}
+
+\input{../TutTexbib/Style_Tut.tex}
+\input{../TutTexbib/PraeambelTut.tex}
+
+\graphicspath{{../figures/}}
+
+\begin{document}
+\starttut{4}
+
+\begin{frame}
+	\frametitle{Übungsblätter}
+	
+	Durchschnitt: 11,4 / 19 Punkten
+	
+	\begin{itemize}
+		\item Bitte erwartet keine volle Punktzahl. Übungsblätter sind dazu da, Fehler zu machen und daraus zu lernen.\\
+		\item Versucht möglichst alle Aufgaben zu bearbeiten.\\
+		\item Wenn keine Begründung/Beweis gefordert ist, müsst ihr keinen angeben.\\
+		\item Nicht mehrere Alternativen angeben, unter denen ich mir die richtige heraussuchen soll.
+	\end{itemize}
+	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Übungsblätter: Häufige Fehler}
+	
+	\begin{itemize}
+		\truefalseQ{1}{2}{MYgreen}{Beweise fängt man mit der Behauptung an}{W}
+		\truefalseQ{3}{4}{MYorange}{Wenn wir $A$ schreiben, ist das immer eine Menge}{F \\Das muss man explizit angeben}
+		\truefalseQ{5}{6}{MYorange}{Ein Beispiel ersetzt einen Beweis.}{F \\ Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
+		\truefalseQ{7}{8}{MYorange}{$\setsize{M} = M$}{F $\; \setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$}
+	\end{itemize}
+
+	\pause[9]
+	Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
+	$90 \% $ der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
+	
+	\pause[10]
+	Passt auf, was eure Variablen sind und welche Operationen ihr darauf anwenden könnt. Mengen kann man nicht mit $\bund, \boder$ verknüpfen
+\end{frame}
+
+\framePrevEpisode
+
+\begin{frame}
+	\frametitle{Rückblick}
+	\begin{itemize}
+		\item Alphabet $\Sigma$ mit Zeichen, aus denen wir Wörter zusammensetzen
+		\item Wir können nicht immer allen Wörtern einen Sinn zuordnen 
+		\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
+		\item Das ist eine formale Sprache: Eine Teilmenge aller möglichen Wörter
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Rückblick}
+	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörter:
+	\begin{itemize}
+		\item $L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$\\
+		Ein Wort aus L1 konkateniert mit einem Wort aus L2.
+		\pause
+		\item $L^0 = \{\varepsilon \} \qquad L^{i+1} = L^i \cdot L$\\
+		Alle Wörter die aus i Wörtern der Sprache zusammengesetzt wurden
+		\pause
+		\item $L^+ = \bigcup \limits_{i=1}^\infty L^i \qquad L^* = L^+ \cup L^0$\\
+		Alle Wörter, die sich aus den Wörtern der Sprache bilden lassen
+	\end{itemize}
+	Ein Alphabet kann man auch als formale Sprache mit Wörtern der Länge 1 auffassen.
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\truefalseQ{1}{2}{MYorange}{Jede Sprache enthält Wörter}{F $\quad \emptyset$ ist auch eine gültige Sprache}
+		\truefalseQ{3}{4}{MYorange}{$01^* = \{\varepsilon, 01, 0101, ...\}$}{F $\quad 01^*$ gibt es nicht, denn $01 \neq \{01\}$}
+		\truefalseQ{5}{6}{MYgreen}{Es gibt Sprachen L, für die gilt $\varepsilon \in L^+$}{W $\quad L = \{\varepsilon\}$}
+		\truefalseQ{7}{8}{MYorange}{$L^+ = L^* \setminus L^0$}{F $\quad$ Das gilt nicht, wenn $\varepsilon \in L$}
+		\truefalseQ{9}{10}{MYgreen}{$\{\}^* \neq \{\} $}{W $\quad \{\}^* = \{\varepsilon\}$}
+	\end{itemize}	
+\end{frame}
+
+\input{Sprache_gesucht_beamer.tex}
+
+\input{../Bloecke/FormaleSprachenP2.tex}
+
+\begin{frame}
+	\frametitle{Ausblick: Klammerausdrücke}
+	
+	Was ist mit der Sprache aller gültigen Klammerausdrücke? Können wir diese auch mit Mengen, Konkatenation und Kleenschem Abschluss angeben? \only<beamer:0>{\\ \emph{Spoiler: Nein, das geht nicht!}}\\[1em]
+	\pause
+	
+	\begin{block}{}
+		\Large
+		\centering
+		SOON\\[1em]
+	\end{block}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.7]{xkcd/(.png}
+		\vspace{-7pt}
+		\caption{ \texttt{\url{https://xkcd.com/859/}} }
+	\end{figure}
+\end{frame}
+
+\input{../Bloecke/Darstellung.tex}
+
+\begin{frame}	
+	\begin{block}{Was ihr nun wissen solltet}
+		\begin{itemize}
+			\item Wie man formale Sprachen angibt
+			\item Wie man Beweise mit formalen Sprachen führt
+			\item Wie man von Zahlendarstellungen zu Zahlen kommt...
+			\item ... und wieder zurück
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Was nächstes Mal kommt}
+		\begin{itemize}
+			\item Nicht immer so positiv: Negative Zahlen
+			\item Komprimierung: Huffmann-Codierungen
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+%% Letzte Seite
+
+\lastframe{0.7}{0}{xkcd/1_to_10.png}{https://xkcd.com/953/}
+\slideThanks
+
+\end{document}
