@@ -1,0 +1,160 @@
+% Toggle Handout mode by including this line before including style_tut:
+% \newcommand{\handout}{}
+
+%% Beamer-Klasse im korrekten Modus
+\ifdefined \handout
+\documentclass[handout]{beamer} % Handout mode
+\else
+\documentclass{beamer}
+\fi
+
+
+% Das ist der KIT-Stil
+%\usepackage{../TutTexbib/beamerthemekit}
+\usepackage[deutsch,titlepage0]{../TutTexbib/KIT/beamerthemeKITmod}
+\TitleImage[width=\titleimagewd]{../figures/titlepage.jpg}
+%\usetheme[deutsch,titlepage0]{KIT}
+
+% Include PDFs
+\usepackage{pdfpages}
+
+% Libertine font (Original GBI font)
+\usepackage{libertine}
+%\renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
+
+% Nicer math symbols
+\usepackage{eulervm}
+%\usepackage{mathpazo}
+
+%% Deutsche Silbentrennung und Beschriftungen
+\usepackage[ngerman]{babel}
+
+%% UTF-8-Encoding
+\usepackage[utf8]{inputenc}
+
+\usepackage{csquotes}
+
+%% Bibliotheken für viele mathematische Symbole
+\usepackage{amsmath, amsfonts, amssymb}
+
+%% Anzeigetiefe für Inhaltsverzeichnis: 1 Stufe
+\setcounter{tocdepth}{1}
+
+%% Schönere Schriften
+\usepackage[TS1,T1]{fontenc}
+
+%% Tabellen
+\usepackage{array}
+\usepackage{multicol}
+
+%% Bibliothek für Graphiken
+\usepackage{graphicx}
+
+%% der wird sowieso in jeder Datei gesetzt
+%%\graphicspath{{../figures/}}
+
+%% Hyperlinks
+\usepackage{hyperref}
+% I don't know why, but this works and only includes sections and NOT subsections in the pdf-bookmarks.
+\hypersetup{bookmarksdepth=subsection} 
+
+%\usepackage{lmodern}
+\usepackage{colortbl}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{listings}
+\usepackage{forloop}
+%\usepackage{algorithmic} % PseudoCode package 
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{automata}
+\usetikzlibrary{tikzmark}
+
+% Needed for gbi-macros
+\usepackage{xspace}
+
+%%%%%%%%%%%% INHALT %%%%%%%%%%%%%%%%
+
+%% Wochennummer
+\newcounter{weeknum}
+
+%% Titelinformationen
+\title[GBI Tutorium, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium 36}
+\subtitle{Termin \theweeknum \ | \mydate \\ Thassilo Helmold}
+\author[Thassilo Helmold]{Thassilo Helmold}
+\institute{KIT -- Karlsruher Institut für Technologie}
+\date{\mydate}
+
+%% Titel einfügen
+\newcommand{\titleframe}{\frame{\titlepage}}
+
+%% Alles starten mit \starttut{X}
+\newcommand{\starttut}[1]{\setcounter{weeknum}{#1}\titleframe\frame{\frametitle{Inhalt}\tableofcontents} \AtBeginSection[]{%
+\begin{frame}
+	\tableofcontents[currentsection]
+\end{frame}\addtocounter{framenumber}{-1}}}
+
+
+\newcommand{\framePrevEpisode}{
+	\begin{frame}
+		\centering
+		\textbf{In the previous episode of GBI...}
+	\end{frame}
+}
+
+%% Legacy: Lastframe. Not for further usage!
+\newcommand{\lastframe}[4]{\xkcdframe{#1}{#2}{#3}{#4}{}}
+\newcommand{\xkcdframe}[5]{
+	\frame[plain]{
+		\vspace{-#2pt}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=#1]{#3}
+			\vspace{-7pt}
+			\caption{ \texttt{\url{#4}} }
+			\vspace{5pt}
+			#5
+		\end{figure} 
+	}
+}
+
+%% Wörter
+\newcommand{\code}[1]{$\mathbf{#1}$}
+
+%% Sterne
+
+\newcounter{starsc}
+\newcommand{\stars}[1]{
+	\hfill
+	\begin{minipage}{100px}
+		\forloop{starsc}{0}{\value{starsc} < #1}%
+		{%
+			\includegraphics[scale=0.05]{star-full.pdf} \hspace*{1px}
+		}%
+		\forloop{starsc}{\value{starsc}}{\value{starsc} < 5}%
+		{%
+			\includegraphics[scale=0.05]{star-empty.pdf} \hspace*{1px}
+		}
+		\vspace*{2px}
+	\end{minipage}
+}
+
+% No stars for me...
+\renewcommand{\stars}[1]{}
+
+\newcommand{\slideThanks}{
+	\begin{frame}
+		\frametitle{Danksagung}
+		\begin{block}{}
+			Dieser Foliensatz basiert in Teilen auf Folien von:\\[1em]
+			Philipp Basler \\
+			Nils Braun \\
+			Dominik Doerner \\
+			Ou Yue \\
+		\end{block}
+	\end{frame}
+}
+
+%% Verbatim
+\usepackage{moreverb}

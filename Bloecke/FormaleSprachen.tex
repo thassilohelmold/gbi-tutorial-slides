@@ -1,0 +1,153 @@
+\section{Formale Sprachen}
+
+\begin{frame}
+	\frametitle{Rückblick}
+	Sei $\Sigma = \{A, B, ..., Z, a, b, ..., z\}$ ein Alphabet.\\
+	\pause
+	Dann enthält $\Sigma^*$ alle Wörter, die man mit Zeichen aus $\Sigma$ bilden kann. Aber nicht jedes dieser Wörter ist auch sinnvoll.\\[1em]
+	
+	\enquote{egnarts si efiL} ist kein sinnvolles Wort. \pause Oder? \\[1em]
+	\pause
+	Wie wir sehen, hängt es immer vom Kontext ab, welche Wörter wir als (syntaktisch) korrekt betrachten.\\
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formale Sprachen}
+		\begin{Definition}
+			Sei $\Sigma$ ein Alphabet.\\
+			Eine formale Sprache $L$ ist eine Teilmenge von $\Sigma^*$.
+		\end{Definition}
+		\pause
+		\vspace{10pt}
+		Durch die formale Sprache geben wir an, welche der möglichen Wörter wir als  \emph{syntaktisch korrekt} ansehen.\\
+		\pause
+		Formale Sprachen werden häufig nicht direkt, sondern über Bildungsvorschriften angegeben.
+		
+		\pause
+		\begin{Beispiel}
+			$\Sigma = \{0, 1\}$ \\
+			$L = \{ \omega \in \Sigma^* \mid \omega \text{ endet auf } 10 \}  = \{10, 010, 110, 0010, ...\}$
+		\end{Beispiel}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Formale Sprachen}
+	
+	\begin{Beispiel}
+		Formale Sprache $L$ aller Wörter über $A=\{\literal{a},\literal{b}\}$, in denen nirgends das Teilwort $\literal{ab}$ vorkommt.
+		\begin{itemize}
+			\pause
+			\item $L=\{\literal{a},\literal{b}\}^*
+			\setminus \{w_1 \cdot \literal{ab} \cdot w_2 \mid w_1,w_2\in
+			\{\literal{a},\literal{b}\}^*\}$
+			
+			\pause
+			\item Erst ein beliebiges Wort (evtl. $\varepsilon$) nur aus $\literal{b}$,\\
+			danach ein beliebiges Wort (evtl. $\varepsilon$) nur aus $\literal{a}$.
+			
+			\pause
+			\item $L=\{w_1w_2 \mid w_1\in 
+			\{\literal{b}\}^*  \text{ und }  w_2\in \{\literal{a}\}^* \}$
+		\end{itemize}
+	\end{Beispiel}
+
+	\begin{block}{Bemerkungen}
+		\begin{itemize}
+			\pause
+			\item Die Beschreibung einer formalen Sprache ist nicht eindeutig (siehe oben).
+			\pause
+			\item Immer auf den Unterschied achten: $\{\literal{abc} \} \neq \literal{abc} $
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Beispiele aus dem Leben}
+	\begin{itemize}
+		\item Sprache der korrekten IP4-Adressen \pause
+		\begin{align*}
+		192.168.178.1,\\
+		76.147.112.6, ...
+		\end{align*} 
+		\pause Aber nicht: $000.999.123.666$ \pause
+		\item Formale Sprache der Schlüsselwörter in Java $$L = \{ class, int , if, \dots \}$$ \pause
+		\item Formale Sprache der legalen Zahlen vom Typ \textbf{int}: Mit $A = \{0...9\}$ 
+		\pause $$A \cdot A^* = \{-19, 12849, 1001, 42, ...\}$$ 
+		\pause Und minus? Also besser $ \{ -, \varepsilon \} \cdot A \cdot A^*$
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Produkt}
+		\begin{Definition}
+			Seien $L_1$ und $L_2$ zwei formale Sprachen. Dann bezeichnet
+				$$L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$$
+				das \textbf{Produkt} der Sprachen $L_1$ und $L_2$.
+		\end{Definition}
+		\pause
+		In $L_1 \cdot L_2$ sind also alle Wörter enthalten, deren erster Teil aus $L_1$ und deren zweiter Teil aus $L_2$ ist.
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Produkt}
+	\begin{Beispiele}
+		$\{a, b\} \cdot \{c, d\} = \{ac, ad, bc, bd\}$\\[0.3em]
+		\pause
+		$ L = \{w_1w_2 \mid w_1\in \{\literal{b}\}^* ,  w_2\in \{\literal{a}\}^* \} 
+		= \{\literal{b}\}^* \cdot \{\literal{a}\}^* $\\[1em]
+		\pause
+		Für alle formalen Sprachen $L$ gilt:\\
+		$$ L \cdot \{\varepsilon\} = L  \qquad L \cdot \emptyset = \emptyset$$
+	\end{Beispiele}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Potenzen}
+	\begin{Definition}
+	Damit kann man induktiv die Potenz formaler Sprachen definieren:
+	$$L^0 = \{\varepsilon \}$$
+	$$L^{i+1} = L^i \cdot L$$
+	\end{Definition} \pause
+	$L^i$ enthält also alle Kombinationen von $i$ (nicht unbedingt verschiedenen) Wörtern aus $L$.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Konkatenationsabschluss}
+	\begin{Definition}
+		Der Konkatenationsabschluss einer formalen Sprache $L$ ist $$L^\ast = \bigcup \limits_{i=0}^\infty L^i$$ 
+		\pause
+		Der $\varepsilon$-freie Konkatenationsabschluss ist $$L^+ = \bigcup \limits_{i=1}^\infty L^i$$
+	\end{Definition} \pause
+	Achtung: Der $\varepsilon$-freie Konkatenationsabschluss muss nicht $\varepsilon$-frei sein! \pause
+	
+	$$ \{\}^* = \{\varepsilon\} $$
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Aufgabe \stars{3}}
+	Es sei $A = \{a, b\}$. Beschreiben Sie die folgenden formalen Sprachen mit den Symbolen $\{, \}, a, b,
+\varepsilon, \cup, \ast,$ Komma,$ ), ($ und $+$:
+	\begin{itemize}
+		\item die Menge aller Wörter über $A$, die das Teilwort \code{ab} enthalten.
+		\item die Menge aller Wörter über $A$, deren vorletztes Zeichen ein b ist.
+		\item die Menge aller Wörter über $A$, in denen nirgends zwei b’s unmittelbar hintereinander vorkommen.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+	\begin{itemize}
+		\item \textit{die Menge aller Wörter über $A$, die das Teilwort \code{ab} enthalten.}  \pause
+			$$\{a,b\}^\ast \cdot \{ab\} \cdot \{a,b\}^\ast$$ \pause
+		\item \textit{die Menge aller Wörter über $A$, deren vorletztes Zeichen ein b ist.}  \pause
+			$$\{a,b\}^\ast \cdot \{b\} \cdot \{a,b\}$$ \pause
+		\item \textit{die Menge aller Wörter über $A$, in denen nirgends zwei b’s unmittelbar hintereinander vorkommen.}  \pause
+			$$\{a, ba\}^\ast \cdot \{b, \varepsilon \}$$
+	\end{itemize}
+\end{frame}
+

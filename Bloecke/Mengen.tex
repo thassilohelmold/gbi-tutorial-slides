@@ -1,0 +1,267 @@
+\section{Mengen}
+
+%TODO: Handout mode
+\mycomment{
+\begin{frame}
+	\frametitle{Problem}
+	
+	\includegraphics[width=\linewidth]{moviesActors.jpg}
+\end{frame}
+}
+
+\begin{frame}
+	\frametitle{Problem}
+	Wir haben \enquote{ein Universum} an Elementen (Filme, Serien, Schauspieler):\\[0.5em]
+	
+	$U$ enthält Sherlock, Benedict Cumberbatch, Lea Thompson, Martin Freeman, The Imitation Game, Mark Gatiss, Christopher Lloyd, Crispin Glover, Zurück in die Zukunft, Michael Fox, Keira Knightley, \dots  
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mengen}
+	Mengen sind eines der Grundelemente der Mathematik. \\[1em]
+	Sammelt bitte 5 Minuten lang \\(alleine / mit eurem Nebensitzer / in Kleingruppen)\\ alles, was ihr über Mengen bereits wisst.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Mengen}
+
+	\begin{block}{Definition}
+		Eine \textbf{Menge} $M$ ist eine Ansammlung verschiedener Objekte. Ein Objekt aus der Menge nennt man ein \textbf{Element} der Menge. Man schreibt
+		$$m \in M \qquad M = \{m_1, m_2, m_3 \} \qquad M = \{m \mid m \geq 0\} \qquad M = \emptyset = \{\} $$
+		Die Reihenfolge der Aufzählung ist dabei irrelevant, Elemente kommen nicht doppelt vor. Die leere Menge $\emptyset$ enthält keine Elemente.
+	\end{block}
+	\pause
+	
+	\begin{block}{Beispiel}
+		Wichtige Mengen sind
+		$$\nN, \nZ, \nQ, \nR, \nC \qquad \nN_+, \nN_0$$
+		Es gilt: $$-5 \in \nZ \qquad -5 \notin \nN \qquad \{2, 1, 3, 1, 4\} = \{1, 2, 3, 4\}$$
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Teilmengen}
+	
+	\begin{block}{Definition}
+		Die Anzahl der Elemente in einer endlichen Menge (Kardinalität) bezeichnet man mit $\mid M \mid$. Es gilt $$ \setsize{M \cup N} \ = \ \setsize{M} + \setsize{N} - \setsize{M \cap N} $$
+	\end{block} 
+	\pause
+
+	\begin{block}{Definition}
+		Eine Menge $N$ ist eine \textbf{Teilmenge} von $M$, wenn jedes Element aus N auch in M enthalten ist.
+		$$ N \subseteq M \iff \forall n \in N : n \in M$$
+	\end{block}
+	\pause
+	
+	\begin{block}{Definition}
+		Zwei Mengen $N$ und $M$ sind \textbf{gleich}, wenn sie die gleichen Elemente enthalten.
+		$$ N = M \iff N \subseteq M \ \text{und} \ M \subseteq N$$
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Teilmengen}
+	
+	\begin{block}{Beispiel}
+		
+	\begin{align*}
+		\mid \{1,2,3,2,1\} \mid &= \only<2->{3} \\
+		\mid \emptyset \mid &= \only<3->{0} \\
+		%\{1,2\} \only<1-3>{\ &? \ } \only<4->{&\subseteq}  \{1,2,3\} \\
+		\{1,2\} \only<4->{&\subseteq}  \{1,2,3\} \\ %TODO: Handout line
+		%\{1,2\} \only<1-4>{\ &? \ } \only<5->{&\nsubseteq} \{Hund, Katze, Maus\}
+		\{1,2\} \only<5->{&\nsubseteq} \{Hund, Katze, Maus\} %TODO: Handout line
+	\end{align*}
+	\end{block} 
+
+	\only<6->{
+		\begin{block}{Lemma}
+			Es gilt: $$ N \subseteq M \iff N \setminus M = \emptyset $$
+			
+		\end{block} 
+
+	}
+\end{frame}
+
+\begin{frame}{Mengengleichheit: Beispiel}
+	\begin{itemize}
+		\item<1-> Sei $ A $ und $M$ beliebige Mengen. Zeigen Sie das gilt 
+		\begin{align*}
+		A &=  \underbrace{ \left(A \setminus M \right)}_{T_1} \cup  \underbrace{ \left(A \cap M \right)}_{T_2}  
+		\end{align*}		 
+		\item<2-5>
+		Richtung: $ A \subseteq T_1 \cup T_2 $ 
+		\only<3-5>{\item<3-5> Wähle $x\in A$ und wende Fallunterscheidung an
+			\item<4-5> Fall 1: Ist $x\in M$ so gilt $x\in A $ und $x\in M$, und damit $x\in A\cap M  = T_2 $
+			\item<5-5> Fall 2 : Ist $x\notin M$ so gilt $x\in T_1$ da $T_1 = \left\{ x \in A \text{ und } x\notin M \right\} $  }
+		\only<6->{\item<6-> Richtung : $T_1 \cup T_2 \subseteq A $ 
+			\item<7-> Wähle $x\in T_1 \cup T_2$. Dies bedeutet $x\in T_1 $ oder $x\in T_2$. 
+			\item<8-> Fall 1: $x\in T_1$. Aus Definition folgt $x\in A$
+			\item<9-> Fall 2: $x\in T_2$. Somit $x\in A$ und $x\in M$.}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Zurück zu unserem Problem}
+	$U = \{ $ Sherlock, Benedict Cumberbatch, Lea Thompson, Martin Freeman, The Imitation Game, Mark Gatiss, Christopher Lloyd, Crispin Glover, Zurück in die Zukunft, Michael Fox, Keira Knightley, \dots $ \} $  \\[0.5em]
+	
+	\pause
+	Ordnen wir diese in eine Teilmenge $M$ für Filme/Serien und jeweils eine Teilmenge $A_m$ für die Schauspieler eines Films $m \in M$. \\[0.5em]
+	
+	\pause
+	$M = \{$ The Imitation Game, Sherlock, Zurück in die Zunkunft $\}$ \\[0.3em]
+	$A_{Sherlock} = \{$ Benedict Cumberbatch, Martin Freeman, Mark Gatiss $\}$ \\
+	$A_{Imitation Game} = \{$ Benedict Cumberbatch, Keira Knightley $\}$ \\
+	$A_{BTTF} = \{$ Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover $\}$
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Schnitt und Vereinigung}
+	
+	\begin{block}{Definition}
+		Sind $M$ und $N$ zwei Mengen, so definiert man
+		$$M \cap N = \{x \mid x \in M \text{ und } x \in N\} \qquad M \cup N = \{x \mid x \in M \text{ oder } x \in N\} $$
+		als den \textbf{Durchschnitt} und die \textbf{Vereinigung}.\\[1em] 
+		\pause
+		Zwei Mengen $M$, $N$ heißen \textbf{disjunkt}, wenn ihr Durchschnitt leer ist, sie also keine gemeinsamen Elemente besitzen. $$M \cap N = \emptyset$$
+	\end{block}
+
+	\pause
+	\begin{block}{Beispiel}
+		$$ \{1,2\} \cup \{2,3\} = \{1,2,3\} \qquad \{1,2\} \cap \{2,3\} = \{2\} $$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Schnitt und Vereinigung}
+	\begin{block}{Definition}
+		Seien $A$ und $B$ zwei beliebige Mengen, so gilt $$ A\setminus B = \left\{ x\in A \text{ und } x\notin  B  \right\} $$ 
+	\end{block}
+	
+	\pause
+
+	\begin{block}{Weitere Beispiele}
+		\begin{align*}
+			A &\cup \emptyset \only<3->{ = A }  \\
+			A &\cap \emptyset \only<4->{ = \emptyset }\\
+			\nN_+ &\cup \{0\} \only<5->{ = \nN_0} \\
+		\end{align*}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Eine Menge Mengen...}
+	\begin{block}{Aufgabe}
+		Es seien $A = \{1, 2\}, B = \{3\}, C = \{1, 3\}  \subseteq M = \{1, 2, 3\}$ Mengen.\\
+		Man berechne folgende Mengen:
+		\begin{align*}
+		A \cup B &= \only<2->{ \{1, 2, 3\} }  \\
+		A \cap C &= \only<3->{ \{1\} }\\
+		A \setminus C &= \only<4->{ \{2\} }\\
+		B \setminus A &= \only<5->{ \{3\} }\\
+		A \cup (B \setminus C) &= \only<6->{ \{1, 2\} }\\
+		C &= \{1, 3\} \\
+		(A \setminus C) \cup B &= \only<7->{ \{2, 3\} }\\
+		A \cap B &= \only<8->{ \emptyset }
+		\end{align*}
+	\end{block}
+\end{frame}
+
+\section{Potenzmengen}
+\begin{frame}
+	\frametitle{... in einer Menge! (Potenzmengen)}
+	\begin{block}{Definition}
+		Die \textbf{Potenzmenge} $2^M$ oder auch $\Pot (M)$ ist die Menge aller möglicher Teilmengen von $M$. Es gilt also 
+		\begin{align*}
+			2^M = \{N \mid N \subseteq M\}
+		\end{align*}
+	\end{block}
+	\pause
+	
+	\begin{block}{Beispiel}
+		Betrachten wir nun   $M = \left\{ 1,2,0 \right\} $. \\ \pause
+		
+		Dann gilt 
+		\begin{align*}
+		2^M &= \left\{ \emptyset, \left\{ 0 \right\}, \left\{ 1 \right\}, \left\{ 2 \right\}, \left\{ 0,1 \right\} , \left\{ 0,2 \right\}, \left\{ 1,2 \right\}, \left\{ 0,1,2 \right\} \right\}
+		\end{align*}
+		
+		Beachte: Es gilt immer $M \in 2^M \ \text{und} \ \emptyset \in 2^M$
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Potenzmengen}
+	\begin{block}{Aufgabe}
+		Wie viele Elemente enthält $2^M$? \\[0.5em]
+		
+		\pause
+		$2^{\mid M \mid }$
+	\end{block}
+	
+	\pause
+	\begin{block}{Aufgabe}
+		Geben Sie eine Abbildung $\phi \colon 2^{M} \longrightarrow 2^{M}$ so an,
+		dass für jedes $L \in 2^{M}$ und für jedes $w \in M$ gilt:
+		\begin{equation*}
+			w \in L \text{ genau dann, wenn } w \notin \phi(L).
+		\end{equation*}
+		
+		\pause
+		\begin{align*}
+			\phi \colon 2^{M} &\longrightarrow 2^{M},\\
+			L &\mapsto M \setminus L.
+		\end{align*}
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Zurück zu unserem Problem}
+	Ordnen wir diese in eine Teilmenge $M$ für Filme/Serien und jeweils eine Teilmenge $A_m$ für die Schauspieler eines Films $m \in M$. \\[0.5em]
+	$M = \{$ The Imitation Game, Sherlock, Zurück in die Zunkunft $\}$ \\[0.3em]
+	$A_{Sherlock} = \{$ Benedict Cumberbatch, Martin Freeman, Mark Gatiss $\}$ \\
+	$A_{Imitation Game} = \{$ Benedict Cumberbatch, Keira Knightley $\}$ \\
+	$A_{BTTF} = \{$ Michael J. Fox, Christopher Lloyd, Lea Thompson, Crispin Glover $\}$ \\[2em]
+	
+	\pause
+	$A_{Sherlock} \cap A_{Imitation Game} = \{ \text{Benedict Cumberbatch} \}$
+	
+\end{frame}
+
+\section{Paare}
+\begin{frame}
+	\frametitle{Paare}
+	\begin{block}{Definition}
+		Seien $A$ und $B$ zwei Mengen und $a \in A$, $b \in B$.\\
+		$$(a, b)$$ heißt \textbf{Paar} mit der ersten Komponente $a$ und der zweiten Komponente $b$.\\[1em]
+		\pause
+		In Paaren können Elemente mehrfach vorkommen, und die Reihenfolge der Elemente ist wichtig.\\
+	\end{block}
+
+	\pause
+	\begin{block}{Beispiel}
+		$$ (KI, T) = (KI, T) \qquad (KI, T) \neq (T, KI) \qquad (1, 1) $$
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Paare}
+	Das Konzept der Paare lässt sich auf das Konzept der Mengen zurückführen.
+	
+	\begin{block}{Aufgabe}
+		Gegeben sei die Menge $M = \{m_1, m_2\}$.\\
+		Wie kann man die Paare $(m_1, m_2)$ und $(m_2, m_1)$ eindeutig darstellen, nur unter Verwendung von Mengen und $m_1, m_2$?
+	\end{block}
+	\pause
+	\begin{block}{Lösung}
+		Wir definieren: \\
+		$(m_1, m_2) := \{m_1, m_2, \{m_1\}\}$ und $(m_2, m_1) := \{m_1, m_2, \{m_2\}\}$
+	\end{block}
+\end{frame}

@@ -1,0 +1,161 @@
+\section{Von der Darstellung zur Zahl}
+
+\subsection{Definitionen}
+\begin{frame}
+	\frametitle{Numerischer Wert}
+	\begin{Definition}
+		Zu einer Zahlenbasis $b$ definiere 
+		$$ \text{Num}_b(\varepsilon) = 0  $$  
+		$$ \text{Num}_b(wx) = b\cdot \text{Num}_b(w) + \text{num}_b(x) \text{ für alle } w\in Z_b^\ast, x\in Z_b $$ 
+	\end{Definition}
+
+	\pause
+	Beachte: $Num_b : Z_b^* \to \nZ$ ist Abbildung, die einem Wort (Zahlendarstellung) eine Zahl (Wert) zuordnet. Wir müssen diesen Wert aber natürlich wieder in eine  Darstellung umwandeln, um ihn aufschreiben zu können.
+\end{frame}
+\begin{frame}{Aufgabe}
+	Berechnet die Zahlenwerte von $ 11_2, 321_4, B2_{16}$.
+	\begin{align*} 
+	\visible<1->{\text{Num}_2(11) &= 2\cdot \text{Num}_2(1) + \text{num}_2(1) \\
+	&= 2\cdot 1 + 1 \\
+	&= 3  \\}
+	\visible<3->{\text{Num}_4(321) &=} \visible<4->{ 4\cdot \text{Num}_4(32) + \text{num}_4(1) \\
+	&= 4\cdot \left( 4\cdot \text{Num}_4(3) + \text{num}_4(2) \right) + \text{num}_4(1) \\
+	&= 4^2\cdot \text{num}_4(3) + 4 \cdot \text{num}_4(2) + \text{num}_4(1) \\
+	&= 57 \\}
+	\visible<5->{\text{Num}_{16}(B2) &=} \visible<6->{ 16 \cdot \text{Num}_{16}(B) + \text{num}_{16}(2) \\
+	&= 16\cdot 11 + 2 \\
+	&= 178}
+	\end{align*}
+
+\end{frame}
+
+\begin{frame}{Wohldefiniertheit}
+	\emph{Behauptung}: Die Definition 
+		$$ \text{Num}_b(\varepsilon) = 0  $$  
+		$$ \text{Num}_b(wx) = b\cdot \text{Num}_b(w) + \text{num}_b(x) \text{ für alle } w\in Z_b^\ast, x\in Z_b $$ 
+		ist wohldefiniert und weist jedem Wort eine eindeutige Bedeutung zu, die dem Zahlenwert entspricht.
+\end{frame}
+\begin{frame}
+	\frametitle{Beweis}
+	\begin{block}{Beweis durch vollständige Induktion über $n=\vert w \vert $}
+	\begin{itemize}
+		\only<1-2>{\item<1->[\emph{IA}] $n = 0 = \vert w \vert \implies w = \varepsilon $. \\
+		Für $w = \varepsilon $ ist $\text{Num}_b$ wohldefiniert und sinnvoll (nämlich $Num_b(\varepsilon) = 0$).
+		\item<2->[\emph{IV}] Für ein beliebig aber festes $n\in\nN_0$ sei $Num_b(w) für alle w mit \setsize{w} = n wohldefiniert und entspreche dem Zahlenwert.$ }
+		\only<3->{\item<3->[\emph{IS}] Wähle $w'$ mit $\vert w' \vert = n+1 $, dann gibt es ein $w\in Z_b^n, x\in Z_b$, so dass $ w' = wx $ \\
+		Mit der Definition gilt nun $$ \text{Num}_b(w') = b\cdot \underbrace{\text{Num}_b(w)}_{IV} + \text{num}_b(x) $$
+		Die Summe ist laut $IV$ wohldefiniert. Auch ist laut $IV$ $\text{Num}_b(w)$ der Zahlenwert von $w$ und damit auch $\text{Num}_b(w')$.}
+	\end{itemize}
+	\end{block}
+
+\end{frame}
+
+%\subsection{Aufgabe}
+%\begin{frame}{Aufgabe. WS 2010 }
+%Es bezeichne $\nZ$ die Menge der ganzen Zahlen. Gegeben sei eine Ziffernmenge $Z_{-2} = \{N, E\}$ mit der Festlegung $num_2 (N) = 0$ und $num_2 (E) = 1$. Wir definieren eine Abbildung $Num_{-2} : Z_{-2}^\ast \to \nZ$ wie folgt:
+%	$$Num_{-2} (\varepsilon) = 0$$
+%	$$\forall \ w \in Z_{-2}^\ast \ \forall \ x \in Z_{-2} : Num_{-2} (wx) = -2 \cdot Num_{-2} (w) + num_2 ( x )$$
+%
+%	\begin{itemize}	
+%		\item Geben Sie für $w \in \{E, EN, EE, ENE, EEN, EEE\}$ jeweils $Num_{-2} (w)$ an.
+%		\item Für welche Zahlen $x \in \nZ$ gibt es ein $w \in Z_{-2}^\ast$ mit $Num_{-2} (w) = x$?
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}{Lösung}
+%\textit{Geben Sie für $w \in \{E, EN, EE, ENE, EEN, EEE\}$ jeweils $Num_{-2} (w)$ an.} \pause
+%	\begin{table}[h!]	
+%		\begin{tabular}{>{$}l<{$}>{$}l<{$}}
+%			Num_{-2} (E)\pause & = 1 \\ \pause 
+%			Num_{-2} (EN)\pause & = -2 \\ \pause
+%			Num_{-2} (EE)\pause & = -1 \\ \pause
+%			Num_{-2} (ENE)\pause & = 5 \\ \pause
+%			Num_{-2} (EEN)\pause & = 2 \\ \pause
+%			Num_{-2} (EEE)\pause & = 3
+%	\end{tabular}
+%	\end{table}
+%	\pause
+%	\textit{Für welche Zahlen $x \in \nZ$ gibt es ein $w \in Z_{-2}^\ast$ mit $Num_{-2} (w) = x$?} \\[1em]\pause
+%	Für alle!
+%\end{frame}
+
+\section{Von der Zahl zur Darstellung}
+\begin{frame}
+	\frametitle{Division und Modulo}
+	\begin{block}{Definition}
+		$ x \div y$ ist die ganzzahlige Division von x durch y.\\
+		$ x \mod y$ liefert den Rest dieser Division
+	\end{block} 
+	\pause
+	
+	\begin{block}{Beobachtung}
+		$ x\div y \in \nN_0 \qquad x\mod y \in \{0,\dots, y-1\} $
+	\end{block}
+	\pause
+	
+	\begin{block}{Lemma}
+		$$ x = y \cdot (x \div y ) + \left( x \mod y \right)$$ 
+	\end{block}
+	
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Beispiel}
+		\begin{tabular}{ccc}
+			& $x\div y$ & $x\mod y$ \\
+			$x=2,y=3$ \pause &  0 & 2 \\  \pause
+			$x=5 ,y=2$ \pause & 2 & 1 \\	\pause
+			$x=8,y=2$ \pause & 4 & 0 \\	
+		\end{tabular}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Beispiel}
+	\begin{table}[h!]
+		\centering
+		\begin{tabular}{c|cccccccccccc}
+			$x$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 \\ \hline
+			$x\div 4 $ & \only<2->{0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 2 & 2 & 2 & 2 } \only<1|handout:0>{&&&&&&&&&&&} \\
+			$4\left( x\div 4\right) $ & \only<3->{0&0&0&0&4&4&4&4&8&8&8&8} \only<1-2|handout:0>{&&&&&&&&&&}  \\
+			$x\mod 4$ & \only<4>{0&1&2&3&0&1&2&3&0&1&2&3} \only<1-3|handout:0>{&} 
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}{Repräsentation}
+	\begin{block}{Definition}
+		$Repr_k(n)$ ist das kürzeste Wort $w\in Z_k^\ast$ mit $Num_k(w)=n$, also 
+		$$ Num_k\left( Repr_k(n)\right) = n $$ 
+	\end{block}
+	\pause
+	\emph{Anmerkung}:
+	Im Allgemeinen $$ Repr_k\left(Num_k(w)\right) \neq w $$ da überflüssige Nullen wegfallen. 
+\end{frame}
+
+\begin{frame}{Repräsentation}
+	Wir definieren
+	\begin{align*}
+		Repr_k : \; &\nN_0 \to Z_k  \\
+		n&\mapsto \begin{cases} repr_k(n) & n<k \\ Repr_k\left( n\div k \right) \cdot repr_k\left( n \mod k \right) & n\geq k 
+		\end{cases} 
+	\end{align*}
+	
+	\begin{block}{Aufgabe}
+		Berechne folgende Darstellungen:\\
+		$Repr_2(42) = \pause 101010$ \\
+		$Repr_4(42) = \pause 222$ \\
+		$Repr_8(42) = \pause 52$ \\
+		$Repr_{16}(42) = \pause 2A$
+	\end{block}
+\end{frame}
+
+\begin{frame}{Beispiel: Lösung}
+	\begin{align*}
+		Repr_8(42) &= Repr_8(42 \div 8) \cdot repr_8(42 \mod 8) \\
+		&= Repr_8(5) \cdot repr_8(2)\\
+		&= repr_8(5) \cdot 2\\
+		&= 5 \cdot 2\\
+		&= 52_8
+	\end{align*}
+	
+\end{frame}

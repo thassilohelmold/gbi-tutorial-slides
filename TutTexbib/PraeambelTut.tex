@@ -1,0 +1,64 @@
+\input{../TutTexbib/gbi-macros}
+\usepackage{../TutTexbib/thwregex}
+
+\newcommand{\nM}{\mathbb{M}}
+\newcommand{\nR}{\mathbb{R}}
+\newcommand{\nN}{\mathbb{N}}
+\newcommand{\nZ}{\mathbb{Z}}
+\newcommand{\nQ}{\mathbb{Q}}
+\newcommand{\nB}{\mathbb{B}}
+\newcommand{\nC}{\mathbb{C}}
+\newcommand{\nK}{\mathbb{K}}
+\newcommand{\nF}{\mathbb{F}}
+\newcommand{\nG}{\mathbb{G}}
+\newcommand{\nullel}{\mathcal{O}}
+\newcommand{\einsel}{\mathds{1}}
+\newcommand{\nP}{\mathbb{P}}
+\newcommand{\Pot}{\mathcal{P}}
+\renewcommand{\O}{\text{O}}
+
+%\newcommand{\literal}[1]{\textcolor{blue}{\texttt{#1}}}
+\newcommand{\realTilde}{\textasciitilde \ }
+\newcommand{\setsize}[1]{\; \mid #1 \mid \; }
+
+\definecolor{myRed}{RGB}{255,75,20}
+\colorlet{MYorange}{myRed} % Backwards compatibility
+\colorlet{myGreen}{KITpalegreen}
+\colorlet{MYgreen}{myGreen} % Backwards compatibility
+
+\newcounter{tfqtempcount}
+\newcommand{\truefalseQ}[4]{
+	\setcounter{tfqtempcount}{#1}
+	\addtocounter{tfqtempcount}{1}
+	\truefalseQuestion{#1}{\value{tfqtempcount}}{#2}{#3}{#4}
+}
+\newcommand{\truefalseQuestion}[5]{\item<#1-|handout:#1-> \color<#2-|handout:#2->{#3} #4 \qquad \visible<#2-|handout:#2->{#5}}
+
+\newcommand{\boder}{\ensuremath{\textcolor{blue}{\vee}}\text{} }
+\newcommand{\bund}{\ensuremath{\textcolor{blue}{\wedge}}\text{}}
+\newcommand{\bimp}{\ensuremath{\textcolor{blue}{\to}}\text{}}
+\newcommand{\bnot}{\ensuremath{\textcolor{blue}{\neg}}\text{}}
+\newcommand{\bone}{\ensuremath{\textcolor{blue}{1}}\text{}}
+\newcommand{\bzero}{\ensuremath{\textcolor{blue}{0}}\text{}}
+\newcommand{\bleftBr}{\ensuremath{\textcolor{blue}{(}}\text{}}
+\newcommand{\brightBr}{\ensuremath{\textcolor{blue}{)}}\text{}}
+
+\newcommand{\summe}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\limes}[1]{\lim\limits_{#1}}
+
+\newcommand{\numpp}{\advance \value{weeknum} by -2 \theweeknum \advance \value{weeknum} by 2}
+\newcommand{\nump}{\advance \value{weeknum} by -1 \theweeknum \advance \value{weeknum} by 1}
+
+\newcommand{\mycomment}[1]{}
+
+\newcounter{abc}
+\newenvironment{alist}{
+  \begin{list}{(\alph{abc})}{
+      \usecounter{abc}\setlength{\leftmargin}{8mm}\setlength{\labelsep}{2mm}
+    }
+}{\end{list}}
+
+\renewcommand{\mod}{\text{ \bf{mod} }}
+\renewcommand{\div}{\text{ \bf{div} }}
+
+%\newcommand{\sgn}{\text{sgn}}

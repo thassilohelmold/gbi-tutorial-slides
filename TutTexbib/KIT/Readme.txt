@@ -1,0 +1,2 @@
+This modified version of the KIT-Theme does not display a KIT-Logo and does not display the family certification on the title page footer.
+To achieve this, the inner and outer theme content was copied directly into the main theme.

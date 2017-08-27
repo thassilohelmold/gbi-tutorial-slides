@@ -1,0 +1,131 @@
+\section{Repräsentation von Graphen}
+\begin{frame}{Darstellung von Graphen}
+	\begin{block}{Auf Papier}
+		\begin{itemize}
+			\item Graphische Darstellung
+			\item Mengendarstellung
+			\item Textuelle Beschreibung
+		\end{itemize}
+	\end{block}
+
+	\pause
+	\begin{block}{Im Rechner}
+		Systematisches abspeichern der Kanten notwendig.\\
+		Knoten werden oftmals implizit verwendet.
+		\begin{itemize}
+			\item (Kantenliste)
+			\item Adjazenzlisten
+			\item Adjazenzmatrix
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Adjazenzlisten}
+	\begin{Definition}
+		In einer \emph{Adjazenzliste} werden zu einem Knoten $x$ alle Knoten eingetragen, die von $x$ aus direkt mit einer Kante verbunden sind.
+	\end{Definition}
+
+	\pause
+	Für jeden Knoten existiert eine Liste, alle Listen werden meist in einem Feld gespeichert.
+\end{frame}
+
+\begin{frame}{Adjazenzlisten}
+	\begin{Beispiel}
+		\begin{columns}
+			\column{0.4\linewidth}
+			\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		        \matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
+		        {
+		          |(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+		          \& |(3)| 3 \& \\
+		        };
+		        \draw  (0) -- (1);
+		        \draw  (0) -- (3);
+		        \draw  (2)  to [bend left] (3);
+		        \draw  (2) -- (1);
+		        \draw  (3) to [bend left] (2);
+		        \draw  (0) to [bend left]  (2);
+		        \path (2) edge [loop right] ();
+		        \draw (1) -- (3);
+	      	\end{tikzpicture}
+			\column{0.4\linewidth}
+				\pause
+				Für die Adjazentenlisten gilt 
+				\begin{table}[H]
+					\centering \vspace*{1em}
+					\begin{tabular}{c|c} 0 & 1,2,3 \\ \hline 1 & 3 \\ \hline 2 & 1,2,3 \\ \hline 3 & 2 
+					\end{tabular}  
+				\end{table}
+		\end{columns}
+	\end{Beispiel}
+\end{frame}
+
+\begin{frame}{Adjazenzmatrix}
+	\begin{Definition}
+		Die \textbf{Adjazenzmatrix} eines Graphen $(V, E)$ mit $n$ Knoten ist die Matrix $A\in \{0,1\}^n\times\{0,1\}^n$ mit $$ A_{ij} = \begin{cases} 0 & (i,j) \notin E \\ 1 & (i,j) \in E \end{cases} $$ 
+	\end{Definition}
+
+	\medskip
+	\emph{Achtung}: Bei dieser Definition müssen Matrix- und Knotenindizes mit dem gleichen Wert starten ($0$ oder $1$)
+\end{frame}
+
+\begin{frame}{Adjazenzmatrix}
+	\begin{Beispiel}
+		\begin{columns}
+			\column{0.4\linewidth}
+			\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+			\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
+			{
+				|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+				\& |(3)| 3 \& \\
+			};
+			\draw  (0) -- (1);
+			\draw  (0) -- (3);
+			\draw (1) -- (3);
+			\draw  (2)  to [bend left] (3);
+			\draw  (2) -- (1);
+			\draw  (3) to [bend left] (2);
+			\draw  (0) to [bend left]  (2);
+			\path (2) edge [loop right] ();
+			\end{tikzpicture}
+			\column{0.4\linewidth}
+			\pause
+			$$ A = \begin{pmatrix} 0 & 1 & 1 & 1 \\ 0 & 0 & 0 & 1 \\ 0 & 1 & 1 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix} $$
+		\end{columns}
+	\end{Beispiel}
+\end{frame}
+
+\begin{frame}{Adjazenzmatrix}
+	\begin{block}{Besondere Eigenschaften der Adjazenzmatrix}
+		\begin{itemize}
+			\item Schlingen lassen sich an einer $1$ auf der Diagonalen erkennen (Wert von $A_{ii}$) 
+			\item Bei ungerichteten Graphen ist $A$ immer symmetrisch (also $A_{ij} = A_{ji}$).
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Vergleich der Darstellungen}
+	\begin{itemize}[<+->]
+		\item Adjazenzliste: Speicherplatz abhängig von Kanten $(m)$\\
+		Besser bei dünn besetzten Graphen. 
+		\item Adjazenzmatrix: Immer gleich viel Speicherplatz $(n^2)$\\
+		Besser bei dicht besetzten Graphen (kein Overhead für Listen nötig).
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Vergleich der Darstellungen}
+	\begin{itemize}[<+->]
+		\item Adjazenzliste: Nachbarn ermitteln in $O(1)$\\
+		Ermitteln ob $(i,j)$ adjazent sind in $O(n)$
+		\item Adjazenzmatrix: Nachbarn ermitteln in $O(n)$\\
+		Ermitteln ob $(i,j)$ adjazent sind in $O(1)$
+	\end{itemize}
+
+	\pause
+	In der Praxis meistens (Varianten von) Adjazenzlisten verwendet.\\
+	Denn: Die meisten Graphalgorithmen traversieren den Graphen, dafür sind Adjazenzlisten deutlich besser.
+	
+	\bigskip
+	Viel mehr dazu in Algorithmen I
+\end{frame}

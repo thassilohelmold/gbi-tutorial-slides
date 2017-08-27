@@ -1,0 +1,733 @@
+%%
+%% This is file `beamerthemeKIT.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% KITbeamer.dtx  (with options: `base')
+%% 
+%% This is a generated file.
+%% 
+%% 
+%% Copyright (C) 2010-2016 by Klaus Braune <klaus.braune@kit.edu>,
+%% Steinbuch Centre for Computing (SCC) at Karlsruhe Institute of Technology (KIT)
+%% 
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.2 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\RequirePackage{rcs}
+\RCS $Date: 2016/04/12 16:06:06 $
+\RCS $Revision: 1.4 $
+\ProvidesPackage{beamerthemeKITmod}
+    [\RCSRawDate\space v\RCSRevision\space Base part of the beamer theme KIT]
+\RequirePackage{mathpazo}
+\RequirePackage{uarial}
+\let\KIT@fam=\sfdefault
+\RequirePackage{tikz}
+\mode<presentation>
+\RequirePackage{KITdefs}
+\newlength{\KIT@mm}
+\setlength{\KIT@mm}{0.003937007874015748031\paperwidth}
+\newlength{\KIT@pt}
+%%\setlength{\KIT@pt}{.5333333333333333333pt}
+\setlength{\KIT@pt}{0.3514598035145980351\KIT@mm}
+\newlength{\KIT@clen}
+\addtolength{\oddsidemargin}{-2.4mm}
+\addtolength{\oddsidemargin}{-4\KIT@mm}
+\setlength{\textwidth}{232.0\KIT@mm}
+\setlength{\headsep}{23\KIT@mm}
+\setlength{\KIT@titimgwd}{248\KIT@mm}
+\let\titleimagewd=\KIT@titimgwd
+\newlength{\titleimageht}\setlength{\titleimageht}{74\KIT@mm}
+\setlength{\KIT@Framewd}{3\KIT@mm}
+\setlength{\KIT@Linewd}{.5\KIT@pt}
+\setlength{\KIT@MFllx}{0\KIT@mm}
+\setlength{\KIT@MFlly}{0\KIT@mm}
+\setlength{\KIT@MFurx}{254\KIT@mm}
+\setlength{\KIT@MFury}{190.5\KIT@mm}
+\newcommand{\KIT@MFodd}{10\KIT@mm}
+\newcommand{\KIT@MFHdh}{0\KIT@mm}
+\newcommand{\KIT@MFbadd}{12\KIT@mm}
+\setlength{\leftmargini}{13.93329pt}
+\setlength{\leftmarginii}{16.06725pt}
+\setlength{\leftmarginiii}{16.06725pt}
+\setlength{\leftmarginiv}{6.40mm}
+\setlength{\leftmarginv}{6.40mm}
+\setlength{\leftmarginvi}{0.00mm}
+\newlength{\labelsep@itemi}
+\setlength{\labelsep@itemi}{6.89763pt}
+\newlength{\labelsep@itemii}
+\setlength{\labelsep@itemii}{5.475pt}
+\newlength{\labelsep@itemiii}
+\setlength{\labelsep@itemiii}{3.76784pt}
+\newlength{\labelsep@itemiv}
+\setlength{\labelsep@itemiv}{4.33688pt}
+\let\labelsep@itemv=\labelsep@itemiv
+\let\labelsep@itemvi=\labelsep@itemv
+\newlength{\labelsep@enumi}
+\setlength{\labelsep@enumi}{\labelsep@itemi}
+\addtolength{\labelsep@enumi}{-2\KIT@mm}
+\newlength{\labelsep@enumii}
+\setlength{\labelsep@enumii}{\labelsep@itemii}
+\addtolength{\labelsep@enumii}{-1.7\KIT@mm}
+\newlength{\labelsep@enumiii}
+\setlength{\labelsep@enumiii}{\labelsep@itemiii}
+\addtolength{\labelsep@enumiii}{-1.4\KIT@mm}
+\newlength{\labelsep@enumiv}
+\setlength{\labelsep@enumiv}{\labelsep@itemiv}
+\addtolength{\labelsep@enumiv}{-1.25\KIT@mm}
+\let\labelsep@enumv=\labelsep@itemv
+\let\labelsep@enumvi=\labelsep@itemvi
+\newlength{\item@indenti}
+\setlength{\item@indenti}{0pt}
+\let\item@indentii=\item@indenti
+\let\item@indentiii=\item@indenti
+\let\item@indentiv=\item@indenti
+\let\item@indentv=\item@indenti
+\newlength{\item@indentvi}
+\setlength{\item@indentvi}{-\labelsep@itemiv}
+\let\enum@indenti=\item@indenti
+\let\enum@indentii=\item@indentii
+\let\enum@indentiii=\item@indentiii
+\let\enum@indentiv=\item@indentiv
+\let\enum@indentv=\item@indentv
+\let\enum@indentvi=\item@indentvi
+\newcommand{\heading}[1]{%
+  \vspace{4.9\KIT@pt}\par{\KIT@fnt@hdr#1}
+}
+\newif\ifKIT@De\KIT@Detrue
+\DeclareOption{deutsch}{\AtEndOfPackage{\German}%
+  \def\KIT@babelopts{english,ngerman}}
+\DeclareOption{german}{\AtEndOfPackage{\German}%
+  \def\KIT@babelopts{english,ngerman}}
+\DeclareOption{ngerman}{\AtEndOfPackage{\German}%
+  \def\KIT@babelopts{english,ngerman}}
+\DeclareOption{germanb}{\AtEndOfPackage{\German}%
+  \def\KIT@babelopts{english,ngerman}}
+\DeclareOption{englisch}{\AtEndOfPackage{\English}%
+  \def\KIT@babelopts{ngerman,english}}
+\DeclareOption{english}{\AtEndOfPackage{\English}%
+  \def\KIT@babelopts{ngerman,english}}
+\DeclareOption{UKenglish}{\AtEndOfPackage{\English}%
+  \def\KIT@babelopts{ngerman,english}}
+\DeclareOption{USenglish}{\AtEndOfPackage{\English}%
+  \def\KIT@babelopts{ngerman,english}}
+\def\KIT@babelopts{english,ngerman}
+\def\KIT@clrmod{rgb}
+\DeclareOption{cmyk}{\def\KIT@clrmod{cmyk}}
+\DeclareOption{rgb}{\def\KIT@clrmod{rgb}}
+\DeclareOption{bw}{\AtBeginDocument{\BW}}
+\DeclareOption{sw}{\AtBeginDocument{\BW}}
+\DeclareOption{color}{\AtBeginDocument{\Color}}
+\DeclareOption{farbig}{\AtBeginDocument{\Color}}
+\DeclareOption{16pt}{\input{KIT16.clo}}
+\DeclareOption{18pt}{\input{KIT18.clo}}
+\DeclareOption{20pt}{\input{KIT20.clo}}
+\DeclareOption{22pt}{\input{KIT22.clo}}
+\DeclareOption{24pt}{\input{KIT24.clo}}
+\newif\ifKIT@usefoot\KIT@usefoottrue
+\DeclareOption{usefoot}{\KIT@usefoottrue}
+\DeclareOption{nofoot}{\KIT@usefootfalse}
+\newif\ifKIT@titlepage@z\KIT@titlepage@zfalse
+\DeclareOption{titlepage0}{\KIT@titlepage@ztrue}
+\DeclareOption{KITtoc}{\AtEndOfPackage{%
+  \setbeamertemplate{section in toc}[KIT]
+  \setbeamertemplate{subsection in toc}[KIT]
+  \setbeamertemplate{subsubsection in toc}[KIT]}}
+\newlength{\tocsecskip}
+\setlength{\tocsecskip}{\fill}
+\newlength{\tochideskip}
+\setlength{\tochideskip}{1.5em}
+\def\beamer@sectionintoc#1#2#3#4#5{%
+  \ifnum\c@tocdepth>0%
+  \ifnum#4=\beamer@showpartnumber%
+  {
+  \beamer@saveanother%
+  \gdef\beamer@todo{}%
+  \beamer@slideinframe=#1\relax%
+  \expandafter\only\beamer@tocsections{\gdef\beamer@todo{%
+      \beamer@tempcount=#5\relax%
+      \advance\beamer@tempcount by\beamer@sectionadjust%
+      \edef\inserttocsectionnumber{\the\beamer@tempcount}%
+      \def\inserttocsection{\hyperlink{Navigation#3}{#2}}%
+      \beamer@tocifnothide{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}%
+      {
+        \ifbeamer@pausesections\pause\fi%
+        \ifx\beamer@toc@ooss\beamer@hidetext
+          \vskip\tochideskip
+        \else
+          \vskip\tocsecskip
+        \fi
+        {%
+          \hbox{\vbox{%
+              \def\beamer@breakhere{\\}%
+              \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}}%
+          \par%
+        }%
+      }%
+    }
+  }%
+  \beamer@restoreanother%
+  }
+  \beamer@todo%
+  \fi\fi%
+}
+\DeclareOption{compacttoc}{\setlength{\tocsecskip}{1ex}}
+\ExecuteOptions{20pt}
+\ProcessOptions
+\PassOptionsToPackage{\KIT@babelopts}{babel}
+\PassOptionsToPackage{\KIT@clrmod}{KITcolors}
+\RequirePackage{KITcolors}
+\let\KIT@BW=\BW
+\renewcommand{\BW}{\KIT@BW
+  \setbeamertemplate{itemize item}{\KIT@mark[black]}%
+  \setbeamertemplate{itemize subitem}{\KIT@mark[black]}%
+  \setbeamertemplate{itemize subsubitem}{\KIT@mark[black]}%
+  \setbeamertemplate{itemize subsubsubitem}{\KIT@mark[black]}%
+  \setbeamertemplate{itemize subsubsubsubitem}{\KIT@mark[black]}%
+  \setbeamertemplate{itemize subsubsubsubsubitem}{\KIT@mark[black]}%
+}
+\let\KIT@Color=\Color
+\renewcommand{\Color}{\KIT@Color
+  \setbeamertemplate{itemize item}{\KIT@mark}%
+  \setbeamertemplate{itemize subitem}{\KIT@mark}%
+  \setbeamertemplate{itemize subsubitem}{\KIT@mark}%
+  \setbeamertemplate{itemize subsubsubitem}{\KIT@mark}%
+  \setbeamertemplate{itemize subsubsubsubitem}{\KIT@mark}%
+  \setbeamertemplate{itemize subsubsubsubsubitem}{\KIT@mark}%
+}
+\gdef\English{%
+  \KIT@English
+  \gdef\KIT@logo{\KIT@logo@clrE}
+}
+\English
+\gdef\German{%
+  \KIT@German
+  \gdef\KIT@logo{\KIT@logo@clrD}
+}
+\let\Deutsch=\German
+\let\KIT@ologo=\relax
+\renewcommand{\logo}[1]{%
+  \settowidth{\KIT@clen}{#1}
+  \ifdim\KIT@clen>30\KIT@mm
+    \@warning{%
+      The additional logo has been rescaled since an additional logo must
+      not be wider than the KIT logo and must optically not be larger
+      than 2/3 of the KIT logo!}%
+    \def\KIT@ologo{\resizebox{30\KIT@mm}{!}{#1}}
+  \else
+    \def\KIT@ologo{#1}
+  \fi}
+\def\KIT@inslogo@warn{%
+  The command \noexpand\insertlogo is not available with the beamer theme KIT}
+\renewcommand{\insertlogo}{\ifx\KIT@inslogo@warn\relax\relax\else
+  \@warning{\KIT@inslogo@warn}\global\let\KIT@inslogo@warn=\relax\fi}
+\defbeamertemplate{sidebar right}{KIT}{\relax}
+\setbeamertemplate{sidebar right}{}
+\newlength{\KITlogowd}
+\setlength{\KITlogowd}{30\KIT@mm}
+\newlength{\KITlogoht}
+\setlength{\KITlogoht}{9.33333\KIT@mm}
+\newlength{\footersepwd}
+\setlength{\footersepwd}{10pt}
+\def\AuthorTitleSep#1{\gdef\KIT@FtATsep{#1}}
+% Modified by TH
+\gdef\KIT@FtATsep{~--~}
+\AtBeginDocument{%
+  \ifx\KIT@FtATsep\relax
+    \gdef{\KIT@FtATsep}{\hspace{\KIT@FtSepFact\footersepwd}}\fi
+  \settowidth{\KIT@tmplen}{\KIT@FtATsep}
+  \addtolength{\KIT@footerwd}{-\KIT@tmplen}}
+\def\AuthorTitleSpaceFactor#1{\gdef\KIT@FtSepFact{#1}}
+\gdef\KIT@FtSepFact{0}
+\let\KIT@org@author=\author
+\let\KIT@author=\relax
+\let\KIT@sauthor=\relax
+\renewcommand{\author}[2][\relax]{%
+  \gdef\KIT@author{#2}
+  \ifx#1\relax
+    \KIT@org@author{#2}
+  \else
+    \gdef\KIT@sauthor{#1}
+    \KIT@org@author[{#1}]{#2}
+  \fi}
+\def\FooterAuthorfraction#1{\gdef\KIT@FtAFrac{#1}}
+\gdef\KIT@FtAFrac{0}
+\let\KIT@org@title=\title
+\let\KIT@title=\relax
+\let\KIT@stitle=\relax
+\renewcommand{\title}[2][\relax]{%
+  \gdef\KIT@title{#2}
+  \ifx#1\relax
+    \KIT@org@title{#2}
+  \else
+    \gdef\KIT@stitle{#1}
+    \KIT@org@title[{#1}]{#2}
+  \fi}
+\def\FooterTitlefraction#1{\gdef\KIT@FtTFrac{#1}}
+\gdef\KIT@FtTFrac{.7}
+\let\KIT@org@institute=\institute
+\let\KIT@inst=\relax
+\let\KIT@sinst=\relax
+\renewcommand{\institute}[2][\relax]{%
+  \gdef\KIT@inst{#2}
+  \ifx#1\relax
+    \KIT@org@institute{#2}
+  \else
+    \settoheight{\KIT@clen}{#1}
+    \settodepth{\KIT@tmplen}{#1}
+    \addtolength{\KIT@clen}{\KIT@tmplen}
+    \ifdim\KIT@clen>9.333333\KIT@mm
+      \@warning{%
+        The additional logo has been rescaled since an additional logo must
+        not be wider than the KIT logo and must optically not be larger
+        than 2/3 of the KIT logo!}%
+      \gdef\KIT@sinst{\resizebox{!}{9.33333\KIT@mm}{#1}}
+    \else
+      \gdef\KIT@sinst{#1}
+    \fi
+    \KIT@org@institute[{#1}]{#2}
+  \fi}
+\def\FooterInstfraction#1{\gdef\KIT@FtIFrac{#1}}
+\gdef\KIT@FtIFrac{.3}
+\newcommand{\KITfoot}[1]{\KIT@usefoottrue\gdef\KIT@foot{#1}}
+\let\KIT@foot=\relax
+\newcommand{\usenavigationsymbols}[1][fHb]{\xdef\KIT@nav@syms{#1!}}
+\let\KIT@nav@syms=\relax
+\usefonttheme{KIT}
+\usecolortheme{KIT}
+%\useinnertheme{KIT}
+
+%%
+%% This is file `beamerinnerthemeKIT.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% KITbeamer.dtx  (with options: `inner')
+%% 
+%% This is a generated file.
+%% 
+%% 
+%% Copyright (C) 2010-2016 by Klaus Braune <klaus.braune@kit.edu>,
+%% Steinbuch Centre for Computing (SCC) at Karlsruhe Institute of Technology (KIT)
+%% 
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.2 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\newlength{\KIT@tmplen}
+\newcommand{\KIT@GetHt}[6][194\KIT@mm]{%
+	\sbox{\KIT@sbx}{\parbox{#1}{\raggedright#5#6}}%
+	\setlength{\KIT@tmplen}{\ht\KIT@sbx}%
+	\ifdim\KIT@tmplen>#2\addtolength{\KIT@tmplen}{#3}%
+	\else\setlength{\KIT@tmplen}{#4}\fi}
+\let\KIT@frametitle@org=\frametitle
+\def\frametitle{\@ifnextchar<\KIT@fr@titB\KIT@fr@titA}
+\def\KIT@fr@titA{\@ifnextchar[\KIT@fr@titAB\KIT@fr@titAA}
+\def\KIT@fr@titAA#1{%
+	\KIT@GetHt{8\KIT@mm}{0\KIT@mm}{0\KIT@mm}{\KIT@fnt@framtitl}{#1}%
+	\vspace*{\KIT@tmplen}\KIT@frametitle@org{#1}}
+\def\KIT@fr@titAB[#1]#2{%
+	\KIT@GetHt{8\KIT@mm}{0\KIT@mm}{0\KIT@mm}{\KIT@fnt@framtitl}{#2}%
+	\vspace*{\KIT@tmplen}\KIT@frametitle@org[#1]{#2}}
+\def\KIT@fr@titB<#1>{\@ifnextchar[{\KIT@fr@titBB<#1>}{\KIT@fr@titBA<#1>}}
+\def\KIT@fr@titBA<#1>#2{%
+	\KIT@GetHt{8\KIT@mm}{0\KIT@mm}{0\KIT@mm}{\KIT@fnt@framtitl}{#2}%
+	\vspace*{\KIT@tmplen}\KIT@frametitle@org<#1>{#2}}
+\def\KIT@fr@titBB<#1>[#2]#3{%
+	\KIT@GetHt{8\KIT@mm}{0\KIT@mm}{0\KIT@mm}{\KIT@fnt@framtitl}{#3}%
+	\vspace*{\KIT@tmplen}\KIT@frametitle@org<#1>[#2]{#3}}
+\let\KIT@framesubtitle@org=\framesubtitle
+\def\framesubtitle{\@ifnextchar<\KIT@fr@stitB\KIT@fr@stitA}
+\def\KIT@fr@stitA#1{%
+	\KIT@GetHt{6.5\KIT@mm}{8.5\KIT@mm}{10\KIT@mm}{\KIT@fnt@framsubtit}{#1}%
+	\vspace*{\KIT@tmplen}\KIT@framesubtitle@org{#1}}
+\def\KIT@fr@stitB<#1>#2{%
+	\KIT@GetHt{6.5\KIT@mm}{8.5\KIT@mm}{10\KIT@mm}{\KIT@fnt@framsubtit}{#2}%
+	\vspace*{\KIT@tmplen}\KIT@framesubtitle@org{#1}}
+\newcommand{\max@itemdepth}{6}
+\newcommand{\max@enumdepth}{6}
+\renewcommand{\itemize}[1][]{%
+	\beamer@ifempty{#1}{}{\def\beamer@defaultospec{#1}}%
+	\ifnum \@itemdepth >\max@itemdepth\relax\@toodeep\else
+	\advance\@itemdepth\@ne
+	\beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+	\usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+	\list
+	{\usebeamertemplate{itemize \beameritemnestingprefix item}}
+	{\def\makelabel##1{%
+			{%
+				\hss\llap{{%
+						\usebeamerfont*{itemize \beameritemnestingprefix item}%
+						\usebeamercolor[fg]{itemize \beameritemnestingprefix item}##1}}%
+			}%
+		}%
+		\expandafter\setlength{\labelsep}%
+		{\csname labelsep@item\romannumeral\the\@itemdepth\endcsname}
+		\expandafter\setlength{\itemindent}%
+		{\csname item@indent\romannumeral\the\@itemdepth\endcsname}
+	}
+	\fi%
+	\beamer@cramped%
+	\raggedright%
+	\beamer@firstlineitemizeunskip%
+}
+\defbeamertemplateparent{itemize items}[KIT]{itemize item,itemize subitem,itemize subsubitem,subsubsubitem,subsubsubsubitem,subsubsubsubsubitem}
+{}
+\setbeamertemplate{items}[KIT]
+\setbeamertemplate{itemize item}{\KIT@mark}
+\setbeamertemplate{itemize subitem}{\KIT@mark}
+\setbeamertemplate{itemize subsubitem}{\KIT@mark}
+\setbeamertemplate{itemize subsubsubitem}{\KIT@mark}
+\setbeamertemplate{itemize subsubsubsubitem}{\KIT@mark}
+\setbeamertemplate{itemize subsubsubsubsubitem}{\KIT@mark}
+\defbeamertemplatealias{itemize subsubsubitem}{triangle}{default}
+\defbeamertemplatealias{itemize subsubsubsubitem}{triangle}{default}
+\defbeamertemplatealias{itemize subsubsubsubsubitem}{triangle}{default}
+\defbeamertemplate{itemize subsubsubitem}{circle}{\tiny\raise0.5pt\hbox{\textbullet}}
+\defbeamertemplate{itemize subsubsubsubitem}{circle}{\tiny\raise0.5pt\hbox{\textbullet}}
+\defbeamertemplate{itemize subsubsubsubsubitem}{circle}{\tiny\raise0.5pt\hbox{\textbullet}}
+\defbeamertemplate{itemize subsubsubitem}{square}{\footnotesize\hbox{\vrule width 1ex height 1ex}}
+\defbeamertemplate{itemize subsubsubsubitem}{square}{\footnotesize\hbox{\vrule width 1ex height 1ex}}
+\defbeamertemplate{itemize subsubsubsubsubitem}{square}{\footnotesize\hbox{\vrule width 1ex height 1ex}}
+\defbeamertemplate{itemize subsubsubitem}{ball}{\raise0.2pt\beamer@usesphere{subsubsubitem projected}{smallsphere}}
+\defbeamertemplate{itemize subsubsubsubitem}{ball}{\raise0.2pt\beamer@usesphere{subsubsubsubitem projected}{smallsphere}}
+\defbeamertemplate{itemize subsubsubsubsubitem}{ball}{\raise0.2pt\beamer@usesphere{subsubsubsubsubitem projected}{smallsphere}}
+\def\usesubsubsubitemizeitemtemplate{\setbeamertemplate{itemize subsubsubitem}}
+\def\usesubsubsubsubitemizeitemtemplate{\setbeamertemplate{itemize subsubsubsubitem}}
+\def\usesubsubsubsubsubitemizeitemtemplate{\setbeamertemplate{itemize subsubsubsubsubitem}}
+\defbeamertemplate*{itemize/enumerate subsubsubbody begin}{default}{}
+\defbeamertemplate*{itemize/enumerate subsubsubbody end}{default}{}
+\defbeamertemplate*{itemize/enumerate subsubsubsubbody begin}{default}{}
+\defbeamertemplate*{itemize/enumerate subsubsubsubbody end}{default}{}
+\defbeamertemplate*{itemize/enumerate subsubsubsubsubbody begin}{default}{}
+\defbeamertemplate*{itemize/enumerate subsubsubsubsubbody end}{default}{}
+\newcounter{enumv}
+\newcounter{enumvi}
+\renewcommand{\theenumiv}{\arabic{enumiv}}
+\renewcommand{\theenumv}{\arabic{enumv}}
+\renewcommand{\theenumvi}{\arabic{enumvi}}
+\newcommand{\insertsubsubsubenumlabel}{\theenumiv}
+\newcommand{\insertsubsubsubsubenumlabel}{\theenumv}
+\newcommand{\insertsubsubsubsubsubenumlabel}{\theenumvi}
+\def\enumerate{%
+	\ifnum\@enumdepth>\max@enumdepth\relax\@toodeep
+	\else%
+	\advance\@enumdepth\@ne%
+	\edef\@enumctr{enum\romannumeral\the\@enumdepth}%
+	\advance\@itemdepth\@ne%
+	\fi%
+	\beamer@computepref\@enumdepth% sets \beameritemnestingprefix
+	\edef\beamer@enumtempl{enumerate \beameritemnestingprefix item}%
+	\@ifnextchar[{\beamer@@enum@}{\beamer@enum@}}
+\def\beamer@enum@{%
+	\beamer@computepref\@itemdepth% sets \beameritemnestingprefix
+	\usebeamerfont{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamercolor[fg]{itemize/enumerate \beameritemnestingprefix body}%
+	\usebeamertemplate{itemize/enumerate \beameritemnestingprefix body begin}%
+	\expandafter
+	\list
+	{\usebeamertemplate{\beamer@enumtempl}}
+	{\usecounter\@enumctr%
+		\def\makelabel##1{{\hss\llap{{%
+						\usebeamerfont*{enumerate \beameritemnestingprefix item}%
+						\usebeamercolor[fg]{enumerate \beameritemnestingprefix item}##1}}}}%
+		\expandafter\setlength{\labelsep}%
+		{\csname labelsep@enum\romannumeral\the\@itemdepth\endcsname}
+		\expandafter\setlength{\itemindent}%
+		{\csname enum@indent\romannumeral\the\@itemdepth\endcsname}
+	}%
+	\beamer@cramped%
+	\raggedright%
+	\beamer@firstlineitemizeunskip%
+}
+\def\beamer@computepref#1{%
+	\let\beameritemnestingprefix\@empty%
+	\ifcase#1\or\or\def\beameritemnestingprefix{sub}\or\def\beameritemnestingprefix{subsub}\or\def\beameritemnestingprefix{subsubsub}\or\def\beameritemnestingprefix{subsubsubsub}\or\def\beameritemnestingprefix{subsubsubsubsub}\or\@toodeep\fi%
+}
+\defbeamertemplateparent{enumerate items}[KIT]{enumerate item,enumerate subitem,enumerate subsubitem,enumerate subsubsubitem,enumerate subsubsubsubitem,enumerate mini}
+{}
+\defbeamertemplate*{enumerate subsubsubitem}{default}{\insertenumlabel.\insertsubenumlabel.\insertsubsubenumlabel.\insertsubsubsubenumlabel}
+\defbeamertemplate*{enumerate subsubsubsubitem}{default}{\insertenumlabel.\insertsubenumlabel.\insertsubsubenumlabel.\insertsubsubsubenumlabel.\insertsubsubsubsubenumlabel}
+\defbeamertemplate*{enumerate subsubsubsubsubitem}{default}{\insertenumlabel.\insertsubenumlabel.\insertsubsubenumlabel.\insertsubsubsubenumlabel.\insertsubsubsubsubenumlabel.\insertsubsubsubsubsubenumlabel}
+\defbeamertemplate*{enumerate subsubsubitem}{ball}
+{
+	\begin{pgfpicture}{-1ex}{-0.55ex}{1ex}{1ex}
+		\usebeamercolor[fg]{subsubsubitem projected}
+		{\pgftransformscale{1.4}\pgftext{\normalsize\pgfuseshading{bigsphere}}}
+		\pgftext{%
+			\usebeamerfont*{subsubitem projected}%
+			\insertsubsubsubenumlabel}
+	\end{pgfpicture}%
+}
+\defbeamertemplate*{enumerate subsubsubsubitem}{ball}
+{
+	\begin{pgfpicture}{-1ex}{-0.55ex}{1ex}{1ex}
+		\usebeamercolor[fg]{subsubsubsubitem projected}
+		{\pgftransformscale{1.4}\pgftext{\normalsize\pgfuseshading{bigsphere}}}
+		\pgftext{%
+			\usebeamerfont*{subsubsubitem projected}%
+			\insertsubsubsubsubenumlabel}
+	\end{pgfpicture}%
+}
+\defbeamertemplate*{enumerate subsubsubsubsubitem}{ball}
+{
+	\begin{pgfpicture}{-1ex}{-0.55ex}{1ex}{1ex}
+		\usebeamercolor[fg]{subsubsubsubsubitem projected}
+		{\pgftransformscale{1.4}\pgftext{\normalsize\pgfuseshading{bigsphere}}}
+		\pgftext{%
+			\usebeamerfont*{subsubsubsubitem projected}%
+			\insertsubsubsubsubsubenumlabel}
+	\end{pgfpicture}%
+}
+\defbeamertemplate{section in toc}{KIT}
+{\leavevmode\leftskip=1.75ex%
+	\llap{%
+		\usebeamerfont*{section number projected}%
+		\usebeamercolor[bg]{section number projected}%
+		\scalebox{1.2}{\protect\KIT@mark}
+		\hskip-2.25ex%
+	}
+	\kern2.25ex\inserttocsection\par}
+\defbeamertemplate{subsection in toc}{KIT}
+{\leavevmode\leftskip=5ex%
+	\llap{%
+		\usebeamercolor[bg]{subsection number projected}%
+		\KIT@mark
+	}
+	\kern.75ex\inserttocsubsection\par}
+\defbeamertemplate{subsubsection in toc}{KIT}
+{\leavevmode\normalsize%
+	\usebeamerfont{subsection in toc}
+	\leftskip=7ex
+	\usebeamerfont{subsubsection in toc}%
+	\llap{%
+		\usebeamercolor[bg]{subsubsection number projected}%
+		\KIT@mark
+		\kern1ex}%
+	\inserttocsubsubsection\par}
+\setbeamertemplate{title page}{%
+	\ifbeamer@centered
+	\vspace*{-.351truemm}%
+	\else
+	\vspace*{-2.36675truemm}%
+	\fi
+	\vspace*{-23\KIT@mm}%
+	\begin{tikzpicture}
+	%%\useasboundingbox (7.6mm,0mm) rectangle (135.6mm,95.649mm);
+	% \useasboundingbox (7.6mm,-\headsep) rectangle (135.6mm,95.649mm-\headsep);
+	\useasboundingbox (5.584252mm,.015mm) rectangle (133.584252mm,96.015mm);
+	\fill[white] (0\KIT@mm,0\KIT@mm) rectangle (254\KIT@mm,93.0\KIT@mm);
+	\pgftext[at=\pgfpoint{\KIT@Framewd}{15\KIT@mm},left,bottom]
+	{\usebox{\KIT@titimg}}
+	% Line above the title image:
+	\fill[white] (\KIT@Framewd,89\KIT@mm) rectangle (\KIT@MFurx-\KIT@Framewd,89.5\KIT@mm);
+	\fill[KITblack50] (\KIT@Framewd,89.5\KIT@mm) rectangle (\KIT@MFurx-\KIT@Framewd,101.5\KIT@mm);
+	\pgftext[at=\pgfpoint{11.0\KIT@mm}{95.5\KIT@mm},left]
+	{\textcolor{white}{\KIT@fnt@inst \insertinstitute}}
+	\fill[white] (0\KIT@mm,101.5\KIT@mm) rectangle (254\KIT@mm,190.5\KIT@mm);
+	\KIT@MFrame[\KIT@MFbadd]
+	%\pgftext[at=\pgfpoint{11\KIT@mm}{180.5\KIT@mm},left,top]
+	%{\pgfimage[interpolate=true,width=45\KIT@mm]{\KIT@logo}}
+	%\pgftext[at=\pgfpoint{243\KIT@mm}{180.5\KIT@mm},right,top]{\KIT@ologo}
+	%%   \pgftext[at=\pgfpoint{19.0\KIT@mm}{133\KIT@mm},left,base]
+	%%      {\parbox[b]{226\KIT@mm}{%
+	%%%       \raggedright\fontsize{32\KIT@pt}{36\KIT@pt}\bfseries\inserttitle}}
+	%%        \raggedright\KIT@fnt@titl\inserttitle}}
+	%%       \KIT@tlenA=\dp\KIT@sbx%
+	%%       \addtolength{\KIT@tlen}{\KIT@tlenA}%
+	%%       \settoheight{\KIT@tlenA}{\KIT@fnt@titl\inserttitle}%
+	%%       \ifdim\KIT@tlen>30\KIT@pt
+	%%   \pgftext[at=\pgfpoint{19.0\KIT@mm}{127\KIT@mm},left,top]
+	%%       \raggedright\fontsize{16\KIT@pt}{18\KIT@pt}\selectfont\insertsubtitle}}
+	\pgftext[at=\pgfpoint{11.0\KIT@mm}{130\KIT@mm},left]
+	{\settoheight{\KIT@tlen}{\parbox{226\KIT@mm}{%
+				\raggedright\KIT@fnt@titl\KIT@title%
+				\global\KIT@tlenA=\baselineskip}}%
+		\parbox{226\KIT@mm}{\raggedright
+			\ifdim\KIT@tlen>\KIT@tlenA\KIT@fnt@tits\else\KIT@fnt@titl\fi
+			\KIT@title\\[6.1\KIT@mm]
+			\KIT@fnt@subtit\insertsubtitle
+	}}
+	\pgftext[at=\pgfpoint{11\KIT@mm}{5.551\KIT@mm},left,base]{%
+		\KIT@fnt@foot\KIT@text}
+	\pgftext[at=\pgfpoint{251\KIT@mm}{5.551\KIT@mm},right,base]
+	{\fontsize{16\KIT@pt}{18\KIT@pt}\selectfont
+		\bfseries\color{white}\KIT@Web}
+	%\pgfdeclaremask{KIT@auditmask}{\KIT@audit@fgh@clr@mask}
+	%\pgftext[at=\pgfpoint{213.85\KIT@mm}{0\KIT@mm},right,base]
+	%   {\pgfimage[mask=KIT@auditmask,interpolate=true,height=13.0\KIT@mm]{\KIT@audit@fgh@clr}}
+	\end{tikzpicture}%
+	\ifKIT@titlepage@z\setcounter{framenumber}{0}\fi
+}
+%%
+%% End of file `beamerinnerthemeKIT.sty'.
+
+
+%\useoutertheme{KIT}
+
+%%
+%% This is file `beamerouterthemeKIT.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% KITbeamer.dtx  (with options: `outer')
+%% 
+%% This is a generated file.
+%% 
+%% 
+%% Copyright (C) 2010-2016 by Klaus Braune <klaus.braune@kit.edu>,
+%% Steinbuch Centre for Computing (SCC) at Karlsruhe Institute of Technology (KIT)
+%% 
+%% 
+%% This file may be distributed and/or modified under the conditions of
+%% the LaTeX Project Public License, either version 1.2 of this license
+%% or (at your option) any later version.  The latest version of this
+%% license is in:
+%% 
+%%    http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of LaTeX version
+%% 1999/12/01 or later.
+%% 
+\setbeamertemplate{navigation symbols}{}
+\newif\ifKIT@ins@warn
+\KIT@ins@warntrue
+%%\setbeamertemplate{frametitle}{\Large\insertframetitle\par}
+%%\setbeamertemplate{frametitle}{\rule{0pt}{8.7mm}\insertframetitle\par}
+\setbeamertemplate{frametitle}{\vspace*{\KIT@FHeadHt}}
+\newlength{\KIT@FHeadHt}
+\newlength{\KIT@footerwd}
+\setlength{\KIT@footerwd}{206\KIT@mm}
+\AtBeginDocument{%
+	\addtolength{\KIT@footerwd}{-\footersepwd}
+	\addtobeamertemplate{background}{}{%
+		\global\KIT@FHeadHt=0\KIT@mm
+		\begin{tikzpicture}
+		\useasboundingbox (-4.415748mm, 0.000mm) rectangle (123.584252mm,96.000mm);
+		%\useasboundingbox (0mm,0mm) rectangle (128mm,96mm);
+		\KIT@MFrame[\KIT@MFbadd]
+		%\pgftext[at=\pgfpoint{243\KIT@mm}{180.5\KIT@mm},right,top]
+		%{\pgfimage[interpolate=true,width=30\KIT@mm]{\KIT@logo}}
+		%%    \pgftext[at=\pgfpoint{15\KIT@mm}{172\KIT@mm},left,base]
+		%%      {\fontsize{30\KIT@pt}{32\KIT@pt}\bfseries\insertframetitle}
+		\pgftext[at=\pgfpoint{11\KIT@mm}{172.5\KIT@mm},left,base]
+		%%    \pgftext[at=\pgfpoint{15\KIT@mm}{154\KIT@mm},left,base]
+		%%      {\fontsize{25\KIT@pt}{27\KIT@pt}\bfseries\insertframesubtitle}
+		{\parbox[t]{194\KIT@mm}{\raggedright%
+				\KIT@fnt@framtitl
+				\insertframetitle\rule{0pt}{0pt}\\[4\KIT@pt]
+				\KIT@fnt@framsubtit
+				\insertframesubtitle}}
+		%%    \pgftext[at=\pgfpoint{9\KIT@mm}{8\KIT@mm},base]
+		%%      {\KIT@fnt@twelvept\bfseries\insertframenumber}
+		\pgftext[at=\pgfpoint{6\KIT@mm}{9.75\KIT@mm},left,base]
+		{\KIT@fnt@page\vphantom{0}\insertframenumber}
+		%%      {\fontsize{7\KIT@pt}{8.5\KIT@pt}\selectfont\vphantom{0}\insertdate}
+		\ifKIT@usefoot
+		\ifx\KIT@foot\relax
+		\pgftext[at=\pgfpoint{17\KIT@mm}{9.75\KIT@mm},left,base]
+		{\KIT@fnt@foot\vphantom{0}\KIT@date}
+		\pgftext[at=\pgfpoint{37\KIT@mm}{9.75\KIT@mm},left,base]
+		{\KIT@fnt@foot\vphantom{0}%
+			\ifdim\KIT@FtAFrac\KIT@footerwd>0pt
+			\addtolength{\KIT@footerwd}{-\KIT@FtSepFact\footersepwd}%
+			\parbox[t]{\KIT@FtAFrac\KIT@footerwd}{\raggedright%
+				\ifx\KIT@sauthor\relax\KIT@author
+				\else\KIT@sauthor\fi\KIT@FtATsep}%
+			\hspace{\KIT@FtSepFact\footersepwd}%
+			\parbox[t]{\KIT@FtTFrac\KIT@footerwd}{\raggedright%
+				\ifx\KIT@stitle\relax\KIT@title
+				\else\KIT@stitle\fi}%
+			\else
+			\parbox[t]{\KIT@FtTFrac\KIT@footerwd}{\raggedright%
+				\ifx\KIT@sauthor\relax\KIT@author
+				\else\KIT@sauthor\fi\KIT@FtATsep
+				\hspace{\KIT@FtSepFact\footersepwd}%
+				\ifx\KIT@stitle\relax\KIT@title
+				\else\KIT@stitle\fi}%
+			\fi}
+		\pgftext[at=\pgfpoint{243\KIT@mm}{9.75\KIT@mm},right,base]
+		{\KIT@fnt@foot\vphantom{0}%
+			\parbox[t]{\KIT@FtIFrac\KIT@footerwd}{\raggedleft%
+				\ifx\KIT@sinst\relax\KIT@inst
+				\else\KIT@sinst\fi}}
+		\else
+		\pgftext[at=\pgfpoint{17\KIT@mm}{9.75\KIT@mm},left,base]
+		{\KIT@fnt@foot\vphantom{0}\parbox[t]{226\KIT@mm}{\KIT@foot}}
+		\fi
+		\fi
+		\ifx\KIT@nav@syms\relax \relax
+		\else
+		\pgftext[at=\pgfpoint{\KIT@MFurx-\KIT@Framewd}{15\KIT@mm},bottom,right]
+		{\color{KITblack50}%
+			\setbeamercolor*{navigation symbols}{fg=KITblack50}%
+			\setbeamercolor*{navigation symbols dimmed}{fg=KITblack30}%
+			\expandafter\KIT@ins@nav\KIT@nav@syms
+		}
+		\fi
+		\end{tikzpicture}%
+	}
+	\def\KIT@ins@nav#1{%
+		\if#1!\let\@next=\relax\else
+		\if#1s\hbox{\insertslidenavigationsymbol}%
+		\let\@next=\KIT@ins@nav\else
+		\if#1f\hbox{\insertframenavigationsymbol}%
+		\let\@next=\KIT@ins@nav\else
+		\if#1H\hbox{\insertsectionnavigationsymbol}%
+		\let\@next=\KIT@ins@nav\else
+		\if#1h\hbox{\insertsubsectionnavigationsymbol}%
+		\let\@next=\KIT@ins@nav\else
+		\if#1d\hbox{\insertdocnavigationsymbol}%
+		\let\@next=\KIT@ins@nav\else
+		\if#1b\hbox{\insertbackfindforwardnavigationsymbol}%
+		\let\@next=\KIT@ins@nav\else
+		\ifKIT@ins@warn
+		\PackageWarning{beamerKIT}{Invalid navigation symbol key `#1' has been ignored}%
+		\message{To avoid the warning use only the keys^^J
+			\@spaces `s' to insert the slide navigation symbol^^J
+			\@spaces `f' to insert the frame navigation symbol^^J
+			\@spaces `H' to insert the section navigation symbol^^J
+			\@spaces `h' to insert the subsection navigation symbol^^J
+			\@spaces `d' to insert the doc navigation symbol and^^J
+			\@spaces `b' to insert the backward - find - forward symbols.^^J}%
+		\global\KIT@ins@warnfalse
+		\fi
+		\let\@next=\KIT@ins@nav
+		\fi\fi\fi\fi\fi\fi\fi
+		\@next
+	}
+}
+%%
+%% End of file `beamerouterthemeKIT.sty'.
+
+
+\DateNumbers
+\AtBeginDocument{\normalsize\raggedbottom}
+\let\KIT@document=\document
+\def\document{\KIT@document\addtolength{\textheight}{-4.8\baselineskip}}
+\mode
+<all>
+\endinput
+%%
+%% End of file `beamerthemeKIT.sty'.

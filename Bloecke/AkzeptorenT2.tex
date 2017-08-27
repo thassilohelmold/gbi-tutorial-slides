@@ -1,0 +1,35 @@
+\begin{frame}{Aufgabe}
+	% WiSe 10/11 Aufgabe 6 c
+	Die Sprache $L\subseteq \{a,b\}^* $ sei definiert als die Menge aller Wörter $w$, die folgende Bedingungen erfüllen 
+	\begin{align*}
+		N_b(w) &> N_a(w)  \\ \forall v_1,v_2 \in \{a,b\}^* : w &\neq v_1 bb v_2 
+	\end{align*}
+
+	Geben Sie einen endlichen Akzeptor an, der $L$ erkennt. \\
+	
+	\bigskip
+	\pause
+	Hinweis: Umgangssprachliche Formulierung der Sprache:\\ \pause
+	Anzahl b \textbf{echt} größer als Anzahl a \textbf{und}\\
+	Nirgends zwei b hintereinander\\
+	
+	\medskip
+	\pause
+	Hinweis 2: Was passiert, wenn $w$ mit einem a startet?\\ \pause
+	$w$ kann nicht mehr in $L$ liegen (wegen der 2. Bedingung)
+\end{frame}
+
+\begin{frame}{Lösung}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.6\linewidth]{automaten/Loesung2.pdf}
+	\end{figure}
+\end{frame}
+
+% TODO: Evtl. nächstes Tut
+\begin{frame}
+	Gibt es einen endlichen Akzeptor für die Sprache $$L = \{ a^n b^n | n \in \nN_0 \}$$
+	\pause
+	Nein! Siehe VL!
+	% TODO: SOON Hinweis auf TM zum erkennen
+\end{frame}

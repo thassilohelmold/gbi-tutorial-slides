@@ -1,0 +1,230 @@
+% % \bigtimes abgeschrieben von http://tex.stackexchange.com/questions/14386/importing-a-single-symbol-from-a-different-font
+% \DeclareFontFamily{U}{mathx}{\hyphenchar\font45}
+% \DeclareFontShape{U}{mathx}{m}{n}{
+%       <5> <6> <7> <8> <9> <10> gen * mathx
+%       <10.95> mathx10 <12> <14.4> <17.28> <20.74> <24.88> mathx12
+%       }{}
+% \DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+% \DeclareMathSymbol{\bigtimes}{\mathop}{mathx}{161}
+
+\RequirePackage{xcolor}
+
+\def\9{\square}
+%\def\9{\blank}
+
+% f"ur Aussagenlogik
+\colorlet{alcolor}{blue}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta}
+\newcommand{\alimpl}{\mathrel{\tikz[x={(0.1ex,0ex)},y={(0ex,0.1ex)},>={Classical TikZ Rightarrow[]}]{\draw[alcolor,->,line width=0.7pt,line cap=round] (0,0) -- (15,0);\path (0,-6);}}}
+\newcommand{\aleqv}{\mathrel{\tikz[x={(0.1ex,0ex)},y={(0ex,0.1ex)},>={Classical TikZ Rightarrow[]}]{\draw[alcolor,<->,line width=0.7pt,line cap=round] (0,0) -- (18,0);\path (0,-6);}}}
+\newcommand{\aland}{\mathbin{\raisebox{-0.6pt}{\rotatebox{90}{\texttt{\color{alcolor}\char62}}}}}
+\newcommand{\alor}{\mathbin{\raisebox{-0.8pt}{\rotatebox{90}{\texttt{\color{alcolor}\char60}}}}}
+%\newcommand{\ali}[1]{_{\mathtt{\color{alcolor}#1}}}
+\newcommand{\alv}[1]{\mathtt{\color{alcolor}#1}}
+\newcommand{\alnot}{\mathop{\tikz[x={(0.1ex,0ex)},y={(0ex,0.1ex)}]{\draw[alcolor,line width=0.7pt,line cap=round,line join=round] (0,0) -- (10,0) -- (10,-4);\path (0,-8) ;}}}
+\newcommand{\alP}{\alv{P}} %ali{#1}}
+%\newcommand{\alka}{\negthinspace\hbox{\texttt{\color{alcolor}(}}}
+\newcommand{\alka}{\negthinspace\text{\texttt{\color{alcolor}(}}}
+%\newcommand{\alkz}{\texttt{\color{alcolor})}}\negthinspace}
+\newcommand{\alkz}{\text{\texttt{\color{alcolor})}}\negthinspace}
+\newcommand{\AAL}{A_{AL}}
+\newcommand{\LAL}{\hbox{\textit{For}}_{AL}}
+\newcommand{\AxAL}{\hbox{\textit{Ax}}_{AL}}
+\newcommand{\AxEq}{\hbox{\textit{Ax}}_{Eq}}
+\newcommand{\AxPL}{\hbox{\textit{Ax}}_{PL}}
+\newcommand{\AALV}{\hbox{\textit{Var}}_{AL}}
+\newcommand{\MP}{\hbox{\textit{MP}}}
+\newcommand{\GEN}{\hbox{\textit{GEN}}}
+\newcommand{\W}{\ensuremath{\hbox{\textbf{w}}}\xspace}
+\newcommand{\F}{\ensuremath{\hbox{\textbf{f}}}\xspace}
+\newcommand{\WF}{\ensuremath{\{\W,\F\}}\xspace}
+\newcommand{\val}{\hbox{\textit{val}}}
+\newcommand{\valDIb}{\val_{D,I,\beta}}
+
+\newcommand*{\from}{\colon}
+
+% die nachfolgenden Sachen angepasst an cmtt
+\newlength{\ttquantwd}
+\setlength{\ttquantwd}{1ex}
+\newlength{\ttquantht}
+\setlength{\ttquantht}{6.75pt}
+\def\plall{%
+  \tikz[line width=0.67pt,line cap=round,line join=round,baseline=(B),alcolor] {
+    \draw (-0.5\ttquantwd,\ttquantht) -- node[coordinate,pos=0.4] (lll){} (-0.25pt,-0.0pt) -- (0.25pt,-0.0pt) -- node[coordinate,pos=0.6] (rrr){} (0.5\ttquantwd,\ttquantht);
+    \draw (lll) -- (rrr);
+    \coordinate (B) at (0,-0.35pt);
+  }%
+}
+\def\plexist{%
+  \tikz[line width=0.67pt,line cap=round,line join=round,baseline=(B),alcolor] {
+    \draw (-0.9\ttquantwd,\ttquantht) -- (0,\ttquantht) -- node[coordinate,pos=0.5] (mmm){} (0,0) --  (-0.9\ttquantwd,0);
+    \draw (mmm) -- ++(-0.75\ttquantwd,0);
+    \coordinate (B) at (0,-0.35pt);
+  }\ensuremath{\,}%
+}
+\let\plexists=\plexist
+\newcommand{\NT}[1]{\ensuremath{\langle\mathrm{#1} \rangle}}
+
+\newcommand{\CPL}{\text{\itshape Const}_{PL}}
+\newcommand{\FPL}{\text{\itshape Fun}_{PL}}
+\newcommand{\RPL}{\text{\itshape Rel}_{PL}}
+\newcommand{\VPL}{\text{\itshape Var}_{PL}}
+\newcommand{\ATer}{A_{\text{\itshape Ter}}}
+\newcommand{\ARel}{A_{\text{\itshape Rel}}}
+\newcommand{\AFor}{A_{\text{\itshape For}}}
+\newcommand{\LTer}{L_{\text{\itshape Ter}}}
+\newcommand{\LRel}{L_{\text{\itshape Rel}}}
+\newcommand{\LFor}{L_{\text{\itshape For}}}
+\newcommand{\NTer}{N_{\text{\itshape Ter}}}
+\newcommand{\NRel}{N_{\text{\itshape Rel}}}
+\newcommand{\NFor}{N_{\text{\itshape For}}}
+\newcommand{\PTer}{P_{\text{\itshape Ter}}}
+\newcommand{\PRel}{P_{\text{\itshape Rel}}}
+\newcommand{\PFor}{P_{\text{\itshape For}}}
+
+\newcommand{\plka}{\alka}
+\newcommand{\plkz}{\alkz}
+%\newcommand{\plka}{\plfoo{(}}
+%\newcommand{\plkz}{\plfoo{)}}
+\newcommand{\plcomma}{\hbox{\texttt{\color{alcolor},}}}
+\newcommand{\pleq}{{\color{alcolor}\,\dot=\,}}
+
+\newcommand{\plfoo}[1]{\mathtt{\color{alcolor}#1}}
+\newcommand{\plc}{\plfoo{c}}
+\newcommand{\pld}{\plfoo{d}}
+\newcommand{\plf}{\plfoo{f}}
+\newcommand{\plg}{\plfoo{g}}
+\newcommand{\plh}{\plfoo{h}}
+\newcommand{\plx}{\plfoo{x}}
+\newcommand{\ply}{\plfoo{y}}
+\newcommand{\plz}{\plfoo{z}}
+\newcommand{\plR}{\plfoo{R}}
+\newcommand{\plS}{\plfoo{S}}
+
+\newcommand{\bv}{\mathrm{bv}}
+\newcommand{\fv}{\mathrm{fv}}
+
+%\newcommand{\AxAL}{\hbox{\textit{Ax}}_{AL}}
+%\newcommand{\AALV}{\hbox{\textit{Var}}_{AL}}
+
+\renewcommand{\#}[1]{\literal{#1}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\Adr}{\text{Adr}}
+\newcommand{\ar}{\mathrm{ar}}
+\newcommand{\ascii}[1]{\literal{\char#1}}
+%\newcommand{\assert}[1]{\text{/\!\!/\ } #1}
+\newcommand{\assert}[1]{\colorbox{black!7!white}{\ensuremath{\{\;#1\;\}}}}
+\newcommand{\Assert}[1]{$\langle$\textit{#1}$\rangle$}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\bfmod}{\mathbin{\kw{ mod }}}
+\newcommand{\bb}{{\text{bb}}}
+\def\bottom{\hbox{\small$\pmb{\bot}$}}
+\newcommand{\card}[1]{|#1|}
+%\newcommand{\cod}{\mathop{\text{cod}}}  % ist in thwmathabbrevs
+\newcommand{\Conf}{\mathcal{C}}
+\newcommand{\define}[1]{\emph{#1}}
+%\renewcommand{\dh}{d.\,h.\@\xspace}
+%\newcommand{\Dh}{D.\,h.\@\xspace}
+%\newcommand{\engl}[1]{engl.\xspace\emph{#1}}
+\newcommand{\eps}{\varepsilon}
+%\newcommand{\evtl}{evtl.\@\xspace}
+\newcommand{\fbin}{\text{bin}}
+\newcommand{\finv}{\text{inv}}
+\newcommand{\fnum}{\text{num}}
+\newcommand{\fNum}{{\text{Num}}}
+\newcommand{\frepr}{\text{repr}}
+\newcommand{\fRepr}{\text{Repr}}
+\newcommand{\fZkpl}{\text{Zkpl}}
+\newcommand{\fLen}{\text{Len}}
+\newcommand{\fsem}{\text{sem}}
+\providecommand{\fspace}{\mathord{\text{space}}}
+\providecommand{\fSpace}{\mathord{\text{Space}}}
+\providecommand{\ftime}{\mathord{\text{time}}}
+\providecommand{\fTime}{\mathord{\text{Time}}}
+\newcommand{\fTrans}{\text{Trans}}
+\newcommand{\fVal}{\text{Val}}
+\def\G{\mathbb{Z}}
+\newcommand{\HT}[1]{\normalfont\textsc{HT-#1}}
+\newcommand{\htr}[3]{\{#1\}\;#2\; \{#3\}}
+\newcommand{\Id}{\text{I}}
+%\newcommand{\ie}{i.\,e.\@\xspace}
+\newcommand{\instr}[2]{\texttt{#1}\ \textit{#2}}
+\newcommand{\Instr}[2]{\texttt{#1}\ \textrm{#2}}
+\newcommand{\instrr}[3]{\texttt{#1}\ \textit{#2}\texttt{(#3)}}
+\newcommand{\Instrr}[3]{\texttt{#1}\ \textrm{#2}\texttt{(#3)}}
+\newcommand{\io}{\!\mid\!}
+\usepackage{KITcolors}
+\newcommand{\literal}[1]{\hbox{\textcolor{blue!95!white}{\textup{\texttt{\scalebox{1.11}{#1}}}}}}
+%\newcommand{\literal}[1]{\hbox{\textcolor{KITblue!80!black}{\textup{\texttt{#1}}}}}
+\def\kasten#1{\leavevmode\literal{\setlength{\fboxsep}{1pt}\fbox{\vrule  width 0pt height 1.5ex depth 0.5ex #1}}}
+\newcommand{\kw}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\lang}[1]{\ensuremath{\langle#1\rangle}}
+%\newcommand{\maw}{m.\,a.\,w.\@\xspace}
+%\newcommand{\MaW}{M.\,a.\,w.\@\xspace}
+\newcommand{\mdefine}[2][FOOBAR]{\define{#2}\def\foobar{FOOBAR}\def\optarg{#1}\ifx\foobar\optarg\def\optarg{#2}\fi\graffito{\optarg}}
+\newcommand{\meins}{\rotatebox[origin=c]{180}{1}}
+\newcommand{\Mem}{\text{Mem}}
+\newcommand{\memread}{\text{memread}}
+\newcommand{\memwrite}{\text{memwrite}}
+\providecommand{\meta}[1]{\ensuremath{\langle}\textit{#1}\ensuremath{\rangle}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NP}{\mathbf{NP}}
+\newcommand{\Nadd}{N_{\text{add}}}
+\newcommand{\Nmult}{N_{\text{mult}}}
+\newcommand{\Oh}[1]{O\left(#1\right)}
+\newcommand{\Om}[1]{\Omega\left(#1\right)}
+\newcommand{\personname}[1]{\textsc{#1}}
+\newcommand{\regname}[1]{\texttt{#1}}
+\newcommand{\mima}{\textsc{Mima}\xspace}
+\newcommand{\mimax}{\textsc{Mima-X}\xspace}
+
+\def\Pclass{\text{\bfseries P}}
+\def\PSPACE{\text{\bfseries PSPACE}}
+
+\newcommand{\SPush}{\text{push}}
+\newcommand{\SPop}{\text{pop}}
+\newcommand{\SPeek}{\text{peek}}
+\newcommand{\STop}{\text{top}}
+\newcommand{\STos}{\text{\itshape tos}}
+\newcommand{\SBos}{\text{\itshape bos}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rnullplus}{\R_0^{+}}
+\newcommand{\Rplus}{\R_{+}}
+\newcommand{\resp}{resp.\@\xspace}
+\newcommand{\Sem}{\text{Sem}}
+\newcommand{\sgn}{\mathop{\text{sgn}}}
+\newcommand{\sqbox}{\mathop{\raisebox{-6.2pt}{\hbox{\hbox to 0pt{$^{^{\sqcap}}$\hss}$^{^{\sqcup}}$}}}}
+\newcommand{\sqleq}{\sqsubseteq}
+\newcommand{\sqgeq}{\sqsupseteq}
+\newcommand{\Th}[1]{\Theta\left(#1\right)}
+%\newcommand{\usw}{usw.\@\xspace}
+\newcommand{\V}[1]{\hbox{\textit{#1}}}
+\newcommand{\x}{\times}
+\newcommand{\ZK}{\mathbb{K}}
+\newcommand{\Z}{\mathbb{Z}}
+%\newcommand{\zB}{z.\,B.\@\xspace}
+%\newcommand{\ZB}{Z.\,B.\@\xspace}
+% \newcommand{\bb}{{\text{bb}}}
+% \def\##1{\hbox{\textcolor{darkblue}{\texttt{#1}}}}
+% \def\A{\mathcal{A}}
+% \newcommand{\0}{\#0}
+% \newcommand{\1}{\#1}
+% \newcommand{\Obj}{\text{Obj}}
+% \newcommand{\start}{\mathop{\text{start}}}
+% \newcommand{\compactlist}{\addtolength{\itemsep}{-\parskip}}
+% \newcommand{\fval}{\text{val}}
+% \newcommand{\lang}[1]{\ensuremath{\langle#1\rangle}}
+% \newcommand{\io}{\!\mid\!}
+% \def\sqbox{\mathop{\raisebox{-6.2pt}{\hbox{\hbox to 0pt{$^{^{\sqcap}}$\hss}$^{^{\sqcup}}$}}}}
+% \def\sqleq{\sqsubseteq}
+% \def\sqgeq{\sqsupseteq}
+\def\Td{T_{\overline{d}}}
+% \newcommand{\csym}[1]{\ensuremath{\#{c}_{\#{\hbox{\scriptsize #1}}}}}
+% \newcommand{\F}{\ensuremath{\mathcal{F}}}
+% \newcommand{\fsym}[2]{\ensuremath{\#{f}^{\#{\hbox{\scriptsize #1}}}_{\#{\hbox{\scriptsize #2}}}}}
+% \newcommand{\rsym}[2]{\ensuremath{\#{R}^{\#{\hbox{\scriptsize #1}}}_{\#{\hbox{\scriptsize #2}}}}}
+% \newcommand{\xsym}[1]{\ensuremath{\#{x}_{\#{\hbox{\scriptsize #1}}}}}
+% \newcommand{\I}{\mathcal{I}}
+% ********************************************************************

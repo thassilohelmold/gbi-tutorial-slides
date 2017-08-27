@@ -1,0 +1,214 @@
+\section{Funktionen von Funktionen}
+
+\begin{frame}{Funktionen}
+	\begin{Definition}
+		Seien A und B Mengen. Mit $B^A$ bezeichnen wir die Menge aller Abbildungen von $A$ nach $B$, also $$B^A = \{f \mid f : A \to B \}$$
+	\end{Definition}
+
+	Man kann sich das wie eine Tabelle vorstellen. Wir wählen für jedes $a \in A$ ein $b \in B$.
+	
+	\begin{block}{Beobachtung}
+		Für endliche Mengen A und B gilt:
+		$$|B^A| = |B|^{|A|}$$
+	\end{block}
+\end{frame}
+
+\newcommand{\filter}{filter_{\only<2-4|handout:1>{even}\only<5|handout:2>{odd}\only<6|handout:3>{solves}}}
+
+\begin{frame}{Problem: Ziffern filtern}
+	Wir wollen aus einer Ziffernfolge (Wort aus $Z^*_{10}$) Ziffern herausfiltern, die eine bestimmte Eigenschaft haben:\\
+	\only<2-4|handout:1>{Gerade}
+	\only<5|handout:2>{Ungerade}
+	\only<6|handout:3>{Löst die Ungleichung $x^2 - 3*x < 20$}
+	
+	\visible<3-> {
+		\begin{align*}
+		\filter : Z^*_{10} &\to Z^*_{10} \\
+		\varepsilon &\mapsto \varepsilon \\
+		z \cdot v &\mapsto \begin{cases}
+		z \cdot \filter(v) &\text{falls } \only<3-4|handout:1>{\visible<4>{z \in \{2,4,6,8,0\}}} \only<5|handout:2>{z \in \{1,3,5,7,9\}} \only<6|handout:3>{z^2 - 3*z < 20 }\\
+		\filter(v) &\text{sonst}
+		\end{cases}\\
+		&\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*
+		\end{align*}
+	}
+\end{frame}
+
+\begin{frame}{Problem: Ziffern filtern}
+	\begin{block}{Aufgabe}
+		Schreibt die Funktionen zum Filtern aller Ziffern...
+		\begin{itemize}
+			\item $> 5$
+			\item $< 5$
+			\item $<2 \text{ oder } >7$
+			\item ... die perfekt sind
+			\item ... die sich ausmalen lassen
+		\end{itemize}
+	\end{block}
+
+	\pause
+	Nein, das wäre natürlich Unsinn!\\
+	Alle Funktionen unterscheiden sich nur an einer Stelle: \pause Der Bedingung, die erfüllt sein muss, damit die Ziffer in das Ergebnis mit aufgenommen wird.\\
+\end{frame}
+
+\begin{frame}{Filter}
+	Definiere stattdessen eine universelle Filter-Funktion:
+	
+	\begin{align*}
+		filter_p : Z^*_{10} &\to Z^*_{10} \\
+		\varepsilon &\mapsto \varepsilon \\
+		z \cdot v &\mapsto \begin{cases}
+		z \cdot filter_p(v) &\text{falls } p(v) = \textbf{w}\\
+		filter_p(v) &\text{sonst}
+		\end{cases}\\
+		&\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*
+	\end{align*}
+	Für alle $$p: Z_{10} \to \nB$$
+\end{frame}
+
+\begin{frame}{Filter}
+	Definiere beispielsweise nun:
+	$$ even:  Z_{10} \to \nB, z \mapsto \begin{cases}
+	\textbf{w} &\text{falls } z \in \{2, 4, 6, 8, 0\}\\
+	\textbf{f} &\text{sonst }
+	\end{cases}$$
+	
+	Dann ist $filter_{even}(123456) = 135$
+	
+	Auch für alle anderen Filter müssen wir nur noch die $p$-Funktionen definieren, was viel einfacher und kürzer ist als jedes Mal die ganze Filter-Funktion neu zu definieren.
+\end{frame}
+
+\begin{frame}{Charakteristische Funktion}
+	Sei $M$ eine abzählbar unendliche Menge und $L \subseteq M$.
+	
+	\begin{Definition}
+		Die Charakteristische Funktion einer (Teil-)Menge $L$ ist die Funktion 
+		\begin{align*}
+			C_L : M &\to \{0, 1\}\\
+			x &\mapsto \begin{cases}
+			1 &x \in L \\
+			0 &x \notin L
+			\end{cases}
+		\end{align*}
+	\end{Definition}
+
+	Also gilt $C_L \in \{0, 1\}^M$
+	
+	Klar ist außerdem: Es gibt eine Bijektion $C$ zwischen Mengen und Charakteristischen Funktionen: $$C : 2^M \to \{0, 1\}^M, L \mapsto C_L$$
+\end{frame}
+
+\begin{frame}{Charakteristische Funktion}
+	Jetzt können wir auf diesen Funktionen äquivalente Operationen wie auf Mengen definieren...
+	
+	Vereinigung: $V\colon \{0,1\}^M \times \{0,1\}^M\to \{0,1\}^M$\\[1em]
+	
+	\only<2|handout:1>{
+	Beispielbild für $L_1=\{a,c,d\}$ und $L_2=\{b,c\}$
+	
+	\begin{tabular}{*{4}{>{$}c<{$}}}
+		& L_1 & L_2 & L_1\cup L_2 \\
+		x & f_1(x) & f_2(x) & V(f_1,f_2) \\
+		a & 1 & 0 & 1 \\
+		b & 0 & 1 & 1 \\
+		c & 1 & 1 & 1 \\
+		d & 1 & 0 & 1 \\
+		e & 0 & 0 & 0 \\
+	\end{tabular}
+	}
+	
+	\only<3-|handout:2> {
+	Wie definiert man $V(f_1,f_2)$? Zum Beispiel so:
+	\begin{align*}
+	V \colon \{0,1\}^M \times  \{0,1\}^M &\to \{0,1\}^M \\
+	(f_1,f_2) &\mapsto (x \mapsto \max(f_1(x),f_2(x))) \\
+	\end{align*}
+	} \only<4|handout:2> {
+	Oder so: $V(f_1,f_2) (x) = \max(f_1(x),f_2(x))$
+	}
+\end{frame}
+
+\begin{frame}
+	Wir haben gesehen:
+	\begin{itemize}
+		\item Eine Abbildung, die eine Funktion auf einen Wert abbildet
+		\item Eine Abbildung, die einen Wert auf eine Funktion abbildet
+	\end{itemize}
+	Gleich werden wir das kombinieren!\\[1em]
+	(Hinweis: Abbildung und Funktion sind hier synonyme Begriffe!)
+\end{frame}
+
+\section{Speicher}
+
+\begin{frame}{Bit vs Byte}
+	\begin{Definition}
+		Eine \textbf{Bit} ist ein Zeichen des Alphabets $\{0, 1\}$ \\
+		Ein Wort aus 8 \emph{Bits} wird \emph{Byte} genannt. 
+	\end{Definition}
+	\pause	
+	
+	\begin{Definition}
+		Ein \emph{Speicher} $m$ bildet Adressen ($Adr$) auf Werte ($Val$) ab.\\
+		Also $m \in Val^{Adr}$
+	\end{Definition}
+	Hier interessiert uns nicht die konkrete Realisierung der Speicherung, sondern nur die abstrakte Funktionsweise.
+	\pause
+	
+	\begin{block}{Hinweis}
+		Im Umgang mit Speicher benutzen wir hier nur Zahlen im Binärsystem. \\
+		D.h. $Adr = 2^k, Val = 2^l \quad k,l \in \nN_+$. 
+	\end{block}
+\end{frame}
+
+\begin{frame}{Speicher}
+
+	Methoden:\\
+	\emph{memread} $(m, adr)$ um eine Zelle zu lesen. \\ \pause
+	\emph{memwrite} $(m, adr, val)$ um in eine Zelle zu schreiben. \\
+	
+	\pause
+	\begin{align*}
+	memread : Val^{Adr} \times Adr &\to Val \\
+	(m,a) &\mapsto m(a) \\
+	\end{align*}	
+	\pause
+	\begin{align*}
+	memwrite : Val^{Adr} \times Adr \times Val \to& Val^{Adr} \\
+	(m,a,v) \mapsto& m' 
+	\end{align*}
+	\pause
+	Mit
+	\begin{equation*}
+	m'(a') =
+	\begin{cases}
+	v & \text{ falls } a'=a \\
+	m(a') & \text{ falls } a'\not=a \\
+	\end{cases}
+	\end{equation*}
+	
+\end{frame}
+
+\begin{frame}{Speicher}
+	\begin{block}{Beispiel}
+		
+	$memread(m, 01) = \only<2->{00000111}$\\
+	\visible<2-|handout:2>{$memwrite(m, 01, 11111100)$\\}
+	\visible<4-|handout:2>{$memread(memwrite(m, 01, 11111100), 01) = 11111100$\\}
+	\bigskip
+	
+	\begin{table}
+		\begin{tabular}{|c|c|}
+			\hline
+			\multicolumn{2}{|c|}{Speicher $m$} \\
+			\hline
+			00 & 00101000 \\
+			\only<-2|handout:1>{01 & 00000111}\only<3-|handout:2>{\color{blue} 01 & \color{blue} 11111100}  \\
+			10 & 10010110 \\
+			11 & 00100101 \\
+			\hline
+		\end{tabular} \par
+		\bigskip
+		Zustand bei \only<-2|handout:1>{$t=0$}\only<3-|handout:2>{\color{blue}$t=1$}
+	\end{table}
+
+	\end{block}
+\end{frame}

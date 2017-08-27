@@ -1,0 +1,104 @@
+\section{Codierungen}
+
+\begin{frame}
+	\textbf{Übersetzung:} Bedeutungserhaltende Abbildung \\[0.5em] \pause
+	\textbf{Codierung:} Injektive Übersetzung \\ \pause
+	Es reicht eine injektive Abbildung: Dann können wir für jedes $f(w)$ eindeutig das erzeugende $w$ angeben und somit die Bedeutung von $f(w)$ als die Bedeutung von $w$ festlegen. \\[1em]
+	
+	\pause
+	\emph{Beliebige }Codierungen zu speichern ist sehr aufwendig, bei unendlichem Definitionsbereich sogar unmöglich.\\
+	Also bringen wir etwas Struktur ins Spiel!
+\end{frame}
+
+\begin{frame}{Homomorphismen}
+	Ein Homomorphismus ist eine strukturerhaltende Abbildung. \\ \pause
+	\begin{align*}
+		\Phi : A &\to B \\
+		\text{ mit } \forall a \in A, b \in B: \Phi(a \; \square \; b) &= \Phi(a) \; \triangle \; \Phi(b)
+	\end{align*} 
+\end{frame}
+
+\begin{frame}{Homomorphismen}
+	In GBI: Homomorphismen auf Wörtern, dabei muss die Konkatenation erhalten werden.\\
+	$A, B$ Alphabete, dann ist Abbildung $h: A^* \to B^*$ ein Homomorphismus, wenn
+	$$ \forall\ x, y\in A^* : h(x \cdot y) = h(x) \cdot h(y) $$
+	
+	\pause
+	Damit sind alle Funktionswerte durch die Bilder der einzelnen Zeichen aus A festgelegt. Das ist aber eine \enquote{endliche Tabelle} (da $A$ endlich ist) und lässt sich daher gut speichern und \enquote{handhaben}.
+	
+	\pause
+	\begin{Beispiel}
+		Sei $h$ ein Homomorphismus mit $h(a) = 2, h(b) = 3$. \\
+		Dann gilt $h(aba) = h(a) \cdot h(b) \cdot h(a) = 232 $ \\[0.5em]
+		$Trans_{16,2}$ ist auch (fast) ein Homomorphismus (siehe dazu ÜB WS15/16)
+	\end{Beispiel}
+\end{frame}
+
+\begin{frame}{Homomorphismen konstruieren}
+	Wir können uns aber aus einer Abbildung der einzelnen Zeichen einen Homomorphismus auf Wörtern konstruieren.
+	\begin{Definition}
+		Sei $f: A \to B^*,$ \pause definiere $f^{**}:A^* \to B^*$ als
+		\begin{align*}
+		f^{**}(\varepsilon) &= \varepsilon  \\
+		\forall w\in A^*, x\in A: f^{**}(wx) &= f^{**}(w) f(x)       
+		\end{align*}
+	\end{Definition}
+
+	$f^{**}$ ist der durch $f$ \textbf{induzierte} Homomorphismus.
+\end{frame}
+
+\begin{frame}{$\varepsilon-$Freiheit}
+	Klar ist: $h(\varepsilon) = \varepsilon$
+	
+	\pause
+	\begin{Definition}
+		Ein Homomorphismus heißt $\varepsilon-$frei, wenn 	$$ \forall\ x\in A : h(x) \neq \varepsilon $$
+	\end{Definition}
+
+	Was ist das Problem mit Homomorphismen, die nicht $\varepsilon-$frei sind? \\ \pause
+	Es \enquote{geht Information verloren}.\\
+	Sei $h(c) = \varepsilon, h(b) = 2, w \in \{b, c\}^*, h(w) = 2$.\\
+	Wie kommen wir zu $w$?\\ \pause 
+	Gar nicht! Wir wissen nicht, wie viele $c$ in dem Wort $w$ sind.
+\end{frame}
+
+\begin{frame}{Präfixfreiheit}
+	\begin{Definition}
+		Ein Homomorphismus heißt \emph{präfixfrei}, wenn für
+		\emph{keine} zwei verschiedenen Symbole $x_1,x_2\in A$ gilt: $h(x_1)$
+		ist ein Präfix von $h(x_2)$.
+	\end{Definition}
+
+	\vspace{5mm}
+	Was ist das Problem mit Homomorphismen, die nicht präfixfrei sind? \\ \pause
+	Es \enquote{geht Information verloren}.\\
+	
+	Sei $h(a) = 2, h(b) = 3, h(c) = 23, , w \in \{a, b, c\}^*, h(w) = 23$. \\
+	Wie kommen wir zu $w$?\\ \pause
+	Gar nicht! $w = c$ oder $w = ab$, wir wissen es nicht!
+\end{frame}
+
+\begin{frame}{Zurück zu Codierungen}
+	\begin{block}{Beobachtung}
+		Präfixfreie Homomorphismen sind $\varepsilon-$frei
+	\end{block}
+
+	\pause
+	\begin{block}{Lemma}
+		Präfixfreie Homomorphismen sind Codierungen (also injektiv).
+	\end{block}
+
+	\pause
+	\begin{block}{Beobachtung}
+		Präfixfreie Codes kann man \enquote{einfach} decodieren:
+		\[
+		u(w) = 
+		\begin{cases}
+		\varepsilon, & \text{ falls } w=\varepsilon\\
+		x\,u(w'), & \text{ falls } w=h(x)w' \text{ für ein } x\in A \\
+		\bot,  & \text{ sonst }\\
+		\end{cases}
+		\]
+	\end{block}
+	
+\end{frame}

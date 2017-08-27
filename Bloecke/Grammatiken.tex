@@ -1,0 +1,286 @@
+\section{Kontextfreie Grammatiken}
+\begin{frame}{Kontextfreie Grammatiken}
+	
+	\begin{Definition}
+		Eine \textbf{kontextfreie Grammatik} ist ein 4-Tupel $G = (N, T, S ,P)$ mit
+		\begin{itemize}
+			\item[N] Alphabet von Nichtterminalsymbolen
+			\item[T] Alphabet von Terminalsymbolen ($N \cap T = \emptyset$)
+			\item[S] Startsymbol ($S \in N$)
+			\item[P] Produktionsmenge ($P \subseteq N \times (N \cup T)^\ast$)
+		\end{itemize}
+	\end{Definition}
+
+	\pause
+	\begin{Beispiel}
+		Sei $A$ das deutsche Alphabet (mit Klein-/Großbuchstaben)\\
+		$G_{MI} = (\{S, M, I, N\}, A \cup \nN_+, S, P)$
+		\begin{align*}
+			P = \{S &\to \text{M\textvisiblespace I\textvisiblespace N}, \\
+			M &\to Monkey, \\
+			I &\to Island, \\
+			N &\to 1 \mid 2 \mid 3 \}
+		\end{align*}
+	\end{Beispiel}
+\end{frame}
+
+\begin{frame}{Kontextfreie Grammatiken}
+	\begin{block}{Produktionen}
+		Menge von gültigen Ersetzungen. Ersetzt wird immer \textbf{genau ein Nichtterminal} (kontextfrei) mit einem Wort von Zeichen aus $(N \cup T)$.\\
+		\pause
+		Vereinfachende Schreibweise: $$S \to a \mid b$$ ($S$ kann durch a oder b ersetzt werden)
+	\end{block}
+\end{frame}
+
+\begin{frame}{Ableitung}
+	\begin{Definition}
+		Für ein  $u \in V^\ast$ mit $u = w_1 \cdot X \cdot w_2 \; (w_1, w_2 \in V^\ast, X \in N)$ nennen wir ein Wort $v = w_1 \cdot w \cdot w_2 \in V^\ast$ \textbf{ableitbar}, wenn eine Produktion $X \to w$ existiert.\\
+		Wir schreiben $$u \Rightarrow v$$
+	\end{Definition}
+	
+	\pause
+	\begin{Beispiel}
+		Für $G_{MI}$ gilt: $S \Rightarrow \text{M\textvisiblespace I\textvisiblespace N}$\\
+		$ \text{M\textvisiblespace I\textvisiblespace N} \Rightarrow$ Monkey\textvisiblespace I\textvisiblespace N\\
+		Es gibt kein Wort, das aus Monkey Island 1 abgeleitet werden kann.
+	\end{Beispiel}
+	
+\end{frame}
+
+\begin{frame}{Ableitung}	
+	\begin{Definition}
+		\begin{align*}
+		u \Rightarrow^0 v &\text{ genau dann, wenn } u=v \\
+		u \Rightarrow^{i+1} v &\text{ genau dann, wenn für ein}  w\in V^*: u \Rightarrow w \Rightarrow^i v\\
+		u \Rightarrow^* v &\text{ genau dann, wenn für ein } i\in\nN_0: u \Rightarrow^i v \\
+		\end{align*}
+	\end{Definition}
+	
+	\pause
+	\begin{block}{Beobachtung}
+		Die Definitionen stimmen mit den Potenzen der Relation $\Rightarrow$ überein.\\
+		$\Rightarrow^\ast$ ist die reflexiv-transitive Hülle von $\Rightarrow$.
+	\end{block}
+
+	\pause
+	\begin{Beispiel}
+		Für $G_{MI}$ gilt: $S \Rightarrow^2$ Monkey Island N $\Rightarrow$ Monkey Island 3\\
+		$S \Rightarrow^*$ Monkey Island 2
+	\end{Beispiel}
+\end{frame}
+
+
+\begin{frame}{Erzeugte Sprache}
+	\begin{Definition}
+		Sei $G$ eine kontextfreie Grammatik. Wir bezeichnen die Sprache $$L(G) = \{w \in T^\ast \mid S \Rightarrow^\ast w \} \subseteq T^*$$ als die von der Grammatik $G$ \textbf{erzeugte Sprache}.
+	\end{Definition} \pause
+	Das sind also alle Wörter aus Terminalsymbolen, die vom Startsymbol aus ableitbar sind.\\
+	Achtung: Die erzeugte Sprache kann auch leer sein. \\
+	Beispiel: \pause $L\left(\left(\{X\},\{a,b\},X,\{X\to X\}\right)\right) = \{\}$
+\end{frame}
+
+\begin{frame}{Erzeugte Sprache}
+	\begin{Beispiel}
+		$L(G_{MI}) = \{$Monkey Island 1, Monkey Island 2, Monkey Island 3$\}$\\
+		M I N $\notin L(G_{MI})$
+	\end{Beispiel}
+	
+	\pause
+	\begin{Definition}
+		Eine Sprache L, für die eine kontextfreie Grammatik G mit $L(G) = L$ existiert, heißt \textbf{kontextfrei}.
+	\end{Definition}
+
+	Viele \enquote{natürlich vorkommende} Sprachen sind kontextfrei.
+		
+\end{frame}
+
+\subsection{Beispiele}
+\begin{frame}{Beispiel}
+	$$ G = (\{X\}, \{a, b\}, X, \{X \to aXb \mid \varepsilon\}) $$
+	
+	\begin{itemize}
+		\item Gilt $X \Rightarrow aXb$, $X \Rightarrow aaXbb$, $XX \Rightarrow aXbaXb$?
+		\item Welche Wörter lassen sich aus aaXbb ableiten? Und aus XX?
+		\item Gib $L(G)$ an!
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Musikgrammatik}
+	Wir betrachten die Grammatik $$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
+		Wie kann man $A$ ableiten? Und $ABC$? \pause Und
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[scale=0.2]{ABBA_Gold_cover.png} \hspace{2em} \pause
+			\includegraphics[scale=0.2]{acdc-black-ice.jpg} \hspace{2em} \pause
+			\includegraphics[scale=0.26]{ADAC-Logo.png} \pause
+		\end{figure} 
+	
+		$X \Rightarrow AX \Rightarrow ABX \Rightarrow ABBX \Rightarrow ABBAX \Rightarrow ABBA$
+		
+\end{frame}
+
+\begin{frame}{Musikgrammatik}
+	$$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
+	
+	Welche Wörter \only<3-|handout:2>{über $\{A, B, C, D\}$}kann man nicht ableiten?\\
+	\only<2|handout:1>{
+		\centering
+		\begin{figure}
+			\includegraphics[scale=0.2]{mozart_jungle}
+		\end{figure}
+	}
+	\only<4|handout:2>{
+		Keine! Die erzeugte Sprache ist
+		$$L(G) = \{A,B,C,D\}^\ast$$
+	}
+\end{frame}
+
+\begin{frame}{Ableitungsbäume}
+	$$G = (\{X\}, \{(, )\}, X, \{X \to XX \mid (X) \mid \varepsilon\})$$
+	\pause
+	\begin{tikzpicture}
+	[level 1/.style={sibling distance=50mm},
+	level 2/.style={sibling distance=30mm},
+	level 3/.style={sibling distance=10mm}]
+	\node {$X$}
+	child { node {$X$}
+		[level 2/.style={sibling distance=15mm}]
+		child {node {$\literal{(}$} }
+		child {node {$X$} 
+			child {node {$\literal{(}$} }
+			child {node {$X$}
+				child {node {$\varepsilon$} }
+			}
+			child {node {$\literal{)}$} }
+		}
+		child {node {$\literal{)}$} }
+	} 
+	child { node {$X$} 
+		child { node {$X$} 
+			child {node {$\literal{(}$} }
+			child {node {$X$}
+				child {node {$\varepsilon$} }
+			}
+			child {node {$\literal{)}$} }
+		}
+		child { node {$X$} 
+			child {node {$\literal{(}$} }
+			child {node {$X$}
+				child {node {$\varepsilon$} }
+			}
+			child {node {$\literal{)}$} }
+		}
+	} ;
+	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Klammerausdrücke}
+	Gegeben sei die Grammatik $$G = (\{X\}, \{(, )\}, X, \{X \to XX \mid (X) \mid \varepsilon\})$$
+	\begin{itemize}
+		\item Wie leitet man $((((()))))$ ab?
+		\item Wie leitet man $()(())()()$ ab?
+		\item Kann man $(()($ ableiten? \pause Nein!
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Klammerausdrücke}
+	Gegeben sei die Grammatik $$G = (\{X\}, \{(, )\}, X, \{X \to XX \mid (X) \mid \varepsilon\}$$
+	Was ist $L(G)$? Was kann man also aus X ableiten?\\ \pause 
+	Alle \enquote{\textit{wohlgeformten Klammerausdrücke}}\\[1em]
+	
+	Was bedeutet wohlgeformt in diesem Kontext?\\ \pause
+	$$\forall w \in L(G): N_((w) = N_)(w)$$ 
+	Reicht das? \pause Notwendig aber nicht hinreichend! 
+
+\end{frame}
+
+\begin{frame}{Klammerausdrücke}
+	Wir dürfen eine Klammer erst schließen, \textit{nachdem} wir sie geöffnet haben.\\
+	Also: Anzahl der schließenden Klammern darf nie größer als Anzahl der öffnenden Klammern sein! \pause \\[1em]
+	Für jedes Präfix $v$ von einem Wort $w \in L(G)$ gilt $$N_( (v) \geq N_) (v)$$ \pause
+	
+	Achtung: Grammatiken sind nicht eindeutig! Wir können zur gleichen Sprache mehrere verschiedene erzeugende Grammatiken finden. \\
+	Alternative Grammatik für wohlgeformte Klammerausdrücke: \pause $$G = (\{X\}, \{(, )\}, X, \{X \to (X)X \mid \varepsilon\})$$
+\end{frame}
+
+\begin{frame}{Und jetzt ihr...}
+	Gebt jeweils eine Grammatik über dem Alphabet $T = \{a, b\}$ an, die folgende Sprache erzeugt:
+	\begin{itemize}
+		\item Alle Wörter, in denen irgendwo das Teilwort $baa$ vorkommt.\\
+		\visible<2-|handout:2>{
+			$(\{X,Y\},T,X,P)$ mit $P=\{X \to YbaaY, Y \to aY|bY|\varepsilon\}$
+		}
+		
+		\item Die Menge aller Wörter $w\in T^*$ mit der Eigenschaft, dass
+		für alle Präfixe $v$ von $w$ gilt: $|N_a(v) - N_b(v)| \leq
+		1$.\\
+		Tipp: Was für eine Struktur haben Wörter der Länge $2$, $4$, \dots? \\
+		% $\{ab, ba\}^*$
+		\visible<3-|handout:2>{
+			$(\{X,Y\},T,X,P)$ mit $P=\{X \to abX|baX|a|b|\varepsilon\}$
+		}
+		
+		\item Alle Wörter, in denen $ab$ als Teilwort vorkommt oder kein $a$ enthalten ist. \\
+		\visible<4-|handout:2>{
+			$G = (\{X, Y\}, \{a,b\}, X, P)$ mit $P = \{X \to bX \mid YabY \mid \varepsilon, Y \to aY \mid bY \mid \varepsilon\}$
+		}
+		
+	\end{itemize}
+\end{frame}
+
+
+\subsection{Aufgabe 1}
+\begin{frame}
+	\frametitle{Aufgabe (WS 2008) \stars{2}}
+	\begin{itemize}
+		\item Geben Sie eine kontextfreie Grammatik $$G = (N, \{a, b\}, S, P )$$ an, für die $L(G)$ die Menge aller Palindrome über dem Alphabet $\{a, b\}$ ist.
+		\item Geben Sie eine Ableitung der Wörter \code{baaab} und \code{abaaaba} aus dem Startsymbol Ihrer Grammatik an.
+		\item Beweisen Sie, dass Ihre Grammatik jedes Palindrom über dem Alphabet $\{a, b\}$ erzeugt.\\
+		Tipp: Induktion: Wenn $n$ und $n+1$ gelten, dann gilt auch $n+2$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+	Die Grammatik $$G = (\{S\}, \{a, b\}, S, P = \{S \to aSa \ | \ bSb \ | \ a \ | \ b \ | \varepsilon \})$$ erzeugt gerade die Menge der Palindrome. \pause Die Ableitungen der Wörter mit dieser Grammatik sind 
+	$$S \Rightarrow bSb \Rightarrow baSab \Rightarrow baaab$$
+	$$S \Rightarrow aSa \Rightarrow abSba \Rightarrow abaSaba \Rightarrow abaaaba$$
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+	Sei $w$ ein Palindrom über $\{a, b\}$. Wir zeigen durch Induktion über $n = \vert w \vert$, dass alle Palindrome aus $S$ abgeleitet werden können. \pause
+	\begin{block}{Induktionsanfang} \pause
+		Für $n = 0$ ist das leere Wort $\varepsilon$ in einem Schritt aus $S$ ableitbar. \\
+		Für $n=1$: Die einzigen Wörter aus $\{a, b\}^\ast$ der Länge 1 sind $a$ und $b$. Auch diese sind offensichtlich aus $S$ ableitbar.
+	\end{block}
+ 	\pause
+	\begin{block}{Induktionsvoraussetzung} \pause
+		Für ein festes, aber beliebiges $n \in \nN_0$ gilt, dass alle Palindrome der Länge $n$ und alle Palindrome der Länge $n + 1$ aus S abgeleitet werden können.
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+		\begin{block}{Induktionsschritt}
+			Sei $w$ ein Palindrom der Länge $n + 2$. Das erste (und damit auch das letzte) Zeichen sei oBdA ein $a$. Dann gibt es ein $w' \in \{a, b\}^\ast$, so dass $w = aw'a$ ist. Da $w$ ein Palindrom ist, muss auch $w'$ ein Palindrom sein. Weiterhin gilt $|w'| = n$. \pause Nach IV gibt es somit eine Ableitung $S \Rightarrow^\ast w'$. Somit gibt es die Ableitung $$S \Rightarrow aSa \overset{IV}{\Rightarrow^\ast} aw'a = w$$ und $w \in L(G)$ folgt. \pause Entsprechendes gilt, wenn das erste Zeichen von w ein b ist. \\
+			Mit der IV haben wir also gezeigt, dass auch Palindrome der Länge $n+1$ und $n+2$ aus $S$ ableitbar sind.
+	\end{block}
+
+\end{frame}
+
+\begin{frame}{Gibt es noch mehr?}
+	\enquote{Die meisten} Sprachen in der Informatik sind kontextfrei.\\[1em]
+	Was ist mit der Sprache $L_{vv} = \{vcv \mid v \in \{a, b\}^*\}$\\
+	\pause
+	In der Vorlesung: Es gibt keine kontextfreie Grammatik, die $L_{vv}$ erzeugt.\\
+	\pause
+	Können wir die Sprache trotzdem irgendwie \enquote{verarbeiten}?
+	
+	\begin{block}{}
+		\Large
+		\centering
+		Soon\\[1em]
+	\end{block}
+\end{frame}

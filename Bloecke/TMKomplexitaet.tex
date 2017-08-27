@@ -1,0 +1,151 @@
+\section{Komplexität}
+\begin{frame}[plain] \large \bf \centering
+	Wir betrachten zuerst nur Turingmaschinen, die bei jedem Eingabewort halten!
+\end{frame}
+
+\subsection{Berechnungskomplexität}
+\begin{frame}{Zeitkomplexität}
+	\begin{Definition}
+		Die Zeitkomplexität Time$(n)$ einer Turingmaschine ist die maximale Anzahl an Schritten, die eine Turingmaschine bei Eingabe eines Worts der Länge $n$ benötigen kann (worst-case).
+	\end{Definition}
+	\pause
+	\textbf{Beispiel:} Überprüfung auf Palindrom:
+	\begin{itemize}[<+->]
+		\item Erstes Symbol -> letztes Symbol ($n$) 
+		\item Zurück zum ersten ($n$)
+		\item Mit kürzerem Wort wiederholen ($|n-2|$)
+	\end{itemize} \pause
+	Also insgesamt $$T(n) \leq 2n + 1 + T(n-2)$$ 
+	Daraus folgern wir $$T(n) \in O(n^2)$$
+\end{frame}
+
+\begin{frame}{Platzkomplexität}
+	\begin{Definition}
+		Die Platzkomplexität Space$(n)$ einer Turingmaschine ist die maximale Anzahl an Feldern, die eine Turingmaschine bei Eingabe eines Worts der Länge $n$ benötigen kann (worst-case). Benötigt wird ein Feld, wenn es vom Schreibkopf besucht wird oder von der Eingabe belegt wurde.
+	\end{Definition}
+	\pause
+	\textbf{Beispiel:} Überprüfung auf Palindrom:
+	\begin{itemize}[<+->]
+		\item Erstes Symbol -> letztes Symbol ($n + 1$) 
+		\item Zurück zum ersten ($0$)
+		\item Mit kürzerem Wort wiederholen ($0$)
+	\end{itemize} \pause
+	Also insgesamt $$n+1 \in \Th{n}$$
+\end{frame}
+
+\begin{frame}{Platzkomplexität}
+	Wie hängen Zeit- und Platzkomplexität zusammen?
+	\begin{itemize}
+		\item Wenn eine TM nur $n$ Schritte macht, kann sie auch nur $n$ Felder besuchen
+		\item Aber anders herum: Auch mit $n$ Feldern können exponentiell viele Schritte durchgeführt werden.\\
+			  Beispiel: Band mit $0^n$. Solange inkrementieren (siehe Aufgabe), bis $1^n$ auf dem Band steht. \pause Also $2^n - 1$ mal inkrementieren, somit mindestens $2^n - 1$ Schritte.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{Definition}
+	\begin{itemize}
+		\item \textbf{P} ist die Menge aller Entscheidungsprobleme, die von Turingmaschinen entschieden werden können, deren Zeitkomplexität polynomiell ist.
+		\item \textbf{PSPACE} ist die Menge aller Entscheidungsprobleme, die von Turingmaschinen entschieden werden können, deren Raumkomplexität polynomiell ist.
+	\end{itemize}
+	\end{Definition}
+	\pause
+	Es ist $$\textbf{P} \subset \textbf{PSPACE}$$ \pause
+	Die andere Richtung ist \textbf{ein großes offenes Problem}\\
+	Wir haben zwar ein Beispiel für eine TM mit polynomiellen Platz und exponentieller Zeit gesehen, aber das \textbf{Problem} (alle $0$ zu $1$ umwandeln) hätte man deutlich effizienter lösen können.
+\end{frame}
+
+\subsection{Aufgabe}
+\begin{frame}{Aufgabe} %(WS 2011)
+	\only<1|handout:1>{	
+		Die Turingmaschine $T$ mit Anfangszustand $S$ sei durch folgende Überführungsfunktion gegeben 
+		\begin{table}[H]
+		\centering
+		\begin{tabular}{c|c|c|c|c}
+		& $S$ & $S_a$ & $S_b$ & $R$ \\
+		\hline
+		$a$ & $(X,S_a,L)$ & $(a,S_a,L)$ & $(a,S_b,L)$ & $(a,R,R)$\\
+		$b$ & $(X,S_b,L)$ & $(b,S_a,L)$ & $(b,S_b,L)$ & $(b,R,R)$\\
+		$X$ & $(X,S,R)$ & $(X,S_a,L)$ & $(X,S_b,L)$ & $(X,S,R)$ \\
+		$\square$ & - & $(a,R,R)$ & $(b,R,R)$ & -
+		\end{tabular} 
+		\end{table}
+		\smallskip
+		
+		Tipp: Manchmal hilft es, die TM zu zeichnen.
+	}
+
+	\begin{itemize}
+		\item Was steht bei der Eingabe des Wortes $w\in \{a,b\}^*$ am Ende der Berechnung auf dem Band? \\
+			\only<2|handout:2>{\emph{Lösung}: Am Ende steht das Wort $R(w)\mathtt X^{\vert w \vert}$ auf dem Band, wobei $R(w)$ das Spiegelbild von $w$ ist.}
+		\item Welche Platzkomplexität hat $T$?\\
+			\only<2|handout:2>{\emph{Lösung}: Eingabe der Länge $n$: Platzbedarf ist $2n+1$}
+		\item Geben Sie eine einfache Funktion $f:\nN_0 \to \nN_0$ an, so dass die Zeitkomplexität von $T$ in $\Theta(f(n))$ liegt.\\
+			\only<2|handout:2>{\emph{Lösung}: Eingabe der Länge $n$: Zeitbedarf in $\Theta(n^2)$ \\}
+	\end{itemize}
+\end{frame}
+
+\subsection{Unentscheidbare Probleme}
+\begin{frame}{Unentscheidbare Probleme}
+	Es existieren Probleme, die von keiner Turingmaschine entschieden werden können.\\ \pause
+	Erinnerung: Entscheidbar heißt, dass es eine Turingmaschine gibt, die für jede Eingabe hält und entscheiden kann, ob das Wort in der Sprache liegt oder nicht. Statt Sprachen spricht man auch gerne von Problemen.\\ \pause
+	
+	\bigskip
+	Achtung: Unentscheidbar meint wirklich \enquote{hält für manche Eingaben nie} und nicht \enquote{braucht $2^{2^{2^{n}}}$ Zeit}.
+\end{frame}
+
+\begin{frame}{Codierung von Turingmaschinen}
+	In der VL: Codierung einer Turingmaschine als Wort über dem Alphabet \nolinebreak $\{0,1,[,]\} \qquad$ (Gödelisierung)
+	\bigskip
+	
+	\begin{Satz}
+		Es existiert eine universelle Turingmaschine $U$, die für zwei Eingaben $[\mathtt w_1][\mathtt w_2]$ 
+		\begin{itemize}
+			\item überprüft ob $\mathtt w_1$ eine Turingmaschine $T$ codiert
+			\item falls ja, die Eingabe $\mathtt w_2$ auf dieser Turingmaschine simuliert
+			\item Das Ergebnis davon berechnet (falls $T$ hält)
+		\end{itemize}
+	\end{Satz}
+\end{frame}
+
+\begin{frame}{Halteproblem}
+	\begin{Satz}
+		Es ist nicht möglich eine Turingmaschine $H$ zu bauen, die für jede Turingmaschine $T$ und jede Eingabe $w$ entscheidet, ob $T$ bei der Eingabe von $w$ hält.
+	\end{Satz}
+\end{frame}
+
+\begin{frame}{Beweis}
+	Sei eine Tabelle $x_i, f_j$ gegeben, wobei die $x_i$ alle Codierungen einer Turingmaschine sind und die $f_j$ die berechneten Funktionen der Turingmaschine $T_j$ sind. Sei jetzt $H$ eine TM, die das Halteproblem löst und $G$ eine Maschine, die \begin{itemize}
+		\item Wenn $H$ mitteilt, dass $T_{x_i} ( x_i )$ hält, dann geht $G$ in eine Endlosschleife.
+		\item Wenn $H$ mitteilt, dass $T_{x_i} ( x_i )$ nicht hält, dann hält $G$
+	\end{itemize}
+	Jede mögliche Turingmaschine $T_{x_i}$ verhält sich also für die Eingabe $x_i$ genau anders wie $G$. Also ist $G$ eine Turingmaschine, die nicht in der Tabelle liegt, aber in der Tabelle sind alle TMs enthalten, da diese ja abzählbar sind. Widerspruch!
+\end{frame}
+
+\begin{frame}{Beweis 2}
+	Sei wieder $H$ eine TM, die das Halteproblem löst und $G$ eine Maschine, die \begin{itemize}
+		\item Wenn $H$ mitteilt, dass $T_{x_i} ( x_i )$ hält, dann geht $G$ in eine Endlosschleife.
+		\item Wenn $H$ mitteilt, dass $T_{x_i} ( x_i )$ nicht hält, dann hält $G$
+	\end{itemize}
+	Also gilt: $$ G \text{ hält für Eingabe } w \iff T_w \text{ hält nicht für Eingabe } w $$
+	Setzen wir nun für $w$ die Codierung von $G$ ein, so erhalten wir:
+	$$ G \text{ hält für Eingabe } w \iff G \text{ hält nicht für Eingabe } w $$
+	Widerspruch!
+\end{frame}
+
+\begin{frame}{Fleißige Biber}
+	\begin{Definition}
+		Ein fleißiger Biber ist eine Turingmaschine, die $n+1$ Zustände hat, wobei ein Anfangszustand und ein Haltezustand darunter sind und die nur Einsen produzieren kann.
+	\end{Definition}
+	\pause
+
+	\begin{Definition}
+		Als Busy-Beaver-Funktion $bb(n)$ wird die maximale Anzahl an Einsen bezeichnet, die ein fleißiger Bieber mit $n+1$ Zuständen auf dem Band hinterlassen kann.
+	\end{Definition} 
+
+	\begin{Satz}
+		Die Busy-Beaver-Funktion ist nicht berechenbar (es gibt keine Turingmaschine, die die Funktionswerte als Ausgabe liefert).
+	\end{Satz}
+\end{frame}
+
+% TODO: Aufgaben!

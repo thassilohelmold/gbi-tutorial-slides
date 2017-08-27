@@ -1,0 +1,143 @@
+\section{Wörter}
+
+\begin{frame}
+	\frametitle{Wörter}
+	\begin{block}{Definition}
+		\begin{itemize}
+			\item Ein \textbf{Alphabet} ist eine endliche Menge von Zeichen. \pause
+			\item Ein \textbf{Wort} $w$  über einem Alphabet A ist ein \textbf{endliche Folge von Zeichen} aus A \\ \pause
+				\emph{Formal}: Eine surjektive Abbildung $f : \nZ_n \to A$\\[0.5em]
+				Zur Erinnerung: $ \nZ_n = \{i\in \nN_0 \mid 0 \leq i < n \} $ 
+		\end{itemize}
+	\end{block}	
+
+	\pause
+	\begin{block}{Definition}
+		Ist $A$ ein Alphabet, dann ist $A^*$ die \textbf{Menge aller Wörter}, die nur Zeichen aus $A$ enthalten, also:\\
+		\pause 
+		$A^*$ ist die Menge aller Abbildungen $w: \nZ_n \to B$ mit $n \in \nN_0$ und $B \subseteq A$. \\
+	\end{block}
+
+	\pause
+	\begin{block}{Beispiel}
+		Sei $ A = \{ a,b\} $ ein Alphabet. 
+		Dann sind $ w_1 = aabbabab$ und $w_2 = ab $ zwei mögliche Wörter.
+		Es gilt also $ w_1 \in A^*, w_2 \in A^*$
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Das Leere Wort}
+	\begin{block}{Definition}
+		Wir definieren das \textbf{leere Wort} als $$ \varepsilon := \nZ_0  \to A \qquad \varepsilon := \{\} \to \{\}$$ \pause
+		Es gilt $ \varepsilon \circ w \circ \varepsilon = w \;$ (Beweis: VL) \\[1em] \pause
+		
+		Wichtig: Das leere Wort ist auch ein \enquote{echtes, gleichberechtigtes} Wort. Die Null ist bei den natürlichen Zahlen ja auch nicht einfach \enquote{nichts}. \\[1em] \pause
+		
+		Ist $\varepsilon := \{\} \to \{\}$ eine Relation? Und eine Funktion? Ist es surjektiv? \\ \pause
+		Bemerkung: In der formalen Definition fordern wir die Surjektivität der Funktion, damit das leere Wort eindeutig ist!
+	\end{block}
+	
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Konkatenation}
+	\begin{block}{}
+		Sei $w_1 = $ Schrank , $w_2 = $ Schlüssel \\
+		Dann gilt $ w_1 \circ w_2 = \text{SchrankSchlüssel} \neq w_2 \circ w_1 = \text{SchlüsselSchrank}$\\ \pause
+		Konkatenation ist also \textbf{nicht kommutativ!} \\
+		Ist sie \textbf{assoziativ}? \pause Ja!		
+	\end{block}
+
+	\begin{block}{Beobachtung}
+		Falls $w=w_1\circ w_2 $ und $w_1 \in A^* , w_2 \in B^* $, dann gilt
+		$ w\in (A\cup B)^* $ 
+	\end{block}
+
+	\begin{block}{Mehrfachkonkatenation}
+		\begin{align*}
+			w^0 &= \varepsilon \\
+			w^k &= \underbrace{w\circ w\circ \cdots \circ w}_{k-mal}
+		\end{align*}
+
+	\end{block}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Länge von Wörtern}
+	\begin{block}{Definition}
+		Unter der \textbf{Länge} eines Wortes versteht man die Anzahl der Zeichen, aus der das Wort besteht.
+	\end{block}
+
+	
+	\begin{block}{Beispiel}
+		$ \vert \text{hallo} \vert = \pause 5 $ \\
+		$ \vert \varepsilon \vert = \pause 0 $
+	\end{block}
+
+	\pause
+	\begin{block}{Lemma}
+		$$ \vert a\circ b \vert = \vert a \vert + \vert b \vert $$
+	\end{block}
+
+	\pause
+	\begin{block}{Lemma}
+		$$ \vert w^k \vert = k \vert w \vert $$
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Wörter}
+	$A^n$: \emph{Menge aller Wörter der Länge $n$} über dem Alphabet $A$.\\
+	Wie kann man damit $A^*$ ausdrücken? \\
+	\pause
+	\[ A^\ast = \bigcup \limits_{i = 0}^\infty A^i \]
+	
+	\pause
+	\begin{block}{Rückblick}
+		\begin{align*}
+		\bigcup_{i\in I} M_i &= \{ x \mid \text{es gibt ein } i\in I \text{ so, dass } x\in  M_i \}  \;
+		\end{align*}
+	\end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Aufgabe}
+	\begin{itemize}
+		\item Welche Wörter lassen sich aus dem Alphabet $A = \{a , b \}$ bilden? Was enthält die Menge $A^*$?
+		\item Ist das Wort $w =$ \code{aabb}$\,\cdot\,$\code{ba} ein Element der Menge $A^5$?
+		\item Was ist $A^2 \times A^2$? \\
+			Wir definieren die Abbildung $f : A^* \times A^* \to A^*, \; (w_1, w_2) \mapsto w_1 \cdot w_2$ \\
+			Was ist $f(A^2 \times A^2)$?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+	\textit{Welche Wörter lassen sich aus dem Alphabet $A = \{a , b \}$ bilden? Was enthält die Menge $A^*$?} \\[2em] \pause
+	
+	Aus $A$ lassen sich z.B. die Wörter $$\text{a, b, aa, bb, ab, ba, aaa, bbb, }\dots$$ bilden. Die Menge $A^*$ enthält gerade diese Wörter.\\
+	\pause
+	Beachte: Auch $\varepsilon$ ist in $A^*$!
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+	\textit{Ist das Wort $w =$ \code{aabb}$\,\cdot\,$\code{ba} ein Element der Menge $A^5$?} \\[2em] \pause
+	
+	Nein. Es gilt $w = \textbf{aabbba}$. Das Wort besteht zwar aus Symbolen, die alle in $A$ liegen, ist aber 6 Zeichen lang.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Lösung}
+	\textit{Was ist $A^2 \times A^2$? \\
+		Wir definieren die Abbildung $f : A^* \times A^* \to A^*, \; (w_1, w_2) \mapsto w_1 \cdot w_2$ \\
+		Was ist $f(A^2 \times A^2)$?} \\[2em]  \pause
+	
+	 $$ A^2 \times A^2 = \{\mathbf{(aa,aa),(aa,bb),(aa,ab),(aa,ba),(bb,aa),} \dots \}$$
+	 \pause
+	 $$ f(A^2 \times A^2) = \{\mathbf{aaaa, aabb, aaab, aaba, bbaa,} \dots \} = A^4 $$
+\end{frame}

@@ -1,0 +1,53 @@
+%% This is file `thwcolor.sty',
+%%
+%=== identification =========================================================-
+\newcommand{\@thwcolor@version}{0.01}
+\newcommand{\@thwcolor@date}{2008/05/20}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thwcolor}[\@thwcolor@date\space version \@thwcolor@version]
+%\typeout{--> thwcolor \@thwcolor@date\space version \@thwcolor@version}
+\ProvidesPackage{thwcolor}
+%=== initial code ============================================================
+%=== declaration of options ==================================================
+%\DeclareOption{colorflag}{\setboolen{colorflag}{true}}
+% could use \PassOptionsToPackage: 
+% \DeclareOption{colorflag}{ ... \PassOptionsToPackage{opt-list}{pkg-name} ...}
+%
+% code for unknown options: code can refer to \CurrentOption
+% \DeclareOption*{code}
+%=== execution of options ====================================================
+% set some defaults
+%\ExecuteOptions{foobar}
+% process the options given to \usepackage
+% in the order of the  \DeclareOption{}{}s
+%\ProcessOptions
+% in the order given to \usepackage
+%\ProcessOptions*
+%=== package loading =========================================================
+\RequirePackage{xcolor}
+%=== main code ===============================================================
+\colorlet{darkblue}{blue!50!black}
+\colorlet{darkgreen}{green!50!black}
+\colorlet{darkorange}{orange!70!black}
+\colorlet{darkred}{red!70!black}
+\colorlet{lightred}{red!60!white}
+\colorlet{lightblue}{blue!60!white}
+\colorlet{lightgreen}{green!60!white}
+\colorlet{lightorange}{orange!10}
+
+\definecolor{halfgray}{gray}{0.55} 
+\definecolor{webgreen}{rgb}{0,.5,0}
+\definecolor{webbrown}{rgb}{.6,0,0}
+\definecolor{Maroon}{cmyk}{0, 0.87, 0.68, 0.32} % from classicthesis
+\definecolor{RoyalBlue}{cmyk}{1, 0.50, 0, 0}
+\definecolor{Black}{cmyk}{0, 0, 0, 0}
+
+
+\definecolor{c1}{rgb}{1.000, 1.000, 0.831}
+\definecolor{c2}{rgb}{0.996, 0.851, 0.557}
+\definecolor{c3}{rgb}{0.996, 0.600, 0.161}
+\definecolor{c4}{rgb}{0.800, 0.298, 0.008}
+
+\endinput
+%%
+%% End of file `thwcolor.sty'.

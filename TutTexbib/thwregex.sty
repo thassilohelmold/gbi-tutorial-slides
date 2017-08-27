@@ -1,0 +1,117 @@
+%% This is file `thwregex.sty',
+%%
+%=== identification ==========================================================
+\newcommand{\@thwregex@version}{0.01}
+\newcommand{\@thwregex@date}{2009/01/09}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{thwregex}[\@thwregex@date\space version \@thwregex@version]
+%\typeout{--> thwregex \@thwregex@date\space version \@thwregex@version}
+\ProvidesPackage{thwregex}
+%=== initial code ============================================================
+\RequirePackage{../TutTexbib/thwcolor}
+\RequirePackage{ifthen}
+\newboolean{exponentflag}
+\newboolean{angleforbraceflag}
+\newboolean{blueflag}
+%=== declaration of options ==================================================
+\DeclareOption{exponent}{\setboolean{exponentflag}{true}}
+\DeclareOption{angleforbrace}{\setboolean{angleforbraceflag}{true}}
+\DeclareOption{blue}{\setboolean{blueflag}{true}}
+% could use \PassOptionsToPackage: 
+% \DeclareOption{regexflag}{ ... \PassOptionsToPackage{opt-list}{pkg-name} ...}
+%
+% code for unknown options: code can refer to \CurrentOption
+% \DeclareOption*{code}
+%=== execution of options ====================================================
+% set some defaults
+%\ExecuteOptions{foobar}
+% process the options given to \usepackage
+% in the order of the  \DeclareOption{}{}s
+\ProcessOptions
+% in the order given to \usepackage
+%\ProcessOptions*
+%=== package loading =========================================================
+%\RequirePackage{foo}
+%=== main code ===============================================================
+\ifthenelse{\boolean{blueflag}}%
+  {\gdef\@regexcolor{darkblue}}%
+  {\gdef\@regexcolor{black}}%
+\def\@rxstar{%
+  \ifthenelse{\boolean{exponentflag}}%
+  {\raisebox{1ex}{{\ttfamily\scriptsize *}}}%
+  {\hbox{\ttfamily $*$}}%
+}
+\def\@rxplus{%
+  \ifthenelse{\boolean{exponentflag}}%
+  {\raisebox{1ex}{{\ttfamily\scriptsize +}}}%
+  {\hbox{\ttfamily +}}%
+}
+\def\@rxquest{%
+  \ifthenelse{\boolean{exponentflag}}%
+  {\raisebox{1ex}{{\ttfamily\scriptsize ?}}}%
+  {\hbox{\ttfamily ?}}%
+}
+\def\@rxemptyword{\@rxemptyset\@rxstar}
+\def\@rxemptyset{\makebox[0.5\width][l]{\ttfamily O}\makebox[0.5\width][r]{\ttfamily \char47}}
+\def\@rxbackslash{\reflectbox{\ttfamily \char47}}
+\def\@rxnot{\hbox{\ttfamily \char94}}
+\def\@rxdollar{\hbox{\ttfamily \char36}}
+\def\@rxunderline{\hbox{\ttfamily \char95}}
+\def\@rxleftangle{%
+  \ifthenelse{\boolean{angleforbraceflag}}%
+  {\hbox{\ttfamily \char123}}%
+  {\hbox{\ttfamily <}}%
+}
+\def\@rxrightangle{%
+  \ifthenelse{\boolean{angleforbraceflag}}%
+  {\hbox{\ttfamily \char125}}%
+  {\hbox{\ttfamily >}}%
+}
+\def\rx#1{\mbox{\bgroup\color{\@regexcolor}\rxparse#1X\egroup}}
+
+\def\rxparse#1{%
+  \def\arg{#1}%
+  \let\next\rxparse
+  \if \arg X\let\next\relax
+  \else
+  \if \arg *\@rxstar
+  \else
+  \if \arg +\@rxplus
+  \else
+  \if \arg ?\@rxquest
+  \else
+  \if \arg B\@rxbackslash\relax
+  \else
+  \if \arg E\@rxemptyword\relax
+  \else
+  \if \arg N\@rxnot\relax
+  \else
+  \if \arg O\@rxemptyset\relax 
+  \else 
+  \if \arg S\@rxdollar\relax 
+  \else 
+  \if \arg U\@rxunderline\relax 
+  \else 
+  \if \arg <\@rxleftangle\relax 
+  \else 
+  \if \arg >\@rxrightangle\relax 
+  \else 
+  \hbox{\ttfamily \arg}%
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi
+  \fi 
+  \next
+}
+
+\endinput
+%%
+%% End of file `thwregex.sty'.
