@@ -1,0 +1,733 @@
+%=======================================================================
+\Tut\chapter{W\"orter}
+\label{k:woerter}
+
+% -----------------------------------------------------------------------
+\Tut\section{W\"orter}
+
+Jeder weiß, was ein Wort ist: Ein \mdefine{Wort über einem Alphabet
+  $A$}\index{Wort} ist eine Folge von Zeichen aus $A$.  Aber gerade
+weil jeder weiß, was das ist, werden wir uns im folgenden eine
+Möglichkeit ansehen, eine formale Definition des Begriffes "`Wort"' zu
+geben. Sinn der Übung ist aber nicht, eine einfache Sache möglichst
+kompliziert darzustellen, sondern an einem Beispiel, das niemandem ein
+Problem bereitet, Dinge zu üben, die in späteren Kapiteln noch
+wichtig werden.
+
+Vorher aber noch kurz eine Bemerkung zu einem Punkt, an dem sich der
+Sprachgebrauch in dieser Vorlesung (und allgemeiner in der Theorie der
+formalen Sprachen) vom umgangssprachlichen unterscheidet: Das
+\emph{Leerzeichen}.  Übrigens benutzt man es heutzutage (jedenfalls
+\zB in europäischen Schriften) zwar ständig --- früher aber nicht!
+Aber wie der Name sagt, fassen wir auch das Leerzeichen als ein
+Zeichen auf. Damit man es sieht, schreiben wir manchmal explizit
+\ascii{32} statt einfach nur Platz zu lassen.
+
+Konsequenz der Tatsache, dass wir das Leerzeichen, wenn wir es denn
+überhaupt benutzen, als ein ganz normales Symbol auf"|fassen, ist
+jedenfalls, dass \zB \literal{Hallo}\ascii{32}\literal{Welt}
+\emph{eine} Folge von Zeichen, also nur \emph{ein} Wort ist (und nicht
+zwei).
+
+Was man für eine mögliche technische Definition von "`Wort"' braucht,
+ist im wesentlichen eine Formalisierung von "`Liste"' (von Symbolen).
+Für eine bequeme Notation definieren wir zunächst: Für jede natürliche
+Zahl $n\geq 0$ sei
+$\G_n = \{i\mid i\in \N_0 \text{ und } 0\leq i \text{ und } i< n\}$
+die Menge der $n$ kleinsten nichtnegativen ganzen Zahlen. Zum Beispiel
+ist $\G_4=\{0,1,2,3\}$, $\G_1=\{0\}$ und $\G_0=\{\}$.
+%
+\begin{tutorium}
+  \begin{itemize}
+  \item \textbf{Achtung:} Wir schreiben seit diesem Semester $\G_n$
+    (und nicht mehr $\mathbb{G}_n$). \textbf{Bitte beachten!}
+  \item Ist die Definition $\G_n= \{i\in \N_0 \mid 0\leq i  \text{ und }  i<
+    n\}$ klar? Können alle so etwas lesen?
+  \item Ist auch $\G_0=\{\}$ klar?
+  \end{itemize}
+\end{tutorium}
+
+Dann wollen wir jede \emph{surjektive} Abbildung $w:\G_n->A$ als ein
+\mdefine[Wort, formalistisch definiert]{Wort} auf"|fassen. Die Zahl
+$n$ heiße auch die \mdefine[Länge eines
+Wortes]{Länge}\index{Wort!Länge}\index{Länge eines Wortes} des Wortes,
+für die man manchmal kurz $|w|$ schreibt. (Es ist in Ordnung, wenn Sie
+im Moment nur an Längen $n\geq 1$ denken. Auf den Fall des sogenannten
+leeren Wortes $\eps$ mit Länge $n=0$ kommen wir im
+\hyperref[sec:leeres-wort]{nachfolgenden Abschnitt} gleich
+noch zu sprechen.)
+
+Das Wort (im umgangssprachlichen Sinne) $w=\literal{hallo}$ ist dann
+also formal die Abbildung $w:\G_5->\{\literal{a}, \literal{h},
+\literal{l}, \literal{o}\}$ mit $w(0)=\literal{h}$,
+$w(1)=\literal{a}$, $w(2)=\literal{l}$, $w(3)=\literal{l}$ und
+$w(4)=\literal{o}$.
+%
+\begin{tutorium}
+  \textbf{Umständliche formale Definition von "`Wort"'}
+
+  \begin{itemize}
+  \item Noch mal deutlich sagen: Zweck der umständlichen formalen
+    Definition von "`Wort"' ist, an einem einfachen Beispiel ein paar
+    vielleicht noch unvertraute Dinge zu üben wie induktive
+    Definitionen und typische Beweismethoden.  Zu letzteren gehört
+    vollständige Induktion, aber auch einfachere
+    Vorgehensweisen. Siehe Skript.
+  \item Beachte: wir lassen nur \emph{surjektive} Abbildungen
+    $w:\G_n->B$ als Wörter zu. (Ansonsten gäbe es mehrere verschiedene
+    leere Wörter.)
+  \item Nichtsdestotrotz sagen wir, dass $w:\G_n->B$ ein Wort
+    \emph{über dem Alphabet $A$} ist, auch wenn $A$ größer ist als $B$.
+  \end{itemize}
+\end{tutorium}
+
+Im folgenden werden wir uns erlauben, manchmal diese formalistische
+Sicht auf Wörter zu haben, und manchmal die vertraute von
+Zeichenfolgen. Dann ist insbesondere jedes einzelne Zeichen auch schon
+ein Wort. Formalismus, vertraute Sichtweise und das Hin- und
+Herwechseln zwischen beidem ermöglich dreierlei:
+%
+\begin{itemize}
+\item präzise Argumentationen, wenn andernfalls nur vages Händewedeln
+  möglich wäre,
+\item leichteres Vertrautwerden mit Begriffen und Vorgehensweisen bei
+  Wörtern und formalen Sprachen, und
+\item das langsame Vertrautwerden mit Formalismen.
+\end{itemize}
+%
+Ganz häufig ist man in der Situation, dass man ein Alphabet $A$
+gegeben hat und über die \mdefine{Menge aller Wörter}\index{Menge
+  aller Wörter} reden möchte, in denen höchstens die Zeichen aus $A$
+vorkommen. Dafür schreibt man
+\mdefine{$A^*$}\index{A_stern@{$A^*$}}. Ganz formalistisch gesehen ist
+das also Menge aller surjektiven Abbildungen $w:\G_n->B$ mit
+$n\in\N_0$ und $B\subseteq A$. Es ist aber völlig in Ordnung, wenn Sie
+sich einfach Zeichenketten vorstellen.
+
+
+% -----------------------------------------------------------------------
+\Tut\section{Das leere Wort}
+\label{sec:leeres-wort}
+
+Beim Zählen ist es erst einmal natürlich, dass man mit eins beginnt:
+$1$, $2$, $3$, $4$, \dots\ Bei Kindern ist das so, und geschichtlich
+gesehen war es bei Erwachsenen lange Zeit auch so. Irgendwann stellte
+sich jedoch die Erkenntnis ein, dass die Null auch ganz praktisch
+ist. Daran hat sich jeder gewöhnt, wobei vermutlich eine gewisse
+Abstraktion hilfreich war; oder stellen Sie sich gerade vor, dass vor
+Ihnen auf dem Tisch $0$ Elefanten stehen?
+
+Ebenso umfasst unsere eben getroffene Definition von "`Wort"' den
+Spezialfall der Wortlänge $n=0$. Auch ein Wort der Länge $0$ verlangt
+zugegebenermaßen ein bisschen Abstraktionsvermögen. Es besteht aus $0$
+Symbolen. Deshalb sieht man es so schlecht.
+
+Wenn es Ihnen hilft, können Sie sich die formalistische Definition
+ansehen: Es ist $\G_0 = \{\}$ die leere Menge; und ein Wort der Länge
+$0$ enthält keine Zeichen. Formalisiert als surjektive Abbildung
+ergibt das dann ein $w:\{\} -> \{\}$.
+
+Wichtig:
+\begin{itemize}
+\item Wundern Sie sich nicht, wenn Sie sich über $w:\{\} -> \{\}$ erst
+  einmal wundern. Sie werden sich an solche Dinge schnell gewöhnen.
+\item Vielleicht haben Sie ein Problem damit, dass der
+  Definitionsbereich oder/und der Zielbereich von $w:\{\} -> \{\}$ die
+  leere Menge ist. Das löst sich aber, wenn man daran denkt, dass
+  Abbildungen besondere Relationen sind.
+\item Es gibt nur \emph{eine} Relation $R\subseteq \{\}\x\{\} = \{\}$,
+  nämlich $R=\{\}$. Als Menge von Paaren aufgefasst ist dieses $R$
+  aber linkstotal und rechtseindeutig, also tatsächlich eine
+  Abbildung; und die ist sogar rechtstotal. Also ist es richtig von
+  \emph{dem} \mdefine[leeres Wort]{leeren Wort}\index{leeres
+    Wort}\index{Wort!leeres} zu sprechen.
+\end{itemize}
+%
+\begin{tutorium}
+  \begin{itemize}
+  \item Das leere Wort sollte zumindest informell klar werden.
+  \item An die formalistische Definition $\eps: \{\} -> \{\}$ müssen
+    sich etliche vermutlich erst noch gewöhnen.
+  \item Was für eine Abbildung $\eps: \{\} -> \{\}$ ist, sieht man auf
+    dem Weg, dass das jedenfalls eine Relation $R\subseteq \{\}\x\{\}$
+    sein muss.
+    \begin{itemize}
+    \item klar machen, dass  $\{\}\x\{\}=\{\}$
+    \item damit gibt es für dieses $R$, also $\eps$ nur eine
+      Möglichkeit
+    \end{itemize}
+  \item Wichtig: $\eps$ hat zwar Länge $0$, besteht also "`aus keinen
+    Symbolen"', ist aber trotzdem "`etwas"'. Die Menge $M=\{\eps\}$,
+    die das leere Wort enthält, ist \emph{nicht} die leere Menge,
+    sondern $M$ enthält genau ein Element. Also $M\not=\emptyset$ und
+    $|M|=1$.
+  \end{itemize}
+\end{tutorium}
+%
+Nun gibt es ähnlich wie schon beim Leerzeichen ein ganz praktisches
+Problem: Da das leere Wort aus $0$ Symbolen besteht, "`sieht man es
+nicht"'. Das führt leicht zu Verwirrungen. Man will aber gelegentlich
+ganz explizit darüber sprechen und schreiben. Deswegen vereinbaren
+wir, dass wir für das leere Wort $\eps$ schreiben.
+
+Beachten Sie, dass wir in unseren Beispielen Symbole unseres
+Alphabetes immer blau darstellen, $\eps$ aber nicht. Es ist nie Symbol
+das gerade untersuchten Alphabetes. Wir benutzen dieses Zeichen aus
+dem Griechischen als etwas, das Sie immer interpretieren (siehe
+Kapitel~\ref{k:signale}) müssen, nämlich als das leere Wort.
+
+% -----------------------------------------------------------------------
+\Tut\section{Mehr zu W\"ortern}
+
+Für die Menge aller Wörter einer festen Länge $n$ über einem Alphabet
+$A$ schreiben wir auch \mdefine{$A^n$}\index{A_hochn@{$A^n$}}. Wenn
+zum Beispiel das zu Grunde liegende Alphabet $A=\{\literal{a},
+\literal{b}\}$ ist, dann ist:
+%
+\begin{align*}
+  A^0 & =\{\eps \} \\
+  A^1 & =\{\literal{a}, \literal{b} \} \\
+  A^2 & =\{\literal{aa}, \literal{ab}, \literal{ba}, \literal{bb} \} \\
+  A^3 & =\{\literal{aaa}, \literal{aab}, \literal{aba}, \literal{abb}, \literal{baa},
+  \literal{bab}, \literal{bba}, \literal{bbb} \} \\
+\end{align*}
+%
+Vielleicht haben nun manche die Idee, dass man auch erst die $A^n$ hätte
+definieren können, und dann festlegen:
+%
+\[
+A^* = A^0 \cup A^1 \cup A^2 \cup A^3 \cup \; \cdots
+\]
+%
+Das unschöne daran sind die "`$\cdots$"': Im vorliegenden Fall mag ja
+noch klar sein, was gemeint ist. Da wir aber darauf achten wollen,
+dass Sie sich nichts angewöhnen, was im allgemeinen zu Problemen
+führen könnte (und dafür sind Pünktchen, bei denen man darauf baut,
+dass der Leser schon die passende Interpretation haben möge,
+prädestiniert), wollen wir lieber das "`große Vereinigungszeichen"'
+benutzen, das wir in \hyperref[k:alphabete-wort]{Kapitel 3}
+kennengelernt haben:
+%
+\[
+A^* = \bigcup_{i\in\N_0} A^i
+\]
+%
+% -----------------------------------------------------------------------
+\Tut\section{Konkatenation von W\"ortern}
+
+Zahlen kann man zum Beispiel addieren oder multiplizieren. Man spricht
+auch davon, dass die Addition und Multiplikation zweistellige oder
+binäre Operationen sind.
+
+Für Wörter definieren wir nun auch eine ganz einfache aber wichtige
+binäre Operation: die sogenannte
+\mdefine{Konkatenation}\index{Konkatenation!von Wörtern} von Wörtern.
+Das ist einfach die Hintereinanderschreibung zweier Wörter. Als
+Operationssymbol verwendet man üblicherweise wie bei der
+Multiplikation von Zahlen den Punkt "`$\cdot$"'. Also zum Beispiel:
+\[
+\literal{SCHRANK} \cdot \literal{SCHLÜSSEL} = \literal{SCHRANKSCHLÜSSEL}
+\]
+oder
+\[
+\literal{SCHLÜSSEL} \cdot \literal{SCHRANK} = \literal{SCHLÜSSELSCHRANK}
+\]
+Oft lässt man wie bei der Multiplikation auch den Konkatenationspunkt
+weg.
+
+Wie man sieht, kommt es (im Gegensatz zur Multiplikation von Zahlen)
+auf die Reihenfolge an: Ein \literal{SCHRANKSCHLÜSSEL} ist etwas
+anderes als ein \literal{SCHLÜSSELSCHRANK}.
+%
+\begin{tutorium}
+  \begin{itemize}
+  \item jedes Wort kann man auf"|fassen als die Konkatenation seiner
+    Symbole, \zB $\#{hallo} = \#h \cdot \#a \cdot \#l \cdot \#l \cdot
+    \#o$.
+  \item evtl: auf wieviele verschiedene Arten kann man $\#{abc}$ als
+    Kontatenation nichtleerer Wörter schreiben?
+
+    vier: $\#{abc}$, $\#{a}\cdot \#{bc}$, $\#{ab}\cdot \#{c}$,
+    $\#{a}\cdot \#{b}\cdot \#{c}$
+  \item evtl: auf wieviele verschiedene Arten kann man $\#{hallo}$ als
+    Kontatenation nichtleerer Wörter schreiben?
+
+    das sind $2^{5-1}=16$, oder?
+  \item noch mal ganz klar sagen, dass bei Konkatenation die
+    \emph{Reihenfolge wichtig} ist. $\#{OTTO} \not= \#{TOTO}$
+  \end{itemize}
+\end{tutorium}
+Nun wollen wir die \mdefine[Konkatenation zweier\\Wörter formal]{Konkatenation zweier Wörter formal}
+definieren.
+
+\begin{definition}
+\label{def:konkatenation}
+Es seien zwei beliebige Wörter $w_1:\G_m -> A_1$ und $w_2:\G_n -> A_2$
+gegeben. Dann ist
+%
+\begin{align*}
+  w_1\cdot w_2 : \G_{m+n} &-> A_1\cup A_2 \\
+                        i & \mapsto \begin{cases}
+                                    w_1(i) & \text{ falls } 0\leq i<m \\
+                                    w_2(i-m) & \text{ falls } m \leq i<m+n
+                                    \end{cases}
+\end{align*}
+\end{definition}
+%
+Ist das eine sinnvolle Definition? Oder vielmehr: Ist das überhaupt
+eine Definition? Und wird hier ein Wort definiert?
+\begin{itemize}
+\item Als erstes hat man sich zu überlegen, dass die Ausdrücke
+  $w_1(i)$ für $0\leq i<m$ und $w_2(i-m)$ für $m \leq i<m+n$ stets
+  definiert sind. Das ist so.
+\item Zweitens stammen die in der Fallunterscheidung vorgeschriebenen
+  Funktionswerte tatsächlich aus dem Bereich $A_1\cup A_2$: denn
+  $w_1(i)$ ist stets aus $A_1$ und $w_2(i-m)$ ist stets aus $A_2$.
+\item Drittens muss man sich klar machen, dass die Fallunterscheidung
+  von der Art ist, dass für jedes $i\in \G_{m+n}$ nur genau \emph{ein}
+  Funktionswert festgelegt wird und nicht mehrere verschiedene.
+\item Und schließlich muss man sich noch klar machen, dass wieder ein
+  \emph{Wort} definiert wird: Dafür muss die Abbildung
+  $w_1\cdot w_2 : \G_{m+n} -> A_1\cup A_2$ surjektiv sein. Das ist sie
+  auch. Denn für jedes $a\in A_1\cup A_2$ gilt (mindestens) eine der
+  folgenden Möglichkeiten:
+  \begin{itemize}
+  \item $a\in A_1$: Dann gibt es aber, da $w_1$ ein Wort ist, also
+    eine surjektive Abbildung, ein $i_1\in \G_m$ mit $w_1(i_1)=a$. Also
+    ist $(w_1w_2)(i_1) = w_1(i_1) = a$.
+  \item $a\in A_2$: Dann gibt es aber, da $w_2$ ein Wort ist, also
+    eine surjektive Abbildung, ein $i_2\in \G_n$ mit $w_2(i_2)=a$. Also
+    ist $(w_1w_2)(m+i_2) = w_2(i_2) = a$.
+  \end{itemize}
+\end{itemize}
+%
+Als letztes sei noch angemerkt, dass man an der Definition sofort
+sieht:
+\begin{lemma}
+  \label{lem:laenge-homomorph}
+  Für jedes Alphabet $A$ gilt:
+  \[
+  \text{für jedes } w_1\in A^* \text{ und jedes } w_2\in A^* \text{ ist } |w_1w_2| = |w_1| + |w_2| \;.
+  \]
+\end{lemma}
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Konkatenation mit dem leeren Wort}
+
+Gefragt, was des Besondere an der Zahl Null ist, antworten zumindest
+manche Leute, dass es die Eigenschaft hat:
+\[
+  \text{für jedes } x\in \N_0 \text{ ist } x+0 = x \text{ und } 0+x = x \;.
+\]
+Man sagt auch, die Null sei das \mdefine[neutrales Element]{neutrale
+  Element} bezüglich der Addition.
+
+Etwas Ähnliches wie die Null für natürliche Zahlen gibt es bei
+Wörtern: Das leere Wort ist das neutrale Element bezüglich
+Konkatenation.
+
+\begin{lemma}
+  Für jedes Alphabet $A$ gilt:
+  \[
+  \text{für jedes } w\in A^* \text{ ist } w\cdot \eps = w \text{ und } \eps\cdot w =w  \;.
+  \]
+\end{lemma}
+%
+Anschaulich ist das wohl klar: Wenn man ein Wort $w$ nimmt und hinten
+dran der Reihe nach noch alle Symbole des leeren Wortes "`klebt"',
+dann "`ändert sich an $w$ nichts"'.
+
+Aber da wir auch eine formale Definition von Wörtern haben, können wir
+das auch präzise beweisen ohne auf Anführungszeichen und "`ist doch
+wohl klar"' zurückgreifen zu müssen. Wie weiter vorne schon einmal
+erwähnt: Wir machen das nicht, um Einfaches besonders schwierig
+darzustellen (so etwas hat angeblich Herr Gauß manchmal gemacht
+\dots), sondern um an einem einfachen Beispiel etwas zu üben, was Sie
+durch Ihr ganzes Studium begleiten wird: Beweisen.
+
+\begin{beweis}
+  Die erste Frage, die sich stellt, ist: Wie beweist man das für alle
+  denkbaren(?) Alphabete $A$? Eine Möglichkeit ist: Man geht von einem
+  wie man sagt "`beliebigen aber festen"' Alphabet $A$ aus, über das
+  man \emph{keinerlei weitere} Annahmen macht und zeigt, dass die
+  Aussage für dieses $A$ gilt.
+
+  Tun wir das: Sei im folgenden $A$ ein beliebiges aber festes
+  Alphabet.
+
+  Damit stellt sich die zweite Frage: Wie beweist man, dass die
+  Behauptung für alle $w\in A^*$ gilt? Im vorliegenden Fall
+  funktioniert das gleiche Vorgehen wieder: Man geht von einem
+  beliebigen Wort $w$ aus, über das man keinerlei Annahmen macht.
+
+  Sei also im folgenden $w$ ein beliebiges aber festes Wort aus $A^*$,
+  \dh eine surjektive Abbildung $w:\G_m->B$ mit $B\subseteq A$.
+
+  Außerdem wissen wir, was das leere Wort ist: $\eps:\G_0->\{\}$.
+
+  Um herauszufinden, was $w'=w\cdot\eps$ ist, können wir nun einfach
+  losrechnen: Wir nehmen die formale Definition der Konkatenation und
+  setzen unsere "`konkreten"' Werte ein. Dann ist also $w'$ eine
+  Abbildung $w': \G_{m+0} -> B\cup\{\}$, also schlicht $w': \G_{m} ->
+  B$. Und für alle $i\in \G_m$ gilt für die Funktionswerte laut der
+  formalen Definition von Konkatenation für alle $i\in \G_m$:
+  %
+  \begin{align*}
+    w'(i) & = \begin{cases}
+      w_1(i) & \text{ falls } 0\leq i<m \\
+      w_2(i-m) & \text{ falls } m \leq i<m+n
+    \end{cases} \\
+    & = \begin{cases}
+      w(i) & \text{ falls } 0\leq i<m \\
+      \eps(i-m) & \text{ falls } m \leq i<m+0
+    \end{cases} \\
+    & = w(i)
+  \end{align*}
+  Also haben $w$ und $w'$ die gleichen Definitions- und Zielbereiche
+  und für alle Argumente die gleichen Funktionswerte, \dh an allen
+  Stellen die gleichen Symbole. Also ist $w'=w$.
+\end{beweis}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item  Ist $w\cdot \eps = w$ klar?
+  \item und $\eps \cdot \eps \cdot w\cdot \eps \cdot \eps \cdot \eps =
+    w$ auch?
+  \end{itemize}
+\end{tutorium}
+% -----------------------------------------------------------------------
+\Tut\subsection{Eigenschaften der Konkatenation}
+
+Wenn man eine neue binäre Operation definiert, stellt sich immer die
+Frage nach möglichen Rechenregeln. Weiter oben haben wir schon darauf
+hingewiesen, dass man bei der Konkatenation von Wörtern nicht einfach
+die Reihenfolge vertauschen darf. (Man sagt auch, die Konkatenation
+sei \emph{nicht kommutativ}.)
+
+Was ist, wenn man mehrere Wörter konkateniert? Ist für jedes Alphabet
+$A$ und alle Wörter $w_1$, $w_2$ und $w_3$ aus $A^*$ stets
+%
+\[
+(w_1 \cdot w_2) \cdot w_3 = w_1 \cdot(w_2 \cdot w_3)   \;?
+\]
+%
+Die Antwort ist: Ja. Auch das kann man stur nachrechnen.
+
+Das bedeutet, dass man bei der Konkatenation mehrerer Wörter keine
+Klammern setzen muss. Man sagt auch, die Konkatenation sei eine
+\emph{assoziative Operation} (siehe
+Unterabschnitt~\ref{sec:bin-op}).
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Beispiel: Aufbau von E-Mails}
+\label{subsec:woerter-aufbau-emails}
+
+\begin{tutorium}
+  Das ist natürlich nicht für die Klausur relevant.
+\end{tutorium}
+%
+Die Struktur von E-Mails ist in einem sogenannten RFC festgelegt.
+\mdefine{RFC} ist die Abkürzung für \mdefine{Request For Comments}. Man
+findet alle RFCs zum Beispiel unter \url{http://tools.ietf.org/html/}.
+
+Die aktuelle Fassung der Spezifikation von E-Mails\index{E-Mail}
+findet man in \mdefine{RFC 5322}\index{RFC!5322 (E-Mail)}%
+\index{RFC!E-Mail (5322)}
+(\url{http://tools.ietf.org/html/rfc5322}, 24.10.14).  Wir zitieren
+und komentieren\footnote{Wir erlauben uns kleine Ungenauigkeiten, weil
+  wir nicht den ganzen RFC zitieren wollen.}  einige Ausschnitte aus
+der Einleitung von Abschnitt~2.1 dieses RFC, wobei die
+Nummerierung/""Strukturierung von uns stammt:
+
+\begin{enumerate}[1.]
+\item
+  \begin{itemize}
+  \item \emph{"`This document specifies that messages are made up of
+      characters in the US-ASCII range of 1 through 127."'}
+  \item Das Alphabet, aus dem die Zeichen stammen müssen, die in einer
+    E-Mail vorkommen, ist der US-ASCII-Zeichensatz mit Ausnahme des
+    Zeichens mit der Nummer $0$.
+  \end{itemize}
+\item
+  \begin{itemize}
+  \item \emph{"`Messages are divided into lines of characters. A line
+      is a series of characters that is delimited with the two
+      characters carriage-return and line-feed; that is, the carriage
+      return (CR) character (ASCII value 13) followed immediately by
+      the line feed (LF) character (ASCII value 10).  (The
+      carriage-return/line-feed pair is usually written in this
+      document as "CRLF".)"'}
+  \item Eine Zeile (\emph{line}) ist eine Folge von Zeichen, also ein
+    Wort, das mit den beiden "`nicht druckbaren"' Symbolen \kasten{CR}
+    \kasten{LF} endet.
+
+    An anderer Stelle wird im RFC übrigens spezifiziert, dass als
+    Zeile im Sinne des Standards nicht beliebige Wörter zulässig sind,
+    sondern nur solche, deren Länge kleiner oder gleich 998 ist.
+  \end{itemize}
+\item
+  \begin{itemize}
+  \item \emph{A message consists of
+      \begin{itemize}
+      \item\relax [...] the header section of the message [...] followed,
+      \item optionally, by a body."'
+      \end{itemize}
+    }
+  \item Eine E-Mail (\emph{message}) ist die Konkatenation von Kopf
+    (\emph{header}) der E-Mail und Rumpf (\emph{body}) der
+    E-Mail. Dass der Rumpf optional ist, also sozusagen fehlen darf,
+    bedeutet nichts anderes, als dass der Rumpf auch das leere Wort
+    sein darf.  (Aus dem Rest des RFC ergibt sich, dass der Kopf nie
+    das leere Wort sein kann.)
+
+    Aber das ist noch nicht ganz vollständig. Gleich anschließend wird
+    der RFC genauer:
+  \end{itemize}
+\item
+  \begin{itemize}
+  \item
+      \begin{itemize}
+      \item \emph{"`The header section is a sequence of lines of
+          characters with special syntax as defined in this specification.
+      \item The body is simply a sequence of characters that follows the
+        header and
+      \item is separated from the header section by an empty line
+        (i.e., a line with nothing preceding the CRLF). [...]"'}
+      \end{itemize}
+  \item Es gilt also:
+    \begin{itemize}
+    \item Der Kopf einer E-Mail ist die Konkatenation (de facto
+      mehrerer) Zeilen.
+    \item Der Rumpf einer E-Mail ist (wie man an anderer Stelle im RFC
+      nachlesen kann) ebenfalls die Konkatenation von Zeilen. Es
+      können aber auch 0 Zeilen oder 1 Zeile sein.
+    \item Eine Leerzeile (\emph{empty line}) ist das Wort \kasten{CR}
+      \kasten{LF}.
+    \item Eine Nachricht ist die Konkatenation von Kopf der E-Mail,
+      einer Leerzeile und Rumpf der E-Mail.
+    \end{itemize}
+  \end{itemize}
+\end{enumerate}
+
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Iterierte Konkatenation}
+
+Von den Zahlen kennen Sie die Potenzschreibweise $x^3$ für $x\cdot
+x\cdot x$ \usw Das wollen wir nun auch für die Konkatenation von
+Wörtern einführen. Die Idee ist so etwas wie
+%
+\[
+w^k = \underbrace{w\cdot w \cdots w}_{k \text{ mal}} \;.
+\]
+%
+Aber da stehen wieder diese Pünktchen \dots\ Wie kann man die
+vermeiden? Was ist mit $k=1$ (immerhin stehen da ja drei $w$ auf der
+rechten Seite)? Und was soll man sich für $k=0$ vorstellen?
+
+Dafür benutzen wir wieder eine induktive Definition wie schon beim
+kartesischer Produkt mehrerer Mengen. Für \mdefine{Potenzen von
+  Wörtern}\index{Potenzen eines Wortes}\index{Wort!Potenzen} beginnen
+wir mit dem Fall $n=0$:
+%
+\begin{align*}
+  w^0 &= \eps \\
+  \text{für jedes } k\in\N_0:\; w^{k+1} &= w^k \cdot w
+\end{align*}
+%
+Man kann nun ausrechnen, was $w^1$ ist:
+\[
+w^1 = w^{0+1} = w^0 \cdot w = \eps \cdot w = w \;.
+\]
+Und dann:
+\[
+w^2 = w^{1+1} = w^1 \cdot w = w \cdot w \;.
+\]
+Und so weiter.
+%
+
+\begin{tutorium}
+  \textbf{Potenzen von Wörtern}
+
+  \begin{itemize}
+  \item klar machen,
+    \begin{itemize}
+    \item was ist $\#a^k$, was ist $\#b^k$ ?
+    \item was ist $\#a^k\#b^k$ ?
+    \item was ist $(\#{ab})^k$ ?
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+%-----------------------------------------------------------------------
+\Tut\section{Formale Sprachen}
+
+Eine natürliche Sprache umfasst mehrere Aspekte, \zB Aussprache und Stil, also
+\zB Wortwahl und Satzbau. Dafür ist es auch notwendig zu wissen, welche
+Formulierungen syntaktisch korrekt sind.
+%
+Neben den anderen genannten und ungenannten Punkten spielt
+\emph{syntaktsiche Korrektheit} auch in der Informatik an vielen
+Stellen eine Rolle.
+
+Bei der Formulierung von Programmen ist das jedem klar.
+%
+Aber auch der Text, der beim Senden einer Email über das Netz
+transportiert wird oder der Quelltext einer HTML-Seite müssen
+bestimmten Anforderungen genügen.
+%
+Praktisch immer, wenn ein Programm Eingaben liest, sei es aus einer
+Datei oder direkt vom Benutzer, müssen diese Eingaben gewissen Regeln
+genügen, sofern sie weiterverarbeitet werden können sollen.
+%
+Wird \zB vom Programm die Darstellung einer Zahl benötigt, dann ist
+vermutlich "`\literal{101}"' in Ordnung, aber "`\literal{a*\&W}"'
+nicht.
+%
+Aber natürlich (?) sind es bei jeder Anwendung andere Richtlinien, die
+eingehalten werden müssen.
+
+Es ist daher nicht verwunderlich, wenn
+%
+\begin{itemize}
+\item syntaktische Korrektheit,
+\item Möglichkeiten zu spezifizieren, was korrekt ist und was nicht,
+  und
+\item Möglichkeiten, syntaktische Korrektheit von Texten zu überprüfen,
+\end{itemize}
+%
+von großer Bedeutung in der Informatik sind.
+
+Man definiert: Eine \mdefine{formale Sprache}\index{formale Sprache}%
+\index{Sprache!formale} (über einem Alphabet $A$) ist eine
+Teilmenge $L\subseteq A^*$.
+
+Immer, wenn es um syntaktische Korrektheit geht, bilden die syntaktisch
+korrekten Gebilde eine formale Sprache $L$, während die syntaktisch falschen
+Gebilde eben \emph{nicht} zu $L$ gehören.
+
+Beispiele:
+%
+\begin{itemize}
+\item Es sei $A=\{\literal{0}, \literal{1}, \literal{2}, \literal{3},
+  \literal{4}, \literal{5}, \literal{6}, \literal{7}, \literal{8},
+  \literal{9}, \literal{-} \}$. Die formale Sprache der
+  Dezimaldarstellungen ganzer Zahlen enthält zum Beispiel die Wörter
+  "`\literal{1}"', "`\literal{-22}"' und "`\literal{192837465}"', aber
+  nicht "`\literal{2-3---41}"'.
+\item Die formale Sprache der syntaktisch korrekten Java"=Programme
+  über dem Unicode"=Alphabet enthält zum Beispiel nicht das Wort
+  "`\literal{[2] class int)(}"' (aber eben alle Java"=Programme).
+\end{itemize}
+%
+\begin{tutorium}
+  \noindent\textbf{Formale Sprachen, Beispiele}
+  \begin{itemize}
+  \item Def: $L\subseteq A^*$
+  \item Bitte darauf achten, dass nicht Wörter und Sprachen
+    durcheinander geworfen werden:
+    \begin{itemize}
+    \item $\literal{abb}$ ist etwas anderes als $\{\literal{abb}\}$.
+    \item Und $\{\literal{abb}\}^*$ gibt es, aber $\literal{abb}^*$
+      \textbf{gibt es nicht}  (bis jetzt).
+    \end{itemize}
+  \item formale Sprache aller Schlüselwörter in Java: eine endliche Sprache \\
+    $L=\{ \literal{class},  \literal{if},  \literal{int}, \dots\}$
+  \item formale Sprache $L$ aller Wörter über
+    $A=\{\literal{a},\literal{b}\}$, in denen nirgends das Teilwort
+    $\literal{ab}$ vorkommt.
+    \begin{itemize}
+    \item das kann man \zB so hinschreiben: $L=\{\literal{a},\literal{b}\}^*
+      \smallsetminus \{w_1\literal{ab} w_2 \mid w_1,w_2\in
+      \{\literal{a},\literal{b}\}^*\}$
+    \item man überlege, was dann noch übrig bleibt
+    \item positiv formuliert: In den erlaubten Wörtern muss
+      erst ein beliebiges Wort (\evtl leer) nur aus $\literal{b}$ kommen und
+      danach ein beliebiges Wort (\evtl leer) nur aus $\literal{a}$.
+    \item man kann also auch schreiben $L=\{w_1w_2 \mid w_1\in
+      \{\literal{b}\}^*  \text{ und }  w_2\in \{\literal{a}\}^* \}$
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+%-----------------------------------------------------------------------
+\Tut\section{Bin\"are Operationen}
+\label{sec:bin-op}
+
+Unter einer binären Operation auf einer Menge $M$ versteht man eine
+Abbildung $f:M\x M->M$. Üblicherweise benutzt man aber ein
+"`Operationssysmbol"' wie das Pluszeichen oder den
+Multiplikationspunkt und setzt ihn zwischen die Argumente: Statt
+$+(3,8)=11$ schreibt man normalerweise $3+8=11$.
+
+Allgemein heißt eine binäre Operation $\diamond:M\x M->M$ genau dann
+\mdefine[kommutative Operation]{kommutativ}\index{kommutative
+  Operation}\index{Operation!kommutative}, wenn gilt:
+%
+\[
+  \text{für jedes } x\in M \text{ und für jedes } y\in M \text{ ist }
+  x \diamond y = y \diamond x \;.
+\]
+%
+Abgesehen davon, dass wir bald eine kompaktere Notation für "`für
+jedes"' kennenlernen werden, könnte man etwas platzsparender auch
+schreiben
+\[
+  \text{für alle } x\in M \text{ und } y\in M \text{ ist }
+  x \diamond y = y \diamond x \;.
+\]
+%
+Man beachte, dass dabei $x$ und $y$ durchaus auch für den gleichen
+Wert stehen dürfen.
+%
+Die sich ergebende Forderung ist allerdings trivialerweise erfüllt.
+
+Eine binäre Operation $\diamond:M\x M->M$ nennt man genau dann
+\mdefine[assoziative Operation]{assoziativ}\index{assoziative
+  Operation}\index{Operation!assoziative}, wenn gilt:
+%
+\[
+  \text{für alle } x\in M, y\in M \text{ und } z\in M \text{ ist }
+  (x \diamond y) \diamond z = x \diamond(y \diamond z) \;.
+\]
+%
+Wir haben gesehen, dass die Konkatenation von Wörtern eine assoziative
+Operation ist, die aber \emph{nicht} kommutativ ist.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Beispiele für kommutative und nichtkommutative Operationen
+  \item Beispiele für assoziative Operationen
+  \item fällt Ihnen auch eine ("`natürliche"') nichtassoziative
+    Operation ein?
+  \end{itemize}
+\end{tutorium}
+%-----------------------------------------------------------------------
+\section*{Zusammenfassung und Ausblick}
+
+In diesem Kapitel wurde eingeführt, was wir unter einem \emph{Wort}
+verstehen wollen, und wie \emph{Konkatenation} und \emph{Potenzen} von
+Wörtern definiert sind.
+
+Als wichtiges technisches Hilfsmittel haben wir erstmals eine
+\emph{induktive Defintion} gesehen.
+%
+So etwas wird im weiteren Verlauf der Vorlesung immer wieder
+vorkommen.
+
+Bisher haben wir an vielen Stellen Aussagen durch die Wörter "`oder"'
+und "`und"' miteinander verbunden.
+%
+Da das auf Dauer etwas mühsam ist, werden wir uns kommenden Kapitel
+ein erstes Mal ausführlich mit Aussagenlogik beschäftigen und dabei
+auch Abkürzungen einführen, die kürzere, besser lesbare Formeln
+erlauben.
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-04-woerter/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

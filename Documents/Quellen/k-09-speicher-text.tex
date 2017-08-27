@@ -1,0 +1,421 @@
+%=== Einheit: Speicher =======================================================
+\Tut\chapter{Speicher}
+\label{k:speicher}
+
+\index{Speicher}
+Etwas aufzuschreiben (vor ganz langer Zeit in Bildern, später dann
+eben mit Zeichen) bedeutet, etwas zu speichern. Weil es naheliegend
+und einfach ist, reden wir im Folgenden nur über Zeichen.
+
+Wenn man über Speicher reden will, muss man über Zeit reden. Speichern
+bedeutet, etwas zu einem Zeitpunkt zu schreiben und zu einem späteren
+Zeitpunkt zu lesen.
+
+Die ersten Sätze dieser Vorlesungseinheit über Speicher haben Sie
+vermutlich von oben nach unten Ziele für Zeile und in jeder Zeile von
+links nach rechts gelesen.  Für diese Reihenfolge ist der Text auch
+gedacht. Man könnte aber auch relativ einfach nur jede dritte Zeile
+lesen.  Mit ein bisschen mehr Mühe könnte man auch nachlesen, welches
+das zweiundvierzigste Zeichen in der dreizehnten Zeile ist. Und wenn
+Sie wissen wollen, was auf Seite 33 in Zeile 22 Zeichen Nummer 11 ist,
+dann bekommen Sie auch das heraus.
+
+Man spricht von \mdefine[wahlfreier Zugriff]{wahlfreiem Zugriff}. 
+
+Auch Rechner haben bekanntlich Speicher, üblicherweise welche aus
+Halbleitermateralien und welche aus magnetischen Materialien. Auch für
+diese Speicher können Sie sich vorstellen, man habe wahlfreien
+Zugriff. Die gespeicherten Werte sind Bits \bzw Bytes. Diejenigen
+"`Gebilde"', die man benutzt, um eines von mehreren gespeicherten
+"`Objekten"' auszuwählen, nennt man \emph{Adressen}.
+
+%-----------------------------------------------------------------------
+\Tut\section{Bit und Byte}
+
+Das Wort "`Bit"' hat verschiedene Bedeutungen. Eine zweite werden Sie
+in der Vorlesung "`Theoretische Grundlagen der Informatik"' kennen
+lernen. Die erste ist: Ein \mdefine{Bit}\index{Bit} ist ein Zeichen
+des Alphabetes $\{\literal{0}, \literal{1}\}$.
+
+Unter einem \mdefine{Byte}\index{Byte} wird heute üblicherweise ein
+Wort aus acht Bits verstanden (früher war das anders und
+unterschiedlich). Deswegen wird in manchen Bereichen das deutlichere
+Wort \mdefine{Octet}\index{Octet} statt Byte bevorzugt. Das gilt nicht
+nur für den frankophonen Sprachraum, sondern zum Beispiel auch in den
+in früheren Kapiteln schon erwähnten \mdefine[RFC]{Requests for
+  Comments}\index{RFC}\index{Reques for Comments} der
+\mdefine[IETF]{Internet Engineering Task
+  Force}\index{IETF}\index{Internet Engineering Task Force} (siehe
+\url{http://www.ietf.org/rfc.html}, 13.11.13).
+
+So wie man die Einheiten Meter und Sekunde mit \si{m} \bzw \si{s} abkürzt,
+möchte man manchmal auch Byte und Bit abkürzen. Leider gibt es da
+Unklarheiten:
+\begin{itemize}
+\item Für Bit wird manchmal die Abkürzung "`b"' benutzt. Allerdings
+  ist das "`b"' schon die Abkürzung für eine Flächeneinheit, das
+  "`barn"' (wovon Sie vermutlich noch nie gehört haben).  Deswegen
+  schreibt man manchmal auch "`bit"'.
+\item Für Bytes wird oft die Abkürzung "`B"' benutzt, obwohl auch
+  "`B"' schon die Abkürzung für eine andere Einheit ist (das Bel;
+  Sie haben vielleicht schon von deziBel gehört).
+\item Für Octets wird die Abkürzung "`o"' benutzt.
+\end{itemize}
+
+%-----------------------------------------------------------------------
+\Tut\section{Bin\"{a}re und dezimale Gr\"{o}\ss enpr\"{a}fixe}
+
+Früher waren Speicher klein (\zB ein paar Hundert Bits), heute sind
+sie groß: Wenn zum Beispiel die Adressen für einen Speicherriegel aus
+$32$ Bits bestehen, dann kann man $2^{32} = 4\,294\,967\,296$ Bytes
+speichern. Festplatten sind noch größer; man bekommt heute im Laden
+problemlos welche, von denen der Hersteller sagt, sie fassten $1$
+Terabyte. Was der Hersteller damit (vermutlich) meint sind
+$1\,000\,000\,000\,000$ Bytes.
+
+Solche Zahlen sind nur noch schlecht zu lesen. Wie bei sehr großen
+(und sehr kleinen) Längen-, Zeit- und anderen Angaben auch, benutzt
+man daher Präfixe, um zu kompakteren übersichtlicheren Darstellungen
+zu kommen (Kilometer (\SI{}{\kilo\meter}), Mikrosekunde
+(\SI{}{\micro\second}), \usw)
+
+\begin{center}
+  \begin{tabular}{*{6}{c}}
+    \toprule
+    $10^{-3}$ & $10^{-6}$ & $10^{-9}$ & $10^{-12}$ & $10^{-15}$ & $10^{-18}$ \\
+    $1000^{-1}$ & $1000^{-2}$ & $1000^{-3}$ & $1000^{-4}$ & $1000^{-5}$ & $1000^{-6}$ \\
+    milli & mikro & nano & pico & femto & atto \\
+    m & $\mu$ & n & p & f & a \\
+    \midrule
+    $10^3$ & $10^6$ & $10^9$ & $10^{12}$ & $10^{15}$ & $10^{18}$ \\
+    $1000^1$ & $1000^2$ & $1000^3$ & $1000^4$ & $1000^5$ & $1000^6$ \\
+    kilo & mega & giga & tera & peta & exa \\
+    k & M & G & T & P & E \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+%
+Im Jahre 1999 hat die \emph{International Electrotechnical Commission}
+"`binäre Präfixe"' analog zu kilo, mega, \usw eingeführt, die aber
+nicht für Potenzen von $1000$, sondern für Potenzen von $1024$
+stehen. Motiviert durch die Kunstworte "`kilobinary"', "`megabinary'',
+\usw heißen die Präfixe \define{kibi}, \define{mebi}, \usw, abgekürzt
+\si{\kibi}, \si{\mebi}, \usw
+
+\begin{center}
+  \begin{tabular}{*{6}{c}}
+    \toprule
+    $2^{10}$ & $2^{20}$ & $2^{30}$ & $2^{40}$ & $2^{50}$ & $2^{60}$ \\
+    $1024^1$ & $1024^2$ & $1024^3$ & $1024^4$ & $1024^5$ & $1024^6$ \\
+    kibi & mebi & gibi & tebi & pebi & exbi \\
+    \si{\kibi} & \si{\mebi} & \si{\gibi} & \si{\tebi} & \si{\pebi} & \si{\exbi} \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+
+%-----------------------------------------------------------------------
+\Tut\section{Speicher als Tabellen und Abbildungen}
+
+Um den aktuellen Gesamtzustand eines Speichers vollständig zu
+beschreiben muss man für jede Adresse, zu der etwas gespeichert ist,
+angeben, welcher Wert unter dieser Adresse abgelegt ist.  Das kann man
+sich zum Beispiel vorstellen als eine große Tabelle mit zwei Spalten:
+in der linken sind alle Adressen aufgeführt und in der rechten die
+zugehörigen Werte (siehe Abbildung~\ref{abb:speicher-als-tabelle}).
+
+\begin{figure}[ht]
+  \centering
+  \subfigure[][allgemein]{
+    \begin{tabular}[t]{cc}
+      \toprule
+      Adresse 1 & Wert 1 \\
+      Adresse 2 & Wert 2 \\
+      Adresse 3 & Wert 3 \\
+      Adresse 4 & Wert 4 \\[10pt]
+       $\vdots$ & $ \vdots$ \\[10pt]
+      Adresse $n$ & Wert  $n$ \\
+      \bottomrule \\
+    \end{tabular}
+  }
+  \qquad
+  \subfigure[][Halbleiterspeicher]{
+    \begin{tabular}[t]{cc}
+      \toprule
+      \literal{000} & \literal{10110101} \\
+      \literal{001} & \literal{10101101} \\
+      \literal{010} & \literal{10011101} \\
+      \literal{011} & \literal{01110110} \\
+      \literal{100} & \literal{00111110} \\
+      \literal{101} & \literal{10101101} \\
+      \literal{110} & \literal{00101011} \\
+      \literal{111} & \literal{10101001} \\
+      \bottomrule \\
+    \end{tabular}
+  }
+  \caption{Speicher als Tabelle}
+  \label{abb:speicher-als-tabelle}
+\end{figure}
+
+\noindent
+Mathematisch kann man eine solche Tabelle zum Beispiel auf"|fassen als
+eine Abbildung, deren Definitionsbereich die Menge aller Adressen und
+deren Wertebereich die Menge aller möglichen speicherbaren Werte
+ist:
+\[
+m : \Adr -> \fVal
+\]
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+\subsection{Hauptspeicher}
+
+Betrachten wir als erstes einen handelsüblichen Rechner mit einem
+Prozessor, der \SI{4}{\gibi\byte} adressieren kann und mit einem
+Hauptspeicher dieser Größe ausgerüstet ist. Bei Hauptspeicher ist die
+Menge der Adressen fest, nämlich alle Kombinationen von $32$ Bits, und
+was man unter einer Adresse zugreifen kann, ist ein Byte. Jeder
+Speicherinhalt kann also beschrieben werden als Abbildung
+\[
+m : \{\literal{0},\literal{1}\}^{32} -> \{\literal{0},\literal{1}\}^8
+\]
+Der in einem Speicher im Zustand $m$ an einer Adresse $a\in\Adr$
+gespeicherte Wert ist dann gerade $m(a)$.
+
+Die Menge der Adressen ist hier fest, und bezeichnet im wesentlichen
+einen physikalischen Ort auf dem Chip, an dem ein bestimmtes Byte
+abgelegt ist. Das entspricht einer Angabe wie
+%
+\begin{quote}
+  Am Fasanengarten 5\\
+  76131 Karlsruhe
+\end{quote}
+%
+auf einem Brief.
+
+Nicht nur den Zustand eines Speichers, sondern auch das Auslesen eines
+Wertes kann man als Abbildung formalisieren. Argumente für eine solche
+Funktion Auslesefunktion $\memread$ sind der gesamte Speicherinhalt
+$m$ des Speichers und die Adresse $a$ aus der ausgelesen wird, und
+Resultat ist der in $m$ an Adresse $a$ gespeicherte Wert. Also:
+%
+\begin{align*}
+  \memread : \Mem \x \Adr &-> \fVal \\
+             (m,a) &\mapsto m(a) \\
+\end{align*}
+%
+Dabei sei $\Mem$ die Menge aller möglichen Speicherzustände, also die
+Menge aller Abbildungen von $\Adr$ nach $\fVal$.
+
+Hier sind nun zwei allgemeine Bemerkungen angezeigt:
+%
+\begin{enumerate}
+\item Man lasse sich nicht dadurch verwirren, dass die Funktion
+  $\memread$ eine (andere) Funktion $m$ als Argument bekommt. Das
+  Beispiel soll gerade klar machen, dass daran nichts mystisch ist.
+\item Wir werden noch öfter die \define{Menge aller Abbildungen} der
+  Form $f:A->B$ von einer Menge $A$ in eine Menge $B$ notieren wollen.
+  Hierfür benutzen wir die Schreibweise $B^A$. (Anlass für diese
+  Schreibweise war vielleicht die Tatsache, dass für endliche Mengen
+  $A$ und $B$ gilt: $\card{B^A}=\card{B}^{\card{A}}$.)
+\end{enumerate}
+%
+\begin{tutorium}
+  Man sehe sich die Schreibweise $B^A$ für Mengen $A$ und $B$ noch ein
+  bisschen an. Mir hilft (manchmal) die Vorstellung von Funktionen als
+  Tabellen mit zwei Spalten (Argumente, Funktionswerte).
+
+  Man mache sich (z.B.\ mit Hilfe der Vorstellung von Tabellen) klar,
+  dass für endliche Mengen gilt: $\card{B^A}=\card{B}^{\card{A}}$
+\end{tutorium}
+%
+\begin{tutorium}
+  Zum Thema "`Funktionen als Argument einer Funktion"' vielleicht
+  folgendes Beispiel: Es sei $M$ eine Menge. Jede Teilmenge
+  $L\subseteq M$ kann man bijektiv mit einer Abbildung $f\colon M\to
+  \{0,1\}$, also einem $f\in \{0,1\}^M$ in Beziehung setzen.
+
+  Dann kann man Vereinigung als Abbildung $V\colon \{0,1\}^M \times
+  \{0,1\}^M\to \{0,1\}^M$ auf"|fassen. Beispielbild für
+  $L_1=\{a,c,d\}$ und $L_2=\{b,c\}$
+  
+  \begin{tabular}{*{4}{>{$}c<{$}}}
+      & L_1 & L_2 & L_1\cup L_2 \\
+    x & f_1(x) & f_2(x) & V(f_1,f_2) \\
+    \midrule
+    a & 1 & 0 & 1 \\
+    b & 0 & 1 & 1 \\
+    c & 1 & 1 & 1 \\
+    d & 1 & 0 & 1 \\
+    e & 0 & 0 & 0 \\
+  \end{tabular}
+
+  Wie definiert man $V(f_1,f_2)$? Zum Beispiel so:
+  \begin{align*}
+    V \colon \{0,1\}^M \times  \{0,1\}^M &\to \{0,1\}^M \\
+    (f_1,f_2) &\mapsto (x \mapsto \max(f_1(x),f_2(x))) \\
+  \end{align*}
+  Oder so: $V(f_1,f_2) (x) = \max(f_1(x),f_2(x))$
+\end{tutorium}
+%
+Wir hätten oben also auch schreiben können:
+%
+\begin{align*}
+  \memread : \fVal^{\Adr} \x \Adr &-> \fVal \\
+             (m,a) &\mapsto m(a) \\
+\end{align*}
+%
+Das Speichern eines neuen Wertes $v$ an eine Adresse $a$ in einem
+Speicher $m$ kann man natürlich auch als Funktion notieren. Es sieht
+dann ein wenig komplizierter aus als beim Lesen:
+%
+\begin{align*}
+  \memwrite : \fVal^{\Adr} \x \Adr \x \fVal ->& \fVal^{\Adr} \\
+             (m,a, v) \mapsto& m' 
+\end{align*}
+%
+Dabei ist $m'$ dadurch festgelegt, dass  für alle $a'\in\Adr$ gilt:
+\begin{equation*}
+  m'(a') =
+  \begin{cases}
+    v & \text{ falls } a'=a \\
+    m(a') & \text{ falls } a'\not=a \\
+  \end{cases}\\
+\end{equation*}
+%
+Was ist "`das wesentliche"' an Speicher? Der allerwichtigste Aspekt
+überhaupt ist sicherlich dieser:
+\begin{itemize}
+\item Wenn man einen Wert $v$ an Adresse $a$ in einen Speicher $m$
+  hineinschreibt und danach den Wert an Adresse $a$ im durch das
+  Schreiben entstandenen Speicher liest, dann ist das wieder der Wert
+  $v$. Für alle $m\in\Mem$, $a\in\Adr$ und $v\in\fVal$ gilt:
+  \begin{equation}
+  \memread(\memwrite(m,a,v),a) = v    \label{eq:mem-read-write}
+\end{equation}
+\end{itemize}
+%
+So wie wir oben $\memread$ und $\memwrite$ definiert haben, gilt diese
+Gleichung tatsächlich.
+
+Allerdings man kann sich "`Implementierungen"' von Speicher
+vorstellen, die zwar diese Eigenschaft haben, aber trotzdem nicht
+unseren Vorstellungen entsprechen. Eine zweite Eigenschaft, die bei
+erstem Hinsehen plausibel erscheint, ist diese:
+%
+\begin{itemize}
+\item Was man beim Lesen einer Speicherstelle als Ergebnis erhält, ist
+  nicht davon abhängig, was vorher an einer anderen Adresse
+  gespeichert wurde. Für alle $m\in\Mem$, $a\in\Adr$, $a'\in\Adr$ mit
+  $a'\not= a$ und $v'\in \fVal$ gilt:
+  \begin{equation}
+    \memread(\memwrite(m,a',v'),a) = \memread(m,a)  \label{eq:mem-read-write-read}
+  \end{equation}
+\end{itemize}
+%
+So wie wir oben $\memread$ und $\memwrite$ definiert haben, gilt diese
+Gleichung tatsächlich.
+
+Es gibt aber Speicher, bei denen diese zunächst plausibel aussehende
+Bedingung \emph{nicht} erfüllt ist, \zB sogenannte Caches (\bzw
+allgemeiner Assoziativspeicher). Für eine adäquate Formalisierung des
+Schreibens in einen solchen Speicher müsste man also die Defintion von
+$\memwrite$ ändern!
+
+Wir können hier nur kurz andeuten, was es \zB mit Caches auf sich
+hat. Spinnen wir die Analogie zu Adressen auf Briefen noch etwas
+weiter: Typischerweise ist auch der Name des Empfängers angegeben. So
+etwas wie "`Thomas Worsch"' ist aber nicht eine weitere Spezifizierung
+des physikalischen Ortes innerhalb von "`Fasanengarten 5, 76131
+Karlsruhe"', an den der Brief transportiert werden soll, sondern eine
+"`inhaltliche"' Beschreibung. Ähnliches gibt es auch bei
+Speichern. Auch sie haben eine beschränkte Größe, aber im Extremfall
+wird für die Adressierung der gespeicherten Wörter sogar überhaupt
+keine Angabe über den physikalischen Ort gemacht, sondern nur eine
+Angabe über den Inhalt. Und dann kann Speichern eines Wertes dazu
+führen, dass ein anderer Wert aus dem Speicher entfernt wird.
+
+Zum Schluss noch kurz eine Anmerkung zur Frage, wozu Gleichungen
+wie~\ref{eq:mem-read-write} und~\ref{eq:mem-read-write-read} gut sein
+können.  Diese Gleichungen sagen ja etwas darüber aus, "`wie sich
+Speicher verhalten soll"'. Und daher kann man sie als Teile der
+\emph{Spezifikation} dessen auf"|fassen, was Speicher überhaupt sein
+soll. Das wäre ein einfaches Beispiel für etwas, was Sie unter
+Umständen später in Ihrem Studium als algebraische Spezifikation von
+Datentypen kennen lernen werden.
+
+Wenn Sie nicht der Spezifizierer sondern der Implementierer von
+Speicher sind, dann liefern Ihnen Gleichungen wie oben Beispiele für
+Testfälle. Testen kann nicht beweisen, dass eine Implementierung
+korrekt ist, sondern "`nur"', dass sie falsch ist. Aber das ist auch
+schon mehr als hilfreich.
+
+% % - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+% \subsection{Cache}
+
+% Adresse auf Brief:
+% \begin{itemize}
+% \item Straße, Ort: beschreiben eine physikalische Stelle, 
+%   \zB Am Fasanengarten 5, 76131 Karlsruhe
+% \item Empfänger: "`inhaltliche"' Teilbeschreibung, wo der Brief hin
+%   soll
+% \end{itemize}
+% %
+% In Rechner gibt es Speicher, bei denen ein Teil der Beschreibung
+% dessen, was den Zugriff auf ein gespeichertes Wort erlaubt,
+% inhaltlicher Art ist. Allgemein spricht man in diesem Zusammenhang von
+% Assoziativspeichern. In Prozessoren findet man konkret (üblicherweise
+% mehrere) sogenannte \mdefine[Cache]{Cache-Speicher}. Bei ihnen ist es
+% wie bei Briefen: ein Teil der Adresse beschreibt einen physikalischen
+% Bereich, ein anderer ist (in Bezug auf den Cache) "`inhaltlicher"'
+% Art.
+
+% TODO: ausführen
+
+% ich werde noch das Prinzip von so was wie einem 4-fach assoziativen
+% Cache erläutern, die Wörter \emph{Cache hit} und \emph{Cache miss}
+% kommen vielleicht vor, einfache Diskussion von
+% Cache"=Verwaltungsstrategien, zumindest LRU,
+
+% Klar machen, dass dann im allgemeinen
+% \[
+%   \memread(\memwrite(m,a',v'),a) = \memread(m,a)  
+% \]
+% nicht mehr gilt, weil durch das Schreiben von $(a',v')$ unter
+% Umständen $(a,v)$ aus dem Cache verdrängt wird.
+
+% vielleicht. \emph{partielle} Funktionen, Äquivalenz von $(C^B)^A$ und
+% $C^{A \x B}$.  Hier wäre dann ein bisschen was im Tutorium zu machen
+% (ansonsten gibts ja nur Rumrechnen mit Kibi, Gibi, usw.; dazu wird es
+% auch eine Aufgabe geben) Ob ich das alles ausführe hängt um Umfang
+% ab. Die nachfolgende Einheit "`Übersetzungen und Codierungen"' ist mir
+% wichtiger.
+
+%-----------------------------------------------------------------------
+\section{Ausblick}
+
+\begin{itemize}
+\item In Vorlesungen über Technische Informatik werden Sie lernen, wie
+  \zB Caches aufgebaut sind.
+\item In Vorlesungen über Systemarchitektur und Prozessorarchitektur
+  werden Sie lernen wozu und wie Caches und Assoziativspeicher in
+  modernen Prozessoren eingesetzt werden.  Dazu gehört dann auch die
+  Frage, was man tut, wenn mehrere Prozessoren auf einem Chip
+  integriert sind und gemeinsam einen Cache nutzen sollen.
+\item Der Aufsatz \emph{What Every Programmer Should Know About
+    Memory} von Ulrich Drepper enthält auf 114 Seiten viele
+  Informationen, unter anderem einen 24-seitigen Abschnitt über
+  Caches.  Die Arbeit steht online unter der URL
+  \url{http://people.redhat.com/drepper/cpumemory.pdf} (16.11.15) zur
+  Verfügung.
+\end{itemize}
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-09-speicher/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

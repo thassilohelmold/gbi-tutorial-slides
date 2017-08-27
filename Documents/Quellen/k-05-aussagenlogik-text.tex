@@ -1,0 +1,1244 @@
+%=======================================================================
+\Tut\chapter{Aussagenlogik}
+\label{k:aussagenlogik}
+
+%-----------------------------------------------------------------------
+\Tut\section{Informelle Grundlagen}
+
+Im früheren Kapiteln haben wir deutsche Sätze wie \zB den folgenden
+geschrieben:
+%
+\begin{quote}
+  "`Die Abbildung $U: A_U \to \N_0$ ist injektiv."'
+\end{quote}
+%
+Das ist eine Aussage. Sie ist \emph{wahr}.
+%
+\begin{quote}
+  "`Die Abbildung $U: A_U \to \N_0$ ist surjektiv."'
+\end{quote}
+%
+ist auch eine Aussage. Sie ist aber \emph{falsch} und deswegen haben
+wir sie auch nicht getroffen.
+
+Aussagen sind Sätze, die "`objektiv"' wahr oder falsch
+sind. 
+%
+Allerdings bedarf es dazu offensichtlich einer Interpretation der
+Zeichen, aus denen die zugrunde liegende Nachricht zusammengesetzt
+ist.
+
+Der klassischen Aussagenlogik liegen zwei wesentliche Annahmen
+zugrunde.
+%
+Die erste ist:
+\begin{itemize}
+\item  Jede Aussage ist entweder falsch oder wahr.
+\end{itemize}
+%
+Man spricht auch von der \mdefine[Zweiwertigkeit der
+Aussagenlogik]{Zweiwertigkeit}\index{Zweiwertigkeit}%
+\index{Aussagenlogik!Zweiwertigkeit} der Aussagenlogik.
+%
+Eine Aussage kann nicht sowohl falsch als auch wahr sein, und es gibt
+auch keine anderen Möglichkeiten.
+%
+Wenn etwas nicht entweder wahr oder falsch ist, dann ist es keine Aussage.
+% 
+% Um einzusehen, dass es auch umgangssprachliche Sätze gibt, die nicht
+% wahr oder falsch sondern sinnlos sind, mache man sich Gedanken zu
+% Folgendem:
+% %
+% "`Ein Barbier ist ein Mann, der genau alle diejenigen Männer rasiert,
+% die sich nicht selbst rasieren."'
+% %
+% Man frage sich insbesondere, ob sich ein Barbier selbst rasiert \dots
+Überlegen Sie sich, ob Ihnen Formulierungen einfallen, die keine Aussagen sind.
+
+Außerdem bauen wir natürlich in dieser Vorlesung ganz massiv darauf,
+dass es keine Missverständnisse durch unterschiedliche
+Interpretationsmöglichkeiten einer Aussage gibt, damit auch klar ist,
+ob sie wahr oder falsch ist.
+%
+% Das ist durchaus nicht selbstverständlich: 
+% %
+% Betrachten Sie das Zeichen \literal{$\N$}. 
+% %
+% Das schreibt man üblicherweise für eine Menge von Zahlen. 
+% %
+% Aber ist bei dieser Menge die $0$ dabei oder nicht? 
+% %
+% In der Literatur findet man beide Varianten (und zumindest für den
+% Autor dieser Zeilen ist nicht erkennbar, dass eine deutlich häufiger
+% vorkäme als die andere).
+
+Häufig setzt man aus einfachen Aussagen, im folgenden kurz mit $P$
+und $Q$ bezeichnet, kompliziertere auf eine der folgenden Arten
+zusammen:
+
+\begin{itemize}
+\item \textbf{Negation:} "`Nicht  $P$"' 
+  % \\ Dafür schreiben wir auch kurz $\lnot P $.
+\item \textbf{logisches Und:} "`$P$ und $Q$"' 
+  % \\   Dafür schreiben wir auch kurz $P\land Q$.
+\item \textbf{logisches Oder:} "`$P$ oder $Q$"' 
+  % \\   Dafür schreiben wir auch kurz $P\lor Q$.
+\item \textbf{logische Folgerung:} "`Wenn $P$, dann $Q$"' 
+  % \\   Dafür schreiben wir auch kurz $P\alimpl Q$.\todo{oder $P\rightarrowQ$ ?}
+\end{itemize}
+
+\noindent
+\begin{samepage}
+Die zweite Grundlage der Aussagenlogik ist dies:
+\begin{itemize}
+\item Der Wahrheitswert einer zusammengesetzten Aussage ist durch die
+  Wahrheitswerte der Teilaussagen eindeutig festgelegt.
+\end{itemize}
+\end{samepage}
+%
+Ob so eine zusammengesetzte Aussage wahr oder falsch ist, soll also
+insbesondere \emph{nicht} vom konkreten Inhalt der Aussagen abhängen!
+%
+Das betrifft auch die aussagenlogische Folgerung.
+%
+Sind zum Beispiel die Aussagen
+\begin{itemize}
+\item[$P:$] \emph{"`Im Jahr 2014 wurden in Japan etwa 4.7
+    Millionen PkW neu
+    zugelassen."'}\footnote{\url{http://de.statista.com/statistik/daten/studie/279897/umfrage/pkw-neuzulassungen-in-japan/}}
+  und
+\item[$Q$:] \emph{"`Im Jahr 1999 gab es in Deutschland etwa 11.2
+    Millionen
+    Internet"=Nutzer"'}\footnote{\url{http://de.statista.com/statistik/daten/studie/36146/umfrage/anzahl-der-internetnutzer-in-deutschland-seit-1997/}}
+\end{itemize}
+%
+gegeben, dann soll "`Wenn $P$, dann $Q$"' 
+\begin{itemize}
+\item erstens tatsächlich eine Aussage sein, die wahr oder falsch ist,
+  obwohl natürlich \emph{kein} kausaler Zusammenhang zwischen den
+  genannten Themen existiert %(schon gar nicht in die Vergangenheit)
+  und
+\item zweitens soll der Wahrheitswert dieser Aussage nur von den
+  Wahrheitswerten der Aussagen $P$ und $Q$ abhängen (und wie wir sehen
+  werden im vorliegenden Beispiel \emph{wahr} sein).
+\end{itemize}
+
+\noindent
+Da in der Aussagenlogik nur eine Rolle spielt, welche Wahrheitswerte
+die elementaren Aussagen haben, aus denen kompliziertere Aussagen
+zusammengesetzt sind, beschränkt und beschäftigt man sich dann in der
+Aussagenlogik mit sogenannten
+\mdefine[aussagenlogische\\Formeln]{aussagenlogischen
+  Formeln}\index{aussagenlogische
+  Formel}\index{Formel!aussagenlogische}, die nach Regeln ähnlich den
+oben genannten zusammengesetzt sind und bei denen statt elementarer
+Aussagen einfach \mdefine{Aussagevariablen}\index{Aussagevariablen}
+stehen, die als Werte "`wahr"' und "`falsch"' haben können.
+
+Der Rest dieses Kapitels ist wie folgt aufgebaut:
+%
+In Abschnitt~\ref{sec:aussagenlogik-syntax} werden wir definieren, wie
+aussagenlogische Formeln syntaktisch aufgebaut sind.
+%
+%Wir werden das aus didaktischen Gründen auf zwei unterschiedlichen
+%Wegen definieren.
+%%%% nein das machen wir nicht
+%
+Wir werden das zunächst auf eine Art und Weise tun, für die uns schon
+alle Hilfsmittel zur Verfügung stehen.
+%
+Eine andere, in der Informatik weit verbreitete Vorgehensweise werden
+wir im Kapitel über kontextfreie Grammatiken kennenlernen.
+%
+In Abschnitt~\ref{sec:boolesche-funktionen} führen wir sogenannte
+boolesche Funktionen ein.
+%
+Sie werden dann in Abschnitt~\ref{sec:aussagenlogik-semantik} benutzt,
+um die Semantik, \dh die Bedeutung, aussagenlogischer Formeln zu
+definieren.
+
+In diesem Kapitel orientieren wir uns stark am Skriptum zur Vorlesung
+"`Formale Systeme"' von \textcite{Schmitt_2013_FS_tr}.
+
+%-----------------------------------------------------------------------
+\section{Syntax aussagenlogischer Formeln}
+\label{sec:aussagenlogik-syntax}
+
+Grundlage für den Aufbau aussagenlogischer Formeln ist ein Alphabet
+\[
+  \AAL = \{ \alka, \alkz, \alnot, \aland, \alor, \alimpl \} \cup \AALV \;.
+\]
+%
+Die vier Symbole $\alnot$, $\aland$, $\alor$ und $\alimpl$ heißen auch
+\mdefine[aussagen-\\logische\\Konnektive]{aussagenlogische Konnektive}%
+\index{Konnektive!aussagenlogische}.
+%
+Und $\AALV$ ist ein Alphabet, dessen Elemente wir
+\emph{aussagenlogische Variablen} nennen.
+%
+Wir notieren sie in der Form $\alP_i$, mit $i\in\N_0$.
+%
+Weil schon bei kleinen Beispielen die Lesbarkeit durch die Indizes
+unnötig beeinträchtigt wird, erlauben wir, als Abkürzungen für
+$\alP_0$,
+$\alP_1$,
+$\alP_2$
+und $\alP_3$
+einfach $\alP$, $\alv{Q}$, $\alv{R}$ und $\alv{S}$ zu benutzen.
+
+
+Die Menge der syntaktisch korrekten aussagenlogischen Formeln soll nun
+definiert werden als eine formale Sprache $\LAL$ über einem Alphabet
+$\AAL$, also als Teilmenge von $\AAL^*$.
+%
+% Formal ergeben sich für verschiedene Mengen von Aussagevariablen
+% auch verschiedene Mengen von Formeln. 
+% %
+% Es wird aber nicht zu Problemen führen, wenn wir das ignorieren. % Stimmt das?
+
+Eine erste Forderung ist, dass stets $\AALV\subseteq \LAL$ sein soll.
+%
+Damit ist also jede aussagenlogische Variable eine aussagenlogische
+Formel.
+
+Als zweites wollen wir nun definieren, dass man aus "`einfacheren"'
+aussagenlogischen Formeln "`kompliziertere"' zusammensetzen kann.
+%
+Für die verschiedenen Möglichkeiten definieren wir uns vier Funktionen:
+%
+\begin{alignat*}{3}
+  f_{\alnot}  &:& \AAL^*          & \to \AAL^* :& G      &\mapsto \alka\alnot G\alkz \\
+  f_{\aland}  &:& \AAL^*\x \AAL^* & \to \AAL^* :& (G, H) &\mapsto \alka G\aland H\alkz \\
+  f_{\alor}   &:& \AAL^*\x \AAL^* & \to \AAL^* :& (G, H) &\mapsto \alka G\alor H\alkz \\
+  f_{\alimpl} &:& \AAL^*\x \AAL^* & \to \AAL^* :& (G, H) &\mapsto \alka G\alimpl H\alkz 
+\end{alignat*}
+%
+Wie man sieht, sind die Funktionswerte jeweils definiert durch
+geeignete Konkatenationen von Argumenten und Symbolen aus dem Alphabet
+der Aussagenlogik.
+%
+Ein sinnvolles Beispiel ist
+\[
+  f_{\aland}(\; \alka\alv{P}\alimpl\alv{Q}\alkz\;,\;  \alv{R}\;) = \alka\alka\alv{P}\alimpl\alv{Q}\alkz\aland \alv{R}\alkz
+\] 
+%
+Ein für unser Vorhaben sinnloses Beispiel ist
+\[
+  f_{\aland}(\alnot\alimpl\alkz,  \alv{R}\alor) = \alka \alnot\alimpl\alkz\aland \alv{R}\alor\alkz
+\]
+%
+Wie man sieht, führt jede Anwendung einer der Abbildungen dazu, dass
+die Anzahl der Konnektive um eins größer wird als die Summe der
+Anzahlen der Konnektive in den Argumenten.
+
+Für die aussagenlogischen Formeln ist es üblich, sie wie folgt zu
+lesen:
+%
+\begin{center}
+  \begin{tabular}{>{$}r<{$}>{"`}l<{"'}l}
+    \alka\alnot G\alkz & nicht $G$ \\
+    \alka G\aland H\alkz & $G$ und $H$ \\
+    \alka G\alor H\alkz & $G$ oder $H$ \\
+    \alka G\alimpl H\alkz & $G$ impliziert $H$ & (oder "`aus $G$ folgt $H$"')
+  \end{tabular}
+\end{center}
+%
+Wir definieren nun induktiv unendlich viele Mengen wie folgt:
+%
+\begin{align*}
+  M_0 &= \AALV \\
+  \text{für jedes }n\in\N_0: M_{n+1} &= M_n \cup f_{\alnot}(M_n) \\
+  &\mathrel{\hphantom{= M_n}} \cup f_{\aland}(M_n\x M_n) \cup f_{\alor}(M_n\x M_n) \cup f_{\alimpl}(M_n\x M_n) \\
+  \LAL &= \bigcup_{i\in\N_0} M_i
+\end{align*}
+%
+Die formale Sprache $\LAL$ ist die \mdefine[Menge der\\
+aussagenlogischen\\Formeln]{Menge der aussagenlogischen Formeln}%
+\index{Formel!aussagenlogische}\index{aussagenlogische Formel} für die
+Variablenmenge $\AALV$.
+%
+Wie man anhand der Konstruktion in der zweiten Zeile sieht, ist für
+jedes $n\in\N_0$ stets $M_n\subseteq M_{n+1}$.
+%
+Die Mengen werden also "`immer größer"'.
+%
+Außerdem enthält jedes $M_n$
+und damit auch $\LAL$
+nur Aussagevariablen sowie Werte der vier involvierten Abbildungen,
+die entstehen können, wenn die Argumente aussagenlogische Formeln
+sind.
+%
+Wenn man also für alle aussagenlogischen Formeln etwas definieren
+möchte, dann genügt es auch, das nur für Aussagevariablen sowie Werte
+der vier involvierten Abbildungen zu tun, die entstehen können, wenn
+die Argumente aussagenlogische Formeln sind.
+
+Um die Konstruktion von $\LAL$
+noch ein bisschen besser zu verstehen, beginnen wir der Einfachheit
+halber einmal mit $\AALV = \{ \alv{P}, \alv{Q} \}$.
+%
+Dann ist also
+%
+\[
+  M_0 = \{ \alv{P}, \alv{Q} \} \;.
+\]
+%
+Daraus ergeben sich
+%
+\begin{align*}
+  f_{\alnot}(M_0) &= \{  \alka\alnot\alv{P}\alkz, \alka\alnot\alv{Q}\alkz  \} \\
+  f_{\aland}(M_0\x M_0) &= \{  \alka\alv{P}\aland\alv{P}\alkz, \alka\alv{P}\aland\alv{Q}\alkz,
+                          \alka\alv{Q}\aland\alv{P}\alkz, \alka\alv{Q}\aland\alv{Q}\alkz \} \\
+  f_{\alor}(M_0\x M_0) &= \{  \alka\alv{P}\alor\alv{P}\alkz, \alka\alv{P}\alor\alv{Q}\alkz,
+                          \alka\alv{Q}\alor\alv{P}\alkz, \alka\alv{Q}\alor\alv{Q}\alkz \} \\
+  f_{\alimpl}(M_0\x M_0) &= \{  \alka\alv{P}\alimpl\alv{P}\alkz, \alka\alv{P}\alimpl\alv{Q}\alkz,
+                          \alka\alv{Q}\alimpl\alv{P}\alkz, \alka\alv{Q}\alimpl\alv{Q}\alkz \} 
+\end{align*}
+%
+und folglich ist
+%
+\begin{align*}
+  M_1 = \{ &\alv{P}, \alv{Q}, \\
+           &\alka\alnot\alv{P}\alkz, \alka\alnot\alv{Q}\alkz,   \\
+           &\alka\alv{P}\aland\alv{P}\alkz, \alka\alv{P}\aland\alv{Q}\alkz,
+             \alka\alv{Q}\aland\alv{P}\alkz, \alka\alv{Q}\aland\alv{Q}\alkz,  \\
+           &\alka\alv{P}\alor\alv{P}\alkz, \alka\alv{P}\alor\alv{Q}\alkz,
+             \alka\alv{Q}\alor\alv{P}\alkz, \alka\alv{Q}\alor\alv{Q}\alkz, \\
+           &\alka\alv{P}\alimpl\alv{P}\alkz, \alka\alv{P}\alimpl\alv{Q}\alkz,
+             \alka\alv{Q}\alimpl\alv{P}\alkz, \alka\alv{Q}\alimpl\alv{Q}\alkz \} 
+\end{align*}
+%
+Für $M_2$ ergeben sich bereits so viele Formeln, dass man sie gar
+nicht mehr alle hinschreiben will.
+%
+Beispiele sind $\alka \alnot \alka\alnot\alv{P}\alkz \alkz$,
+$\alka\alka\alv{P}\alimpl\alv{Q}\alkz \aland
+\alv{P} \alkz$
+oder $\alka \alv{Q} \alor \alka\alnot \alv{Q}\alkz \alkz$.
+
+Weil es nützlich ist, führen wir noch eine Abkürzung ein.
+%
+Sind $G$
+und $H$
+zwei aussagenlogische Formeln, so stehe $\alka G \aleqv H \alkz$
+für
+$\alka \alka G \alimpl H \alkz \aland \alka H \alimpl G \alkz \alkz$.
+
+So, wie wir aussagenlogische Formeln definiert haben, ist zwar
+$\alka\alv{P}\alimpl\alv{Q}\alkz$ eine, aber $\alv{P}\alimpl\alv{Q}$
+nicht.
+%
+(Wie könnte man das leicht beweisen?)
+%
+Und bei größeren Formeln verliert man wegen der vielen Klammern leicht
+den Überblick.
+%
+Deswegen erlauben wir folgende Abkürzungen bei der Notation
+aussagenlogischer Formeln.
+%
+(Ihre "`offizielle"' Syntax bleibt die gleiche!)
+%
+\begin{itemize}
+\item Die äußerten umschließenden Klammern darf man immer weglassen.
+  %
+  Zum Beispiel ist $\alv{P}\alimpl\alv{Q}$ die Kurzform von
+  $\alka\alv{P}\alimpl\alv{Q}\alkz$.
+\item Wenn ohne jede Klammern zwischen mehrere Aussagevariablen immer
+  das gleiche Konnektiv steht, dann bedeute das "`implizite
+  Linksklammerung"'.
+  %
+  Zum Beispiel ist $\alv{P}\aland\alv{Q}\aland\alv{R}$ die Kurzform von
+  $\alka\alka\alv{P}\aland\alv{Q}\alkz\aland\alv{R}\alkz$.
+\item Wenn ohne jede Klammern zwischen mehrere Aussagevariablen
+  verschiedene Konnektive stehen, dann ist von folgenden
+  "`Bindungsstärken"' der Konnektive auszugehen:
+  \begin{enumerate}[a)]
+  \item $\alnot$ bindet am stärksten
+  \item $\aland$ bindet am zweitstärksten
+  \item $\alor$ bindet am drittstärksten
+  \item $\alimpl$ bindet am viertstärksten
+  \item $\aleqv$ bindet am schwächsten
+  \end{enumerate}
+  % 
+  Zum Beispiel ist
+  $\alv{P}\alor\alv{R}\alimpl\alnot\alv{Q}\aland\alv{R}$ die Kurzform
+  von
+  $\alka \alka\alv{P}\alor\alv{R}\alkz \alimpl %
+         \alka \alka\alnot\alv{Q}\alkz \aland\alv{R}\alkz 
+   \alkz$.
+\end{itemize}
+%
+\begin{tutorium}
+  \paragraph{Klammersparregeln bei aussagenlogischen Formeln}
+
+  Beispiele
+  \begin{itemize}
+  \item $\alv{P}\alor\alv{Q}\aland\alv{R}$ steht für %
+    $\alka \alv{P}\alor \alka\alv{Q}\aland\alv{R}\alkz \alkz$
+  \end{itemize}
+\end{tutorium}
+
+%-----------------------------------------------------------------------
+\Tut\section{Boolesche Funktionen}
+\label{sec:boolesche-funktionen}
+
+\begin{window}[0,r,\includegraphics[width=30mm]{../k-05-aussagenlogik/George_Boole_color},{}]
+  \noindent
+  Der britische Mathematiker George Boole (1815--1864) hat mit seinem
+  heutzutage \href{http://www.gutenberg.org/ebooks/15114}{online}
+  verfügbaren Buch
+  "`\citetitle{Boole_1854_LT_bk}"' \parencite{Boole_1854_LT_bk} die
+  Grundlagen für die sogenannte \emph{algebraische Logik} oder auch
+  \emph{boolesche Algebra} gelegt.
+  %
+  Dabei griff er die weiter vorne erwähnte Grundlage der Aussagenlogik
+  auf, dass der Wahrheitswert einer Aussage nur von den
+  Wahrheitswerten seiner Teilformeln abhängt.
+  %
+  Was Boole neu hinzunahm, war die Idee, in Anlehnung an arithmetische
+  Ausdrücke auch "`boolesche Ausdrücke"' einschließlich "`Variablen"'
+  zu erlauben und solche Ausdrücke umzuformen analog zu den gewohnten
+  Umformungen bei arithmetischen Ausdrücken.
+\end{window}
+
+Im weiteren Verlauf schreiben wir für die Wahrheitswerte "`wahr"' und
+"`falsch"' kurz \W und \F und bezeichnen die Menge mit diesen beiden
+Werten als $\Bool=\{\W,\F\}$.
+
+Eine \mdefine{boolesche Funktion}\index{Funktion!boolesche}%
+\index{boolesche Funktion} ist eine Abbildung der Form
+$f: \Bool^n \to \Bool$.
+%
+In der nachfolgenden Tabelle sind einige "`typische"' boolesche
+Funktionen aufgeführt, die wir zunächst einmal mit $b_{\alnot}$,
+$b_{\aland}$, $b_{\alor}$ und $b_{\alimpl}$ bezeichnen:
+
+\begin{center}
+  \begin{tabular}{*{2}{>{$}c<{$}}|*{4}{>{$}c<{$}}}
+    \toprule
+    x_1 & x_2 & b_{\alnot}(x_1) & b_{\aland}(x_1,x_2) & b_{\alor}(x_1,x_2) & b_{\alimpl}(x_1,x_2) \\
+    \midrule
+    \F & \F & \W & \F & \F & \W \\
+    \F & \W & \W & \F & \W & \W \\
+    \W & \F & \F & \F & \W & \F \\
+    \W & \W & \F & \W & \W & \W \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+%
+Üblicher ist es allerdings, die Abbildungen $b_{\aland}$
+und $b_{\alor}$
+mit einem Infixoperator zu schreiben und  $b_{\alnot}$
+wird auch anders notiert.
+%
+Dabei findet man (mindestens) zwei Varianten.
+%
+In der nachfolgenden Tabelle sind die Möglichkeiten nebeneinander
+gestellt und auch gleich noch übliche Namen \bzw Sprechweisen mit
+angegeben:
+%
+\begin{center}
+  \begin{tabular}{*{3}{>{$}c<{$}}@{\quad}l}
+    b_{\alnot}(x) & \lnot x & \bar{x} & Negation \bzw Nicht\\
+    b_{\aland}(x,y) &  x\land y & x\cdot y & Und \\
+    b_{\alor}(x,y) &  x\lor y & x+y & Oder \\
+    b_{\alimpl}(x,y) &   &  & Implikation 
+  \end{tabular}
+\end{center}
+%
+Die an Arithmetik erinnernde Notationsmöglichkeit geht oft einher mit
+der Benutzung von $0$ statt $\F$ und $1$ statt $\W$.
+
+Das meiste, was durch die Definitionen dieser booleschen Abbildungen
+ausgedrückt wird, ist aus dem alltäglichen Leben vertraut. 
+%
+Nur auf wenige Punkte wollen wir explizit eingehen:
+%
+\begin{itemize}
+\item Das "`Oder"' ist "`inklusiv"' (und nicht "`exklusiv"'): Auch
+  wenn $x$ und $y$ \emph{beide} wahr sind, ist $x\alor y$ wahr.
+\item Bei der Implikationsabbildung ist $b_{\alimpl}(x,y)$
+  auf jeden Fall wahr, wenn $x=\F$
+  ist, unabhängig vom Wert von $y$,
+  insbesondere auch dann, wenn $y=\F$
+  ist.
+\item Für jedes $x\in\Bool$
+  haben beiden Abbildungen $b_{\aland}$
+  und $b_{\alor}$
+  die Eigenschaft, dass $b_{\aland}(x,x)=b_{\alor}(x,x)=x$
+    ist, und für $b_{\alimpl}$ gilt $b_{\alimpl}(x,x)=\W$.
+\end{itemize}
+%
+Natürlich gibt es zum Beispiel insgesamt $\cramped{2^{2\cdot 2}}=16$
+zweistellige boolesche Funktionen.
+%
+Die obigen sind aber ausreichend, um auch jede der anderen durch
+Hintereinanderausführung der genannten zu realisieren.
+%
+Zum Beispiel ist $\Bool^2\to \Bool: (x,y) \mapsto b_{\alor}(b_{\alnot}(x), x)$
+die Abbilung, die konstant $\W$ ist.
+
+%Und es ist auch für jedes $x,y\in\Bool$:
+%$\lnot((\lnot x \land (\lnot y))= x\lor y$.
+%
+Für die Abbildung $b_{\alimpl}$
+hat sich übrigens keine Operatorschreibweise durchgesetzt.
+%
+Man kann sich aber klar machen, dass für jedes $x,y\in\Bool$ gilt:
+$b_{\alimpl}(x,y) = b_{\alor}(b_{\alnot}(x), y)$ ist.
+%
+Eine Möglichkeit besteht darin, in einer Tabelle für alle möglichen
+Kombinationen von Werten für $x$
+und $y$ die booleschen Ausdrücke auszuwerten:
+%
+\begin{center}
+  \begin{tabular}{*{5}{>{$}c<{$}}}
+    \toprule
+    x  & y  & b_{\alnot}(x) & b_{\alor}(b_{\alnot}(x), y) & b_{\alimpl}(x,y) \\
+    \midrule
+    \F & \F & \W      & \W & \W \\
+    \F & \W & \W      & \W & \W \\
+    \W & \F & \F      & \F & \F \\
+    \W & \W & \F      & \W & \W \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
+%-----------------------------------------------------------------------
+\Tut\section{Semantik aussagenlogischer Formeln}
+\label{sec:aussagenlogik-semantik}
+
+Unser Ziel ist es nun, jeder aussagenlogischen Formel im wesentlichen
+eine boolsche Funktion als Bedeutung zuzuordnen.
+
+Eine \mdefine{Interpretation}\index{Interpretation} einer Menge $V$
+von Aussagevariablen ist eine Abbildung $I: V \to \Bool$.
+%
+Die Menge aller Interpretationen einer Variablenmenge $V$ ist also
+$\Bool^V$.
+%
+Das kann man sich \zB vorstellen als eine Tabelle mit je einer Spalte
+für jede Variable $X\in V$ und je einer Zeile für jede Interpretation
+$I$, wobei der Eintrag in "`Zeile $I$"' und "`Spalte $X$"' gerade
+$I(X)$ ist. Abbildung~\ref{fig:tab-alle-interpretationen} zeigt
+beispielhaft den Fall $V=\{\alP_1, \alP_2, \alP_3\}$.
+%
+Machen Sie sich klar, dass es für jede Variablenmenge mit $k\in\N_+$
+Aussagevariablen gerade $2^k$ Interpretationen gibt.
+%
+\begin{figure}[ht]
+  \centering
+  \begin{tabular}{*{3}{c}}
+    \toprule
+    $\alP_1$ & $\alP_2$ & $\alP_3$ \\
+    \midrule
+    \F & \F & \F \\
+    \F & \F & \W \\
+    \F & \W & \F \\
+    \F & \W & \W \\
+    \W & \F & \F \\
+    \W & \F & \W \\
+    \W & \W & \F \\
+    \W & \W & \W \\
+    \bottomrule
+  \end{tabular}
+  \caption{Alle Interpretationen der Menge $V=\{\alP_1, \alP_2, \alP_3\}$ von Aussagevariablen.}
+  \label{fig:tab-alle-interpretationen}
+\end{figure}
+%
+\begin{tutorium}
+  \paragraph{Interpretationen von Mengen von Aussagevariablen}
+
+  klar machen, dass es für jede Variablenmenge mit $k\in\N_+$
+  Aussagevariablen gerade $2^k$ Interpretationen gibt.
+  %
+  \begin{itemize}
+  \item Fälle $k=1,2,3$ betrachten
+  \item Wieviele Interpretationen gibt es bei $k+1$ Variablen im
+    Vergleich zu $k$ Variablen?
+  \end{itemize}
+\end{tutorium}
+
+Jede Interpretation $I$ legt eine Auswertung $\val_I(F)$ jeder
+aussagenlogischen Formel $F\in\LAL$ fest: 
+%
+Für jedes $X\in\AALV$
+und für jede aussagenlogische Formel $G$ und $H$ gelte:
+%
+\begin{align*}
+  \val_I(X)         &= I(X) \\
+  \val_I(\alnot G)   &= b_{\alnot}(\val_I(G)) \\
+  \val_I(G \aland H) &= b_{\aland}(\val_I(G), \val_I(H)) \\
+  \val_I(G \alor H)  &= b_{\alor}(\val_I(G)  \val_I(H)) \\
+  \val_I(G \alimpl H)&= b_{\alimpl}(\val_I(G), \val_I(H))
+\end{align*}
+%
+\begin{tutorium}
+  \paragraph{Auswertung von Formeln:}
+  meistens macht man das gleich für alle Interpretationen, wobei man
+  sich nur die Aussagevariablen hinschreibt, die auch in der Formel
+  vorkommen.
+  \begin{itemize}
+  \item Wenn man größere Formeln "`auswerten"' will, dann kann man
+    Wahrheitswerte unter die Konnektive schreiben:
+    \begin{enumerate}
+    \item Wahrheitswerte für die Variablen:
+
+      \begin{tabular}[t]{ccccc}
+        \toprule
+        $\alka\alv{P}$ & $\aland$ & $\alv{Q}\alkz$ & $\alor$ & $\alv{P}$\\
+        \midrule
+        \F && \F && \F \\
+        \F && \W && \F\\
+        \W && \F && \W\\
+        \W && \W && \W\\
+        \bottomrule
+      \end{tabular}
+
+    \item Wahrheitswerte für die Teilformel $(G\aland H)$:
+
+      \begin{tabular}[t]{ccccc}
+        \toprule
+        $\alka\alv{P}$ & $\aland$ & $\alv{Q}\alkz$ & $\alor$ & $\alv{P}$\\
+        \midrule
+        \F &\F& \F && \F \\
+        \F &\F& \W && \F\\
+        \W &\F& \F && \W\\
+        \W &\W& \W && \W\\
+        \bottomrule
+      \end{tabular}
+
+    \item Wahrheitswerte für die ganze Formel
+
+      \begin{tabular}[t]{ccccc}
+        \toprule
+        $\alka\alv{P}$ & $\aland$ & $\alv{Q}\alkz$ & $\alor$ & $\alv{P}$\\
+        \midrule
+        \F &\F& \F &\F& \F \\
+        \F &\F& \W &\F& \F\\
+        \W &\F& \F &\W& \W\\
+        \W &\W& \W &\W& \W\\
+        \bottomrule
+      \end{tabular}
+
+    \item Man sehe die Äquivalenz von  $\alka\alv{P}\aland \alv{Q}\alkz\alor \alv{P}$ und $\alv{P}$.
+    \end{enumerate}
+  \end{itemize}
+\end{tutorium}
+%
+Das meiste, was hier zum Ausdruck gebracht wird, ist aus dem
+alltäglichen Leben vertraut. 
+%
+Nur auf wenige Punkte wollen wir explizit eingehen:
+%
+\begin{itemize}
+\item Man kann für komplizierte Aussagen anhand der obigen Definition
+  "`ausrechnen"', ob sie für eine Interpretation wahr oder falsch ist,
+  weil jede aussagenlogische Formel nur durch Anwendung von genau
+  einer erlaubten Abbildungen entstehen kann.
+  %
+  Für die Interpretation $I$
+  mit $I(\alv{P})=\W$
+  und $I(\alv{Q})=\F$
+  ergäbe die Anwendung der obigen Definition von $\val_I$
+  auf die Formel $\alnot\alka\alv{P}\aland\alv{Q}\alkz$ \zB schrittweise:
+  \begin{align*}
+    \val_I(\alnot\alka\alv{P}\aland\alv{Q}\alkz) 
+    &= \lnot ( \val_I(\alv{P}\aland\alv{Q}) ) \\
+    &= \lnot ( \val_I(\alv{P}) \land \val_I(\alv{Q}) )  \\
+    &= \lnot ( I(\alv{P}) \land I(\alv{Q}) ) \\
+    &= \lnot (\W \land \F)  \\
+    &= \lnot (\F)  \\
+    &= \W  \\
+  \end{align*}
+
+
+  Oft interessiert man sich dafür, was für \emph{jede} Interpretation
+  der Variablen einer Formel passiert.
+  %
+  Dann ergänzt man die Tabelle aller Interpretationen um weitere Spalten
+  mit den Werten von $\val_I(G)$.
+  %
+  Hier ist ein Beispiel:\\
+
+  \begin{tabular}{*{7}{c}}
+    \toprule
+    $\alv{P}$ & $\alv{Q}$ & $\alnot\alv{P}$ & $\alnot\alv{Q}$ 
+    & $\alnot\alv{P}\alor\alnot\alv{Q}$ & $\alv{P}\aland\alv{Q}$ & $\alnot\alka\alv{P}\aland\alv{Q}\alkz$ \\
+    \midrule
+    \F & \F & \W & \W & \W & \F & \W \\
+    \F & \W & \W & \F & \W & \F & \W \\
+    \W & \F & \F & \W & \W & \F & \W \\
+    \W & \W & \F & \F & \F & \W & \F \\
+    \bottomrule
+  \end{tabular}\\
+  
+
+\item Die Tabelle zeigt, dass die Aussagen
+  $\alnot\alka\alv{P}\aland \alv{Q}\alkz$
+  und $\alnot \alv{P} \alor \alnot \alv{Q} $
+  \emph{für alle Interpretationen} denselben Wahrheitswert annehmen.
+  % 
+  Solche Aussagen nennt man
+  \mdefine[äquivalente\\Aussagen]{äquivalent}\index{äquivalente
+    Aussagen}\index{Aussagen!äquivalente}.
+  %
+  Gleiches gilt für $\alnot\;\alnot \alv{P}$
+  und $\alv{P}$ und viele weitere Paare von aussagenlogischen Formeln.
+
+  Wenn zwei Formeln $G$
+  und $H$ äquivalent sind, dann schreiben wir auch $G\equiv H$.
+\item Noch eine Anmerkung zur Implikation.
+  %
+  So wie $b_{\alimpl}$
+  definiert wurde ist eine Aussage $\alv{P}\alimpl \alv{Q}$
+  genau dann wahr, wenn $\alv{P}$ falsch ist oder $\alv{Q}$ wahr.
+  %
+  Warum das sinnvoll ist, wird unter Umständen noch etwas klarer, wenn
+  man überlegt, wie man denn die Tatsache umschreiben wollte, dass
+  eine Implikation im naiven Sinne, also "`aus $\alv{P}$
+  folgt $\alv{Q}$"',
+  \emph{nicht} zutrifft. Das ist doch wohl dann der Fall, wenn zwar
+  $\alv{P}$
+  zutrifft, aber $\alv{Q}$
+  nicht. Also sollte $\alv{P}\alimpl \alv{Q}$
+  äquivalent zu $\alnot\alka\alv{P}\aland \alnot \alv{Q}\alkz$,
+  und das ist nach obigem äquivalent zu
+  $\alka\alnot \alv{P}\alkz \alor \alka\alnot\;\alnot \alv{Q}\alkz$
+  und das zu $\alka\alnot \alv{P}\alkz \alor \alv{Q}$.
+\end{itemize}
+%
+\begin{tutorium}
+  \paragraph{Implikation}
+
+  \begin{itemize}
+  \item  ausführlich erklärt; sehen Sie sich bitte
+    die Folien noch mal an.
+  \item wesentlich: $\alv{P}\alimpl \alv{Q}$
+    ist äquivalent zu $\alnot \alv{P} \alor \alv{Q}$
+  \item Auswirkung auf Beweis von Aussagen der Form $A\alimpl B$: Man muss nur
+    etwas tun, wenn $A$ wahr ist.
+    (so etwas wird sehr oft vorkommen)
+  \end{itemize}
+\end{tutorium}
+%
+\begin{tutorium}
+  \paragraph{Äquivalenz von aussagenlogischen Formeln}
+  \begin{itemize}
+  \item Man bespreche noch einmal, was äquivalente Aussagen sind.
+  \item Beachte: Äquivalente Aussagen enthalten "`meistens"' die
+    gleichen Aussagevariablen:
+    \begin{itemize}
+    \item Die Formeln $\alv{P}$ und $\alv{Q}$ sind nicht äquivalent.
+    \item Denn es kann ja $\alv{P}$ wahr sein und $\alv{Q}$ falsch.
+    \item Ausnahmen sind so etwas wie \zB $\alv{P}\aland \alnot \alv{P}$ und $\alv{Q} \aland
+      \alnot \alv{Q}$
+    \end{itemize}
+  \end{itemize}    
+\end{tutorium}
+%
+Man kann nun noch einen letzten Schritt tun und mit jeder
+aussagenlogische Formel $G$
+eine Abbildung assoziieren, die für jede (passende) Interpretation
+die ausgewertete Formel als Wert zuweist.
+%
+Wir gehen in zwei Schritten vor.
+%
+Als erstes sei $V$ eine Menge von aussagelogischen Variablen, die alle in $G$
+vorkommenden Variablen enthält. 
+%
+Dann kann man die folgende Abbildung definieren:
+\[
+  \Bool^V \to \Bool : I \mapsto \val_I(G) \;.
+\]
+%
+Das ist ganz genau genommen noch keine boolesche Abbildung, weil der
+Definitionsbereich nicht ein kartesisches Produkt $\Bool^k$
+ist, sondern eben die Menge aller Abbildungen von $V$ in $\Bool$.
+
+Konsequenz ist auch, dass zum Beispiel die Formeln
+$G=\alP_0\aland\alP_0$
+und $H= \alP_2\aland\alP_2$ \emph{nicht} äquivalent sind.
+%
+Das sieht man an einer Interpretation $I$
+mit $I(\alP_0)=\W$ und $I(\alP_2)=\F$.
+%
+Für sie ist $\val_I(G)=\W$, aber $\val_I(H)=\F$.
+%
+Man kann sich aber durchaus auf den Standpunkt stellen, dass es einen
+"`Kern"' gibt, der von den konkreten Namen der Aussagevariablen
+unabhängig und bei beiden Formeln gleich ist.
+
+Um diesen "`Kern"' herauszuarbeiten, kann man verschiedene Wege gehen.
+%
+Einer, dem wir nicht folgen werden, besteht darin, zu verlangen, dass
+in jeder Formel $G$
+für eine geeignete nichtnegative ganze Zahl $k$
+die Nummern der in $G$
+vorkommenden Aussagevariablen gerade die Zahlen in $\Z_n$ sein müssen.
+%
+Falls das nicht der Fall ist, müsste man also immer Variablen
+umbenennen.
+
+Wir bevorzugen eine Alternative, bei der man sozusagen auch noch die
+Namen der Aussagevariablen "`vergisst"'.
+%
+Das formalisieren wir so:
+%
+Da wir vorgesetzt haben, dass alle Aussagevariablen von der Form
+$\alv{P}_i$
+sind, können wir den Variablen in $V$ auch eine Reihenfolge geben.
+%
+Dazu seien einfach für $k=|V|\geq 1$
+die Zahlen $i_1, \ldots, i_k\in\N_0$
+die Indizes der Variablen in $V$,
+und zwar seien sie so gewählt, dass für jedes $j\in\P_{k-1}$
+gelte: $i_j<i_{j+1}$.
+%
+Jedem $k$-Tupel
+$x=(x_1,\dots,x_k)\in\Bool^k$
+entspricht dann in naheliegender Weise die Interpretation
+\[
+  I_x: \alv{P}_{i_j} \mapsto x_j \;.
+\]
+%
+Damit ist dann die durch eine aussagenlogische Formel $G$
+beschriebene Abbildung diejenige mit
+$\Bool^k \to \Bool : x \mapsto \val_{I_x}(G)$.
+
+Ist $I$
+eine Interpretation für eine aussagenlogische Formel $G$,
+dann nennen wir $I$
+ein \mdefine[Modell einer Formel]{Modell}\index{Modell!für
+  aussagenlogische Formeln} von $G$, wenn $\val_I(G)=\W$ ist.
+%
+Ist $I$
+eine Interpretation für eine Menge $\Gamma$
+aussagenlogischer Formeln, dann nennen wir $I$
+ein \mdefine[Modell einer Formelmenge]{Modell} von $\Gamma$,
+wenn $I$ Modell jeder Formel $G\in \Gamma$ ist.
+
+Ist $\Gamma$
+eine Menge aussagenlogischer Formeln und $G$
+ebenfalls eine, so schreibt man auch genau dann $\Gamma\models G$,
+wenn jedes Modell von $\Gamma$ auch Modell von $G$ ist.
+%
+Enthält $\Gamma=\{H\}$
+nur eine einzige Formel, schreibt man einfach $H\models G$.
+%
+Ist $\Gamma=\{\}$ die leere Menge, schreibt man einfach $\models G$.
+%
+Die Bedeutung soll in diesem Fall sein, dass $G$
+für \emph{alle} Interpretationen überhaupt wahr ist, \dh dass $G$ eine
+Tautologie ist.
+
+
+Es zeigt sich, dass in verschiedenen Teilen der Informatik zwei Sorten
+aussagenlogischer Formeln von Bedeutung sind.
+%
+Die eine wichtige Klasse von Formeln sind
+\mdefine[erfüllbare\\Formel]{erfüllbare Formeln}, \dh Formeln, die für
+mindestens eine Interpretation wahr sind.
+%
+Die Untersuchung aussagenlogischer Formeln auf Erfüllbarkeit spielt in
+einigen Anwendungen eine große Rolle.
+%
+Für manche Formeln ist das ganz einfach, für andere anscheinend nicht.
+%
+Vergleichen Sie einfach mal die Formeln
+$\alka\alv{P}\aland\alnot\alv{Q}\alkz\alor\alka\alnot\alv{P}\aland\alv{R}\alkz$
+und
+$\alka\alv{P}\alor\alnot\alv{Q}\alkz\aland\alka\alnot\alv{P}\alor\alv{R}\alkz$
+in dieser Hinsicht.
+%
+In der Vorlesung "`Theoretische Grundlagen der Informatik"' werden Sie
+mehr zum Thema Erfüllbarkeit erfahren.
+
+Das andere sind \mdefine[Tautologie]{Tautologien}\index{Tautologie};
+das sind Formeln, für die \emph{jede} Interpretation ein Modell ist,
+die also für jede Interpretation wahr sind.
+%
+Sie heißen auch \mdefine[allgemeingültige\\Formel]{allgemeingültige Formeln}.%
+\index{allgemeingültige Formel}\index{Formel!allgemeingültige}
+%
+Solche Formeln gibt es, \zB $\alv{P} \alor\alnot\alv{P}$
+oder $\alv{P}\alimpl\alka\alv{Q}\alimpl\alv{P}\alkz$.
+%
+Sie werden auch im nächsten Abschnitt noch eine wichtige Rolle spielen.
+
+Zum Abschluss dieses Abschnitts geht es erst einmal darum, eine ganze
+Reihe von Tautologien kennenzulernen und auch Methoden, sich neue zu
+beschaffen.
+
+Als erstes betrachten wir eine Formel der Form $G\aleqv H$.
+%
+Das wurde eingeführt als Abkürzung für $G\alimpl H \aland H\alimpl G$.
+%
+Für jede Interpretation $I$ ist
+\begin{align*}
+  \val_I(G\alimpl H \aland H\alimpl G) 
+  &= \val_I(G\alimpl H) \land \val_I(H\alimpl G)\\
+  &= (\lnot\val_I(G)\lor\val_I(H)) \land (\lnot\val_I(H)\lor\val_I(G))
+\end{align*}
+%
+Falls nun $G$
+und $H$
+äquivalente Formeln sind, also für jede Interpretation $I$
+$\val_I(G)=\val_I(H)$ gilt, ergibt sich weiter
+\begin{align*}
+  \val_I(G\alimpl H \aland H\alimpl G) 
+  &= (\lnot\val_I(G)\lor\val_I(G)) \land (\lnot\val_I(G)\lor\val_I(G))
+\end{align*}
+%
+und gleichgültig, welchen Wert $\val_I(G)$
+hat ergibt die Auswertung letzten Endes \emph{immer}
+$\val_I(\cdots)=\cdots = \W\land\W=\W$.
+%
+Also gilt:
+%
+\begin{lemma}
+  Wenn $G$ und $H$
+  äquivalente aussagenlogische Formeln sind, dann ist die Formel
+  $G\aleqv H$ eine Tautologie.
+\end{lemma}
+%
+Zusammen mit Einsichten in vorangegangenene Abschnitten zeigt das
+sofort, dass für beliebige Formeln $G$
+und $H$ \zB folgende Formeln Tautologien sind:
+%
+\begin{itemize}
+\item $\alnot \alnot G \aleqv G$
+\item $\alka G\alimpl H\alkz \aleqv \alka\alnot G\alor H\alkz$
+\item $\alka G\alimpl H\alkz \aleqv \alka \alnot H \alimpl\alnot G\alkz$
+\item $\alka G\aland H\alkz \aleqv \alnot\alka \alnot G \alor\alnot H\alkz$ und \\
+   $\alka G\alor H\alkz \aleqv \alnot\alka \alnot G \aland\alnot H\alkz$
+\item $\alnot\alka G\aland H\alkz \aleqv \alka \alnot G \alor\alnot H\alkz$ und \\
+   $\alnot\alka G\alor H\alkz \aleqv \alka \alnot G \aland\alnot H\alkz$
+\item $G\aland G \aleqv G$ und\\
+  $G\alor G \aleqv G$
+\item $G\aland H \aleqv H\aland G$ und \\
+  $G\alor H \aleqv H\alor G$
+\end{itemize}
+%
+Es gilt übrigens auch die Umkehrung der obigen Argumentation:
+%
+\begin{lemma}
+  Wenn für zwei aussagenlogische Formeln $G$
+  und $H$
+  die Formel $G\aleqv H$
+  eine Tautologie ist, dann sind $G$ und $H$ äquivalente Formeln.
+\end{lemma}
+% 
+Außerdem überzeugt man sich schnell, dass auch Formeln des folgenden
+Aufbaus allgemeingültig sind für beliebige aussagenlogische Formeln
+$G$, $H$ und $K$:
+\begin{itemize}
+\item $G\alimpl G$
+\item $\alnot G\alor G$
+\item $G\alimpl \alka H\alimpl G\alkz$
+\item $\alka G\alimpl \alka H\alimpl K\alkz\alkz
+  \alimpl \alka \alka G \alimpl H\alkz\alimpl\alka G\alimpl K\alkz\alkz $
+\item $\alka\alka\alnot H\alimpl \alnot G\alkz\alimpl \alka\alka\alnot
+  H\alimpl G\alkz\alimpl H\alkz\alkz$
+\end{itemize}
+
+
+%-----------------------------------------------------------------------
+\section{Beweisbarkeit}
+\label{sec:beweisbarkeit}
+
+Der grundlegende Begriff im Zusammenhang mit Beweisbarkeit sowohl in
+der Aussagenlogik als auch in der Prädikatenlogik ist der des Kalküls.
+%
+Im Fall der Aussagenlogik gehören zu sogenannten
+\mdefine{Aussagenkalkül} gehören dazu stets
+\begin{itemize}
+\item das Alphabet $\AAL$, aus dem die Zeichen für alle Formeln stammen,
+\item die Menge $\LAL$,
+  der syntaktisch korrekten Formeln über dem Alphabet $\AAL$,
+\item eine Menge sogenannter \mdefine{Axiome} $\AxAL\subseteq\AAL$,
+\item und sogenannte \mdefine{Schlussregeln} oder \mdefine{logische
+    Folgerungsregeln}. 
+\end{itemize}
+% 
+Als Axiome für das Aussagenkalkül wählen wir 
+\begin{align*}
+  \AxAL &= \bigl\{\alka G\alimpl \alka H\alimpl  G\alkz\alkz
+          \bigm| G,H\in\LAL \bigr\} \\
+        &\mathrel{\hphantom{=}} \cup \bigl\{\alka G\alimpl \alka H\alimpl  K\alkz\alkz
+          \alimpl \alka\alka G\alimpl H\alkz\alimpl \alka G\alimpl  K\alkz\alkz \bigm| G,H,K\in\LAL \bigr\}\\
+        &\mathrel{\hphantom{=}} \cup \bigl\{
+          \alka\alnot H\alimpl \alnot G\alkz\alimpl \alka\alka\alnot H\alimpl G\alkz\alimpl  H\alkz
+          \bigm| G,H \in\LAL 
+          \bigr\}
+\end{align*}
+%
+Die Formelmenge in den drei Zeilen wollen kurz mit $\AxAL{}_1$,
+$\AxAL{}_2$ und $\AxAL{}_3$ bezeichnen.
+%
+Für alle drei Mengen haben wir schon erwähnt, dass sie nur Tautologien
+enthalten.
+%
+(Überlegen Sie sich bitte auch selbst.)
+%
+Die Axiome sind also alle Tautologien.
+
+Im Fall der Aussagenlogik gibt es nur eine Schlussregel, den
+sogenannten \mdefine{Modus Ponens}.
+% 
+Diese Regel kann man formalisieren als Relation
+$\MP\subseteq\LAL^3$, nämlich
+\[
+  \MP = \{ (G\alimpl H, G, H) \mid  G, H \in\LAL \}
+\]
+%
+Bei Kalkülen schreibt man gelegentlich Ableitungsregeln in der
+speziellen Form auf.
+%
+Beim Modus Ponens sieht das so aus:
+  
+$\MP:$ \quad \begin{tabular}{c}
+                $G \alimpl H$ \qquad $G$ \\
+                \midrule
+                $H$
+              \end{tabular}
+
+\noindent
+Wie der Modus Ponens anzuwenden ist, ergibt sich bei der Definition
+dessen, was wir formal unter einer Ableitung \bzw unter einem Beweis
+verstehen wollen.
+
+Dazu sei $\Gamma$
+eine Formelmenge sogenannter \mdefine[Hypothese]{Hypothesen} oder
+\mdefine[Prämisse]{Prämissen} und $G$
+eine Formel. 
+%
+Eine \mdefine{Ableitung} von $G$
+aus $\Gamma$
+ist eine endliche Folge $(G_1,\dots,G_n)$
+von $n$
+Formeln mit der Eigenschaft, dass erstens $G_n=G$
+ist und auf jede Formel $G_i$ einer der folgenden Fälle zutrifft:
+
+\begin{itemize}
+\item Sie ist ein Axiom: $G_i\in\AxAL$.
+\item Oder sie ist eine Prämisse: $G_i\in\Gamma$.
+\item Oder es gibt Indizes $i_1$ und $i_2$ echt kleiner $i$, für die gilt:
+  $(G{i_1},G_{i_2},G_i)\in\MP$.
+\end{itemize}
+%
+Wir schreiben dann $\Gamma\vdash G$.
+%
+Ist $\Gamma=\{\}$,
+so heißt eine entsprechende Ableitung auch ein \define{Beweis} von $G$
+und $G$
+ein \mdefine{Theorem} des Kalküls, in Zeichen: $\vdash G$.
+
+Wir wollen als erstes einen Beweis für die Formel
+$\alka\alP\alimpl\alP\alkz$
+angeben. 
+%
+Dabei ist zum besseren Verständnis in jeder Zeile in
+Kurzform eine Begründung dafür angegeben, weshalb die jeweilige
+Formel an dieser Stelle im Beweis aufgeführt werden darf.
+
+\begin{tabular}{rll}
+1. & $\alka \alka \alP \alimpl \alka \alka \alP \alimpl  \alP \alkz\alimpl  \alP \alkz\alkz\alimpl 
+       \alka \alka \alP \alimpl \alka \alP \alimpl  \alP \alkz\alkz\alimpl \alka \alP \alimpl  \alP \alkz\alkz\alkz$ & $\AxAL{}_2$ \\
+2. & $\alka \alP \alimpl \alka \alka \alP \alimpl  \alP \alkz\alimpl  \alP \alkz\alkz$ & $\AxAL{}_1$ \\
+3. & $\alka \alka \alP \alimpl \alka \alP \alimpl  \alP \alkz\alkz\alimpl \alka \alP \alimpl  \alP \alkz\alkz$ & $\MP(1,2)$ \\
+4. & $\alka \alP \alimpl \alka \alP \alimpl  \alP \alkz\alkz$ & $\AxAL{}_1$ \\
+5. & $\alka \alP \alimpl  \alP \alkz$ & $\MP(3,4)$ 
+\end{tabular}
+
+Wenn man in diesem Beweis überall statt $\alP$
+eine andere aussagenlogische Formel $G$
+notieren würde, erhielte man offensichtlich einen Beweis für
+$G\alimpl G$.
+
+% \begin{tabular}{rll}
+% 1. & \L{\alka \alka \lmeta{A}\alimpl \alka \alka \lmeta{A}\alimpl  \lmeta{A})\alimpl  \lmeta{A}))\alimpl 
+%        \alka \alka \lmeta{A}\alimpl \alka \lmeta{A}\alimpl  \lmeta{A}))\alimpl \alka \lmeta{A}\alimpl  \lmeta{A})))} & $\A_2$ \\
+% 2. & \L{\alka \lmeta{A}\alimpl \alka \alka \lmeta{A}\alimpl  \lmeta{A})\alimpl  \lmeta{A}))} & $\A_1$ \\
+% 3. & \L{\alka \alka \lmeta{A}\alimpl \alka \lmeta{A}\alimpl  \lmeta{A}))\alimpl \alka \lmeta{A}\alimpl  \lmeta{A}))} & $\RMP$,1,2 \\
+% 4. & \L{\alka \lmeta{A}\alimpl \alka \lmeta{A}\alimpl  \lmeta{A}))} & $\A_1$ \\
+% 5. & \L{\alka \lmeta{A}\alimpl  \lmeta{A})} & $\RMP$,3,4
+% \end{tabular}
+
+Man spricht in einem solchen Fall von einem \mdefine{Beweisschema}.
+Wir werden uns aber erlauben, im folgenden auch in solchen Fällen
+lax von Beweisen zu sprechen.
+%
+Auch der folgende Beweis ist nicht besonders lang:
+
+\begin{tabular}{rll}
+1. & $\alka \alnot\alP \alimpl \alnot\alP \alkz\alimpl 
+     \alka \alka \alnot\alP \alimpl \alP \alkz\alimpl \alP \alkz$ & $\AxAL{}_3$ \\
+2. & $\alka \alnot\alP \alimpl \alnot\alP \alkz$ & Beispiel von eben \\
+3. & $\alka \alnot\alP \alimpl \alP \alkz\alimpl \alP$  & $\MP(1,2)$ \\
+\end{tabular}
+
+\noindent
+Genaugenommen müsste man allerdings statt der Zeile~2 die fünf Zeilen
+von eben übernehmen und überall $\alP$ durch $\alnot\alP$ ersetzen.
+%
+Aber so wie man Programme strukturiert, indem man größere Teile aus
+kleineren zusammensetzt, macht man das bei Beweisen auch.
+%
+Insbesondere dann, wenn man kleinere Teil mehrfach verwenden kann.
+
+Wir hatten schon darauf hingewiesen, dass alle Formeln in $\AxAL$
+Tautologien sind.
+%
+Sehen wir uns nun noch den Modus Ponens genauer an. 
+%
+Es gilt
+%
+\begin{lemma}
+  Modus Ponens "`erhält Allgemeingültigkeit"', \dh wenn sowohl
+  $G\alimpl H$
+  als auch $G$ Tautologien sind, dann ist auch $H$ eine Tautologie.
+\end{lemma}
+
+\begin{beweis}
+  Wenn $G\alimpl H$
+  eine Tautologie ist, dann gilt für jede Bewertung $I$:
+  \[
+    \W=\val_I(G\alimpl H)= b_{\alimpl}(\val_I(G), \val_I)(H) \;.
+  \]
+  %
+  Da $G$ aber auch Tautologie ist, ist $\val_I(G)=\W$ und folglich
+  \[
+    b_{\alimpl}(\val_I(G), \val_I(H))= b_{\alimpl}(\W, \val_I(H)) = \val_I(H)
+  \]
+  Also ist $\W=\val_I(H)$
+  für jede Bewertung $I$, also ist $H$ Tautologie.
+\end{beweis}
+
+\noindent
+Da alle Axiome Tautologien sind und Modus Ponens Allgemeingültigkeit
+erhält, ergibt sich
+\begin{korollar}
+  \label{kor:theoreme-sind-tautologien}
+  Alle Theorem des Aussagenkalküls sind Tautologien.
+\end{korollar}
+
+\noindent
+Schwieriger zu beweisen ist, dass die Umkehrung dieser Aussage auch
+gilt:
+\begin{lemma}
+  \label{lem:tautolgien-sind-theoreme}
+  Jede Tautologie ist im Aussagenkalkül beweisbar.
+\end{lemma}
+
+\noindent
+Zusammen mit Korollar~\ref{kor:theoreme-sind-tautologien} ergibt sich
+der folgende Satz.
+%
+\begin{theorem}
+  Für jede Formel $G\in\LAL$
+  gilt $\models G$ genau dann, wenn $\vdash G$ gilt.
+\end{theorem}
+
+\noindent
+Wir werden Lemma~\ref{lem:tautolgien-sind-theoreme} in diesem Kapitel
+nicht beweisen.
+%
+Möglicherweise werden wir aber für ein verwandtes System (mit anderen
+Schlussregeln) sehen, dass man sogar Systeme bauen kann, für die man
+algorithmisch (\dh also mit Rechner) für jede Formel 
+\begin{itemize}
+\item herausfinden kann, ob sie Tautologie ist oder nicht und
+\item gegebenenfalls dann sogar auch gleich noch einen Beweis im
+  Kalkül.
+\end{itemize}
+%
+\emph{Man beachte}, dass das nur in der Aussagenlogik so schön klappt.
+%
+In der Prädikatenlogik, die wir in einem späteren Kapitel auch noch
+ansehen werden, ist das nicht mehr der Fall.
+
+%-----------------------------------------------------------------------
+\section*{Zusammenfassung und Ausblick}
+
+In diesem Kapitel wurde zunächst die Syntax aussagenlogischer Formeln
+festgelegt.
+%
+Anschließend haben wir ihre Semantik mit Hilfe boolescher Funktionen
+definiert.
+%
+Und am Ende haben wir gesehen, wie man dem semantischen Begriff der
+Allgemeingültigkeit den syntaktischen Begriff der Beweisbarkeit so
+gegenüberstellen kann, dass sich die beiden entsprechen.
+
+\printunitbibliography
+
+\cleardoublepage
+
+
+
+% Alles was wir bisher in diesem Abschnitt betrachtet haben, gehört zu
+% dem Bereich der \emph{Aussagenlogik}. Wir werden sie im beschriebenen
+% Sinne naiv verwenden und in Zukunft zum Beispiel Definitionen wie die
+% der Injektivität und Surjektivität von Funktionen entsprechend
+% kompakter schreiben können.
+
+% Außerdem gibt es die sogenannte \emph{Prädikatenlogik}. (Genauer
+% gesagt interessiert uns Prädikatenlogik erster Stufe, ohne dass wir
+% die Bedeutung dieser Bezeichnung jetzt genauer erklären wollen oder
+% können.)
+
+% Aus der Prädikatenlogik werden wir --- wieder ganz naiv --- die
+% sogenannten \mdefine{Quantoren}\index{Quantor} verwenden:
+% %
+% \begin{center}
+%   \begin{tabular}{cc@{\hspace*{30mm}}cc}
+%     \define{Allquantor} & $\forall$ & \define{Existenzquantor} & $\exists$ \\
+%   \end{tabular}
+%   \index{Allquantor}\index{Existenzquantor}
+% \end{center}
+% %
+% In der puren Form hat eine quantifizierte Aussage eine der Formen
+% \[
+%   \forall x \; A(x) \text{\qquad oder\qquad} \exists x \; A(x) 
+% \]
+% %
+% Dabei soll $A(x)$ eine Aussage sein, die von einer Variablen $x$
+% abhängt (oder jedenfalls abhängen kann). $A$ kann weitere Quantoren
+% enthalten. 
+
+% Die Formel $\forall x \; A(x)$ hat man zu lesen als: "`Für alle $x$
+% gilt: $A(x)$"'.  Und die Formel $\exists x \; A(x)$ hat man zu lesen
+% als: "`Es gibt ein $x$ mit: $A(x)$"'.
+
+% Zum Beispiel ist die Formel
+% \[
+% \forall x \; (x\in \N_0 \alimpl \exists y \; (y\in\N_0 \aland y=x+1))
+% \]
+% wahr.
+
+% Sehr häufig hat man wie in diesem Beispiel den Fall, dass eine Aussage
+% nicht für alle $x$ gilt, sondern nur für $x$ aus einer gewissen
+% Teilmenge $M$. Statt
+% \[
+% \forall x \; (x\in M \alimpl B(x))
+% \]
+% schreibt man oft kürzer
+% \[
+% \forall x \in M :\; B(x)
+% \]
+% wobei der Doppelpunkt nur die Lesbarkeit verbessern soll.  Obiges
+% Beispiel wird damit zu
+% \[
+% \forall x \in \N_0 : \exists y \in\N_0 : y=x+1
+% \]
+
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-05-aussagenlogik/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

@@ -1,0 +1,1213 @@
+%=======================================================================
+\Tut\chapter{Pr\"adikatenlogik}
+\label{k:praedikatenlogik}
+
+In Kapitel~\ref{k:aussagenlogik} haben wir Syntax und Semantik
+aussagenlogischer Formeln kennengelernt.
+%
+Nun widmen wir uns der sogenannten \emph{Prädikatenlogik erster Stufe}.
+%
+Dabei wird auch Aussagenlogik wieder eine Rolle spielen. 
+
+%-----------------------------------------------------------------------
+\Tut\section{Syntax pr\"adikatenlogischer Formeln}
+\label{sec:praedikatenlogik-syntax}
+
+Prädikatenlogische Formeln sind komplizierter aufgebaut als aussagenlogische.
+%
+Man geht drei Schritten vor:
+%
+\begin{itemize}
+\item Zunächst definiert man sogenannte \emph{Terme}, die aus
+  Konstanten, Variablen und Funktionssymbolen zusammengesetzt werden.
+\item Mit Hilfe von Relationssymbolen und Termen konstruiert man dann
+  \emph{atomare Formeln}.
+\item Aus ihnen werden mittels der schon bekannten aussagenlogischen
+  Konnektive und zweier sogenannter Quantoren allgemeine
+  \emph{prädikatenlogische Formeln} gebildet.
+\end{itemize}
+%
+Für die Definition von Termen sind drei Alphabete gegeben:
+%
+\begin{itemize}
+\item ein Alphabet $\CPL$ sogenannter
+  \mdefine[Konstantensymbol]{Konstantensymbole}, notiert als $\plc_i$
+  (für endliche viele $i\in\N_0$) oder kurz als $\plc$, $\pld$.
+\item ein Alphabet $\VPL$ sogenannter
+  \mdefine[Variablensymbol]{Variablensymbole}, notiert als $\plx_i$
+  (für endliche viele $i\in\N_0$) oder kurz als $\plx$, $\ply$, $\plz$.
+\item ein Alphabet $\FPL$ sogenannter
+  \mdefine[Funktionsymbol]{Funktionsymbole}, notiert als $\plf_i$
+  (für endliche viele $i\in\N_0$) oder kurz als $\plf$, $\plg$, $\plh$.
+  %
+  Für jedes $\plf_i\in\FPL$ bezeichne $\ar(\plf_i)\in\N_+$ die
+  \mdefine{Stelligkeit} (oder \mdefine{Arität}) des Funktionssysmbols.
+\end{itemize}
+%
+Das Alphabet $\ATer$ der Symbole, aus denen Terme zusammengesetzt
+sind, umfasst neben den oben genannten außerdem Symbole "`Klammer
+auf"', "`Komma"' und "`Klammer zu"':
+\[
+  \ATer = \{ \plka, \plcomma, \plkz \} \cup \CPL \cup \VPL \cup \FPL \;.
+\]
+%
+Der syntaktische Aufbau von Termen wird mit Hilfe einer kontextfreien
+Grammatik $(\NTer, \ATer, \#T, \PTer)$ definiert.
+%
+Dazu sei nun $m$ die größte Stelligkeit, die ein Funktionssymbol in
+$\FPL$ oder ein Relationssymbol in $\RPL$ (siehe nächste Seite) hat.
+%
+Als $m+1$ Nichtterminalsymbole benutzen wir 
+\[
+  \NTer = \{ \,\#T \,\} \cup \{ \, \#L_i \mid i\in\N_+ \text{ und } i\leq m \,\} \;.
+\]
+%
+Die folgenden Produktionen erzeugen dann zusammen die Terme:
+\begin{alignat*}{2}
+  \#L_{i+1} &\to \#L_i \plcomma \#T &\qquad& \text{für jedes } i\in\N_+\text{ mit } i<m   \\
+  \#L_1  &\to \#T \\
+  \#T &\to \plc_i && \text{für jedes } \plc_i\in\CPL\\
+  \#T &\to \plx_i && \text{für jedes } \plx_i\in\VPL\\
+  \#T &\to \plf_i\plka\#L_{\ar(\plf_i)} \plkz && \text{für jedes } \plf_i\in\FPL
+\end{alignat*}
+%
+Aus \#T kann man alle Terme ableiten und aus jedem $\#L_i$ Listen mit
+genau $i$ durch Kommata getrennten Termen. 
+%
+Wir bezeichnen die Menge aller Terme auch mit $\LTer$.
+
+Ein Term heißt \mdefine{Grundterm}, wenn in ihm keine Variablensymbole
+vorkommen, wenn also bei seiner Ableitung niemals eine der
+Produktionen $\#T\to\plx_i$ benutzt wird.
+
+Wenn $\plf$ ein zweistelliges und $\plg$ ein einstelliges
+Funktionssymbol sind, dann sind zum Beispiel die folgenden Ausdrücke
+Terme:
+
+\setlength{\tabcolsep}{0pt}
+\begin{tabularx}{\textwidth}{*{5}{>{\textbullet\ }X}}
+$\plc$& $\ply$
+& $\plg\plka\plx\plkz$
+& $\plf\plka \plx\plcomma \plg\plka\plz\plkz\plkz$
+& $\plf\plka \plc\plcomma \plg\plka \plg\plka\plz\plkz\plkz \plkz$ \\
+\end{tabularx}
+% 
+Syntaktisch falsch sind dagegen
+
+\begin{tabularx}{\textwidth}{*{5}{>{\textbullet\ }X}}
+ $\plx\ply$ & $\plc\plka\plx\plkz$ & $\plf\plkz\plx\plcomma \ply\plka$
+ &$\plg\plka \plc\plcomma\plc\plcomma\plc\plcomma\plx  \plkz$ & \multicolumn{1}{X}{}\\
+\end{tabularx}
+% 
+und so weiter.
+%
+\begin{tutorium}
+  \paragraph{Syntax prädikatenlogischer Terme}
+
+  Machen Sie ein Beispiel, bei dem
+  \begin{itemize}
+  \item $\plf$ ein zweistelliges und $\plg$ ein einstelliges
+    Funktionssymbol sind,
+  \item $\plc$ das einzige Konstantensymbol und
+  \item $\plx$ und $\ply$ Variablensymbole
+  \end{itemize}
+  Dann
+  \begin{itemize}
+  \item $\NTer=\{ \#T, \#L_1, \#L_2 \}$
+  \item $\begin{aligned}[t]
+      \PTer=\{  \#L_2 & \to \#L_1\plcomma\#T \\
+                \#L_1 & \to \#T  \\
+                \#T   & \to \plc \\
+                \#T   & \to \plx \\
+                \#T   & \to \ply \\
+                \#T   & \to \plg\plka \#L_1 \plkz \\
+                \#T   & \to \plf\plka \#L_2 \plkz \}
+              \end{aligned}
+              $
+  \end{itemize}
+
+
+  \begin{itemize}
+  \item Konstruieren Sie \zB den Ableitungsbaum für
+    $\plf\plka\plc\plcomma\plg\plka\plx\plkz\plkz$
+  \item Machen Sie klar, was aus $\#T$ und was aus $\#L_1,\#L_2$
+    ableitbar ist:
+    \begin{itemize}
+    \item aus $\#T$ sind \textbf{T}erme ableitbar
+    \item aus $\#L_i$ sind \textbf{L}isten von $i$ Termen ableitbar
+    \end{itemize}
+  \item nicht übersehen: das Terminalsymbol "`Komma"': $\plcomma$
+  \end{itemize}
+\end{tutorium}
+
+\mdefine[atomare Formel]{Atomare Formeln} werden aus
+Relationssymbolen und Termen zusammengesetzt.
+%
+Dazu wird ein Alphabet $\RPL$ sogenannter
+\mdefine[Relationsymbol]{Relationsymbole} festgelegt.
+%
+\begin{itemize}
+\item Es enthält zum einen Symbole, die wir in der Form
+  $\plR_i$ notieren (für endliche viele $i\in\N_0$) oder
+  kurz als $\plR, \plS$.
+  %
+  Für jedes $\plR_i\in\RPL$ bezeichne $\ar(\plR_i)\in\N_+$ die
+  \mdefine{Stelligkeit} (oder \mdefine{Arität}) des Relationssysmbols.
+\item Außerdem enthalte $\RPL$ \emph{immer} ein Symbol, für das wir
+  $\pleq$ schreiben, also ein "`Gleichheitszeichen mit einem Punkt
+  darüber"'.
+  %
+  Wie man an der Grammatik weiter unten sehen wird, ist $\pleq$ ein
+  zweistelliges Relationssymbol, das immer infix notiert wird.
+  %
+  (Diese Notation ist aus dem Skript zur Vorlesung "`Formale Systeme"'
+  übernommen.)
+\end{itemize}
+%
+Das Alphabet $\ARel$ der Symbole, aus denen atomare Formeln
+zusammengesetzt sind, umfasst neben den Symbolen für Terme zusätzlich
+nur die Relationssymbole:
+\[
+  \ARel = \ATer \cup \RPL \;.
+\]
+%
+Für die kontextfreie Grammatik $(\NRel, \ARel, \#A, \PRel)$, die
+atomare Formeln erzeugt, sei wieder $m$ die größte Stelligkeit,
+die ein Funktions- oder ein Relationssymbol in $\FPL$ \bzw $\RPL$
+haben.
+%
+Dann ist
+\[
+  \NRel = \{ \,\#A, \#T \,\} \cup \{ \, \#L_i \mid i\in\N_+ \text{ und } i\leq m \,\} = \{\,\#A\,\} \cup \NTer  \;.
+\]
+% 
+Die Produktionenmenge für atomare Formeln erweitert die für Terme wie
+folgt:
+%
+\begin{align*}
+  \PRel = \PTer &\cup \{ \#A \to \plR_i \plka \#L_{\ar(\plR_i)} \plkz \mid \text{ für jedes } \plR_i \in\RPL \} \\
+  &\cup \{ \, \#A \to \#T \pleq \#T \, \} \;.
+\end{align*}
+%
+Die aus \#A ableitbaren Wörter sind die atomaren Formeln.
+%
+Die Menge aller atomaren Formeln bezeichnen wir mit $\LRel$.
+
+Wenn $\plf$ ein zweistelliges und $\plg$ ein einstelliges
+Funktionssymbol sind, $\plR$ ein dreistelliges und $\plS$ ein
+einstelliges Relationssymbol, dann sind zum Beispiel die folgenden
+Wörter atomare Formeln:
+
+\begin{tabularx}{\textwidth}{*{3}{>{\textbullet\ }X}}
+ $\plS\plka\plc\plkz$
+& $\plR\plka\ply,\plc,\plg\plka\plx\plkz\plkz$
+& $\plg\plka\plx\plkz \pleq \plf\plka \plx\plcomma \plg\plka\plz\plkz\plkz$ \\
+\end{tabularx}
+% 
+Syntaktisch falsch sind dagegen
+
+\begin{tabularx}{\textwidth}{*{3}{>{\textbullet\ }X}}
+   $\plx\pleq\ply\pleq\plz$
+ & $\plR\pleq\plR$
+ & $\plS\plka\plx\plkz \pleq \plS\plka\plx\plkz$ \\
+   $\plR\plka\plx\plcomma\ply\plkz$
+ & $\plf\plka\plS\plka\plx\plkz\plkz$
+ & $\plR\plka\plS\plka\plx\plkz\plcomma\plx\plcomma\plx\plkz$ \\
+   $\plka\plS\plka\plS\plkz\plkz\plka\plx\plkz$
+ & $\plR\plkz\plx\plcomma \ply\plka$
+ & $\plg\plR\plf\plka \plkz$ \\
+   $\plx \alimpl \plR\plka\plz\plkz$
+ & $\plx \alor \ply$
+\end{tabularx}
+% 
+und so weiter.
+
+Das Alphabet $\AFor$ der Symbole, aus denen prädikatenlogische Formeln
+zusammengesetzt sind, umfasst neben den Symbolen für atomare Formeln
+zusätzlich die aussagenlogischen Konnektive und den sogenannten
+\mdefine{Allquantor} $\plall$ und den sogenannten \mdefine{Existenzquantor}:
+\[
+  \AFor = \ARel \cup \{\, \alnot, \aland, \alor, \alimpl, \plall, \plexist  \,\} \;.
+\]
+%
+Für die kontextfreie Grammatik $(\NFor, \AFor, \#F, \PFor)$ ist
+\[
+  \NFor = \{ \,\#F \,\} \cup \NRel
+\]
+% 
+Die Produktionenmenge für prädikatenlogische Formeln erweitert die für
+atomare Formeln wie folgt:
+%
+\begin{align*}
+  \PFor = \PRel &\cup \{\, \#F \to \#A \,\} \\
+  &\cup \{\, \#F \to \plka  \alnot \#F \plkz \,,\, \#F \to \plka \#F \aland \#F \plkz \,,\,
+                  \#F \to \plka \#F \alor \#F \plkz \,,\, \#F \to \plka \#F \alimpl \#F \plkz\, \} \\
+  &\cup \{ \, \#F \to \plka\plall \plx_i \#F \plkz \mid \plx_i\in\VPL \, \} %\\
+                %&\cup \{ \, \#F \to \plka\plexist \plx_i \#F \plkz \mid \plx_i\in\VPL \, \}
+\;.
+\end{align*}
+%
+Die aus \#F ableitbaren Wörter sind die prädikatenlogischen Formeln.
+%
+Die Menge aller prädikatenlogischen Formeln bezeichnen wir mit $\LFor$.
+
+Wie bei aussagenlogischen Formeln stehe für alle Formeln $G$ und $H$
+das Wort $\alka G \aleqv H \alkz$ für
+$\alka \alka G \alimpl H \alkz \aland \alka H \alimpl G \alkz \alkz$.
+%
+Außerdem schreiben wir als weitere Abkürzung
+$\plka\plexist\plx_i F\plkz$ statt
+$\plka\alnot\plka\plall\plx_i \plka\alnot F\plkz\plkz\plkz$.
+%
+Das Zeichen $\plexist$ heißt \mdefine{Existenzquantor}.
+
+Und bei größeren Formeln verliert man wegen der vielen Klammern leicht
+den Überblick.
+%
+Deswegen erlauben wir ganz analog zum Fall aussagenlogischer Formeln
+folgende Klammereinsparungsregeln.
+%
+(Ihre "`offizielle"' Syntax bleibt die gleiche!)
+%
+\begin{itemize}
+\item Die äußerten umschließenden Klammern darf man immer weglassen.
+  %
+  Zum Beispiel ist $\alv{P}\alimpl\alv{Q}$ die Kurzform von
+  $\alka\alv{P}\alimpl\alv{Q}\alkz$.
+\item Wenn ohne jede Klammern zwischen mehrere Aussagevariablen immer
+  das gleiche Konnektiv steht, dann bedeute das "`implizite
+  Linksklammerung"'.
+  %
+  Zum Beispiel ist $\alv{P}\aland\alv{Q}\aland\alv{R}$ die Kurzform von
+  $\alka\alka\alv{P}\aland\alv{Q}\alkz\aland\alv{R}\alkz$.
+\item Wenn ohne jede Klammern zwischen mehrere Aussagevariablen
+  verschiedene Konnektive oder/und Quantoren stehen, dann ist von
+  folgenden "`Bindungsstärken"' auszugehen:
+  \begin{enumerate}[a)]
+  \item $\plall$ und $\plexist$ binden am stärksten
+  \item $\alnot$ bindet am zweitstärksten
+  \item $\aland$ bindet am drittstärksten
+  \item $\alor$ bindet am viertstärksten
+  \item $\alimpl$ bindet am fünftstärksten
+  \item $\aleqv$ bindet am schwächsten
+  \end{enumerate}
+  % 
+  Zum Beispiel ist
+  %
+  $\plall\plx \plR\plka\plx\plcomma\ply\plkz \aland \plS\plka\plx\plkz$ 
+  %
+  die Kurzform von
+  %
+  $\plka\plall\plx \plR\plka\plx\plcomma\ply\plkz\plkz \aland \plS\plka\plx\plkz$.
+\end{itemize}
+%
+\begin{tutorium}
+  \paragraph{Klammersparregeln bei aussagenlogischen Formeln}
+
+  Beispiele
+  \begin{itemize}
+  \item $\alv{P}\alor\alv{Q}\aland\alv{R}$ steht für %
+    $\alka \alv{P}\alor \alka\alv{Q}\aland\alv{R}\alkz \alkz$
+  \end{itemize}
+\end{tutorium}
+
+
+%-----------------------------------------------------------------------
+\Tut\section{Semantik pr\"adikatenenlogischer Formeln}
+\label{sec:praedikatenlogik-semantik}
+
+% Unser Ziel ist es nun, jeder aussagenlogischen Formel im wesentlichen
+% eine boolsche Funktion als Bedeutung zuzuordnen.
+
+Es seien Alphabete $\CPL$, $\FPL$ und $\RPL$ gegeben.
+%
+Eine dazu passende \mdefine{Interpretation} $(D,I)$ ist durch folgende
+Bestandteile festgelegt:
+\begin{itemize}
+\item eine nichtleere Menge $D$, das sogenannte \mdefine{Universum}
+  der Interpretation,
+\item für jedes $\plc_i\in\CPL$ ein Wert $I(\plc_i)\in D$,
+\item für jedes $\plf_i\in\FPL$ eine Abbildung
+  $I(\plf_i): D^{\ar(\plf_i)} \to D$ und
+\item für jedes $\plR_i\in\RPL$ eine Relation
+  $I(\plR_i)\subseteq  D^{\ar(\plR_i)}$.
+\end{itemize}
+%
+Zu jedem Alphabet $\VPL$ und einer Interpretation $(D,I)$ ist eine
+\mdefine{Variablenbelegung} eine Abbildung $\beta:\VPL\to D$.
+
+Sind eine Interpretation $(D,I)$ und eine Variablenbelegung $\beta$
+festgelegt, so kann man
+\begin{itemize}
+\item jedem Term einen Wert aus $D$ und
+\item jeder Formel einen Wahrheitswert zuordnen.
+\end{itemize}
+%
+Die entsprechende Abbildung $\valDIb:\LTer\cup\LFor \to D\cup \Bool$
+definieren wir schrittweise induktiv zunächst für Terme und
+anschließend für Formeln wie folgt.
+
+Für jeden Term $t\in\LTer$ und alle Terme $t_1,\dots,t_k\in\LTer$ sei
+\[
+  \valDIb(t) = \begin{dcases*}
+    \beta(\plx_i), & falls $t=\plx_i\in\VPL$\\
+    I(\plc_i), & falls $t=\plc_i\in\CPL$\\
+    I(\plf_i) (\valDIb(t_1), \dots, \valDIb(t_k)), & falls $t=\plf_i\plka t_1\plcomma\dots\plcomma t_k\plkz$
+  \end{dcases*}
+\]
+%
+Wie man sieht, ist für jeden Term $t$ der Funktionswert $\valDIb(t)$
+definiert und ein Element von $D$.
+%
+Wir haben uns an dieser Stellen erlaubt, Pünktchen"=Notation zu
+verwenden.
+%
+Das hätte man durch zusätlichen Aufwand vermeiden können, der das
+Ganze aber schlechter lesbar gemacht hätte.
+%
+Deshalb machen wir diese Ausnahme hier \dots\ und gleich noch einmal.
+
+Jede atomare Formel ist entweder von der Form
+$\plR_i\plka t_1,\dots, t_k\plkz$ für Terme
+$(t_1,\dots, t_k)\in \LTer^{\ar(\plR_i)}$ oder von der Form $t_1\pleq t_2$
+für Terme $(t_1,t_2)\in \LTer^2$. 
+%
+Für sie wird festgelegt:
+\begin{align*}
+  \valDIb(\plR_i\plka t_1,\dots, t_k\plkz) &= \begin{dcases*}
+    \W, & falls $(\valDIb(t_1), \dots, \valDIb(t_k))\in I(\plR_i)$ \\
+    \F, & falls  $(\valDIb(t_1), \dots, \valDIb(t_k))\notin I(\plR_i)$ 
+  \end{dcases*}\\
+  \valDIb(t_1\pleq t_2) &=
+  \begin{dcases*}
+    \W, & falls $\valDIb(t_1) = \valDIb(t_2)$ \\
+    \F, & falls $\valDIb(t_1) \not= \valDIb(t_2)$ 
+  \end{dcases*}
+\end{align*}
+
+Damit muss nur noch für nicht-atomare Formeln $F$ definiert werden,
+was $\valDIb(F)$ sein soll.
+%
+Falls $F$ von einer der Formen ist, die wir schon aus der
+Aussagenlogik kennen, sei $\valDIb(F)$ dementsprechend definiert. Zum
+Beispiel sei für alle prädikatenlogischen Formeln $G$ und $H$
+festgelegt:
+$\valDIb(H_1 \aland H_2) = b_{\aland}(\valDIb(H_1), \valDIb(H_2))$.
+
+Damit bleibt nur noch, für jede Formel $F$ zu definieren, was
+$\valDIb(\plall\plx_i F)$ sein soll.
+%
+Dafür führen wir noch folgende Hilfsdefinition ein.
+%
+Für jede Variablenbelegung $\beta:\VPL\to D$, jedes $\plx_i\in \VPL$
+und jedes $d\in D$ sei
+\[
+  \beta_{\plx_i}^d : \VPL \to D : 
+  \plx_j \mapsto
+           \begin{dcases*}
+             \beta(\plx_j) & falls $j\not=i$ \\
+             d & falls $j=i$
+           \end{dcases*}
+\]
+%
+diejenige Variablenbelegung, die mit $\beta$ für alle Variablen
+ungleich $\plx_i$ übereinstimmt, und für $\plx_i$ den Wert $d$
+vorschreibt.
+
+Damit ist dann
+\[
+  \valDIb(\plall\plx_i F) =
+  \begin{dcases*}
+    \W, & falls für jedes $d\in D$ und $\beta'=\beta_{\plx_i}^d$ gilt: $\val_{D,I,\beta'}(F)=\W$ \\
+    \F, & sonst
+  \end{dcases*}
+\]
+Man kann sich überlegen, dass dann auch gilt:
+\[
+  \valDIb(\plexist\plx_i F) =
+  \begin{dcases*}
+    \W, & falls für mind.~ein $d\in D$ und $\beta'=\beta_{\plx_i}^d$ gilt: $\val_{D,I,\beta'}(F)=\W$ \\
+    \F, & sonst
+  \end{dcases*}
+\]
+
+Eine prädikatenlogische Formel $F$ heißt
+\mdefine[allgemeingültige\\Formel]{allgemeingültig}, wenn für jede
+passende Interpretation $(D,I)$ und jede passende Variablenbelegung
+$\beta$ gilt: $\valDIb(F)=\W$.
+
+Eine einfache Methode, um zu allgemeingültigen Formeln zu gelangen,
+besteht darin, eine aussagenlogische Tautologie $G$ zu nehmen und für
+jede in ihr vorkommende Aussagevariable $\alP_i$ eine beliebige
+prädikatenlogische Formel $G_i$ und dann in $G$ alle Vorkommen von
+$\alP_i$ syntaktisch durch $G_i$ zu ersetzen.
+%
+Wir wollen so entstehende Formeln als prädikatenlogische Tautologien
+bezeichnen.
+
+Aber es gibt noch andere allgemeingültige prädikatenlogische Formeln.
+%
+Ein einfaches Beispiel ist die Formel
+\[
+  \plka t_1\pleq t_2\plkz \alimpl \plka t_2 \pleq t_1 \plkz \;,
+\]
+%
+andere sind \zB von der Form
+%
+\[
+  \plka\plall\plx_i\;\plka G\alimpl H\plkz\plkz \alimpl \plka
+  \plka\plall\plx_i \; G\plkz \alimpl \plka\plall\plx_i \; H\plkz
+  \plkz
+\]
+%
+für beliebige prädikatenlogische Formeln $G$ und $H$.
+
+Ist $(D,I)$ eine Interpretation für eine prädikatenlogische Formel
+$G$, dann nennen wir $(D,I)$ ein \mdefine[Modell einer
+Formel]{Modell}\index{Modell!für prädikatenlogische Formeln} von $G$,
+wenn für jede Variablenbelegung $\beta$ gilt, dass $\valDIb(G)=\W$ ist.
+%
+Ist $(D,I)$ eine Interpretation für eine Menge $\Gamma$
+prädikatenlogischer Formeln, dann nennen wir $(D,I)$ ein
+\mdefine[Modell einer Formelmenge]{Modell} von $\Gamma$, wenn $(D,I)$
+Modell jeder Formel $G\in \Gamma$ ist.
+
+Ist $\Gamma$ eine Menge prädikatenlogischer Formeln und $G$ ebenfalls
+eine, so schreibt man auch genau dann $\Gamma\models G$, wenn jedes
+Modell von $\Gamma$ auch Modell von $G$ ist.
+%
+Enthält $\Gamma=\{H\}$
+nur eine einzige Formel, schreibt man einfach $H\models G$.
+%
+Ist $\Gamma=\{\}$ die leere Menge, schreibt man einfach $\models G$.
+%
+Die Bedeutung soll in diesem Fall sein, dass $G$ für \emph{alle}
+Interpretationen überhaupt wahr ist, \dh dass $G$ allgemeingültig ist.
+
+Als Beispiel betrachten wir die Formel $G$
+\[
+   \plall \plx \; \plf\plka\plx \plcomma\plc\plkz \pleq \plx
+\]
+und mehrere Interpretationen:
+\begin{itemize}
+\item Es sei $D=\N_0$, $I(\plc)=0$ und $I(\plf)$ die Addition von
+  Zahlen.
+  % 
+  Dann ist $(D,I)$ ein Modell der Formel, denn anschaulich bedeutet
+  $G$ dann: Für jede nichtnegative ganze Zahl $x$ ist $x+0=x$.
+  
+  Genauer muss man sich fragen, ob für jedes $\beta$ gilt:
+  $\valDIb(G)=\W$.
+  %
+  Dazu muss man für jedes $d\in\N_0$ und $\beta'=\beta_{\plx}^d$
+  prüfen, ob
+  $\val_{D,I,\beta'}(\plf\plka\plx \plcomma\plc\plkz \pleq \plx) =\W$
+  ist.
+  %
+  Das ist genau dann der Fall, falls
+  $\val_{D,I,\beta'}(\plf\plka\plx \plcomma\plc\plkz) =
+  \val_{D,I,\beta'}(\plx)$ ist.
+
+  Die linke Seite ist
+  $I(\plf)(\beta'(\plx), I(\plc)) = \beta'(\plx)+0=\beta'(\plx)$, was
+  gerade gleich der rechten Seite ist.
+\item Ein anderes Modell von $G$ erhält man, wenn $D=\{\#a,\#b\}^*$,
+  $I(\plc)=\eps$ und $I(\plf)$ die Konkatenation von Wörtern ist.
+\item Ist dagegen $D=\N_0$, $I(\plc)=0$ und $I(\plf)$ die
+  Multiplikation von Zahlen, dann liegt kein Modell für $G$ vor, denn
+  über den nichtnegativen ganzen Zahlen ist \emph{nicht} stets
+  $x\cdot 0=x$.
+\end{itemize}
+%
+Betrachtet man andererseits die Formel
+$\plall \plx\; \plall\ply\; \plf\plka\plx\plcomma\ply\plkz \pleq
+\plf\plka\ply\plcomma\plx\plkz$, dann ist die erste der obigen
+Interpretationen wieder ein Modell (weil die Addition von Zahlen
+kommutativ ist), die zweite Interpretation ist aber kein Modell (weil
+die Konkatenation von Wörtern nicht kommutativ ist).
+
+% -----------------------------------------------------------------------
+\Tut\section{Freie und gebundene Variablenvorkommen und Substitutionen}
+\label{sec:praedikatenlogik-frei-geb-subst}
+
+Dieser Abschnitt ist sehr technisch.
+%
+Wofür das alles nötig ist, und dass sich der Aufwand tatsächlich
+lohnt, werden wir in späteren Abschnitten dieses Kapitels und auch in
+weiteren Kapiteln der Vorlesung sehen.
+%
+Bis dahin müssen Sie sich beim Lesen etwas gedulden.
+
+Wenn in einer prädikatenlogischen Formel $G$ in einem Term eine
+Variable $\plx$ steht, dann spricht man auch von einem
+\mdefine[Vorkommen einer Variablen]{Vorkommen}\index{Vorkommen einer Variablen}%
+\index{Variable!Vorkommen in einer Formel} der Variablen $\plx$ in
+$G$.
+%
+(Die Anwesenheit einer Variablen unmittelbar hinter einem Quantor
+zählt \emph{nicht} als Vorkommen.)
+
+Die gleiche Variable kann natürlich an mehreren Stellen in $G$
+vorkommen.
+%
+Genauer unterscheidet man sogenannte \mdefine[freies Vorkommen]{freie}
+und \mdefine[gebundenes Vorkommen]{gebundene} Vorkommen von Variablen
+in $G$.
+%
+Außerdem definiert man die Menge $\fv(G)$ der frei in $G$ vorkommenden
+Variablen und die Menge $\bv(G)$ der gebunden in $G$ vorkommenden
+Variablen.
+%
+Diese Konzepte sind wie folgt definiert.
+
+Für jede Formel $G$, die atomar ist, sind alle Vorkommen von
+Variablen frei und es ist $\bv(G)=\{\}$ und $\fv(G)$ die Menge aller
+in $G$ an mindestens einer Stelle vorkommenden Variablen.
+
+Für jede Formel $G$ der Form $\alnot H$ ist $\bv(G)=\bv(H)$ und
+$\fv(G)=\fv(H)$ und jedes freie \bzw gebundene Vorkommen einer
+Variablen in $H$ ist auch ein freies \bzw gebundenes Vorkommen in $G$.
+
+Für jede Formel $G$, die eine der Formen $H_1\aland H_2$,
+$H_1\alor H_2$ oder $H_1\alimpl H_2$ hat, ist
+$\bv(G)=\bv(H_1)\cup \bv(H_2)$ und  $\fv(G)=\fv(H_1)\cup \fv(H_2)$ und
+jedes freie \bzw gebundene Vorkommen einer Variablen in $H_1$ oder
+$H_2$ ist auch ein freies \bzw gebundenes Vorkommen in $G$.
+
+Für jede Formel $G$ der Form $\plka \plall \plx_i \, H\plkz$ oder
+$\plka \plexist \plx_i \, H\plkz$ ist
+$\fv(G)=\fv(H)\smallsetminus\{\plx_i\}$ und
+$\bv(G)=\bv(H)\cup\left( \{\plx_i\} \cap \fv(H)\right)$, \dh
+expliziter ausgedrückt
+\[
+\bv(G)=\begin{dcases*}
+  \bv(H)\cup \{\plx_i\} & falls $\plx_i\in\fv(H)$ \\
+  \bv(H) & sonst \\
+\end{dcases*}
+\]
+%
+Außerdem sind in $G$ alle Vorkommen der Variablen $\plx_i$ gebunden
+und man sagt auch, dass sich die in $H$ freien Vorkommen von $\plx_i$
+im \mdefine[Wirkungsbereich\\eines Quantors]{Wirkungsbereich}%
+\index{Wirkungsbereich eines Quantors}\index{Quantor!Wirkungsbereich}
+des Quantors davor befinden und durch ihn gebunden werden.
+%
+Alle Vorkommen anderer Variablen in $G$ sind frei \bzw gebunden, je
+nachdem ob es in $H$ freie oder gebundene Vorkommen  sind.
+
+Eine Formel $G$ heiße \mdefine[geschlossene Formel]{geschlossen}, wenn
+$\fv(G)=\{\}$ ist.
+
+Als Beispiel betrachten wir die Formel $G$
+\[
+  \plall \plx \, \plka \plR\plka\plx\plcomma\ply\plkz \aland
+  \plexist\ply\, \plR\plka\plx\plcomma\ply\plkz  \plkz
+\]
+\begin{itemize}
+\item Das sechste Zeichen ist das erste Vorkommen von $\plx$; es ist
+  ein gebundenes Vorkommen, denn dieses $\plx$ wird durch den
+  Allquantor am Anfang der Formel gebunden.
+\item Das fünfzehnte Zeichen ist das zweite Vorkommen von $\plx$; es
+  ist ein gebundenes Vorkommen, denn dieses $\plx$ wird ebenfalls
+  durch den Allquantor am Anfang der Formel gebunden.
+\item Das achte Zeichen ist das erste Vorkommen von $\ply$; es ist
+  ein freies Vorkommen.
+\item Das siebzehnte Zeichen ist das zweite Vorkommen von $\ply$; es
+  ist ein gebundenes Vorkommen, dieses $\ply$ wird durch den
+  Existenzquantor nach dem $\aland$ gebunden.
+\item Es ist also $\bv(G)=\{\plx,\ply\}$ und $\fv(G)=\{\ply\}$.
+  % 
+  Wie man sieht, müssen die Menge der frei und die Menge der gebunden
+  vorkommenden Variablen nicht disjunkt sein.
+\item Die Formel ist nicht geschlossen (denn $\ply$ kommt frei darin
+  vor).
+\end{itemize}
+
+\noindent
+Eine \mdefine{Substitution}\index{Substitution} ist eine Abbildung
+$\sigma:\VPL\to \LTer$.
+%
+Sind die $k$ Variablen $\plx_{i_j}$ mit $1\leq j\leq k$ die einzigen
+Variablen mit $\sigma(\plx_{i_j})\not=\plx_{i_j}$, dann ist $\sigma$
+durch die Menge $S$ der Paare
+$\{\plx_{i_j}/\sigma(\plx_{i_j}) \mid 1\leq j\leq k\}$ eindeutig
+bestimmt.
+%
+(Es ist üblich, die Paare in der Form
+$\plx_{i_j}/\sigma(\plx_{i_j})$ und nicht in der Form
+$(\plx_{i_j},\sigma(\plx_{i_j}))$ zu notieren.)
+%
+Wir notieren $\sigma$ dann auch in der Form $\sigma_S$, wobei
+$S$ stets rechtseindeutig ist, da $\sigma$ eine Abbildung ist.
+%
+Zum Beispiel bedeutet
+$\sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz \}}$ die Abbildung mit
+\begin{align*}
+  \sigma(\plx) &= \plc\\
+  \sigma(\ply) &= \plf\plka\plx\plkz\\
+  \sigma(z) &= z \text{ für jedes } z\notin\{\plx,\ply\}
+\end{align*}
+%
+Man erweitert $\sigma_S$ zu einer Abbildung $\sigma_S':\LTer\to\LTer$,
+indem man die in einem Term vorkommenden Variablen "`alle
+gleichzeitig"' gemäß $S$ ersetzt:
+\[
+  \sigma_S'(t) = \begin{dcases*}
+    \sigma_S(x), & falls $t=x$ mit $x\in\VPL$ \\
+    c, & falls $t=c$ mit $c\in\CPL$ \\
+    f\plka\sigma_S'(t_1),\dots,\sigma_S'(t_k)\plkz & falls $t=f\plka t_1,\dots,t_k\plkz$ mit $f\in\FPL$ und $t_1,\dots,t_k\in\LTer$
+  \end{dcases*}
+\]
+%
+Statt $\sigma'_S$ schreibt man üblicherweise wieder einfach $\sigma_S$.
+
+Zum Beispiel ist 
+\begin{align*}
+  \sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz \}}(\plx) 
+  &= \plc \\
+  \sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz \}}(\ply) 
+  &= \plf\plka\plx\plkz \\
+  \sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz \}}(\plg\plka\ply\plcomma\plx\plkz) 
+  &= \plg\plka\plf\plka\plx\plkz\plcomma\plc\plkz \\
+  \sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz \}}(\plf\plka\plz\plcomma\plz\plkz) 
+  &= \plf\plka\plz\plcomma\plz\plkz
+\end{align*}
+
+\noindent
+Eine Substitution $\sigma_S:\LTer\to\LTer$ erweitert man schließlich in
+einem zweiten Schritt zu einer Abbildung $\sigma_S'':\LFor\to\LFor$ (für
+die man hinterher ebenfalls einfach wieder $\sigma_S$ schreibt).
+%
+Das macht man induktiv und bei Formeln ohne Quantoren auf naheliegende
+Art und Weise:
+\[
+  \sigma_S''(G) = \begin{dcases*}
+    R\plka\sigma_S'(t_1),\dots,\sigma_S'(t_k)\plkz, & falls $G=R\plka t_1,\dots,t_k\plkz$ mit $R\in\RPL$ und $t_1,\dots,t_k\in\LTer$ \\
+    \sigma_S'(t_1)\pleq \sigma_S'(t_2), & falls $G= t_1\pleq t_2$ mit $t_1,t_2\in\LTer$\\
+    \alnot \sigma_S''(H), & falls $G=\alnot H$  \\
+    \sigma_S''(H_1) \aland \sigma_S''(H_2), & falls $G= H_1\aland H_2$  \\
+    \sigma_S''(H_1) \alor \sigma_S''(H_2), & falls $G= H_1\alor H_2$  \\
+    \sigma_S''(H_1) \alimpl \sigma_S''(H_2), & falls $G= H_1\alimpl H_2$  \\
+  \end{dcases*}
+\]
+%
+Für den verbleibenden Fall einer quantifizierten Formel definieren wir
+vorbereitend zu jeder Substitution $\sigma_S$ und jedem $x\in\VPL$ eine
+Substitution $\sigma_{S-x}$ vermöge der Festlegung:
+\begin{align*}
+  \sigma_{S-x}(x) &= x \\
+  \sigma_{S-x}(y) &= \sigma_S(y) \text{ für jedes } y\in\VPL \text{ mit }y\not=x
+\end{align*}
+%
+Damit können wir nun noch definieren:
+\begin{align*}
+  \sigma_S''( \plall x \; H ) &= \plall x \; \sigma''_{S-x}(H) \\
+  \sigma_S''( \plexist x \; H ) &= \plexist x \; \sigma''_{S-x}(H)
+\end{align*}
+%
+Das bedeutet nichts anderes als dass bei einer Substitution gebundene
+Vorkommen von Variablen nicht  ersetzt werden.
+%
+Wir betrachten dazu als Beispiel die Formel
+$G = \plS\plka\plx\plkz \aland \plall\plx \;
+\plR\plka\plx\plcomma\ply\plkz$ und eine beliebige Substitution
+$\sigma_S$.
+%
+Dann erhält man Schritt für Schritt zunächst einmal
+\begin{align*}
+  \sigma_S(G) 
+  &= \sigma_S(\plS\plka\plx\plkz \aland \plall\plx \; \plR\plka\plx\plcomma\ply\plkz) \\
+  &= \sigma_S(\plS\plka\plx\plkz) \aland \sigma_S(\plall\plx \; \plR\plka\plx\plcomma\ply\plkz) \\
+  &= \plS\plka\sigma_S(\plx)\plkz \aland \plall\plx \; \sigma_{S-\plx}(\plR\plka\plx\plcomma\ply\plkz) \\
+  &= \plS\plka\sigma_S(\plx)\plkz \aland \plall\plx \; \plR\plka\sigma_{S-\plx}(\plx)\plcomma\sigma_{S-\plx}(\ply)\plkz
+\end{align*}
+%
+Sei nun konkret die Substitution
+$\sigma_S=\sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz\}}$.
+%
+Dann ist $\sigma_{S-\plx}$ nichts anderes als
+$\sigma_{\{\ply/\plf\plka\plx\plkz\}}$.
+%
+Folglich ergibt sich in obigem Beispiel weiter:
+%
+\begin{align*}
+  \sigma_S(G) 
+  &= \plS\plka\sigma_S(\plx)\plkz \aland \plall\plx \; \plR\plka\sigma_{S-\plx}(\plx)\plcomma\sigma_{S-\plx}(\ply)\plkz \\
+  &= \plS\plka\sigma_{\{\plx/\plc, \ply/\plf\plka\plx\plkz\}}(\plx)\plkz \aland \plall\plx \; \plR\plka\sigma_{\{\ply/\plf\plka\plx\plkz\}}(\plx)\plcomma\sigma_{\{\ply/\plf\plka\plx\plkz\}}(\ply)\plkz \\
+  &= \plS\plka\plc\plkz \aland \plall\plx \; \plR\plka\plx\plcomma\plf\plka\plx\plkz\plkz
+\end{align*}
+%
+In diesem Beispiel ist etwas passiert, was man bei Substitutionen
+häufig vermeiden will.
+%
+Nach der Substitution war das zweite Argument von $\plR$ durch den
+Allquantor gebunden, vor der Substitution aber noch nicht.
+%
+Häufig möchte man nur über Substitutionen reden, bei denen das nicht
+passiert.
+%
+Deshalb erhalten sie einen besonderen Namen.
+
+Eine Substitution $\sigma$ heiße \mdefine[kollisionsfreie\\
+Substitution]{kollisionsfrei}\index{Substitution!kollisiosnfrei}%
+\index{kollisionsfreie Substitution} für eine Formel $G$, wenn für
+jede Variable $\plx_i$, die durch $\sigma$ verändert wird (also
+$\sigma(\plx_i)\not=\plx_i$) und  jede Stelle eines freien Vorkommens von $\plx_i$ in
+$G$ gilt: Diese Stelle liegt nicht im Wirkungsbereich eines Quantors
+$\plall \plx_j$ oder $\plexist \plx_j$, wenn $\plx_j$ eine Variable ist, die in
+$\sigma(\plx_i)$ vorkommt.
+
+
+Zum Abschluss dieses Abschnitts geht es erst einmal darum, eine ganze
+Reihe allgemeingültiger Formeln kennenzulernen.
+%
+Dazu verallgemeinern wir noch einen Begriff, der schon bei
+aussagenlogischen Formeln eine Rolle spielte.
+%
+Zwei prädikatenlogische Formeln $G$ und $H$ heißen \mdefine[logisch\\
+äquivalente\\Formeln]{logisch äquivalent}, wenn für jede passende
+Interpretation $(D,I)$ und jede passende Variablenbelegung $\beta$ gilt:
+%
+$\valDIb(G) = \valDIb(H)$.
+
+Man kann sich überlegen, dass zwei Formeln $G$ und $H$ genau dann
+logisch äquivalent sind, wenn $\models G\aleqv H$ gilt, wenn also
+$G\aleqv H$ allgemeingültig ist.
+
+Nachfolgend führen wir eine Reihe logisch äquivalenter Formelpaare
+auf, ohne auf Beweise für die logische Äquivalenz einzugehen.
+%
+(Interessierte seien auf das Skript der Vorlesung "`Formale Systeme"'
+verwiesen.)
+%
+Es seien jeweils $G$ und $H$ beliebige prädikatenlogische Formeln.
+
+\begin{enumerate}
+\item $\alnot\plall\plx_i \,G$ und $\plexist\plx_i \,\alnot G$
+\item $\alnot\plexist\plx_i \,G$ und $\plall\plx_i \,\alnot G$
+\item $\plall\plx_i\,\plall\plx_j \,G$ und  $\plall\plx_j\,\plall\plx_i \,G$ 
+\item $\plexist\plx_i\,\plexist\plx_j \,G$ und $\plexist\plx_j\,\plexist\plx_i \,G$
+\item $\plall\plx_i\,\plka G \aland H\plkz$ und  $\plall\plx_i\, G \aland \plall\plx_i\,H$
+\item $\plexist\plx_i\,\plka G \alor H\plkz$ und  $\plexist\plx_i\, G \alor \plexist\plx_i\,H$
+\item wenn $\plx_j\notin\fv(G)$ und $\sigma_{\{\plx_i/\plx_j\}}$
+  kollisionsfrei für $G$, dann sind äquivalent
+  \begin{itemize}
+  \item $\plall\plx_i \,G$ und $\plall x_j \, \sigma_{\{\plx_i/\plx_j\}}(G)$
+  \item $\plexist\plx_i \,G$ und $\plexist x_j \, \sigma_{\{\plx_i/\plx_j\}}(G)$
+  \end{itemize}
+  Man spricht in diesem Fall von \mdefine{gebundener Umbenennung} der Variablen.
+\item wenn $\plx_i\notin\fv(G)$, dann sind äquivalent
+  \begin{itemize}
+  \item $G\aland \plall \plx_i \, H$ und $\plall \plx_i \, \plka G\aland H\plkz$ 
+  \item $G\aland \plexist \plx_i \, H$ und $\plexist \plx_i \, \plka G\aland H\plkz$ 
+  \item $G\alor \plall \plx_i \, H$ und $\plall \plx_i \, \plka G\alor H\plkz$ 
+  \item $G\alor \plexist \plx_i \, H$ und $\plexist \plx_i \, \plka G\alor H\plkz$ 
+  \item $G\alimpl \plall \plx_i \, H$ und $\plall \plx_i \, \plka G\alimpl H\plkz$ 
+  \item $G\alimpl \plexist \plx_i \, H$ und $\plexist \plx_i \, \plka G\alimpl H\plkz$ 
+  \end{itemize}
+\item wenn $\plx_i\notin\fv(H)$, dann sind äquivalent
+  \begin{itemize}
+  \item $\plall\plx_i \,G \alimpl H$ und $\plexist\plx_i\, \plka G\alimpl H\plkz$
+  \item $\plexist\plx_i \,G \alimpl H$ und $\plall\plx_i\, \plka G\alimpl H\plkz$
+  \end{itemize}
+\end{enumerate}
+%
+Weitere allgemeingültige Formeln, die aber nicht von der Form
+$G\aleqv H$ sind, werden auch im nächsten Abschnitt benötigt.
+%
+Es seien $G\in\LFor$ und $\plx_i\in\VPL$.
+\begin{enumerate}
+\item Wenn die Substitution $\sigma_{\{\plx_i/t\}}$ kollisionsfrei für
+  $G$ ist, dann ist
+  \begin{itemize}
+  \item $\plka \plall\plx_i\, G\plkz \alimpl \sigma_{\{\plx_i/t\}}(G)$
+  \end{itemize}
+  allgemeingültig.
+\item Wenn $\plx_i\notin\fv(G)$ ist, dann ist
+  \begin{itemize}
+  \item $\plall\plx_i \,\plka G\alimpl H\plkz \alimpl\plka G\alimpl\plall\plx_i\, H\plkz$
+  \end{itemize}
+  allgemeingültig.
+\item Für Variablen $\plx_i, \plx_j, \plx_k$ sind die Formeln
+  \begin{itemize}
+  \item $\plx_i\pleq\plx_i$
+  \item $\plx_i\pleq\plx_j \alimpl \plx_j\pleq\plx_i$
+  \item $\plx_i\pleq\plx_j \alimpl \plka  \plx_j\pleq\plx_k \alimpl  \plx_i\pleq\plx_k \plkz$
+  \end{itemize}
+  allgemeingültig.
+\item Wenn $x_1,\dots, x_k\in\VPL$ und $y_1,\dots,y_k\in\VPL$ ,
+  $\plf_i$ ein $k$-stelliges Funktionssymbol und $\plR_i$ ein
+  $k$-stelliges Relationssymbol, dann sind die Formeln
+  \begin{itemize}
+  \item $x_1\pleq y_1 \alimpl\alka x_2\pleq y_2 \alimpl\alka\cdots \plka x_k\pleq y_k \alimpl
+    \plf_i\plka x_1\plcomma\dots\plcomma x_k\plkz \pleq\plf_i\plka y_1\plcomma\dots\plcomma y_k\plkz\plkz \cdots\alkz\alkz$
+  \item $x_1\pleq y_1 \alimpl\alka x_2\pleq y_2 \alimpl\alka\cdots \plka x_k\pleq y_k \alimpl
+    \plka\plR_i\plka x_1\plcomma\dots\plcomma x_k\plkz \alimpl \plR_i\plka y_1\plcomma\dots\plcomma y_k\plkz\plkz\plkz \cdots\alkz\alkz$
+  \end{itemize}
+  allgemeingültig.
+\end{enumerate}
+
+%-----------------------------------------------------------------------
+\section{Beweisbarkeit}
+\label{sec:praedikatenlogik-beweisbarkeit}
+
+Der grundlegende Begriff im Zusammenhang mit Beweisbarkeit sowohl in
+der Aussagenlogik als auch in der Prädikatenlogik ist der des Kalküls.
+%
+In Kapitel~\ref{k:aussagenlogik} hatten wir bereits die prinzipielle
+Struktur eines Kalküls anhand der Aussagenlogik kennengelernt:
+\begin{itemize}
+\item In der Menge aller syntaktisch korrekten Formeln wurde
+\item eine Menge von \emph{Axiomen} ausgezeichnet, aus denen mithilfe
+\item von \emph{Ableitungsregeln} in endliche vielen Schritten
+\item die \emph{Theoreme} des Kalküls ableitbar sind.
+\end{itemize}
+%
+Der wesentliche Punkt war dabei, dass man den Kalkül so konstuieren
+kann --- und dann eben auch so konstruiert --- dass die Menge der
+Theoreme mit der Menge der allgemeingültigen Formeln übereinstimmt.
+%
+Man kann also im Kalkül genau die Formeln beweisen, die in jeder
+Interpretation wahr sind.
+
+Dieses Programm werden wir nun für die Prädikatenlogik erster Stufe
+analog vorstellen.
+%
+Dabei werden wir (wie in der Aussagenlogik so auch hier erst recht)
+darauf verzichten, den zentralen Satz zu beweisen.
+%
+Das würde über den Rahmen dieser Grundlagenvorlesung hinausgehen.
+
+Für die Prädikatenlogik gibt es, wie für die Aussagenlogik, ganz
+unterschiedliche Kalküle, die das gleiche leisten.
+%
+Wir beschreiben nachfolgend eine Variante, die auf David Hilbert
+zurückgeht.
+%
+Dazu sei
+\begin{itemize}
+\item $\AFor$ ein Zeichenvorrat (mit Variablen-, Konstanten-,
+  Funktions- und Relationssymbolen) für prädikatenlogische Formeln
+\item $\LFor$ die Menge der syntaktisch korrekten prädikatenlogischen
+  Formeln über dem Alphabet $\AFor$,
+\item $\AxPL\subseteq\LFor$ eine nachfolgend definierte Menge von
+  Axiomen,
+\item und zwei Schlussregeln, nämlich neben dem schon bekannten Modus
+  ponens noch "`Generalisierung"'.
+\end{itemize}
+%
+Als Menge $\AxPL$ der Axiome für den Hilbert"=Kalkül wählen wir die
+Vereinigung der folgenden Mengen von Formeln.
+%
+Wir haben im vorangegangenen Abschnitt für die Formeln jeder Menge
+angemerkt, dass es sich jeweils um allgemeingültige prädikatenlogische
+Formeln handelt.
+%
+\begin{align*}
+  {\AxAL}_1 &= \bigl\{\alka G\alimpl \alka H\alimpl  G\alkz\alkz
+            \bigm| G,H\in\LFor \bigr\} \\
+  {\AxAL}_2 &= \bigl\{\alka G\alimpl \alka H\alimpl  K\alkz\alkz
+            \alimpl \alka\alka G\alimpl H\alkz\alimpl \alka G\alimpl  K\alkz\alkz \bigm| G,H,K\in\LFor \bigr\}\\
+  {\AxAL}_3 &=  \bigl\{
+            \alka\alnot H\alimpl \alnot G\alkz\alimpl \alka\alka\alnot H\alimpl G\alkz\alimpl  H\alkz
+            \bigm| G,H \in\LFor 
+            \bigr\} \\
+  {\AxPL}_1 &=  \bigl\{
+            \plka\plall \plx_i \, G \plkz \alimpl \sigma_{\{\plx_i/t\}}(G)
+            \bigm| G \in\LFor, \plx_i\in\VPL, t\in\LTer \text{ und $\sigma_{\{\plx_i/t\}}$ kollisionsfrei für $G$}
+            \bigr\} \\
+  {\AxPL}_2 &=  \bigl\{
+            \plka\plall \plx_i \, \plka G \alimpl H \plkz\plkz \alimpl \plka G \alimpl \plall \plx_i \, H \plkz
+            \bigm| G,H \in\LFor, \plx_i\in\VPL, \text{ und } \plx_i\notin\fv(G) 
+            \bigr\} \\
+ {\AxEq}_1 &=  \bigl\{ \plx_i\pleq \plx_i \bigm| \plx_i\in\VPL \bigr\} \\
+ {\AxEq}_2 &=  \bigl\{ \plx_i\pleq \plx_j  \alimpl \plx_j\pleq \plx_i
+          \bigm| \plx_i, \plx_j\in\VPL 
+          \bigr\} \\
+ {\AxEq}_3 &=  \bigl\{ \plx_i\pleq \plx_j  \alimpl \plka \plx_j\pleq \plx_k \alimpl \plx_i\pleq \plx_k\plkz
+          \bigm| \plx_i, \plx_j, \plx_k\in\VPL 
+          \bigr\} \\
+ {\AxEq}_4 &=  \bigl\{ \plx_{i_1}\pleq \plx_{j_1}  \alimpl \plka \plx_{i_2}\pleq \plx_{j_2}\alimpl \plka \cdots\plka \plx_{i_n}\pleq \plx_{j_n} \alimpl
+           \plf_i\plka\plx_{i_1}\plcomma\ldots\plcomma\plx_{i_n}\plkz\pleq \plf_i\plka\plx_{j_1}\plcomma\ldots\plcomma\plx_{j_n}\plkz
+           \plkz\cdots\plkz\plkz\\
+         &\mathrel{\hphantom{=}}\;\; \bigm| \plx_{i_1},\cdots,\plx_{i_n}, \plx_{j_1},\cdots,\plx_{j_n}\in\VPL, \plf_i\in\FPL
+          \bigr\} \\
+ {\AxEq}_5 &=  \bigl\{ \plx_{i_1}\pleq \plx_{j_1}  \alimpl \plka \plx_{i_2}\pleq \plx_{j_2} \alimpl\plka \cdots\plka \plx_{i_n}\pleq \plx_{j_n} \alimpl
+           \plka\plR_i\plka\plx_{i_1}\plcomma\ldots\plcomma\plx_{i_n}\plkz\alimpl \plR_i\plka\plx_{j_1}\plcomma\ldots\plcomma\plx_{j_n}\plkz\plkz
+           \plkz\cdots\plkz\plkz\\
+         &\mathrel{\hphantom{=}} \;\;\bigm| \plx_{i_1},\cdots,\plx_{i_n}, \plx_{j_1},\cdots,\plx_{j_n}\in\VPL, \plR_i\in\RPL
+          \bigr\}
+\end{align*}
+%
+Im Fall der Prädikatenlogik gibt es zwei Schlussregeln.
+%
+Die eine ist wieder Modus Ponens\index{Modus ponens}%
+\index{Schlussregel!Modus ponens}, aber dieses Mal natürlich für
+prädikatenlogische Formeln.
+% 
+Als Relation geschrieben ist 
+$\MP\subseteq\LFor^3$ mit
+\[
+  \MP = \{ (G\alimpl H, G, H) \mid  G, H \in\LFor \} \text{\qquad\bzw\qquad}
+  \text{\begin{tabular}{c}
+          $G \alimpl H$ \qquad $G$ \\
+          \midrule
+          $H$
+        \end{tabular}} 
+\]
+%
+Die zweite Ableitungsregel heißt
+\mdefine{Generalisierung}\index{Generalisierung}%
+\index{Schlussregel!Generalisierung}. 
+%
+$\GEN\subseteq\LFor^2$ ist so definiert:
+%
+\[
+  \GEN = \{ (G, \plka\plall\plx_i \, G\plkz) \mid  G \in\LFor \text{ und }\plx_i\in\VPL\} \text{\qquad\bzw\qquad}
+  \text{\begin{tabular}{c}
+          $G$ \\
+          \midrule
+          $\;\plka\plall\plx_i \, G\plkz\;$
+        \end{tabular}} 
+\]
+%
+Man mache sich bitte klar, dass die Anwendung von sowohl Modus ponens
+als auch Generalisierung auf allgemeingültige Formeln wieder
+allgemeingültige Formeln liefert.
+
+Die Formalisierung des Begriffs \mdefine{Ableitung}\index{Ableitung!im
+  Hilbert-Kalkül}\index{Kalkül!Ableitung}\index{Hilbert-Kalkül!Ableitung} oder auch
+\mdefine{Beweis}\index{Beweis}\index{Kalkül!Beweis} erweitert die
+Vorgehensweise aus der Aussagenlogik um die Möglichkeit, in einem
+Schritt Generalisierung anzuwenden.
+
+Dazu sei $\Gamma$ eine Formelmenge sogenannter
+\mdefine[Hypothese]{Hypothesen} oder \mdefine[Prämisse]{Prämissen} und
+$G$ eine Formel.
+%
+Eine \mdefine{Ableitung} von $G$
+aus $\Gamma$
+ist eine endliche Folge $(G_1,\dots,G_n)$
+von $n$
+Formeln mit der Eigenschaft, dass erstens $G_n=G$
+ist und auf jede Formel $G_i$ einer der folgenden Fälle zutrifft:
+
+\begin{itemize}
+\item Sie ist ein Axiom: $G_i\in\AxPL$.
+\item Oder sie ist eine Prämisse: $G_i\in\Gamma$.
+\item Oder es gibt Indizes $i_1$ und $i_2$ echt kleiner $i$, für die gilt:
+  $(G_{i_1},G_{i_2},G_i)\in\MP$.
+\item Oder es gibt einen Indix $i_1$ echt kleiner $i$, für den gilt:
+  $(G_{i_1},G_i)\in\GEN$.
+\end{itemize}
+%
+Wir schreiben dann $\Gamma\vdash G$.
+%
+Ist $\Gamma=\{\}$, so heißt eine entsprechende Ableitung auch ein
+\mdefine{Beweis}\index{Beweis} von $G$ und $G$ ein \mdefine{Theorem}%
+\index{Theorem}\index{Kalkül!Theorem}\index{Hilbert-Kalkül!Theorem}
+des Kalküls, in Zeichen: $\vdash G$.
+
+Es ist nicht Aufgabe dieser Vorlesung in Hilberts Kalkül besonders
+viele oder besonders komplizierte Theoreme zu beweisen.
+%
+Ein etwas ausführlicheres Beispiel soll aber klar machen, dass es der
+Kalkül erlaubt, Beweise im obigen Sinn zu führen, die "`informell"'
+geführten Beweisen entsprechen.
+%
+Das soll auch eine Andeutung sein der Tatsache, dass alle unsere
+Beweise, die wir ja immer nicht präzise in einem Kalkül führen, eine
+solide Grundlagen haben.
+
+Zuvor seien noch zwei wichtige Theoreme aufgeführt, deren Beweise Sie
+an anderen Stellen in der Literatur oder \zB in der Vorlesung
+"`Formale Systeme"' finden können:
+
+\begin{theorem}
+  Für jede Formelmenge $\Gamma\subseteq\LFor$ und jede Formel
+  $G\in\LFor$ gilt:
+  \[
+    \text{ wenn } \Gamma \vdash G \text{, dann auch } \Gamma
+    \models G \;.
+  \]
+\end{theorem}
+%
+Man sagt auch, dass der Hilbert"=Kalkül \mdefine[Korrektheit des
+Hilbert-Kalküls]{korrekt} sei.
+
+\begin{theorem}
+  Für jede Formelmenge $\Gamma\subseteq\LFor$ und jede Formel
+  $G\in\LFor$ gilt:
+  \[
+    \text{ wenn } \Gamma \models G \text{, dann auch } \Gamma
+    \vdash G \;.
+  \]
+\end{theorem}
+%
+Man sagt auch, dass der Hilbert"=Kalkül \mdefine[Vollständigkeit des
+Hilbert-Kalküls]{vollständig} sei.
+
+Außerdem sei noch eine Warnung ausgesprochen.
+%
+Im Fall der Aussagenlogik hatten wir das Deduktionstheorem
+kennengelernt.
+%
+Ohne an dieser Stelle auf Details einzugehen, sei erwähnt, dass man es
+\emph{nicht} in voller Allgemeinheit auf die Prädikatenlogik
+übertragen kann.
+%
+Wir erwähnen nur das folgende Analogon, das eine relativ starke
+Voraussetzung macht (es gibt schwächere hinreichende Voraussetzungen).
+\begin{theorem}
+  Für jede \emph{geschlossene} Formel $G\in\LFor$ und jedes
+  $H\in\LFor$ gilt $G\vdash H$ genau dann, wenn
+  $\vdash \alka G\alimpl H\alkz$ gilt.
+\end{theorem}
+%
+Zum Abschluss dieses Abschnitts betrachten wir nun beispielhaft einen
+Fall, in dem $\FPL=\{\plf\}$ und $\CPL=\{\plc\}$. Außerdem sei
+$\Gamma=\{\;\plall\plx\, \plka\plf\plka\plc\plcomma\plx\plkz \pleq
+\plx \aland \plf\plka\plx\plcomma\plc\plkz \pleq\plx\plkz\;\}$.
+%
+Jedes Modell $(D,I)$ von $\Gamma$ besitzt also eine auf $D$ definierte
+zweistellige Operation $I(\plf)$ und eine Konstante $I(\plc)$, die
+neutrales Element bezüglich der Operation ist.
+
+Ein Modell erhält man \zB durch die Festlegungen
+\begin{itemize}
+\item $D=\N_0$, $I(\plf):\N_0\x\N_0\to\N_0:(x,y)\mapsto x+y$ und $I(\plc)=0$,
+\end{itemize}
+ein anderes durch
+\begin{itemize}
+\item $D=\{\#a,\#b\}^*$,
+  $I(\plf):\{\#a,\#b\}^*\x
+  \{\#a,\#b\}^*\to\{\#a,\#b\}^*:(w_1,w_2)\mapsto w_1\cdot w_2$ und
+  $I(\plc)=\eps$.
+\end{itemize}
+%
+Wir wollen nun zeigen, dass in jedem solchen Modell das neutrale
+Element immer eindeutig ist, \dh dass für jedes Modell von $\Gamma$
+die folgende Aussage $G$ wahr ist:
+\[
+  \plall\ply \, \plka \; \plall\plx\,
+  \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+  \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl \ply\pleq\plc
+  \plkz
+\]
+%
+Den Nachweis wollen wir unter Ausnutzung der Korrektheit des
+Hilbert"=Kalküls zeigen.
+%
+Wir müssen also eine Ableitung von $G$ aus den Axiomen und den
+Hypothesen in $\Gamma$ finden.
+
+Wir werden nicht einen genauen Beweis im Hilbert"=Kalkül aufschreiben;
+das ist zu aufwändig.
+%
+Aber wir werden Formulierungen, wie wir sie "`normalerweise"' nutzen,
+so erweitern, dass interessierte Leser den Rest hoffentlich selbst
+erledigen können.
+%
+Salopp gesprochen beruht die Aussage auf der Beobachtung, dass
+\[
+  y = f(c,y) = c \;,
+\]
+sobald $c$ linksneutrales Element ist und $y$ rechtsneutrales Element.
+%
+Genauer kann man in folgenden Schritten vorgehen:
+%
+\begin{description}%[Schr{i}tt 1:]
+\item[Schritt 0:] Man beginnt mit einem "`beliebigen"' $\ply$ und muss zeigen: \\
+  $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+  \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl \ply\pleq\plc$
+\item[Schritt 1:] zeige:  $\ply\pleq \plf\plka\plc\plcomma\ply\plkz  $
+  \begin{description}
+  \item[Schritt 1.1:] wegen
+    $\plall\plx\, \plka\plf\plka\plc\plcomma\plx\plkz \pleq \plx \aland
+    \plf\plka\plx\plcomma\plc\plkz \pleq\plx\plkz$ gilt insbesondere \\
+    $\plf\plka\plc\plcomma\ply\plkz \pleq \ply \aland
+    \plf\plka\ply\plcomma\plc\plkz \pleq\ply$
+  \item[Schritt 1.2:] Also gilt $\plf\plka\plc\plcomma\ply\plkz \pleq \ply $.
+  \item[Schritt 1.3:] Also gilt $\ply\pleq \plf\plka\plc\plcomma\ply\plkz  $.
+  \end{description}
+\item[Schritt 2:] zeige:  $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+  \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl 
+  \ply \pleq\plf\plka\plc\plcomma\ply\plkz $ 
+  % \\ dazu nutzt man die Tautologie $G\alimpl\alka H\alimpl G\alkz$
+\item[Schritt 3:] zeige:  $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+  \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl
+\plf\plka\plc\plcomma\ply\plkz \pleq\plc $
+  \begin{description}
+  \item[Schritt 3.1:] zeige
+    $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+    \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl 
+    % 
+    \plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx\plkz \aland
+    \plall\plx\, \plka\plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz
+    $
+  \item[Schritt 3.2:] zeige $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx\plkz \aland
+    \plall\plx\, \plka\plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz
+    \alimpl
+    \plall\plx\, \plka\plf\plka\plx\plcomma\ply\plkz \pleq\plx \plkz
+    $
+  \item[Schritt 3.3:] also $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+    \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz
+    \alimpl
+    \plall\plx\, \plka\plf\plka\plx\plcomma\ply\plkz \pleq\plx \plkz
+    $
+  \item[Schritt 3.4:] es gilt $
+    \plall\plx\, \plka\plf\plka\plx\plcomma\ply\plkz \pleq\plx \plkz \alimpl
+    \plf\plka\plc\plcomma\ply\plkz \pleq\plc 
+    $
+  \item[Schritt 3.5:] also $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx \aland
+    \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz
+    \alimpl
+    \plf\plka\plc\plcomma\ply\plkz \pleq\plc$
+  \end{description}
+\item[Schritt 4:] zeige $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx
+    \aland \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl \ply\pleq\plc$
+  \begin{description}
+  \item[Schritt 4.1]
+    mit Ergebnissen von Schritt 2 und Schritt 3 zeige: \\
+    $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx
+    \aland \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl \plka
+    \ply \pleq\plf\plka\plc\plcomma\ply\plkz \aland
+    \plf\plka\plc\plcomma\ply\plkz \pleq\plc \plkz$
+  \item[Schritt 4.2:] zeige $\plka
+    \ply \pleq\plf\plka\plc\plcomma\ply\plkz \aland
+    \plf\plka\plc\plcomma\ply\plkz \pleq\plc \plkz 
+    \alimpl \ply\pleq\plc$
+  \item[Schritt 4.3:] also $\plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq \plx
+    \aland \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl \ply\pleq\plc$
+  \end{description}
+\item[Schritt 5:] Aus dem Ergebnis von Schritt 4 folgt durch Generalisierung: \\
+  $\plall\ply\, \plka \plall\plx\, \plka\plf\plka\ply\plcomma\plx\plkz \pleq
+  \plx \aland \plf\plka\plx\plcomma\ply\plkz \pleq\plx\plkz \alimpl
+  \ply\pleq\plc \plkz$ 
+\end{description}
+
+%-----------------------------------------------------------------------
+\section*{Zusammenfassung und Ausblick}
+
+In diesem Kapitel wurde zunächst die Syntax prädikatenlogischer Formeln
+festgelegt.
+%
+Anschließend haben wir  Interpretationen und Modelle eingeführt.
+%
+Und am Ende haben wir gesehen, wie man dem semantischen Begriff der
+Allgemeingültigkeit den syntaktischen Begriff der Beweisbarkeit, \zB
+im Hilbert-Kalkül, so gegenüberstellen kann, dass sich die beiden
+entsprechen.
+
+\printunitbibliography
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-13-praedikatenlogik/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

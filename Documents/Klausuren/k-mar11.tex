@@ -1,0 +1,161 @@
+\documentclass[12pt,twoside]{report}
+
+\setcounter{errorcontextlines}{4}
+
+\setlength{\textheight}{240mm}
+\addtolength{\topmargin}{-25mm}
+\addtolength{\textwidth}{5mm}
+\addtolength{\oddsidemargin}{5mm}
+\addtolength{\evensidemargin}{-10mm}
+
+%% %%%%%%%%% PACKAGES
+%\usepackage{../../skript/gbi}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+\usepackage{pst-all}
+\usepackage{latexsym}
+\usepackage{mdwlist}
+%\usepackage{thwmathligs}
+\usepackage{thwpalatino}
+\usepackage{euler}
+\usepackage{tabularx}
+%% \usepackage{thwalg}
+%\usepackage{thwmathabbrevs}
+%\usepackage{thwtextabbrevs}
+% \usepackage{url}
+\usepackage{array}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{{Matr.-Nr.:}\hspace*{40mm}}
+\fancyhead[LO]{{Name:}}
+\fancyfoot[CE,CO]{\thepage}
+
+\usepackage[digits]{at}
+\usepackage{cmtt}
+\newatcommand N[1]{\ensuremath{\langle}\hbox{\textit{#1}}\ensuremath{\rangle}}
+\newatcommand T[1]{\hbox{\upshape\mttfamily\bfseries{#1}}}
+\newatcommand M[1]{\ensuremath{\big#1}}
+\newatcommand .{\ensuremath{\mathop{\hbox{\textbullet}}\,}}
+\let\Hash=\#
+\renewcommand{\#}[1]{\textup{\texttt{#1}}}
+\newcommand{\act}{\ensuremath{\mathit{act}}}
+\newcommand{\goto}{\ensuremath{\mathit{goto}}}
+\def\strich{\underline{\hspace*{1cm}}}
+\def\Strich{\underline{\hspace*{2cm}}}
+\def\implies{\Rightarrow}
+\def\BoX{\scalebox{3.0}{\Box}}
+\def\A{\mathcal{A}}
+\def\B{\mathcal{B}}
+
+\def\JANEIN{\qquad ja: \strich\qquad nein: \strich }
+
+\newcounter{afgnr}
+\setcounter{afgnr}{1}
+
+\parskip=12pt
+\parindent=0pt
+
+\newenvironment{aufgabe}[1][\relax]%
+  {\clearpage
+    \noindent\textbf{Aufgabe \arabic{afgnr}}%
+    \if#1\relax\else{ (#1 Punkte)}\fi
+    \\
+  }%
+  {\addtocounter{afgnr}{1}}%
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+  \bfseries \Large
+  Klausur zur Vorlesung \\
+  Grundbegriffe der Informatik \\
+  1. M\"arz 2011 \\[8mm]
+  \begin{tabular}{l@{\quad}|c|c|c|}
+    \cline{2-4}
+    Klausur- &
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}\\
+    nummer &
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}\\
+    \cline{2-4}
+  \end{tabular}
+
+\end{center}
+
+%\vspace*{5mm}
+\def\Q{\hspace*{12mm}}
+\begin{center}
+  \begin{tabular}[t]{|l|*{8}{c|}}
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Name:} \\
+    \multicolumn{5}{|l|}{} \\
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Vorname:} \\
+    \multicolumn{5}{|l|}{} \\
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Matr.-Nr.:} \\
+    \multicolumn{5}{|l|}{} \\
+%     \cline{1-5}
+%     \multicolumn{2}{|l|}{} & & & \\
+%     \multicolumn{2}{|l|}{Klausur.-Nr.:} & & &\\
+%     \multicolumn{2}{|l|}{} & & & \\
+    \cline{1-5}
+    \multicolumn{8}{c}{ } \\
+%    \multicolumn{8}{c}{ } \\
+%    \multicolumn{8}{c}{ } \\
+%    \multicolumn{8}{c}{ } \\
+    \cline{1-8}
+    \            &   &   &   &   &   &   &      \\
+    Aufgabe      & 1 & 2 & 3 & 4 & 5 & 6 & 7   \\
+    \            & \Q& \Q& \Q& \Q& \Q& \Q& \Q  \\
+    \cline{1-8}
+    \            &   &   &   &   &   &   &      \\
+    max. Punkte  & 6 & 9 & 4 & 9 & 5 & 5 & 9    \\
+    \            &   &   &   &   &   &   &      \\
+    \cline{1-8}
+    \            &   &   &   &   &   &   &      \\
+    tats. Punkte &   &   &   &   &   &   &      \\
+    \            &   &   &   &   &   &   &      \\
+  \cline{1-8}
+%    \multicolumn{7}{c}{ } \\
+%    \multicolumn{7}{c}{ } \\
+%    \multicolumn{7}{c}{ } \\
+    \multicolumn{8}{c}{ } \\
+    \cline{1-4}\cline{6-7}
+    \multicolumn{4}{|l|}{ } &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{ } & \multicolumn{1}{c}{ }\\
+    \multicolumn{4}{|l|}{Gesamtpunktzahl:} &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{Note:} & \multicolumn{1}{c}{ }\\
+    \multicolumn{4}{|l|}{ } &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{ } & \multicolumn{1}{c}{ } \\
+    \cline{1-4}\cline{6-7}
+  \end{tabular}
+\end{center}
+
+%=======================================================================
+\def\foobar{\relax}
+\def\repeattm{0}
+\input{aufgaben}
+%=======================================================================
+\end{document}
+%%% Local Variables:
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

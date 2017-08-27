@@ -1,0 +1,323 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+
+\usetikzlibrary{positioning}
+
+\tikzstyle{every node} = [circle, draw, fill = white, inner sep = 3pt, minimum width = 3pt, font = \scriptsize] % small
+\tikzstyle{every path} = [-, shorten >= 0pt, thick]% [->, > = stealth, shorten >= 0pt, thick]
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{9}
+\newcommand{\ausgabetermin}{23.~Dezember 2015}
+\newcommand{\abgabetermin}{15.~Januar 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+%\newcommand{\punkteblatt}{18} % Blatt 5
+%\newcommand{\punkteblattphysik}{18} % Blatt 5
+%\newcommand{\punkteblatt}{20} % Blatt 6
+%\newcommand{\punkteblattphysik}{20} % Blatt 6
+%\newcommand{\punkteblatt}{20} % Blatt 7
+%\newcommand{\punkteblattphysik}{0} % Blatt 7
+%\newcommand{\punkteblatt}{18} % Blatt 8
+%\newcommand{\punkteblattphysik}{18} % Blatt 8
+\newcommand{\punkteblatt}{17} % Blatt 9
+\newcommand{\punktetotal}{159} %
+\newcommand{\punkteblattphysik}{17} % Blatt 9
+\newcommand{\punktetotalphysik}{136} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben müssen von
+%Studenten der Physik nicht bearbeitet werden.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2 + 2 + 2 + 2 + 1 + 2  = 11]
+  Für jede positive ganze Zahl $n \in \N_+$ sei $G_n = (V_n, E_n)$ der gerichtete Graph mit der Knotenmenge $V_n = \{0, 1\}^n$ und der Kantenmenge
+  \begin{equation*}
+%    E_n = \{ \{x, y\} \in 2^{V_n} \mid \exists i \in \Z_n \colon (x_i \neq y_i \land \forall k \in \Z_n \setminus \{i\} \colon x_k = y_k) \}.
+    E_n = \{ (x, y) \in V_n \times V_n \mid \exists i \in \Z_n \colon (x_i \neq y_i \land \forall k \in \Z_n \smallsetminus \{i\} \colon x_k = y_k) \}.
+  \end{equation*}
+  \begin{enumerate}
+    \item Zeichnen Sie $G_1$, $G_2$ und $G_3$ jeweils in ein kartesisches Koordinatensystem der entsprechenden Dimension.
+    \item Geben Sie einen geschlossenen arithmetischen Ausdruck für $\abs{E_n}$ an. Dabei bedeutet \emph{geschlossen}, dass in dem Ausdruck weder das Summenzeichen $\sum$ noch das Produktzeichen $\prod$ vorkommt.
+    \item Geben Sie für jede positive ganze Zahl $n \in \N_+$ eine Einbettung $f_n$ von $G_n$ in $G_{n + 1}$ an, das heißt, eine injektive Abbildung $f_n \colon V_n \to V_{n + 1}$ derart, dass
+          \begin{equation*}
+%            \forall x \in V_n\; \forall y \in V_n \colon \left( \{x, y\} \in E_n \rightarrow \{f_n(x), f_n(y)\} \in E_{n + 1} \right).
+            \forall x \in V_n\; \forall y \in V_n \colon \left( (x, y) \in E_n \rightarrow (f_n(x), f_n(y)) \in E_{n + 1} \right).
+          \end{equation*}
+    \item Geben Sie einen Pfad $p = (v_0, v_1, v_2, v_3)$ von $(0,0,0)$ nach $(1,1,1)$ in $G_3$ an. Geben Sie außerdem einen Pfad $q$ von $(0,0,0,0)$ nach $(1,1,1,1)$ in $G_4$ an, der den Pfad $(f_3(v_0), f_3(v_1), f_3(v_2), f_3(v_3))$ als Teilpfad enthält, wobei $f_3$ die Einbettung von $G_3$ in $G_4$ aus der vorangegangenen Teilaufgabe sei.
+    \item Geben Sie für jede positive ganze Zahl $n \in \N_+$ einen geschlossenen arithmetischen Ausdruck für
+          \begin{equation*}
+            \gamma_n = \min\{ |p| \mid \text{$p$ ist Pfad in $G_n$ von $(0,0,\dotsc,0)$ nach $(1,1,\dotsc,1)$} \}
+          \end{equation*}
+          an.
+    \item Geben Sie für jede positive ganze Zahl $n \in \N_+$ einen Graph"=Isomorphismus $\varphi_n$ von $G_n$ nach $G_n$ an, der nicht die identische Abbildung ist. %, das heißt, eine bijektive Abbildung $\varphi_n \colon V_n \to V_n$ derart, dass
+%          \begin{equation*}
+%            \forall x \in V_n\; \forall y \in V_n \colon \left( \{x, y\} \in E_n \leftrightarrow \{\varphi_n(x), \varphi_n(y)\} \in E_n \right),
+%          \end{equation*}
+%          und derart, dass ein Knoten $x \in V_n$ existiert, für den $\varphi_n(x) \neq x$ gilt.
+    % \item Geben Sie für jede positive ganze Zahl $n \in \N_+$ einen geschlossenen arithmetischen Ausdruck für
+    %       \begin{equation*}
+    %         \xi_n = \min\{ |U| \mid U \subseteq E_n \land (V_n, E_n \setminus U) \text{ unzusammenhängend} \}
+    %       \end{equation*}
+    %       an.
+          % Der Graph $G_n$ is zusammenhängend. %Was ist die kleinste Anzahl an Kanten die aus $G_n$ entfernt werden müssen, damit $G_n$ % Wie viele Kanten müssen mindestens aus $G_n$ entfernt werden, damit der entstehende Graph unzusammenhängend ist?
+    % \item Geben Sie für jede positive ganze Zahl $n \in \N_+$ ein Teilmenge $F_n$ von $E_n$ so an, dass der ungerichtete Graph $H_n = (V_n, F_n)$ ein Baum ist.
+
+    %       \emph{Hinweis:} Bei der Definition von $F_n$ können die Abbildungen
+    %       \begin{align*}
+    %         \sigma_n \colon E_n &\to     \N_0,\\
+    %                           x &\mapsto \sum_{i \in \Z_n} x_i,
+    %       \end{align*}
+    %       und
+    %       \begin{align*}
+    %         \tau_n \colon E_n &\to     \Z,\\
+    %                         x &\mapsto \begin{dcases*}
+    %                                      -1, &falls $\forall i \in \Z_n \colon x_i = 0$,\\
+    %                                      \min\{ i \in \Z_n \mid x_i = 1 \}, &sonst,
+    %                                    \end{dcases*}
+    %       \end{align*}
+    %       von Nutzen sein.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item \quad\begin{tikzpicture}[auto, baseline = {([yshift=-10pt]current bounding box.north)},>={Latex}]
+            \node (0) {$0$};
+            \node (1) [right = 1cm of 0] {$1$};
+
+            \path (0) edge[bend left=8,->] (1);
+            \path (1) edge[bend left=8,->] (0);
+          \end{tikzpicture}
+          \qquad\qquad\qquad
+          \quad\begin{tikzpicture}[auto, baseline = {([yshift=-10pt]current bounding box.north)},>={Latex}]
+            \node (00) {$(0, 0)$};
+            \node (10) [right = 1cm of 00] {$(1, 0)$};
+            \node (01) [above = 1cm of 00] {$(0, 1)$};
+            \node (11) [right = 1cm of 01] {$(1, 1)$};
+
+            \path (00) edge[bend left=8,->] (10)
+                  (00) edge[bend left=8,->] (01)
+                  (11) edge[bend left=8,->] (01)
+                  (11) edge[bend left=8,->] (10);
+            \path (10) edge[bend left=8,->] (00)
+                  (01) edge[bend left=8,->] (00)
+                  (01) edge[bend left=8,->] (11)
+                  (10) edge[bend left=8,->] (11);
+          \end{tikzpicture}
+
+          \quad\begin{tikzpicture}[auto, baseline = {([yshift=-10pt]current bounding box.north)},>={Latex}]
+            \node (000) {$(0, 0, 0)$};
+            \node (001) [above right = 0.7cm of 000] {$(0, 0, 1)$};
+            \node (010) [above = 1.4cm of 000] {$(0, 1, 0)$};
+            \node (011) [above right = 0.7cm of 010] {$(0, 1, 1)$};
+            \node (100) [right = 1.4cm of 000] {$(1, 0, 0)$};
+            \node (101) [above right = 0.7cm of 100] {$(1, 0, 1)$};
+            \node (110) [above = 1.4cm of 100] {$(1, 1, 0)$};
+            \node (111) [above right = 0.7cm of 110] {$(1, 1, 1)$};
+
+            \path (000) edge[bend left=8,->] (001)
+                  (000) edge[bend left=8,->] (010)
+                  (000) edge[bend left=8,->] (100)
+                  (111) edge[bend left=8,->] (110)
+                  (111) edge[bend left=8,->] (101)
+                  (111) edge[bend left=8,->] (011)
+                  (001) edge[bend left=8,->] (011)
+                  (001) edge[bend left=8,->] (101)
+                  (010) edge[bend left=8,->] (110)
+                  (010) edge[bend left=8,->] (011)
+                  (100) edge[bend left=8,->] (101)
+                  (100) edge[bend left=8,->] (110);
+            \path (001) edge[bend left=8,->] (000)
+                  (010) edge[bend left=8,->] (000)
+                  (100) edge[bend left=8,->] (000)
+                  (110) edge[bend left=8,->] (111)
+                  (101) edge[bend left=8,->] (111)
+                  (011) edge[bend left=8,->] (111)
+                  (011) edge[bend left=8,->] (001)
+                  (101) edge[bend left=8,->] (001)
+                  (110) edge[bend left=8,->] (010)
+                  (011) edge[bend left=8,->] (010)
+                  (101) edge[bend left=8,->] (100)
+                  (110) edge[bend left=8,->] (100);
+          \end{tikzpicture}
+
+          \begin{korrektur}
+            Jeweils 0.5 Punkte für $G_1$ und $G_2$. Und 1 Punkt für $G_3$.
+
+            Das mit dem "`kartesischen Koordinatensystem"' war gedacht
+            als Mittel, um einheitlichere Abgaben zu erreichen. Keine
+            Abzüge für andere Bilder.
+
+            Wenn die Knoten anonym sind, \emph{insgesamt} 0.5 Punkte Abzug.
+
+            Für ungerichtete Graphen \emph{insgesamt} 0.5 Punkte Abzug.
+          \end{korrektur}
+    \item $\abs{E_n} = 2^{n} \cdot n$
+
+      \emph{Erklärung (nicht verlangt):} Es sei $n \in \N_+$. Der Graph $G_n$ hat genau $2^n$ Knoten. Jeder dieser Knoten hat Ausgangsgradgrad $n$, das heißt, genau $n$ wegführende Kanten. Und so wird jede Kante genau einmal gezählt.
+      % Die Kantenzahl beträgt somit
+      %     \begin{equation*}
+      %       \frac{\sum_{x \in V_n} n}{2} = \frac{2^n \cdot n}{2} = 2^{n - 1} \cdot n.
+      %     \end{equation*}
+      %     Wir müssen $\sum_{x \in V_n} n$ durch $2$ dividieren, da wir im Ausdruck $\sum_{x \in V_n} n$ jede Kante doppelt zählen, einmal je inzidenten Knoten (und jede Kante, die keine Schlinge ist, ist zu genau zwei verschiedenen Knoten inzident).
+    \item Für jedes $n \in \N_+$ ist
+          \begin{align*}
+            f_n \colon V_n &\to     V_{n + 1},\\
+                         x &\mapsto (x, 0),
+          \end{align*}
+          eine mögliche Einbettung von $G_n$ in $G_{n + 1}$.
+
+          $x\mapsto (x,1)$ und $x\mapsto (0,x)$ sind andere und es gibt noch viel mehr Möglichkeiten.
+          \begin{korrektur}
+            Bitte darauf achten, dass die Bilder verbundener Knoten wieder verbunden sind.
+          \end{korrektur}
+    \item Ein möglicher Pfad $p$ ist $((0,0,0), (1,0,0), (1,1,0), (1,1,1))$. 
+
+      Ein möglicher Pfad $q$ ist
+      $((0,0,0,0), (1,0,0,0), (1,1,0,0), (1,1,1,0), (1,1,1,1))$.
+
+      \begin{korrektur}
+        Je 0.5 Punkte auf jeden Pfad und 1 Punkt, wenn das Bild von
+        $p$ in $q$ vorkommt.
+      \end{korrektur}
+    \item $\gamma_n = n$
+
+          Um von $(0,0,\dotsc,0)$ nach $(1,1,\dotsc,1)$ in $G_n$ zu kommen müssen genau $n$ bits von $0$ auf $1$ kippen.
+          \begin{korrektur}
+            \textbf{Achtung:} $|p|$ wurde in der Vorlesung nicht
+            präzise definiert. Wir akzeptieren auch $n+1$, aber nicht $n-1$.
+          \end{korrektur}
+    \item Für jedes $n \in \N_+$ ist \zB
+          \begin{align*}
+            \varphi_n \colon V_n &\to     V_n,\\
+                          (x, 0) &\mapsto (x, 1),\\
+                          (x, 1) &\mapsto (x, 0),
+          \end{align*}
+          ein Isomorphismus von $G_n$ nach $G_n$. Für $n = 1$ degeneriert $(x, 0)$ zu $0$ und $(x, 1)$ zu $1$.
+
+          \begin{korrektur}
+            Wir haben Probleme, vernünftig mit $n$-Tupeln umzugehen.
+            Deshalb seien Sie bitte bei der Korrektur auch ein bisschen großzügig.
+          \end{korrektur}
+
+    % \item $\xi_n = n$
+
+    %       Tatsächlich genügt es $n$ Kanten aus $G_n$ zu entfernen, damit der entstehende Graph unzusammenhängend wird: Man wähle einfach einen Knoten und entferne alle zu diesem Knoten inzidenten Kanten.
+
+    %       Das man mit einer kleineren Anzahl an Kanten nicht auskommt, ist schwerer einzusehen.
+
+    % \item Die Kantenmenge
+    %       \begin{equation*}
+    %         F_n = \{ \{x, y\} \in E_n \mid \sigma_n(x) < \sigma_n(y) \land \tau_n(x) \leq \tau_n(y) \}
+    %       \end{equation*}
+    %       leistest das Gewünschte.
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+\begin{aufgabe}[1 + 1 + 2 + 2 = 6]
+  \emph{Hinweis:} Benutzen Sie in dieser Aufgabe die Definition von
+  "`Zyklus"' aus dem aktualisierten Skript: Ein Zyklus ist ein
+  geschlossener Pfad, dessen Länge größer als oder gleich $1$ ist.
+
+  Ein sogenannter DAG (engl.~\emph{directed acyclic graph}) ist ein
+  gerichteter Graph, der keine Zyklen enthält.
+
+  \begin{enumerate}
+  \item Geben Sie einen DAG mit $4$ Knoten an, der
+    \begin{itemize}
+    \item kein Baum ist, und
+    \item einen Teilgraphen mit $4$ Knoten enthält, der ein Baum ist.
+    \end{itemize}
+  \item Geben Sie einen DAG mit $6$ Knoten und $9$ Kanten an, der
+    keinen Pfad der Länge $2$ enthält.
+  \item Begründen Sie, warum jeder Baum ein DAG ist.
+  \item Es sei $G=(V,E)$ ein DAG und es seien $x,y\in V$ zwei Knoten
+    von $G$ mit der Eigenschaft: $(x,y)\in E^*$ und $(y,x)\in E^*$.
+    %
+    Beweisen Sie: $x=y$.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+  \item
+    \begin{tikzpicture}[auto, baseline = {([yshift=-10pt]current
+        bounding box.north)},>={Latex}]
+      \node (A) {};
+      \node (B) [right = 1cm of A] {};
+      \node (C) [below = 1cm of A] {};
+      \node (D) [right = 1cm of C] {};
+
+      \draw[->] (A) -- (B);
+      \draw[->] (B) -- (D);
+      \draw[->] (A) -- (C);
+      \draw[->] (C) -- (D);
+    \end{tikzpicture} \\[3mm]
+  \item
+    \begin{tikzpicture}[auto, baseline = {([yshift=-10pt]current
+        bounding box.north)},>={Latex}]
+      \node (A1) {};
+      \node (B1) [right = 1cm of A1] {};
+      \node (C1) [right = 1cm of B1] {};
+      \node (A2) [below = 1cm of A1] {};
+      \node (B2) [right = 1cm of A2] {};
+      \node (C2) [right = 1cm of B2] {};
+
+      \draw[->] (A1) -- (A2);
+      \draw[->] (A1) -- (B2);
+      \draw[->] (A1) -- (C2);
+      \draw[->] (B1) -- (A2);
+      \draw[->] (B1) -- (B2);
+      \draw[->] (B1) -- (C2);
+      \draw[->] (C1) -- (A2);
+      \draw[->] (C1) -- (B2);
+      \draw[->] (C1) -- (C2);
+    \end{tikzpicture} \\[3mm]
+  \item Es ist zu zeigen, dass ein Baum keine Zyklen enthält.
+
+    Angenommen ein Graph $G=(V,E)$ ist ein Baum mit Wurzel $r\in V$
+    und er enthält einen Zyklus $p=(v_0,\dots,v_n)$, also $n\geq 1$
+    und $v_0=v_n$.
+
+    Da $G$ ein Baum ist, gibt es einen Pfad von $q$ von $r$ zu $v_0$.
+    Wenn man diesen Pfad um die Folge $v_1, \dots,v_n$ verlängert,
+    erhält man wiederum einen Pfad von $r$ zu $v_0$, der aber länger
+    als also verschieden von $q$ ist.
+
+    Also gibt es mindestens zwei Pfade von $r$ nach $v_0$ im
+    Widerspruch zur Annahme, dass $G$ ein Baum ist.
+  \item Wäre $x\not= y$, dann gäbe es wegen $(x,y)\in E^*$ einen Pfad
+    $(v_0,\dots,v_n)$ mit $x=v_0$, $y=v_n$ und $n\geq 1$, wegen
+    $(y,x)\in E^*$ gäbe es einen Pfad $(v'_0,\dots,v'_m)$ mit $y=v'_0$,
+    $x=v'_m$ und $m\geq 1$.
+
+    Dann wäre aber $(v_0,\dots, v_n, v'_1, \dots, v'_m)$ ein Pfad von
+    $x$ nach $x$ einer Länge $\geq 1$ im Widerspruch zu der Tatsache,
+    dass $G$ ein DAG ist.
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

@@ -1,0 +1,370 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{8}
+\newcommand{\ausgabetermin}{16.~Dezember 2015}
+\newcommand{\abgabetermin}{8.~Januar 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+%\newcommand{\punkteblatt}{18} % Blatt 5
+%\newcommand{\punkteblattphysik}{18} % Blatt 5
+%\newcommand{\punkteblatt}{20} % Blatt 6
+%\newcommand{\punkteblattphysik}{20} % Blatt 6
+%\newcommand{\punkteblatt}{20} % Blatt 7
+%\newcommand{\punkteblattphysik}{0} % Blatt 7
+\newcommand{\punkteblatt}{18} % Blatt 8
+\newcommand{\punktetotal}{142} %
+\newcommand{\punkteblattphysik}{18} % Blatt 8
+\newcommand{\punktetotalphysik}{119} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben müssen von
+%Studenten der Physik nicht bearbeitet werden.\\
+
+\noindent
+\textbf{Vorbemerkung.} Für alle Aufgaben auf diesem Blatt gelten die
+folgenden Annahmen, ohne dass sie jedes Mal erneut aufgeführt werden:
+\begin{itemize}[nosep]
+\item Die Menge der möglichen Werte für eine Variable ist $\Z$, sofern
+  nicht ausdrücklich etwas anderes angegeben ist.
+\item Alle Variablen sind initialisiert. Der Anfangswert ist aber
+  nicht immer explizit angegeben.
+\item Zu einer Anweisungsfolge $S$ und einer Nachbedingung $Q$ heißt
+  $P$ eine \emph{schwächste Vorbedingung}, wenn $\htr{P}{S}{Q}$ ein
+  gültiges Hoare"=Tripel ist und für jedes gültige Hoare"=Tripel
+  $\htr{P'}{S}{Q}$ gilt: $P'$ impliziert $P$.
+\item Zu einer Anweisungsfolge $S$ und einer Vorbedingung $P$ heißt
+  $Q$ eine \emph{stärkste Nachbedingung}, wenn $\htr{P}{S}{Q}$ ein
+  gültiges Hoare"=Tripel ist und für jedes gültige Hoare"=Tripel
+  $\htr{P}{S}{Q'}$ gilt: $Q$ impliziert $Q'$.
+\end{itemize}
+
+\vspace*{\baselineskip}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Es seien $x$ und $y$ zwei verschiedene Variablen und es seien $a$ und $b$ zwei ganze Zahlen. Bestimmen Sie anhand des Hoare-Kalküls eine schwächste Vorbedingung von
+  \begin{align*}
+    & x \gets x + y \\
+    & x \gets x \cdot x \\
+    & x \gets x - y \\
+    & \{ x = a \land y = b \}
+  \end{align*}
+  indem Sie wiederholt das Zuweisungsaxiom verwenden.
+\end{aufgabe}
+
+\begin{loesung}
+  Eine schwächste Vorbedingung ist ${((x + y) \cdot (x + y)) - y} = a \land y = b$.
+
+  Gemäß des Zuweisungsaxioms sind die folgenden Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x - y = a \land y = b \} \\
+    & x \gets x - y \\
+    & \{ x = a \land y = b \}
+  \end{align*}
+  und
+  \begin{align*}
+    & \{ (x \cdot x) - y = a \land y = b \} \\
+    & x \gets x \cdot x \\
+    & \{ x - y = a \land y = b \}
+  \end{align*}
+  und
+  \begin{align*}
+    & \{ ((x + y) \cdot (x + y)) - y = a \land y = b \} \\
+    & x \gets x + y \\
+    & \{ {x \cdot x-y} = a \land y = b \}
+  \end{align*}
+  Gemäß der Sequenzenregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ ((x + y) \cdot (x + y)) - y = a \land y = b \} \\
+    & x \gets x + y \\
+    & x \gets x \cdot x \\
+    & x \gets x - y \\
+    & \{ x = c \land y = d \}
+  \end{align*}
+  Somit ist $((x + y) \cdot (x + y)) - y = a \land y = b$ eine Vorbedingung. Und diese ist tatäschlich eine schwächste.
+
+  Alternativ alles hintereinander weg:
+  \begin{align*}
+    & \{ ((x + y) \cdot (x + y)) - y = a \land y = b \} \\
+    & x \gets x + y \\
+    & \{ x  \cdot x - y = a \land y = b \} \\
+    & x \gets x \cdot x \\
+    & \{ x - y = a \land y = b \} \\
+    & x \gets x - y \\
+    & \{ x = a \land y = b \}
+  \end{align*}
+
+  Statt $\{ ((x + y) \cdot (x + y)) - y = a \land y = b \}$ kann
+  natürlich auch etwas Äquivalentes stehen.
+
+  \begin{korrektur}
+    Was man \emph{nicht} möchte ist Einsetzen von oben nach unten:
+    \begin{align*}
+      & \{ x = -b \pm \sqrt{a+b} \land y = b \} \\
+      & x \gets x + y \\
+      & \{ x = \pm \sqrt{a+b} \land y = b \} \\
+      & x \gets x \cdot x \\
+      & \{ x =  a+b \land y = b \} \\
+      & x \gets x - y \\
+      & \{ x = a \land y = b \}
+    \end{align*}
+
+    Erlaubt ist, beim Einsetzen von unten nach oben die arithmetischen
+    Ausdrücke ab und zu \emph{explizit} "`vereinfachen"', \dh zwei
+    Zusicherungen hintereinander und die untere folgt aus der darüber.
+
+    Vorschlag: je 1 Punkt für jede Zusicherung
+  \end{korrektur}
+
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[6]
+  Es seien $x$, $y$ und $z$ drei verschiedene Variablen und es seien $a$ und $b$ zwei ganze Zahlen. Weiter sei
+  \begin{align*}
+    \min \colon \Z \times \Z &\to     \Z,\\
+                      (u, v) &\mapsto \begin{dcases*}
+                                        u, &falls $u < v$,\\
+                                        v, &falls $u \geq v$,
+                                      \end{dcases*}
+  \end{align*}
+  und es sei
+  \begin{align*}
+    \max \colon \Z \times \Z &\to     \Z,\\
+                      (u, v) &\mapsto u + v - \min(u, v).
+  \end{align*}
+  Beweisen Sie anhand des Hoare-Kalküls, dass das Hoare-Tripel
+  \begin{align*}
+    & \{ x = a \land y = b \} \\
+    & \kw{if\ } x > y \kw{\ then} \\
+    & \qquad z \gets x \\
+    & \qquad x \gets y \\
+    & \qquad y \gets z \\
+    & \kw{else} \\
+    & \qquad x \gets x \\
+    & \kw{fi} \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  gültig ist.
+\end{aufgabe}
+
+\begin{loesung}
+  Gemäß des Zuweisungsaxioms sind die folgenden Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x = \min(a, b) \land z = \max(a, b) \} \\
+    & y \gets z \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  und
+  \begin{align*}
+    & \{ y = \min(a, b) \land z = \max(a, b) \} \\
+    & x \gets y \\
+    & \{ x = \min(a, b) \land z = \max(a, b) \}
+  \end{align*}
+  und
+  \begin{align*}
+    & \{ y = \min(a, b) \land x = \max(a, b) \} \\
+    & z \gets x \\
+    & \{ y = \min(a, b) \land z = \max(a, b) \}
+  \end{align*}
+  Gemäß der Sequenzenregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ y = \min(a, b) \land x = \max(a, b) \} \\
+    & z \gets x \\
+    & x \gets y \\
+    & y \gets z \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  Die Vorbedingung dieses Hoare-Tripels wird impliziert von $x = a \land y = b \land x > y$. Gemäß der Verstärkungs- und Abschwächungsregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x = a \land y = b \land x > y \} \\
+    & z \gets x \\
+    & x \gets y \\
+    & y \gets z \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  Gemäß des Zuweisungsaxioms ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x = \min(a, b) \land y = \max(a, b) \} \\
+    & x \gets x \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  Die Vorbedingung dieses Hoare-Tripels wird impliziert von $x = a \land y = b \land \neg (x > y)$. Gemäß der Verstärkungs- und Abschwächungsregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x = a \land y = b \land \neg (x > y) \} \\
+    & x \gets x \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  Gemäß der Verzweigungsregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x = a \land y = b \} \\
+    & \kw{if\ } x > y \kw{\ then} \\
+    & \qquad z \gets x \\
+    & \qquad x \gets y \\
+    & \qquad y \gets z \\
+    & \kw{else} \\
+    & \qquad x \gets x \\
+    & \kw{fi} \\
+    & \{ x = \min(a, b) \land y = \max(a, b) \}
+  \end{align*}
+  Da ausschließlich gültige Hoare-Tripel ableitbar sind, ist obiges Hoare-Tripel gültig.
+
+  \begin{korrektur}
+    Vorschlag: 4 Punkte für den \kw{then}-Teil und 2 für den
+    \kw{else}-Teil.
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[8]
+  Für jede positive ganze Zahl $n \in \N_+$ ist der ganzzahlige binäre Logarithmus von $n$, geschrieben $\floor{\log_2 n}$, jene nicht-negative ganze Zahl $k \in \N_0$, für die $2^k \leq n < 2^{k + 1}$ gilt.
+
+  Es seien $x$, $y$ und $z$ drei verschiedene Variablen. Beweisen Sie anhand des Hoare-Kalküls und mithilfe einer Schleifeninvariante, dass das Hoare-Tripel
+  \begin{align*}
+    & \{ x \geq 1 \} \\
+    & z \gets 0 \\
+    & y \gets 1 \\
+    & \kw{while\ } 2 \cdot y \leq x \kw{\ do} \\
+    & \qquad z \gets z + 1 \\
+    & \qquad y \gets 2 \cdot y \\
+    & \kw{od} \\
+    & \{ z = \floor{\log_2 x} \}
+  \end{align*}
+  gültig ist.
+
+  \emph{Hinweis:} Die Nachbedingung $z = \floor{\log_2 x}$ ist äquivalent zu $2^z \leq x < 2^{z + 1}$.
+\end{aufgabe}
+
+\begin{loesung}
+  Gemäß des Zuweisungsaxioms sind die folgenden Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x \geq 1 \land 1 = 1 \land z = 0 \} \\
+    & y \gets 1 \\
+    & \{ x \geq 1 \land y = 1 \land z = 0 \}
+  \end{align*}
+  und
+  \begin{align*}
+    & \{ x \geq 1 \land 1 = 1 \land 0 = 0 \} \\
+    & z \gets 0 \\
+    & \{ x \geq 1 \land 1 = 1 \land z = 0 \}
+  \end{align*}
+  Gemäß der Sequenzenregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x \geq 1 \land 1 = 1 \land 0 = 0 \} \\
+    & z \gets 0 \\
+    & y \gets 1 \\
+    & \{ x \geq 1 \land y = 1 \land z = 0 \}
+  \end{align*}
+  Die Vorbedingung dieses Hoare-Tripels wird impliziert von $x \geq 1$. Gemäß der Verstärkungs- und Abschwächungsregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x \geq 1 \} \\
+    & z \gets 0 \\
+    & y \gets 1 \\
+    & \{ x \geq 1 \land y = 1 \land z = 0 \}
+  \end{align*}
+  Um zu beweisen, dass das Hoare-Tripel aus der Aufgabenstellung ableitbar, insbesondere gültig, ist, genügt es, gemäß der Sequenzenregel, zu beweisen, dass das folgende Hoare-Tripel ableitbar ist:
+  \begin{align*}
+    & \{ x \geq 1 \land y = 1 \land z = 0 \} \\
+    & \kw{while\ } 2 \cdot y \leq x \kw{\ do} \\
+    & \qquad z \gets z + 1 \\
+    & \qquad y \gets 2 \cdot y \\
+    & \kw{od} \\
+    & \{ z = \floor{\log_2 x} \}
+  \end{align*}
+  Dazu raten wir die Schleifeninvariante $y = 2^z \land y \leq x$. Diese Formel ist tatsächlich eine Schleifeninvariante, da durch zweifache Anwendung des Zuweisungsaxioms und einfache Anwendung der Sequenzenregel folgt, dass
+  \begin{align*}
+    & \{ 2 \cdot y = 2^{z + 1} \land 2 \cdot y \leq x \} \\
+    & z \gets z + 1 \\
+%    & \{ 2 \cdot y = 2^z \land 2 \cdot y \leq x \}
+    & y \gets 2 \cdot y \\
+    & \{ y = 2^z \land y \leq x \}
+  \end{align*}
+  ableitbar ist, und durch einfach Anwendung der Verstärkungs- und Abschwächungsregel folgt, dass
+  \begin{align*}
+    & \{ y = 2^z \land y \leq x \land 2 \cdot y \leq x \} \\
+    & z \gets z + 1 \\
+    & y \gets 2 \cdot y \\
+    & \{ y = 2^z \land y \leq x \}
+  \end{align*}
+  ableitbar ist. Gemäß der Schleifeninvariantenregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ y = 2^z \land y \leq x \} \\
+    & \kw{while\ } 2 \cdot y \leq x \kw{\ do} \\
+    & \qquad z \gets z + 1 \\
+    & \qquad y \gets 2 \cdot y \\
+    & \kw{od} \\
+    & \{ y = 2^z \land y \leq x \land \neg (2 \cdot y \leq x) \}
+  \end{align*}
+  Die Vorbedingung dieses Hoare-Tripels wird impliziert von $x \geq 1 \land y = 1 \land z = 0$ und die Nachbedingung impliziert $2^z \leq x < 2^{z + 1}$, also gemäß der Hinweises $z = \floor{\log_2 x}$. Gemäß der Verstärkungs- und Abschwächungsregel ist das folgende Hoare-Tripel ableitbar:
+  \begin{align*}
+    & \{ x \geq 1 \land y = 1 \land z = 0 \} \\
+    & \kw{while\ } 2 \cdot y \leq x \kw{\ do} \\
+    & \qquad z \gets z + 1 \\
+    & \qquad y \gets 2 \cdot y \\
+    & \kw{od} \\
+    & \{ z = \floor{\log_2 x} \}
+  \end{align*}
+
+  Alternativ notiert alles hintereinander weg:
+
+  \begin{align*}
+    & \{ x \geq 1 \} \\
+    & \{ 1=2^0 \land 1\leq x \}\\
+    & z \gets 0 \\
+    & \{ 1=2^z \land 1\leq x \}\\
+    & y \gets 1 \\
+    & \{ y=2^z \land y\leq x \}\\
+    & \kw{while\ } 2 \cdot y \leq x \kw{\ do} \\
+    & \qquad \{ y=2^z \land y\leq x \land 2\cdot y \leq x\}\\
+    & \qquad \{ 2\cdot y=2^{z+1} \land 2\cdot y\leq x \}\\
+    & \qquad z \gets z + 1 \\
+    & \qquad \{ 2\cdot y=2^z \land 2\cdot y\leq x \}\\
+    & \qquad y \gets 2 \cdot y \\
+    & \qquad \{ y=2^z \land y\leq x \}\\
+    & \kw{od} \\
+    & \{ y=2^z \land y\leq x \land \lnot (2 \cdot y \leq x)\}\\
+    & \{ y=2^z \land y\leq x \land x < 2 \cdot y \}\\
+    & \{ 2^z \leq x < 2^{z + 1} \} \\
+    & \{ z = \floor{\log_2 x} \}
+  \end{align*}
+
+  \begin{korrektur}
+    Vorschlag: 
+    \begin{itemize}
+    \item 1 Punkt für den Teil vor dem \kw{while}
+    \item 3 Punkte für vernünftige Schleifeninvariante, 
+    \item 1 Punkt für richtige Benutzung der Schleifeninvariante, 
+    \item 2 Punkte für den Rest des Schleifenrumpfes
+    \item 1 Punkte für richtige Argumentation nach dem Schleifenrumpf
+    \end{itemize}
+  \end{korrektur}
+
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

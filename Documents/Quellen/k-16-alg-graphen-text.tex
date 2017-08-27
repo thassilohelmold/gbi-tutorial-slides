@@ -1,0 +1,1307 @@
+% === Einheit  ====================================================================
+\Tut\chapter{Erste Algorithmen in Graphen}
+\label{k:alg-graphen}
+
+In dieser Einheit wollen wir beginnen, Algorithmen auch unter
+quantitativen Gesichtspunkten zu betrachten. 
+
+Als "`Aufhänger"' werden wir eine vereinfachte Problemstellung
+betrachten, die mit einer der am Ende der
+\hyperref[k:graphen]{Einheit~\ref{k:graphen} über Graphen}
+aufgezählten verwandt ist: Man finde heraus, ob es in einem gegebenen
+gerichteten Graphen einen Pfad von einem gegebenen Knoten $i$ zu einem
+gegebenen Knoten $j$ gibt.
+
+Wir beginnen in Abschnitt~\ref{sec:graph-in-rechner} mit der Frage,
+wie man denn Graphen im Rechner repräsentiert. In~\ref{sec:e-quadrat}
+nähern wir uns dann langsam dem Erreichbarkeitsproblem, indem wir uns
+erst einmal nur für Pfade der Länge $2$ interessieren. Das führt auch
+zu den Konzepten Matrixaddition und Matrixmultiplikation.  Auf der
+Matrizenrechnung aufbauend beginnen wir dann in~\ref{sec:e-stern} mit
+einem ganz naiven Algorithmus und verbessern ihn in zwei Schritten.
+Einen der klassischen Algorithmen, den von Warshall, für das Problem,
+werden wir in Abschnitt~\ref{sec:warshall} kennenlernen.
+
+Nachdem wir uns in dieser Einheit beispielhaft auch mit dem Thema
+beschäftigt haben werden, wie man --- in einem gewissen Sinne --- die
+Güte eines Algorithmus quantitativ erfassen kann, werden wir das in
+der nachfolgenden
+\hyperref[k:quantitative-aspekte]{Einheit~\ref{k:quantitative-aspekte}
+  über quantitative Aspekte von Algorithmen} an weiteren Beispielen
+aber auch allgemein etwas genauer beleuchten.
+
+% -----------------------------------------------------------------------
+\Tut\section{Repr\"asentation von Graphen im Rechner}
+\label{sec:graph-in-rechner}
+
+In der Vorlesung über Programmieren haben Sie schon von Klassen,
+Objekten und Attributen gehört und Arrays kennengelernt. Das kann man
+auf verschiedene Arten nutzen, um \zB Graphen im Rechner zu
+repräsentieren. Ein erster Ansatz in Java könnte \zB so aussehen:
+
+\begin{alltt}
+  class Vertex \{                    class Edge \{                 
+     String name;                      Vertex start;               
+  \}                                    Vertex end;                 
+                                    \}                            
+  class Graph \{
+     Vertex[] vertices;
+     Edge[] edges;
+  \}
+\end{alltt}
+% 
+Dabei hat man aber mehr hingeschrieben als man "`eigentlich"' will,
+denn die Knoten (und auch die Kanten) sind durch die Nummerierung der
+Komponenten der Arrays total angeordnet worden. Das ist bei den Mengen
+der mathematischen Definition nicht der Fall.
+
+Aber es schadet nicht. Da man die Nummern aber sowieso schon hat,
+macht man, zumindest wenn man besonders kurz und übersichtlich sein
+will, den Schritt und sagt, dass die Identitäten der Knoten einfach
+die Zahlen eines Anfangsstückes der natürlichen Zahlen sind.  Solange
+man sich mit Problemen beschäftigt, die unter Isomorphie invariant
+sind, ergeben sich hierdurch keine Probleme. Deswegen ist für uns im
+folgenden bei allen Graphen $V=\G_n$ für ein $n\geq 1$.
+
+\begin{alltt}
+  class Vertex \{                    class Edge \{                 
+     int id;                           Vertex start;               
+  \}                                    Vertex end;                 
+                                    \}                            
+  class Graph \{
+     Vertex[] vertices;
+     Edge[] edges;
+  \}                         
+\end{alltt}
+% 
+Gelegentlich verwendet man als Knotennummern auch Anfangsstücke der
+positiven ganzen Zahlen (also ohne Null). Lassen Sie sich von solchen
+kleinen technischen Details nicht verunsichern. Man macht, was einem
+gerade am besten erscheint.
+
+Wenn man Graphen in Java wie oben skizziert implementieren würde, dann
+könnte man bei einer gegebenen Kante leicht auf deren Anfangs- und
+Endknoten zugreifen.  Wie Sie bald sehen werden, will man aber
+mitunter umgekehrt zu einem gegebenen Knoten $v$ \zB auf die ihn
+verlassenden Kanten zugreifen.  Das wäre aber nur umständlich möglich:
+Man müsste systematisch alle Kanten darauf hin überprüfen, ob sie bei
+$v$ starten.
+
+Es gibt (neben anderen) zwei gängige Methoden, dieses Problem zu
+beseitigen. Die eine besteht darin, zu jedem Knoten eine Liste der ihn
+verlassenden Kanten oder der über solche Kanten erreichbaren
+Nachbarknoten mitzuführen. Wenn man diese Liste als Array
+implementiert, dann wäre
+% 
+\begin{alltt}
+  class Vertex \{                       class Graph \{                 
+     int id;                               Vertex[] vertices;      
+     Vertex[] neighbors;               \}                         
+  \}                                  
+\end{alltt}
+% 
+Man spricht dann davon, dass für jeden Knoten die
+\mdefine{Adjazenzliste}\index{Adjazenzliste} vorhanden ist. 
+
+Wenn man mit kantenmarkierten Graphen arbeiten muss, benutzt man statt
+dessen lieber die
+\mdefine[Inzidenzliste]{Inzidenzlisten}\index{Inzidenzlisten}. Das ist
+für einen Knoten die Liste der Kanten, die ihn als einen Endpunkt
+haben.
+
+Wir wollen im folgenden aber eine andere Methode benutzen, um die
+Beziehungen zwischen Knoten zu speichern. Wenn man zu einem Knoten $u$
+womöglich oft und schnell herausfinden möchte, ob ein Knoten $v$
+Nachbar von $u$ ist, dann ist es bequem, wenn man das immer leicht
+herausfinden kann. Man müsste dann (unter Umständen) nur noch die
+Klassen für einzelne Knoten und einen Graphen implementieren, \zB so:
+% 
+\begin{alltt}
+  class Vertex \{                              class Graph \{            
+     int id;                                      Vertex[] vertices;     
+     boolean[] is_connected_to;               \}                         
+  \}
+\end{alltt}
+% 
+Für einen Knoten, also ein Objekt $u$ der Klasse \texttt{Vertex}, wäre
+\verb|is_connected_to| also ein Feld mit genau so vielen Komponenten
+wie es Knoten im Graphen gibt. Und
+$u$.\verb|is_connected_to[|$v$.\verb|id|\verb|]| sei genau dann
+\texttt{true}, wenn eine Kante von $u$ nach $v$ existiert, und
+ansonsten \texttt{false} .
+
+Betrachten wir als Beispiel den Graphen aus Abbildung~\ref{abb:adj-mat}:
+\begin{figure}[ht]
+  \centering
+    \begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+      \matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm]
+      {
+        |(0)| 0 & |(1)| 1 & |(2)| 2 \\
+        & |(3)| 3 & \\
+      };
+      \draw  (0) -- (1);
+      \draw  (0) -- (3);
+      \draw  (2)  to [bend left] (3);
+      \draw  (2) -- (1);
+      \draw  (3) to [bend left] (2);
+      \path (2) edge [loop right] ();
+    \end{tikzpicture}
+  \caption{Ein kleiner Beispielgraph}
+  \label{abb:adj-mat}
+\end{figure}
+
+\noindent
+Für das Objekt $u$ der Klasse \texttt{Vertex}, das den Knoten $0$
+repräsentiert, würde \zB gelten:
+%
+\begin{center}
+  \begin{tabular}{c@{\qquad}c}
+    $u$.\verb|id| &  $u$.\verb|is_connected_to|\\
+    $0$ & 
+    \begin{tabular}{|>{$}c<{$}|>{$}c<{$}|>{$}c<{$}|>{$}c<{$}|}
+      \hline
+      \texttt{false} & \texttt{true} &\texttt{false} &\texttt{true}\\ \hline 
+      \multicolumn{1}{c}{$0$} & \multicolumn{1}{c}{$1$} & \multicolumn{1}{c}{$2$} & \multicolumn{1}{c}{$3$}\\
+    \end{tabular}
+  \end{tabular}
+\end{center}
+%
+Schreibt man das für alle vier Knoten
+untereinander, erhält man:
+%
+\begin{center}
+  \begin{tabular}{c@{\qquad}|>{$}c<{$}|>{$}c<{$}|>{$}c<{$}|>{$}c<{$}|}
+    \multicolumn{1}{c}{$u$.\texttt{id}} &  \multicolumn{4}{c}{$u$.\texttt{is\_connected\_to}}\\ \cline{2-5}
+    $0$ & \texttt{false} & \texttt{true} &\texttt{false} &\texttt{true} \\ \cline{2-5} 
+    $1$ & \texttt{false} & \texttt{false} &\texttt{false} &\texttt{false} \\ \cline{2-5}
+    $2$ & \texttt{false} & \texttt{true} &\texttt{true} &\texttt{true}\\ \cline{2-5} 
+    $3$ & \texttt{false} & \texttt{false} &\texttt{true} &\texttt{false}\\ \cline{2-5}  
+    \multicolumn{1}{c}{}& \multicolumn{1}{c}{$0$} & \multicolumn{1}{c}{$1$} & \multicolumn{1}{c}{$2$} & \multicolumn{1}{c}{$3$}\\
+  \end{tabular}
+\end{center}
+%
+Wenn man in dieser zweidimensionalen Tabelle nun noch \texttt{false}
+durch $0$ und \texttt{true} durch $1$ ersetzt, erhält man die
+sogenannte \mdefine{Adjazenzmatrix}\index{Adjazenzmatrix} des
+Graphen. 
+
+Manche haben Matrizen inzwischen in der Vorlesung "`Lineare Algebra"'
+kennengelernt, andere haben zumindest schon ein Beispiel gesehen, in
+dem ein Graph als zweidimensionale Tabelle repräsentiert wurde. Im
+allgemeinen können Zeilenzahl $m$ und Spaltenzahl $n$ einer Matrix $A$
+verschieden sein. Man spricht dann von einer $m\x n$-Matrix. Die
+einzelnen Einträge in Matrizen werden in dieser Vorlesung immer Zahlen
+sein.  Für den Eintrag in Zeile $i$ und Spalte $j$ von $A$ schreiben
+wir auch $A_{ij}$ (oder manchmal $(A)_{ij}$ o.\,ä.).  
+
+Für die Menge aller $m\x n$-Matrizen, deren Einträge alle aus einer
+Menge $M$ stammen, schreiben wir gelegentlich $M^{m\x n}$.
+
+Typischerweise notiert man eine Matrix ohne die ganzen senkrechten und
+waagerechten Striche, aber mit großen runden (oder manchmal auch
+eckigen) Klammern außen herum. Wenn es hilfreich ist, notiert man
+außerhalb der eigentlichen Matrix auch die Nummerierung der Zeilen bzw
+Spalten, wie es \zB in Abbildung ~\ref{abb:adj-mat-2} gemacht ist.
+
+Die Adjazenzmatrix eines gerichteten Graphen $G=(V,E)$ mit $n$ Knoten
+ist eine $n\x n$-Matrix $A$ mit der Eigenschaft:
+\[
+A_{ij} = \begin{cases}
+  1 & \text{ falls } (i,j)\in E \\
+  0 & \text{ falls } (i,j)\notin E
+\end{cases}
+\]
+%
+Als Beispiel ist in Abbildung~\ref{abb:adj-mat-2} noch
+einmal der Graph mit vier Knoten und nun auch die zugehörige
+Adjazenzmatrix angegeben.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tabular}{c@{\hspace*{15mm}}c}
+    \begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+      \matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm]
+      {
+        |(0)| 0 & |(1)| 1 & |(2)| 2 \\
+        & |(3)| 3 & \\
+      };
+      \draw  (0) -- (1);
+      \draw  (0) -- (3);
+      \draw  (2)  to [bend left=12] (3);
+      \draw  (2) -- (1);
+      \draw  (3) to [bend left=12] (2);
+      \path (2) edge [loop right=] ();
+    \end{tikzpicture}
+    &
+    $\kbordermatrix{
+      & 0 & 1 & 2 & 3 \\
+      0 & 0 & 1 & 0 & 1 \\
+      1 & 0 & 0 & 0 & 0 \\
+      2 & 0 & 1 & 1 & 1 \\
+      3 & 0 & 0 & 1 & 0 \\
+    }$
+  \end{tabular}
+  \caption{Ein Graph und seine Adjazenzmatrix}
+  \label{abb:adj-mat-2}
+\end{figure}
+
+\noindent
+Im Falle eines ungerichteten Graphen $U=(V,E)$ versteht man unter
+seiner Adjazenzmatrix die des zugehörigen gerichteten Graphen
+$G=(V,E_g)$.
+
+\begin{tutorium}
+  Man vergleiche Adjazenzliste und Adjazenzmatrizen:
+  \begin{itemize}
+  \item Bei den Listen hat man "`schnell"' Zugriff auf alle adjazenten
+    Knoten, bei der Matrix muss man alle Knoten überhaupt durchgehen, um
+    zu sehen, welche Nachbarn sind.
+  \item Bei der Matrix kann man "`schnell"' herausfinden, ob es eine
+    Kante zwischen zwei Knoten $i$ und $j$ gibt, bei den Listen muss man
+    unter Umständen alle Nachbarn durchgehen.
+  \item Wann spart was Speicherplatz? (Listen bei "`relativ wenigen"' Knoten)
+  \end{itemize}
+  
+  Adjazenzmatrizen:
+  \begin{itemize}
+  \item Woran erkennt man eine Schlinge? ($1$ auf der Diagonale)
+  \item Beispiele machen, \zB $A=$ alles Einsen
+  \item welche besondere Eigenschaft haben die Adjazenzmatrizen
+    ungerichteter Graphen? (Symmetrie \bzgl Hauptdiagonale)
+  \item Beispiele von Matrix zum Graphen und zurück
+  \end{itemize}
+
+\end{tutorium}
+% 
+Allgemein kann man jede binäre Relation $R\subseteq M\x M$ auf einer
+endlichen Menge $M$ mit $n$ Elementen durch eine $n\x n$-Matrix $A(R)$
+repräsentieren, indem man definiert:
+% 
+\[
+(A(R))_{ij} = \begin{cases}
+  1 & \text{ falls } (i,j)\in R    \text{\quad \dh also } i R j \\
+  0 & \text{ falls } (i,j)\notin R \text{\quad \dh also } \lnot (i R j) 
+\end{cases}
+\]
+% 
+Dabei gehören zu verschiedenen Relationen auf der gleichen Menge $M$
+verschiedene Matrizen und umgekehrt.
+
+So, wie man die Kantenrelation $E$ eines gerichteten Graphen als
+Adjazenzmatrix darstellen kann, kann man natürlich auch jede andere
+Relation durch eine entsprechende Matrix darstellen, \zB die
+"`Erreichbarkeitsrelation"' $E^*$. Die zugehörige Matrix $W$ eines
+Graphen wird üblicherweise \mdefine{Wegematrix}\index{Wegematrix}
+genannt. Sie hat also die Eigenschaft:
+\begin{align*}
+  W_{ij} &= \begin{cases}
+    1 & \text{ falls } (i,j)\in E^* \\
+    0 & \text{ falls } (i,j)\notin E^*
+  \end{cases} \\
+  &= \begin{cases}
+    1 & \text{ falls es in $G$ einen Pfad von $i$ nach $j$ gibt } \\
+    0 & \text{ falls es in $G$ keinen Pfad von $i$ nach $j$ gibt } \\
+  \end{cases}
+\end{align*}
+% 
+Im folgenden wollen wir uns mit dem algorithmischen Problem
+beschäftigen, zu gegebener Adjazenzmatrix $A$ die zugehörige
+Wegematrix $W$ zu berechnen.
+
+\begin{tutorium}
+  Wegematrix:
+  \begin{itemize}
+  \item erst mal einfach durch Hingucken für einen Graphen eine
+    bestimmen, \zB für
+
+    \begin{tabular}{c@{\hspace*{15mm}}c}
+      \begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+        \matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm]
+        {
+          |(0)| 0 & |(1)| 1 & |(2)| 2 \\
+          & |(3)| 3 & \\
+        };
+        \draw  (0) -- (1);
+        \draw  (0) -- (3);
+        \draw  (2)  to [bend left] (3);
+        \draw  (2) -- (1);
+        \draw  (3) to [bend left] (2);
+        \path (2) edge [loop right] ();
+      \end{tikzpicture}
+      &
+      W = $\kbordermatrix{
+        & 0 & 1 & 2 & 3 \\
+        0 & 1 & 1 & 1 & 1 \\
+        1 & 0 & 1 & 0 & 0 \\
+        2 & 0 & 1 & 1 & 1 \\
+        3 & 0 & 1 & 1 & 1 \\
+      }$
+    \end{tabular}
+  \item Wie sieht die Wegematrix aus, wenn $A=$alles Einsen? ($W=A$)
+  \item etwas schwieriger: Wann ist allgemein $W=A$? (Wenn $E^*=E$,
+    also wenn Kantenrelation reflexiv und transitiv)
+  \end{itemize}
+\end{tutorium}
+
+% -----------------------------------------------------------------------
+\Tut\section{Berechnung der 2-Erreichbarkeitsrelation und Rechnen mit Matrizen}
+\label{sec:e-quadrat}
+
+Es sei $A$ die Adjazenzmatrix eines Graphen $G=(V,E)$;
+Abbildung~\ref{fig:e-quadrat} zeigt ein Beispiel.
+%
+\begin{figure}[htb]
+  \centering
+  \begin{tabular}{cl}
+    \begin{tikzpicture}[->,>=stealth]
+      \matrix[matrix of math nodes,nodes={draw,circle,minimum size=4mm,inner sep=1pt},row sep=2mm,column sep=10mm] {
+        & |(0)| 0 & \\
+        & |(1)| 1 &  \\
+        |(2)| 2  & |(3)| 3 &  |(4)| 4  \\
+        & |(5)| 5 &  \\
+        & |(6)| 6 &   \\
+      };
+      \draw (2) -- (1);
+      \draw (2) -- (3);
+      \draw (2) -- (6);
+      \draw (0) -- (4);
+      \draw (1) -- (4);
+      \draw (6) -- (4);
+    \end{tikzpicture}
+    &
+    \raisebox{10mm}{$\kbordermatrix{
+        & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+        0& 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        1& 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+        2& 0 & 1 & 0 & 1 & 0 & 0 & 1 \\
+        3& 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        4& 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        5& 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+        6& 0 & 0 & 0 & 0 & 1 & 0 & 0 \\
+      }$ }
+  \end{tabular}
+  \caption{Beispielgraph für die Berechung von $E^2$}
+  \label{fig:e-quadrat}
+\end{figure}
+%
+Wir interessieren uns nun zum Beispiel für die Pfade der Länge $2$ von
+Knoten $2$ zu Knoten $4$. Wie man in dem Graphen sieht, gibt es genau
+zwei solche Pfade: den über Knoten $1$ und den über Knoten $6$. 
+
+Wie findet man "`systematisch"' alle solchen Pfade? Man überprüft
+\emph{alle} Knoten $k\in V$ daraufhin, ob sie als "`Zwischenknoten"'
+für einen Pfad $(2,k,4)$ in Frage kommen. Und $(2,k,4)$ ist genau dann
+ein Pfad, wenn sowohl $(2,k)\in E$, also eine Kante, ist, als auch
+$(k,4)\in E$, also eine Kante, ist. Und das ist genau dann der Fall,
+wenn in der Adjazenzmatrix $A$ von $G$ sowohl $A_{2k}=1$ als auch
+$A_{k4}=1$ ist. Das kann man auch so schreiben, dass $A_{2k}\cdot
+A_{k4}=1$ ist.
+
+Wenn man nacheinander alle Elemente $A_{2k}$ inspiziert, dann
+durchläuft man in $A$ nacheinander die Elemente in der \emph{Zeile}
+für Knoten $2$. Und wenn man nacheinander alle Elemente $A_{k4}$
+inspiziert, dann durchläuft man in $A$ nacheinander die Elemente in
+der \emph{Spalte} für Knoten $4$. 
+
+In Abbildung~\ref{fig:matmult-1} haben wir schräg übereinander zweimal
+die Matrix $A$ hingeschrieben, wobei wir der Deutlichkeit halber
+einmal nur die Zeile für Knoten $2$ explizit notiert haben und das
+andere Mal nur die Spalte für Knoten $4$. Außerdem haben wir im oberen
+linken Viertel alle Produkte $A_{2k}\cdot A_{k4}$ angegeben. Die
+Frage, ob es einen Pfad der Länge zwei $(2,k,4)$ gibt, ist
+gleichbedeutend mit der Frage, ob eines dieser Produkte gleich $1$
+ist.
+
+\begin{figure}[htb]
+  \def\foo#1#2{\tikz[remember picture] \node[inner sep=0pt,outer sep=1pt,circle] (n#2) {$#1$};}
+  \begin{tabular}{cl}
+    &
+    \raisebox{10mm}{$\kbordermatrix{
+        & 0 & 1 & 2 & 3 &4 & 5 & 6\\
+        \phantom{0}
+        &   & & & & \foo{1}{b0} & & \\
+        &   & & & & \foo{1}{b1} & & \\
+        &   & & & & \foo{0}{b2} & & \\
+        &   & & & & \foo{0}{b3} & & \\
+        &   & & & & \foo{0}{b4} & & \\
+        &   & & & & \foo{0}{b5} & & \\
+        &   & & & & \foo{1}{b6} & & \\
+      }$ }
+    \\
+    $\kbordermatrix{
+      \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0}& \phantom{0} &\phantom{0} \\
+      % & 0 & 1 & 2 & 3 &4 & 5 & 6\\
+      0&   & & & & & & \\
+      1&   & & & & & & \\
+      2& \foo{0}{a0} & \foo{1}{a1} & \foo{0}{a2} & \foo{1}{a3} & \foo{0}{a4} & \foo{0}{a5} & \foo{1}{a6} \\
+      3&   & & & & & & \\
+      4&   & & & & & & \\
+      5&   & & & & & & \\
+      6&   & & & & & & \\
+    }$ 
+    &
+    $\kbordermatrix{
+      \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0} & \phantom{0}& \phantom{0}  \\
+      \phantom{0}&   & & & & & & \\
+      & & & & & & & \\
+      & & & & &\foo{2}{p24}& &  \\
+      & & & & & & & \\
+      & & & & & & & \\
+      & & & & & & & \\
+      & & & & & & & \\
+    }$ 
+  \end{tabular}
+
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[-,thick] (na0) |- (nb0) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$0$};
+    \draw[-,thick] (na1) |- (nb1) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$1$};
+    \draw[-,thick] (na2) |- (nb2) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$0$};
+    \draw[-,thick] (na3) |- (nb3) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$0$};
+    \draw[-,thick] (na4) |- (nb4) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$0$};
+    \draw[-,thick] (na5) |- (nb5) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$0$};
+    \draw[-,thick] (na6) |- (nb6) node[pos=0.5,fill=white,circle,inner sep=0pt,outer sep=4pt] {$1$};
+  \end{tikzpicture}
+  \caption{Der erste Schritt in Richtung Matrixmultiplikation}
+  \label{fig:matmult-1}
+\end{figure}
+
+\begin{tutorium}
+  Berechnung von $E^2$
+  \begin{itemize}
+  \item wie im Skript noch ein ausführliches Beispiel, vielleicht für
+    \begin{center}
+      \begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+        \matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm]
+        {
+          |(0)| 0 & |(1)| 1 & |(2)| 2 & |(3)| 3 & \\
+        };
+        \draw  (0) -- (1);
+        \draw  (1) -- (2);
+        \draw  (2) -- (3);
+        % \draw  (2) -- (1);
+        % \draw  (3) to [bend left] (2);
+        \path (2) edge [loop below] ();
+      \end{tikzpicture}
+
+    \end{center}
+  \end{itemize}
+\end{tutorium}
+
+\noindent
+Wir tun jetzt aber noch etwas anderes. Wir addieren die Werte alle zu
+einer Zahl
+\[
+P_{24} = \sum_{k=0}^{6} A_{2k}\cdot A_{k4}
+\]
+und notieren Sie in einer dritten Matrix im unteren rechten Viertel
+der Darstellung.  Dabei ist jetzt wichtig:
+\begin{itemize}
+\item Der Wert $P_{24}$ gibt an, wieviele Pfade der Länge zwei es von
+  Knoten $2$ nach Knoten $4$ gibt.
+\item Analog kann man für jedes andere Knotenpaar $(i,j)$ die gleiche
+  Berechnung durchführen:
+  \[
+  P_{ij} = \sum_{k=0}^{n-1} A_{ik}\cdot A_{kj}
+  \]
+  Dann ist $P_{ij}$ die Anzahl der Pfade der Länge zwei von Knoten $i$
+  zu Knoten $j$.
+\end{itemize}
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Matrixmultiplikation}
+\label{sub:matmult}
+
+Was wir eben aufgeschrieben haben ist nichts anderes als ein
+Spezialfall von
+\mdefine{Matrixmultiplikation}\index{Matrixmultiplikation}. Ist $A$
+eine $\ell\x n$-Matrix und $B$ eine $n\x m$-Matrix, so heißt die $\ell\x
+m$-Matrix $C$, bei der für alle $i$ und alle $j$ 
+\[
+C_{ij} = \sum_{k=0}^{n-1} A_{ik}\cdot B_{kj}
+\]
+gilt, das Produkt der Matrizen $A$ und $B$ und man schreibt auch
+$C=A\cdot B$. (Wichtig: Selbst wenn einmal $\ell=n=m$ ist, ist trotzdem
+im Allgemeinen $A\cdot B \not= B \cdot A$ !)
+
+Algorithmisch notiert sähe die naheliegende Berechung des Produktes
+zweier Matrizen so aus, wie in Algorithmus~\ref{alg:matmult-1}
+dargestellt. Wir werden im nächsten Kapitel aber sehen, dass es
+durchaus andere Möglichkeiten gibt!
+
+\begin{algorithm}[t]
+  \caption{Einfachster Algorithmus, um zwei Matrizen zu multiplizieren}
+  \label{alg:matmult-1}
+  \begin{tabbing}
+    \quad\=\quad\=\quad\=\quad\=\quad\=\hspace*{30mm}\=\kill
+    \>\kw{for } $i <- 0$ \kw{ to } $\ell-1$ \kw{ do}\\
+    \>\>\kw{for } $j <- 0$ \kw{ to } $m-1$ \kw{ do}  \\
+    \>\>\>$C_{ij} <- 0$ \\
+    \>\>\>\kw{for } $k <- 0$ \kw{ to } $n-1$ \kw{ do}  \\
+    \>\>\>\>$C_{ij} <- C_{ij} + A_{ik} \cdot B_{kj}$ \\
+    \>\>\>\kw{od} \\
+    \>\>\kw{od} \\
+    \>\kw{od} 
+  \end{tabbing}
+\end{algorithm}
+
+\begin{tutorium}
+  Matrixmultiplikation: sollten dieses Jahr \emph{alle} schon gehabt
+  haben. Aber Üben kann nicht schaden:
+  \begin{itemize}
+  \item Man nehme \zB die
+    $4\x 4$-Matrizen mit $A_{ij} = \begin{cases} 1 & \text{ falls } i\leq j \\
+      0 & \text{ sonst} \end{cases}$ und $B_{ij} = \begin{cases} 1 & \text{ falls } i> j \\
+      0 & \text{ sonst} \end{cases}$ und berechne $AB$ und $BA$
+  \item aus der Vorlesung; noch mal durchgehen:
+    \begin{tabbing}
+      \quad\=\quad\=\quad\=\quad\=\quad\=\hspace*{30mm}\=\\ \kill
+      \>\kw{for } $i <- 0$ \kw{ to } $\ell-1$ \kw{ do}\\
+      \>\>\kw{for } $j <- 0$ \kw{ to } $m-1$ \kw{ do}  \\
+      \>\>\>$C_{ij} <- 0$ \\
+      \>\>\>\kw{for } $k <- 0$ \kw{ to } $n-1$ \kw{ do}  \\
+      \>\>\>\> $C_{ij} <- C_{ij} + A_{ik} \cdot B_{kj}$ \\
+      \>\>\>\kw{od} \\
+      \>\>\kw{od} \\
+      \>\kw{od} \\  
+    \end{tabbing}
+  \end{itemize}
+\end{tutorium}
+
+Von besonderer Wichtigkeit sind die sogenannten
+\mdefine[Einheitsmatrix]{Einheitsmatrizen}. Das sind diejenigen $n\x
+n$-Matrizen $\Id$, bei denen für alle $i$ und $j$ gilt:
+\[
+\Id_{ij} =
+\begin{cases}
+  1 & \text{ falls } i=j \\
+  0 & \text{ falls } i\not=j
+\end{cases}
+\]
+%
+Zu beliebiger $m\x n$-Matrix $A$ gilt für die jeweils passende Einheitsmatrizen:
+\[
+\Id \cdot A = A = A \cdot \Id
+\]
+Man beachte, dass die Einheitsmatrix auf der linken Seite Größe $m\x
+m$ hat und die auf der rechten Seite Größe $n\x n$.
+%
+\begin{tutorium}
+  Einheitsmatrizen
+  \begin{itemize}
+  \item $\Id \cdot A=A$ nachrechnen:
+    \[
+    (\Id\cdot A)_{ij} = \sum_{v=0}^{n-1} \Id_{iv} \cdot A_{vj} =\Id_{ii} \cdot A_{ij} = A_{ij}
+    \]
+  \end{itemize}
+\end{tutorium}
+
+\noindent
+Ist eine Matrix quadratisch (wie \zB die Adjazenzmatrix $A$ eines
+Graphen), dann kann man $A$ mit sich selbst multiplizieren. Dafür
+benutzt man wie schon an mehreren anderen Stellen in dieser Vorlesung
+die Potenzschreibweise:
+\begin{align*}
+  A^0 &= \Id \\
+  \forall n\in\N_0: A^{n+1} &= A^n \cdot A
+\end{align*}
+
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Matrixaddition}
+\label{sub:matadd}
+
+Für zwei Matrizen $A$ und $B$ der gleichen Größe $m\x n$ ist für uns
+in Kürze auch noch die Summe $A+B$ von Interesse. Die
+\mdefine{Matrixaddition}\index{Matrixaddition}\index{Addition!von
+  Matrizen} von $A$ und $B$ liefert die $m\x n$-Matrix $C$, bei der
+für alle $i$ und alle $j$ gilt:
+\[
+C_{ij} = A_{ij}+ B_{ij}   \;.
+\]
+Das neutrale Element ist die sogenannte
+\mdefine{Nullmatrix}\index{Nullmatrix} (genauer gesagt die
+Nullmatrizen; je nach Größe). Sie enthält überall nur Nullen. Wir
+schreiben für Nullmatrizen einfach $0$.
+
+Zwei Matrizen zu addieren, ist leicht:
+
+\begin{tabbing}
+  \quad\=\quad\=\quad\=\quad\=\quad\=\hspace*{30mm}\=\kill
+  \>\kw{for } $i <- 0$ \kw{ to } $m-1$ \kw{ do}\\
+  \>\>\kw{for } $j <- 0$ \kw{ to } $n-1$ \kw{ do}  \\
+  \>\>\>\> $C_{ij} <- A_{ij} + B_{ij}$ \\
+  \>\>\kw{od} \\
+  \>\kw{od} 
+\end{tabbing}
+ 
+% -----------------------------------------------------------------------
+\Tut\section{Berechnung der Erreichbarkeitsrelation}
+\label{sec:e-stern}
+
+Eine naheliegende Idee für die Berechnung von $E^*$ ist natürlich, auf
+die Definition
+\[
+E^* = \bigcup_{i=0}^{\infty} E^i
+\]
+zurückzugreifen. Allerdings stellen sich sofort drei Probleme:
+\begin{itemize}
+\item Was kann man tun, um nicht unendlich viele Matrizen berechnen zu
+  müssen? \Dh, kann man das $\infty$ durch eine natürliche Zahl
+  ersetzen?
+\item Woher bekommt man die Matrizen für die Relationen $E^i$, \dh
+  welcher Operation bei Matrizen entspricht das Berechnen von Potenzen
+  bei Relationen?
+\item Wenn man die Matrizen hat, welcher Operation bei Matrizen
+  entspricht die Vereinigung bei Relationen?
+\end{itemize}
+% 
+Beginnen wir mit dem ersten Punkt. Was ist bei Graphen spezieller als
+bei allgemeinen Relationen? Richtig: Es gibt nur \emph{endlich} viele
+Knoten. Und das ist in der Tat eine große Hilfe: Wir interessieren uns
+für die Frage, ob für gegebene Knoten $i$ und $j$ ein Pfad in $G$ von
+$i$ nach $j$ existiert. Sei $G=(V,E)$ mit $|V|=n$.  Nehmen wir an, es
+existiert ein Pfad: $p=(i_0, i_1, \dots, i_k)$ mit $i_0=i$ und
+$i_k=j$. Was dann? Nun, wenn $k$ "`groß"' ist, genauer gesagt, $k\geq
+n$, dann kommen in der Liste $p$ also $k+1\geq n+1$ "`Knotennamen"'
+vor. Aber $G$ hat nur $n$ verschiedene Knoten. Also muss mindestens
+ein Knoten $x$ doppelt in der Liste $p$ vorkommen. Das bedeutet, dass
+man auf dem Pfad von $i$ nach $j$ einen Zyklus von $x$ nach $x$
+geht. Wenn man den weglässt, ergibt sich ein kürzerer Pfad, der immer
+noch von $i$ nach $j$ führt. Indem man dieses Verfahren wiederholt,
+solange im Pfad mindestens $n+1$ Knoten vorkommen, gelangt man
+schließlich zu einem Pfad, in dem höchstens noch $n$ Knoten, und damit
+höchstens $n-1$ Kanten, vorkommen, und der auch immer noch von $i$
+nach $j$ führt.
+
+Mit anderen Worten: Was die Erreichbarkeit in einem endlichen Graphen
+mit $n$ Knoten angeht, gilt:
+\[
+E^* = \bigcup_{i=0}^{n-1} E^i
+\]
+Aber höhere Potenzen schaden natürlich nicht. Das heißt, es gilt sogar:
+%
+\begin{lemma}
+  \label{lem:e-stern-graphen}
+  Für jeden gerichteten Graphen $G=(V,E)$ mit $n$ Knoten gilt:
+  \[
+  \forall k\geq n-1: E^* = \bigcup_{i=0}^{k} E^i
+  \]
+\end{lemma}
+
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Potenzen der Adjazenzmatrix}
+\label{subsub:potenzen-adjazenz}
+
+Wenn man die Adjazenzmatrix $A$ eines Graphen quadriert, erhält man 
+als Eintrag in Zeile $i$ und Spalte $j$
+%
+\begin{align*}
+  (A^2)_{ij} &= \sum_{k=0}^{n-1} A_{ik}A_{kj}  \;.
+\end{align*}
+%
+Jeder der Summanden ist genau dann $1$, wenn $A_{ik}=A_{kj}=1$ ist,
+also genau dann, wenn $(i,k,j)$ ein Pfad der Länge $2$ von $i$ nach
+$j$ ist. Und für verschiedene $k$ sind das auch verschiedene
+Pfade. Also ist
+%
+\begin{align*}
+  (A^2)_{ij} &= \sum_{k=0}^{n-1} A_{ik}A_{kj}
+\end{align*}
+%
+gleich der Anzahl der Pfade der Länge $2$ von $i$ nach $j$.
+
+Überlegen Sie sich, dass analoge Aussagen für $(A^1)_{ij}$ und Pfade
+der Länge $1$ von $i$ nach $j$, sowie $(A^0)_{ij}$ und Pfade der Länge
+$0$ von $i$ nach $j$ richtig sind. Tatsächlich gilt:
+
+\begin{lemma}
+  \label{lem:A-hoch-k}
+  Es sei $G$ ein gerichteter Graph mit Adjazenzmatrix $A$. Für alle
+  $k\in\N_0$ gilt: $(A^k)_{ij}$ ist die Anzahl der Pfade der Länge $k$
+  in $G$ von $i$ nach $j$.
+\end{lemma}
+%
+Der Beweis wäre eine recht einfache vollständige Induktion. Der
+einzige gegenüber dem Fall $k=2$ zusätzlich zu beachtende Punkt
+besteht darin, dass die Verlängerung verschiedener Wege um die gleiche
+Kante (falls das überhaupt möglich ist), wieder zu verschiedenen Wegen
+führt.
+%
+\begin{tutorium}
+  quadrierte Adjazenzmatrix:
+  \begin{itemize}
+  \item inhaltliche Bedeutung von $(A^2)_{ij}$: unbedingt klar
+    machen
+  \end{itemize}
+\end{tutorium}
+
+Wir bezeichnen nun mit $\sgn$ die sogenannte
+\mdefine{Signum-Funktion}\index{Signum-Funktion}
+\[
+\sgn: \R -> \R: \sgn(x) = 
+\begin{cases}
+  1 & \text{ falls } x>0 \\
+  0 & \text{ falls } x=0 \\
+  -1 & \text{ falls } x<0 \\
+\end{cases}
+\]
+Für die Erweiterung auf Matrizen durch komponentenweise Anwendung
+schreiben wir auch wieder $\sgn$:
+\[
+\sgn : \R^{m\x n} -> \R^{m\x n}: ( \sgn(M))_{ij} = \sgn(M_{ij})
+\]
+Unter Verwendung dieser Hilfsfunktion ergibt sich aus
+Lemma~\ref{lem:A-hoch-k}:
+\begin{korollar}
+  \label{kor:sgn-A-hoch-k}
+  Es sei $G$ ein gerichteter Graph mit Adjazenzmatrix $A$. 
+  \begin{enumerate}
+  \item Für alle $k\in\N_0$ gilt: 
+    \[
+    \sgn((A^k)_{ij})=
+    \begin{cases}
+      1 & \text{ falls in $G$ ein Pfad der Länge $k$} \\
+        & \text{\quad von $i$ nach $j$ existiert}\\
+      0 & \text{ falls in $G$ kein Pfad der Länge $k$} \\
+        & \text{\quad von $i$ nach $j$ existiert}\\
+    \end{cases}
+    \]
+  \item Für alle $k\in\N_0$ gilt: $\sgn(A^k)$ ist die Matrix, die die
+    Relation $E^k$ repräsentiert. 
+  \end{enumerate}
+\end{korollar}
+% 
+% -----------------------------------------------------------------------
+\Tut\subsection{Erste M\"oglichkeit f\"ur die Berechnung der Wegematrix}
+\label{subsub:wegematrix-1}
+
+Um zu einem ersten Algorithmus zur Berechnung der Wegematrix zu
+kommen, müssen wir als letztes noch klären, welche Operation auf
+Matrizen "`zur Vereinigung von Relationen passt"'.  Seien dazu auf der
+gleichen Menge $M$ zwei binäre Relationen $R\subseteq M\x M$ und
+$R'\subseteq M\x M$ gegeben, repräsentiert durch Matrizen $A$ und
+$A'$. Dann gilt:
+%
+\begin{align*}
+   (i,j)\in R\cup R' 
+   &<==> (i,j)\in R \lor (i,j) \in R'\\
+   &<==> A_{ij} = 1 \lor A'_{ij} = 1 \\
+   &<==> A_{ij} +A'_{ij} \geq 1 \\
+   &<==> (A+A')_{ij} \geq 1 \\
+   &<==> \sgn(A+A')_{ij} =1 
+\end{align*}
+%
+Also wird die Relation $R\cup R'$ durch die Matrix $\sgn(A+A')$
+repräsentiert.
+
+Aus Lemma~\ref{lem:e-stern-graphen} und dem eben aufgeführten
+Korollar~\ref{kor:sgn-A-hoch-k} folgt recht schnell eine erste Formel
+für die Berechnung der Wegematrix:
+% 
+\begin{lemma}
+  Es sei $G$ ein gerichteter Graph mit Adjazenzmatrix $A$. Dann gilt
+  für alle $k\geq n-1$: 
+  \begin{itemize}
+  \item Die Matrix $\sgn(\sum_{i=0}^{k} A^i)$ repräsentiert die
+    Relation $E^*$.
+  \item Mit anderen Worten: 
+    \[
+    W = \sgn\left(\sum_{i=0}^{k} A^i\right) 
+    \]
+    ist die Wegematrix des Graphen $G$.
+  \end{itemize}
+\end{lemma}
+% 
+\begin{beweis}
+  Angesichts der schon erarbeiteten Ergebnisse ist es ausreichend,
+  sich noch die beiden folgenden eher technischen Dinge zu überlegen:
+  \begin{itemize}
+  \item Die Vereiniung $\bigcup_{i=0}^{n-1} E^i$ wird repräsentiert
+    durch die Matrix $\sgn(\sum_{i=0}^{k} \sgn(A^i))$.
+  \item In dieser Formel darf man die "`inneren"' Anwendungen von
+    $\sgn$ weglassen.
+  \end{itemize}
+  Das sieht man so:
+  \begin{itemize}
+  \item Zum ersten Punkt genügt es, die obige Überlegung zur
+    Matrixrepräsentation von $R\cup R'$ per Induktion auf beliebig
+    endliche viele Relationen zu übertragen.
+  \item Mit einer ähnlichen Heransgehensweise wie oben ergibt sich
+    \begin{align*}
+      \sgn(\sgn(A)+\sgn(A'))_{ij} =1 &<==> (\sgn(A)+\sgn(A'))_{ij} \geq 1 \\
+      &<==> \sgn(A)_{ij}+\sgn(A')_{ij} \geq 1 \\
+      &<==> \sgn(A)_{ij}= 1 \lor \sgn(A')_{ij} = 1 \\
+      &<==> A_{ij}\geq 1 \lor A'_{ij} \geq 1 \\
+      &<==> A_{ij}+A'_{ij} \geq 1 \\
+      &<==> (A+A')_{ij} \geq 1 \\
+      &<==> \sgn(A+A')_{ij} = 1
+    \end{align*}
+    Dabei haben wir in beiden Punkten benutzt, dass die Einträge in
+    den interessierenden Matrizen nie negativ sind.
+  \end{itemize}
+\end{beweis}
+%
+Das sich ergebende Verfahren ist in
+Algorithmus~\ref{alg:wege-n-hoch-5} dargestellt.
+
+\begin{algorithm}[h]
+  \caption{einfachster Algorithmus, um die Wegematrix zu berechnen}
+  \label{alg:wege-n-hoch-5}
+  \vspace*{-\baselineskip}
+  \begin{tabbing}
+    \quad\=\quad\=\quad\=\quad\=\quad\=\hspace*{30mm}\=\\ \kill
+    \> \assert{\text{Matrix $A$ sei die Adjazenzmatrix}} \\
+    \> \assert{\text{Matrix $W$ wird am Ende die Wegematrix enthalten}} \\
+    \> \assert{\text{Matrix \hbox{$M$} wird benutzt, um \hbox{$A^i$} zu berechnen}} \\
+    \> $W <- 0$ \>\>\>\>\> \assert{\text{Nullmatrix}} \\
+    \>\kw{for } $i <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\> $M <- \Id$ \>\>\>\> \assert{\text{Einheitsmatrix}} \\
+    \>\>\kw{for } $j <- 1$ \kw{ to } $i$ \kw{ do}  \\
+    \>\>\> $M <- M \cdot A$  \>\>\>\assert{\text{Matrixmultiplikation}} \\
+    \>\>\kw{od} \\
+    \>\> $W<-W+M$ \>\>\>\> \assert{\text{Matrixaddition}} \\
+    \>\kw{od} \\  
+    \> $W <- \sgn(W)$ \\
+  \end{tabbing}
+  \vspace*{-\baselineskip}
+\end{algorithm}
+ 
+% Mit einem kleinen "`Trick"' kann man die Benutzung der Signum-Funktion
+% auch umgehen: Man interpretiere 
+% \begin{itemize}
+% \item die Einträge in der Adjazenzmatrix als "`wahr"' für $1$ und
+%   "`falsch"' für $0$ und
+% \item bei der Matrixmultiplikation das $\cdot$ als logisches Und und
+%   das $+$ als logisches Oder.
+% \end{itemize}
+% %
+%   \begin{tutorium}
+%     "`Boolesche Matrizen"':
+%     \begin{itemize}
+%     \item vielleicht mache ich Matrix-"`Multiplikation"' mit $\lor$ und
+%       $\land$ statt $+$ und $\cdot$ auch genauer \dots
+%     \end{itemize}
+%   \end{tutorium}
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Z\"ahlen durchzuf\"uhrender arithmetischer Operationen}
+\label{subsub:zaehlen}
+
+Wir stellen nun ein erstes Mal die Frage danach wie aufwändig es ist,
+die Wegematrix eines Graphen auszurechnen. Unter Aufwand wollen hier
+zunächst einmal der Einfachheit halber die Anzahl benötigter
+arithmetischer Operationen verstehen. (Wir werden das im Laufe
+weiterer Einheiten noch genauer diskutieren.)
+
+Wir beginnen mit der wohl naivsten Herangehensweise, wollen aber
+darauf hinweisen, dass Sie schon in diesem Fall sehen werden, dass man
+manchmal durch Nachdenken oder hübsche Ideen signifikante
+Verbesserungen erreichen kann.
+
+Die einfachste Methode besteht darin,
+Algorithmus~\ref{alg:wege-n-hoch-5} zu benutzen und ohne viel
+Nachdenken zu implementieren. Das bedeutet, dass wir zur Berechung von
+$\sgn\left(\sum_{i=0}^{n-1} A^i\right)$ folgende Berechnungen (nicht
+unbedingt in dieser Reihenfolge) durchzuführen haben:
+\begin{itemize}
+\item $n^2$ Berechnungen der $\sgn$ Funktion;
+\item $n$ Matrix-Additionen;
+\item $0+1+\cdots+n-1 = \sum_{i=1}^{n-1} i = n(n-1)/2$
+  Matrix"=Multiplikationen;
+\end{itemize}
+% 
+\begin{tutorium}
+  Zählen von Operationen:
+  \begin{itemize}
+  \item so was wie $\sum_{i=1}^{n-1} i = n(n-1)/2$ klar machen
+  \item ich benutze immer die Methode, mit der angeblich Gauß schon
+    als Schulkind auf"|fiel, als alle Schüler $1+2+3+\cdots+100$
+    ausrechnen sollten: erster + letzter Summand = zweiter +
+    vorletzter Summand = \dots, also insgesamt Wert = so eine
+    Zweiersumme mal Anzahl Summanden halbe (funktioniert auch bei
+    ungerader Anzahl Summanden)
+  \end{itemize}
+\end{tutorium}
+Alle Matrizen haben Größe $n\x n$.
+
+Für jeden der $n^2$ Einträge in einer Summenmatrix muss man eine
+Addition durchführen, also benötigt eine Matrixaddition $n^2$
+arithmetische Operationen.
+
+Für jeden der $n^2$ Einträge in einer Produktmatrix besteht jedenfalls
+die naheliegende Methode darin, eine Formel der Form $\sum_{k=0}^{n-1}
+a_{ik}b_{kj}$ auszuwerten. (Tatsächlich gibt es andere Möglichkeiten,
+wie wir in nachfolgenden Abschnitten sehen werden!) Das sind jeweils
+$n$ Multiplikationen und $n-1$ Additionen. Insgesamt ergeben sich so
+$2n^3-n^2$ Operationen.
+
+Für die Berechnung der Wegematrix nach dieser Methode kommt man so auf
+\begin{align*}
+  & n^2 + n^2\cdot n + (2n^3-n^2)n(n-1)/2 \\
+  = & n^2 + n^3 + (2n^3-n^2)(n^2-n)/2 \\
+  = & n^2 + n^3 +(2n^5-2n^4-n^4+n^3)/2 \\
+  = & n^5 -\frac{3}{2}n^4 + \frac{3}{2}n^3 + n^2
+\end{align*}
+Operationen. Wenn \zB $n=1000$ ist, dann sind das immerhin
+$998\,501\,501\,000\,000$ Operationen, also "`fast"' $n^5=10^{15}$.
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Weitere M\"oglichkeiten f\"ur die Berechnung der Wegematrix}
+\label{subsub:wegematrix-2}
+
+Kann man die Wegematrix auch mit "`deutlich"' weniger Operationen
+berechnen? Vielleicht haben Sie eine Möglichkeit schon gesehen: Wir
+haben weiter vorne so getan, als müsste man für die Berechnung von
+$A^i$ immer $i-1$ Matrixmultiplikationen durchführen. Da aber der
+Reihe nach \emph{alle} Potenzen $A^i$ berechnet werden, ist das nicht
+so. Man merkt sich einfach immer das alte $A^{i-1}$ und braucht dann
+nur \emph{eine} Matrixmultiplikation, um zu $A^i$ zu gelangen.  Diese
+Vorgehensweise ist in Algorithmus~\ref{alg:wege-n-hoch-4}
+dargestellt. Damit ergeben sich insgesamt nur $n$
+Matrixmultiplikationen statt $n(n-1)/2$ und die Gesamtzahl
+arithmetischer Operationen sinkt von $n^5 -(3/2)n^4+(3/2)n^3+n^2$ auf
+$2n^4+n^2$. Für $n=1000$ sind das $2\,000\,001\,000\,000$, also
+"`ungefähr"' $500$ mal weniger als mit
+Algorithmus~\ref{alg:wege-n-hoch-5}.
+%
+\begin{algorithm}[h]
+  \caption{verbesserter Algorithmus, um die Wegematrix zu berechnen}
+  \label{alg:wege-n-hoch-4}
+  \vspace*{-\baselineskip}
+  \begin{tabbing}
+    \quad\=\quad\=\quad\=\quad\=\quad\=\hspace*{30mm}\=\\ \kill
+    \> \assert{\text{Matrix $A$ sei die Adjazenzmatrix}} \\
+    \> \assert{\text{Matrix $W$ wird am Ende die Wegematrix enthalten}} \\
+    \> \assert{\text{Matrix \hbox{$M$} wird benutzt um \hbox{$A^i$} zu berechnen}} \\
+    \> $W <- 0$ \>\>\>\>\> \assert{\text{Nullmatrix}} \\
+    \> $M <- \Id$ \>\>\>\>\>  \assert{\text{Einheitsmatrix}} \\
+    \>\kw{for } $i <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\> $W<-W+M$ \>\>\>\>  \assert{\text{Matrixaddition}} \\
+    \>\> $M <- M \cdot A$  \>\>\>\>  \assert{\text{Matrixmultiplikation}} \\
+    \>\kw{od} \\  
+    \> $W <- \sgn(W)$ \\
+  \end{tabbing}
+  \vspace*{-\baselineskip}
+\end{algorithm}
+
+\begin{tutorium}
+  Wegematrix schneller ($n^4$):
+  \begin{itemize}
+  \item Wenn man eine feste Gesamtzeit zur Verfügung hat und mit dem
+    $n^5$ Algorithmus gerade noch Probleminstanzen mit $n=1000$
+    schafft: Wie große Probleminstanzen schafft man mit dem $n^4$ Algorithmus?
+  \end{itemize}
+\end{tutorium}
+%
+Wenn man einmal unterstellt, dass jede Operation gleich lange dauert,
+dann erhält man also Ergebnisse um etwa einen Faktor $n/2$ schneller.
+
+Und es geht noch schneller: statt $n$ Matrixmultiplikationen wollen
+wir nun mit $\log_2 n$ von ihnen auskommen. Hierfür nutzen wir die
+Beobachtung aus, deren explizite Erwähnung in
+Lemma~\ref{lem:e-stern-graphen} Sie vielleicht ein bisschen gewundert
+hat:
+\[
+\forall k\geq n-1: E^* = \bigcup_{i=0}^{k} E^i
+\]
+Statt $n-1$ wählen wir nun die nächstgrößere Zweierpotenz $k=2^{\lceil
+  \log_2 n \rceil}$. Außerdem benutzen wir noch einen Trick, der es
+uns erlaubt, statt $\bigcup_{i=0}^{k} E^i$ etwas ohne viele
+Vereinigungen hinzuschreiben. Dazu betrachten wir $F=E^0\cup
+E^1=\Id_V\cup E$. Unter Verwendung der Rechenregel (die Sie sich bitte
+klar machen) für Relationen
+\[
+(A\cup B)\circ(C\cup D) = (A\circ C) \cup (A\circ D) \cup (B\circ C) \cup (B \circ D)
+\]
+ergibt sich
+\[
+F^2 = (E^0\cup E^1)\circ(E^0\cup E^1)= E^0 \cup E^1\cup E^1 \cup E^2= E^0 \cup E^1 \cup E^2
+\]
+Daraus folgt
+\begin{align*}
+  F^4 = (F^2)^2 &= (E^0\cup E^1\cup E^2)\circ(E^0\cup E^1\cup E^2) \\
+  &= \dots \\
+  & = E^0 \cup E^1 \cup E^2\cup E^3 \cup E^4  \\
+\end{align*}
+und durch Induktion sieht man, dass für alle $m\in\N_0$ gilt:
+\[
+F^{2^m} = \bigcup_{i=0}^{2^m} E^i
+\]
+Wenn man einfach zu Beginn die Matrix für $F=E^0+E$ berechnet und sie
+dann so oft quadriert, dass nach $m$-maligen Durchführen $2^m\geq
+n-1$ ist, hat man das gewünschte Ergebnis. Offensichtlich genügt
+$m=\lceil \log_2 n \rceil$.
+
+\begin{tutorium}
+  Von der Rechenregel 
+  \[
+  (A\cup B)\circ(C\cup D) = (A\circ C) \cup (A\circ D) \cup (B\circ C) \cup (B \circ D)
+  \]
+  für Relationen kann man sich mal einen Teil klar machen, \zB falls
+  alles binäre Relationen auf Menge $M$ sind:
+  \[
+  (A\cup B)\circ C = (A\circ C) \cup (A\circ D)
+  \]
+  (anderer Teil analog)
+  Beweis durch Nachprüfen beider Inklusionen, \evtl gleichzeitig:
+  \begin{align*}
+    (x,z)\in (A\cup B)\circ C &<==> \exists y\in M: (x,y)\in A\cup B \land (y,z)\in C \\
+    &<==> \exists y\in M: ((x,y)\in A \lor (x,y)\in B) \land (y,z)\in C \\
+    &<==> \exists y\in M: ((x,y)\in A \land (y,z)\in C) \lor ((x,y)\in B) \land (y,z)\in C) \\
+    &<==> \exists y\in M: ((x,y)\in A \land (y,z)\in C) \\
+    &\phantom{<==> }\lor \exists y\in M: ((x,y)\in B) \land (y,z)\in C) \\
+    &<==> (x,z)\in A\circ C \lor (x,z)\in B\circ C \\
+    &<==> (x,z)\in A\circ C \cup B\circ C \\
+  \end{align*}
+  Allerdings: 
+  \begin{itemize}
+  \item beim dritten $<==>$ braucht man Distributivgesetz für
+    Aussagenlogik: durch Nachdenken klar machen
+  \item beim vierten $<==>$ auch \textbf{unbedingt genau
+      nachdenken}: es ist wichtig, dass da ein \textbf{Oder} steht
+  \item für $\land$ wäre das folgende \textbf{FALSCH FALSCH FALSCH
+    }:
+    \[
+    \exists y\in M: (\A(y) \land \B(y) ) <==> \exists y\in M: \A(y)
+    \land \exists y\in M:\B(y)
+    \]
+    \textbf{HIER IST $<==>$ FALSCH: ES GILT NUR $==>$ !}
+  \item Gegenbeispiel $\exists y\in\N_0: y=1$ und $\exists y\in\N_0:
+    y=2$ \dots
+  \item Wenn Sie sich nicht in der Lage sehen, das klar rüber zu
+    bringen, dann lieber im Beweis umgangssprachlich argumentieren.
+  \end{itemize}
+\end{tutorium}
+%
+Im Matrizenrechnung übersetzt ergeben sich 
+\[
+2n^2 + \lceil \log_2 n \rceil(2n^3-n^2)
+\]
+arithmetische Operationen, was gegenüber $2n^4+n^2$ wieder eine
+beträchtliche Verbesserung ist, nämlich ungefähr um einen Faktor
+$2n/\lceil \log_2 n \rceil$.
+%
+\begin{tutorium}
+  Wegematrix schneller ($n^3\log_2 n$):
+  \begin{itemize}
+  \item Wenn man eine feste Gesamtzeit zur Verfügung hat und mit dem
+    $n^5$ Algorithmus gerade noch Probleminstanzen mit $n=1000$
+    schafft: Wie große Probleminstanzen schafft man mit dem
+    $n^3\log_2 n$ Algorithmus?
+  \end{itemize}
+\end{tutorium}
+
+% -----------------------------------------------------------------------
+\Tut\section{Algorithmus von Warshall}
+\label{sec:warshall}
+
+\index{Algorithmus von Warshall}\index{Warshall-Algorithmus} Wir
+kommen nun zu einem Algorithmus zur Berechnung der Wegematrix eines
+Graphen, bei dem gegenüber der eben zuletzt behandelten Methode der
+Faktor $\log_2 n$ sogar auf eine (kleine) Konstante sinkt. Er stammt
+von \textcite{Warshall_1962_TBM_ar} und ist in
+Algorithmus~\ref{alg:warshall} dargestellt.
+
+\begin{algorithm}[h]
+  \caption{Berechnung der Wegematrix nach Warshall}
+  \label{alg:warshall}
+  \vspace*{-\baselineskip}
+  \begin{tabbing}
+    \quad\=\quad\=\quad\=\quad\=\quad\=\hspace*{30mm}\=\\ \kill
+    \>\kw{for } $i <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\>\kw{for } $j <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\>\> $W_{ij} <- \begin{cases}
+      1 & \text{ falls } i=j\\
+      A_{ij} & \text{ falls } i\not=j\\
+    \end{cases}$ \\
+    \>\>\kw{od} \\
+    \>\kw{od} \\
+    \>\kw{for } $k <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\>\kw{for } $i <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\>\>\kw{for } $j <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+    \>\>\>\> $W_{ij} <- \max(\, W_{ij} ,\,  \min(W_{ik}, W_{kj})\,  )$\\
+    \>\>\>\kw{od} \\
+    \>\>\kw{od} \\
+    \>\kw{od}
+  \end{tabbing}
+\end{algorithm}
+ 
+\noindent
+Zum besseren Verständnis sei als erstes darauf hingewiesen, dass für
+zwei Bits $x$ und $y$ das Maximum $\max(x,y)$ dem logischen Oder
+entspricht, wenn man $1$ als wahr und $0$ als falsch
+interpretiert. Analog entspricht das Minimum $\min(x,y)$ dem logischen
+Und.
+
+Den Aufwand dieses Algorithmus sieht man schnell. Für die
+Initialisierung der Matrix $W$ im ersten Teil werden $n^2$ Operationen
+benötigt. Die weitere Rechnung besteht aus drei ineinander
+geschachtelten \kw{for}-Schleifen, von denen jede jedes Mal $n$ mal
+durchlaufen wird. Das ergibt $n^3$-malige Ausführung des
+Schleifenrumpfes, bei der jedes Mal zwei Operationen durchgeführt
+werden.
+
+Weitaus weniger klar dürfte es für Sie sein, einzusehen, warum der
+Algorithmus tatsächlich die Wegematrix berechnet. Es stellt sich hier
+mit anderen Worten wieder einmal die Frage nach der \emph{Korrektheit}
+des Algorithmus. 
+
+Die algorithmische Idee, die hier im Algorithmus von Warshall benutzt
+wird, geht auf eine fundamentale Arbeit von Stephen
+\textcite{Kleene_1956_REN_ic}\index{Kleene, Stephen Cole} zurück, der
+sie im Zusammenhang mit \emph{endlichen Automaten} und \emph{regulären
+  Ausdrücken} benutzt hat. (Unter anderem wird in dieser Arbeit die
+Schreibweise mit dem hochgestellten Stern $^*$ für den
+Konkatenationsabschluss eingeführt, der deswegen auch Kleene-Stern
+heißt.) Auf diese Themen werden wir in einer späteren Einheit
+eingehen.
+
+Für den Nachweis der Korrektheit des Algorithmus von War\-shall
+besteht die Hauptaufgabe darin, eine Schleifeninvariante für die
+äußerste (Laufvariable $k$) der drei ineinander geschachtelten
+Schleifen
+% \vspace*{-\baselineskip}
+% \begin{tabbing}
+%   \quad\=\quad\=\quad\=\quad\=\quad\=\quad\=\quad\\\kill
+%   \> \kw{for } $k <- 0$ \kw{ to } $n-1$ \kw{ do}\\
+%   \>\> \dots \\
+%   \>\kw{od}
+% \end{tabbing}
+% 
+zu finden. Für die Formulierung ist es hilfreich, bei einem Pfad
+$p=(v_0, v_1, \dots, v_{m-1}, v_m)$ der Länge $m\geq 2$ über die
+Knoten $v_1, \dots,$ $v_{m-1}$ reden zu können. Wir nennen sie im
+folgenden die \emph{Zwischenknoten} des Pfades. Pfade der Längen $0$
+und $1$ besitzen keine Zwischenknoten. Hier ist nun die
+Schleifeninvariante:
+
+\begin{lemma}
+  \label{lem:invariante-warshall}
+  Für alle $i,j\in \G_n$ gilt: Nach $k$ Durchläufen der äußeren
+  Schleife des Algorithmus von Warshall ist $W[i,j]$ genau dann $1$,
+  wenn es einen wiederholungsfreien Pfad von $i$ nach $j$ gibt, bei
+  dem alle Zwischenknoten Nummern in $\G_k$ haben (also Nummern, die
+  echt kleiner als $k$ sind).
+\end{lemma}
+%
+Hat man erst einmal nachgewiesen, dass das tatsächlich
+Schleifeninvariante ist, ist die Korrektheit des gesamten Algorithmus
+schnell bewiesen. Denn dann gilt insbesondere nach Beendigung der
+Schleife, also nach $n$ Schleifendurchläufen:
+\begin{itemize}
+\item Für alle $i,j\in \G_n$ gilt: Nach $n$ Schleifendurchläufen ist
+  $W_{ij}$ genau dann $1$, wenn es einen wiederholungsfreien Pfad von
+  $i$ nach $j$ gibt, bei dem alle Zwischenknoten Nummern in $\G_n$
+  haben, wenn also überhaupt ein Pfad existiert (denn andere
+  Knotennummern gibt es gar nicht).
+\end{itemize}
+
+\begin{beweis}[von Lemma~\ref{lem:invariante-warshall}]
+  \leavevmode~\\[-\baselineskip]
+  \begin{description}
+  \item[Induktionsanfang:] Dass die Behauptung im Fall $k=0$ gilt,
+    ergibt sich aus der Initialisierung der Matrix $W$: Knoten mit
+    Nummern echt kleiner als $0$ gibt es nicht; in den zur Rede
+    stehenden Pfaden kommen also keine Knoten außer dem ersten und dem
+    letzten vor. Das bedeutet aber, dass die Pfade von einer der
+    Formen $(x)$ oder $(x,y)$ sein müssen.
+  \end{description}
+  % 
+  Für den Induktionsschritt sei $k>0$ beliebig aber fest und wir
+  treffen die
+  \begin{description}
+  \item[Induktionsvoraussetzung:] Für alle $i,j\in \G_n$ gilt: Nach
+    $k-1$ Durchläufen der äußeren Schleife des Algorithmus von
+    Warshall ist $W_{ij}$ genau dann $1$, wenn es einen
+    wiederholungsfreien Pfad von $i$ nach $j$ gibt, bei dem alle
+    Zwischenknoten Nummern haben, die in $\G_{k-1}$ sind.
+  \item[Induktionsschluss:] Wir bezeichnen mit $W^{[k]}$ die Matrix, wie
+    sie nach $k$ Schleifendurchläufen berechnet wird, und analog mit
+    $W^{[k-1]}$ die Matrix nach $k-1$ Schleifendurchläufen. Die beiden
+    Implikationen werden getrennt bewiesen:
+    \begin{itemize}
+    \item[$==>$:] Es sei $W^{[k]}_{ij}=1$. Dann hat also mindestens eine
+      der folgenden Bedingungen zugetroffen:
+      \begin{itemize}
+      \item $W^{[k-1]}_{ij}=1$: In diesem Fall existiert ein Pfad,
+        dessen Zwischenknoten alle Nummern in $\G_{k-1}$ haben, und
+        das ist auch einer, dessen Zwischenknoten alle Nummern in
+        $\G_k$ haben.
+      \item $W^{[k-1]}_{ik}=1$ und $W^{[k-1]}_{kj}=1$. Dann existieren
+        Pfade von $i$ nach $k$ und von $k$ nach $j$, deren
+        Zwischenknoten alle Nummern in $\G_{k-1}$ sind. Wenn man die
+        Pfade zusammensetzt, erhält man einen Pfad von $i$ nach $j$,
+        dessen Zwischenknoten alle Nummern in $\G_k$ haben. Durch
+        Entfernen von Zyklen kann man auch einen entsprechenden Pfad
+        konstruieren, der wiederholungsfrei ist.
+      \end{itemize}
+    \item[$<==$:] Es gebe einen wiederholungsfreien Pfad $p$ von $i$ nach
+      $j$, dessen Zwischenknoten alle Nummern in $\G_k$ haben. Dann
+      sind zwei Fälle möglich:
+      \begin{itemize}
+      \item Ein Zwischenknoten in $p$ hat Nummer $k-1$: \\
+        Da $p$ wiederholungsfrei ist, enthält das Anfangsstück von
+        $p$, das von $i$ nach $k-1$ führt, nicht $k-1$ als
+        Zwischenknoten, also nur Knotennummern in $\G_{k-1}$. Das
+        gleiche gilt für das Endstück von $p$, das von $k-1$ nach $j$
+        führt. Nach Induktionsvoraussetzung sind also
+        $W^{[k-1]}_{i,k-1}=1$ und $W^{[k-1]}_{k-1,j}=1$. Folglich wird im
+        $k$-ten Durchlauf $W^{[k]}_{ij}=1$ gesetzt.
+      \item Kein Zwischenknoten in $p$ hat Nummer $k-1$: \\
+        Dann sind die Nummern der Zwischenknoten alle in
+        $\G_{k-1}$. Nach Induktionsvoraussetzung ist folglich
+        $W^{[k-1]}_{ij}=1$ und daher auch $W^{[k]}_{ij}=1$.
+      \end{itemize}
+    \end{itemize}
+  \end{description}
+\end{beweis}
+%
+\begin{tutorium}
+  Algorithmus von Warshall
+  \begin{itemize}
+  \item Korrektheit möglichst klar machen, denn der gleiche Trick
+    wird vielleicht noch mal auftauchen bei der Konstruktion von
+    regulären Ausdrücken zu endlichen Automaten.
+  \item stumpfsinniges Nachvollziehen der Rechnereien des
+    Algorithmus finde ich nur mäßig erhellend. Hat jemand noch
+    schöne Bilder dazu?
+  \end{itemize}
+\end{tutorium}
+% % -----------------------------------------------------------------------
+% \Tut\section{Algorithmus von Floyd}
+% \label{sub:floyd}
+
+% Eine kleine Änderung am Algorithmus von Warshall führt zum sogenannten
+% Algorithmus von Floyd, der in einem gerichteten Graphen für alle Paare von Knoten
+
+% -----------------------------------------------------------------------
+\section{Ausblick}
+
+Wir sind in dieser Einheit davon ausgegangen, dass die Matrizen auf
+die naheliegende Weise miteinander multipliziert werden. In der
+nächsten Einheit werden wir sehen, dass es auch andere Möglichkeiten
+gibt, die in einem gewissen Sinne sogar besser sind. Dabei werden auch
+Möglichkeiten zur Quantifizierung von "`gut"', "`besser"', \usw Thema
+sein.
+
+Effiziente Algorithmen für Problemstellungen bei Graphen sind nach wie
+vor Gegenstand intensiver Forschung. Erste weiterführende Aspekte
+werden Sie im kommenden Semester in der Vorlesung "`Algorithmen \textsc{i}"' zu
+sehen bekommen.
+
+% -----------------------------------------------------------------------
+% Literatur
+% nothing cited in this unit
+\printunitbibliography
+
+\cleardoublepage
+
+% -----------------------------------------------------------------------
+%%% 
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-16-alg-graphen/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

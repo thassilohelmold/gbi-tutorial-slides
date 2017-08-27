@@ -1,0 +1,1491 @@
+%=== Einheit  ====================================================================
+\Tutonly{\begin{center}\Large\bfseries Hinweise f\"ur die Tutorien\end{center}}
+\Tut\chapter{Turingmaschinen}
+\label{k:turingmaschinen}
+
+Turingmaschinen sind eine und waren im wesentlichen die erste
+mathematische Präzisierung des Begriffes des
+\mdefine{Algorithmus}\index{Algorithmus} so wie er klassisch
+verstanden wird:
+%
+Zu jeder endlichen Eingabe wird in endlich vielen Schritten eine
+endliche Ausgabe berechnet.
+
+Einen technischen Hinweis wollen wir an dieser Stelle auch noch geben:
+In diesem Kapitel werden an verschiedenen Stellen partielle Funktionen
+vorkommen. 
+%
+Das sind rechtseindeutige Relationen, die nicht notwendig linkstotal
+sind (siehe Abschnitt~\ref{subsec:rel-func}). 
+%
+Um deutlich zu machen, dass eine partielle Funktion vorliegt,
+schreiben wir im folgenden $f: M -o-> M'$. 
+%
+Das bedeutet dann also, dass für ein $x\in M$ entweder eindeutig ein
+Funktionswert $f(x)\in M'$ definiert ist, oder dass \emph{kein}
+Funktionswert $f(x)$ definiert ist. 
+%
+Man sagt auch, $f$ sei an der Stelle $x$ undefiniert.
+
+\begin{tutorium}
+  \subsubsection*{partielle Funktionen}
+  \begin{itemize}
+  \item ggf.\ noch mal kurz drauf eingehen
+  \item "`wie eine normale Funktion, aber an manchen Stellen evtl.\ nicht definiert"'
+  \end{itemize}
+\end{tutorium}
+
+%-----------------------------------------------------------------------
+\Tut\section{Alan Mathison Turing}
+\label{sec:turing}
+
+\personname{Alan Mathison Turing}\index{Turing, Alan} wurde am
+23.6.1912 geboren.
+
+Mitte der Dreißiger Jahre beschäftigte sich Turing mit Gödels
+Unvollständigkeitssätzen und Hilberts Frage, ob man für jede
+mathematische Aussage algorithmisch entscheiden könne, ob sie wahr sei
+oder nicht.  
+%
+Das führte zu der bahnbrechenden Arbeit
+\emph{\citetitle{Turing_1936_CNW_ar}} von
+\citeyear{Turing_1936_CNW_ar}.
+
+Von 1939 bis 1942 arbeitete Turing in Bletchly Park an der
+Dechiffrierung der verschlüsselten Texte der Deutschen. 
+%
+Für den Rest des zweiten Weltkriegs beschäftigte er sich in den USA
+mit Ver- und Entschlüsselungsfragen. 
+%
+Mehr zu diesem Thema (und verwandten) können Sie in Vorlesungen zum
+Thema \emph{Kryptographie}\index{Kryptographie} erfahren.
+
+Nach dem Krieg widmete sich Turing unter anderem dem Problem der
+\emph{Morphogenese}\index{Morphogenese} in der Biologie. 
+%
+Ein kleines bisschen dazu findet sich in der Vorlesung "`Algorithmen
+in Zellularautomaten"'.\index{Zellularautomaten}
+
+Alan Turing starb am 7.6.1954 an einer Zyankalivergiftung.
+%
+Eine Art "`Homepage"' findet sich unter
+\url{http://www.turing.org.uk/turing/index.html} (19.1.2011).
+
+%-----------------------------------------------------------------------
+\Tut\section{Turingmaschinen}
+\label{sec:turingmaschinen}
+
+Als \emph{Turingmaschine} bezeichnet man heute etwas, was
+\textcite{Turing_1936_CNW_ar} in seiner Arbeit eingeführt hat. 
+%
+Die Bezeichnung selbst geht wohl auf eine Besprechung von Turings
+Arbeit durch Alonzo Church zurück (laut einer WWW-Seite von J.~Miller;
+\url{http://jeff560.tripod.com/t.html}, 14.1.2010).
+
+Eine Turingmaschine kann man als eine Verallgemeinerung endlicher
+Automaten auf"|fassen, bei der die Maschine nicht mehr darauf
+beschränkt ist, nur feste konstante Zahl von Bits zu speichern. 
+%
+Im Laufe der Jahrzehnte wurden viele Varianten definiert und
+untersucht. Wir führen im folgenden nur die einfachste Variante ein.
+
+Zur Veranschaulichung betrachte man Abbildung~\ref{fig:tm}. 
+%
+Im oberen Teil sieht man die \emph{Steuereinheit}, die im wesentlichen
+ein endlicher \emph{Mealy-Automat} ist. 
+%
+Zusätzlich gibt es ein \emph{Speicherband}, das in einzelne
+\emph{Felder} aufgeteilt ist, die mit jeweils einem Symbol beschriftet
+sind. 
+%
+Die Steuereinheit besitzt einen \emph{Schreib-Lese-Kopf}, mit dem sie
+zu jedem Zeitpunkt von einem Feld ein Symbol als Eingabe lesen kann.
+%
+Als Ausgabe produziert die Turingmaschine ein Symbol, das auf das
+gerade besuchte Feld geschrieben wird, und sie kann den Kopf um ein
+Feld auf dem Band nach links oder rechts bewegen.
+%
+Ausgabesymbol und Kopfbewegung ergeben sich ebenso eindeutig aus
+aktuellem Zustand der Steuereinheit und gelesenem Symbol wie der neue
+Zustand der Steuereinheit.
+%
+\begin{tutorium}
+  \begin{itemize}
+  \item wir betrachten nur die simpelste Variante: 
+    \begin{itemize}
+    \item nur ein Kopf
+    \item nur ein Arbeitsband
+    \item keine separaten "`Spezialbänder"' für Eingaben oder Ausgaben 
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[node distance=0mm,->,>={Latex[open]},thin]
+    \matrix[matrix of math nodes,column sep=0mm,minimum size=8mm,row sep=10mm,nodes={every rectangle node/.style={rectangle,draw,anchor=center}}]   {
+      & & & && \node[circle,draw] (z) {z}; & \\
+      \node[circle] {\cdots}; & \blank & \blank & |(x)| \#a & \#b & \#b & \#a & \#a & \blank & \node[circle] {\cdots};\\
+    };
+    \path[<->] (z) edge [out=270,in=90] (x);
+  \end{tikzpicture}
+  \caption{schematische Darstellung einer (einfachen) Turingmaschine}
+  \label{fig:tm}
+\end{figure}
+
+Formal kann man sich also eine
+\mdefine{Turingmaschine}\index{Turingmaschine} $T=(Z,z_0,X,f,$ $g,m)$
+festgelegt vorstellen durch
+\begin{itemize}
+\item eine Zustandsmenge $Z$
+\item einen Anfangszustand $z_0\in Z$
+\item ein Bandalphabet $X$
+\item eine partielle Zustandsüberführungsfunktion \\
+  $f:Z\x X-o->Z$
+\item eine partielle Ausgabefunktion $g:Z\x X-o-> X$ und
+\item eine partielle Bewegungsfunktion $m:Z\x X -o-> \{ -1, 0, 1\}$
+\end{itemize}
+%
+Wir verlangen, dass die drei Funktionen $f$, $g$ und $m$ für die
+gleichen Paare $(z,x)\in Z\x X$ definiert \bzw nicht definiert sind.
+Warum wir im Gegensatz zu \zB endlichen Akzeptoren erlauben, dass die
+Abbildungen nur partiell sind, werden wir später noch erläutern.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item habe die Arbeitsweise auf 3 Funktionen $f$, $g$, $m$
+    aufgeteilt, weil man da einfacher hinschreiben kann, was ein
+    Schritt ist
+    \begin{enumerate}
+    \item Feld mit nächstem Symbol beschriften
+    \item in neuen Zustand übergehen
+    \item Kopf bewegen
+    \end{enumerate}
+  \item weiteres Beispiel:
+    \begin{center}
+      \begin{tabular}{c}
+        \begin{tikzpicture}[shorten >=1pt,initial text=,node distance=2cm,auto,->,>=stealth,baseline=(B.base)]
+          % \node[state,initial]  (S)                       {$S$};
+          \node[state,initial]  (A)          {$A$};
+          % \node (nix) [right of=A] {};
+          \node[state]          (B) [above right of=A] {$B$};
+          \node[state]          (C) [right of=B] {$C$};
+          \node[state]          (E) [below right of=A] {$E$};
+          \node[state]          (D) [right of=E] {$D$};
+          \path[->]
+          % (S) edge              node  {$\9\io\9R$} (A)
+          (A) edge              node  {$\#1\io\#XR$} (B)
+          (B) edge [loop above] node  {$\#1\io\#1R$} ()
+          edge              node  {$\9\io\9R$} (C)
+          (C) edge [loop above] node  {$\#1\io\#1R$} ()
+          edge              node  {$\9\io\#1L$} (D)
+          (D) edge [loop below] node  {$\#1\io\#1L$} ()
+          edge              node  {$\9\io\9L$} (E)
+          (E) edge [loop below] node  {$\#1\io\#1L$} ()
+          edge              node  {$\#X\io\#1R$} (A)
+          % (B) edge              node        {$\9\io\9R$} (B)
+          % edge [loop right] node        {$\#1\io\#1R$} ()
+          % (B) edge [loop right] node {$\9\io\#1L$} ()
+          % edge  node [pos=0.3]       {$\#1\io\#1L$} (A)
+          ;
+        \end{tikzpicture}
+        \\[5mm]
+        \begin{tabular}[t]{>{$}c<{$}@{\qquad}*{6}{>{$}c<{$}}}
+          \toprule
+          % & S      & A       & B      & C       & D       & E \\
+          % \midrule
+          % \9  & \9,R,A &         & \9,R,C & \#1,L,D & \9,L,E  &  \\
+          % \#1 &        & \#X,R,B & \#1,R,B& \#1,R,C & \#1,L,D & \#1,L,E \\
+          % \#X &        &         &        &         &         & \#1,R,A \\
+          & A       & B      & C       & D       & E \\
+          \midrule
+          \9       
+          &         & \9,R,C & \#1,L,D & \9,L,E  &  \\
+          \#1         & \#X,R,B & \#1,R,B& \#1,R,C & \#1,L,D & \#1,L,E \\
+          \#X         &         &        &         &         & \#1,R,A \\
+          \bottomrule
+        \end{tabular}
+      \end{tabular}
+    \end{center}
+    Wenn ich mich nicht vertan habe, kopiert diese TM ein Wort
+    $\#1^k$ auf einem leeren Band, so dass hinterher $\cdots \blank
+    \#1^k \blank \#1^k \blank \cdots$ da steht, falls man auf der
+    ersten \#1 startet. Richtig?
+  \item Verallgemeinerung fürs Kopieren von Wörtern über $\{\#0,\#1\}$:
+    Man muss sich auf dem Weg nach rechts merken, was mit \#X
+    überschrieben wurde, und man muss auf dem Weg nach rechts und
+    zurück sowohl \#1 als auch \#0 überlaufen.
+  \end{itemize}
+\end{tutorium}
+
+Es gibt verschiedene Möglichkeiten, die Festlegungen für eine konkrete
+Turingmaschine darzustellen. Manchmal schreibt man die drei
+Abbildungen $f$, $g$ und $m$ in Tabellenform auf, manchmal macht man
+es graphisch, ähnlich wie bei Mealy-Automaten.  In
+Abbildung~\ref{fig:tm-spez-bb3} ist die gleiche Turingmaschine auf beide
+Arten definiert. Die Bewegungsrichtung notiert man oft auch mit $L$
+(für links) statt $-1$ und mit $R$ (für rechts) statt $1$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tabular}{c}
+    \begin{tikzpicture}[shorten >=1pt,node distance=2cm,auto,->,>=stealth,baseline=(B.base)]
+    \node[state]  (A)                       {$A$};
+    \node (start) [above left of=A] {};
+    \node[state] (stop) [below left of=A] {$H$};
+    \node (nix) [right of=A] {};
+    \node[state]          (B) [above right of= nix] {$B$};
+    \node[state]          (C) [below right of= nix] {$C$};
+    \path[->] (start) edge (A)
+              (A) edge              node        {$\9\io\#1R$} (B)
+                  edge              node  {$\#1\io\#1R$} (stop)
+              (B) edge              node        {$\9\io\9R$} (C)
+                  edge [loop right] node        {$\#1\io\#1R$} ()
+              (C) edge [loop right] node {$\9\io\#1L$} ()
+                  edge  node [pos=0.3]       {$\#1\io\#1L$} (A);
+    \end{tikzpicture}
+    \\
+    \begin{tabular}[t]{>{$}c<{$}@{\qquad}*{4}{>{$}c<{$}}}
+      \toprule
+      & A & B & C & H \\
+      \midrule
+      \9 & \#1,R,B & \9,R,C & \#1,L,C & \hphantom{\#1,L,C} \\
+      \#1 & \#1,R,H & \#1,R,B &  \#1,L,A \\
+      \bottomrule
+    \end{tabular}
+  \end{tabular}
+  \caption{Zwei Spezifikationsmöglichkeiten der gleichen
+    Turingmaschine; sie heißt BB3.}
+  \label{fig:tm-spez-bb3}
+\end{figure}
+
+Eine Turingmaschine befindet sich zu jedem Zeitpunkt in einem
+"`Gesamtzustand"', den wir eine
+\mdefine{Konfiguration}\index{Konfiguration} nennen wollen. Sie ist
+vollständig beschrieben durch
+\begin{itemize}
+\item den aktuellen Zustand $z\in Z$ der Steuereinheit,
+\item die aktuelle Beschriftung des gesamten Bandes, die man als
+  Abbildung $b:\Z-> X$ formalisieren kann, und
+\item die aktuelle Position $p\in \Z$ des Kopfes.
+\end{itemize}
+%
+Eine Bandbeschriftung ist also ein potenziell unendliches "`Gebilde"'.
+Wie aber schon in Abschnitt~\ref{sub:alg-informell} erwähnt und zu
+Beginn dieses Kapitels noch einmal betont, interessieren in weiten
+Teilen der Informatik \emph{endliche} Berechnungen, die aus
+\emph{endlichen} Eingaben \emph{endliche} Ausgaben berechnen. Um das
+adäquat zu formalisieren, ist es üblich, davon auszugehen, dass das
+Bandalphabet ein sogenanntes \mdefine{Blanksymbol}\index{Blanksymbol}
+enthält, für das wir $\blank \in X$ schreiben. Bandfelder, die "`mit
+$\blank$ beschriftet"' sind, wollen wir als "`leer"' ansehen; und so
+stellen wir sie dann gelegentlich auch dar, oder lassen sie ganz weg.
+Jedenfalls in dieser Vorlesung (und in vielen anderen auch) sind alle
+tatsächlich vorkommenden Bandbeschriftungen von der Art, dass nur
+endlich viele Felder nicht mit $\blank$ beschriftet sind.
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Berechnungen}
+\label{subsec:berechnungen}
+
+Wenn $c=(z,b,p)$ die aktuelle Konfiguration einer Turingmaschine $T$
+ist, dann kann es sein, dass sie einen \mdefine[Schritt einer\\
+Turingmaschine]{Schritt}\index{Schritt einer
+  Turingmaschine}\index{Turingmaschine!Schritt} durchführen kann. Das
+geht genau dann, wenn für das Paar $(z,b(p))$ aus aktuellem Zustand
+und aktuell gelesenem Bandsymbol die Funktionen $f$, $g$ und $m$
+definiert sind. Gegebenenfalls führt das dann dazu, dass $T$ in die
+Konfiguration $c'=(z',b',p')$ übergeht, die wie folgt definiert ist:
+\begin{itemize}
+\item $z' = f(z,b(p))$
+\item $\forall i\in \Z: b'(i) =
+  \begin{cases}
+    b(i) & \text{ falls } i\not=p \\
+    g(z,b(p)) & \text{ falls } i=p
+  \end{cases}$
+\item $p' = p + m(z,b(p))$
+\end{itemize}
+%
+Wir schreiben $c'= \Delta_1(c)$. Bezeichnet $\Conf_T$ die Menge aller
+Konfigurationen einer Turingmaschine $T$, dann ist das also die
+partielle Abbildung $\Delta_1:\Conf_T -o-> \Conf_T$, die als
+Funktionswert $\Delta_1(c)$ gegebenenfalls die ausgehend von $c$ nach
+einem Schritt erreichte Konfiguration bezeichnet.
+
+Falls für eine Konfiguration $c$ die Nachfolgekonfiguration
+$\Delta_1(c)$ nicht definiert ist, heißt $c$ auch eine
+\mdefine{Endkonfiguration}\index{Endkonfiguration} und man sagt, die
+Turingmaschine habe \mdefine[Halten]{gehalten}\index{Halten!einer
+  Turingmaschine}\index{Turingmaschine!Halten}.
+
+Die Turingmaschine aus Abbildung~\ref{fig:tm-spez-bb3} wollen wir BB3
+nennen. Wenn BB3 im Anfangszustand $A$ auf einem vollständig leeren Band
+gestartet wird, dann
+macht sie wegen
+\begin{itemize}
+\item $f(A,\blank) = B$,
+\item $g(A,\blank) = \#1$ und
+\item $m(A,\blank)= R$
+\end{itemize}
+ folgenden Schritt:
+\begin{center}
+  \begin{tabular}{*{10}{>{$}c<{$}}}
+    \midrule
+       &   &   & A &  \\
+    \9 &\9 &\9 &\9 &\9 &\9 &\9 &\9 \\
+    \midrule
+       &   &   &   & B & & \\
+    \9 &\9 &\9 &\#1&\9 &\9 &\9 &\9 \\
+    \midrule
+  \end{tabular}
+\end{center}
+Dabei haben wir den Zustand der Turingmaschine jeweils über dem gerade
+besuchten Bandfeld notiert. In der entstandenen Konfiguration kann BB3
+einen weiteren Schritt machen, und noch einen und noch einen \dots. Es
+ergibt sich folgender Ablauf.
+\begin{center}
+  \begin{tabular}{*{10}{>{$}c<{$}}}
+    \midrule
+    &   &   & A &  \\
+    \9 &\9 &\9 &\9 &\9 &\9 &\9 &\9 \\
+    \midrule
+    &   &   &   & B & & \\
+    \9 &\9 &\9 &\#1&\9 &\9 &\9 &\9 \\
+    \midrule
+    &   &   &   &   & C & \\
+    \9 &\9 &\9 &\#1&\9 &\9 &\9 &\9 \\
+    \midrule
+    &   &   &   & C & \\
+    \9 &\9 &\9 &\#1&\9 &\#1&\9 &\9 \\
+    \midrule
+    &   &   & C &   & \\
+    \9 &\9 &\9 &\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   & A &   &   & \\
+    \9 &\9 &\9 &\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   &   & B &   & \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   &   &   & B & \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   &   &   &   & B & \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   &   &   &   &   & B \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   &   &   &   &   &   & C \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\9 &\9 \\
+    \midrule
+    &   &   &   &   &   & C \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\9 &\#1 \\
+    \midrule
+    &   &   &   &   &  C \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\#1&\#1 \\
+    \midrule
+    &   &   &   & A \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\#1&\#1 \\
+    \midrule
+    &   &   &   &   & H \\
+    \9 &\9 &\#1&\#1&\#1&\#1&\#1&\#1 \\
+    \midrule
+  \end{tabular}
+\end{center}
+%
+In Zustand $H$ ist kein Schritt mehr möglich; es ist eine
+Endkonfiguration erreicht und BB3 hält.
+
+Eine \mdefine[endliche\\Berechnung]{endliche Berechnung}\index{endliche
+  Berechnung}\index{Berechnung!endliche} ist eine endliche Folge von
+Konfigurationen $(c_0, c_1, c_2,$ $\dots, c_t)$ mit der Eigenschaft,
+dass für alle $0<i\leq t$ gilt: $c_i = \Delta_1(c_{i-1})$.  Eine
+Berechnung ist \mdefine[haltende\\Berechnung]{haltend}%
+\index{Berechnung!haltend}\index{haltende
+  Berechnung}, wenn es eine endliche Berechung ist und ihre letzte
+Konfiguration eine Endkonfiguration ist.
+
+Eine \mdefine[unendliche\\Berechnung]{unendliche Berechnung}\index{unendliche
+  Berechnung}\index{Berechnung!unendliche} ist eine unendliche Folge
+von Konfigurationen $(c_0, c_1,$ $c_2, \dots)$ mit der Eigenschaft,
+dass für alle $0<i$ gilt: $c_i = \Delta_1(c_{i-1})$. Eine unendliche
+Berechnung heißt auch \mdefine[nicht haltende\\Berechung]{nicht
+  haltend}\index{Berechnung!nicht haltend}\index{nicht haltende
+  Berechnung}.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Wichtig: Darauf eingehen, dass es unendliche Berechnungen
+    gibt --- bei TM genauso wie in Java.
+  \end{itemize}
+\end{tutorium}
+
+Eine nicht haltende Berechungen würden wir zum Beispiel bekommen, wenn
+wir BB3 dahingehend abändern, dass $f(A,\blank)=A$ und
+$g(A,\blank)=\blank$ ist. Wenn man dann BB3 auf dem vollständig leeren
+Band startet, dann bewegt sie ihren Kopf immer weiter nach rechts,
+lässt das Band leer und bleibt immer im Zustand $A$.
+
+Analog zu $\Delta_1$ liefere generell für $t\in
+\N_0$ die Abbildung $\Delta_t$ als Funktionswert $\Delta_t(c)$
+gegebenenfalls die ausgehend von $c$ nach $t$ Schritten erreichte
+Konfiguration. Also
+\begin{align*}
+  \Delta_0 &= \Id \\
+\forall t\in \N_+:  \Delta_{t+1} &= \Delta_1 \circ \Delta_t 
+\end{align*}
+%
+Zu jeder Konfiguration $c$ gibt es genau eine Berechnung, die mit $c$
+startet, und wenn diese Berechnung hält, dann ist der Zeitpunkt, zu dem
+das geschieht, natürlich auch eindeutig. Wir schreiben $\Delta_*$ für
+die partielle Abbildung $\Conf_T -o-> \Conf_T$ mit
+\[
+\Delta_*(c) =
+\begin{cases}
+  \Delta_t(c) & \text{ falls $\Delta_t(c)$ definiert und }\\
+  & \text{ Endkonfiguration ist} \\
+  \text{undefiniert} & \text{ falls $\Delta_t(c)$ für alle $t\in \N_0$ definiert ist} \\
+\end{cases}
+\]
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Eingaben f\"ur Turingmaschinen}
+\label{subsec:tm-eingaben}
+
+Informell (und etwas ungenau) gesprochen werden Turingmaschinen für
+"`zwei Arten von Aufgaben"' eingesetzt: Zum einen wie endliche
+Akzeptoren zur Entscheidung der Frage, ob ein Eingabewort zu einer
+bestimmten formalen Sprache gehört. Man spricht in diesem Zusammenhang
+auch von
+\mdefine[Entscheidungsproblem]{Entscheidungsproblemen}\index{Entscheidungsproblem}.
+Zum anderen betrachtet man allgemeiner den Fall der "`Berechung von
+Funktionen"', bei denen der Funktionswert aus einem größeren Bereich
+als nur $\{0,1\}$ kommt.
+
+In beiden Fällen muss aber jedenfalls der Turingmaschine die Eingabe
+zur Verfügung gestellt werden. Dazu fordern wir, dass stets ein
+\mdefine{Eingabealphabet}\index{Eingabealphabet} $A\subset
+X\smallsetminus\{\blank\}$ spezifiziert ist. (Das Blanksymbol gehört
+also nie zum Eingabealphabet.) Und die Eingabe eines Wortes $w\in A^*$
+wird bewerkstelligt, indem die Turingmaschine im Anfangszustand $z_0$
+mit dem Kopf auf Feld $0$ gestartet wird mit der Bandbeschriftung
+\begin{align*}
+  b_w: \Z &-> X \\
+        b_w(i) &=
+        \begin{cases}
+          \blank & \text{ falls } i< 0 \lor i\geq |w| \\
+          w(i) & \text{ falls } 0\leq i \land i< |w| 
+        \end{cases}
+\end{align*}
+%
+Für die so definierte \mdefine[zu $w$ gehörende
+Anfangskonfiguration]{zur Eingabe $w$ gehörende
+  Anfangskonfiguration}\index{Anfangskonfiguration}\index{c0@$c_0(w)$}
+schreiben wir auch $c_0(w)$.
+
+Interessiert man sich \zB für die Berechnung von Funktionen der Form
+$f:\N_0 -> \N_0$, dann wählt man üblicherweise die naheliegende
+Binärdarstellung des Argumentes $x$ für $f$ als Eingabewort für die
+Turingmaschine. Für die Eingabe mehrerer Argumente sei vereinbart,
+dass jedes mit \#[ und \#] abgegrenzt wird und die entstehenden Wörter
+unmittelbar hintereinander auf das Band geschrieben werden. Für die
+Argumente $11$ und $5$ hätte der relevante Teil der initialen
+Bandbeschriftung also die Form
+$\9\9\9\#[\#1\#0\#1\#1\#]\#[\#1\#0\#1\#]\9\9$.
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Ergebnisse von Turingmaschinen}
+\label{subsec:tm-ergebnisse}
+
+Man betrachtet verschiedene Arten, wie eine Turingmaschine ein
+Ergebnis "`mitteilt"', wenn sie hält. Sofern man \emph{kein}
+Entscheidungsproblem vorliegen hat, sondern ein Problem, bei dem mehr
+als zwei verschiedene Funktionswerte $f(x)$ möglich sind, ist eine
+nicht unübliche Vereinbarung, dass in der Endkonfiguration das Band
+wieder vollständig leer ist bis auf eine Darstellung von $f(x)$ (\zB
+binär, falls es um nichtnegative ganze Zahlen geht). Wir wollen so
+etwas eine Turingmaschine mit \mdefine{Ausgabe auf dem
+  Band}\index{Ausgabe auf dem Band! bei
+  Turingmaschinen}\index{Turingmaschine!Ausgabe auf dem Band} nennen.
+
+Im Falle von Entscheidungsproblemen
+wollen wir wie bei endlichen Akzeptoren davon ausgehen, dass eine
+Teilmenge $F\subset Z$ von \mdefine[akzeptierender
+Zustand]{akzpetierenden Zuständen}\index{akzeptierender Zustand! bei
+  Turingmaschinen}\index{Zustand!akzeptierender, bei Turingmaschinen}
+definiert ist. Ein Wort $w$ gilt als \mdefine[akzeptiertes
+Wort]{akzeptiert}\index{akzeptiertes Wort!bei
+  Turingmaschinen}\index{Wort!akzeptiertes, bei Turingmaschinen}, wenn
+die Turingmaschine für Eingabe $w$ hält und der Zustand der
+Endkonfiguration $\Delta_*(c_0(w))$ ein akzepierender ist.  Die Menge
+aller von einer Turingmaschine $T$ akzeptierten Wörter heißt wieder
+\mdefine{akzeptierte formale Sprache}\index{akzeptierte formale
+  Sprache!bei Turingmaschinen}\index{formale Sprache!akzeptierte , bei
+  Turingmaschinen} $L(T)$.  Wir sprechen in diesem Zusammenhang
+gelegentlich auch von
+\mdefine[Turingmaschinenakzeptor]{Turingmaschinenakzeptoren}\index{Turingmaschine!Akzeptor}.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item die Palindrommaschine sollten Sie sich klar gemacht haben
+  \item ich beschränke mich weitgehend auf Akzeptoren, aber wenn Sie
+    wollen, können Sie eine TM besprechen, die eine binär dargestellte
+    Zahl um 1 erhöht:
+    
+    \begin{tabular}[t]{>{$}c<{$}@{\qquad}*{4}{>{$}c<{$}}}
+      \toprule
+      & r & c_0 & c_1 & h \\
+      \midrule
+      \#0 & \#0,R,r   & \#0,L,c_0 & \#1,L,c_0 \\
+      \#1 & \#1,R,r   & \#1,L,c_0 & \#0,L,c_1 \\
+      \9  & \9, L,c_1 & \9 ,R,h   & \#1,L,c_0 & \hphantom{\#1,L,C} \\
+      \bottomrule
+    \end{tabular}\\
+
+    \noindent
+    Auf diese Maschine komme ich später noch mal zurück.
+  \end{itemize}
+\end{tutorium}
+
+Einen solchen Turingmaschinenakzeptor kann man immer "`umbauen"' in
+eine Turingmaschine mit Ausgabe auf dem Band, wobei dann Akzeptieren
+durch Ausgabe \#1 und Ablehnen durch Ausgabe \#0 repräsentiert wird.
+Versuchen Sie als Übung, sich zumindest ein Konzept für eine
+entsprechende Konstruktion zu überlegen.
+
+Wenn ein Wort $w$ von einer Turingmaschine \emph{nicht} akzeptiert wird,
+dann gibt es dafür zwei mögliche Ursachen:
+\begin{itemize}
+\item Die Turingmaschine hält für Eingabe $w$ in einem nicht
+  akzeptierenden Zustand.
+\item Die Turingmaschine hält für Eingabe $w$ nicht.
+\end{itemize}
+%
+Im ersten Fall bekommt man sozusagen die Mitteilung "`Ich bin fertig
+und lehne die Eingabe ab."' Im zweiten Fall weiß man nach jedem
+Schritt nur, dass die Turingmaschine noch arbeitet. Ob sie irgendwann
+anhält, und ob sie die Eingabe dann akzeptiert oder ablehnt, ist im
+allgemeinen unbekannt. Eine formale Sprache, die von einer
+Turingmaschine akzeptiert werden kann, heißt auch \mdefine{aufzählbare
+  Sprache}\index{aufzählbare Sprache}\index{Sprache!aufzählbare}.
+
+Wenn es eine Turingmaschine $T$ gibt, die $L$ akzeptiert und für jede
+Eingabe hält, dann sagt man auch, dass $T$ die Sprache $L$
+\mdefine[entscheiden]{entscheide} und dass $L$ \mdefine[entscheidbare
+Sprache]{entscheidbar}\index{entscheidbare
+  Sprache}\index{Sprache!entscheidbare} ist. Dass das eine echt
+stärkere Eigenschaft ist als Aufzählbarkeit werden wir in
+Abschnitt~\ref{sec:unentscheidbare-probleme} ansprechen.
+
+Als Beispiel betrachten wir die Aufgabe, für jedes Eingabewort $w\in
+L=\{\#a,\#b\}^*$ festzustellen, ob es ein Palindrom ist oder nicht.
+Es gilt also einen Turingmaschinenakzeptor zu finden, der genau $L$
+entscheidet. In Abbildung~\ref{fig:tm-pal} ist eine solche
+Turingmaschine angegeben. Ihr Anfangszustand ist $r$ und einziger
+akzeptierender Zustand ist $f_+$. Der Algorithmus beruht auf der Idee,
+dass ein Wort genau dann Palindrom ist, wenn erstes und letztes Symbol
+übereinstimmen und das Teilwort dazwischen auch ein Palindrom ist.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[shorten >=1pt,node distance=25mm,auto,->,>=stealth,baseline=(B.base)]
+    \matrix[matrix of math nodes,column sep=20mm,minimum width=10mm,row sep=20mm,nodes={circle,draw,inner sep=1pt}]   {
+      & |(ra)| r_{\#a} & |(la)| l_{\#a} & \\
+    |(r)| r & \draw circle (4.5mm); \node[anchor=center] (f_+) {f_+};  & |(f_{-})| f_{-} & |(l)| l \\
+      & |(rb)| r_{\#b} & |(lb)| l_{\#b} & \\[-10mm]
+      \coordinate (bbb) {}; & \coordinate (h12) {}; & \coordinate (h22) {}; & \coordinate (aaa) {}; \\
+    };
+    \path[->] %(start) edge (r)
+              (r) edge              node [pos=0.7]       {$\#a\io\9R$} (ra)
+                  edge              node [swap,pos=0.7]        {$\#b\io\9R$} (rb)
+                  edge              node [swap]       {$\9\io\9R$} (f_+)
+              (ra) edge [loop above] node [anchor=east,pos=0.3] {$\#a\io\#aR$, $\#b\io\#bR$} ()
+                   edge              node {$\9\io\9L$} (la)
+              (rb) edge [loop below] node [anchor=east,pos=0.7] {$\#a\io\#aR$, $\#b\io\#bR$} ()
+                   edge              node [swap] {$\9\io\9L$} (lb)
+              (la) edge              node [pos=0.3]{$\#a\io\9L$} (l)
+                   edge              node [pos=0.7] {$\#b\io\9L$} (f_{-})
+                   edge              node [swap,pos=0.7] {$\9\io\90$} (f_+)
+              (lb) edge              node [swap,pos=0.7] {$\#a\io\9L$} (f_{-})
+                   edge              node [swap,pos=0.3] {$\#b\io\9L$} (l)
+                   edge              node [pos=0.7] {$\9\io\90$} (f_+)
+              (l)  edge [loop above] node [anchor=south,pos=0.7] {$\#a\io\#aL$, $\#b\io\#bL$} ();
+        \path[draw,->] (l) .. controls (aaa) .. (h22) --  node {$\9\io\9R$}  (h12) .. controls (bbb) .. (r) ;
+        \path[draw,<-] (r) -- ++(-1,0);
+  \end{tikzpicture}
+  \caption{Eine Turingmaschine zur Palindromerkennung; $f_+$ sei der
+    einzige akzeptierende Zustand}
+  \label{fig:tm-pal}
+\end{figure}
+%
+Zur Erläuterung der Arbeitsweise der Turingmaschine ist in
+Abbildung~\ref{fig:tm-pal-berechnung} beispielhaft die Berechnung für
+Eingabe \#{abba} angegeben. Man kann sich klar machen (tun Sie das
+auch), dass die Turingmaschine alle Palindrome und nur die akzeptiert
+und für jede Eingabe hält. Sie entscheidet die Sprache der Palindrome
+also sogar.
+%
+\begin{figure}
+  \centering
+  \begin{tabular}{*{10}{>{$}c<{$}}}
+    \midrule
+       &   & r  \\
+    \9 &\9 &\#a&\#b&\#b&\#a &\9 \\
+    \midrule
+       &   &  & r_{\#a}  \\
+    \9 &\9 &\9&\#b&\#b&\#a &\9 \\
+    \midrule
+       &   &  &   & r_{\#a}  \\
+    \9 &\9 &\9&\#b&\#b&\#a &\9 \\
+    \midrule
+       &   &  &   &   & r_{\#a}  \\
+    \9 &\9 &\9&\#b&\#b&\#a &\9 \\
+    \midrule
+       &   &  &   &   &   &r_{\#a}  \\
+    \9 &\9 &\9&\#b&\#b&\#a &\9 \\
+    \midrule
+       &   &  &   &   & l_{\#a}  \\
+    \9 &\9 &\9&\#b&\#b&\#a &\9 \\
+    \midrule
+       &   &  &   & l  \\
+    \9 &\9 &\9&\#b&\#b&\9 &\9 \\
+    \midrule
+       &   &  & l  \\
+    \9 &\9 &\9&\#b&\#b&\9 &\9 \\
+    \midrule
+       &   & l  \\
+    \9 &\9 &\9&\#b&\#b&\9 &\9 \\
+    \midrule
+       &   &  & r  \\
+    \9 &\9 &\9&\#b&\#b&\9 &\9 \\
+    \midrule
+       &   &  &   &r_{\#b}  \\
+    \9 &\9 &\9&\9 &\#b&\9 &\9 \\
+    \midrule
+       &   &  &   &   &r_{\#b}  \\
+    \9 &\9 &\9&\9 &\#b&\9 &\9 \\
+    \midrule
+       &   &  &   & l_{\#b}  \\
+    \9 &\9 &\9&\9 &\#b&\9 &\9 \\
+    \midrule
+       &   &  & l  \\
+    \9 &\9 &\9&\9 &\9 &\9 &\9 \\
+    \midrule
+       &   &  &   & r  \\
+    \9 &\9 &\9&\9 &\9 &\9 &\9 \\
+    \midrule
+       &   &  &   &   & f_+ \\
+    \9 &\9 &\9&\9 &\9 &\9 &\9 \\
+    \midrule
+  \end{tabular}
+  \caption{Akzeptierende Berechung der Turingmaschine
+    aus Abbildung~\ref{fig:tm-pal} für Eingabe \protect\#{abba}}
+  \label{fig:tm-pal-berechnung}
+\end{figure}
+
+%-----------------------------------------------------------------------
+\Tut\section{Berechnungskomplexit\"at}
+\label{sec:komplexitaet}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Noch mal der Hinweis aus dem Skript: Der Einfachheit halber
+    wollen wir in diesem Abschnitt davon ausgehen, dass wir
+    auschließlich mit Turingmaschinen zu tun haben, die für jede
+    Eingabe halten.
+
+    In nächsten Abschnitt werden wir dann aber wieder gerade von dem
+    allgemeinen Fall ausgehen, dass eine Turingmaschine für manche
+    Eingaben \emph{nicht} hält.
+  \item Das ist vielleicht etwas verwirrend für die Studenten. Aber
+    der Formalismus für Komplexitätstheorie, bei dem alles für
+    manchmal nicht haltende TM durchgezogen wird, ist auch nicht
+    gerade so toll. Und man muss aufpassen.
+  \item Lieber die Studenten anflehen, sie mögen doch bitte glauben,
+    dass die Annahme des Immer-Haltens ok ist. Ich werde auch in der
+    Vorlesung was dazu sagen.
+  \end{itemize}
+\end{tutorium}
+
+
+Wir beginnen mit einem wichtigen Hinweis: Der Einfachheit halber
+wollen wir in diesem Abschnitt davon ausgehen, dass wir
+auschließlich mit Turingmaschinen zu tun haben, die für jede Eingabe
+halten. Die Definitionen sind dann leichter hinzuschreiben. Und für
+die Fragestellungen, die uns in diesem und im folgenden Abschnitt
+interessieren ist das "`in Ordnung"'. Warum dem so ist, erfahren Sie
+vielleicht einmal in einer Vorlesung über Komplexitätstheorie.
+
+In Abschnitt~\ref{sec:unentscheidbare-probleme} werden wir dann aber
+wieder gerade von dem allgemeinen Fall ausgehen, dass eine
+Turingmaschine für manche Eingaben \emph{nicht} hält. Warum das
+wichtig ist, werden Sie dann schnell einsehen. Viel mehr zu diesem
+Thema werden Sie vielleicht einmal in einer Vorlesung über
+Berechenbarkeit oder/und Rekursionstheorie hören.
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Komplexit\"atsma\ss e}
+\label{subsec:kompl-masze}
+
+Bei Turingmaschinen kann man leicht zwei sogenannte
+\mdefine[Komplexitätsmaß]{Komplexitätsmaße}\index{Komplexitätsmaß}
+definieren, die Rechenzeit und Speicherplatzbedarf charakterisieren.
+
+Für die Beurteilung des Zeitbedarfs definiert man zwei Funktionen
+$\ftime_T:A^+ -> \N_+$ und $\fTime_T:\N_+ -> \N_+$ wie folgt:
+\begin{align*}
+  \ftime_T(w) &= \text{das $t$, für das $\Delta_t(c_0(w))$ Endkonfiguration ist} \\
+  \fTime_T(n)   &= \max \{\ftime_T(w) \mid w\in A^n\}
+\end{align*}
+%
+Da wir im Moment davon ausgehen, dass die betrachteten Turingmaschinen
+immer halten, sind diese Abbildungen total. Der Einfachheit halber
+lassen wir das leere Wort bei diesen Betrachtungen weg.
+
+Üblicherweise heißt die Abbildung $\fTime_T$ die
+\mdefine{Zeitkomplexität}\index{Zeitkomplexität} der Turingmaschine
+$T$. Man beschränkt sich also darauf, den Zeitbedarf in Abhängigkeit
+von der Länge der Eingabe (und nicht für jede Eingabe einzeln)
+anzugeben (nach oben beschränkt).  Man sagt, dass die Zeitkomplexität
+einer Turingmaschine \mdefine[pollynomielle
+Zeitkomplexität]{polynomiell}\index{polynomiell!Zeitkomplexität}\index{Zeitkomplexität!polynomiell}
+ist, wenn ein Polynom $p(n)$ existiert mit
+$\fTime_T(n)\in\Oh{p(n)}$.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item bei Komplexitätsmaßen üblich: \zB bei der Zeitkomplexität
+    Angabe des schlimmsten Falles in Abhängigkeit von der
+    Eingabegröße (und nicht für jede Eingabe einzeln).
+  \end{itemize}
+\end{tutorium}
+
+Welche Zeitkomplexität hat unsere Turingmaschine zur
+Palindromerkennung? Für eine Eingabe der Länge $n\geq 2$ muss sie
+schlimmstenfalls
+\begin{itemize}
+\item erstes und letztes Symbol miteinander vergleichen, stellt dabei
+  fest, dass sie übereinstimmen, und muss dann
+\item zurücklaufen an den Anfang des Restwortes der Länge $n-2$ ohne
+  die Randsymbole und
+\item dafür wieder einen Palindromtest machen.
+\end{itemize}
+Der erste Teil erfordert $2n+1$ Schritte.
+Für den Zeitbedarf $\fTime(n)$ gilt also jedenfalls:
+\begin{equation*}
+  \fTime(n) \leq n+1 + n + \fTime(n-2)
+\end{equation*}
+Der Zeitaufwand für Wörter der Länge $1$ ist ebenfalls gerade
+$2n+1$. Eine kurze Überlegung zeigt, dass daher die Zeitkomplexität
+$\fTime(n) \in \Oh{n^2}$, also polynomiell ist.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item "`Auflösen"' der Rekursion $\fTime(n+2) \leq 2n+1 +
+    \fTime(n-2)$ und Ergebnis $\fTime(n) \in \Oh{n^2}$ ggf.\ klar
+    machen können.
+  \item Palindromerkennung ist übrigens einer der schönen Fälle, in
+    denen man beweisen kann, dass jede 1-Kopf-TM Laufzeit in
+    $\Om{n^2}$ hat.
+  \end{itemize}
+\end{tutorium}
+
+
+Für die Beurteilung des Speicherplatzbedarfs definiert man zwei
+Funktionen $\fspace_T(w):A^+ -> \N_+$ $\fSpace_T(n):\N_+ -> \N_+$ wie
+folgt:
+\begin{align*}
+  \fspace_T(w) &= \text{die Anzahl der Felder, die während der }\\
+               &\quad  \text{Berechnung für Eingabe $w$ benötigt werden}\\
+  \fSpace_T(n)   &= \max \{\fspace_T(w) \mid w\in A^n\} 
+\end{align*}
+Üblicherweise heißt die Abbildung $\fSpace_T$ die
+\mdefine{Raumkomplexität}\index{Raumkomplexität} oder
+\mdefine{Platzkomplexität}\index{Platzkomplexität} der Turingmaschine
+$T$.  Dabei gelte ein Feld als "`benötigt"', wenn es zu Beginn ein
+Eingabesymbol enthält oder irgendwann vom Kopf der Turingmaschine
+besucht wird.  Man sagt, dass die Raumkomplexität einer Turingmaschine
+\mdefine[polynomielle
+Raumkomplexität]{polynomiell}\index{polynomiell!Raumkomplexität}\index{Raumkomplexität!polynomiell}
+ist, wenn ein Polynom $p(n)$ existiert mit
+$\fSpace_T(n)\in\Oh{p(n)}$.
+
+Unsere Beispielmaschine zur Palindromerkennung hat Platzbedarf
+$\fSpace(n)=n+1\in\Th{n}$, weil außer den $n$ Feldern mit den
+Eingabesymbolen nur noch ein weiteres Feld rechts davon besucht wird.
+
+Welche Zusammenhänge bestehen zwischen der Zeit- und der
+Raumkomplexität einer Turingmaschine? Wenn eine Turingmaschine für
+eine Eingabe $w$ genau $\ftime(w)$ viele Schritte macht, dann kann sie
+nicht mehr als $1+\ftime(w)$ verschiedene Felder mit ihrem Kopf
+besuchen. Folglich ist sicher immer
+\[
+\fspace(w) \leq |w|+\ftime(w) \;.
+\]
+Also hat eine Turingmaschine mit polynomieller Laufzeit auch nur
+polynomiellen Platzbedarf.
+
+Umgekehrt kann man aber auf $k$ Feldern des Bandes $|X|^k$ verschieden
+Inschriften speichern. Daraus folgt, dass es sehr wohl Turingmaschinen
+gibt, die zwar polynomielle Raumkomplexität, aber exponentielle
+Zeitkomplexität haben.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Bitte machen Sie sich die Zusammenhänge zwischen Zeit- und
+    Raumkomplexität klar.
+  \item Um zu sehen, dass man auf linearem Platz exponentielle Zeit
+    verbraten kann:
+    \begin{itemize}
+    \item man baue noch eine TM: auf dem Band steht anfangs eine Folge
+      von Nullen. Aufgabe der TM: Solange auf dem Band nicht eine
+      Folge nur aus Einsen steht, immer wieder die TM von weiter vorne
+      anwenden, die die Zahl um 1 erhöht.
+    \item Wenn anfangs $n$ Nullen auf dem Band stehen, dann wird
+      $2^n-1$ mal die 1.~TM ausgeführt; das macht insgesamt
+      offensichtlich $\geq 2^n$ Schritte.
+    \item Für die, die es genauer machen wollen: \textbf{Achtung:}
+      $\Th{(2^n-1)n} \not\subseteq \Oh{2^n}$, aber natürlich \zB
+      $\Th{(2^n-1)n} \subseteq \Oh{3^n}$.
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item \textbf{GANZ WICHTIG:} Reden Sie \emph{niemals} von der
+    Zeitkomplexität o.\,ä.~eines \emph{Problems}.
+    \begin{itemize}
+    \item \emph{Algorithmen} haben eine Laufzeit. Probleme nicht.
+    \item \textbf{Achtung:} Der Versuch die Laufzeit eines Problems
+      als die der schnellsten Algorithmen zur Lösung des Problems zu
+      definieren \text{funktioniert nicht}.
+
+      \emph{Es gibt Probleme, für die es keine schnellsten
+        Algorithmen gibt.} Sondern zu jedem Algorithmus für ein
+      solches Problem gibt es einen anderen, der \emph{um mehr als
+        einen konstanten Faktor (!)} schneller ist.
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Komplexit\"atsklassen}
+\label{subsec:kompl-klassen}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Aus dem Skript: Wichtig: 
+    \begin{itemize}
+    \item Eine Komplexitätsklasse ist eine Menge von Problemen ---
+      und \emph{nicht} von Algorithmen.
+    \item Wir beschränken uns im folgenden wieder auf
+      Entscheidungsprobleme.
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+Eine \mdefine{Komplexitätsklasse}\index{Komplexitätsklasse} ist eine
+Menge von Problemen. Wir beschränken uns im folgenden wieder auf
+Entscheidungsprobleme, also formale Sprachen. Charakterisiert werden
+Komplexitätsklassen oft durch Beschränkung der zur Verfügung stehen
+Ressourcen, also Schranken für Zeitkomplexität oder/und
+Raumkomplexität (oder andere Maße). Zum Beispiel könnte man die Menge
+aller Entscheidungsprobleme betrachten, die von Turingmaschinen
+entschieden werden können, bei denen gleichzeitig die Zeitkomplexität
+in $\Oh{n^2}$ und die Raumkomplexität in $\Oh{n^{3/2}\log n}$ ist,
+wobei hier $n$ wieder für die Größe der Probleminstanz, also die Länge
+des Eingabewortes, steht.
+
+Es hat sich herausgestellt, dass unter anderem die beiden folgenden
+Komplexitätsklassen interessant sind:
+%
+\begin{itemize}
+\item $\Pclass$\index{P@$\Pclass$} ist die Menge aller Entscheidungsprobleme, die von
+  Turingmaschinen entschieden werden können, deren Zeitkomplexität
+  polynomiell ist.
+\item $\PSPACE$\index{PSPACE@$\PSPACE$} ist die Menge aller
+  Entscheidungsprobleme, die von Turingmaschinen entschieden werden
+  können, deren Raumkomplexität polynomiell ist.
+\end{itemize}
+%
+Zu $\Pclass$ gehört zum Beispiel das Problem der Palindromerkennung. Denn
+wie wir uns überlegt haben, benötigt die Turingmaschine aus
+Abbildung~\ref{fig:tm-pal} für Wörter der Länge $n$ stets $\Oh{n^2}$
+Schritte, um festzustellen, ob $w$ Palindrom ist.
+
+Ein Beispiel eines Entscheidungsproblemes aus $\PSPACE$ haben wir
+schon in Kapitel~\ref{k:reg-ausdruecke} erwähnt, nämlich zu
+entscheiden, ob zwei reguläre Ausdrücke die gleiche formale Sprache
+beschreiben. In diesem Fall besteht also jede Probleminstanz aus zwei
+regulären Ausdrücken. Als das (jeweils eine) Eingabewort für die
+Turingmaschine würde man in diesem Fall die Konkatenation der beiden
+regulären Ausdrücke mit einem dazwischen gesetzten Trennsymbol wählen,
+das sich von allen anderen Symbolen unterscheidet.
+
+Welche Zusammenhänge bestehen zwischen $\Pclass$ und $\PSPACE$? Wir haben
+schon erwähnt, dass eine Turingmaschine mit polynomieller Laufzeit
+auch nur polynomiell viele Felder besuchen kann. Also ist eine
+Turingmaschine, die belegt, dass ein Problem in $\Pclass$ liegt, auch
+gleich ein Beleg dafür, dass das Problem in $\PSPACE$ liegt. Folglich ist
+\[
+\Pclass \subseteq \PSPACE \;.
+\]
+Und wie ist es umgekehrt? Wir haben auch erwähnt, dass eine
+Turingmaschine mit polynomiellem Platzbedarf exponentiell viele
+Schritte machen kann. Und solche Turingmaschinen gibt es auch. Aber
+Vorsicht: Das heißt \emph{nicht}, dass $\PSPACE$ eine echte Obermenge
+von $\Pclass$ ist. Bei diesen Mengen geht es um Probleme, nicht um
+Turingmaschinen! Es könnte ja sein, dass es zu jeder Turingmaschine
+mit polynomiellem Platzbedarf auch dann, wenn sie exponentielle
+Laufzeit hat, eine andere Turingmaschine mit nur polynomiellem
+Zeitbedarf gibt, die genau das gleiche Problem entscheidet. Ob das so
+ist, weiß man nicht. Es ist eines der großen offenen
+wissenschaftlichen Probleme, herauszufinden, ob $\Pclass=\PSPACE$ ist oder
+$\Pclass\not=\PSPACE$.
+
+% %-----------------------------------------------------------------------
+% \Tut\section{Schwere Probleme}
+% \label{sec:schwere-probleme}
+
+% \begin{tutorium}
+%   \begin{itemize}
+%   \item Hier gibt es nicht viel zu üben oder zu beweisen.
+%   \item Ggf.\ bitte diskutieren, warum man von den
+%     Reduktionsfunktionen fordert, dass sie in Polynomialzeit
+%     berechenbar sein sollen.
+%   \item Bitte widerstehen Sie ggf.\ der Versuchung, $\NP$ zu definieren.
+%   \end{itemize}
+% \end{tutorium}
+% Es seien $L_1$ und $L_2$ zwei formale Sprachen über dem gleichen
+% Alphabet $A$ (oder mit anderen Worten: Entscheidungsprobleme).  Man
+% sagt, dass \mdefine{$L_1$ auf $L_2$
+%   reduzierbar}\index{reduzierbar}\index{Reduzierbarkeit} ist, wenn es
+% eine in Polynomialzeit berechenbare Funktion $f:A^*->A^*$ gibt mit der
+% Eigenschaft: $w\in L_1 <==> f(w)\in L_2$.  (Eine solche Funktion kann
+% auch wieder nur polynomiell viel Platz benötigen.)  Wenn man das hat
+% und \zB $L_2\in \Pclass$ ist, dann kann man auch $L_1$ in Polynomialzeit
+% entscheiden: Für jede Eingabe $w$
+% \begin{itemize}
+% \item berechnet man zuerst $f(w)$ und
+% \item überprüft dann ob $f(w)\in L_2$ ist.
+% \end{itemize}
+% Beides geht in Polynomialzeit, also ist dann auch $L_1\in\Pclass$.
+
+% Und wenn $L_2\in\PSPACE$ ist, dann folgt aus der gleichen
+% Konstruktion, dass auch $L_1\in\PSPACE$ ist.
+
+% Ein Problem $C$ heißt
+% \mdefine{$\PSPACE$-hart}\index{PSPACE-hart@$\PSPACE$-hart}\index{harte
+%   Probleme} oder
+% \mdefine{$\PSPACE$-schwer}\index{PSPACE-schwer@$\PSPACE$-schwer} wenn
+% es für jedes Problem $L\in\PSPACE$ eine Polynomialzeitreduktion auf
+% $C$ gibt. Ein Problem heißt \mdefine{$\PSPACE$-vollständig}, falls es
+% $\PSPACE$-hart ist und selbst in $\PSPACE$
+% liegt. $\PSPACE$"=vollständige Probleme gehören also sozusagen "`zu den
+% schwersten in $\PSPACE$"'.
+
+% Solche Probleme gibt es. Man kennt eine ganze Reihe von ihnen, \zB die
+% schon erwähnte Überprüfung, ob zwei reguläre Ausdrücke die gleiche
+% formale Sprache beschreiben.
+
+% Eine Folge der eben gemachten Überlegungen ist: Wenn man nur für ein
+% einziges $\PSPACE$-vollständiges Problem einen
+% Polynomialzeitalgorithmus findet, dann kann man \emph{alle} Probleme
+% aus $\PSPACE$ in Polynomialzeit entscheiden. Der etwas kuriose Stand
+% der Wissenschaft $\PSPACE$"=vollständige Probleme betreffend ist: Man
+% kennt für kein einziges einen Polynomialzeit-Algorithmus, man kann
+% aber bislang auch nicht beweisen, dass keine existieren.
+
+% Damit Sie aus den vorangegangenen Abschnitten nicht falsche Schlüsse
+% ziehen, wollen wir zum Abschluss noch folgendes mitteilen: Man kann
+% beweisen, dass es noch viel schwierigere Probleme gibt. \ZB kennt man
+% Probleme, für die jede Turingmaschine, die eines von ihnen löst,
+% Laufzeit $2^{2^{2^n}}$ hat. Und Analoges gilt für höhere "`Türme"' von
+% Exponenten.
+
+%-----------------------------------------------------------------------
+\Tut\section{Unentscheidbare Probleme}
+\label{sec:unentscheidbare-probleme}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Als erstes noch mal den prizipiellen Unterschied zwischen
+    "`nur in Zeit $2^{2^{2^n}}$ berechenbar"' und "`überhaupt nicht
+    berechenbar"' klar machen
+  \item auch wenn man in der Praxis nie $2^{2^{2^n}}$ Zeit hat.
+  \end{itemize}
+\end{tutorium}
+In gewisser Weise noch schlimmer als Probleme, die exorbitanten
+Ressourcenbedarf zur Lösung erfordern, sind Probleme, die man
+algorithmisch, also \zB mit Turingmaschinen oder Java-Programmen,
+überhaupt nicht lösen kann.
+
+In diesem Abschnitt wollen wir zumindest andeutungsweise sehen, dass
+es solche Probleme tatsächlich gibt.
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Codierungen von Turingmaschinen}
+\label{subsec:cod-tm}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Die im Skript beschriebene Codierung ist so gewählt, weil
+    \begin{itemize}
+    \item man leicht von einem Wort überprüfen kann, ob es eine TM
+      codiert, und
+    \item sie bequem ist, um eine TM zu simulieren, wenn man ihre
+      Codierung hat.
+    \end{itemize}
+  \item Ich habe faulerweise darauf verzichtet, auch noch zu sagen,
+    wie man bei TM-Akzeptoren die akzeptierenden Zustände
+    codiert. Man denke sich was bequemes aus.
+  \item Wer mag, kann ja eine kleine TM codieren.
+  \end{itemize}
+\end{tutorium}
+Zunächst soll eine Möglichkeit beschrieben werden, wie man jede
+Turingmaschine durch ein Wort über dem festen Alphabet $A=\{\#[, \#],
+\#0, \#1\}$ beschreiben kann. Natürlich kann man diese Symbole durch
+Wörter über $\{\#0, \#1\}$ codieren und so die Alphabetgröße auf
+einfache Weise noch reduzieren.
+
+Eine Turingmaschine $T=(Z,z_0,X, \blank,f,g,m)$ kann man zum Beispiel
+wie folgt codieren.
+\begin{itemize}
+\item Die Zustände von $T$ werden ab $0$ durchnummeriert.
+\item Der Anfangszustand bekommt Nummer $0$.
+\item Alle Zustände werden durch gleich lange Binärdarstellungen ihrer
+  Nummern, umgeben von einfachen eckigen Klammern, repräsentiert.
+\item Wir schreiben $\cod_Z(z)$ für die Codierung von Zustand $z$.
+\item Die Bandsymbole werden ab $0$ durchnummeriert.
+\item Das Blanksymbol bekommt Nummer $0$.
+\item Alle Bandsymbole werden durch gleich lange Binärdarstellungen
+  ihrer Nummern, umgeben von einfachen eckigen Klammern, repräsentiert.
+\item Wir schreiben $\cod_X(x)$ für die Codierung von Bandsymbol $x$.
+\item Die möglichen Bewegungsrichtungen des Kopfes werden durch die
+  Wörter \#{[10]}, \#{[00]} und \#{[01]} (für $-1$, $0$ und $1$)
+  repräsentiert.
+\item Wir schreiben $\cod_M(r)$ für die Codierung der
+  Bewegungsrichtung $r$.
+\item Die partiellen Funktionen $f$, $g$ und $m$ werden wie folgt
+  codiert:
+  \begin{itemize}
+  \item Wenn sie für ein Argumentpaar $(z,x)$ nicht definiert sind,
+    wird das codiert durch das Wort
+    $\cod_{fgm}(z,x)=\#[\cod_Z(z)\cod_X(x)\#{[][][]}\#]$.
+  \item Wenn sie für ein Argumentpaar $(z,x)$ definiert sind, wird das
+    codiert durch das Wort $\cod_{fgm}(z,x)=$\\
+    $\#[\cod_Z(z)\cod_X(x)\cod_Z(f(z,x))\cod_X(g(z,x))\cod_M(m(z,x))\#]$.
+  \item Die Codierung der gesamten Funktionen ist die Konkatenation
+    aller $\cod_{fgm}(z,x)$ für alle $z\in Z$ und alle $x\in X$.
+  \end{itemize}
+\item Die gesamte Turingmaschine wird codiert als Konkatenation der
+  Codierung des Zustands mit der größten Nummer, des Bandsymbols mit
+  der größten Nummer und der Codierung der gesamten Funktionen $f$,
+  $g$ und $m$.
+\item Wir schreiben auch $T_w$ für die Turingmaschine mit Codierung
+  $w$.
+\end{itemize}
+%
+Auch ohne dass wir das hier im Detail ausführen, können Sie
+hoffentlich zumindest glauben, dass man eine Turingmaschine
+konstruieren kann, die für jedes beliebiges Wort aus $A^*$ feststellt,
+ob es die Codierung einer Turingmaschine ist. Mehr wird für das
+Verständnis des folgenden Abschnittes nicht benötigt.
+
+Tatsächlich kann man sogar noch mehr: Es gibt sogenannte
+\mdefine[universelle\\Turingmaschine]{universelle
+  Turingmaschinen}\index{universelle
+  Turingmaschine}\index{Turingmaschine!universelle}. Eine universelle
+Turingmaschine $U$
+\begin{itemize}
+\item erhält als Eingabe zwei Argumente, etwa als Wort
+  $\#[w_1\#]\#[w_2\#]$,
+\item überprüft, ob $w_1$ Codierung einer Turingmaschine $T$ und $w_2$
+  Codierung einer Eingabe für $T_{w_1}$ ist, und
+\item falls ja, simuliert sie Schritt für Schritt die Arbeit, die $T$
+  für Eingabe $w_2$ durchführen würde,
+\item und falls $T$ endet, liefert $U$ am Ende als Ergebnis das, was
+  $T$ geliefert hat (oder vielmehr die Codierung dessen).
+\end{itemize}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Da ich bei der Unentscheidbarkeit des Halteproblems ohne
+    universelle TM auskomme, habe ich das Thema nur kurz
+    angesprochen.
+  \item Falls ich viel Zeit habe, liefere ich eine Beschreibung
+    einer universellen TM. Ansonsten:
+  \item Wer Lust hat, kann sich ja mal für die beschriebene
+    Codierung eine universelle TM überlegen. Technisch braucht man
+    nicht viel.
+  \item Falls im Tutorium Zeit ist oder entsprechende Fragen kommen,
+    kann man die universelle TM ja mal "`auf hohem Niveau"'
+    beschreiben.
+  \end{itemize}
+\end{tutorium}
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Das Halteproblem}
+\label{subsec:halteproblem}
+
+Der Kern des Nachweises der Unentscheidbarkeit des Halteproblems
+ist \mdefine{Diagonalisierung}\index{Diagonalisierung}. Die Idee geht
+auf Georg Ferdinand Ludwig Philipp Cantor (1845--1918, siehe \zB
+\url{http://www-history.mcs.st-and.ac.uk/Biographies/Cantor.html},
+5.2.2015), der sie benutzte um zu zeigen, dass die Menge der reellen
+Zahlen nicht abzählbar unendlich ist. Dazu sei eine "`zweidimensionale
+unendliche Tabelle"' gegeben, deren Zeilen mit Funktionen $f_i$
+($i\in\N_0$) indiziert sind, und die Spalten mit Argumenten $w_j$
+($j\in\N_0$).  Eintrag in Zeile $i$ und Spalte $j$ der Tabelle sei
+gerade der Funktionswert $f_i(w_j)$. Die $f_i$ mögen als
+Funktionswerte zumindest $0$ und $1$ annehmen können.
+
+\begin{center}
+  \begin{tabular}{>{$}c<{$}@{\qquad}*{6}{>{$}c<{$}}}
+    \toprule
+        & w_0 & w_1 & w_2 & w_3 & w_4 & \cdots \\
+    \midrule
+    f_0 & f_0(w_0) & f_0(w_1) & f_0(w_2) & f_0(w_3) & f_0(w_4) & \cdots \\
+    f_1 & f_1(w_0) & f_1(w_1) & f_1(w_2) & f_1(w_3) & f_1(w_4) & \cdots \\
+    f_2 & f_2(w_0) & f_2(w_1) & f_2(w_2) & f_2(w_3) & f_2(w_4) & \cdots \\
+    f_3 & f_3(w_0) & f_3(w_1) & f_3(w_2) & f_3(w_3) & f_3(w_4) & \cdots \\
+    f_4 & f_4(w_0) & f_4(w_1) & f_4(w_2) & f_4(w_3) & f_4(w_4) & \cdots \\
+    \vdots &    \vdots &    \vdots &    \vdots &    \vdots &    \vdots &    \ddots \\
+    \toprule
+  \end{tabular}
+\end{center}
+Cantors Beobachtung war (im Kern) die folgende: Wenn man die Diagonale
+der Tabelle nimmt, also die Abbildung $d$ mit $d(w_i)=f_i(w_i)$ und
+dann \emph{alle Einträge ändert}, also 
+\[
+\overline{d}(w_i) = \overline{f_i(w_i)} =
+\begin{cases}
+  1 & \text{ falls } f_i(w_i)=0  \\
+  0 & \text{ sonst}
+\end{cases}
+\]
+dann erhält man eine Abbildung ("`Zeile"') $\overline{d}$,
+\begin{center}
+  \begin{tabular}{>{$}c<{$}@{\qquad}*{6}{>{$}c<{$}}}
+    \toprule
+        & w_0 & w_1 & w_2 & w_3 & w_4 & \cdots \\
+    \midrule
+    d & f_0(w_0) & f_1(w_1)& f_2(w_2)& f_3(w_3) & f_4(w_4) & \cdots \\[0.5ex]
+    \overline{d} & \overline{f_0(w_0)} & \overline{f_1(w_1)}& \overline{f_2(w_2)} & \overline{f_3(w_3)} & \overline{f_4(w_4)} & \cdots \\
+    \toprule
+  \end{tabular}
+\end{center}
+die sich von jeder
+Abbildung ("`Zeile"') der gegebenen Tabelle unterscheidet, denn für
+alle $i$ ist
+\[
+\overline{d}(w_i) = \overline{f_i(w_i)} \not= f_i(w_i) \;.
+\]
+Die Ausnutzung dieser Tatsache ist von Anwendung zu Anwendung (und es
+gibt in der Informatik mehrere, \zB in der Komplexitätstheorie)
+verschieden.
+
+\begin{tutorium}
+  Diagonalisierung:
+  \begin{itemize}
+  \item habe ich relativ allgemein beschreiben, aber eben nur den
+    Kern.
+  \item Der Kern sollte gaaaanz klar sein: Die "`verdorbene
+    Diagonale"' $\overline{d}$ (so nenn ich das immer; wenn Sie einen
+    besseren Begriff haben \dots) unterscheidet sich von jeder Zeile
+    der Tabelle.
+  \item Die Art der Ausnutzung der Idee variiert.
+    \begin{itemize}
+    \item Manchmal weiß man, dass die Zeilen \emph{alle} Möglichkeiten
+      einer gewissen Art umfassen, dann ist also $\overline{d}$ sicher
+      nicht von der gewissen Art; es gibt also etwas, was nicht von
+      der gewissen Art ist. (\zB Komplexitätstheorie: es gibt ein
+      Problem, dass nicht in Zeit $n^2$ o.ä.\ lösbar ist) (aber wie
+      sich zeigt \zB in Zeit $n^{2+\eps}$, wenn man die Diagonale
+      vorsichtig genug verdirbt).
+    \item Manchmal, \zB bei der Überabzählbarkeit von $\R$, ist
+      $\overline{d}$ Zeuge dafür, dass die Tabelle nie vollständig
+      sein kann.
+    \item beim Halteproblem ist es noch ein bisschen anders.
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+%
+Im folgenden wollen wir mit Hilfe dieser Idee nun beweisen, dass das
+Halteproblem unentscheidbar ist. Es ist keine Beschränkung der
+Allgemeinheit, wenn wir uns auf ein Alphabet $A$ festlegen, über dem
+wir bequem Codierungen von Turingmaschinen aufschreiben können. Statt
+"`Turingmaschine $T$ hält für Eingabe $w$"' sagen wir im folgenden
+kürzer "`$T(w)$ hält"'.
+
+Das \mdefine{Halteproblem}\index{Halteproblem} ist die formale Sprache
+\[
+H = \{ w\in A^* \mid \text{$w$ ist eine TM-Codierung und $T_w(w)$
+  hält} \}
+\]
+%
+Wir hatten weiter vorne erwähnt, dass es kein Problem darstellt, für
+ein Wort festzustellen, ob es \zB gemäß der dort beschriebenen
+Codierung eine Turingmaschine beschreibt. Das wesentliche Problem beim
+Halteproblem ist also tatsächlich das Halten.
+%
+\begin{theorem}
+  Das Halteproblem ist unentscheidbar, \dh es gibt keine
+  Turingmaschine, die $H$ entscheidet.
+\end{theorem}
+
+\begin{beweis}
+  Wir benutzen (eine Variante der) Diagonalisierung. In der obigen
+  großen Tabelle seien nun die $w_i$ alle Codierungen von
+  Turingmaschinen in irgendeiner Reihenfolge. Und $f_i$ sei die
+  Funktion, die von der Turingmaschine mit Codierung $w_i$, also
+  $T_{w_i}$, berechnet wird.
+
+  Da wir es mit Turingmaschinen zu tun haben, werden manche der
+  $f_i(w_j)$ nicht definiert sein, da $T_{w_i}$ für Eingabe $w_j$
+  nicht hält. Da die $w_i$ \emph{alle} Codierungen von Turingmaschinen
+  sein sollen, ist in der Tabelle für \emph{jede} Turingmaschine eine
+  Zeile vorhanden.
+
+  Nun nehmen wir an, dass es doch eine Turingmaschine $T_h$ gäbe, die
+  das Halteproblem entscheidet, \dh \emph{für jede Eingabe $w_i$ hält}
+  und als Ergebnis mitteilt, ob $T_{w_i}$ für Eingabe $w_i$ hält. Wir
+  gehen davon aus, dass es sich dabei um eine Turingmaschine mit
+  Ausgabe auf dem Band handelt.
+
+  Wir führen diese Annahme nun zu einem Widerspruch, indem wir zeigen:
+  Es gibt eine Art "`verdorbene Diagonale"' $\overline{d}$ ähnlich wie
+  oben mit den beiden folgenden sich widersprechenden Eigenschaften.
+  \begin{itemize}
+  \item Einerseits unterscheidet sich $\overline{d}$ von jeder Zeile
+    der Tabelle, also von jeder von einer Turingmaschine berechneten
+    Funktion.
+  \item Andererseits kann auch $\overline{d}$ von einer Turingmaschine
+    berechnet werden.
+  \end{itemize}
+  %
+  Und das ist ganz einfach: Wenn die Turingmaschine $T_h$ existiert,
+  dann kann man auch den folgenden Algorithmus in einer Turingmaschine
+  $\Td$ realisieren:
+  \begin{itemize}
+  \item Für eine Eingabe $w_i$ berechnet $\Td$ zunächst, welches
+    Ergebnis $T_h$ für diese Eingabe liefern würde.
+  \item Dann arbeitet $\Td$ wie folgt weiter:
+    \begin{itemize}
+    \item Wenn $T_h$ mitteilt, dass $T_{w_i}(w_i)$ hält, \\
+      dann geht $\Td$ in eine Endlosschleife.
+    \item Wenn $T_h$ mitteilt, dass $T_{w_i}(w_i)$ nicht hält, \\
+      dann hält $\Td$ (und liefert irgendein Ergebnis, etwa $0$).
+    \end{itemize}
+  \item Andere Möglichkeiten gibt es nicht, und in beiden Fällen ist
+    das Verhalten von $\Td$ für Eingabe $w_i$ anders als das von
+    $T_{w_i}$ für die gleiche Eingabe.
+  \end{itemize}
+  Also: Wenn Turingmaschine $T_h$ existiert, dann existiert auch
+  Turingmaschine $\Td$, aber jede Turingmaschine $T_{w_i}$ verhält
+  sich für mindestens eine Eingabe, nämlich $w_i$, anders als $\Td$.
+
+  Das ist ein Widerspruch. Folglich war die Annahme, dass es die
+  Turingmaschine $T_h$ gibt, die $H$ entscheidet, falsch.
+\end{beweis}
+
+\begin{tutorium}
+  Halteproblem:
+  \begin{itemize}
+  \item Die Aussage und der Beweis müssen sitzen.
+  \item Statt konkret über TM rede ich nur noch von Algorithmen. Man
+    mache sich im Zweifelsfall klar, wie eine TM das jeweils
+    bewerkstelligen könnte.  Ich wollte hier aber keinen Workshop
+    über "`TM-Tools"' und "`TM-Libraries"' veranstalten.
+  \item Ich diskutiere nicht die Tatsache, dass $H$ als formale
+    Sprache immerhin erkennbar (also wie man auch sagt aufzählbar)
+    ist. Dafür bräuchte man universelle TM.
+  \end{itemize}
+\end{tutorium}
+
+% - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+\Tut\subsection{Die Busy-Beaver-Funktion}
+\label{subsec:busy-beaver}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Aus Zeitgründen müssen wir uns hier aufs Staunen
+    beschränken. Vielleicht macht das ja den ein oder anderen
+    neugierig.
+  \item Wenn ich mich recht erinnere, hat der Wertebereich von
+    $\bb()$ übrigens die Eigenschaft, dass weder er noch sein
+    Komplement aufzählbar ist. Also noch schlimmer als $H$ \dots
+  \end{itemize}
+\end{tutorium}
+
+In Abschnitt~\ref{sec:turingmaschinen} hatten wir BB3 als erstes
+Beispiel einer Turingmaschine gesehen. Diese Turingmaschine hat
+folgende Eigenschaften:
+%
+\begin{itemize}
+\item Bandalphabet ist $X=\{\blank,\#1\}$.
+\item Die Turingmaschine hat $3+1$ Zustände, wobei
+  \begin{itemize}
+  \item in $3$ Zuständen für jedes Bandsymbol der nächste Schritt
+    definiert ist,
+  \item einer dieser $3$ Zustände der Anfangszustand ist und
+  \item in einem weiteren Zustand für kein Bandsymbol der nächste
+    Schritt definiert ist ("`Haltezustand"').
+  \end{itemize}
+\item Wenn man die Turingmaschine auf dem leeren Band startet, dann
+  hält sie nach endlich vielen Schritten.
+\end{itemize}
+%
+Wir interessieren uns nun allgemein für Turingmaschinen mit den
+Eigenschaften:
+%
+\begin{itemize}
+\item Bandalphabet ist $X=\{\blank,\#1\}$.
+\item Die Turingmaschine hat $n+1$ Zustände, wobei
+  \begin{itemize}
+  \item in $n$ Zuständen für jedes Bandsymbol der nächste Schritt
+    definiert ist,
+  \item einer dieser $n$ Zustände der Anfangszustand ist und
+  \item in einem weiteren Zustand für kein Bandsymbol der nächste
+    Schritt definiert ist ("`Haltezustand"').
+  \end{itemize}
+\item Wenn man die Turingmaschine auf dem leeren Band startet, dann
+  hält sie nach endlich vielen Schritten.
+\end{itemize}
+%
+Solche Turingmaschinen wollen wir der Einfachheit halber
+\mdefine[Bibermaschine]{Bibermaschinen}\index{Bibermaschine}
+nennen. Genauer wollen wir von einer $n$-Bibermaschine reden, wenn
+sie, einschließlich des Haltezustands $n+1$ Zustände hat. Wann immer
+es im folgenden explizit oder implizit um Berechnungen von
+Bibermaschinen geht, ist immer die gemeint, bei der sie auf dem
+vollständig leeren Band startet.  Bei BB3 haben wir gesehen, dass sie
+$6$ Einsen auf dem Band erzeugt.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics{../k-20-turingmaschinen/Beaver_2}
+  \caption{Europäischer Biber (castor fiber), Bildquelle:
+    \url{http://upload.wikimedia.org/wikipedia/commons/d/d4/Beaver_2.jpg} (14.1.2010)
+  }
+  \label{fig:echter-biber}
+\end{figure}
+
+Die \mdefine{Busy-Beaver-Funktion}\index{Busy-Beaver-Funktion} ist wie folgt
+definiert:
+\begin{align*}
+  \bb: \N_+ &-> \N_+ \\
+  \bb(n) &= \text{die maximale Anzahl von Einsen, die eine $n$-Bibermaschine}\\
+  &\mathrel{\hphantom{=}} \text{am Ende auf dem Band hinterlässt} 
+\end{align*}
+%
+Diese Funktion wird auch
+\mdefine{Rad\'o-Funktion}\index{Rado-Funktion} genannt nach dem
+ungarischen Mathematiker Tibor Rad\'o\index{Rado@Rad\'o, Tibor}, der
+sich als erster mit dieser Funktion beschäftigte. Statt $\bb(n)$ wird
+manchmal auch $\Sigma(n)$ geschrieben. 
+
+Eine $n$-Bibermaschine heißt \mdefine{fleißiger Biber}\index{fleißiger
+  Biber}\index{Biber!fleißiger}, wenn sie am Ende $\bb(n)$ Einsen auf
+dem Band hinterlässt.
+
+
+Da BB3 am Ende $6$ Einsen auf dem Band hinterlässt, ist also
+jedenfalls $\bb(3)\geq 6$. Rad\'o fand heraus, dass sogar $\bb(3) =6$
+ist. Die Turingmaschine BB3 ist also ein fließiger Biber.
+
+Brady hat 1983 gezeigt, dass $\bb(4)=13$ ist. Ein entsprechender
+fleißiger Biber ist
+%
+\begin{center}
+  \begin{tabular}[t]{>{$}c<{$}@{\qquad}*{5}{>{$}c<{$}}}
+    \toprule
+    & A & B & C & D& H \\
+    \midrule
+    \9 & \#1,R,B & \#1,L,A & \#1,R,H & \#1,R,D  & \hphantom{\#1,L,C} \\
+    \#1 & \#1,L,B & \blank,L,C &  \#1,L,D & \blank,R,A \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+%
+H.~Marxen (\url{http://www.drb.insel.de/~heiner/BB/}, 14.1.2010) und
+J.~Buntrock haben 1990 eine $5$-Bibermaschine gefunden, die $4098$
+Einsen produziert und nach $47\,176\,870$ Schritten hält. Also ist
+$\bb(5)\geq 4098$. Man weiß nicht, ob es eine $5$-Bibermaschine gibt,
+die mehr als $4098$ Einsen schreibt.
+
+%Im Dezember 2007 haben Terry and Shawn Ligocki eine $6$-Bibermaschine
+%gefunden, die mehr als $4.6\cdot 10^{1439}$ Einsen schreibt und nach
+%mehr als $2.5 \cdot 10^{2879}$ Schritten hält. Also ist $\bb(6)\geq
+%4.6\cdot 10^{1439}$. 
+Im Jahre 2010 hat Pavel Kropitz eine Turingmaschine gefunden, die mehr
+als $3.514\cdot 10^{18276}$ Einsen schreibt und erst nach mehr als
+$7.412\cdot 10^{36534}$ Schritten hält. Nein, hier liegt kein
+Schreibfehler vor!
+
+Man hat den Eindruck, dass die Funktion $\bb$ sehr schnell wachsend
+ist. Das stimmt. Ohne den Beweis hier wiedergeben zu wollen
+(Interessierte finden ihn \zB in einem Aufsatz von J.~Shallit
+(\url{http://grail.cba.csuohio.edu/~somos/beaver.ps}, 14.1.10) teilen
+wir noch den folgenden Satz mit.  In ihm und dem unmittelbaren
+Korollar wird von der Berechenbarkeit von Funktionen $\N_+ -> \N_+$
+gesprochen. Damit ist gemeint, dass es eine Turingmaschine gibt, die
+\begin{itemize}
+\item als Eingabe das Argument (zum Beispiel) in binärer Darstellung
+  auf einem ansonsten leeren Band erhält, und
+\item als Ausgabe den Funktionswert (zum Beispiel) in binärer
+  Darstellung auf einem ansonsten leeren Band liefert.
+\end{itemize}
+%
+\begin{theorem}
+  Für jede berechenbare Funktion $f:\N_+ -> \N_+$ gibt es ein $n_0$, so
+  dass für alle $n\geq n_0$ gilt: $\bb(n) > f(n)$.
+\end{theorem}
+%
+\begin{korollar}
+  Die Busy-Beaver-Funktion $\bb(n)$ ist nicht berechenbar.
+\end{korollar}
+%
+% Mit weiteren Überlegungen sieht man dann auch noch, dass die Menge
+% \[
+% B=\{ \bb(n) \mid n\in\N_+ \}
+% \] 
+% die beiden Eigenschaften hat:
+% \begin{lemma}
+%   $B$ ist nicht aufzählbar und $\N_+\smallsetminus B$ ist auch nicht
+%   aufzählbar.
+% \end{lemma}
+% %
+% In gewisser
+
+%-----------------------------------------------------------------------
+\section{Ausblick}
+\label{sec:tm-ausblick}
+
+Sie werden an anderer Stelle lernen, dass es eine weitere wichtige
+Komplexitätsklasse gibt, die $\NP$ heißt. Man weiß, dass $\Pclass\subseteq
+\NP\subseteq\PSPACE$ gilt, aber für keine der beiden Inklusionen weiß
+man, ob sie echt ist. Gewisse Probleme aus $\NP$ und $\PSPACE$
+(sogenannte \emph{vollständige} Probleme) spielen an vielen Stellen
+(auch in der Praxis) eine ganz wichtige Rolle. Leider ist es in allen
+Fällen so, dass alle bekannten Algorithmen exponentielle Laufzeit
+haben, aber man nicht beweisen kann, dass das so sein muss.
+
+% -----------------------------------------------------------------------
+% Literatur
+%  if something has been cited in this unit:
+\printunitbibliography
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-20-turingmaschinen/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

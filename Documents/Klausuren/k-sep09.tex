@@ -1,0 +1,364 @@
+\documentclass[12pt,twoside]{report}
+\setcounter{errorcontextlines}{4}
+
+\setlength{\textheight}{236mm}
+\addtolength{\topmargin}{-20mm}
+\addtolength{\textwidth}{5mm}
+\addtolength{\oddsidemargin}{5mm}
+\addtolength{\evensidemargin}{-10mm}
+
+%% %%%%%%%%% PACKAGES
+%\usepackage{../../skript/gbi}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+%% %\usepackage{latexsym}
+\usepackage{mdwlist}
+%\usepackage{thwmathligs}
+%\usepackage{thwpalatino}
+%\usepackage{mdwlist}
+\usepackage{tabularx}
+%% \usepackage{thwalg}
+%\usepackage{thwmathabbrevs}
+%\usepackage{thwtextabbrevs}
+% \usepackage{url}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{Matr.-Nr.:\hspace*{40mm}}
+\fancyhead[LO]{Name:}
+\fancyfoot[CE,CO]{\thepage}
+
+\usepackage[digits]{at}
+\usepackage{cmtt}
+\newatcommand N[1]{\ensuremath{\langle}\hbox{\textit{#1}}\ensuremath{\rangle}}
+\newatcommand T[1]{\hbox{\upshape\mttfamily\bfseries{#1}}}
+\newatcommand M[1]{\ensuremath{\big#1}}
+\newatcommand .{\ensuremath{\mathop{\hbox{\textbullet}}\,}}
+\let\Hash=\#
+\renewcommand{\#}[1]{\textup{\texttt{#1}}}
+\newcommand{\act}{\ensuremath{\mathit{act}}}
+\newcommand{\goto}{\ensuremath{\mathit{goto}}}
+\def\strich{\underline{\hspace*{1cm}}}
+\def\Strich{\underline{\hspace*{2cm}}}
+
+\def\JANEIN{\qquad ja: \strich\qquad nein: \strich }
+
+\newcounter{afgnr}
+\setcounter{afgnr}{1}
+
+\parskip=12pt
+\parindent=0pt
+
+\newenvironment{aufgabe}[1][\relax]%
+  {\clearpage
+    \noindent\textbf{Aufgabe \arabic{afgnr}}%
+    \if#1\relax\else{ (#1 Punkte)}\fi
+    \\
+  }%
+  {\addtocounter{afgnr}{1}}%
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+  \bfseries \Large
+  Klausur zur Vorlesung \\
+  Grundbegriffe der Informatik \\
+  31. August 2009 \\[8mm]
+  \begin{tabular}{l@{\quad}|c|c|c|}
+    \cline{2-4}
+    Klausur- &
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}\\
+    nummer &
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}\\
+    \cline{2-4}
+  \end{tabular}
+
+\end{center}
+
+\vspace*{10mm}
+\def\Q{\hspace*{12mm}}
+\begin{center}
+  \begin{tabular}[t]{|l|*{8}{c|}}
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Name:} \\
+    \multicolumn{5}{|l|}{} \\
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Vorname:} \\
+    \multicolumn{5}{|l|}{} \\
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Matr.-Nr.:} \\
+    \multicolumn{5}{|l|}{} \\
+%     \cline{1-5}
+%     \multicolumn{2}{|l|}{} & & & \\
+%     \multicolumn{2}{|l|}{Klausur.-Nr.:} & & &\\
+%     \multicolumn{2}{|l|}{} & & & \\
+    \cline{1-5}
+    \multicolumn{8}{c}{ } \\
+    \multicolumn{8}{c}{ } \\
+    \multicolumn{8}{c}{ } \\
+    \multicolumn{8}{c}{ } \\
+    \cline{1-8}
+    \            &   &   &   &   &   &   &      \\
+    Aufgabe      & 1 & 2 & 3 & 4 & 5 & 6 & 7   \\
+    \            & \Q& \Q& \Q& \Q& \Q& \Q& \Q  \\
+    \cline{1-8}
+    \            &   &   &   &   &   &   &      \\
+    max. Punkte  & 4 & 4 & 6 & 8 & 6 & 8 & 8    \\
+    \            &   &   &   &   &   &   &      \\
+    \cline{1-8}
+    \            &   &   &   &   &   &   &      \\
+    tats. Punkte &   &   &   &   &   &   &      \\
+    \            &   &   &   &   &   &   &      \\
+  \cline{1-8}
+    \multicolumn{7}{c}{ } \\
+    \multicolumn{7}{c}{ } \\
+    \multicolumn{7}{c}{ } \\
+    \multicolumn{8}{c}{ } \\
+    \cline{1-4}\cline{6-7}
+    \multicolumn{4}{|l|}{ } &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{ } & \multicolumn{1}{c}{ }\\
+    \multicolumn{4}{|l|}{Gesamtpunktzahl:} &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{Note:} & \multicolumn{1}{c}{ }\\
+    \multicolumn{4}{|l|}{ } &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{ } & \multicolumn{1}{c}{ } \\
+    \cline{1-4}\cline{6-7}
+  \end{tabular}
+\end{center}
+
+%=======================================================================
+\begin{aufgabe}[1+1+2 = 4]
+  In dieser Aufgabe geht um die formalen Sprachen
+  \begin{align*}
+    L_1 &= \{ \#a^k\#b^m \mid k,m\in\mathbb{N}_0 \wedge k \bmod 2=0 \wedge m \bmod 3=1\} \\
+    L_2 &= \{ \#b^k\#a^m \mid k,m\in\mathbb{N}_0 \wedge k \bmod 2=1 \wedge m \bmod 3=0\} \\
+  \end{align*}
+
+  Geben Sie für jede der folgenden formalen Sprachen $L$ je einen
+  regulären Ausdruck $R_L$ an mit $\langle R_L\rangle = L$.
+
+  \begin{enumerate}[a)]
+  \item $L=L_1$
+  \item $L=L_1\cdot L_2$
+  \item $L=L_1\cap L_2$
+  \end{enumerate}
+ 
+%\clearpage
+%\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[1+1+1+1 = 4]
+  In dieser Aufgabe geht es um Abbildungen.
+
+  Im folgenden sei $n \ge 1$ eine positive ganze Zahl.
+  \begin{enumerate}[a)]
+  \item Wie viele Abbildungen gibt es von einer einelementigen Menge in eine $n$-elementige Menge?
+  \item Wie viele Abbildungen gibt es von einer $n$-elementigen Menge in eine einelementige Menge?
+  \item Wie viele injektive Abbildungen gibt es von einer $n$-elementigen Menge in eine einelementige Menge?
+  \item Wie viele injektive Abbildungen gibt es von einer 2-elementigen Menge in eine 3-elementige Menge?
+  
+  \end{enumerate}
+ 
+%\clearpage
+%\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[3+3 = 6]
+  Im folgenden sei $n\ge 1$ immer eine positive ganze Zahl.
+
+  Gegeben sei eine nichtleere Menge $M$ mit einer Halbordnung $\sqsubseteq$ darauf.
+  Eine Folge $(a_1, \ldots, a_n)$ in $M$ heiße \textit{streng monoton fallend},
+  falls gilt:
+
+  $\forall i \in \{1, \ldots, n-1\}: a_{i+1} \sqsubseteq a_i \wedge a_{i+1} \ne a_i$.
+
+  \begin{enumerate}[a)]
+  \item\label{foo} Sei $(a_1, \ldots, a_n)$ eine streng monoton fallende Folge in $M$.
+    Zeigen Sie, dass gilt:
+
+    $\forall i \in \{1, \ldots, n\} \forall j \in \{1, \ldots, n\}:
+    i<j \Rightarrow a_j \sqsubseteq a_i$.
+
+    Führen Sie dazu eine vollständige Induktion über die Differenz $k=j-i$ durch!
+
+  \item Zeigen Sie durch vollständige Induktion über $n$: 
+  
+    $\forall n \in \mathbb{N}_+:$ Falls $M$ kein minimales Element enthält,
+    gibt es eine streng monoton fallende Folge $(a_1, \ldots, a_n)$
+    mit $n$ Elementen in $M$.
+
+  \end{enumerate}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[3+2+3 = 8]
+  In dieser Aufgabe geht es um endliche Akzeptoren mit Zustandsmenge
+  $Z=\{z_0, z_1, z_2\}$ und Eingabealphabet $X=\{\#a, \#b\}$.
+
+  \begin{enumerate}[a)]
+  \item Kann die durch den regul\"aren Ausdruck $(\#{aaaa})*$ beschriebene 
+    Sprache von einem Automaten mit der oben genannten Zustandsmenge $Z$ 
+    und dem oben genannten Eingabealphabet $X$ erkannt werden?
+
+    Begründen Sie Ihre Antwort.
+  
+  \item Geben Sie einen endlichen Akzeptor mit der oben genannten
+    Zustandsmenge $Z$ und dem oben genannten Eingabealphabet $X$ an,
+    der genau die Wörter $w\in X^*$ akzeptiert, für die gilt:
+    
+    Die Anzahl der \#a in dem Wort $w$ ist gerade und größer als 1.
+  \item Geben Sie einen endlichen Akzeptor mit der oben genannten
+    Zustandsmenge $Z$ und dem oben genannten Eingabealphabet $X$ an,
+    der genau die Wörter $w\in X^*$ akzeptiert, die die folgenden drei Bedingungen
+    erfüllen:
+    
+    \begin{itemize}
+    \item $w$ beginnt mit \#a oder ist das leere Wort.
+    \item In $w$ kommt nirgends das Teilwort \#{aa} vor.
+    \item In $w$ kommt nirgends das Teilwort \#{bb} vor.
+    \end{itemize}
+      
+  \end{enumerate}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[2+2+2 = 6]
+
+  Gegeben sei die kontextfreie Grammatik $G=(\{S, X\}, \{\#a, \#b\}, S, 
+  \{S \rightarrow \#aS\#a \mid \#bS\#b \mid \#aX\#b \mid \#bX\#a,
+    X \rightarrow \#aX \mid \#bX \mid \varepsilon\}$ 
+  
+  \begin{enumerate}[a)]
+  \item Geben Sie ein Wort der Länge 5 an, das in $L(G)$ liegt,
+    und ein Wort der Länge 5, das nicht in $L(G)$ liegt.
+  \item Geben Sie eine kontextfreie Grammatik $G'=(N, T, S', P)$ an,
+    für die gilt: 
+
+    $L(G')=\{\#a, \#b\}^* \setminus L(G)$
+  \item Geben Sie eine Abbildung $g: \mathbb{N}_0 \rightarrow \{\#a, \#b\}^*$ an,
+    so dass gilt:
+
+    $\forall n \in \mathbb{N}_0: \forall m \in \mathbb{N}_0: g(n)\#a^m \in L(G) \iff n \ne m$
+    
+%  \item Geben Sie einen regulären Ausdruck an, der die Menge aller Wörter beschreibt,
+%    die \textit{nicht} in $L(G)\cdot L(G')$ liegen.
+  
+  \end{enumerate}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[4+2+2 = 8]
+  Sei $\mathcal {G}$ die Menge aller gerichteten Graphen, für die gilt:
+  Jeder Knoten hat den Ausgangsgrad 1 und es gibt einen Knoten, von dem aus
+  alle anderen Knoten über einen Weg erreichbar sind.
+
+  \begin{enumerate}[a)]
+  \item Zeichnen Sie alle Graphen aus $\mathcal{G}$ mit vier Knoten,
+    von denen keine zwei Graphen isomorph sind.  
+
+  \item Geben Sie für die Hälfte der dargestellten Graphen die Adjazenzmatrix an.
+    Machen Sie deutlich, welche Adjazenzmatrix zu welchem Graphen gehört.
+
+  \item Geben Sie für jeden dargestellten Graphen, für den Sie keine
+    Adjazenzmatrix angegeben haben, die Wegematrix an. Machen Sie
+    deutlich, welche Wegematrix zu welchem Graphen gehört.
+  \end{enumerate}
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[2+1+1+2+1+1 = 8]
+  Gegeben sei die folgende Turingmaschine $T$:
+  \begin{itemize*}
+  \item Zustandsmenge ist $Z=\{z_0, z_1, z_2, z_3, z_4, z_e, z_a, z_b, z'_a, z'_b, f_1, f_2\}$.
+  \item Anfangszustand ist $z_0$.
+  \item Bandalphabet ist $X=\{\Box,\#a,\#b,\#{\Hash} \}$.
+  \item Die Arbeitsweise ist wie folgt festgelegt:
+
+     \begin{tabular}{c|ccccc}
+       &$z_0$&$z_1$&$z_2$&$z_3$&$z_4$\\ \hline
+       \#a& $(z_0, \#a, 1)$ & $(z_1, \#a, 1)$ &$(z_2, \#a, 1)$ &$(z_3, \#a, -1)$ &$(z_a, \Box, 1)$\\
+       \#b& $(z_0, \#b, 1)$ & $(z_1, \#b, 1)$ &$(z_2, \#b, 1)$ &$(z_3, \#b, -1)$ &$(z_b, \Box, 1)$\\
+       \#{\Hash}& $(z_1, \#{\Hash}, 1)$ & $(z_2, \#{\Hash}, 1)$ &$(z_2, \#{\Hash}, 1)$ &$(z_3, \#{\Hash}, -1)$ &$(z_e, \Box, 1)$\\
+       $\Box$ & $(z_2, \Box, 1)$ & $(z_3, \Box, -1)$ &$(z_2, \Box, 1)$ &$(z_4, \Box, 1)$ &$(z_2, \Box, 1)$\\
+    \end {tabular}
+    
+    \vspace*{\baselineskip}
+ 
+    \begin{tabular}{c|ccccc}
+       &$z_a$&$z_b$&$z'_a$ & $z'_b$ & $z_e$\\ \hline
+       \#a&$(z_a, \#a, 1)$ & $(z_b, \#a, 1)$ & $(z_3, \#{\Hash}, -1)$ &$(f_1, \#a, 0)$ & $(f_1, \#a, 0)$ \\
+       \#b&$(z_a, \#b, 1)$ & $(z_b, \#b, 1)$ & $(f_1, \#b, 0)$ &$(z_3, \#{\Hash}, -1)$ & $(f_1, \#b, 0)$ \\
+       \#{\Hash}&$(z'_a, \#{\Hash}, 1)$ & $(z'_b, \#{\Hash}, 1)$ & $(z'_a, \#{\Hash}, 1)$ &$(z'_b, \#{\Hash}, 1)$ & $(z_e, \Box, 1)$ \\
+       $\Box$&$(z_2, \Box, 1)$ & $(z_2, \Box, 1)$ & $(f_1, \Box, 0)$ &$(f_1, \Box, 0)$ & $(f_2, \Box, 0)$ \\
+    \end {tabular}
+    
+  \end{itemize*}
+  Die Turingmaschine wird im folgenden benutzt für Bandbeschriftungen,
+  bei denen auf dem Band (von Blanksymbolen umgeben) ein Wort $w \in \{\#a, \#b, \#{\Hash}\}^*$
+  steht.
+
+  Der Kopf der
+  Turingmaschine stehe auf dem ersten Symbol von $w\in
+  \{\#a,\#b, \#{\Hash}\}^*$.
+
+  Sei $\mathcal{L}$ die Menge aller Wörter $w \in \{\#a, \#b, \#{\Hash}\}^*$, für die gilt:
+  $T$ hält bei Eingabe von $w$ im Zustand $f_2$.
+
+  \begin{enumerate}[a)]
+  \item Geben Sie einen regulären Ausdruck für die Menge aller Wörter $w$ an,
+    für die $T$ bei Eingabe von $w$ irgendwann hält.
+  \item Berechnen Sie die Endkonfiguration für die Eingabe $w=\#{aaab\Hash baa}$.
+    Die Zwischenschritte der Berechnung m\"ussen \textit{nicht} angegeben werden.
+  \item Berechnen Sie die Endkonfiguration für die Eingabe $w=\#{abbaa\Hash abba}$.
+    Die Zwischenschritte der Berechnung m\"ussen \textit{nicht} angegeben werden.
+  \item Geben Sie eine formale Beschreibung von $\mathcal{L}$ an, die nicht
+    auf $T$ verweist.
+  \item Sei $w \in \mathcal{L}$ die Eingabe von $T$. Welches Wort 
+    $w'\in \{\#a, \#b, \#{\Hash}\}^*$
+    steht auf dem
+    Band, wenn sich $T$ im Zustand $f_2$ befindet?
+  \item Geben Sie eine möglichst einfache Funktion $g$ an, so dass gilt:
+
+    Es gibt eine Funktion $f \in \Theta(g)$, so dass $T$ bei Eingabe eines Wortes $w \in \mathcal{L}$
+    der Länge $n$ genau $f(n)$ Schritte macht, bis $T$ hält.
+  
+  \end{enumerate}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+%=======================================================================
+\end{document}
+%%% Local Variables:
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+
+\RequirePackage{mathtools}
+\input{preamble-aufgaben}
+
+\newcommand{\plB}{\plfoo{B}}
+\newcommand{\plE}{\plfoo{E}}
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{7}
+\newcommand{\ausgabetermin}{9.~Dezember 2015}
+\newcommand{\abgabetermin}{18.~Dezember 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+%\newcommand{\punkteblatt}{18} % Blatt 5
+%\newcommand{\punkteblattphysik}{18} % Blatt 5
+%\newcommand{\punkteblatt}{20} % Blatt 6
+%\newcommand{\punkteblattphysik}{20} % Blatt 6
+\newcommand{\punkteblatt}{20} % Blatt 7
+\newcommand{\punktetotal}{124} %
+\newcommand{\punkteblattphysik}{0} % Blatt 7
+\newcommand{\punktetotalphysik}{101} %
+% =======================================================
+
+\begin{document}
+
+\noindent
+Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben müssen von
+Studenten der Physik nicht bearbeitet werden.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[1 + 1 + 2 + 2 = 6][Physik] % TODO \RPL muss auch noch das Gleichheitszeichen mit Punkt enthalten!
+  Es seien $\CPL = \{ \}$, $\VPL = \{ \plx, \ply, \plz \}$, $\FPL = \{ \}$ und $\RPL = \{ \plE, \pleq \}$ mit $\ar(\plE) = 2$, und es sei $F$ die prädikatenlogische Formel
+  \begin{equation*}
+    \alnot \plexist \plx
+      {\plka
+        \plE{\plka \plx \plcomma \ply \plkz}
+        \alor
+        \alnot \plall \plz \plall \plx \plall \ply
+          {\plka
+            \plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz} \alimpl \plx \pleq \ply
+          \plkz}
+      \plkz}
+  \end{equation*}
+  \begin{enumerate}
+    \item Geben Sie all jene Variablen an die frei und all jene die gebunden in $F$ vorkommen.
+    \item Geben sie eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ ist.
+    \item Geben Sie eine Interpretation $(D_1, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $\val_{D_1, I_1, \beta_1}(F) = \W$ gilt.
+    \item Geben Sie eine Interpretation $(D_2, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $\val_{D_2, I_2, \beta_2}(F) = \F$ gilt.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item Nur die Variable $\ply$ kommt frei in $F$ vor. Genau die Variablen $\plx$, $\ply$ und $\plz$ kommen gebunden in $F$ vor.
+    \item Die Substitution $\sigma_{\{(\ply/\plx)\}}$ leistet das Gewünschte.
+    \item Die Interpretation $(D_1, I_1) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_1 \colon \VPL \to D$, $v \mapsto 0$, leisten das Gewünschte.
+    \item Die Interpretation $(D_2, I_2) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_2 \colon \VPL \to D$, $v \mapsto 1$, leisten das Gewünschte.
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2 + 2 + 2 = 6][Physik]
+  Formulieren Sie die folgenden Aussagen als Formeln in Prädikatenlogik:
+  \begin{enumerate}
+    \item Nicht alle Vögel können fliegen.
+    \item Wenn es irgendjemand kann, dann kann es Donald Ervin Knuth.
+    \item John liebt jeden, der sich nicht selbst liebt.
+  \end{enumerate}
+  \emph{Anmerkung:} Die Alphabete der Konstantensymbole, Variablensymbole, Funktionssymbole und Relationssymbole müssen Sie nicht explizit angeben, da diese implizit aus den Formeln hervorgehen.
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item
+          \begin{equation*}
+            \plexist \plx {\plka \plfoo{Vogel}{\plka \plx \plkz} \aland \alnot \plfoo{flugfaehig}{\plka \plx \plkz} \plkz}
+          \end{equation*}
+    \item
+          \begin{equation*}
+            \plexist \plx {\plka \plfoo{kann\_es}{\plka \plx \plkz} \plkz}
+            \alimpl
+            \plfoo{kann\_es}{\plka \plfoo{knuth} \plkz}
+          \end{equation*}
+    \item
+          \begin{equation*}
+            \plall \plx {\plka \alnot \plfoo{liebt}{\plka \plx \plcomma \plx \plkz} \alimpl \plfoo{liebt}{\plka \plfoo{John} \plcomma \plx \plkz} \plkz}
+          \end{equation*}
+  \end{enumerate}
+
+  \begin{korrektur}
+    \ZB bei a) soll Prädikat $\plfoo{Vogel}$ vorkommen. Verbale
+    Einschränkungen auf \zB Universen, die sowieso nur Vögel
+    enthalten, werden nicht akzeptiert.
+
+    Wir sind hier noch im Kapitel über Prädikatenlogik. Deshalb soll
+    die Syntax auch (halbwegs) stimmen. Sowas wie
+    $\plall \plfoo{Vogel}\plka\plx\plkz$ wird nicht akzeptiert.
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4][Physik]
+  Es seien $G$ und $H$ zwei prädikatenlogische Formeln. Beweisen Sie, dass die prädikatenlogische Formel
+  \begin{equation*}
+    {\plka \plexist \plx {\plka G \alimpl H \plkz} \plkz}
+    \alimpl
+    {\plka \plall \plx G \alimpl \plexist \plx H \plkz}
+  \end{equation*}
+  allgemeingültig ist.
+\end{aufgabe}
+
+\begin{loesung}
+  \emph{Nebenbei:} Tatsächlich ist sogar die prädikatenlogische Formel
+  \begin{equation*}
+    {\plka \plexist \plx {\plka G \alimpl H \plkz} \plkz}
+    \aleqv
+    {\plka \plall \plx G \alimpl \plexist \plx H \plkz}
+  \end{equation*}
+  allgemeingültig (siehe Übung).
+
+  \emph{Beweis:}
+  Es sei $(D, I)$ eine passende Interpretation und es sei $\beta$ eine passende Variablenbelegung. Weiter sei $U = \plka \plexist \plx {\plka G \alimpl H \plkz} \plkz$ und es sei $V = \plka \plall \plx G \alimpl \plexist \plx H \plkz$. Gemäß der Definition von $\val_{D,I,\beta}$ für Implikationen gilt $\val_{D,I,\beta}(U \alimpl V) = b_{\alor}(b_{\alnot}(\val_{D,I,\beta}(U)), \val_{D,I,\beta}(V))$.
+  \begin{description}
+    \item[Fall 1:] $\val_{D,I,\beta}(U) = \F$. Gemäß der Definitionen von $b_{\alnot}$ und $b_{\alor}$ gilt dann $\val_{D,I,\beta}(U \alimpl V) = \W$.
+    \item[Fall 2:] $\val_{D, I, \beta}(U) = \W$. Gemäß der Charakterisierung von $\val_{D, I, \beta}$ für existenzquantifizierte Formeln gibt es somit ein $d \in D$ so, dass $\val_{D, I, \beta_{\plx}^d}(G \alimpl H) = \W$. Gemäß der Definition von $\val_{D, I, \beta_{\plx}^d}$ für Implikationen gilt damit $b_{\alor}(b_{\alnot}(\val_{D, I, \beta_{\plx}^d}(G)), \val_{D, I, \beta_{\plx}^d}(H)) = \W$.
+                   \begin{description}
+                     \item[Fall 2.1:] $\val_{D, I, \beta_{\plx}^d}(G) = \W$. Dann gilt $\val_{D, I, \beta_{\plx}^d}(H) = \W$. Gemäß der Charakterisierung von $\val_{D, I, \beta}$ für existenquantifizierte Formeln aus der Vorlesung gilt somit $\val_{D, I, \beta}(\plexist \plx H) = \W$. Gemäß der Definition von $\val_{D, I, \beta}$ für Implikationen gilt also $\val_{D, I, \beta}(\plall \plx G \alimpl \plexist \plx H) = \W$.
+                     \item[Fall 2.2:] $\val_{D, I, \beta_{\plx}^d}(G) = \F$. Gemäß der Definition von $\val_{D, I, \beta}$ für allquantifizierte Formeln gilt somit $\val_{D, I, \beta}(\plall \plx G) = \F$. Gemäß der Definition von $\val_{D, I, \beta}$ für Implikationen gilt also $\val_{D, I, \beta}(\plall \plx G \alimpl \plexist \plx H) = \W$.
+                   \end{description}
+                   In beiden Fällen gilt $\val_{D, I, \beta}(V) = \W$. Gemäß der Definitionen von $b_{\alnot}$ und $b_{\alor}$ gilt folglich $\val_{D,I,\beta}(U \alimpl V) = \W$.
+  \end{description}
+  In beiden Fällen gilt $\val_{D,I,\beta}(U \alimpl V) = \W$.
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4][Physik]
+  Es seien $\CPL = \{ \}$, $\VPL = \{ \plx, \ply \}$, $\FPL = \{ \}$ und $\RPL = \{ \plB, \plR, \pleq \}$ mit $\ar(\plB) = 1$ und $\ar(\plR) = 2$. Weiter sei $F$ die prädikatenlogische Formel
+  \begin{equation*}
+    \plexist \plx {\plka \plB{\plka \plx \plkz} \plkz} \aland \plall \plx {\plka \plB{\plka \plx \plkz} \aleqv \plall \ply {\plka \alnot \plR{\plka \ply \plcomma \ply \plkz} \aleqv \plR{\plka \plx \plcomma \ply \plkz} \plkz} \plkz}
+  \end{equation*}
+  Beweisen Sie, dass $F$ unerfüllbar ist, das heißt, dass für jede passende Interpretation $(D, I)$ und jede passende Variablenbelegung $\beta$ gilt: $\val_{D, I, \beta}(F) = \F$.
+
+  \emph{Hinweis:} Für alle prädikatenlogischen Formeln $G$ und $H$, jede passende Interpretation $(D, I)$ und jede passende Variablenbelegung $\beta$ gilt:
+  \begin{equation*}
+    \val_{D, I, \beta}(G \aleqv H) = \W \text{ genau dann, wenn } \val_{D, I, \beta}(G) = \val_{D, I, \beta}(H).
+  \end{equation*}
+\end{aufgabe}
+
+\begin{loesung}
+  \emph{Nebenbei:} Liest man das Relationssymbol $\plB$ als \enquote{ist ein Barbier} und das Relationssymbol $\plR$ als \enquote{rasiert} so lautet $F$ umgangssprachlich: Es gibt einen Barbier und Barbier ist genau der, der genau all jene rasiert, die sich nicht selbst rasieren. Die Unerfüllbarkeit von $F$ bedeutet also, dass es keinen Barbier geben kann, der all jene rasiert, die sich nicht selbst rasieren.
+
+  \emph{Beweis:} Es sei $(D, I)$ eine passende Interpretation und es sei $\beta$ eine passende Variablenbelegung. Weiter sei $F_1 = \plexist \plx {\plka \plB{\plka \plx \plkz} \plkz}$ und es sei $F_2 = \plall \plx {\plka \plB{\plka \plx \plkz} \aleqv \plall \ply {\plka \alnot \plR{\plka \ply \plcomma \ply \plkz} \aleqv \plR{\plka \plx \plcomma \ply \plkz} \plkz} \plkz}$. Dann gilt $F = F_1 \aland F_2$. Ferner gilt
+  \begin{equation*}
+    \val_{D, I, \beta}(F_1 \aland F_2) = b_{\aland}(\val_{D, I, \beta}(F_1), \val_{D, I, \beta}(F_2)).
+  \end{equation*}
+  \begin{description}
+    \item[Fall 1:] $\val_{D, I, \beta}(F_1) = \F$. Gemäß der Definition von $b_{\aland}$ gilt damit $\val_{D, I, \beta}(F_1 \aland F_2) = \F$.
+    \item[Fall 2:] $\val_{D, I, \beta}(F_1) = \W$. Gemäß der Charakterisierung von $\val_{D, I, \beta}$ existenquantifizierte Formeln aus der Vorlesung gibt es somit ein $b \in D$ so, dass $\val_{D, I, \beta_{\plx}^b}(\plB{\plka \plx \plkz}) = \W$. Gemäß der Definition von $\val_{D, I, (\beta_{\plx}^b)_{\ply}^b}$ für negierte Formeln und atomare Formeln gilt damit
+                   \begin{align*}
+                     \val_{D, I, (\beta_{\plx}^b)_{\ply}^b}(\alnot \plR{\plka \ply \plcomma \ply \plkz})
+                     &= b_{\alnot}(\val_{D, I, (\beta_{\plx}^b)_{\ply}^b}(\plR{\plka \ply \plcomma \ply \plkz}))\\
+                     &= \begin{dcases*}
+                          b_{\alnot}(\W), &falls $((\beta_{\plx}^b)_{\ply}^b(\ply), (\beta_{\plx}^b)_{\ply}^b(\ply)) \in I(\plR)$,\\
+                          b_{\alnot}(\F), &sonst,
+                        \end{dcases*}\\
+                     &= \begin{dcases*}
+                          \F, &falls $(b, b) \in I(\plR)$,\\
+                          \W, &sonst,
+                        \end{dcases*}
+                   \end{align*}
+                   und analog gilt
+                   \begin{equation*}
+                     \val_{D, I, (\beta_{\plx}^b)_{\ply}^b}(\plR{\plka \plx \plcomma \ply \plkz})
+                     = \begin{dcases*}
+                         \W, &falls $(b, b) \in I(\plR)$,\\
+                         \F, &sonst.
+                       \end{dcases*}
+                   \end{equation*}
+                   Gemäß der Hinweises gilt somit $\val_{D, I, (\beta_{\plx}^b)_{\ply}^b}(\alnot \plR{\plka \ply \plcomma \ply \plkz} \aleqv \plR{\plka \plx \plcomma \ply \plkz}) = \F$. Gemäß der Definition von $\val_{D, I, \beta}$ für allquantifizierte Formeln gilt also $\val_{D, I, \beta_{\plx}^b}(\plall \ply {\plka \alnot \plR{\plka \ply \plcomma \ply \plkz} \aleqv \plR{\plka \plx \plcomma \ply \plkz} \plkz}) = \F$. Wegen $\val_{D, I, \beta_{\plx}^b}(\plB{\plka \plx \plkz}) = \W$ und gemäß des Hinweises gilt folglich $\val_{D, I, \beta_{\plx}^b}(\plB{\plka \plx \plkz} \aleqv \plall \ply {\plka \alnot \plR{\plka \ply \plcomma \ply \plkz} \aleqv \plR{\plka \plx \plcomma \ply \plkz} \plkz}) = \F$. Gemäß der Definition von $\val_{D, I, \beta}$ für allquantifizierte Formeln gilt damit $\val_{D, I, \beta}(F_2) = \F$. Schließlich gilt $\val_{D, I, \beta}(F_1 \aland F_2) = \F$.
+  \end{description}
+  In beiden Fällen gilt $\val_{D, I, \beta}(F) = \F$.
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

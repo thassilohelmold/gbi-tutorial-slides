@@ -1,0 +1,340 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows,shapes}
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{11}
+\newcommand{\ausgabetermin}{21.~Januar 2016}
+\newcommand{\abgabetermin}{29.~Januar 2016}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+%\newcommand{\punkteblatt}{18} % Blatt 5
+%\newcommand{\punkteblattphysik}{18} % Blatt 5
+%\newcommand{\punkteblatt}{20} % Blatt 6
+%\newcommand{\punkteblattphysik}{20} % Blatt 6
+%\newcommand{\punkteblatt}{20} % Blatt 7
+%\newcommand{\punkteblattphysik}{0} % Blatt 7
+%\newcommand{\punkteblatt}{18} % Blatt 8
+%\newcommand{\punkteblattphysik}{18} % Blatt 8
+%\newcommand{\punkteblatt}{17} % Blatt 9
+%\newcommand{\punkteblattphysik}{17} % Blatt 9
+%\newcommand{\punkteblatt}{16} % Blatt 10
+%\newcommand{\punkteblattphysik}{16} % Blatt 10
+\newcommand{\punkteblatt}{19} % Blatt 11
+\newcommand{\punktetotal}{194} %
+\newcommand{\punkteblattphysik}{19} % Blatt 11
+\newcommand{\punktetotalphysik}{171} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben müssen von
+%Studenten der Physik nicht bearbeitet werden.\\
+
+\noindent
+Im folgenden schreiben wir $[n\mapsto f(n)]$ für die Funktion
+$f\from\N_0\to\R_0^+\from n \mapsto f(n)$. Statt
+$\Oh{[n\mapsto f(n)]}$ schreiben wir kürzer $\Oh{n\mapsto f(n)}$ und
+analog bei $\Om{\cdot}$ und $\Th{\cdot}$.
+\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Beweisen Sie, dass $\Omega(n \mapsto 2^n) \cap O(n \mapsto n^2)$ die leere Menge ist.
+
+  \emph{Hinweis:} Gemäß der Vorlesung gilt $[n \mapsto 2^n] \npreceq [n \mapsto n^2]$.
+\end{aufgabe}
+
+\begin{loesung}
+  Angenommen $\Omega(n \mapsto 2^n) \cap O(n \mapsto n^2) \neq \{\}$. Dann gibt es ein $f \in \Omega(n \mapsto 2^n) \cap O(n \mapsto n^2)$. Wegen $f \in \Omega(n \mapsto 2^n)$, gibt es ein $c \in \R_+$ und ein $n_0 \in \N_0$ derart, dass
+  \begin{equation*}
+    \forall n \geq n_0 : f(n) \geq c \cdot 2^n.
+  \end{equation*}
+  Und wegen $f \in O(n \mapsto n^2)$, gibt es ein $c' \in \R_+$ und ein $n_0' \in \N_0$ derart, dass
+  \begin{equation*}
+    \forall n \geq n_0' : f(n) \leq c' \cdot n^2.
+  \end{equation*}
+  Also gilt
+  \begin{equation*}
+    \forall n \geq \max\{n_0, n_0'\} : c \cdot 2^n \leq f(n) \leq c' \cdot n^2.
+  \end{equation*}
+  Somit gilt
+  \begin{equation*}
+    \forall n \geq \max\{n_0, n_0'\} : 2^n \leq \frac{c'}{c} \cdot n^2.
+  \end{equation*}
+  Folglich gilt $[n \mapsto 2^n] \preceq [n \mapsto n^2]$, im Widerspruch zum Hinweis $[n \mapsto 2^n] \npreceq [n \mapsto n^2]$. % zu $[n \mapsto 2^n] \npreceq [n \mapsto n^2]$, was wir aus der Vorlesung wissen.
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Es sei $p \colon \N_0 \to \R_0^+$ eine Abbildung derart, dass eine nicht-negative ganze Zahl $k \in \N_0$ existiert und nicht-negative reelle Zahlen $a_i \in \R_0^+$, für $i \in \Z_{k + 1}$, mit $a_k \neq 0$ existieren so, dass
+  \begin{equation*}
+    \forall n \in \N_0 : p(n) = \sum_{i = 0}^k a_i n^i.
+  \end{equation*}
+  Die Abbildung $p$ ist also eine Polynomfunktion des Grades $k$ mit nicht-negativen reellwertigen Koeffizienten und Definitionsbereich $\N_0$. Beweisen Sie, dass $p \in \Theta(n \mapsto n^k)$ gilt.
+\end{aufgabe}
+
+\begin{loesung}
+  Man setze $c=a_k$. Dann gilt für jedes $n \in \N_0$:
+  \begin{equation*}
+    p(n) =    \sum_{i = 0}^k a_i n^i
+         \geq a_k n^k
+         =    c n^k.
+  \end{equation*}
+  Somit gilt $p \in \Omega(n \mapsto n^k)$.
+
+  Setze $c' = \sum_{i = 0}^k a_i$. Für jedes $n \in \N_0$ gilt
+  \begin{equation*}
+    p(n) =    \sum_{i = 0}^k a_i n^i
+         \leq \sum_{i = 0}^k a_i n^k
+         =    c' n^k.
+  \end{equation*}
+  Somit gilt $p \in O(n \mapsto n^k)$.
+
+  Insgesamt gilt $p \in \Omega(n \mapsto n^k) \cap O(n \mapsto n^k) = \Theta(n \mapsto n^k)$.
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Für $n\in\N_0$ sei $G_n$ der Graph $(V_n,E_n)$ mit
+  \begin{align*}
+    V_n &= \{ (x,y)\in\N_0^2 \mid x+y \leq n \} \\
+    E_n &= \begin{aligned}[t]
+      &\mathbin{\phantom{\cup}} \{ ((x,y),(x+1,y)) \mid x+1+y\leq n \} \\
+      &\cup \{ ((x,y),(x,y+1)) \mid x+y+1\leq n \}
+    \end{aligned}
+  \end{align*}
+
+  \begin{enumerate}[a)]
+  \item Zeichnen Sie $G_3$.
+  \item Für welche $n\in \N_0$ ist $G_n$ ein Baum?
+  \item Geben Sie eine Funktion $f\from \N_0\to\R_0^+$ so an, dass
+    $[n\mapsto \card{V_n}] \in\Th{f}$.
+  \item Geben Sie eine Funktion $g\from \N_0\to\R_0^+$ so an, dass
+    $[n\mapsto \card{E_n}] \in\Th{g}$.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}[a)]
+  \item
+    \begin{tikzpicture}[every node/.style={draw,circle,inner sep=1pt}
+      ,x={(20mm,0mm)},y={(0mm,20mm)},>={Latex[]},baseline=(03.center)]
+      \draw 
+      (0,0) node (00) {$(0,0)$}
+      (0,1) node (01) {$(0,1)$}
+      (0,2) node (02) {$(0,2)$}
+      (0,3) node (03) {$(0,3)$}
+      (1,0) node (10) {$(1,0)$}
+      (1,1) node (11) {$(1,1)$}
+      (1,2) node (12) {$(1,2)$}
+      (2,0) node (20) {$(2,0)$}
+      (2,1) node (21) {$(2,1)$}
+      (3,0) node (30) {$(3,0)$}
+      ;
+      \path (0,-0.5) coordinate;
+      \draw[->] (00) -- (01);
+      \draw[->] (01) -- (02);
+      \draw[->] (02) -- (03);
+      \draw[->] (10) -- (11);
+      \draw[->] (11) -- (12);
+      \draw[->] (20) -- (21);
+      ;
+      \draw[->] (00) -- (10);
+      \draw[->] (10) -- (20);
+      \draw[->] (20) -- (30);
+      \draw[->] (01) -- (11);
+      \draw[->] (11) -- (21);
+      \draw[->] (02) -- (12);
+      ;
+    \end{tikzpicture}
+    \item für $n=0$ und $n=1$
+    \item $f: n\mapsto n^2$  \qquad (exakt sind es $(n+1)(n+2)/2$ )
+    \item $g: n\mapsto n^2$  \qquad (exakt sind es $2((n+1)(n+2)/2-(n+1)) = n(n+1)$ )
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[7]
+  Für jeden gerichteten Graphen $G=(V,E)$ ist der sogenannte
+  \emph{Kantengraph} (engl.~\emph{line graph}) $L(G)=(V',E')$ wie
+  folgt definiert: Wenn $E$ nicht leer ist, dann ist
+  \begin{align*}
+    V' &= E, \\
+    E' &= \{ ( (x,y), (y,z) ) \mid (x,y), (y,z)\in V'  \};
+  \end{align*}
+  %
+  wenn $E$ leer ist, dann ist $V'=\{0\}$ und $E'=\{\}$.
+
+  Für $n\in\N_0$ sei der $n$-te iterierte Kantengraph $L^n(G)$ so definiert:
+  %
+  \begin{align*}
+    L^0(G) &= G, \\
+    \forall n\in\N_0:L^{n+1}(G) &= L(L^n(G)) \;.
+  \end{align*}
+  Es bezeichne im folgenden $L^n_V(G)$ die Knotenmenge von $L^n(G)$ und
+  $L^n_E(G)$ die Kantenmenge von $L^n(G)$.
+
+  \emph{Hinweis:} $|M|$ bezeichnet im folgenden stets die
+  Kardinalität, also die Anzahl der Elemente, einer endlichen Menge
+  $M$.
+
+  \begin{enumerate}[a)]
+  \item Zeichnen Sie zu dem Graphen $H_1$
+
+  \qquad  \begin{tikzpicture}[x={(20mm,0mm)},y={(0mm,-20mm)},every node/.style={draw,circle,minimum size=9mm,anchor=mid}]
+      \node (A) at (0,0) {$A$} ;
+      \node (B) at (1,0) {$B$} ;
+      \node (C) at (0,1) {$C$} ;
+      \node (D) at (1,1) {$D$} ;
+      \draw[-{Latex[]}] (B) edge (A)
+                            edge (C)
+                        (C) edge (D)
+                        (D) edge (B);
+    \end{tikzpicture}
+
+    den Kantengraphen $L(H_1)$ und benennen sie dessen Knoten sinnvoll.
+  \item Geben Sie eine Funktion $f\from \N_0\to\R_0^+$ so an, dass
+    $[n\mapsto \card{L^n_V(H_1)}] \in\Th{f}$.
+  \item Geben Sie einen Graphen $H_2$ mit $5$ Knoten und
+    $5$ Kanten so an, dass für dessen iterierte Kantengraphen
+    $L^n(H_2)$ gilt:
+    \[
+      [n\mapsto \card{L^n_E(H_2)}]\in \Th{n\mapsto 0} .
+    \]
+    %
+    %(Dabei stehe die $0$ in $\Th{0}$ für die konstante Nullfunktion
+    %$[n\mapsto 0]$.)
+  \item Für $n\in\N_+$ sei $B_n$ der de Bruijn-Graph mit Knotenmenge
+    $V_n=\{\#0,\#1\}^n$ und Kantenmenge
+    $E_n=\{ (xw,wy) \mid x,y\in\{\#0,\#1\} \land w\in\{\#0,\#1\}^{n-1}\}$
+    (siehe Kapitel 15).
+    \begin{itemize}
+    \item Geben Sie für jedes $n\in\N_+$ eine Bijektion
+      $\phi_n\from E_n \to \{\#0,\#1\}^{n+1}$ an.
+    \item Zeigen Sie, dass für jedes $n\in\N_+$ der Kantengraph
+      $L(B_n)$ isomorph zu $B_{n+1}$ ist.
+    \item Für welche $k\in\Z_4$ gilt
+      $[n\mapsto \card{L_V^n(B_2)}] \in \Oh{n\mapsto k^n}$ ?
+    \end{itemize}
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{korrektur}
+    Punkteaufteilung: $1+1+2+3$
+  \end{korrektur}
+
+  \begin{enumerate}[a)]
+  \item \begin{tikzpicture}[x={(20mm,0mm)},y={(0mm,-20mm)},
+      every node/.style={draw,circle,minimum size=9mm,anchor=mid},baseline=(current bounding box.north)]
+      \node (A) at (0,0) {$BA$} ;
+      \node (B) at (1,0) {$BC$} ;
+      \node (C) at (0,1) {$CD$} ;
+      \node (D) at (1,1) {$DB$} ;
+      \draw[-{Latex[]}] (B) edge (C)
+                        (C) edge (D)
+                        (D) edge (A)
+                            edge (B);
+    \end{tikzpicture}
+    
+    Dieser Graph ist isomorph zu $H_1$
+  \item $n\mapsto 4$
+  \item \begin{tikzpicture}[x={(20mm,0mm)},y={(0mm,-20mm)},
+      every node/.style={draw,circle,minimum size=9mm,anchor=mid},baseline=(current bounding box.north)]
+      \node (A) at (0,0) {$A$} ;
+      \node (B) at (1,0) {$B$} ;
+      \node (C) at (2,0) {$C$} ;
+      \node (D) at (3,0) {$D$} ;
+      \node (E) at (4,0) {$E$} ;
+      \draw[-{Latex[]}] (A) edge[bend left=30] (C)
+                        (B) edge (A)
+                            edge (C)
+                        (D) edge (C)
+                            edge (E);
+    \end{tikzpicture}
+
+    Anmerkung: In $L(H_2)$ existiert nur noch eine einzige Kante,
+    nämlich von Knoten $(B,A)$ zu Knoten $(A,C)$; die einzige Kante
+    ist also keine Schlinge. Folglich existieren in $L^2(H_2)$ keine
+    Kanten mehr und damit auch nicht in allen weiteren iterierten
+    Kantengraphen.
+  \item 
+    \begin{korrektur}
+      $0.5 + 2 + 0.5$ Punkte
+    \end{korrektur}
+    \mbox{ }
+    \begin{itemize}
+    \item $\phi_n\from E_n \to \{\#0,\#1\}^{n+1} \from (xw,wy) \mapsto xwy$
+    \item Das eben definierte $\phi_n$ leistet schon das von einem
+      Isomorphismus Gewünschte.
+
+      Es ist noch zu zeigen
+      \begin{itemize}
+      \item Wenn eine Kante in $L(B_n)$ von $s$ nach $t$ führt, dann
+        auch eine Kante in $B_{n+1}$ von $\phi_n(s)$ nach $\phi_n(t)$:
+
+        Im folgenden seien $x,x',y,y',z\in\{0,1\}$ und
+        $w,w',v\in\{0,1\}^*$.
+        
+        Es sei $s=(xw,wy)$ und $t=(x'w',w'y')$. Wenn eine Kante von
+        $s$ zu $t$ führt, dann ist $wy=x'w'$.
+
+        \begin{itemize}
+        \item Falls $n=1$ und daher $w=w'=\eps$ ist, ist auch $y=x'$
+          und alles vereinfacht sich zu $s=(x,y)$ und $t=(y,y')$. Dann
+          ist $\phi_n(s)=xy$ nach $\phi_n(t)=yy'$ und es gibt nach
+          Definition von $E_2$ eine Kante von $\phi_1(s)$ nach
+          $\phi_1(t)$.
+        \item Falls $n\geq 2$ ist, gibt es ein $v$ mit
+          $wy = x'vy = x'w'$ und es ist $s=(xx'v,x'vy)$ und
+          $t=(x'vy,vyy')$. Man erhält $\phi_n(s)=xx'vy$ nach
+          $\phi_n(t)=x'vyy'$ und nach Definition von $E_{n+1}$
+          existiert eine Kante von $\phi_1(s)$ nach $\phi_1(t)$.
+        \end{itemize}
+      \item Wenn eine Kante in $B_{n+1}$ von $\phi_n(s)$ nach
+        $\phi_n(t)$ führt, dann auch eine Kante in $L(B_n)$ von $s$
+        nach $t$:
+
+        \begin{itemize}
+        \item Falls $n=1$, ist $\phi_n(s)=xy$ nach $\phi_n(t)=yy'$.
+          Also ist der Endpunkt der Kante $(x,y)$ der Anfangspunkt der
+          Kante $(y,y')$ und folglich existiert in $L(B_1)$ eine Kante
+          von $s=(x,y)$ zu $t=(y,y')$.
+        \item Falls $n\geq 2$, ist $\phi_n(s)=xwy$ und
+          $\phi_n(t)=x'w'y'$. Wenn es eine Kante von $\phi_n(s)$ zu
+          $\phi_n(t)$ gibt, dann ist $wy=x'w'$ und es muss ein $v$
+          existieren mit $wy=x'vy=x'w'$. Folglich existiert in
+          $L(B_n)$ eine Kante von $(xw,wy)$ zu $(x'w',w'y')$.
+        \end{itemize}
+      \end{itemize}
+    \item für $k\in\{2,3\}$
+    \end{itemize}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

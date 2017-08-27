@@ -1,0 +1,1501 @@
+%=======================================================================
+\Tut\chapter{Der Begriff des Algorithmus}
+\label{k:algorithmusbegriff}
+\setcounter{equation}{0}
+
+\personname{Muhammad ibn M\=us\=a al-Khw\=arizm\=\i}%
+%\index[person]{al-Khwarizmi, Muhammad ibn Musa} lebte ungefähr von 780
+\index{al-Khwarizmi, Muhammad ibn Musa} lebte ungefähr von 780
+bis 850. Abbildung~\ref{abb:alkhwarizmi} zeigt eine (relativ beliebte
+weil copyright-freie) Darstellung auf einer russischen Briefmarke
+anlässlich seines (jedenfalls ungefähr) 1200.~Geburtstages.
+%
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=1.3]{../k-14-algorithmen/alkhwarizmi}
+  \caption{Muhammad ibn M\=us\=a al-Khw\=arizm\=\i; Bildquelle:
+    \url{http://commons.wikimedia.org/wiki/Image:Abu_Abdullah_Muhammad_bin_Musa_al-Khwarizmi.jpg}
+    (24.11.2014)}
+  \label{abb:alkhwarizmi}
+\end{figure}
+%
+Im Jahr 830 (oder wenig früher) schrieb al-Khw\=arizm\={\i} ein
+wichtiges Buch mit dem Titel "`Al-Kit\={a}b al-mukhta\d{s}ar f\={\i}
+h\={\i}s\={a}b al-\u{g}abr wa'l-muq\={a}bala"'. (An anderer Stelle
+findet man als Titel "`Al-Kit\={a}b al-mukhta\d{s}ar f\={\i}
+\d{h}is\={a}b al-jabr wa-l-muq\={a}bala"'.)  Die deutsche Übersetzung
+lautet in etwa "`Das kurzgefasste Buch zum Rechnen durch Ergänzung und
+Ausgleich"'. Aus dem Wort "`al-\u{g}abr"' \bzw "`al-jabr"' entstand
+später das Wort \emph{Algebra}\index{Algebra}.  Inhalt des Buches ist
+unter anderem die Lösung quadratischer Gleichungen mit einer
+Unbekannten.
+
+Einige Jahre früher (825?) entstand das Buch, das im Original
+vielleicht den Titel "`Kit\={a}b al-Jam` wa-l-tafr\={\i}q
+bi-\d{h}is\={a}b al-Hind"' trug, auf Deutsch "'Über das Rechnen mit
+indischen Ziffern"'. Darin führt al-Khw\=ariz\={\i} die aus dem
+Indischen stammende Zahl Null in das arabische Zahlensystem ein und
+führt die Arbeit mit Dezimalzahlen vor. Von diesem Buch existieren nur
+noch Übersetzungen, zum Beispiel auf Lateinisch aus dem vermutlich
+12.~Jahrhundert. Abbildung~\ref{abb:dixit_algorizmi} zeigt einen
+Ausschnitt aus einer solchen Übersetzung.
+
+Von diesen Fassungen ist kein Titel bekannt, man vermutet aber, dass
+er "`Algoritmi de numero Indorum"' oder "`Algorismi de numero
+Indorum"' gelautet haben könnte, also ein Buch "`des Al-gorism über
+die indischen Zahlen"'. Das "`i"' am Ende von
+"`Algorismi"'\graffito{Herkunft das Wortes Algorithmus} wurde später
+fälschlicherweise als Pluralendung des Wortes \emph{Algorithmus}%
+\index{Algorithmus} angesehen.
+
+Womit wir etwas zur Ethymologie eines der wichtigsten Begriffe der
+Informatik gesagt hätten.
+
+\begin{figure}[h]
+  \centering
+   % Original 241.1409pt x 334.6101pt
+  \includegraphics[width=\textwidth,viewport=0 230 200 300,clip]{../k-14-algorithmen/dixit_algorizmi}
+  \caption{Ausschnitt einer Seite einer lateinischen Übersetzung der
+    Arbeit von al-Khw\=arizm\=\i\ über das "`Rechnen mit indischen
+    Ziffern"'; Bildquelle:
+    \url{http://en.wikipedia.org/wiki/Image:Dixit_algorizmi.png}
+    (24.11.2014)}
+  \label{abb:dixit_algorizmi}
+\end{figure}
+  
+%-----------------------------------------------------------------------
+\Tut\section{L\"osen einer Sorte quadratischer Gleichungen}
+
+Angenommen, man hat eine quadratische Gleichung der Form $x^2+bx=c$,
+wobei $b$ und $c$ positive Zahlen sind. Dann, so al-Khwarizmi,
+kann man die positive Lösung dieser Gleichung bestimmen, indem man
+nacheinander wie folgt rechnet:
+%
+%\begin{algorithm}
+  \begin{align}
+    &h <- b/2 \label{foo1} \\
+    &q <- h^2 \\
+    &s <- c+q \\
+    &w <- \sqrt{s} \\
+    &x <- w-h \label{foo5} 
+  \end{align}
+%\end{algorithm}
+%
+(Natürlich ist die Beschreibung der durchzuführenden Rechnungen bei
+al-Khwarizmi anders.)
+
+Wir haben hier eine Notation gewählt, bei der in jeder Zeile ein Pfeil
+$<-$ steht. Links davon steht ein symbolischer Name.
+%, der vorher noch nicht benutzt wurde.
+Rechts vom Pfeil steht ein arithmetischer Ausdruck, in dem zum einen
+die beiden Namen $b$ und $c$ für die Eingangsgrößen vorkommen, zum
+anderen symbolische Namen, die schon einmal in einer
+\emph{darüberliegenden} Zeile auf der linken Seite vorkamen.
+
+Durch eine solche \emph{Zuweisung} wird die linke Seite zu einem Namen
+für den Wert, den man aus der rechten Seite ausrechnen kann.
+
+Man kann Schritt für Schritt alle Zuweisungen "`ausführen"'. Es
+passieren keine Unglücke ($s$ ist nie negativ.) Man kann sich
+überlegen, dass am Ende $x$ immer einen Wert bezeichnet, der die
+quadratische Gleichung $x^2+bx=c$ erfüllt.
+
+%-----------------------------------------------------------------------
+\Tut\section{Zum informellen Algorithmusbegriff}
+\label{sub:alg-informell}
+
+Das gerade besprochene Beispiel besitzt einige Eigenschaften, die man
+allgemein beim klassischen Algorithmusbegriff fordert:\index{Algorithmus!informell}
+%
+\begin{itemize}
+\item Der Algorithmus besitzt eine \emph{endliche Beschreibung} (ist
+  also ein Wort über einem Alphabet).
+\item Die Beschreibung besteht aus \emph{elementaren Anweisungen}, von
+  denen jede offensichtlich effektiv in einem Schritt ausführbar ist.
+\item \emph{Determinismus:} Zu jedem Zeitpunkt ist eindeutig
+  festgelegt, welches die nächste elementare Anweisung ist, und
+  diese Festlegung hängt nur ab
+  \begin{itemize}
+  \item von schon berechneten Ergebnissen und
+   \item davon, welches die zuletzt ausgeführte elementare Anweisung
+     war.
+  \end{itemize}
+\item Aus einer \emph{endlichen Eingabe} wird eine \emph{endliche
+  Ausgabe} berechnet.
+\item Dabei werden \emph{endliche viele Schritte} gemacht, \dh nur
+  endlich oft eine elementare Anweisung ausgeführt.
+\item Der Algorithmus funktioniert für \emph{beliebig große Eingaben.}
+\item Die \emph{Nachvollziehbarkeit/Verständlichkeit} des Algorithmus
+  steht für jeden (mit der Materie vertrauten) außer Frage.
+\end{itemize}
+%
+Zwei Bemerkungen sind hier ganz wichtig:
+%
+\begin{itemize}
+\item So plausibel obige Forderungen sind, so informell sind sie aber
+  andererseits: Was soll \zB "`offensichtlich effektiv ausführbar"'
+  heißen? Für harte Beweise benötigt man einen präziseren
+  Algorithmusbegriff.
+\item Im Laufe der Jahre hat sich herausgestellt, dass es durchaus
+  auch interessant ist, Verallgemeinerungen des oben skizzierten
+  Algorithmenbegriffes zu betrachten. Dazu gehören zum Beispiel
+  \begin{itemize}
+  \item randomisierte Algorithmen, bei denen manchmal die Fortsetzung
+    nicht mehr eindeutig ist, sondern abhängig von Zufallsereignissen,
+  \item Verfahren, bei denen nicht von Anfang an alle Eingaben zur
+    Verfügung stehen, sondern erst nach und nach (\zB Cacheverwaltung
+    in Prozessoren), und
+  \item Verfahren, die nicht terminieren (\zB Ampelsteuerung).
+  \end{itemize}
+\end{itemize}
+%
+\begin{tutorium}
+  Die Eigenschaften, die man allgemein beim klassischen
+  Algorithmusbegriff fordert, noch mal kurz durchgehen; sollten erst
+  mal alle plausibel sein.
+  \begin{itemize}
+  \item \emph{endliche Beschreibung}
+  \item \emph{elementare Anweisungen}
+  \item \emph{Determinismus}
+  \item zu \emph{endlichen Eingabe} wird \emph{endliche Ausgabe}
+    berechnet
+  \item \emph{endliche viele Schritte}
+  \item funktioniert für \emph{beliebig große Eingaben}
+  \item \emph{Nachvollziehbarkeit/Verständlichkeit} für jeden (mit der
+    Materie vertrauten)
+  \end{itemize}
+\end{tutorium}
+
+%-----------------------------------------------------------------------
+\Tut\section{Informelle Einf\"uhrung des Hoare-Kalk\"uls}
+
+Al-Khwarizmi gibt einen sehr schönen Beweis dafür an, dass die
+Rechnungen in (\ref{foo1})-(\ref{foo5}) das gewünschte Ergebnis
+liefern. Er beruht auf einer recht einfachen geometrischen Überlegung
+(siehe \zB
+\url{http://www-history.mcs.st-and.ac.uk/~history/Biographies/Al-Khwarizmi.html},
+24.11.2014).
+
+Man kann in diesem konkreten Fall auch einfach den am Ende berechneten
+Wert \zB in die linke Seite der Ausgangsgleichung einsetzen und
+nachrechnen, dass sich als Ergebnis $c$ ergibt. Wir schreiben die fünf
+Zuweisungen noch einmal auf und fügen nach jeder eine logische Formel
+ein, die eine gültige Aussage über berechnete Werte macht. Man nennt
+so etwas auch eine Zusicherung. Die Formeln sind zwischen geschweifte
+Klammern~$\{$ und~$\}$ gesetzt. 
+
+\begin{align*}
+&\assert{b>0 \land c>0} \\
+&h <- b/2  \\
+&\assert{h = b/2}   \\
+&q <- h^2 \\
+&\assert{q = b^2/4}   \\
+&s <- c+q \\
+&\assert{s = c + b^2/4}   \\
+&w <- \sqrt{s} \\
+&\assert{w = \sqrt{c + b^2/4}}  \\
+&x <- w-h   \\
+&\assert{x = \sqrt{c + b^2/4} - b/2 }  \\
+&\assert{x^2+bx = (\sqrt{c + b^2/4} - b/2)^2 +b(\sqrt{c + b^2/4} - b/2) }  \\
+&\assert{x^2+bx = {c + b^2/4} - b\sqrt{c + b^2/4} +b^2/4 +b\sqrt{c + b^2/4} - b^2/2 }  \\
+&\assert{x^2+bx = c }  
+\end{align*}
+%
+Die oben benutzte Notation stammt von den sogenannten Hoare"=Tripeln,
+die nach den britischen Informatiker Charles Antony Richard Hoare
+benannt sind.
+
+Bevor wir uns näher mit ihnen beschäftigen, wollen wir die Syntax
+einer "`Mini"=Programmiersprache"' skizzieren, die wir in unseren
+Beispielen benutzen werden.
+%
+Als Schlüssenwörter werden wir \kw{if}, \kw{then}, \kw{else}, \kw{fi}
+\kw{while}, \kw{do}, \kw{od}, \kw{for} und \kw{to} benutzen, und als
+Symbol für die Zuweisung $\gets$.
+%
+Einige gängige Funktionen und Relationen werden wir mit den üblichen
+Symbolen bezeichnen, die auch immer auf die gewohnte Art und Weise zu
+interpretieren sind, wie etwa das "`$+$"' und das "`$\leq$"'.
+%
+Das gleiche gilt für Konstantensymbole wie etwa $0$ oder $1$.
+
+Zu den Produktionen der kontextfreien Grammatik, die im wesentlichen
+die Syntax unserer Sprache festlgegen soll, gehören unter anderem die
+folgenden:
+\begin{align*}
+  \#{Prog} \to &\;\#{Stmt} \\
+               &|\; \#{Stmt} \; \#{Prog} \\
+%               &|\; \#{Stmt} \; ; \; \#{Prog} \\
+  \#{Stmt} \to &\;\#{Var} \,\gets\, \#{Expr} \\
+               &|\; \kw{if } \#{Bool} \kw{ then } \#{Prog} \kw{ else } \#{Prog} \kw{ fi} \\
+               &|\; \kw{while } \#{Bool} \kw{ do } \#{Prog} \kw{ od} \\
+               &|\; \kw{for } \#{Var} \,\gets\, \#{Expr} \kw{ to } \#{Expr} \kw{ do } \#{Prog} \kw{ od}
+\end{align*}
+%
+Ein Programm soll also eine nichtleere Folge von Anweisungen
+(\emph{statements}) sein.
+%
+(Gelegentlich werden wir uns erlauben, zur Verdeutlichung Anweisungen
+durch Semikola zu trennen, obwohl die Grammatik das nicht erlaubt).
+%
+Mögliche Anweisungen sind Zuweisung, \kw{if}-Anweisung und
+\kw{while}- und \kw{for}"=Schleifen.
+%
+Produktionen für die Nichtterminalsymbole \#{Var}, \#{Expr} und
+\#{Bool} geben wir nicht an.
+%
+Aus \#{Var} sollen Variablennamen der üblichen Art ableitbar sein.
+%
+Aus \#{Expr} sollen "`Ausdrücke"' (\emph{expressions}) ableitbar sein;
+das sind die Gebilde, die wir in der Prädikatenlogik als Terme
+bezeichnet haben.
+%
+Dabei sind die Programmvariablen auch prädikatenlogische Variablen.
+%
+Und aus \#{Bool} sollen synatktische Einheiten ableitbar sein, denen
+man einen Wahrheitswert zuordnen kann, also Gebilde, die wir in der
+Prädikatenlogik als Formeln bezeichnet haben.
+
+Um die \emph{Bedeutung} solcher Programme (vor allem von
+\kw{while}"=Schleifen) in der üblichen Weise zu definieren, fehlen uns
+an dieser Stelle noch zu viele Grundlagen.
+%
+Wir beschränken uns daher auf einige Hinweise.
+%
+In jeder Variablen ist zu jedem Zeitpunkt ein Wert aus dem
+zugrundeliegenden Universum $D$ gespeichert.
+%
+Welches das ist, werden wir in jedem Fall explizit sagen.
+%
+Abhängig davon wird auch immer die Interpretation $I$ aller im
+Programm auftretenden Konstanten-, Funktions- und Relationssymbole
+klar sein.
+%
+Vor und nach der Ausführung jeder Zuweisung oder zusammengesetzten
+Anweisung liegt also ein Gesatmzustand des Speichers vor, der formal
+durch das beschrieben wird, was wir eine Variablenbelegung
+$\beta:\hbox{\textit{Var}} \to D$ genannt haben.
+%
+Der Zustand des Speichers kann sich nur durch die Ausführung einer
+Zuweisung $x\gets E$ mit $E\in\LTer$ ändern.
+%
+Liegt eine Variablenbelegung $\beta$ vor, dann soll sich durch
+Ausführung von $x\gets E$ die Variablenbelegung $\beta'$ ergeben mit
+\[
+  \beta' = \beta_x^{\mathrm{val}_{D,I,\beta}(E)} \;.
+\]
+Alle Variablen ungleich $x$ behalten also ihren Wert und der Wert von
+$x$ nach der Zuweisung ist gerade der Wert, der sich bei Auswertung
+von $E$ vor der Zuweisung ergibt.
+
+Was bei der Ausführung einer bedingten Anweisung \kw{if} $B$ \kw{then}
+$S_1$ \kw{else} $S_2$ \kw{fi} passiert, hängt vom Wahrheitswert der
+Formel $B$ am Anfang ab.
+%
+Ist $\valDIb(B)=\W$, dann "`wird $S_1$ ausgeführt"', die Bedeutung ist
+also die von $S_1$, und ist $\valDIb(B)=\F$, dann "`wird $S_2$
+ausgeführt"'.
+
+Bei einer Schleife \kw{while} $B$ \kw{do} $S$ \kw{od} müssen wir am
+ungenauesten bleiben.
+%
+Die Ausführung einer solchen Schleife bedeutet
+\begin{itemize}
+\item als erstes $\valDIb(B)$ zu bestimmen.
+  % 
+  Ergibt sich $\F$, dann ist die Ausführung der Schleife sofort
+  beendet und "`es passiert gar nichts"'.
+\item Ist $\valDIb(B)=\W$, dann wird einmal $S$ ausgeführt (was im
+  allgemeinen zu einer Änderung des Speicherzustands führt) und
+  anschließend wieder die gesamte Schleife.
+\end{itemize}
+%
+Eine Schleife der Form \kw{for} $x \gets E_1$ \kw{to} $E_2$ \kw{do}
+$S$ \kw{od} kann man als Abkürzung auf"|fassen für das Programmstück
+$x \gets E_1$; \kw{while} $x\leq E_2$ \kw{do} $S$; $x\gets x+1$
+\kw{od}.
+
+Jede Ausführung einer Anweisung führt dazu, dass aus einer
+Variablenbelegung $\beta$ vor der Ausführung eine Variablenbelegung
+$\beta'$ nach der Ausführung wird.
+%
+Bei der Ausführng zweier aufeinander folgender Anweisungen $S_1;S_2$
+ist das sich nach Ausführung von $S_1$ ergebende $\beta'$ die
+Variablenbelegung, von der für die Ausführung von $S_2$ ausgegangen
+wird.
+
+Damit kommen wir nun zum eigentlichen Thema dieses Abschnitts.
+%
+Ein \mdefine{Hoare"=Tripel}\index{Hoare-Tripel} hat die Form $\htr{P}{S}{Q}$
+für eine Anweisung oder Anweisungsfolge $S$ und zwei Aussagen $P$ und $Q$, die
+\mdefine{Zusicherungen}\index{Zusicherung} heißen.
+%
+Man nennt $P$ die \mdefine{Vorbedingung}\index{Vorbedingung!eines
+  Hoare-Tripels} und $Q$ die
+\mdefine{Nachbedingung}\index{Nachbedingung!eines Hoare-Tripels} des
+Hoare"=Tripels.
+%
+Zusicherungen machen Aussagen über Werte von Variablen und Ausdrücken und
+ihre Zusammenhänge. 
+%
+Im allgemeinen sind prädikatenlogische Formeln erlaubt.
+%
+Damit das Ganze sinnvoll wird, gehen wir davon aus, dass man auf der rechten
+Seite von Zuweisungen gerade solche Ausdrücke hinschreiben darf, die auch in
+der Prädikatenlogik erlaubt sind.
+
+Ein Hoare"=Tripel $\htr{P}{S}{Q}$ ist
+\mdefine{gültig}\index{Hoare-Tripel!gültig}\index{gültiges
+  Hoare-Tripel}, wenn für jede relevante Interpretation (siehe gleich)
+und jede Variablenbelegung $\beta$ gilt:
+
+Wenn vor der Ausführung $\valDIb(P)=\W$ ist und wenn die
+Ausführung von $S$ für $I$ und $\beta$ endet und hinterher
+Variablenbelegung $\beta'$ vorliegt, dann gilt am Ende
+$\val_{D,I,\beta'}(Q)=\W$.
+
+In den Zusicherungen werden wir auch Konstantensymbole verwenden, die
+\emph{keine} offensichtliche Interpretation haben, \zB ein $c$.
+%
+Wir wollen vereinbaren, dass es für die Gültigkeit eines
+Hoare"=Tripels notwendig ist, dass \emph{für alle} Interpretationen
+$I(c)$ dieser Symbole die oben genannte Forderung erfüllt ist.
+
+Die Beobachtung von Hoare war, dass man ein Kalkül (mit Axiomen und
+Ableitungsregeln analog zu dem, was wir sowohl bei der Aussagenlogik
+als auch bei der Prädikatenlogik gesehen haben) angeben kann, in dem
+man gerade alle gültigen Hoare"=Tripel ableiten kann.
+%
+Man spricht naheliegenderweise vom
+\mdefine{Hoare"=Kalkül}\index{Hoare-Kalkül}.
+
+Die \mdefine[Axiome für\\Hoare"=Kalkül]{Axiome}\index{Axiome!für Hoare-Kalkül}%
+\index{Hoare"=Kalkül!Axiome} betreffen die Zuweisungen.
+%
+Für jede Zuweisung $x\gets E$ (mit $E\in\LTer$) und jede Nachbedingung
+$Q$ mit der Eigenschaft, dass die Substitution $\sigma_{\{x/E\}}$
+kollisionsfrei für $Q$ ist, ist
+$\htr{\sigma_{\{x/E\}}(Q)}{x\gets E}{Q}$ ein Axiom.
+%
+Da man Axiome auch als Ableitungsregeln auf"|fassen kann, die keine
+Voraussetzungen haben, schreibt man manchmal auch
+
+\HT{A}: \quad \begin{tabular}{c}
+                \mbox{ } \\
+                \midrule
+                $\htr{\sigma_{\{x/E\}}(Q)}{x\gets E}{Q}$
+              \end{tabular}
+
+\noindent
+Wir nennen diese "`Regel"' \HT{A}, um mit dem $A$ an "`Axiom"' (oder
+\emph{assignment}) zu erinnern.
+%
+Es ist wichtig, dass $\sigma_{\{x/E\}}$ kollisionsfrei für $Q$ ist.
+%
+Andernfalls erhielte man für die Zuweisung $x\gets y$ und die
+(erfüllbare!) Nachbedingung $\exists y : x+1 \leq y$ als zugehörige
+Vorbedingung $\exists y : y+1 \leq y$.
+%
+So etwas will man offensichtlich nicht.
+%
+Berücksichtigt man die Einschränkung, dann ist es eine nicht sehr
+schwere Übung, sich klar zu machen, dass die Hoare"=Tripel der Form
+$\htr{\sigma_{\{x/E\}}(Q)}{x\gets E}{Q}$ tatsächlich gültig sind.
+%
+Versuchen Sie das als Übung.
+
+Außerdem sei eine Warnung ausgesprochen:
+%
+In der Literatur findet man an Stelle unserer Schreibweise
+$\sigma_{\{x/E\}}(Q)$ auch die Notationen $\htr{Q[E/x]}{x\gets E}{Q}$
+oder $\htr{[E/x]Q}{x\gets E}{Q}$ oder $\htr{Q[x/E]}{x\gets E}{Q}$.
+%
+Wie man sieht, ist Vorsicht geboten.
+%
+Nur die letzte Notationsmöglichkeit nutzen wir gelegentlich auch.
+
+Die beiden ersten "`echten"' Ableitungsregeln des Hoare"=Kalküls
+betreffen die Hintereinanderausführung von Programmstücken und die
+Möglichkeit die Vor- \bzw Nachbedingung eines Hoare"=Tripels in
+passender Weise abzuändern.
+
+Die Regel für die Hintereinanderausführung nennen wir \HT{S} und sie
+lautet:
+
+\HT{S}: \quad \begin{tabular}{c}
+                $\htr{P}{S_1}{Q}$ \qquad $\htr{Q}{S_2}{R}$ \\
+                \midrule
+                $\htr{P}{S_1;S_2}{R}$ 
+              \end{tabular}
+
+\noindent
+Nachrechnen ergibt, dass diese Regel die Gültigkeit von Hoare"=Tripeln
+erhält, \dh die Eigenschaft hat, dass aus der Gültigkeit der
+Hoare"=Tripel $\htr{P}{S_1}{Q}$ und $\htr{Q}{S_2}{R}$ auch die von
+$\htr{P}{S_1;S_2}{R}$ folgt.
+
+Als einfaches Beispiel wollen wir für die Anweisungsfolge
+$y \gets x; z \gets y$  zeigen, dass
+\[
+\htr{x=a}{y \gets x; z \gets y}{z=a}
+\]
+ein ableitbares, also gültiges, Hoare"=Tripel ist.
+%
+Da \HT{A} nahelegt, "`von hinten nach vorne"' vorzugehen, tun wir das
+auch:
+\begin{itemize}
+\item Als erstes besagt \HT{A}, dass $\htr{y=a}{z\gets y}{z=a}$ ableitbar ist.
+\item Weiter besagt wiederum \HT{A}, dass $\htr{x=a}{y\gets x}{y=a}$
+  ableitbar ist.
+\item Aus den beiden ersten Punkten ergibt sich mit \HT{S} die Ableitbarkeit von \\
+  $\htr{x=a}{y \gets x; z \gets y}{z=a}$.
+\end{itemize}
+
+Am Anfang sind Sie vielleicht versucht, statt \HT{A} ein Analogon zu
+finden, das "'von vorne nach hinten"' vorgeht.
+%
+Herumprobieren wird Sie aber hoffentlich sehr schnell zu der Einsicht
+bringen, dass es zwar leicht ist, zu gegebener Nachbedingung $Q$ die
+Vorbedingung $\sigma_{x/E}(Q)$ zu bestimmen, die umgekehrte Richtung
+aber in manchen Fällen völlig unklar.
+
+Wollte man \zB den Algorithmus von Al-Khwarizmi mit Hilfe von
+Hoare"=Tripeln verfizieren, würde man feststellen, dass noch ein
+Hilfsmittel fehlt, das es erlaubt, bei einem Hoare"=Tripel die
+Vorbedingung zu "`verstärken"' \bzw die Nachbedingung abzuschwächen.
+%
+Wir nennen diese Regel \HT{E}.
+%
+Sie lautet:
+%
+Unter der Voraussetzung, dass $P' \vdash P$ und $Q \vdash Q'$ gelten, ist
+
+\HT{E}: \quad \begin{tabular}{c}
+                $\htr{P}{S}{Q}$\\
+                \midrule
+                $\htr{P'}{S}{Q'}$
+              \end{tabular}
+
+Wir verifizieren nun mit Hilfe von Hoare"=Tripeln den Algorithmus von
+Al-Khwarizmi, schreiben das Ganze aber wieder ähnlich auf wie oben.
+%
+Um etwas Platz zu sparen, schreiben wir $\A$ als Abkürzung für die Aussage
+%
+\begin{quote}
+"`\emph{$\sqrt{c+(b/2)^2}$ ist definiert und $\sqrt{c+(b/2)^2}-b/2$ ist echt
+    größer $0$.}"'
+\end{quote}
+%
+In Abbildung~\ref{fig:verifikation:al-khwarizmi} sind die
+Zusicherungen in einer Reihenfolge durchnummeriert, in der man sie
+auch bestimmen kann.
+%
+Ausgehend von Zusicherung~1 ergeben sich die Zusicherungen~2 bis~6 der Reihe
+nach jeweils aus der vorhergehenden gemäß Regel \HT{A}.
+%
+Von Zusicherung~6 kommt man zu~7 und~8 durch Regel \HT{E}, indem man zu immer
+schwächeren  Vorbedingungen übergeht.
+%
+Analog kommt man mit \HT{E} von Zusicherung~1 letzten Endes zu~11, indem man zu
+immer stärkeren Nachbedingungen übergeht.
+%
+Die Zwischenschritte~7,~9 und~10 sind nicht nötig, aber helfen hoffentlich
+beim Verständnis.
+
+\begin{figure}[ht]
+  \begin{align*}
+    8&&&\assert{b>0 \land c>0} \\
+    7&&&\assert{\A} \\
+    6&&&\assert{\sqrt{c+(b/2)^2}-b/2 = \sqrt{c + b^2/4} - b/2 \land \A } \notag \\
+     &&&h <- b/2  \\
+    5&&&\assert{\sqrt{c+h^2}-h = \sqrt{c + b^2/4} - b/2 \land \A } \notag \\
+     &&&q <- h^2 \\
+    4&&&\assert{\sqrt{c+\smash[b]q}-h = \sqrt{c + b^2/4} - b/2  \land \A }  \notag \\
+     &&&s <- c+q \\
+    3&&&\assert{\sqrt{s}-h = \sqrt{c + b^2/4} - b/2 \land \A } \notag \\
+     &&&w <- \sqrt{s} \\
+    2&&&\assert{w-h = \sqrt{c + b^2/4} - b/2 \land \A} \notag \\
+     &&&x <- w-h   \\
+    1&&&\assert{ x = \sqrt{c + b^2/4} - b/2 \land \A } \notag  \\
+    9&&&\assert{ x^2+bx = (\sqrt{c + b^2/4} - b/2)^2 +b(\sqrt{c + b^2/4} - b/2) \land x>0} \notag \\
+    10&&&\assert{x^2+bx = {c + b^2/4} - b\sqrt{c + b^2/4} +b^2/4 +b\sqrt{c + b^2/4} - b^2/2 \land x>0} \notag \\
+    11&&&\assert{x^2+bx = c \land x>0} \notag 
+  \end{align*}
+  \caption{Verifikation des Algorithmus von von Al-Khwarizmi}
+  \label{fig:verifikation:al-khwarizmi}
+\end{figure}
+% 
+Damit hat man wegen der Regel \HT{S} insgesamt gezeigt, dass das Hoare"=Tripel
+\[
+\htr{b>0 \land c>0}{\hbox{"<Algorithmus von Al-Khwarizmi">}}{x^2+bx = c \land x>0}
+\]
+gültig ist.
+%
+Möglicherweise fragen Sie sich, wie man darauf kommt, ausgerechnet mit
+Zusicherung~1 anzufangen.
+%
+Da hilft viel Übung.
+%
+Im vorliegenden Fall hätten Sie aber auch noch einfach mit der untersten
+Zusicherung $x^2+bx = c \land x>0$ beginnen und sich dann nach oben
+durcharbeiten können.
+%
+(Es wäre aber mehr Schreibarbeit gewesen.)
+
+\begin{tutorium}
+  Die Studenten müssen sich erst mal dran gewöhnen, dass es sinnvoll ist, sich
+  irgendwelche Zusicherungen zu überlegen, die an gewissen Stellen im
+  Algorithmus gelten (sollen).
+\end{tutorium}
+
+Auch für bedingte Anweisungen und Schleifen gibt es Regeln für
+Hoare"=Tripel.
+%
+Für bedingte Anweisungen geht das so:
+
+\HT{I}: \quad \begin{tabular}{c}
+                $\htr{P \land B}{S_1}{Q}$ \qquad $\htr{P\land \lnot B}{S_2}{Q}$\\
+                \midrule
+                $\htr{P}{\kw{if } B \kw{ then } S_1 \kw{ else } S_2 \kw{ fi}}{Q}$ 
+              \end{tabular}
+
+\noindent 
+%
+In Anlehnung an das Vorangegangene kann man diese Regel auch so
+darstellen wie in Abbildung~\ref{fig:HTI}.
+%
+\begin{figure}[ht]
+  \centering
+  $\begin{alignedat}{2}
+    &\assert{P}  \\
+    &\kw{if } B  \\
+    &\kw{then } \\
+    &&&\assert{P \land  B} \\
+    &&& S_1  \\
+    &&&\assert{Q} \\
+    &\kw{else } \\
+    &&&\assert{P \land  \lnot B} \\
+    &&& S_2  \\
+    &&&\assert{Q} \\
+    &\kw{fi } \\
+    &\assert{Q}
+  \end{alignedat}$
+  % 
+  \caption{Die Regel \HT{I} für bedingte Anweisungen im Hoare"=Kalkül}
+  \label{fig:HTI}
+\end{figure}
+%
+Um festzustellen, dass das äußere Hoare"=Tripel gültig ist, muss man sich von
+der Gültigkeit der beiden inneren Hoare"=Tripel überzeugen.
+%
+%Der \emph{else}-Teil kann natürlich fehlen.
+
+Abbildung~\ref{fig:hoare-abs-x} zeigt ein einfaches Beispiel.
+%
+Die Vorbedingung $0=0$ ist immer wahr.
+%
+Deshalb besagt die Nachbedingung $x\geq 0$, dass sie \emph{immer} nach
+Ausführung der bedingten Anweisung wahr ist.
+%
+Die dazwischen eingefügten Zusicherungen ergeben sich zunächst durch
+\HT{I} und dann durch \HT{A}.
+%
+Bei zwei aufeinander folgenden Zusicherungen muss man sich klar
+machen, dass \HT{E} zutrifft.
+
+\begin{figure}[ht]
+  \centering
+  $\begin{alignedat}{2}
+    &\assert{0=0}  \\[-1mm]
+    &\kw{if } x<0 \\[-1mm]
+    &\kw{then } \\[-1mm]
+    &&&\assert{0=0 \land  x<0} \\[-1mm]
+    &&&\assert{-x \geq 0} \\[-1mm]
+    &&& x \gets -x  \\[-1mm]
+    &&&\assert{x\geq 0} \\[-1mm]
+    &\kw{else } \\[-1mm]
+    &&&\assert{0=0 \land  \lnot (x<0)} \\[-1mm]
+    &&&\assert{x \geq 0} \\[-1mm]
+    &&& x \gets x  \\[-1mm]
+    &&&\assert{x\geq 0} \\[-1mm]
+    &\kw{fi } \\[-1mm]
+    &\assert{x\geq 0}
+  \end{alignedat}$
+  % 
+  \caption{Verifikation einer einfachen bedingten Anweisung}
+  \label{fig:hoare-abs-x}
+\end{figure}
+
+\begin{tutorium}
+  Als Beispiel für die \emph{if}--\emph{then}--\emph{else} Regel fülle man
+  nach und nach aus:
+  \begin{alignat*}{2}
+    &\assert{x=a \land y=b}  \\
+    &\kw{if } x>y  \\
+    &\kw{then } \\
+    &&&\assert{ \dots\ } \\
+    &&& z \gets x  \\
+    &&&\assert{ \dots\ } \\
+    &\kw{else } \\
+    &&&\assert{ \dots\ } \\
+    &&& z \gets y  \\
+    &&&\assert{ \dots\ } \\
+    &\kw{fi } \\
+    &\assert{z=\min(a,b)}
+  \end{alignat*}
+
+  \begin{alignat*}{2}
+    &\assert{x=a \land y=b}  \\
+    &\kw{if } x>y  \\
+    &\kw{then } \\
+    &&&\assert{x=a \land y=b \land x>y} \\
+    &&&\assert{y=\min(a,b)} \\
+    &&& z \gets y  \\
+    &&&\assert{z=\min(a,b)} \\
+    &\kw{else } \\
+    &&&\assert{x=a \land y=b \land  \lnot (x>y)} \\
+    &&&\assert{x=\min(a,b)} \\
+    &&& z \gets x  \\
+    &&&\assert{z=\min(a,b)} \\
+    &\kw{fi } \\
+    &\assert{z=\min(a,b)}
+  \end{alignat*}
+\end{tutorium}
+
+Der schwierigste Fall ist der von Schleifen.
+%
+In der nachfolgenden Regel ist $I$ eine "`frei wählbare"' Zusicherung,
+eine sogenannte \mdefine{Schleifeninvariante}%
+\index{Schleifeninvariante}.
+
+\HT{W}: \quad \begin{tabular}{c}
+                $\htr{I \land B}{S}{I}$ \\
+                \midrule
+                $\htr{I}{\kw{while } B \kw{ do } S \kw{ od}}{I\land \lnot B}$
+              \end{tabular}
+              
+\noindent
+Um zu erläutern, was es mit dieser Regel auf sich hat, betrachten wir
+im nächsten Abschnitt einen einfachen Algorithmus zur Multiplikation
+zweier Zahlen.
+
+
+% -----------------------------------------------------------------------
+% \Tut\section{Wie geht es weiter?}
+
+% Wir wollen im Laufe der Vorlesung zum Beispiel sehen, wie man
+% zumindest in nicht allzu schwierigen Fällen \emph{allgemein} vorgehen
+% kann, um sich davon zu überzeugen, dass solche Folgen von Rechnungen
+% das richtige Ergebnis liefern.  Das gehört dann zum Thema
+% \emph{Verifikation} von Algorithmen.
+
+% Dafür benötigt man zumindest die folgenden "`Zutaten"':
+% %
+% \begin{itemize}
+% \item einen präzisen Algorithmenbegriff,
+% \item eine präzise Spezifikation des "`richtigen Verhaltens"' (bei
+%   uns meist der Zusammenhang zwischen gegebenen Eingaben und dazu
+%   gehörenden Ausgaben) und
+% \item präzise Methoden, um \zB zu beweisen, dass das Verhalten eines
+%   Algorithmus der Spezifikation genügt.
+% \item Dazu kommt in allen Fällen auch eine präzise Notation, die
+%   zumindest bei der Verarbeitung durch Rechner nötig ist.
+% \end{itemize}
+% %
+% In einigen der nachfolgenden Einheiten werden wir diese Punkte
+% aufgreifen und in  verschiedenen Richtungen weiter vertiefen.
+% %
+% \begin{itemize}
+% \item Präzisierungen des Algorithmenbegriffes gibt es viele, und Sie
+%   werden schon in diesem Semester mehrere kennenlernen:
+%   \begin{itemize}
+%   \item Im vorangegangenen Kapitel haben Sie schon (auf den Vorlesungsfolien,
+%     aber noch nicht im Skript) die \mima kennengelernt.
+%   \item Sie kennen inzwischen \zB Grundzüge einer Programmiersprache. Die ist
+%     praktisch, wenn man tatsächlich Algorithmen so aufschreiben will, dass sie
+%     ein Rechner ausführen können soll.
+%   \item Die ist aber andererseits unpraktisch, wenn man \zB beweisen will,
+%     dass ein bestimmtes Problem durch keinen Algorithmus gelöst werden kann.
+%     Dann sind einfachere Modelle wie zum Beispiel Turingmaschinen besser
+%     geeignet. Die werden wir in einem der letzten Kapitel behandeln.
+%   \end{itemize}
+% \item "`Ordentliche"' Notationen dafür, was "`das richtige Verhalten"' eines
+%   Algorithmus ist, gibt es viele. Logische Formeln eine gute Möglichkeit.
+% \item Im vorangegangenen Abshcnitt haben wir die Ansätze einer Methode
+%   kennengelernt, um zu beweisen, dass ein Algorithmus "`das Richtige tut"'.
+%   Das werden wir gleich noch weiter vertiefen.
+% \item Präzise Notationen sind nicht nur wichtig, um sich etwas
+%   sicherer sein zu können, keine Fehler gemacht zu haben. Sie sind
+%   auch unabdingbar, wenn man Aufgaben dem Rechner übertragen will. Und
+%   dazu gehören nicht nur "`Rechnungen"', sondern \zB auch
+%   \begin{itemize}
+%   \item die Analyse von Beschreibungen aller Art (\zB von Programmen
+%     oder Ein-/Ausgabe-Spezifikationen) auf syntaktische Korrektheit
+%   \item Beweise (etwa der Korrektheit von Algorithmen bezüglich
+%     spezifizierter Anforderungen).
+%   \end{itemize}
+% \end{itemize}
+
+% \begin{tutorium}
+%   zu diesem Abschnitt gibt es wohl nichts zu erklären
+% \end{tutorium}
+
+%-----------------------------------------------------------------------
+\Tut\section{Ein Algorithmus zur Multiplikation nichtnegativer ganzer Zahlen}
+
+Im Folgenden werden wieder die binären Operationen \kw{div} und
+\kw{mod} benutzt, die in Kapitel~\ref{k:codierungen} eingeführt
+wurden: 
+%
+Die Operation $\kw{mod}$ liefert für zwei Argumente $x$ und $y$ als
+Funktionswert $x\kw{\ mod\ }y$ den Rest der ganzzahligen Division von
+$x$ durch $y$. 
+%
+Und die Operation $\kw{div}$ liefere für zwei Argumente $x$ und $y$
+als Funktionswert $x\kw{\ div\ }y$ den Wert der ganzzahligen Division
+von $x$ durch $y$. 
+%
+Es gilt:
+\begin{equation}
+  x = y\cdot (x\kw{\ div\ }y) + (x\kw{\ mod\ }y)  
+  \text{\qquad und \qquad} 0 \leq (x\kw{\ mod\ }y) < y\label{eq:div-mod}
+\end{equation}
+%
+Der Algorithmus ist aif der linken Seite von Abbildung~\ref{alg:mult-ab} dargestellt.
+%
+\begin{figure}[ht]
+  \centering
+  $\begin{aligned}
+    & \assert{\text{Eingaben: } a, b\in\N_0} \\
+    & i <- 0 \\
+    & P <- 0 \\
+    & X <- a \\
+    & Y <- b \\
+    & \kw{while } X>0 \kw{\ do\ } \\[-1mm]
+    & \qquad i <- i+1 \\[-1mm]
+    & \qquad P <- P + (X\kw{ mod } 2) \cdot Y \\[-1mm]
+    & \qquad X <- X \kw{\ div\ } 2 \\[-1mm]
+    & \qquad Y <- 2\cdot Y \\[-1mm]
+    & \kw{od\ } \\[-1mm]
+  \end{aligned}$
+  \hspace*{15mm}
+  \begin{tabular}{>{$}l<{$}*{3}{>{$}r<{$}}}
+    \toprule
+    & P_i & X_i & Y_i  \\
+    \midrule
+    i=0 &  0 & 6 &  9  \\
+    i=1 &  0 & 3 & 18  \\
+    i=2 & 18 & 1 & 36  \\
+    i=3 & 54 & 0 & 72  \\
+    \bottomrule
+  \end{tabular}
+  % 
+  \caption{Ein einfacher Algorithmus für die Multiplikation zweier
+    nichtnegativer ganzer Zahlen Zahlen $a$ und $b$.}
+  \label{alg:mult-ab}
+\end{figure}
+
+Machen wir eine Beispielrechnung für den Fall $a=6$ und $b=9$. 
+%
+In der Tabelle auf der rechten Seite von Abbildung~\ref{alg:mult-ab}
+ist in jeweils einer Zeile die Werte angegeben, die den Variablen $P$,
+$X$ und $Y$ jeweils zugewiesen werden, wenn Variable $i$ einen
+bestimmten Wert hat.
+%
+Um besser argumentieren zu können, schreiben wir \zB $P_i$ für den
+Wert, der $P$ zugewiesen wird, wenn ein gewisser Wert von $i$
+vorliegt; es handelt sich sozusagen um den Wert "`nach $i$
+Schleifendurchläufen"'.
+%
+(Die Variable $i$ ist nur für diese Erläuterungen eingeführt; für das
+eigentliche Ergebnis des Algorithmus ist sie nicht notwendig.)
+%
+Am Ende ist $X=0$, die Schleife endet und man erhält in $P$ den Wert
+$54$.
+%
+Das ist das Produkt der Eingabewerte $6$ und $9$.
+%
+\begin{tutorium}
+  \noindent\textbf{Annäherung an Schleifeninvarianten}
+  
+  dafür finde ich Tabellen wie etwa der folgenden Form extrem hilfreich
+
+  \begin{tabular}{>{$}l<{$}*{3}{>{$}r<{$}}}
+    \toprule
+    & P_i & X_i & Y_i  \\
+    \midrule
+    i=0 &  0 & 6 &  9  \\
+    i=1 &  0 & 3 & 18  \\
+    i=2 & 18 & 1 & 36  \\
+    i=3 & 54 & 0 & 72  \\
+    \bottomrule
+  \end{tabular}
+\end{tutorium}
+% 
+Im folgenden wollen wir beweisen, dass für den Grundbereich $D=\N_0$,
+und daher vereinbarungsgemäß für alle $I(a),I(b)\in\N_0$, der
+Algorithmus mit der Vorbedingung $\{0=0\}$ und der Nachbedingung
+$\{P=a\cdot b\}$ ein gültiges Hoare"=Tripel ist.
+ 
+Um Regel \HT{W} anwenden zu können. benötigen wir eine
+Schleifeninvariante $I$ dergestalt, dass 
+
+\begin{align*}
+  & \assert{0=0} \\[-1mm]
+  & i <- 0 \\[-1mm]
+  & X <- a \\[-1mm]
+  & Y <- b \\[-1mm]
+  & P <- 0 \\[-1mm]
+  & \assert{I} \\[-1mm] %X\cdot Y +P = a\cdot b} \\[-1mm]
+  & \kw{while } X>0 \kw{\ do\ } \\[-1mm]
+  & \qquad \assert{I \land B} \\[-1mm]
+  & \qquad i <- i+1 \\[-1mm]
+  & \qquad P <- P + (X \kw{\ mod\ } 2) \cdot Y \\[-1mm]
+  & \qquad X <- X \kw{\ div\ } 2 \\[-1mm]
+  & \qquad Y <- 2\cdot Y \\[-1mm]
+  & \qquad \assert{I} \\[-1mm]
+  & \kw{od} \\[-1mm]
+  & \assert{I \land \lnot B} \\[-1mm]
+  & \assert{P=a\cdot b}
+\end{align*}
+%
+zu einem vollständigen Beweis ergänzt werden kann.
+%
+Nützliche Schleifennvarianten zu finden, ist nicht leicht.
+%
+(Nicht hilfreich ist \zB die Aussage $2\cdot 2 = 4$.)
+%
+Mitunter hilft eine Tabelle wie in Abbildung~\ref{alg:mult-ab}.
+%
+Hinreichend langes Hinsehen führt zu der Einsicht, dass die Formel
+$X\cdot Y + P = a\cdot b$ jedenfalls eine Schleifeninvariante zu sein
+scheint.
+%
+Das ist tatsächlich so, wie man in Abbildung~\ref{fig:mult-invariante}
+sieht.
+%
+\begin{figure}[ht]
+  \centering
+
+  $\begin{aligned}
+    & \assert{0=0} \\[-1mm]
+    & i <- 0 \\[-1mm]
+    & X <- a \\[-1mm]
+    & Y <- b \\[-1mm]
+    & P <- 0 \\[-1mm]
+    & \assert{X\cdot Y +P = a\cdot b} \\[-1mm] %X\cdot Y +P = a\cdot b} \\[-1mm]
+    & \kw{while } X>0 \kw{\ do\ } \\[-1mm]
+    & \qquad \assert{X\cdot Y +P = a\cdot b \land X>0} \\[-1mm]
+    & \qquad \assert{(X\kw{ div }2)\cdot (2Y) +P + (X \kw{\ mod\ } 2) \cdot Y = a\cdot b} \\[-1mm]
+    & \qquad  i <- i+1 \\[-1mm]
+    & \qquad \assert{(X\kw{ div }2)\cdot (2Y) +P + (X \kw{\ mod\ } 2) \cdot Y = a\cdot b} \\[-1mm]
+    & \qquad  P <- P + (X \kw{\ mod\ } 2) \cdot Y \\[-1mm]
+    & \qquad \assert{(X\kw{ div }2)\cdot (2Y) +P = a\cdot b} \\[-1mm]
+    & \qquad  X <- X \kw{\ div\ } 2 \\[-1mm]
+    & \qquad \assert{X\cdot (2Y) +P = a\cdot b} \\[-1mm]
+    & \qquad  Y <- 2\cdot Y \\[-1mm]
+    & \qquad \assert{X\cdot Y +P = a\cdot b} \\[-1mm]
+    & \kw{od} \\[-1mm]
+    & \assert{X\cdot Y +P = a\cdot b \land \lnot (X>0)} \\[-1mm]
+    & \assert{P=a\cdot b}
+  \end{aligned}$ 
+  %
+  \caption{Die wesentlichen Zusicherungen für die Verifikation des
+    Multiplikationsalgorithmus}
+  \label{fig:mult-invariante}
+\end{figure}
+% \begin{figure}[ht]
+%   \centering
+%
+%   $\begin{aligned}
+%     & \assert{0=0} \\[-1mm]
+%     & i <- 0 \\[-1mm]
+%     & X <- a \\[-1mm]
+%     & Y <- b \\[-1mm]
+%     & P <- 0 \\[-1mm]
+%     & \assert{X\cdot Y +P = a\cdot b} \\[-1mm] %X\cdot Y +P = a\cdot b} \\[-1mm]
+%     & \kw{while } X>0 \kw{\ do\ } \\[-1mm]
+%     & \qquad\tikzmark{ll}\raisebox{2ex}{\tikzmark{ul}} \\[-1mm]
+%     & \kw{od} \\[-1mm]
+%     & \assert{X\cdot Y +P = a\cdot b \land \lnot (X>0)} \\[-1mm]
+%     & \assert{P=a\cdot b}
+%   \end{aligned}$ 
+%   \hfill  
+%   $\begin{aligned}
+%     & \raisebox{2ex}{\tikzmark{ur}}\assert{X\cdot Y +P = a\cdot b \land X>0} \\[-1mm]
+%     & \assert{(X\kw{ div }2)\cdot (2Y) +P + (X \kw{\ mod\ } 2) \cdot Y = a\cdot b} \\[-1mm]
+%     &  i <- i+1 \\[-1mm]
+%     & \assert{(X\kw{ div }2)\cdot (2Y) +P + (X \kw{\ mod\ } 2) \cdot Y = a\cdot b} \\[-1mm]
+%     &  P <- P + (X \kw{\ mod\ } 2) \cdot Y \\[-1mm]
+%     & \assert{(X\kw{ div }2)\cdot (2Y) +P = a\cdot b} \\[-1mm]
+%     &  X <- X \kw{\ div\ } 2 \\[-1mm]
+%     & \assert{X\cdot (2Y) +P = a\cdot b} \\[-1mm]
+%     &  Y <- 2\cdot Y \\[-1mm]
+%     % & \assert{X\cdot Y +P = a\cdot b} \\[-1mm]
+%     % &  x <- X \kw{\ mod\ } 2 \\[-1mm]
+%     &  \raisebox{-0.8ex}{\tikzmark{lr}}\assert{X\cdot Y +P = a\cdot b} \\[-1mm]
+%   \end{aligned}$
+%   \tikz[remember picture,rounded corners] {
+%     \draw[overlay] (pic cs:ur) -- ++(-3mm,0) |- (pic cs:ul);
+%     \draw[overlay] (pic cs:lr) -- ++(-3mm,0) |- (pic cs:ll);
+%     \draw[overlay] (pic cs:ul) -- ++(0.7mm,0.7mm);
+%     \draw[overlay] (pic cs:ll) -- ++(0.7mm,-0.7mm);
+%     \draw[overlay,rounded corners=0mm] (pic cs:ul) -- ++(-1ex,-1ex) -- (pic cs:ll);
+%   }
+%   %
+%   \caption{}
+%   \label{fig:mult-invariante}
+% \end{figure}
+
+Für den Übergang von der ersten zur zweiten Zusicherung im
+Schleifenrumpf ist die Gleichung~\ref{eq:div-mod} nützlich.
+%
+Für den Übergang von der vorletzten zur letzten Zusicherung ist
+wichtig, dass als Grundbereich $\N_0$ angenommen wurde.
+%
+Dass die ersten vier Zuweisungen immer die Gültigkeit der Invariante
+vor dem ersten Betreten der Schleife sicherstellen, können Sie
+inzwischen leicht selbst überprüfen.
+
+%  hinarbeiten, der zeigt, dass
+% das immer so ist: Unter den Voraussetzungen, die zu Beginn zugesichert
+% werden enthält nach Beendigung des Algorithmus das zuletzt
+% ausgerechnete $P_3$ den Wert $P_3 = a\cdot b$.  Wie geht das?
+
+% Da $P_3$ unter anderem mit Hilfe von $P_2$ ausgerechnet wird, ist es
+% vermutlich hilfreich auch etwas darüber zu wissen; und über $P_1$
+% auch, \usw Analog sollte man am besten etwas über alle $x_i$ wissen
+% sowie über alle $X_i$ und $Y_i$.
+
+% Angenommen, uns gelingt es, "`etwas Passendes"' hinzuschreiben, \dh
+% eine logische Formel, die eine Aussage $\A_i$ über die
+% interessierenden Werte $P_i$, $x_i$, $X_i$ und $Y_i$ macht. Was dann?
+% Sie ahnen es vermutlich: vollständige Induktion.
+
+% Induktionsbeweise sind am Anfang nicht immer ganz leicht. Aber hier
+%  stehen wir vor einem weiteren Problem: Wir müssen erst einmal Aussagen
+% $\A_i$ finden, die wir erstens beweisen können, und die uns zweitens
+% zum gewünschten Ziel führen.  Passende Aussagen zu finden ist nicht
+% immer ganz einfach und Übung ist sehr(!)  hilfreich. Hinweise kann man
+% aber oft durch Betrachten von Wertetabellen wie weiter vorne angegeben
+% finden. Im vorliegenden Fall liefert ein bisschen Herumspielen
+% irgendwann die Beobachtung, dass jedenfalls im Beispiel für jedes
+% $i\in\G_4$ die folgende Aussage wahr ist:
+% \[
+% \text{für jedes }  i\in\G_4: X_i\cdot Y_i + P_i = a\cdot b
+% \]
+% Das formen wir noch in eine Aussage für alle nichtnegativen ganzen
+% Zahlen um:
+% \[
+% \text{für jedes }  i\in\N_0 : i<4 ==> X_i\cdot Y_i + P_i = a\cdot b
+% \]
+% Wir beweisen nun also durch vollständige Induktion die Formel
+% $\text{für jedes }  i\in\N_0: \A_i$, wobei $\A_i$ die Aussage ist:
+% \[ 
+% i<4 ==> X_i\cdot Y_i + P_i = a\cdot b \;.
+% \]
+
+% \begin{description}
+% \item[Induktionsanfang $i=0$:] Aufgrund der Initialisierungen der
+%   Variablen ist klar: $X_0Y_0+P_0 = ab+0=ab$.
+% \item[Induktionsvoraussetzung:] für ein beliebiges aber festes $i$
+%   gelte:\\
+%   $i<4 ==> X_i\cdot Y_i + P_i = a\cdot b$.
+% \item[Induktionsschluss:] zu zeigen ist nun: \\
+%   $i+1<4 ==> X_{i+1}\cdot Y_{i+1} + P_{i+1} = a\cdot b$.
+
+%   Sei also $i+1<4$ (andernfalls ist die Implikation ohnehin
+%   wahr). Dann ist auch $i<4$ und nach Induktionsvoraussetzung gilt:
+%   $X_i\cdot Y_i + P_i = a\cdot b$.
+
+%   Wir rechnen nun:
+%   \begin{align*}
+%     X_{i+1}\cdot Y_{i+1} + P_{i+1} &= (X_i\kw{\ div\ } 2)\cdot 2 Y_i + P_i + x_iY_i \\
+%     &= (X_i\kw{\ div\ } 2)\cdot 2 Y_i + P_i + (X_i \kw{\ mod\ }2)Y_i \\
+%     &= (2(X_i\kw{\ div\ } 2) + (X_i \kw{\ mod\ }2)) Y_i + P_i \\
+%     &= X_i Y_i + P_i \\
+%     &= ab \;.
+%   \end{align*}
+%   % 
+%   Dabei gelten die beiden ersten Gleichheiten wegen der
+%   Zuweisungen im Algorithmus, die vierte wegen
+%   Gleichung~\ref{eq:div-mod} und die letzte nach
+%   Induktionsvoraussetzung.
+% \end{description}
+% %
+% Wissen wir nun, dass am Ende des Algorithmus $P=ab$ ist?
+% Offensichtlich noch nicht: Wir haben bisher nur bewiesen, dass nach
+% der letzten Anweisung gilt: $P_3+X_3Y_3 = ab$. Der weiter vorne
+% angegebenen Wertetabelle entnimmt man, dass jedenfalls in der
+% Beispielrechnung am Ende $X_3=0$ gilt. Wenn es gelingt zu beweisen,
+% dass auch das für \emph{alle} Eingaben $a\in\G_8$ und $b\in\N_0$ gilt,
+% dann sind wir fertig. Wie beweist man das? Wie Sie sich vielleicht
+% schon bewusst gemacht haben, werden die $X_i$ der Reihe nach immer
+% kleiner. Und zwar immer um mindestens die Hälfte, denn $X_i\kw{\ div\
+% }2 \leq X_i/2$. Mit anderen Worten:
+% %
+% \begin{align*}
+%   X_0 &\leq a  \\
+%   X_1 &\leq X_0/2 \leq a/2 \\
+%   X_2 &\leq X_1/2 \leq a/4 \\
+%   &\vdots
+% \end{align*}
+% %
+% Ein Induktionsbeweis, der so einfach ist, dass wir ihn hier schon
+% nicht mehr im Detail durchführen müssen, zeigt: $\text{für jedes }  i\in\N_0:
+% i<4 ==> X_i\leq a/2^i$. Insbesondere ist also $X_2\leq a/4$. Nun ist aber nach
+% Voraussetzung $a<8$, und folglich $X_2<8/4 =2$. Da $X_2$ eine ganze
+% Zahl ist, ist $X_2\leq 1$. Und daher ist das zuletzt berechnete
+% $X_3=X_2\kw{\ div\ }2 =0$.
+
+%-----------------------------------------------------------------------
+%\Tut\section{Der Algorithmus zur Multiplikation nichtnegativer ganzer Zahlen mit einer Schleife}
+
+% \begin{tutorium}
+%   Da in Programmieren noch keine Schleifen dran waren, führen wir
+%   \kw{for}-Schleifen als Abkürzungen für mehrfach wiederholten
+%   Programmtext ein.
+% \end{tutorium}
+%
+% Nun schreiben wir als den Algorithmus mit Hilfe einer \kw{for}-Schleife auf.
+%
+% \begin{tutorium}
+%   Das Weglassen der Indizes in Abbildung~\ref{alg:mult-3bit-2} bei den
+%   Variablen macht hoffentlich keine großen Probleme. Das ist aber nur
+%   wichtig, wenn man auf das Wort Schleifen\emph{invariante} hinaus
+%   will. Ansonsten kann man die Indizes auch einfach stehen lassen.
+% \end{tutorium}
+% %
+% \begin{figure}[ht]
+%   \begin{align*}
+%     & \assert{\text{Eingaben: } a\in\G_8, b\in\N_0} \\
+%     & X <- a \\
+%     & Y <- b \\
+%     & P <- 0 \\
+%     & x <- X \kw{\ mod\ } 2 \\
+%     & \assert{\text{--- Algorithmusstelle --- } i=0} \\
+%     & P <- P + x \cdot Y \\
+%     & X <- X \kw{\ div\ } 2 \\
+%     & Y <- 2\cdot Y \\
+%     & x <- X \kw{\ mod\ } 2 \\
+%     & \assert{\text{--- Algorithmusstelle --- } i=1} \\
+%     & P <- P + x\cdot Y \\
+%     & X <- X \kw{\ div\ } 2 \\
+%     & Y <- 2\cdot Y \\
+%     & x <- X \kw{\ mod\ } 2 \\
+%     & \assert{\text{--- Algorithmusstelle --- } i=2} \\
+%     & P <- P + x\cdot Y \\
+%     & X <- X \kw{\ div\ } 2 \\
+%     & Y <- 2\cdot Y \\
+%     & x <- X \kw{\ mod\ } 2 \\
+%     & \assert{\text{--- Algorithmusstelle --- } i=3} 
+%   \end{align*}
+%   %
+%   \caption{Vereinfachter Darstellung des Algorithmus aus
+%     Abbildung~\ref{alg:mult-3bit}.}
+%   \label{alg:mult-3bit-2}
+% \end{figure}
+%
+% Nun hat man dreimal genau den gleichen Algorithmustext
+% hintereinander. Dafür führen wir als Abkürzung eine \mdefine{Schleife}
+% ein, genauer gesagt eine sogenannte \kw{for}-Schleife.  Generell
+% schreiben wir das in der folgenden Struktur auf:
+% Dafür wollen wir folgende Pseudocode"=Notation verwenden:
+% %
+% \begin{align*}
+%   & \kw{for\ } @c{Schleifenvariable} <- @c{Startwert} \kw{\ to\ } @c{Endwert} \kw{\ do\ } \\
+%   & \qquad @c{sogenannter Schleifenrumpf, der} \\
+%   & \qquad @c{aus mehreren Anweisungen bestehen darf} \\
+%   & \kw{od\ } 
+% \end{align*}
+% %
+% Die Bedeutung soll sein, dass der Schleifenrumpf nacheinander für
+% jeden Wert der @c{Schleifenvariable} durchlaufen wird: als erstes für
+% den @c{Startwert}. Bei jedem weiteren Durchlauf werde die
+% @c{Schleifenvariable} um $1$ erhöht. Der letzte Durchlauf finde für
+% den @c{Endwert} statt.  Außerdem wollen wir vereinbaren, dass der
+% Schleifenrumpf überhaupt nicht durchlaufen werde, falls der angegebene
+% @c{Endwert} echt kleiner ist als der @c{Anfangswert}.
+
+% Abbildung~\ref{alg:mult-3bit-schleife} zeigt, was sich in unserem
+% Beispiel ergibt. Es ist ein besonders einfacher Fall, in dem der
+% Schleifenrumpf gar nicht die Schleifenvariable (hier $i$) benutzt. Im
+% allgemeinen soll das aber erlaubt sein.
+
+% \begin{figure}[ht]
+%   \begin{align*}
+%     & \assert{\text{Eingaben: } a\in\G_8, b\in\N_0} \\
+%     & X <- a \\
+%     & Y <- b \\
+%     & P <- 0 \\
+%     & x <- X \kw{\ mod\ } 2 \\
+%     & \kw{for\ } i <- 0 \kw{\ to\ } 2 \kw{\ do\ } \\
+%     & \qquad \assert{\text{--- Algorithmusstelle --- } i} \\
+%     & \qquad P <- P + x \cdot Y \\
+%     & \qquad X <- X \kw{\ div\ } 2 \\
+%     & \qquad Y <- 2\cdot Y \\
+%     & \qquad x <- X \kw{\ mod\ } 2 \\
+%     & \qquad \assert{\text{--- Algorithmusstelle --- } i+1} \\
+%     & \kw{od\ } \\
+%     & \assert{\text{Ergebnis: } P=a\cdot b}
+%   \end{align*}
+%   %
+%   \caption{Multiplikationsalgorithmus mit einer Schleife für
+%     größenbeschränkten Faktor $a$.}
+%   \label{alg:mult-3bit-schleife}
+% \end{figure}
+% %
+% Wir haben am Ende des Algorithmus noch die inzwischen bewiesene
+% Zusicherung $P=ab$ notiert.
+% %
+% \begin{tutorium}
+%   Hier ist noch ein einfaches Beispiel:
+
+%   \begin{minipage}{0.4\textwidth}
+%     \begin{align*}
+%       & \assert{\text{Eingaben: } a, b\in\N_0} \\
+%       & S_0 <- a \\
+%       & Y_0 <- b \\
+%       & \kw{for\ } i <- 0 \kw{\ to\ } b-1 \kw{\ do\ } \\
+%       & \qquad \assert{S_i+Y_i=a+b} \\
+%       & \qquad S_{i+1} <- S_i + 1 \\
+%       & \qquad \assert{S_{i+1}+Y_i-1=a+b} \\
+%       & \qquad Y_{i+1} <- Y_i - 1 \\
+%       & \qquad \assert{S_{i+1}+Y_{i+1}=a+b} \\
+%       & \kw{od\ } \\
+%       & \assert{\text{Ergebnis: } S_b=a + b}
+%     \end{align*}
+%   \end{minipage}
+% \qquad \bzw \qquad
+%   \begin{minipage}{0.4\textwidth}
+%     \begin{align*}
+%       & \assert{\text{Eingaben: } a, b\in\N_0} \\
+%       & S <- a \\
+%       & Y <- b \\
+%       & \kw{for\ } i <- 0 \kw{\ to\ } b-1 \kw{\ do\ } \\
+%       & \qquad \assert{S+Y=a+b} \\
+%       & \qquad S <- S + 1 \\
+%       & \qquad \assert{S+Y-1=a+b} \\
+%       & \qquad Y <- Y - 1 \\
+%       & \qquad \assert{S+Y=a+b} \\
+%       & \kw{od\ } \\
+%       & \assert{\text{Ergebnis: } S=a + b}
+%     \end{align*}
+%   \end{minipage}
+  
+%   Die Tabelle sieht dann zum Beispiel für den Fall $a=6$ und $b=4$ so aus
+%   \begin{center}
+%     \begin{tabular}{*{5}{>{$}r<{$}}}
+%       \toprule
+%       & S_i & Y_i  \\
+%       \midrule
+%       i=0 &  6 & 4    \\
+%       i=1 &  7 & 3    \\
+%       i=2 &  8 & 2    \\
+%       i=3 &  9 & 1    \\
+%       i=4 & 10 & 0    \\
+%       \bottomrule
+%     \end{tabular}
+%   \end{center}
+%   "`Wie man sieht"' gilt für alle $i\in \N_0$: $i\leq b ==> S_i+Y_i=a+b$
+% \end{tutorium}
+% %
+
+% Interessant ist es nun, sich noch einmal klar zu machen, was nach dem
+% Entfernen der Indizes aus den Aussagen $\A_i\equiv P_i+X_iY_i=ab$
+% wird: Alle sehen gleich aus: $P+XY=ab$. Inhaltlich war $\A_i$ aber eine
+% Aussage darüber, was "`an Algorithmusstelle $i$"' gilt, also wie wir
+% nun sagen können, nach $i$ Schleifendurchläufen \bzw vor dem $i+1$-ten
+% Schleifendurchlauf. Wir hatten bewiesen, dass aus der Gültigkeit von
+% $\A_i$ die von $\A_{i+1}$ folgt. Nach dem Entfernen der Indizes sind
+% aber $\A_i$ und $\A_{i+1}$ identisch. Wir haben also gezeigt:
+% %
+% \begin{quote}
+%   Wenn die Aussage $P+XY=ab$ vor dem einmaligen Durchlaufen des
+%   Schleifenrumpfes gilt, dann gilt sie auch hinterher wieder.
+% \end{quote}
+% %
+% Man sagt auch, dass diese Aussage eine \mdefine{Schleifeninvariante}%
+% \index{Schleifeninvariante} ist.
+
+% Der Induktionsanfang war nichts anderes als der Nachweis, dass die
+% Schleifeninvariante vor dem ersten Betreten der Schleife stets gilt.
+% Der Induktionsschritt war der Nachweis, dass die Wahrheit der
+% Schleifeninvariante bei jedem Durchlauf erhalten bleibt.
+
+% Wenn also die Schleife jemals zu einem Ende kommt (und etwas anderes
+% ist bei einer \kw{for}-Schleife wie eben beschrieben gar nicht
+% möglich), dann gilt die Schleifeninvariante auch zum Schluss.
+
+% Zum Abschluss wollen wir den Algorithmus nun noch so verallgemeinern,
+% dass er für alle $a\in\N_0$ funktioniert und nicht nur für Zahlen
+% kleiner als $8$. Wenn man sich die obigen Beweise alle noch einmal
+% ansieht, stellt man fest, dass die Bedingung $a<8$ nur an einer Stelle
+% verwendet wurde, nämlich beim Nachweis, dass $X_3=0$ ist.
+
+% Für einen Anfangswert von \zB $4711$ ist man natürlich nach drei
+% Schleifendurchläufen noch nicht bei $0$. 
+% %
+% Damit man für größere Anfangswerte "`irgendwann"' bei $0$ angelangt,
+% muss man öfter den Wert $X_i$ halbieren. 
+% %
+% Es ist also eine größere Anzahl $n$ von Schleifendurchläufen
+% notwendig. 
+% %
+% Wieviele es sind, sieht man an der schon besprochenen Ungleichung
+% $X_i\leq a/2^i$. 
+% %
+% Man ist fertig, wenn vor dem letzten Durchlauf gilt: $X_{n-1}\leq
+% 1$.
+% %
+% Das ist sicher richtig, wenn $a/2^{n-1}\leq 1$ ist, also
+% $a\leq 2^{n-1}$. 
+% %
+% Im Fall $a>0$ gilt das, wenn $n-1\geq \log_2 a$. 
+% %
+% Im Fall $a=0$ ist $a\leq 2^{n-1}$ auch immer wahr. 
+% %
+% Um diese Fallunterscheidung nicht immer aufschreiben zu müssen,
+% vereinbaren wir: $\log_2 0 =0$.
+% %
+% Insgesamt ergibt sich der in Abbildung~\ref{alg:mult-schleife}
+% dargestellte Algorithmus.
+
+% \begin{figure}[ht]
+%   \begin{align*}
+%     & \assert{\text{Eingaben: } a\in\N_0, b\in\N_0} \\
+%     & X <- a \\
+%     & Y <- b \\
+%     & P <- 0 \\
+%     & x <- X \kw{\ mod\ } 2 \\
+%     & n <- 1+\lceil \log_2 a\rceil \\
+%     & \kw{for\ } i <- 0 \kw{\ to\ } n-1 \kw{\ do\ } \\
+%     & \qquad P <- P + x \cdot Y \\
+%     & \qquad X <- X \kw{\ div\ } 2 \\
+%     & \qquad Y <- 2\cdot Y \\
+%     & \qquad x <- X \kw{\ mod\ } 2 \\
+%     & \kw{od\ } \\
+%     & \assert{\text{Ergebnis: } P=a\cdot b}
+%   \end{align*}
+%   %
+%   \caption{Algorithmus zu Multiplikation beliebiger nichtnegativer
+%     ganzer Zahlen.}
+%   \label{alg:mult-schleife}
+% \end{figure}
+
+% \begin{tutorium}
+%   Zum Üben kann man auch gut die Aufgaben von Übungsblatt 3 des Jahres
+%   2008 benutzen. Siehe
+%   \url{http://gbi08.ira.uka.de/uebung/blatt-3-aufgaben.pdf} und
+%   \url{http://gbi08.ira.uka.de/uebung/blatt-3-loesungen.pdf}
+% \end{tutorium}
+
+% Damit können wir nun auch noch eine Regel angeben, die es erlaubt,
+% gültige Hoare"=Tripel zu bekommen, wenn Schleifen im Spiel sind. 
+% %
+% Der Einfachheit halber beschränken wir uns im folgenden auf
+% \kw{while}-Schleifen.
+
+% \begin{description}
+% \item[\HT5:] Es sei $\kw{while } B \kw{ do } S \kw{ od}$ eine Schleife
+%   mit "<Bedingung"> $B$ und einem Schleifenrumpf $S$. 
+%   %
+%   Wenn $I$ eine Zusicherung ist, für die das Hoare"=Tripel
+%   $\htr{I \land B}{S}{I}$ gültig ist, dann ist auch
+%   $\htr{I}{\kw{while } B \kw{ do } S \kw{ od}}{I\land \lnot B}$
+%   gültig.
+%   %
+%   Die Zusicherung $I$ heißt auch
+%   \mdefine{Schleifeninvariante}\index{Schleifeninvariante}.
+% \end{description}
+% %
+% Eine schematische Darstellung findet sich in Abbildung~\ref{fig:hoare-while}.
+
+% \begin{figure}[ht]
+%   \centering
+%   \begin{alignat*}{2}
+%     &\assert{I}  \\
+%     &\kw{while } B  \\
+%     &\kw{do} \\
+%     &&&\assert{I \land  B} \\
+%     &&& S  \\
+%     &&&\assert{I} \\
+%     &\kw{id } \\
+%     &\assert{I \land \lnot B}
+%   \end{alignat*}
+%   %
+%   \caption{Zur Verifikation von \kw{while}-Schleifen mit dem Hoare-Kalkül}
+%   \label{fig:hoare-while}
+% \end{figure}
+% % 
+
+\begin{tutorium}
+  \paragraph{Verifikation einer \kw{while}-Schleife}
+
+  Grundbereich sei $\Z$
+  % 
+  \begin{align*}
+    &\assert{x=a \land y=b}  \\
+    &\assert{ \dots\ } \\
+    &\kw{while } y\not=0  \\
+    &\kw{do } \\
+    &\qquad\assert{ \dots } \\
+    &\qquad y \gets y-1 \\
+    &\qquad\assert{ \dots } \\
+    &\qquad x \gets x+1 \\
+    &\qquad\assert{ \dots\ } \\
+    &\kw{od } \\
+    &\assert{ \dots\ } \\
+    &\assert{x=a+b} \\
+  \end{align*}
+  % 
+  Herumspielen und -phantasieren ("<jeden Ball aus Eimer $y$ nehmen und
+  in Eimer $x$ stecken">) führt (hoffentlich) zu
+  \[
+  x+y = a+b 
+  \]
+  als Schleifeninvariante $I$
+
+  Setzt man $I$ in unser Schema ein und wenden im Schleifenrumpf \HT{A}
+  an, so ergibt sich:
+  % 
+  \begin{align*}
+    &\assert{x=a \land y=b }  \\
+    &\assert{x+y=a+b }  \\
+    &\kw{while } y\not=0  \\
+    &\kw{do } \\
+    &\qquad\assert{x+y=a+b \land y\not=0 }  \\
+    &\qquad\assert{x+1+y-1=a+b } \\
+    &\qquad y \gets y-1 \\
+    &\qquad\assert{x+1+y = a+b} \\
+    &\qquad x \gets x+1 \\
+    &\qquad\assert{x+y = a+b} \\
+    &\kw{od } \\
+    &\assert{x+y = a+b \land \lnot(y\not=0) } \\
+    &\assert{x=a+b} \\
+  \end{align*}
+  % 
+  An allen drei Stellen, an denen zwei Zusicherungen direkt
+  untereinander stehen, sieht man, dass jeweils die zweite aus der
+  ersten folgt wie es von Regel \HT{E} verlangt wird.
+
+  Es ist auch lehrreich, sich anzusehen, was passiert, wenn zu Beginn
+  $b$, also $y$, negativ ist!
+
+  Wie man sieht, ist \emph{ncht} garantiert, dass das Programm jemals
+  hält.
+\end{tutorium}
+%
+
+% Als zweites Beispiel greifen wir auf ein Maschinenprogramm für die \mima aus
+% Kapitel~\ref{k:prozessor} zurück. Eine leichte Variante ist in
+% Abbildung~\ref{fig:mima-summe} in Pseudocode dargestellt.
+% %
+% \begin{figure}[ht]
+%   \centering
+%   \begin{tabbing}
+%     \qquad\=\qquad\=\qquad\=\qquad\=\qquad\=\kill \\
+%     \>\V{list} sei ein Array der Länge \V{len} von Zahlen  \\
+%     \>\> \V{list}[$0$], $\dots$, \V{list}[$\V{len}-1$] \\
+%     \>\\
+%     \>$\V{sum} \gets 0$ \\
+%     \>$\V{c} \gets 0$ \\
+%     \>\kw{while } \V{c} < \V{len} \\
+%     \>\kw{do } \\
+%     \>\> $\V{sum} \gets \V{sum} + \V{list}[c]$ \\
+%     \>\> $\V{c} \gets \V{c} + 1$ \\
+%     \>\kw{od}
+%   \end{tabbing}
+%   \caption{Aufsummieren einer Liste von Zahlen ähnlich dem
+%     \mima-Programm aus Kapitel~\ref{k:prozessor}}
+%   \label{fig:mima-summe}
+% \end{figure}
+% %
+% Wir wollen beweisen, dass nach Ausführung des Programmes gilt:
+% \[
+% \V{sum} = \sum_{i=0}^{\V{len}-1} \V{list}[i]
+% \]
+% %
+% Es stellt sich die Frage nach einer passenden Schleifeninvariante $I$.
+% %
+% Ein erster Ansatz dafür ist die Formel
+% \[
+% \V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \;.
+% \]
+% Setzt man dieses $I$ in das Schema für Regel \HT5 ein, ergibt sich
+% Abbildung~\ref{fig:mima-summe-2}.
+% %
+% Wie man sieht ist vor Beginn der Schleife alles in Ordnung, wenn man
+% die Konvention annimmt, dass eine "<leere Summe"> Wert $0$ hat.
+% %
+% \begin{figure}[ht]
+%   \begin{tabbing}
+%     \qquad\=\qquad\=\qquad\=\qquad\=\qquad\=\kill \\
+%     \>$\V{sum} \gets 0$ \\
+%     \>$c \gets 0$ \\
+%     \>\assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i]} \\
+%     \>\kw{while } c < \V{len} \\
+%     \>\kw{do } \\
+%     \>\> \assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \land c<\V{len} } \\[2pt]
+%     \>\> \assert{\V{sum}+ \V{list}[c] = \sum_{i=0}^{c+1-1} \V{list}[i]}\\
+%     \>\> $\V{sum} \gets \V{sum} + \V{list}[c]$ \\
+%     \>\> \assert{\V{sum} = \sum_{i=0}^{c+1-1} \V{list}[i]}\\
+%     \>\> $c \gets c + 1$ \\
+%     \>\> \assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i]}\\
+%     \>\kw{od} \\
+%     \>\assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \land \lnot(c < \V{len})} \\[2pt]
+%     \>\assert{\V{sum} = \sum_{i=0}^{\V{len}-1} \V{list}[i]}
+%   \end{tabbing}
+%   %
+%   \caption{Erster Versuch der Verifikation}
+%   \label{fig:mima-summe-2}
+% \end{figure}
+% %
+% Aber am Ende gibt es ein Problem.
+% %
+% Man weiß, dass $\lnot(c < \V{len})$ gilt, aber woher weiß man, dass
+% auch $c=\V{len}$ gilt?
+% %
+% Hier hilft ein kleiner Trick: Wir erweitern $I$ um eine weitere
+% hilfreiche Aussage so, dass es eine Schleifeninvariante bleibt:
+% \enlargethispage{40mm}
+% \[
+% \V{sum} = \sum_{i=0}^{\V{len}-1} \V{list}[i] \land c\leq \V{len}
+% \]
+% \begin{figure}[ht]
+%   \begin{tabbing}
+%     \qquad\=\qquad\=\qquad\=\qquad\=\qquad\=\kill \\
+%     \>$\V{sum} \gets 0$ \\
+%     \>$c \gets 0$ \\
+%     \>\assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \land c\leq \V{len}} \\
+%     \>\kw{while } c < \V{len} \\
+%     \>\kw{do } \\
+%     \>\> \assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \land c\leq \V{len} \land c<\V{len} } \\[2pt]
+%     \>\> \assert{\V{sum}+ \V{list}[c] = \sum_{i=0}^{c+1-1} \V{list}[i] \land c\leq \V{len}}\\
+%     \>\> $\V{sum} \gets \V{sum} + \V{list}[c]$ \\
+%     \>\> \assert{\V{sum} = \sum_{i=0}^{c+1-1} \V{list}[i] \land c\leq \V{len}}\\
+%     \>\> $c \gets c + 1$ \\
+%     \>\> \assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \land c\leq \V{len}}\\
+%     \>\kw{od} \\
+%     \>\assert{\V{sum} = \sum_{i=0}^{c-1} \V{list}[i] \land c\leq \V{len} \land \lnot(c < \V{len})} \\[2pt]
+%     \>\assert{\V{sum} = \sum_{i=0}^{\V{len}-1} \V{list}[i]}
+%   \end{tabbing}
+%   %
+%   \caption{Erfolgreiche Verifikation mit erweiterter Schleifeninvariante}
+%   \label{fig:mima-summe-3}
+% \end{figure}
+
+%-----------------------------------------------------------------------
+%Literatur
+%\printunitbibliography
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-14-algorithmen/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

@@ -1,0 +1,220 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+\DeclareMathOperator{\add}{add}
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{4}
+\newcommand{\ausgabetermin}{18.~November 2015}
+\newcommand{\abgabetermin}{27.~November 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+\newcommand{\punkteblatt}{18} % Blatt 4
+\newcommand{\punktetotal}{66} %
+\newcommand{\punkteblattphysik}{18} % Blatt 4
+\newcommand{\punktetotalphysik}{63} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben werden von
+%Studenten der Physik bitte nicht bearbeitet.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2 + 2 + 2 = 6]
+  Das Additionswerk der arithmetisch-logischen Einheit eines $8$-Bit Prozessors
+  realisiert eine Abbildung $\add_8 \colon Z_2^8 \times Z_2^8 \to Z_2^8$ mit
+  der Eigenschaft, dass für jedes Wort $u \in Z_2^8$ und jedes Wort
+  $v \in Z_2^8$ gilt:
+  \begin{equation*}
+    \add_8(u, v) = \fbin_8((\fNum_2(u) + \fNum_2(v)) \bfmod 2^8).
+  \end{equation*}
+%  insbesondere $\fNum_2(\add_8(u, v)) = \fNum_2(u) + \fNum_2(v) \bfmod 2^8$.
+  \begin{enumerate}
+    \item Geben Sie $\fZkpl_8(23)$ und $\fZkpl_8(-57)$ an.
+    \item Geben Sie $\fZkpl_8(23 + (-57))$ und $\add_8(\fZkpl_8(23), \fZkpl_8(-57))$ an.
+    \item Geben Sie ein Wort $w \in Z_2^*$ so an, dass $\fNum_2(w) = \fNum_{16}(\#{B3C8})$. % $\fTrans_{2,16}(\#{B3C8})$.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item $\fZkpl_8(23) = \fbin_8(23) = \#{00010111}$
+
+          $\fZkpl_8(-57) = \fbin_8(-57 + 2^8) = \fbin_8(-57 + 256) = \fbin_8(199) = \#{11000111}$
+    \item $\fZkpl_8(23 + (-57)) = \fZkpl_8(-34) = \fbin_8(-34 + 256) = \fbin_8(222) = \#{11011110}$
+          \begin{align*}
+            &\add_8(\fZkpl_8(23), \fZkpl_8(-57))\\
+            &= \fbin_8(\fNum_2(\fZkpl_8(23)) + \fNum_2(\fZkpl_8(-57)) \bfmod 2^8)\\
+            &= \fbin_8(\fNum_2(\#{00010111}) + \fNum_2(\#{11000111}) \bfmod 256)\\
+            &= \fbin_8(23 + 199 \bfmod 256)\\
+            &= \fbin_8(222 \bfmod 256)\\
+            &= \fbin_8(222)\\
+            &= \#{11011110}
+          \end{align*}
+
+          Tatsächlich gilt für alle ganzen Zahlen $x$, $y \in \ZK_{\ell}$ mit
+          $x + y \in \ZK_{\ell}$:
+          \begin{equation*}
+            \fZkpl_{\ell}(x + y) = \add_{\ell}(\fZkpl_{\ell}(x), \fZkpl_{\ell}(y)).
+          \end{equation*}
+          Etwas ähnliches gilt auch ohne die Voraussetzung $x + y \in \ZK_{\ell}$.
+          Das Additionswerk kann also unverändert zum Addieren von Zahlen in
+          Zweierkomplementdarstellung verwendet werden.
+    \item Das Wort $w = \fTrans_{2,16}(\#{B3C8})$ hat die gewünschte Eigenschaft. Mit den Hinweisen aus der vierten Übung und der Einsicht das $\fRepr_2(\fnum_{16}(\#{B}))$ gerade $\fbin_4(\fnum_{16}(\#{B}))$ ohne führende Nullen ist, können wir $\fTrans_{2,16}(\#{B3C8})$ wie folgt berechnen: $\fTrans_{2,16}(\#{B3C8}) = \fRepr_2(\fnum_{16}(\#{B})) \cdot \fbin_4(\fnum_{16}(\#{3})) \cdot \fbin_4(\fnum_{16}(\#{C})) \cdot \fbin_4(\fnum_{16}(\#{8})) = \#{1011} \cdot \#{0011} \cdot \#{1100} \cdot \#{1000} = \#{1011001111001000}$.
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[3 + 3 = 6]
+  Es sei $w$ das Wort $\#{strrprrrstprprtt}$ über dem Alphabet $\{\#r, \#s, \#t, \#p\}$.
+  \begin{enumerate}
+    \item Bestimmen Sie eine Huffman"=Codierung des Wortes $w$ anhand des in der
+          Vorlesung vorgestellten Algorithmus.
+    \item Bestimmen Sie eine Block-Codierung des Wortes $w$ für Blöcke der
+          Länge $2$ anhand des in der Vorlesung vorgestellten Algorithmus.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item Schritt 1: Vorkommen zählen.
+          \begin{tabular}{*{4}{>{$}c<{$}}}
+            \#{r} & \#{s} & \#{t} & \#{p} \\
+            \midrule
+            7     & 2     & 4     & 3
+          \end{tabular}
+
+          Schritt 2: Baum erstellen und beschriften.
+          \begin{forest}
+            [16, baseline
+              [9, edge label={node[pos=0.3,left] {\#0}}
+                [5, edge label={node[pos=0.3,left] {\#0}}
+                  [{2,\#s}, edge label={node[pos=0.3,left] {\#0}}]
+                  [{3,\#p}, edge label={node[pos=0.3,right] {\#1}}]
+                ]
+                [{4,\#t}, edge label={node[pos=0.3,right] {\#1}}]
+              ]
+              [{7,\#r}, edge label={node[pos=0.3,right] {\#1}}]
+            ]
+          \end{forest}
+
+          Schritt 3: Codierung einzelner Buchstaben ablesen.
+          \begin{tabular}{*{4}{>{$}c<{$}}}
+            \#{r} & \#{s}  & \#{t} & \#{p} \\
+            \midrule
+            \#{1} & \#{000} & \#{01} & \#{001}
+          \end{tabular}
+
+          Schritt 4: Wort codieren. $\#{000011100111100001001100110101}$
+          \begin{korrektur}
+            Leider sind Huffman"=Codierungen nicht eindeutig
+
+            Punkte: je $0,5$ für Schritte 1, 3 und 4, und $1,5$ für Schritt 2
+
+            Achtung bei Folgefehlern: Wer aus einem falschen Baum richtig die Codierungen abgelesen hat, bekommt für letzteres noch die $0,5$ Punkte, (sofern nicht irgendwas trivial wird)
+          \end{korrektur}
+    \item Schritt 1: Wort in Blöcke der Länge $2$ unterteilen. $\#{st rr pr rr st pr pr tt}$
+
+          Schritt 2: Vorkommen zählen.
+          \begin{tabular}{*{4}{>{$}c<{$}}}
+            \#{st} & \#{rr} & \#{pr} & \#{tt} \\
+            \midrule
+            2      & 2      & 3      & 1
+          \end{tabular}
+
+          Schritt 3: Baum erstellen und beschriften.
+          \begin{forest}
+            [8, baseline
+              [3, edge label={node[pos=0.3,left] {\#0}}
+                [{1, \#{tt}}, edge label={node[pos=0.3,left] {\#0}}]
+                [{2, \#{st}}, edge label={node[pos=0.3,right] {\#1}}]
+              ]
+              [5, edge label={node[pos=0.3,left] {\#1}}
+                [{2, \#{rr}}, edge label={node[pos=0.3,right] {\#0}}]
+                [{3, \#{pr}}, edge label={node[pos=0.3,right] {\#1}}]
+              ]
+            ]
+          \end{forest}
+
+          Schritt 4: Codierung einzelner Buchstaben ablesen.
+          \begin{tabular}{*{4}{>{$}c<{$}}}
+            \#{st} & \#{rr} & \#{pr} & \#{tt} \\
+            \midrule
+            \#{01} & \#{10} & \#{11} & \#{00}
+          \end{tabular}
+
+          Schritt 5: Wort codieren. $\#{0110111001111100}$
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[3 + 3 = 6]
+  Für jedes $i \in \N_0$ sei $a_i$ ein Symbol so, dass für jedes
+  $k \in \Z_i$ gilt $a_k \neq a_i$. Weiter sei $M$ die Menge
+  $\{a_i \mid i \in \N_0\}$.
+  \begin{enumerate}
+    \item Geben Sie für jedes $k\in\N_+$ ein Alphabet $A_k \subseteq M$ und ein Wort
+          $u_k \in A_k^*$ so an, dass jedes Symbol $x \in A_k$ mindestens einmal in $u_k$ vorkommt und
+          für jede Huffman"=Codierung $h \colon A_k^* \to \{\#0,\#1\}^*$ von $u_k$ gilt:
+          \begin{equation*}
+            \text{Für jedes } x \in A_k \text{ gilt } |h(x)| = k.
+          \end{equation*}
+    \item Geben Sie für jedes $n\in\N_+$ ein Alphabet $B_n \subseteq M$ und ein Wort
+          $w_n \in B_n^*$ so an, dass jedes Symbol $x \in B_n$ mindestens einmal in $w_n$ vorkommt und
+          für jede Huffman"=Codierung $h \colon B_n^* \to \{\#0,\#1\}^*$ von $w_n$
+          gelten:
+          \begin{itemize}
+            \item Es gibt ein Symbol $x\in B_n$ mit $|h(x)|=1$;
+            \item Es gibt ein Symbol $x\in B_n$ mit $|h(x)|=n$;
+            \item Für jedes Symbol $x\in B_n$ gilt $|h(x)| \in \{1,n\}$.
+          \end{itemize}
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item Es sei $k \in \N_+$. Weiter sei $A_k$ die Menge $\{a_i \in M \mid i \in \Z_{2^k}\}$ und es sei $u_k$ das Wort
+          \begin{align*}
+            u_k \colon \Z_{2^k} &\to     A_k,\\
+                              i &\mapsto a_i.
+          \end{align*}
+          Ferner sei $h$ eine Huffman"=Codierung von $u_k$. Dann gilt für jedes $x \in A_k$, dass $|h(x)| = k$.
+    \item Es sei $n \in \N_+$. Weiter sei $B_n$ die Menge $\{a_i \in M \mid i \in \Z_{2^{n-1} + 1}\}$ und es sei $w_n$ das Wort
+          \begin{align*}
+            w_n \colon \Z_{2^n} &\to     B_n,\\
+                              i &\mapsto \begin{dcases*}
+                                           a_i,           &falls $i \in \Z_{2^{n-1}}$,\\ % \leq 2^{n - 1} - 1
+                                           a_{2^{n - 1}}, &sonst. % falls $i \geq 2^{n - 1}$
+                                         \end{dcases*}
+          \end{align*}
+          Ferner sei $h$ eine Huffman"=Codierung von $w_n$. Dann gelten $a_{2^{n-1}} \in B_n$, $|h(a_{2^{n-1}})| = 1$, $a_0 \in B_n$, $|h(a_0)| = n$ und für jedes $x \in B_n$ gilt $|h(x)| \in \{1,n\}$ (weil nämlich für sogar für jedes $i\in\G_{2^{n-1}}$ gilt: $a_i\in B_n$ und $|h(a_i)|=n$; vergleiche Teilaufgabe a) ).
+  \end{enumerate}
+
+  \begin{korrektur}
+    Bei beiden Teilaufgaben jeweils: 1 Punkt für ordentliche
+    Definition des Wortes und 2 Punkte für ein "`inhaltlich
+    richtiges"' Wort.
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

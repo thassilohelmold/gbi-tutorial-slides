@@ -1,0 +1,375 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{2}
+\newcommand{\ausgabetermin}{4.~November 2015}
+\newcommand{\abgabetermin}{13.~November 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punktetotalphysik}{13} % Blatt 1
+\newcommand{\punkteblatt}{17} % Blatt 2
+\newcommand{\punktetotal}{30} %
+\newcommand{\punkteblattphysik}{14} % Blatt 2
+\newcommand{\punktetotalphysik}{27} %
+% =======================================================
+
+\begin{document}
+
+\noindent
+Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben werden von
+Studenten der Physik bitte nicht bearbeitet.\\
+
+% -----------------------------------------------------------------------------
+\begin{aufgabe}[3][Physik]
+  Es sei $\AALV$ eine Menge von Aussagevariablen und es sei $\LAL$ die
+  Menge aller aussagenlogischen Formeln über $\AALV$. Beweisen Sie, dass für alle
+  $G$, $H \in \LAL$ die aussagenlogische Formel
+  \begin{equation*}
+    \alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz
+  \end{equation*}
+  eine Tautologie ist.
+\end{aufgabe}
+
+\begin{loesung}
+  Es seien $G$, $H \in \LAL$. Es ist zu zeigen, dass für jede Interpretation
+  $I \colon \AALV \to \Bool$ gilt:
+  \begin{equation*}
+    \val_I(\alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz) = \W.
+  \end{equation*}
+  Dazu sei $I \colon \AALV \to \Bool$ eine Interpretation. Nach Definition der
+  Abbildung $\val_I$ gilt:
+  \begin{equation*}
+    \val_I(\alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz)
+    = \lnot \val_I(G\alimpl H) \lor \val_I(\alnot H \alimpl\alnot G).
+  \end{equation*}
+  Nach Definition der Abbildungen $\val_I$ und $\lor$ gilt
+  \begin{align*}
+    \val_I(G\alimpl H) &= \lnot \val_I(G) \lor \val_I(H)\\
+                       &= \val_I(H) \lor \lnot \val_I(G).
+  \end{align*}
+  Und nach Definition der Abbildungen $\val_I$ und $\lnot$ gilt
+  \begin{align*}
+    \val_I(\alnot H \alimpl\alnot G) &= \lnot \val_I(\alnot H) \lor \val_I(\alnot G)\\
+                                     &= \lnot (\lnot \val_I(H)) \lor \lnot (\val_I(G))\\
+                                     &= \val_I(H) \lor \lnot \val_I(G).
+  \end{align*}
+  Damit gilt
+  \begin{equation*}
+    \val_I(\alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz)
+    = \lnot (\val_I(H) \lor \lnot \val_I(G)) \lor (\val_I(H) \lor \lnot \val_I(G)).
+  \end{equation*}
+  \begin{description}
+    \item[Fall 1:] $\val_I(H) \lor \lnot \val_I(G) = \W$. Nach Definition der Abbildung
+          $\lor$ gilt dann
+          \begin{equation*}
+            \lnot (\val_I(H) \lor \lnot \val_I(G)) \lor (\val_I(H) \lor \lnot \val_I(G))
+            = \lnot \W \lor \W
+            = \W.
+          \end{equation*}
+    \item[Fall 2:] $\val_I(H) \lor \lnot \val_I(G) = \F$. Nach Definition der Abbildung
+          $\lnot$ gilt dann $\lnot (\val_I(H) \lor \lnot \val_I(G)) = \W$. Und nach
+          Definition der Abbildung $\lor$ gilt somit
+          \begin{equation*}
+            \lnot (\val_I(H) \lor \lnot \val_I(G)) \lor (\val_I(H) \lor \lnot \val_I(G))
+            = \W \lor \F
+            = \W.
+          \end{equation*}
+  \end{description}
+  In beiden Fällen gilt
+  \begin{equation*}
+    \val_I(\alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz)
+    = \lnot (\val_I(H) \lor \lnot \val_I(G)) \lor (\val_I(H) \lor \lnot \val_I(G))
+    = \W.
+  \end{equation*}
+
+  \begin{korrektur}
+    Wer wie in der Vorlesung eine große Tabelle macht und schrittweise
+    für alle Teilformeln in allen Interpretationen die Wahrheitswerte
+    ermittelt, wird nicht bestraft, auch wenn das Vorgehen
+    unvollständig ist.
+  \end{korrektur}
+%  Da die Interpretation $I$ beliebig gewählt war, ist $\alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz$
+%  eine Tautologie. Und da die aussagenlogischen Formeln $G$ und $H$ ebenfalls
+%  beliebig gewählt waren, ist dies für alle aussagenlogischen Formeln $G$
+%  und $H$ so.
+
+%  \begin{description}
+%    \item[Fall 1:] $\val_I(G\alimpl H) = \F$. Nach Definition der Abbildung
+%          $\lnot$ gilt dann $\lnot \val_I(G\alimpl H) = \W$. Und nach
+%          Definition der Abbildung $\lor$ gilt damit
+%          $\lnot \val_I(G\alimpl H) \lor \val_I(\alnot H \alimpl\alnot G) = \W$.
+%          Somit gilt $\val_I(\alka G\alimpl H\alkz \alimpl \alka \alnot H \alimpl\alnot G\alkz) = \W$.
+%    \item[Fall 2:] $\val_I(G\alimpl H) = \W$.
+%  \end{description}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+%\begin{aufgabe}[3]
+%  Ersetzt man in einer aussagenlogischen Formel $F$ eine Teilformel $T$ durch
+%  eine zu $T$ äquivalente Formel, so erhält man eine zu $F$ äquivalente
+%  Formel. Verwenden Sie diese Tatsache, die in der Vorlesung vorgestellten
+%  Tautologien, die Lemmata auf Folie $29$, und ... um die Formel
+%  \begin{equation*}
+%    {\alka \alv{P} \aland \alv{Q} \alkz} \aland {\alka {\alka \alv{Q} \alimpl \alv{P} \alkz} \alor {\alka \alnot {\alka {\alka \alnot \alv{P} \alkz} \alor {\alka \alnot {\alka \alnot {\alka \alnot \alv{Q} \alkz} \alkz} \alkz} \alkz} \alkz} \aland {\alka {\alka \alv{P} \alor {\alka \alnot \alv{P} \alkz} \alkz} \alimpl \alv{Q} \alkz} \alkz}
+%  \end{equation*}
+%  Schritt für Schritt in eine zu ihr äquivalente Formel mit genau fünf Zeichen
+%  umzuformen.
+%\end{aufgabe}
+%
+%\begin{loesung}
+%  \begin{equation*}
+%    {\alka \alv{P} \aland \alv{Q} \alkz}
+%  \end{equation*}
+%\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2]
+  Es sei $A$ ein Alphabet, und für jede formale Sprache $L \subseteq A^*$ und
+  jede formale Sprache $S \subseteq A^*$ sei
+  \begin{equation*}
+    L \cdot S = \{ u \cdot v \mid u \in L \text{ und } v \in S \}.
+  \end{equation*}
+  Es seien ferner $L_1$, $L_2$ und $L_3$ drei formale Sprachen über $A$.
+  Beweisen Sie, dass gilt:
+  \begin{equation*}
+    L_1 \cdot (L_2 \cdot L_3) \subseteq (L_1 \cdot L_2) \cdot L_3.
+  \end{equation*}
+\end{aufgabe}
+
+\begin{loesung}
+  Es ist zu zeigen, dass für jedes $w \in L_1 \cdot (L_2 \cdot L_3)$
+  gilt: $w \in (L_1 \cdot L_2) \cdot L_3$. Dazu sei
+  $w \in L_1 \cdot (L_2 \cdot L_3)$. Dann gibt es ein $u \in L_1$ und
+  ein $v \in L_2 \cdot L_3$ so, dass $w = u \cdot v$. Außerdem gibt es ein
+  $\mu \in L_2$ und ein $\kappa \in L_3$ so, dass $v = \mu \cdot \kappa$.
+  Damit gilt $w = u \cdot (\mu \cdot \kappa)$. Da $\cdot$ assoziativ ist, folgt
+  $w = u \cdot (\mu \cdot \kappa) = (u \cdot \mu) \cdot \kappa$. Es gilt
+  $u \cdot \mu \in L_1 \cdot L_2$ und damit $(u \cdot \mu) \cdot \kappa \in (L_1 \cdot L_2) \cdot L_3$.
+  Wegen $w = (u \cdot \mu) \cdot \kappa$ folgt $w \in (L_1 \cdot L_2) \cdot L_3$.
+%  Da $w$ ein beliebiges Wort aus $L_1 \cdot (L_2 \cdot L_3)$ ist, folgt
+%  \begin{equation*}
+%    L_1 \cdot (L_2 \cdot L_3) \subseteq (L_1 \cdot L_2) \cdot L_3.
+%  \end{equation*}
+
+  \begin{korrektur}
+    An der Stelle, an der die Assoziativität für die Konkatenation von
+    Wörtern benutzt wird, sollte das nicht einfach stillschweigend
+    passieren, sondern der/die Aufgabenlöser(in) soll zu erkennen
+    geben, dass man an der Stelle nachdenken muss. Sonst -0.5 Punkte
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[1 + 1 + 1 + 1 + 1 + 1 = 6]
+  Es sei $A$ ein Alphabet.
+  \begin{enumerate}
+    \item Geben Sie eine injektive Abbildung $f \colon A^* \to A^*$ an, die
+          nicht surjektiv ist.
+    \item Geben Sie eine surjektive Abbildung $g \colon A^* \to A^*$ an, die
+          nicht injektiv ist.
+    \item Geben Sie eine bijektive Abbildung $h \colon A^* \to A^*$ an, die
+          nicht die identische Abbildung $A^* \to A^*, w \mapsto w$, ist.
+    \item Geben Sie eine Abbildung $\varphi \colon A^* \to A^*$ so an, dass
+          für jedes $w \in A^*$ gilt:
+          \begin{equation*}
+            |\varphi(w)| = 2^{|w|} \cdot |w|^{|w|}.
+          \end{equation*}
+    \item Geben Sie eine Abbildung $\psi \colon 2^{A^*} \to 2^{A^*}$ so an,
+          dass für jedes $L \in 2^{A^*}$ gilt:
+          \begin{equation*}
+            \{ |w| \mid w \in \psi(L) \} = \{ 3 \cdot |w| \mid w \in L \}.
+          \end{equation*}
+    \item Geben Sie eine Abbildung $\xi \colon 2^{A^*} \to 2^{A^*}$ so an,
+          dass für jedes $L \in 2^{A^*}$ und für jedes $w \in A^*$ gilt:
+          \begin{equation*}
+            w \in L \text{ genau dann, wenn } w \notin \xi(L).
+          \end{equation*}
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  Mögliche Abbildungen sind
+  \begin{enumerate}
+  \item 
+    \begin{align*}
+      f \colon A^* &\to     A^*,\\
+      w &\mapsto w \cdot w,
+    \end{align*}
+  \item 
+    \begin{align*}
+      g \colon A^* &\to     A^*,\\
+      \epsilon &\mapsto \epsilon,\\
+      x \cdot w &\mapsto w, \text{ wobei $x \in A$ und $w \in A^*$}
+    \end{align*}
+  \item Diese Aufgabe war schwerer als gedacht. Falls $|A|$
+    mindestens zwei Symbole enthält, kann man \zB "`Wort spiegeln"'
+    als Abbildung nehmen:
+    \begin{align*}
+      h \colon A^* &\to     A^*,\\
+      \epsilon &\mapsto \epsilon,\\
+      w \cdot x &\mapsto x \cdot h(w), \text{ wobei $w \in A^*$ und $x \in A$}
+    \end{align*}
+    Falls $|A|=1$
+    ist, ist diese Abbildung leider die Identität. Falls $A=\{a\}$
+    ist, leistet aber \zB folgende Abbildung das gewünschte:
+    \begin{align*}
+      h \colon A^* &\to     A^*,\\
+      \epsilon &\mapsto a,\\
+      a &\mapsto \epsilon,\\
+      w  &\mapsto w, \text{ falls } |w|\geq 2
+    \end{align*}
+  \item Die Aufgabenstellung ist für $w=\eps$ sinnlos. Also
+    \begin{align*}
+      \varphi \colon A^+ &\to     A^*,\\
+      w &\mapsto (w \cdot w)^{|w \cdot w|^{|w| - 1}},
+    \end{align*}
+    \begin{korrektur}
+      Das leere Wort bitte ignorieren.
+    \end{korrektur}
+  \item
+    \begin{align*}
+      \psi \colon 2^{A^*} &\to     2^{A^*},\\
+      L &\mapsto \{ w \cdot (w \cdot w) \mid w \in L \},
+    \end{align*}
+  \item
+    \begin{align*}
+      \xi \colon 2^{A^*} &\to     2^{A^*},\\
+      L &\mapsto A^* \setminus L.
+    \end{align*}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[1,5 + 1,5 + 3 = 6]
+  Sind $X$ und $Y$ zwei Mengen und $f \colon X \to Y$ eine bijektive Abbildung,
+  so ist die Relation
+  \begin{equation*}
+    R_f = \{ (f(x), x) \mid x \in X \}
+  \end{equation*}
+  eine bijektive Abbildung von $Y$ nach $X$, die wir mit $f^{-1}$ bezeichnen,
+  \emph{Umkehrabbildung von $f$} oder \emph{Inverse von $f$} nennen, und für
+  die für jedes $x \in X$ und jedes $y \in Y$ gilt:
+  \begin{equation*}
+    f^{-1}(f(x)) = x \text{ und } f(f^{-1}(y)) = y.
+  \end{equation*}
+  Es sei $A$ das Alphabet $\{ \#a, \#b, \#c \}$, es sei $\gamma$ die bijektive
+  Abbildung
+  \begin{align*}
+    \gamma \colon \Z_3 &\to     A,\\
+                     0 &\mapsto \#a,\\
+                     1 &\mapsto \#b,\\
+                     2 &\mapsto \#c,
+  \end{align*}
+  und es sei $\odot$ die binäre Operation
+  \begin{align*}
+    \odot \colon A^* \times A^* &\to     A^*,\\
+%                  (u, \epsilon) &\mapsto u,\\
+%                  (\epsilon, v) &\mapsto \epsilon,\\
+%         (x \cdot u, y \cdot v) &\mapsto \gamma((\gamma^{-1}(x) + \gamma^{-1}(y)) \bmod 3) \cdot (u \odot v),
+                         (u, v) &\mapsto \begin{dcases*}
+                                           u,                                                                          &falls $u = \epsilon$ \text{ oder } $v = \epsilon$,\\
+                                           \gamma((\gamma^{-1}(x) + \gamma^{-1}(y)) \bmod 3) \cdot (\mu \odot \kappa), &falls $u = x \cdot \mu$ \text{ und } $v = y \cdot \kappa$\\
+                                                                                                                       &\text{für } $x, y \in A$ \text{ und } $\mu, \kappa \in A^*$,
+                                         \end{dcases*}
+  \end{align*}
+  wobei für jede nicht-negative ganze Zahl $z$ der Ausdruck $z \bmod 3$ den
+  Rest der ganzzahligen Division von $z$ mit $3$ bezeichne und bei Bedarf
+  Zeichen in $A$ als Wörter der Länge $1$ in $A^1$ aufzufassen sind.
+  \begin{enumerate}
+    \item Berechnen Sie die Wörter $\#{baac} \odot \#{aaaa}$,
+          $\#{baac} \odot \#{bbbbbb}$ und $\#{baac} \odot \#{cc}$.
+    \item Es sei
+          \begin{align*}
+            \delta \colon A &\to     A,\\
+                        \#a &\mapsto \#a,\\
+                        \#b &\mapsto \#c,\\
+                        \#c &\mapsto \#b.
+          \end{align*}
+          Geben Sie für jedes $u \in A^*$ ein $v \in A^*$ so an, dass
+          $u \odot v = \#a^{|u|}$ gilt.
+%    \item Geben Sie für jedes $u \in A^*$ ein $v \in A^*$ so an, dass
+%          $|v| = |u|$ und $u \odot v = u$ gelten.
+    \item Beweisen Sie durch vollständige Induktion, dass für jedes
+          $n \in \N_0$ gilt:
+          \begin{equation*}
+            \text{Für jedes } w \in A^n \colon w \odot \#a^n = w.
+          \end{equation*}
+  \end{enumerate}
+\end{aufgabe}
+
+%\vspace*{-8mm}
+%\vbox to 0pt{\hbox to \textwidth{\hfill\hbox to 0pt{\includegraphics[scale=0.45]{mathefest}\hss}\raisebox{36mm}{\ \tikz{\fill[white] (0,0) rectangle (2,2);}}\hfill\hfill\hfill}}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item $\#{baac} \odot \#{aaaa} = \#{baac}$,
+          $\#{baac} \odot \#{bbbbbb} = \#{cbba}$ und
+          $\#{baac} \odot \#{cc} = \#{acac}$.
+    \item Es sei $u \in A^*$ und es sei $B$ der Zielbereich von $u$. Das Wort
+          \begin{align*}
+            v \colon \Z_{|u|} &\to     \delta(B),\\
+                            i &\mapsto \delta(u(i)),
+          \end{align*}
+          hat die gewünschte Eigenschaft.
+    \item \emph{Induktionsanfang}: Es sei $w \in A^0$. Dann ist $w = \epsilon$.
+          Nach Definition von $\odot$ gilt somit $w \odot \#a^0 = w$. Insgesamt
+          gilt:
+          \begin{equation*}
+            \text{Für jedes } w \in A^0 \colon w \odot \#a^0 = w.
+          \end{equation*}
+
+          \emph{Induktionsschritt}: Es sei $n \in \N_0$ so, dass gilt:
+          \begin{equation}\tag{Induktionsvoraussetzung}
+            \text{Für jedes } u \in A^n \colon u \odot \#a^n = u.
+          \end{equation}
+          Weiter sei $w \in A^{n + 1}$. Dann gibt es ein $x \in A$ und ein
+          $u \in A^n$ so, dass $x \cdot u = w$. Damit gilt:
+          \begin{align*}
+            w \odot \#a^{n + 1} &= (x \cdot u) \odot (\#a \cdot \#a^n)\\
+                                &= \gamma((\gamma^{-1}(x) + \gamma^{-1}(\#a)) \bmod 3) \cdot (u \odot \#a^n).
+          \end{align*}
+          Nach Definition von $\gamma$, $\gamma^{-1}$ und $\bmod$ gilt:
+          \begin{align*}
+            \gamma((\gamma^{-1}(x) + \gamma^{-1}(\#a)) \bmod 3)
+            &= \gamma((\gamma^{-1}(x) + 0) \bmod 3)\\
+            &= \gamma(\gamma^{-1}(x) \bmod 3)\\
+            &= \gamma(\gamma^{-1}(x))\\
+            &= x.
+          \end{align*}
+          Nach Induktionsvoraussetzung gilt $u \odot \#a^n = u$. Somit gilt:
+          \begin{align*}
+            w \odot \#a^{n + 1} &= \gamma((\gamma^{-1}(x) + \gamma^{-1}(\#a)) \bmod 3) \cdot (u \odot \#a^n)\\
+                                &= x \cdot u\\
+                                &= w.
+          \end{align*}
+          Insgesamt gilt:
+          \begin{equation*}
+            \text{Für jedes } w \in A^{n + 1} \colon w \odot \#a^{n + 1} = w.
+          \end{equation*}
+
+          \emph{Schlussworte}: Gemäß des Prinzips der vollständigen Induktion
+          gilt die Behauptung.
+
+          \begin{korrektur}
+            Ind.anfang 1 Punkt, Ind.schritt 2 Punkte
+          \end{korrektur}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

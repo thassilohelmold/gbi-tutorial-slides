@@ -1,0 +1,249 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+\DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\stack}{init\_stack}
+\DeclareMathOperator{\emptyX}{is\_empty}
+\DeclareMathOperator{\push}{push}
+\DeclareMathOperator{\pushall}{push\_all}
+\DeclareMathOperator{\pop}{pop}
+\DeclareMathOperator{\peek}{peek}
+\DeclareMathOperator{\sumX}{sum}
+%\DeclareMathOperator{\increment}{increment}
+%\DeclareMathOperator{\decrement}{decrement}
+%\DeclareMathOperator{\second}{second}
+%\DeclareMathOperator{\first}{first}
+\newcommand{\lbl}[1]{\mathit{#1}}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{5}
+\newcommand{\ausgabetermin}{25.~November 2015}
+\newcommand{\abgabetermin}{4.~Dezember 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+\newcommand{\punkteblatt}{18} % Blatt 5
+\newcommand{\punktetotal}{84} %
+\newcommand{\punkteblattphysik}{18} % Blatt 5
+\newcommand{\punktetotalphysik}{81} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben werden von
+%Studenten der Physik bitte nicht bearbeitet.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[1 + 1 + 4 = 6]
+  Es sei $\fVal = \{\#0, \#1\}^8$, es sei $\Adr = \{\#0, \#1\}^{32}$ und es sei $\Mem = \fVal^\Adr$. Die Addition modulo $2^8$ zweier Zahlen in Binärdarstellung der Länge $8$ ist gegeben durch die Abbildung
+  \begin{align*}
+    \add_{\fVal} \colon \fVal \times \fVal &\to     \fVal,\\
+                                    (u, v) &\mapsto \fbin_8((\fNum_2(u) + \fNum_2(v)) \bfmod 2^8),
+  \end{align*}
+  und die Addition modulo $2^{32}$ zweier Zahlen in Binärdarstellung der Länge $32$ beziehungsweise $8$ ist gegeben durch die Abbildung
+  \begin{align*}
+    \add_{\Adr} \colon \Adr \times \fVal &\to     \Adr,\\
+                                  (a, v) &\mapsto \fbin_{32}((\fNum_2(a) + \fNum_2(v)) \bfmod 2^{32}).
+  \end{align*}
+  Ein Stapel ist eine Datenstruktur mit drei grundlegenden Operationen:
+  \begin{enumerate}
+    \item \enquote{$\push$} legt einen Wert auf den Stapel;
+    \item \enquote{$\pop$} nimmt den zuoberst liegenden Wert vom Stapel;
+    \item \enquote{$\peek$} liefert den zuoberst liegenden Wert, ohne ihn vom Stapel zu nehmen.
+  \end{enumerate}
+  In unserem Speichermodell kann ein Stapel mit höchstens $(2^8 - 1)$-vielen Werten durch eine Adresse repräsentiert werden, deren Wert die Anzahl der Werte auf dem Stapel in Binärdarstellung ist und deren Folgeadressen die Werte auf dem Stapel enthalten. Die Abbildungen $\stack$, $\emptyX$, $\push$, $\pop$ und $\peek$ bilden eine Schnittstelle zur Verwaltung von Stapeln und sind gegeben durch:
+  \begin{align*}
+    \stack \colon \Mem \times \Adr &\to     \Mem,\\
+                            (m, a) &\mapsto \memwrite(m, a, \fbin_8(0)),
+  \end{align*}
+  \begin{align*}
+    \emptyX \colon \Mem \times \Adr &\to     \Bool,\\
+                             (m, a) &\mapsto \begin{dcases*}
+                                               \W, &falls $\memread(m, a) = \fbin_8(0)$,\\
+                                               \F, &sonst,
+                                             \end{dcases*}
+  \end{align*}
+%  \begin{align*}
+%    \increment \colon \Mem \times \Adr &\to     \Mem,\\
+%                                (m, a) &\mapsto \add_{\Adr}(\memread(m, a), \fbin_8(1))
+%  \end{align*}
+%  \begin{align*}
+%    \decrement \colon \Mem \times \Adr &\to     \Mem,\\
+%                                (m, a) &\mapsto \add_{\Adr}(\memread(m, a), \fbin_8(2^8 - 1))
+%  \end{align*}
+  \begin{align*}
+    \push \colon \Mem \times \Adr \times \fVal &\to     \Mem,\\
+                                     (m, a, v) &\mapsto \memwrite(m', \add_{\Adr}(a, \memread(m', a)), v),\\
+                                               &\qquad\text{wobei } m' = \memwrite(m,a,\add_{\fVal}(\memread(m, a), \fbin_8(1))),
+  \end{align*}
+  \begin{align*}
+    \pop \colon \Mem \times \Adr &\to     \Mem,\\
+                          (m, a) &\mapsto \begin{dcases*}
+                                            m,                                                               &falls $\emptyX(m, a)$,\\
+                                            \memwrite(m, a, \add_{\fVal}(\memread(m, a), \fbin_8(2^8 - 1))), &sonst,
+                                          \end{dcases*}
+  \end{align*}
+  \begin{align*}
+    \peek \colon \Mem \times \Adr &\to     \fVal,\\
+                           (m, a) &\mapsto %\begin{dcases*}
+                                           %  \fbin_8(0),                                  &falls $\emptyX(m, a) = \W$,\\
+                                             \memread(m, \add_{\Adr}(a, \memread(m, a))).%, &sonst.
+                                           %\end{dcases*}
+  \end{align*}
+  Für jeden Speicher $m \in \Mem$, jede Adresse $a \in \Adr$ und jeden Wert $v \in \fVal$, initislisiert $\stack(m, a)$ einen Stapel bei $a$ in $m$, prüft $\emptyX(m, a)$, ob der Stapel bei $a$ in $m$ leer ist oder nicht, legt $\push(m, a, v)$ den Wert $v$ auf den Stapel bei $a$ in $m$, nimmt $\pop(m, a)$ den zuoberst liegenden Wert des Stapels bei $a$ in $m$ und liefert $\peek(m, a)$ den zuoberst liegenden Wert des Stapels bei $a$ in $m$.
+  \begin{enumerate}
+    \item Es sei $m \in \Mem$ und es sei $a = \fbin_{32}(0)$. Geben Sie den Wert
+          \begin{equation*}
+            \peek(\pop(\push(\push(\stack(m, a), a, \#{00101111}), a, \#{00001100}), a), a)
+          \end{equation*}
+          an.
+    \item Es sei $m \in \Mem$, es sei $a = \fbin_{32}(0)$ und es sei
+          \begin{equation*}
+            m' = \push(\push(\stack(m, a), a, \#{11111111}), a, \#{00000001}).
+          \end{equation*}
+          Geben Sie den Wert $\add_{\fVal}(\peek(m', a), \peek(\pop(m', a), a))$ an.
+    \item Definieren Sie induktiv, unter ausschließlicher Verwendung der Abbildungen $\add_{\fVal}$, $\emptyX$, $\pop$ und $\peek$, eine Abbildung $\sumX \colon \Mem \times \Adr \to \fVal$ derart, dass für jeden Speicher $m \in \Mem$ und jede Adresse $a \in \Adr$ gilt, dass $\sumX(m, a)$ die Binärdarstellung der Summe modulo $2^8$ aller Werte, interpretiert als Binärdarstellungen von Zahlen, auf dem Stapel bei $a$ in $m$ ist, wobei die leere Summe per Definition $0$ ist.
+%Die Abbildung $\pushall$ sei induktiv definiert durch
+%          \begin{align*}
+%            \pushall \colon \Mem \times \Adr \times \Val
+%          \end{align*}
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item $\#{00101111}$
+    \item $\#{00000000}$
+    \item
+          \begin{align*}
+            \sumX \colon \Mem \times \Adr &\to     \fVal,\\
+                                  (m, a) &\mapsto \begin{dcases*}
+                                                    \peek(m, a),                                     &falls $\emptyX(m, a) = \W$,\\
+                                                    \add_{\fVal}(\sumX(\pop(m, a), a), \peek(m, a)), &sonst.
+                                                  \end{dcases*}
+          \end{align*}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\def\foobox{\fbox{\vrule width 1.5em height 0pt depth 0pt\vrule width 0pt height 1.7ex depth 0.15ex}}
+\begin{aufgabe}[4]
+  Es seien $a_1$ und $a_2$ zwei verschiedene $20$bit Adressen. Im Speicher stehe in Adresse $a_1$ die Zweierkomplementdarstellung einer nicht-negativen ganzen Zahl $x$, für die $2^x$ mit $24$bit in Zweierkomplementdarstellung darstellbar ist. Ergänzen Sie die fehlenden Konstanten und Adressen im unvollständigen Minimalmaschinenprogramm
+  \begin{align*}
+                       & \#{LDC } \foobox \\
+                       & \#{STV } \foobox \\
+    \lbl{while\colon}  & \#{LDC } \foobox \\
+                       & \#{NOT} \\
+                       & \#{ADD } \foobox \\
+                       & \#{STV } \foobox \\
+                       & \#{JMN } \lbl{end} \\
+                       & \#{LDV } \foobox \\
+                       & \#{ADD } \foobox \\
+                       & \#{STV } \foobox \\
+                       & \#{JMP } \lbl{while} \\
+    \lbl{end\colon}    & \#{HALT}
+  \end{align*}
+  derart, dass nach dessen Ausführung $2^x$ in Zweierkomplementdarstellung im Speicher bei Adresse $a_2$ steht. Beachten Sie, dass alle arithmetischen Ausdrücke, in denen $x$ vorkommt, keine Konstanten sind, und, dass $2^0 = 1$ gilt.
+\end{aufgabe}
+
+\begin{loesung}
+  Es gilt $2^0 = 1$ und für jedes $n \in \N_0$ gilt $2^{n + 1} = 2 \cdot 2^n = 2^n + 2^n$. Somit gilt $2^1 = 2^0 + 2^0 = 1 + 1$, $2^2 = 2^1 + 2^1 = (1 + 1) + (1 + 1)$, $2^3 = 2^2 + 2^2 = [(1 + 1) + (1 + 1)] + [(1 + 1) + (1 + 1)]$, und so weiter. Initialisieren wir den Wert bei $a_2$ mit $1$ und wiederholen wir $x$-mal, dass wir den Wert bei $a_2$ mit sich selbst addieren und das Ergebnis bei $a_2$ ablegen, so ist der Wert bei $a_2$ nach der nullten Wiederholung $2^0$, nach der ersten Wiederholung $2^1$, nach der zweiten Wiederholung $2^2$, und nach der $x$-ten Wiederholung $2^x$. Ein Minimalmaschinenprogramm für diesen Algorithmus ist das Folgende:
+  \begin{align*}
+                       & \#{LDC } 1 \\
+                       & \#{STV } a_2 \\
+    \lbl{while\colon}  & \#{LDC } 0 \\
+                       & \#{NOT} \\
+                       & \#{ADD } a_1 \\
+                       & \#{STV } a_1 \\
+                       & \#{JMN } \lbl{end} \\
+                       & \#{LDV } a_2 \\
+                       & \#{ADD } a_2 \\
+                       & \#{STV } a_2 \\
+                       & \#{JMP } \lbl{while} \\
+    \lbl{end\colon}    & \#{HALT}
+  \end{align*}
+
+  \begin{korrektur}
+    Es wird Lösungen geben, in denen auch \mima-Befehle geändert sind
+    (\#{LDV} statt \#{LDC}, \usw)
+
+    Wie bewerten wir das?\\[2\baselineskip]
+
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4 + 4 = 8]
+  Für jede positive ganze Zahl $n \in \N_+$ ist der ganzzahlige binäre Logarithmus von $n$, geschrieben $\floor{\log_2 n}$, jene nicht-negative ganze Zahl $k \in \N_0$, für die $2^k \leq n < 2^{k + 1}$ gilt. Es seien $a_1$, $a_2$ und $a_3$ drei paarweise verschiedene $20$bit Adressen.
+  \begin{enumerate}
+    \item Im Speicher stehe in Adresse $a_1$ die Zweierkomplementdarstellung einer positiven ganzen Zahl $x_1$. Schreiben Sie ein Minimalmaschinenprogramm, nach dessen Ausführung die Zweierkomplementdarstellung von $x_1 \kw{ div } 2$ im Akkumulator steht und das höchstens die Adressen $a_1$ und $a_2$ verwendet. % Beachten Sie, dass alle arithmetischen Ausdrücke, in denen $x_1$ vorkommt, keine Konstanten sind.
+%    \item Es sei $x \in \N_0$ so, dass $2^x \leq c$. Im Speicher stehe in Adresse $a_1$ die Zweierkomplementdarstellung von $c$ und in Adresse $a_2$ jene von $x$. Schreiben Sie ein Minimalmaschinenprogramm, das $c \kw{ div } 2^x$ in Zweierkomplementdarstellung im Speicher bei Adresse $a_3$ ablegt.
+%
+%          \emph{Hinweis:} Für jedes $y \in \N_0$ gilt $c \kw{ div } 2^{y + 1} = (c \kw{ div } 2) \kw{ div } 2^y$.
+    \item Im Speicher stehe in Adresse $a_1$ die Zweierkomplementdarstellung einer positiven ganzen Zahl $x_2$. Schreiben Sie ein Minimalmaschinenprogramm, nach dessen Ausführung die Zweierkomplementdarstellung von $\floor{\log_2 x_2}$ im Speicher bei Adresse $a_3$ steht. Dabei dürfen Sie das Programm aus der vorangegangenen Teilaufgabe verwenden, indem sie $\#{DIV } a_1$ dort im Programm schreiben, wo das Programm aus der vorangegangenen Teilaufgabe Zeichen für Zeichen ohne den (letzten) Befehl $\#{HALT}$ eingefügt werden soll. % Beachten Sie, dass alle arithmetischen Ausdrücke, in denen $x_2$ vorkommt, keine Konstanten sind.
+
+          \emph{Hinweise:}
+          \begin{itemize}
+          \item Für jedes $k \in \N_0$ gilt genau dann $k = \floor{\log_2 x_2}$, wenn $x_2 \kw{ div } 2^k = 1$.
+          \item Für jedes $y \in \N_0$ gilt $x_2 \kw{ div } 2^{y + 1} = (x_2 \kw{ div } 2) \kw{ div } 2^y$.
+          \item Auch wenn Sie für Teilaufgabe a) keine Lösung gefunden haben, können Sie Teilaufgabe b) bearbeiten.
+          \end{itemize}
+        \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item Die Zweierkomplementdarstellung $u$ von $x_1 \kw{ div } 2$ ist gleich der Zweierkomplementdarstellung $w$ von $x_1$ ohne das niederwertigste Bit. Zur Berechnung von $u$ rotieren wir $w$ um eins nach rechts und setzen das höchstwertige Bit auf $\#0$. Letzteres erreichen wir dadurch, dass wir den rotierten Wert bitweise mit $\#{011...1}$ verunden. Das Bitmuster $\#{011...1}$ bekommen wir indem wir $\#{111...1}$ bitweise mit $\#{000...01}$ exklusiv verodern und um eins nach rechts rotieren. Als Minimalmaschinenprogramm:
+          \begin{align*}
+            & \#{LDV } a_1 \\
+            & \#{RAR} \\
+            & \#{STV } a_1 \\
+            & \#{LDC } 0 \\
+            & \#{NOT} \\
+            & \#{STV } a_2 \\
+            & \#{LDC } 1 \\
+            & \#{XOR } a_2 \\
+            & \#{RAR} \\
+            & \#{AND } a_1 \\
+            & \#{HALT}
+          \end{align*}
+    \item Wir berechnen nacheinander $x_2$, $x_2 \kw{ div } 2$, $(x_2 \kw{ div } 2) \kw{ div } 2$, und so weiter, bis wir das erste Mal $1$ erhalten. Außerdem merken wir uns die Anzahl durchgeführter Ganzzahldivisionen. Als Minimalmaschinenprogramm:
+          \begin{align*}
+                                & \#{LDC } 0 \\
+                                & \#{STV } a_3 \\
+            \lbl{while\colon}   & \#{LDC } 1 \\
+                                & \#{EQL } a_1 \\
+                                & \#{JMN } \lbl{end} \\
+                                & \#{DIV } a_1 \\
+                                & \#{STV } a_1 \\
+                                & \#{LDC } 1 \\
+                                & \#{ADD } a_3 \\
+                                & \#{STV } a_3 \\
+                                & \#{JMP } \lbl{while} \\
+            \lbl{end\colon}     & \#{HALT}
+          \end{align*}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

@@ -1,0 +1,358 @@
+%=======================================================================
+\chapter{Dokumente}
+\label{k:dokumente}
+\strictpagecheck
+%-----------------------------------------------------------------------
+\section{Dokumente}
+
+Die Idee zu dieser Einheit geht auf eine Vorlesung "`Informatik A"' von Till
+Tantau\index{Tantau, Till} aus dem Jahre 2012 zurück.
+% URL tot:
+% (siehe \url{http://www.tcs.uni-luebeck.de/lehre/2012-ws/info-a/wiki/Vorlesung}, 18.10.2013).
+
+Im alltäglichen Leben hat man mit vielerlei Inschriften zu tun: Briefe,
+Kochrezepte, Zeitungsartikel, Vorlesungsskripte, Seiten im WWW, Emails, und so
+weiter.  Bei vielem, was wir gerade aufgezählt haben, und bei vielem anderen
+kann man drei verschiedene Aspekte unterscheiden, die für den Leser eine Rolle
+spielen, nämlich
+%
+\begin{itemize}
+\item den \mdefine{Inhalt}\index{Inhalt} des Textes,
+\item seine \mdefine{Struktur}\index{Struktur} und
+\item sein \mdefine[Erscheinungsbild,\\
+  Form]{Erscheinungsbild},\index{Erscheinungsbild} die (äußere)
+  \define{Form}.\index{Form}
+\end{itemize}
+%
+Stünde die obige Aufzählung so auf dem Papier:
+%
+\begin{itemize}
+\item den \uppercase{Inhalt} des Textes,
+\item seine \uppercase{Struktur} und
+\item sein \uppercase{Erscheinungsbild}, die (äußere) \uppercase{Form}.
+\end{itemize}
+%
+dann hätte man an der Form etwas geändert (Wörter in Großbuchstaben statt
+kursiv), aber nicht am Inhalt oder an der Struktur.  Hätten wir dagegen
+geschrieben:
+\begin{quote}
+  "`[\dots] den \define{Inhalt} des Textes, seine \define{Struktur} und sein
+  \define{Erscheinungsbild}, die (äußere) \define{Form}."'
+\end{quote}
+dann wäre die Struktur eine andere (keine Liste mehr, sondern Fließtext), aber
+der Inhalt immer noch der gleiche.  Und stünde hier etwas über
+\begin{itemize}
+\item \emph{Balaenoptera musculus} (Blauwal),
+\item \emph{Mesoplodon carlhubbsi} (Hubbs-Schnabelwal) und
+\item \emph{Physeter macrocephalus} (Pottwal),
+\end{itemize}
+dann wäre offensichtlich der Inhalt ein anderer.
+
+Von Ausnahmen abgesehen (welche fallen Ihnen ein?), ist Autoren und Lesern
+üblicherweise vor allem am Inhalt gelegen. Die Wahl einer bestimmten Struktur
+und Form hat primär zum Ziel, den Leser beim Verstehen des Inhalts zu
+unterstützen. Mit dem Begriff \mdefine{Dokumente}\index{Dokument} in der
+Überschrift sollen Texte gemeint sein, bei denen man diese drei Aspekte
+unterscheiden kann.
+
+Wenn Sie später beginnen, erste nicht mehr ganz kleine Dokumente (\zB
+Seminarausarbeitungen oder die Bachelor-Arbeit) selbst zu schreiben, werden
+Sie merken, dass die Struktur, oder genauer gesagt das Auf"|finden einer
+geeigneten Struktur, auch zu Ihrem, also des Autors, Verständnis beitragen
+kann. Deswegen ist es bei solchen Arbeiten unseres Erachtens sehr\graffito{ein
+  Rat für Ihr weiteres Studium} ratsam%
+\index{früh aufschreiben}\index{aufschreiben!früh}\index{Rat fürs
+  Studium}\index{Studium!ein guter
+  Rat}\index{Bachelorarbeit}\index{Seminararbeit}\index{Masterarbeit},
+\emph{früh damit zu beginnen, etwas aufzuschreiben,} weil man so gezwungen
+wird, über die Struktur nachzudenken.
+
+Programme fallen übrigens auch in die Kategorie dessen, was wir hier
+Dokumenten nennen.
+
+%-----------------------------------------------------------------------
+\section{Struktur von Dokumenten}
+
+Oft ist es so, dass es Einschränkungen bei der erlaubten Struktur von
+Dokumenten gibt. Als Beispiel wollen wir uns zwei sogenannte
+\mdefine[Auszeichnungssprache]{Auszeichnungssprachen}%
+\index{Auszeichnungssprache} (im Englischen \mdefine{markup
+language}\index{markup language}) ansehen. Genauer gesagt werden wir uns dafür
+interessieren, wie Listen in \LaTeX{} aufgeschrieben werden müssen, und wie
+Tabellen in XHTML.
+
+%-----------------------------------------------------------------------
+\subsection{\LaTeX}
+
+\LaTeX{}\index{LaTeX@{\LaTeX}}, ausgesprochen "`Latech"', ist (etwas ungenau,
+aber für unsere Belange ausreichend formuliert) eine Erweiterung eines
+Textsatz"=Programmes (ini\TeX), das von Donald Knuth\index{Knuth, Donald}
+entwickelt wurde (\url{http://www-cs-faculty.stanford.edu/~knuth/}, 27.11.2015).
+
+Es wird zum Beispiel in der Informatik sehr häufig für die Verfassung von
+wissenschaftlichen Arbeiten verwendet, weil unter anderem der Textsatz
+mathematischer Formeln durch \TeX{} von hervorragender Qualität ist, ohne dass
+man dafür viel tun muss. Sie ist deutlich besser als alles, was der Autor
+dieser Zeilen jemals in Dokumenten gesehen hat, die mit Programmen wie \zB
+libreoffice o.\,ä.\ verfasst wurden. Zum Beispiel liefert der Text
+\begin{verbatim}
+  \[ 2 - \sum_{i=0}^{k} i 2^{-i} = (k+2) 2^{-k} \]
+\end{verbatim}
+die Ausgabe
+  \[ 2 - \sum_{i=0}^{k} i 2^{-i} = (k+2) 2^{-k} \]
+%
+Auch der vorliegende Text wurde mit \LaTeX{} gemacht. Für den Anfang
+dieses Abschnittes wurde \zB geschrieben:
+
+\verb|\section{Struktur von Dokumenten}|\hfill
+
+\noindent
+woraus \LaTeX{} die Zeile
+
+{\large 7.2\ \ \ \ \textsc{Struktur von Dokumenten}}
+
+\noindent
+am Anfang dieser Seite gemacht hat.  Vor dem Text der Überschrift wurde also
+automatisch die passende Nummer eingefügt und der Text wurde in einer
+Kapitälchenschrift gesetzt. Man beachte, dass \zB die Auswahl der Schrift
+\emph{nicht} in der Eingabe mit vermerkt ist. Diese Angabe findet sich an
+anderer Stelle, und zwar an \emph{einer} Stelle, an der das typografische
+Aussehen \emph{aller} Abschnittsüberschriften (einheitlich) festgelegt ist.
+
+Ganz grob kann ein \LaTeX-Dokument \zB die folgende Struktur haben:
+{\small
+\begin{verbatim}
+  \documentclass[11pt]{report}
+  % Kommentare fangen mit einem %-Zeichen an und gehen bis zum Zeilenende
+  % dieser Teil heißt Präambel des Dokumentes
+  % die folgende Zeile ist wichtig, kann hier aber nicht erklärt werden
+  \usepackage[T1]{fontenc}      
+  % Unterstützung für Deutsch, z.B. richtige automatische Trennung
+  \usepackage[ngerman]{babel}      
+  % Angabe des Zeichensatzes, der für den Text verwendet wird
+  \usepackage[utf8]{inputenc}     % zu UTF-8 siehe Kapitel 10
+  % für das Einbinden von Grafiken
+  \usepackage{graphicx}
+  \begin{document}
+    % und hier kommt der eigentliche Text .....
+  \end{document}
+\end{verbatim}
+}
+%
+\noindent
+Eine Liste einfacher Punkte sieht in \LaTeX{} so aus:
+%
+\begin{center}
+  \begin{tabular}{l@{\hspace*{20mm}}l}
+    \toprule
+    Eingabe & Ausgabe \\
+    \midrule
+    \verb|\begin{itemize}|& \\
+      \verb|\item Inhalt|   & \textbullet\ \ Inhalt \\
+      \verb|\item Struktur| &\textbullet\ \ Struktur \\
+      \verb|\item Form|     &\textbullet\ \ Form \\
+      \verb|\end{itemize}|  & \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+%
+Vor den aufgezählten Wörtern steht jeweils ein dicker Punkt. Auch dieser
+Aspekt der äußeren Form ist \emph{nicht} dort festgelegt, wo die Liste steht,
+sondern an \emph{einer} Stelle, an der das typografische Aussehen \emph{aller}
+solcher Listen (einheitlich) festgelegt ist. Wenn man in seinen Listen lieber
+alle Aufzählungspunkte mit einem sogenannten Spiegelstrich "`--"' beginnen
+lassen möchte, dann muss man nur an einer Stelle (in der Präambel) die
+Definition von \verb|\item| ändern.
+
+Wollte man die formale Sprache $L_{\mathrm{itemize}}$ aller legalen
+Texte für Listen in LaTeX{} aufschreiben, dann könnte man \zB zunächst
+geeignet die formale Sprache $L_{\mathrm{item}}$ aller Texte
+spezifizieren, die hinter einem Aufzählungspunkt vorkommen dürfen.
+Dann wäre
+
+\noindent
+$L_{\mathrm{itemize}} = \bigl\{$\textcolor{darkblue}{\texttt{\char92
+    begin\char123 itemize\char125}}$\bigr\}$
+$\Bigl(\bigl\{$\textcolor{darkblue}{\texttt{\char92 item}}$\bigr\}
+L_{\mathrm{item}}\Bigr)^+ \bigl\{$\textcolor{darkblue}{\texttt{\char92
+    end\char123 itemize\char125}}$\bigr\}$ 
+
+\noindent
+Dabei haben wir jetzt vereinfachend so getan, als wäre es kein Problem,
+$L_{\mathrm{item}}$ zu definieren. Tatsächlich ist das aber zumindest auf den
+ersten Blick eines, denn ein Aufzählungspunkt in \LaTeX{} darf seinerseits
+wieder eine Liste enthalten. Bei naivem Vorgehen würde man also genau
+umgekehrt für die Definition von $L_{\mathrm{item}}$ auch auf
+$L_{\mathrm{itemize}}$ zurückgreifen (wollen). Wir diskutieren das ein kleines
+bisschen ausführlicher in Unterabschnitt~\ref{ssub:rekursive-def}.
+
+% -----------------------------------------------------------------------
+\subsection{HTML und XHTML}
+
+HTML ist die Auszeichnungssprache, die man benutzt, wenn man eine WWW-Seite
+(be)schreibt. Für HTML ist formaler als für \LaTeX{} festgelegt, wie
+syntaktisch korrekte solche Seiten aussehen. Das geschieht in einer
+sogenannten \emph{document type definition}, kurz \emph{DTD}.
+
+Hier ist ein Auszug aus der DTD für eine (nicht die allerneueste) Version von
+XHTML. Sie dürfen sich vereinfachend vorstellen, dass das ist im wesentlichen
+eine noch striktere Variante von HTML ist. Das nachfolgenden Fragment
+beschreibt teilweise, wie man syntaktisch korrekt eine Tabelle notiert.
+
+{\small
+\begin{verbatim}
+  <!ELEMENT table (caption?, thead?, tfoot?, (tbody+|tr+))>
+  <!ELEMENT caption  %Inline;>
+  <!ELEMENT thead    (tr)+>
+  <!ELEMENT tfoot    (tr)+>
+  <!ELEMENT tbody    (tr)+>
+  <!ELEMENT tr       (th|td)+>
+  <!ELEMENT th       %Flow;>
+  <!ELEMENT td       %Flow;>
+\end{verbatim}
+} 
+
+\noindent
+Wir können hier natürlich nicht auf Details eingehen. Einige einfache
+aber wichtige Aspekte sind aber mit unserem Wissen schon
+verstehbar. Die Wörter wie \literal{table}, \literal{thead},
+\literal{tr}, \usw dürfen wir als bequem notierte Namen für formale
+Sprachen auf"|fassen. Welche, das wollen wir nun klären.
+
+Die Bedeutung von \literal{*} und \literal{+} ist genau das, was wir als
+Konkatenationsabschluss und $\eps$-freien Konkatenationsabschluss kennen
+gelernt haben. Die Bedeutung des Kommas \literal{,} in der ersten Zeile ist
+die des Produktes formaler Sprachen. Die Bedeutung des senkrechten Striches
+\literal{|} in der sechsten Zeile ist Vereinigung von Mengen.
+
+Das Fragezeichen ist uns neu, hat aber eine ganz banale Bedeutung: In der uns
+geläufigen Notation würden wir definieren: $L^? = L^0\cup L^1 = \{\eps\} \cup
+L$. Mit anderen Worten: Wenn irgendwo $L^?$ notiert ist, dann kann an dieser
+Stelle ein Wort aus $L$ stehen, oder es kann fehlen. Das Auftreten eines
+Wortes aus $L$ ist also mit anderen Worten optional.
+
+Nun können Sie zur Kenntnis nehmen, dass \zB die Schreibweise
+
+\qquad \qquad \literal{<!ELEMENT tbody (tr)+ >} 
+
+\noindent
+die folgende formale Sprache festlegt:
+\[
+L_{\mathtt{tbody}} = \{\literal{<tbody>}\}\cdot
+L_{\mathtt{tr}}^+\cdot\{\literal{</tbody>}\}
+\]
+Das heißt, ein Tabellenrumpf (\emph{table body}) beginnt mit der
+Zeichenfolge \literal{<tbody>}, endet mit der Zeichenfolge
+\literal{</tbody>}, und enthält dazwischen eine beliebige positive
+Anzahl von Tabellenzeilen (\emph{table rows}). Und die erste Zeile aus
+der DTD besagt
+\[
+L_{\mathtt{table}} = \{\literal{<table>}\}\cdot
+L_{\mathtt{caption}}^?\cdot L_{\mathtt{thead}}^?\cdot
+L_{\mathtt{tfo{}ot}}^?\cdot (L_{\mathtt{tbody}}^+ \cup L_{\mathtt{tr}}^+)\cdot
+\{\literal{</table>}\}
+\]
+das heißt, eine Tabelle (\emph{table}) ist von den Zeichenketten
+\literal{<table>} und \literal{</table>} umschlossen und enthält
+innerhalb in dieser Reihenfolge
+%
+\begin{itemize}
+\item optional eine Überschrift (\emph{caption}),
+\item optional einen Tabellenkopf (\emph{table head}),
+\item optional einen Tabellenfuß (\emph{table foot}) und
+\item eine beliebige positive Anzahl von Tabellenrümpfen (siehe eben) oder
+  Tabellenzeilen.
+\end{itemize}
+%
+Insgesamt ergibt sich, dass zum Beispiel
+\begin{verbatim}
+  <table>
+    <tbody>
+      <tr>  <td>1</td> <td>a</td>  </tr>
+      <tr>  <td>2</td> <td>b</td>  </tr>
+    </tbody>
+  </table>
+\end{verbatim}
+eine syntaktisch korrekte Tabelle.
+
+In Wirklichkeit gibt es noch zusätzliche Aspekte, die das Ganze formal
+verkomplizieren und bei der Benutzung flexibler machen, aber das ganz
+Wesentliche haben wir damit jedenfalls an einem Beispiel beleuchtet.
+
+%%-----------------------------------------------------------------------
+%\section{Erstellung von Dokumenten}
+%
+%Wir haben schon darauf hingewiesen, dass 
+
+
+% -----------------------------------------------------------------------
+\subsection{Eine Grenze unserer bisherigen Vorgehensweise}
+\label{ssub:rekursive-def}
+
+Dass wir eben mit Hilfe von Produkt und Konkatenationsabschluss formaler
+Sprachen in einigen Fällen präzise Aussagen machen konnten, hing auch mit der
+Einfachheit dessen zusammen, was es zu spezifizieren galt.
+%
+Es wurde, jedenfalls in einem intuitiven Sinne, immer etwas von einer
+komplizierteren Art aus Bestandteilen einfacherer Art zusammengesetzt.
+
+Es gibt aber auch den Fall, dass man sozusagen größere Dinge einer Art aus
+kleineren Bestandteilen zusammensetzen will, die aber von der gleichen Art
+sind. Auf Listen, deren Aufzählungspunkte ihrerseits wieder Listen enthalten
+dürfen, hatten wir im Zusammenhang mit \LaTeX{} schon hingewiesen.  
+
+Ein anderes typisches Beispiel sind korrekt geklammerte arithmetische
+Ausdrücke. Sehen wir einmal von den Operanden und Operatoren ab und
+konzentrieren uns auf die reinen Klammerungen.  Bei einer syntaktisch
+korrekten Klammerung gibt es zu jeder Klammer auf "`weiter hinten"' die
+"`zugehörige"' Klammer zu. Insbesondere gilt:
+%
+\begin{itemize}
+\item Man kann beliebig viele korrekte Klammerungen konkatenieren und
+  erhält wieder eine korrekte Klammerung.
+\item Man kann um eine korrekte Klammerung außen herum noch ein
+  Klammerpaar schreiben (Klammer auf ganz vorne, Klammer zu ganz
+  hinten) und erhält wieder eine korrekte Klammerung.
+\end{itemize}
+%
+Man würde also gerne in irgendeinem Sinne $L_{\mathrm{Klammer}}$ mit
+$L_{\mathrm{Klammer}}^*$ und mit
+$\{\literal{(}\}\cdot L_{\mathrm{Klammer}}\cdot\{\literal{)}\}$ in Beziehung
+setzen. Es ist aber nicht klar wie. Insbesondere würden bei dem
+Versuch, eine Art Gleichung hinzuschreiben, sofort die Fragen im Raum
+stehen, ob die Gleichung überhaupt lösbar ist, und wenn ja, ob die
+Lösung eindeutig ist.
+ 
+%-----------------------------------------------------------------------
+\section{Zusammenfassung}
+
+In dieser Einheit haben wir über \emph{Dokumente} gesprochen. Sie
+haben einen \emph{Inhalt}, eine \emph{Struktur} und ein
+\emph{Erscheinungsbild}.
+
+Formale Sprachen kann man \zB benutzen, um zu spezifizieren, welche
+Struktur(en) ein legales, \dh syntaktisch korrektes Dokument haben
+darf, sofern die Strukturen hinreichend einfach sind. Was man in
+komplizierten Fällen machen kann, werden wir in einer späteren Einheit
+kennenlernen.
+ 
+%-----------------------------------------------------------------------
+%\section{Ausblick}
+
+%In der Einheit~\ref{k:codierungen} "`Codierungen"' werden wir genauer
+%auf Codierungen eingehen.
+
+%Mehr über Schriften findet man zum Beispiel über die WWW-Seite
+%\url{http://www.omniglot.com/writing/} (1.10.08).
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 78
+%%% mode: latex
+%%% TeX-master: "../k-11-dokumente/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:
+

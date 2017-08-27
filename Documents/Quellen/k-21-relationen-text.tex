@@ -1,0 +1,1302 @@
+%=== Einheit  ====================================================================
+\Tutonly{\begin{center}\Large\bfseries Hinweise f\"ur die Tutorien\end{center}}
+\Tut\chapter{Relationen}
+\label{u:relationen}
+
+%-----------------------------------------------------------------------
+\Tut\section{\"Aquivalenzrelationen}
+\label{sub:aequiv-rel}
+
+%-----------------------------------------------------------------------
+\Tut\subsection{Definition}
+\label{subsub:aequiv-def}
+
+\begin{tutorium}
+  \begin{itemize}
+  \item die Eigenschaften reflexiv, symmetrisch und transitiv an
+    Beispielrelationen klar machen
+  \item evtl. auch Relationen vorführen, die nur zwei oder eine oder
+    gar keine dieser Eigenschaften haben
+  \item Darstellung von Relationen als gerichtete Graphen:
+    Woran sieht man
+    \begin{itemize}
+    \item Reflexivität?
+    \item Symmetrie?
+    \item Transitivität?
+    \end{itemize}
+  \item Wie sieht der Graph einer Äquivalenzrelation aus:
+    "`Klumpen"', in denen jeder mit jedem verbunden ist, zwischen
+    den Klumpen nichts (die Klumpen heißen später Äquivalenzklassen)
+  \end{itemize}
+\end{tutorium}
+In Abschnitt~\ref{subsec:symm-rel-equiv-rel} hatten wir schon einmal
+erwähnt, dass eine Relation $R\subseteq M\x M$ auf einer Menge $M$,
+die
+\begin{itemize}
+\item reflexiv,
+\item symmetrisch und
+\item transitiv
+\end{itemize}
+ist, \mdefine{Äquivalenzrelation}\index{Äquivalenzrelation} heißt.
+Das bedeutet also, dass
+\begin{itemize}
+\item für alle $x\in M$ gilt: $(x,x)\in R$
+\item für alle $x,y\in M$ gilt: wenn $(x,y)\in R$, dann auch $(y,x)\in R$
+\item für alle $x,y,z\in M$ gilt: wenn $(x,y)\in R$ und $(y,z)\in R$,
+  dann auch $(x,z)\in R$.
+\end{itemize}
+%
+Für Äquivalenzrelationen benutzt man oft Symbole wie $\equiv$, $\sim$
+oder $\approx$, die mehr oder weniger deutlich an das
+Gleichheitszeichen erinnern, sowie Infixschreibweise. Dann liest sich
+die Definition so: Eine Relation $\equiv$ ist Äquivalenzrelation auf
+einer Menge $M$, wenn gilt:
+\begin{itemize}
+\item $\forall x\in M: x \equiv x$,
+\item $\forall x\in M: \forall y\in M: x\equiv y ==> y \equiv x$
+\item $\forall x\in M: \forall y\in M: \forall z\in M: x\equiv y \land
+  y\equiv z ==> x \equiv z$
+\end{itemize}
+%
+Der Anlass für Symbole, die an das "`$=$"' erinnnern, ist natürlich
+der, dass Gleichheit, also die Relation $\Id=\{ (x,x) \mid x\in M\}$,
+auf jeder Menge eine Äquivalenzrelation ist, denn offensichtlich gilt:
+\begin{itemize}
+\item $\forall x\in M: x = x$,
+\item $\forall x\in M: \forall y\in M: x = y ==> y = x$
+\item $\forall x\in M: \forall y\in M: \forall z\in M: x= y \land
+  y = z ==> x = z$
+\end{itemize}
+%
+Ein klassisches Beispiel sind die "`Kongruenzen modulo $n$"' auf den
+ganzen Zahlen. Es sei $n\in\N_+$. Zwei Zahlen $x,y\in \Z$ heißen
+\mdefine{kongruent modulo $n$}\index{Kongruenz modulo
+  $n$}\index{modulo $n$}, wenn die Differenz $x-y$ durch $n$ teilbar, also
+ein ganzzahliges Vielfaches von $n$, ist. Man schreibt typischerweise
+$x\equiv y \pmod n$. Dass dies tatsächlich Äquivalenzrelationen sind,
+haben Sie in Mathematikvorlesungen mehr oder weniger explizit gesehen.
+\begin{itemize}
+\item Die Reflexivität ergibt sich aus der Tatsache, dass $x-x=0$
+  Vielfaches von $n$ ist.
+\item Die Symmetrie gilt, weil mit $x-y$ auch $y-x=-(x-y)$ Vielfaches
+  von $n$ ist.
+\item Transitivität: Wenn $x-y=k_1n$ und $y-z=k_2n$ (mit $k_1,k_2\in
+  \Z$), dann ist auch $x-z=(x-y)+(y-z)=(k_1+k_2)n$ ein ganzzahliges
+  Vielfaches von $n$.
+\end{itemize}
+
+% %-----------------------------------------------------------------------
+% \Tut\subsection{\"Aquivalenzrelationen von Nerode}
+% \label{subsub:nerode}
+
+% \begin{tutorium}
+%   \begin{itemize}
+%   \item die Definition der Nerode-Äquivalenz verstand jedenfalls ich
+%     nicht auf Anhieb
+%   \item Manche brauchen vielleicht immer noch Anleitung, die
+%     Definition überhaupt richtig zu lesen.
+%   \item vielleicht hilft es, auch das zu diskutieren: 
+%     \begin{itemize}
+%     \item man nehme ein $L$, das von einem endlichen Akzeptor
+%       erkannt wird
+%     \item man nehme zwei Wörter $w_1$, $w_2$ die \emph{nicht}
+%       $\equiv_L$-äquivalent sind
+%     \item Was kann man über $f^*(z_0,w_1)$ und $f^*(z_0,w_2)$ sagen?
+%       Sie müssen verschieden sein, denn sonst
+%       $f^*(z_0,w_1)=f^*(z_0,w_2)$ und dann auch für jedes Suffix
+%       $w$: $f^*(z_0,w_1w)=f^*(z_0,w_2w)$, also werden für jedes
+%       Suffix entweder beide Wörter $w_1w$ und $w_2w$ oder keines
+%       akzeptiert, und dann wären $w_1$ und $w_2$ ja äquivalent.        
+%     \end{itemize}
+%   \end{itemize}
+% \end{tutorium}
+
+% Als ein durchgehendes Beispiel in diesem und weiteren Abschnitten
+% betrachten wir eine Äquivalenzrelation $\equiv_L$, die durch eine
+% formale Sprache $L\subseteq A^*$ auf der Menge $A^*$ aller Wörter
+% induziert wird. Sie heißt die \mdefine{Äquivalenzrelation von
+%   Nerode}\index{Äquivalenzrelation von
+%   Nerode}\index{Nerode!Äquivalenzrelation}. Die Relation ist wie folgt
+% definiert. Für alle $w_1, w_2\in A^*$ ist
+% \[
+% w_1 \equiv_L w_2 <==> \bigl( \forall w\in A^*: w_1w\in L <==> w_2w\in L   \bigr)
+% \]
+% Wenn man das erste Mal mit dieser Definition konfrontiert ist, muss
+% man sie erfahrungsgemäß mehrfach lesen. Zwei Wörter $w_1$ und $w_2$
+% sind dann und nur dann äquivalent, wenn gilt: Gleich, welches Wort
+% $w\in A^*$ man an die beiden anhängt, immer sind entweder beide
+% Produkte $w_1w$ und $w_2w$ in $L$, oder keines von beiden. Anders
+% gesagt: Zwei Wörter sind genau dann \emph{nicht}
+% $\equiv_L$-äquivalent, wenn es ein Wort $w\in A^*$ gibt, so dass genau
+% eines der Wörter $w_1w$ und $w_2w$ in $L$ liegt, aber das andere
+% nicht.
+
+% Betrachtet man das leere Wort $w=\eps$, dann ergibt sich insbesondere,
+% dass $w_1 \equiv_L w_2$ höchstens dann gelten kann, wenn beide Wörter
+% in $L$ liegen, oder beide nicht in $L$.
+
+% Nehmen wir als Beispiel das Alphabet $A=\{\#a, \#b\}$ und die formale
+% Sprache $L=\lang{\rx{a*b*}}\subset A^*$ aller Wörter, in denen
+% nirgends das Teilwort \#{ba} vorkommt. Versuchen wir anhand einiger
+% Beispielpaare von Wörtern, ein Gefühl dafür zu bekommen, welche Wörter
+% $\equiv_L$-äquivalent sind und welche nicht.
+% \begin{enumerate}
+% \item $w_1=\#{aaa}$ und $w_2=\#{a}$:
+%   \begin{itemize}
+%   \item Hängt man an beide Wörter ein $w\in \lang{\rx{a*}}$ an, dann
+%     sind sowohl $w_1w$ als auch $w_2w$ in $L$.
+%   \item Hängt man an beide Wörter ein $w\in \lang{\rx{a*bb*}}$ an,
+%     dann sind ebenfalls wieder sowohl $w_1w$ als auch $w_2w$ in $L$.
+%   \item Hängt man an beide Wörter ein $w$ an, das das Teilwort \#{ba}
+%     enthält, dann enthalten $w_1w$ und $w_2w$ beide \#{ba}, sind also
+%     beide nicht in $L$.
+%   \item Andere Möglichkeiten für ein Suffix $w$ gibt es nicht, also
+%     sind die beiden Wörter $\equiv_L$-äquivalent.
+%   \end{itemize}
+% \item $w_1=\#{aaab}$ und $w_2=\#{abb}$:
+%   \begin{itemize}
+%   \item Hängt man an beide Wörter ein $w\in \lang{\rx{b*}}$ an, dann
+%     sind sowohl $w_1w$ als auch $w_2w$ in $L$.
+%   \item Hängt man an beide Wörter ein $w$ an, das ein \#a enthält,
+%     dann enthalten $w_1w$ und $w_2w$ beide das Teilwort \#{ba}, sind
+%     also beide nicht in $L$.
+%   \item Andere Möglichkeiten gibt es nicht, also sind die beiden
+%     Wörter $\equiv_L$-äquivalent.
+%   \end{itemize}
+% \item $w_1=\#{aa}$ und $w_2=\#{abb}$:
+%   \begin{itemize}
+%   \item Hängt man an beide Wörter $w=\#a$ an, dann ist zwar
+%     $w_1w=\#{aaa}\in L$, aber $w_2w=\#{abba}\notin L$.
+%   \item Also sind die beiden Wörter \emph{nicht}
+%     $\equiv_L$-äquivalent.
+%   \end{itemize}
+% \item $w_1=\#{aba}$ und $w_2=\#{babb}$:
+%   \begin{itemize}
+%   \item Beide Wörter enthalten \#{ba}. Egal welches $w\in A^*$ man
+%     anhängt, bleibt das so, \dh immer sind $w_1w\notin L$ und
+%     $w_2w\notin L$.
+%   \item Also sind die beiden Wörter $\equiv_L$-äquivalent.
+%   \end{itemize}
+% \item $w_1=\#{ab}$ und $w_2=\#{ba}$:
+%   \begin{itemize}
+%   \item Da $w_1\in L$, aber $w_2\notin L$, zeigt schon das Suffix
+%     $w=\eps$, dass die beiden Wörter nicht $\equiv_L$-äquivalent sind.
+%   \end{itemize}
+% \end{enumerate}
+% %
+% Die wesentliche Behauptung ist nun:
+% \begin{lemma}
+%   Für jede formale Sprache $L$ ist $\equiv_L$ eine Äquivalenzrelation.
+% \end{lemma}
+% \begin{beweis}
+%   Man prüft nach, dass die drei definierenden Eigenschaften erfüllt
+%   sind.
+%   \begin{itemize}
+%   \item Reflexivität: Ist $w_1\in A^*$, dann gilt für jedes $w\in A^*$
+%     offensichtlich: $w_1w\in L <==> w_1w\in L$.
+%   \item Symmetrie: Für $w_1,w_2\in A^*$ und alle $w\in A^*$ gelte:
+%     $w_1w\in L <==> w_2w\in L$. Dann gilt offensichtlich auch immer
+%     $w_2w\in L <==> w_1w\in L$.
+%   \item Transitivität: Es seien $w_1,w_2,w_3\in A^*$ und es möge
+%     gelten
+%     \begin{align}
+%       \forall w\in A^*&: w_1w \in L <==> w_2w\in L \label{foo172a}\\
+%       \forall w\in A^*&: w_2w \in L <==> w_3w\in L \label{foo172b}
+%     \end{align}
+%     Wir müssen zeigen: $\forall w\in A^*: w_1w \in L <==> w_3w\in
+%     L$. Sei dazu ein beliebiges $w\in A^*$ gegeben. Falls $w_1w\in L$
+%     ist, dann ist wegen (\ref{foo172a}) auch $w_2w\in L$ und daher
+%     wegen (\ref{foo172b}) auch $w_3w\in L$. Analog folgt aus
+%     $w_1w\notin L$ der Reihe nach $w_2w\notin L$ und $w_3w\notin L$.
+%     Also gilt $w_1w \in L <==> w_3w\in L$.
+%   \end{itemize}
+% \end{beweis}
+
+
+%-----------------------------------------------------------------------
+\Tut\subsection{\"Aquivalenzklassen und Faktormengen}
+\label{subsub:aequivalenzklassen}
+
+Für $x\in M$ heißt $\{ y\in M\mid x \equiv y\}$ die
+\mdefine[Äquivalenzklasse]{Äquivalenzklasse von
+  $x$}\index{Äquivalenzklasse}. Man schreibt für die Äquivalenzklasse
+von $x$ mitunter $[x]_{\equiv}$ oder einfach $[x]$, falls klar ist,
+welche Äquivalenzrelation gemeint ist.
+
+\begin{tutorium}
+  noch mal das Beispiel Kongruenz modulo $n$; nehmen wir $n=5$; also
+  $x\equiv y \pmod 5$; das gilt, wenn $x-y$ ganzzahliges Vielfaches
+  von $5$ ist:
+  \begin{itemize}
+  \item $\dots, -10, -5, 0, 5, 10, \dots$ sind alle äquivalent zueinander, also\\
+    $[0]=\{\dots, -10, -5, 0, 5, 10, \dots\}$ oder kurz $[0]=5\Z$ (mit
+    der Komplexschreibweise aus Abschnitt~13.2.4 im Skript)\\
+    statt $[0]$ hätte man auch $[5]$ oder $[-10]$ oder
+    $[2783012931025]$ schreiben können.
+  \item da $1\not\equiv 0 \pmod 5$, ist $[1]$ eine \emph{andere}
+    Äquivalenzklasse. \\
+    $[1]=1+5\Z$; genauso gut könnte man schreiben $[1]=-24+5\Z$
+  \end{itemize}
+\end{tutorium}
+\begin{tutorium}
+  \begin{itemize}
+  \item Bitte klar machen: für $x\not= y$ kann $[x]=[y]$ sein
+  \item Beweisen: wenn $x\equiv y$, dann $[x]=[y]$
+    \begin{itemize}
+    \item wenn $z\in [x]$, dann $x\equiv z$, also wegen Symm. auch $z\equiv x$
+    \item mit $x\equiv y$ und Transitivität folgt $z\equiv y$,
+    \item also $y\equiv z$, also $z\in[y]$
+    \item also $[x]\subseteq [y]$.
+    \item umgekehrt geht es genauso.
+    \end{itemize}
+  \item Beweisen: Wenn ein $z$ sowohl in $[x]$ als auch in $[y]$
+    ist, dann ist $[x]=[y]$.
+    \begin{itemize}
+    \item Wenn $z\in[x]$ und $z\in[y]$, dann $x\equiv z$ und
+      $y\equiv z$,
+    \item also wegen Symmetrie $x\equiv z$ und $z\equiv y$,
+    \item also wegen Transitivität $x\equiv y$
+    \item also (eben gesehen) $[x]=[y]$
+    \item Äquivalenzklassen sind also entweder disjunkt oder
+      gleich. "`halbe Überlappungen"' gibt es nicht
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+Für die Menge aller Äquivalenzklassen schreibt man $M_{/\equiv}$ und
+nennt das manchmal auch die \mdefine{Faktormenge}\index{Faktormenge}
+oder \mdefine[Faserung]{Faserung von $M$ nach
+  $\equiv$}\index{Faserung}, also $M_{/\equiv} = \{ [x]_{\equiv} \mid
+x\in M\}$.
+
+Ist konkret $\equiv$ die Äquivalenzrelation "`modulo $n$"' auf den
+ganzen Zahlen, dann schreibt man für die Faktormenge auch $\Z_n$.
+
+\begin{tutorium}
+  \subsubsection*{Faktormenge von $\Z$ für Kongruenz modulo $5$}
+  \begin{itemize}
+  \item hinreichend langes Überlegen zeigt: die Äquivalenzklassen
+    $[0]$, $[1]$, $[2]$, $[3]$ und $[4]$ sind alle paarweise
+    verschieden: für je zwei der Zahlen ist die Differenz
+    offensichtlich positiv, aber echt kleiner als $5$.
+  \item Aber für jedes andere $x\in\Z$ gibt es eine äquivalente Zahl
+    zwischen $0$ und $4$, nämlich den Rest bei Division durch $5$.
+  \item Also gibt es nur fünf Äquivalenzklassen:
+    \[
+    \Z_{/\equiv_5} = \Z_5 = \{  [0], [1], [2], [3], [4] \}
+    \]
+  \end{itemize}
+\end{tutorium}
+% \begin{tutorium}
+%   \subsubsection*{Faktormenge für Nerode-Äquivalenz}
+%   \begin{itemize}
+%   \item Machen Sie sich bitte die Äquivalenzklassen von $\equiv_L$
+%     aus den Skriptbeispielen klar, so dass Sie sie erklären können.
+%   \end{itemize}
+% \end{tutorium}
+% Mitunter ist es nützlich, sich anzusehen aus wievielen
+% Äquivalenzklassen eine Faserung besteht. Nehmen wir als Beispiel
+% wieder die durch $L=\lang{\rx{a*b*}}$ induzierte Nerode-Äquivalenz
+% $\equiv_L$. Schaut man sich noch einmal die Argumentationen im
+% vorangegangenen Abschnitt an, dann merkt man, dass jedes Wort zu genau
+% einem der drei Wörter $\eps$, \#{b} und \#{ba} äquivalent ist. Mit
+% anderen Worten besteht $A^*_{/\equiv_L}$ aus drei Äquivalenzklassen:
+% \begin{itemize}
+% \item $[\eps]=\lang{\rx{a*}}$
+% \item $[\#{b}]=\lang{\rx{a*bb*}}$
+% \item $[\#{ba}] = \lang{\rx{a*bb*a(a|b)*}}$
+% \end{itemize}
+% %
+% Die Wahl der Repräsentanten in dieser Aufzählung ist natürlich
+% willkürlich. Wir hätten genauso gut schreiben können:
+% \begin{itemize}
+% \item $[\#{aaaaa}]=\lang{\rx{a*}}$
+% \item $[\#{aabbbbb}]=\lang{\rx{a*bb*}}$
+% \item $[\#{aabbaabbba}] = \lang{\rx{a*bb*a(a|b)*}}$
+% \end{itemize}
+% %
+% Die durch eine formale Sprache $L$ induzierte Nerode-Äquivalenz hat
+% aber nicht immer nur endlich viele Äquivalenzklassen. Als Beispiel
+% betrachte man das schon in Abschnitt~\ref{sec:akzeptoren} diskutierte
+% \[
+% L = \{\#a^k\#b^k \mid k\in\N_0\} \;.
+% \]
+% Für diese Sprache besteht $A^*_{/\equiv_L}$ aus unendlich vielen
+% Äquivalenzklassen. Ist nämlich $k\not= m$, dann sind $w_1=\#a^k$ und
+% $w_2= \#a^m$ nicht äquivalent, wie man durch Anhängen von $w=\#b^k$
+% sieht:
+% \begin{itemize}
+% \item $w_1w=\#a^k\#b^k\in L$, aber
+% \item $w_2w=\#a^m\#b^k\notin L$.
+% \end{itemize}
+% Also ist zumindest jedes Wort $\#a^k$, $k\in\N_0$ in einer anderen
+% Äquivalenzklasse. Und es sind auch jeweils keine anderen Wörter in
+% diesen Äquivalenzklassen.
+
+% Die Wörter der Form $\#a^k\#b$, $k\in\N_+$ sind ebenfalls alle in
+% paarweise verschiedenen Äquivalenzklassen. Jede von diesen ist aber
+% unendlich groß, denn für jedes $k$ sind jeweils alle Wörter der Form
+% $\#a^{k+m}\#b^{1+m}$ für beliebiges $m\in\N_0$ äquivalent.
+
+% Vielleicht lässt die Tatsache, dass es für die reguläre Sprache
+% $\lang{\rx{a*b*}}$ endlich viele Äquivalenzklassen gibt, aber für die
+% nicht reguläre Sprache $L = \{\#a^k\#b^k \mid k\in\N_0\}$ unendlich
+% viele, Sie schon etwas ahnen.
+
+%-----------------------------------------------------------------------
+\Tut\section{Kongruenzrelationen}
+\label{sub:kong-rel}
+
+Mitunter hat eine Menge $M$, auf der eine Äquivalenzrelation definiert
+ist, zusätzliche "`Struktur"', \bzw auf $M$ sind eine oder mehrere
+Operationen definiert. Als Beispiel denke man etwa an die ganzen
+Zahlen $\Z$ mit der Addition. Man kann sich dann \zB fragen, wie sich
+Funktionswerte ändern, wenn man Argumente durch andere, aber
+äquivalente ersetzt.
+
+
+%-----------------------------------------------------------------------
+\Tut\subsection{Vertr\"aglichkeit von Relationen mit Operationen}
+\label{subsub:vertraeglichkeit}
+
+Um den Formalismus nicht zu sehr aufzublähen, beschränken wir uns in
+diesem Unterabschnitt auf die zwei am häufigsten vorkommenden
+einfachen Fälle.
+
+Es sei $\equiv$ eine Äquivalenzrelation auf einer Menge $M$ und
+$f:M->M$ eine Abbildung. Man sagt, dass $\equiv$ mit $f$
+\mdefine{verträglich}\index{Verträglichkeit} ist, wenn für alle
+$x_1,x_2\in M$ gilt:
+\[
+x_1 \equiv x_2 ==> f(x_1) \equiv f(x_2) \;.
+\]
+Ist $\sqbox$ eine binäre Operation auf einer Menge $M$, dann heißen
+$\equiv$ und $\sqbox$ \mdefine{verträglich}\index{Verträglichkeit} ,
+wenn für alle $x_1,x_2\in M$ und alle $y_1,y_2\in M$ gilt:
+\[
+x_1 \equiv x_2 \land y_1 \equiv y_2 ==>  x_1\sqbox y_1 \equiv x_2\sqbox y_2 \;.
+\]
+Ein typisches Beispiel sind wieder die Äquivalenzrelationen "`modulo
+$n$"'. Diese Relationen sind mit Addition, Subtraktion und
+Multiplikation verträglich. Ist etwa
+\begin{alignat*}{2}
+  x_1&\equiv x_2 \pmod n &\qquad& \text{also\quad} x_1-x_2 = k n\\
+  \text{und \quad} y_1&\equiv y_2 \pmod n && \text{also\quad} y_1-y_2 = m n
+\end{alignat*}
+dann ist zum Beispiel
+\[
+(x_1+y_1) - (x_2+y_2) = (x_1-x_2) + (y_1-y_2) = (k+m)n \;.
+\]
+Mit anderen Worten ist dann auch
+\[
+x_1+y_1 \equiv x_2+y_2 \pmod n \;.
+\]
+Eine Äquivalenzrelation, die mit allen gerade interessierenden
+Funktionen oder/und Operationen verträglich ist, nennt man auch eine
+\mdefine{Kongruenzrelation}\index{Kongruenzrelation}.
+
+% Auch die Nerode-Äquivalenzen haben eine solche Eigenschaft. Sei $w'\in
+% A^*$ ein beliebiges Wort und sei $f_{w'}:A^*->A^*$ die Abbildung, die
+% $w'$ an ihr Argument anhängt, also $f_{w'}(v)=vw'$.  Wir behaupten,
+% dass $\equiv_L$ mit allen $f_{w'}$ verträglich ist. \dh:
+% \[
+% \forall w_1, w_2\in A^*: w_1\equiv_L w_2 ==> w_1w' \equiv_L w_2w'
+% \]
+% Wir müssen zeigen: Wenn $w_1\equiv_L w_2$ ist, dann ist auch $w_1w'
+% \equiv_L w_2w'$. Gehen wir also davon aus, dass für \emph{alle} $w\in
+% A^*$ gilt: $w_1w\in L <==> w_2w\in L$. Wir müssen zeigen, dass für
+% alle $v\in A^*$ gilt: $(w_1w')v\in L <==> (w_2w')v\in L$. Das
+% geht ganz einfach. Sei $v\in A^*$ beliebig; dann gilt
+% \begin{align*}
+%   (w_1w')v\in L &<==> w_1(w'v)\in L \\
+%   &<==> w_2(w'v)\in L \text{\qquad weil $w_1\equiv_L w_2$}\\
+%   &<==> (w_2w')v\in L \;.
+% \end{align*}
+
+%-----------------------------------------------------------------------
+\Tut\subsection{Wohldefiniertheit von Operationen mit \"Aquivalenzklassen}
+\label{subsub:wohldefiniertheit}
+
+% \begin{tutorium}
+%   \begin{itemize}
+%   \item Wichtig: Verständnis dafür, dass so etwas wie 
+%     \[
+%     f'_x: A^*_{/\equiv_L} -> A^*_{/\equiv_L}: [w] \mapsto [wx]
+%     \]
+%     nicht vollkommen automatisch eine vernünftige Definition ist,
+%     sondern nur, weil eben $\equiv_L$ mit Konkatenation von rechts
+%     verträglich ist.
+%   \end{itemize}
+% \end{tutorium}
+\begin{tutorium}
+  \subsubsection*{Arithmetik modulo $n$}
+  \begin{itemize}
+  \item im Skript nachgerechnet: wenn
+    \begin{alignat*}{2}
+      x_1&\equiv x_2 \pmod n &\qquad& \text{also\quad} x_1-x_2 = k n\\
+      \text{und \quad} y_1&\equiv y_2 \pmod n && \text{also\quad} y_1-y_2 = m n
+    \end{alignat*}
+    dann auch
+    \[
+    x_1+y_1 \equiv x_2+y_2 \pmod n \;.
+    \]
+  \item analog zeigt man, dass dann auch 
+    \[
+    x_1\cdot y_1 \equiv x_2\cdot y_2 \pmod n \
+    \]
+    denn
+    \[
+    x_1\cdot y_1 =(x_2+kn)\cdot (y_2+mn)=x_2\cdot y_2 + (x_2m+ky_2+km)n
+    \]
+    also ist $x_1\cdot y_1 - x_2\cdot y_2$ offensichtlich ganzzahliges
+    Vielfaches von $n$.
+  \item also kann man mit den Äquivalenzklassen rechnen, indem man
+    immer irgendein Element jeder Ä.klasse hernimmt und mit ihnen
+    rechnet ("`repräsentantenweise"'); Beispiel $n=5$:
+    \begin{align*}
+      [3]+[4] &= [3+4] = [7] = [2] \\
+      [2]+[3] &= [2+3] = [5] = [0] \\
+      \text{aber auch } [2]+[3] &= [7]+[-12] = [7-12] = [-5] = [0] \\
+      [2]\cdot[3] &= [2\cdot3] = [6] = [1]\\
+    \end{align*}
+  \item wann ist $[x]\cdot[y]=[0]$? Dafür muss $xy$ äquivalent zu $0$
+    sein, also Vielfaches von $5$. Da $5$ eine Primzahl ist, muss dann
+    schon $x$ oder $y$ Vielfaches von $5$ gewesen sein, also $[x]=[0]$
+    oder $[y]=[0]$.
+  \item Es ergeben sich die folgenden Tabellen:
+
+    \begin{tabular}{>{$}c<{$}| *{5}{>{$}c<{$}}}
+       +  & [0]& [1]& [2]& [3]& [4]\\ \hline
+      [0] & [0]& [1]& [2]& [3]& [4]\\\relax
+      [1] & [1]& [2]& [3]& [4]& [0]\\\relax
+      [2] & [2]& [3]& [4]& [0]& [1]\\\relax
+      [3] & [3]& [4]& [0]& [1]& [2]\\\relax
+      [4] & [4]& [0]& [1]& [2]& [3]\\\relax
+    \end{tabular}
+    \qquad und \qquad
+    \begin{tabular}{>{$}c<{$}| *{5}{>{$}c<{$}}}
+       \cdot  & [0]& [1]& [2]& [3]& [4]\\ \hline
+      [0] & [0]& [0]& [0]& [0]& [0]\\\relax
+      [1] & [0]& [1]& [2]& [3]& [4]\\\relax
+      [2] & [0]& [2]& [4]& [1]& [3]\\\relax
+      [3] & [0]& [3]& [1]& [4]& [2]\\\relax
+      [4] & [0]& [4]& [3]& [2]& [1]\\\relax
+    \end{tabular}
+  \end{itemize}
+\end{tutorium}
+
+Wann immer man eine Kongruenzrelation vorliegen hat, also \zB eine
+Äquivalenzrelation $\equiv$ auf $M$ die mit einer binären Operation
+$\sqbox$ auf $M$ verträglich ist, \mdefine[induzierte
+Operation]{induziert}\index{induzierte
+  Operation}\index{Operation!induzierte} diese Operation auf $M$ eine
+Operation auf $M_{/\equiv}$. Analoges gilt für Abbildungen $f:M->M$.
+
+% Betrachten wir wieder die Nerode"=Äquivalenzen. $L$ sei wie immer eine
+% beliebige formale Sprache $L\subseteq A^*$. Eben hatten wir uns
+% überlegt, dass insbesondere für jedes $x\in A$ die Abbildung
+% $f_x:A^*->A^*: w\mapsto wx$ mit $\equiv_L$ verträglich ist.
+
+% Wir schreiben nun einmal hin:
+% \[
+%   f'_x: A^*_{/\equiv_L} ->  A^*_{/\equiv_L}: [w] \mapsto [wx]
+% \]
+% Der ganz entscheidende Punkt ist: Dies ist eine vernünftige
+% Definition.  Wenn Sie so etwas zum ersten Mal sehen, fragen Sie sich
+% vielleicht, warum es überhaupt Unsinn sein könnte. Nun: Es wird hier
+% versucht eine Abbildung zu definieren, die jede Äquivalenzklasse auf
+% eine Äquivalenzklasse abbildet. Aber die durch $[w]$ beschriebene
+% Klasse enthält ja im allgemeinen nicht nur $w$, sondern noch viele
+% andere Wörter. Zum Beispiel hatten wir uns weiter vorne überlegt, dass
+% im Fall $L=\lang{\rx{a*b*}}$ die Wörter $\eps$, \#a, $\#a^2$, $\#a^3$,
+% \usw alle in einer Äquivalenzklasse liegen. Es ist also $[\eps] =
+% [\#a] = [\#a^2] =\cdots$.  \Dh, damit das, was wir eben für $f'_x$
+% hingeschrieben haben, wirklich eine Definition ist, die für jedes
+% Argument \emph{eindeutig} einen Funktionswert festlegt, sollte dann
+% bitte auch $[\eps x] = [\#ax] = [\#a^2x] =\cdots$ sein. Und das ist
+% so, denn hier hinter steckt nichts anderes als die Forderung
+% \begin{align*}
+%   w_1\equiv_L w_2 &==> w_1x \equiv_L w_2x \\
+%   \text{also \quad } w_1\equiv_L w_2 &==> f_x(w_1) \equiv_L f_x(w_2)
+% \end{align*}
+% Und weil wir gesehen hatte, dass das gilt, sind wie man auch sagt, die
+% Abbildungen $f'_x: A^*_{/\equiv_L} -> A^*_{/\equiv_L}$
+% \mdefine{wohldefiniert}\index{wohldefinierte
+%   Abbildung}\index{Abbildung!wohldefinierte}. Die Abbildungsvorschrift
+% ist unabhängig von der Wahl des Repräsentanten der Äquivalenzklasse,
+% die als Argument verwendet wird.
+
+% Allgemein gilt: Wenn $\equiv$ mit $f:M->M$ verträglich ist, dann ist
+% $f':M_{/\equiv} -> M_{/\equiv}: f'([x]) = [f(x)] $ wohldefiniert.
+
+% Zum Abschluss werfen wir einen letzten Blick auf die
+% Nerode-Äquivalenzen. Sei nun $L$ eine formale Sprache, für die
+% $\equiv_L$ nur endlich viele Äquivalenzklassen hat. Wir schreiben zur
+% Abkürzung $Z=A^*_{/\equiv_L}$ und definieren
+% \[
+% f: Z\x A -> Z: f([w],x) = [wx]
+% \]
+% Diese Abbildung ist nach dem oben Gesagten wohldefiniert. Und sie
+% erinnert Sie hoffentlich an endliche Automaten. Das ist Absicht. Legt
+% man nämlich noch fest
+% \begin{itemize}
+% \item $z_0=[\eps]$ und
+% \item $F=\{ [w] \mid w\in L\}$
+% \end{itemize}
+% dann hat man einen endlichen Akzeptor, der genau die formale Sprache
+% $L$ erkennt. Überlegen Sie sich das! 
+
+% Ohne Beweis teilen wir Ihnen noch die folgenden schönen Tatsachen mit:
+% Für jede formale Sprache, die von einem endlchen Akzeptor erkannt
+% wird, hat $\equiv_L$ nur endlich viele Äquivalenzklassen. Und der
+% gerade konstruierte Akzeptor ist unter allen, die $L$ erkennen, einer
+% mit minimaler Zustandszahl. Und dieser endliche Akzeptor ist bis auf
+% Isomorphie (also Umbenenung von Zuständen) sogar eindeutig.
+ 
+%-----------------------------------------------------------------------
+\Tut\section{Halbordnungen}
+\label{sub:halbord-rel}
+
+Eine Ihnen wohlvertraute Halbordnung ist die Mengeninklusion
+$\subseteq$. Entsprechende Beispiele tauchen daher im folgenden immer
+wieder auf.
+%, zumal Sie am Ende dieses Abschnittes sehen werden, dass
+%man zum Beispiel durch den Fixpunktsatz von Knaster-Tarski für
+%sogenannte vollständige Halbordnungen noch einmal einen neuen Blick
+%auf kontextfreie Grammatiken bekommt.
+
+%-----------------------------------------------------------------------
+\Tut\subsection{Grundlegende Definitionen}
+\label{subsub:halb-ord-def}
+
+Eine Relation $R\subseteq M\x M$ heißt
+\mdefine[Antisymmetrie]{antisymmetrisch}\index{antisymmetrische
+  Relation}\index{Relation!antisymmetrisch}, wenn für alle $x,y\in M$
+gilt:
+\[
+x R y \land y R x ==> x=y
+\]
+Eine Relation $R\subseteq M\x M$ heißt
+\mdefine{Halbordnung}\index{Halbordnung}, wenn sie
+\begin{itemize}
+\item reflexiv,
+\item antisymmetrisch und
+\item transitiv
+\end{itemize}
+ist.  Wenn $R$ eine Halbordnung auf einer Menge $M$ ist, sagt man
+auch, die Menge sei \mdefine[halbgeordnete
+Menge]{halbgeordnet}\index{halbgeordnete Menge}.
+
+Auf der Menge aller Wörter über einem Alphabet $A$ ist die Relation
+$\sqleq_p$ ein einfaches Beispiel, die definiert sei vermöge der
+Festlegung $w_1\sqleq_p w_2 <==> \exists u\in A^*: w_1u=w_2$. Machen
+Sie sich zur Übung klar, dass sie tatsächlich die drei definierenden
+Eigenschaften einer Halbordnung hat.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Man erarbeite, dass die Relation $\sqleq_p$ auf $A^*$ mit
+    $v\sqleq_p w <==> \exists u: vu=w$ eine Halbordnung ist:
+    \begin{itemize}
+    \item Reflexivität: gilt wegen  $w_1\eps=w_1$
+    \item Antisymmetrie: wenn $w_1\sqleq_p w_2$ und $w_2\sqleq_p w_1$,
+      dann gibt es $u_1,u_2\in A^*$ mit $w_1u_1=w_2$ und
+      $w_2u_2=w_1$. Also ist $w_1u_1u_2=w_2u_2=w_1$. Also muss
+      $|u_1u_2|=0$ sein, also $u_1=u_2=\eps$, also $w_1=w_2$.
+    \item Transitivität: wenn $w_1\sqleq_p w_2$ und $w_2\sqleq_p w_3$,
+      dann gibt es $u_1,u_2\in A^*$ mit $w_1u_1=w_2$ und
+      $w_2u_2=w_3$.  Also ist $w_1(u_1u_2)=(w_1u_1)u_2=w_2u_2=w_3$,
+      also $w_1\sqleq_p w_3$.
+    \end{itemize}
+  \item Das folgende ist \emph{keine} Halbordnung auf $A^*$:
+    $w_1\sqleq w_2 <==> |w_1| \leq |w_2|$. Studenten überlegen
+    lassen: Antisymmetrie ist verletzt. (Reflexivität und
+    Transitivität sind erfüllt.)
+  \end{itemize}
+\end{tutorium}
+
+Es sei $M'$ eine Menge und $M=2^{M'}$ die Potenzmenge von $M'$. Dann
+ist die Mengeninklusion $\subseteq$ eine Halbordnung auf $M$. Auch
+hier sollten Sie noch einmal aufschreiben, was die Aussagen der drei
+definierenden Eigenschaften einer Halbordnung sind. Sie werden merken,
+dass die Antisymmetrie eine Möglichkeit an die Hand gibt, die
+Gleichheit zweier Mengen zu beweisen (wir haben das auch schon
+ausgenutzt).
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Vielleicht noch mal Rekapitulation des Begriffs
+    "`Potenzmenge"'?
+  \item die drei Eigenschaften von Halbordnungen für $\subseteq$ auf
+    $2^M$ durchgehen \dots
+  \end{itemize}
+\end{tutorium}
+
+Wenn $R$ Halbordnung auf einer \emph{endlichen} Menge $M$ ist, dann
+stellt man sie manchmal graphisch dar. Wir hatten schon in
+Unterabschnitt~\ref{subsub:relationen-revisited} darauf hingewiesen,
+dass Relationen und gerichtete Graphen sich formal nicht
+unterscheiden. Betrachten wir als Beispiel die halbgeordnete Menge
+$(2^{\{a,b,c\}}, \subseteq)$. Im zugehörigen Graphen führt eine Kante
+von $M_1$ zu $M_2$, wenn $M_1\subseteq M_2$ ist. Es ergibt sich also
+die Darstellung aus Abbildung~\ref{fig:halbord-graph}. 
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[->,>=stealth]
+    \matrix[matrix of math nodes,column sep=17mm,row sep=15mm,nodes={circle,draw,inner sep=1pt,minimum width=13mm}]   {
+       & & |(abc)| \{a,b,c\} &  \\
+       |(ab)| \{a,b\} & & |(ac)| \{a,c\} & |(bc)| \{b,c\}  \\
+       |(a)| \{a\} & |(b)| \{b\} & & |(c)| \{c\} \\
+       & |(e)| \{\} & \\
+    };
+    \draw (e) --  (a);
+    \draw (e) --  (ab);
+    \draw (e) --  (abc);
+    \draw (e) --  (ac);
+    \draw (e) --  (b);
+    \draw (e) --  (bc);
+    \draw (e) --  (c);
+
+    \draw (a) -- (ab);
+    \draw (a) -- (abc);
+    \draw (a) -- (ac);
+    \draw (b) -- (ab);
+    \draw (b) -- (abc);
+    \draw (b) -- (bc);
+    \draw (c) -- (abc);
+    \draw (c) -- (ac);
+    \draw (c) -- (bc);
+
+    \draw (ab) -- (abc);
+    \draw (ac) -- (abc);
+    \draw (bc) -- (abc);
+
+    \draw (e) edge[loop left] ();
+    \draw (a) edge[loop left] ();
+    \draw (ab) edge[loop left] ();
+    \draw (b) edge[loop left] ();
+    \draw (bc) edge[loop right] ();
+    \draw (ac) edge[loop right] ();
+    \draw (c) edge[loop right] ();
+    \draw (abc) edge[loop right] ();
+  \end{tikzpicture}
+  \caption{Die Halbordnung $(2^{\{a,b,c\}}, \subseteq)$ als Graph}
+  \label{fig:halbord-graph}
+\end{figure}
+%
+Wie man sieht wird das ganze recht schnell relativ
+unübersichtlich. Dabei ist ein Teil der Kanten nicht ganz so wichtig,
+weil deren Existenz ohnehin klar ist (wegen der Reflexivität) oder aus
+anderen Kanten gefolgert werden kann (wegen der
+Transitivität). Deswegen wählt man meist die Darstellung als
+sogenanntes \mdefine{Hasse"=Diagramm}\index{Hasse-Diagramm} dar. Das
+ist eine Art "`Skelett"' der Halbordnung, bei dem die eben
+angesprochenen Kanten fehlen. Genauer gesagt ist es der Graph der
+Relation $H_R = (R\smallsetminus \Id) \smallsetminus (
+R\smallsetminus\Id)^2$. In unserem Beispiel ergibt sich aus
+Abbildung~\ref{fig:halbord-graph} durch Weglassen der Kanten
+Abbildung~\ref{fig:halbord-hasse}.
+%
+\begin{tutorium}
+  \subsubsection*{Hasse-Diagramm}
+  \begin{itemize}
+  \item man lässt überall die trivial ergänzbaren Kringel weg
+  \item und lässt von den übrigen Pfeilen diejenigen weg, die man aus
+    anderen mittels Transitivität "`konstruieren"' kann
+  \end{itemize}
+\end{tutorium}
+%
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[->,>=stealth]
+    \matrix[matrix of math nodes,column sep=17mm,row sep=15mm,nodes={circle,draw,inner sep=1pt,minimum width=13mm}]   {
+       & & |(abc)| \{a,b,c\} &  \\
+       |(ab)| \{a,b\} & & |(ac)| \{a,c\} & |(bc)| \{b,c\}  \\
+       |(a)| \{a\} & |(b)| \{b\} & & |(c)| \{c\} \\
+       & |(e)| \{\} & \\
+    };
+    \draw (e) --  (a);
+    %\draw (e) --  (ab);
+    %\draw (e) --  (abc);
+    %\draw (e) --  (ac);
+    \draw (e) --  (b);
+    %\draw (e) --  (bc);
+    \draw (e) --  (c);
+
+    \draw (a) -- (ab);
+    %\draw (a) -- (abc);
+    \draw (a) -- (ac);
+    \draw (b) -- (ab);
+    %\draw (b) -- (abc);
+    \draw (b) -- (bc);
+    %\draw (c) -- (abc);
+    \draw (c) -- (ac);
+    \draw (c) -- (bc);
+
+    \draw (ab) -- (abc);
+    \draw (ac) -- (abc);
+    \draw (bc) -- (abc);
+
+%     \draw (e) edge[loop left] ();
+%     \draw (a) edge[loop left] ();
+%     \draw (ab) edge[loop left] ();
+%     \draw (b) edge[loop left] ();
+%     \draw (bc) edge[loop right] ();
+%     \draw (ac) edge[loop right] ();
+%     \draw (c) edge[loop right] ();
+%     \draw (abc) edge[loop right] ();
+  \end{tikzpicture}
+  \caption{Hassediagramm der Halbordnung $(2^{\{a,b,c\}}, \subseteq)$}
+  \label{fig:halbord-hasse}
+\end{figure}
+
+Vom Hassediagramm kommt man "`ganz leicht"' wieder zur ursprünglichen
+Halbordnung: Man  muss nur die reflexiv-transitive Hülle bilden.
+
+\begin{lemma}
+  \label{lem:h-stern=halbord}
+  Wenn $R$ eine Halbordnung auf einer endlichen Menge $M$ ist und
+  $H_R$ das zugehörige Hassediagramm, dann ist $H_R^*=R$.
+\end{lemma}
+%
+\begin{beweis}
+  \label{bew:h-stern=halbord}
+  $R$ und $H_R$ sind beides Relationen über der gleichen Grundmenge
+  $M$ (also ist $R^0=H_R^0$) und offensichtlich ist $H_R\subseteq
+  R$. Eine ganz leichte Induktion (machen Sie sie) zeigt, dass für
+  alle $i\in\N_0$ gilt: $H_R^i\subseteq R^i$ und folglich
+  $H_R^*\subseteq R^*$. Da $R$ reflexiv und transitiv ist, ist
+  $R^*=R$, also $H_R^*\subseteq R$.
+
+
+  Nun wollen wir zeigen, dass umgekehrt auch gilt: $R\subseteq H_R^*$.
+  Sei dazu $(x,y)\in R$. Falls $x=y$ ist, ist auch
+  $(x,y)\in\Id\subseteq H_R^*$.
+
+  Sei daher im folgenden $x\not= y$, also $(x,y)\in R\smallsetminus
+  \Id$, und sein $(x_0, x_1, \dots, x_m)$ eine Folge von Elementen mit
+  folgenden Eigenschaften:
+  \begin{itemize}
+  \item $x_0=x$ und $x_m=y$
+  \item für alle $0\leq i<m$ ist $x_i\sqleq x_{i+1}$
+  \item für alle $0\leq i<m$ ist $x_i\not= x_{i+1}$
+  \end{itemize}
+  In einer solchen Folge kann kein Element $z\in M$ zweimal
+  auftauchen. Wäre nämlich $x_i=z$ und $x_k=z$ mit $k>i$, dann wäre
+  jedenfalls $k\geq i+2$ und $x_{i+1}\not=z$. Folglich wäre einerseits
+  $z=x_i\sqleq x_{i+1}$ und andererseits $x_{i+1}\sqleq \cdots \sqleq
+  x_k$, also wegen Transitivität $x_{i+1}\sqleq x_k=z$. Aus der
+  Antisymmetrie von $\sqleq$ würde $x_{i+1}=z$ folgen im
+  Widerspruch zum eben Festgehaltenen.
+
+  Da in einer Folge $(x_0, x_1, \dots, x_m)$ der beschriebenen Art
+  kein Element zweimal vorkommen kann und $M$ endlich ist, gibt es
+  auch maximal lange solche Folgen. Sei im folgenden $(x_0, x_1,
+  \dots, x_m)$ maximal lang. Dann gilt also für alle $0\leq i<m$, dass
+  man zwischen zwei Elemente $x_i$ und $x_{i+1}$ kein weiteres Element
+  einfügen kann, dass also gilt: $\lnot \exists z\in M: x_i \sqleq z
+  \sqleq x_{i+1} \land x_i\not=z \land x_{i+1}\not=z$.
+
+  Dafür kann man auch schreiben: $\lnot \exists z\in M: (x_i,z)\in
+  R\smallsetminus \Id \land (z,x_{i+1})\in R\smallsetminus \Id$, \dh
+  $(x_i,x_{i+1})\notin(R\smallsetminus \Id)^2$.
+
+  Also gilt für alle $0\leq i<m$: $(x_i,x_{i+1})\in (R\smallsetminus
+  \Id)\smallsetminus (R\smallsetminus \Id)^2=H_R$. Daher ist
+  $(x,y)=(x_0,x_m)\in H_R^m\subseteq H_R^*$.
+\end{beweis}
+
+Graphen, die das Hassediagramm einer endlichen Halbordnung sind,
+heißen auch \mdefine{gerichtete azyklische Graphen}\index{gerichteter
+  azyklischer Graph}\index{Graph!gerichteter azyklischer} (im
+Englischen \emph{directed acyclic graph} oder kurz
+\mdefine{Dag}\index{Dag}), weil sie keine Zyklen mit mindestens einer
+Kante enthalten. Denn andernfalls hätte man eine Schlinge oder (fast
+die gleiche Argumentation wie eben im
+Beweis~\ref{bew:h-stern=halbord}) des Lemmas verschiedene Elemente $x$
+und $y$ mit $x\sqleq y$ und $y\sqleq x$. 
+
+Gerichtete azyklische Graphen tauchen an vielen Stellen in der
+Informatik auf, nicht nur natürlich bei Problemstellungen im
+Zusammenhang mit Graphen, sondern \zB auch bei der Darstellung von
+Datenflüssen, im Compilerbau, bei sogenannten \emph{binary decision
+  diagrams} zur Darstellung logischer Funktionen \usw
+
+% -----------------------------------------------------------------------
+\Tut\subsection{"`Extreme"' Elemente}
+\label{subsub:extrem-halb-ord}
+
+Es sei $(M,\sqleq)$ eine halbgeordnete Menge und $T$ eine beliebige
+Teilmenge von $M$.
+
+Ein Element $x\in T$ heißt \mdefine{minimales Element} von
+$T$\index{minimales Element}, wenn es kein $y\in T$ gibt mit $y\sqleq
+x$ und $y\not=x$.  Ein Element $x\in T$ heißt \mdefine{maximales
+  Element} von $T$\index{maximales Element}, wenn es kein $y\in T$
+gibt mit $x\sqleq y$ und $x\not=y$.
+
+Ein Element $x\in T$ heißt \mdefine{größtes Element} von
+$T$\index{größtes Element}, wenn für alle $y\in T$ gilt: $y\sqleq x$.  Ein
+Element $x\in T$ heißt \mdefine{kleinstes Element} von
+$T$\index{kleinstes Element}, wenn für alle $y\in T$ gilt: $x\sqleq y$.
+
+Eine Teilmenge $T$ kann mehrere minimale (\bzw maximale) Elemente
+besitzen, aber nur ein kleinstes (\bzw größtes). Als Beispiel
+betrachte man die Teilmenge $T\subseteq 2^{\{a,b,c\}}$ aller Teilmengen
+  von $\{a,b,c\}$, die nichtleer sind. Diese Teilmenge besitzt die
+  drei minimalen Elemente $\{a\}$, $\{b\}$ und $\{c\}$. Und sie
+besitzt ein größtes Element, nämlich $\{a,b,c\}$.
+
+Ein Element $x\in M$ heißt \mdefine{obere Schranke} von
+$T$\index{obere Schranke}\index{Schranke!obere}, wenn für alle $y\in
+T$ gilt: $y\sqleq x$. Ein $x\in M$ heißt \mdefine{untere Schranke} von
+$T$\index{untere Schranke}\index{Schranke!untere}, wenn für alle $y\in
+T$ gilt: $x\sqleq y$.  In der Halbordnung $(2^{\{a,b,c\}}, \subseteq)$
+besitzt zum Beispiel $T=\{ \{\}, \{a\}, \{b\} \}$ zwei obere
+Schranken: $\{a,b\}$ und $\{a,b,c\}$. Die Teilmenge $T=\{ \{\}, \{a\},
+\{b\}, \{a,b\} \}$ besitzt die gleichen oberen Schranken.
+
+In einer Halbordnung muss nicht jede Teilmenge eine obere Schranke
+besitzen. Zum Beispiel besitzt die Teilmenge aller Elemente der
+Halbordnung mit dem Hassediagramm
+\begin{tikzpicture}[->,>=stealth,baseline=(e.base)]
+  \matrix[matrix of math nodes,column sep=2mm,row sep=2mm,nodes={circle,draw,inner sep=1pt,minimum width=1mm}]   {
+    |(a)| && |(b)|    \\
+    & |(e)| & \\
+  };
+  \draw (e) --  (a);
+  \draw (e) --  (b);
+\end{tikzpicture}
+\emph{keine} obere Schranke.
+
+Besitzt die Menge der oberen Schranken einer Teilmenge $T$ ein
+kleinstes Element, so heißt dies das
+\mdefine{Supremum}\index{Supremum} von $T$ und wir schreiben dafür
+$\bigsqcup T$ (oder $\sup(T)$\graffito{$\bigsqcup T$, $\sup(T)$}).
+
+Besitzt die Menge der unteren Schranken einer Teilmenge $T$ ein
+größtes Element, so heißt dies das \mdefine{Infimum}\index{Infimum}
+von $T$. Das werden wir in dieser Vorlesung aber nicht benötigen.
+
+Wenn eine Teilmenge kein Supremum besitzt, dann kann das daran liegen,
+dass sie gar keine oberen Schranken besitzt, oder daran, dass die
+Menge der oberen Schranken kein kleinstes Element hat. Liegt eine
+Halbordnung der Form $(2^M, \subseteq)$, dann besitzt aber jede
+Teilmenge $T\subseteq 2^M$ ein Supremum. $\bigsqcup T$ ist dann
+nämlich die Vereinigung aller Elemente von $T$ (die Teilmengen von $M$
+sind).
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Man male Hassediagramme von Halbordnungen, bei denen
+    irgendwelche Teilmengen kleinste/größte/.... Elemente besitzen
+    oder nicht besitzen.
+  \end{itemize}
+\end{tutorium}
+
+%-----------------------------------------------------------------------
+\Tut\subsection{Vollst\"andige Halbordnungen}
+\label{sub:voll-halb-ord}
+
+Eine \mdefine{aufsteigende Kette}\index{aufsteigende Kette} ist eine
+abzählbar unendliche Folge $(x_0,$ $x_1,$ $x_2,\dots)$ von Elementen einer
+Halbordnung mit der Eigenschaft: $\forall i\in\N_0: x_i \sqleq x_{i+1}$.
+
+Eine Halbordnung heißt \mdefine[vollständige
+Halbordnung]{vollständig}\index{vollständige
+  Halbordnung}\index{Halbordnung!vollständige}, wenn sie ein kleinstes
+Element besitzt und jede aufsteigende Kette ein Supremum besitzt. Für
+das kleinste Element schreiben wir im folgenden $\bottom$.  Für das
+das Supremum einer aufsteigenden Kette $x_0\sqleq x_1\sqleq x_2\sqleq
+\cdots$ schreiben wir $\bigsqcup_i x_i$.
+
+Ein ganz wichtiges Beispiel für eine vollständige Halbordnung ist die
+schon mehrfach erwähnte Potenzmenge $2^{M'}$ einer Menge $M'$ mit
+Mengeninklusion $\subseteq$ als Relation. Das kleinste Element ist die
+leere Menge $\emptyset$. Und das Supremum einer aufsteigenden Kette
+$T_0\subseteq T_1\subseteq T_2\subseteq \cdots$ ist $\bigsqcup_i
+T_i=\bigcup T_i$.
+
+Andererseits ist $(\N_0,\leq)$ \emph{keine} vollständige Halbordung,
+denn unbeschränkt wachsende aufsteigende Ketten wie \zB $0 \leq 1\leq
+2 \leq \cdots$ besitzen kein Supremum in $\N_0$. Wenn man aber noch
+ein weiteres Element $u$ "`über"' allen Zahlen hinzufügt, dann ist die
+Ordnung vollständig. Man setzt also $N=\N_0\cup\{u\}$ und definiert
+\[
+x \sqleq y <==> \bigl(x, y\in\N_0 \land x\leq y\bigr) \lor(y=u)
+\]
+Weil wir es später noch brauchen können, definieren wir auch noch
+$N'=\N_0\cup\{u_1,u_2\}$ mit der totalen Ordnung
+\[
+x \sqleq y <==> \bigl(x, y\in\N_0 \land x\leq y\bigr)
+\lor\bigl(x\in\N_0\cup\{u_1\}\land y=u_1\bigr) \lor y=u_2
+\]
+also sozusagen
+\[
+0 \sqleq 1 \sqleq 2 \sqleq 3 \sqleq \cdots \sqleq u_1 \sqleq u_2
+\]
+Ein anderes Beispiel einer (sogar totalen) Ordnung, die \emph{nicht}
+vollständig ist, werden wir am Ende von Abschnitt~\ref{sub:ord-rel}
+sehen.
+
+% -----------------------------------------------------------------------
+\Tut\subsection{Stetige Abbildungen auf vollst\"andigen Halbordnungen}
+
+Es sei $\sqleq$ eine Halbordnung auf einer Menge $M$. Eine Abbildung
+$f:M-> M$ heißt \mdefine[monotone Abbildung]{monoton}\index{monotone
+  Abbildung}\index{Abbildung!monotone}, wenn für alle $x,y\in M$ gilt:
+$x\sqleq y ==> f(x) \sqleq f(y)$.
+
+Die Abbildung $f(x)=x+1$ etwa ist auf der Halbordnung $(\N_0,\leq)$
+monoton. Die Abbildung $f(x)=x \bmod 5$ ist auf der gleichen
+Halbordnung dagegen nicht monoton, denn es ist zwar $3\leq 10$, aber
+$f(3)=3 \not\leq 0=f(10)$.
+
+
+Eine monotone Abbildung $f:D->D$ auf einer vollständigen Halbordnung
+$(D,\sqleq)$ heißt \mdefine[stetige Abbildung]{stetig}\index{stetige
+  Abbildung}\index{Abbildung!stetige}, wenn für jede aufsteigende
+Kette $x_0\sqleq x_1\sqleq x_2 \sqleq \cdots$ gilt: $f(\bigsqcup_i x_i)
+= \bigsqcup_i f(x_i)$.
+
+Betrachten wir als erstes Beispiel noch einmal die vollständige
+Halbordnung $N'=\N_0\cup\{u_1,u_2\}$ von eben. Die Abbildung
+$f:N'->N'$ mit
+\[
+f(x) =
+\begin{cases}
+  x+1 & \text{ falls } x\in \N_0\\
+  u_1 & \text{ falls } x=u_1\\
+  u_2 & \text{ falls } x=u_2\\
+\end{cases}
+\]
+ist stetig. Denn für jede aufsteigende Kette $x_0\sqleq x_1\sqleq x_2
+\sqleq \cdots$ gibt es nur zwei Möglichkeiten:
+\begin{itemize}
+\item Die Kette wird konstant. Es gibt also ein $n'\in N'$ und ein
+  $i\in\N_0$ so dass gilt: $x_0\sqleq x_1\sqleq x_2 \sqleq \cdots
+  \sqleq x_i = x_{i+1} = x_{i+2} = \cdots = n'$. Dann ist jedenfalls
+  $\bigsqcup_i x_i = n'$. Es gibt nun drei Unterfälle zu betrachten:
+
+  \begin{itemize}
+  \item Wenn $n'=u_2$ ist, dann ist wegen $f(u_2)=u_2$ ist auch
+    $\bigsqcup_i f(x_i)=u_2$, also ist $f(\bigsqcup_i x_i) =\bigsqcup_i
+    f(x_i)$.
+  \item Wenn $n'=u_1$, gilt eine analoge Überlegung.
+  \item Wenn $n'\in\N_0$ ist, dann ist $f(\bigsqcup_i x_i) =
+    f(n')=n'+1$.  Andererseits ist die Kette der Funktionswerte
+    $f(x_0)\sqleq f(x_1)\sqleq f(x_2) \sqleq \cdots \sqleq f(x_i) =
+    f(x_{i+1}) = f(x_{i+2}) = \cdots = f(n')=n'+1$. Also ist
+    $f(\bigsqcup_i x_i) =\bigsqcup_i f(x_i)$.
+  \end{itemize}
+\item Der einzige andere Fall ist: die Kette wird nicht konstant. Dann
+  müssen alle $x_i\in\N_0$ sein, und die Kette wächst
+  unbeschränkt. Das gleiche gilt dann auch für die Kette der
+  Funktionswerte. Also haben beide als Supremum $u_1$ und wegen
+  $f(u_1)=u_1$ ist $f(\bigsqcup_i x_i) =\bigsqcup_i f(x_i)$.
+\end{itemize}
+%
+Der letzte Fall zeigt einem auch gleich schon, dass dagegen die
+folgende Funktion $g:N'->N'$ \emph{nicht} stetig ist:
+\[
+g(x) =
+\begin{cases}
+  x+1 & \text{ falls } x\in \N_0\\
+  u_2 & \text{ falls } x=u_1\\
+  u_2 & \text{ falls } x=u_2\\
+\end{cases}
+\]
+Der einzige Unterschied zu $f$ ist, dass nun $g(u_1)=u_2$.  Eine
+unbeschränkt wachsende Kette $x_0\sqleq x_1\sqleq x_2 \sqleq \cdots$
+nichtnegativer ganzer Zahlen hat Supremem $u_1$, so dass $g(\bigsqcup_i
+x_i)=u_2$ ist.  Aber die Kette der Funktionswerte $g(x_0)\sqleq
+g(x_1)\sqleq g(x_2) \sqleq \cdots$ hat Supremem
+$\bigsqcup_i g(x_i)=u_1\not=g(\bigsqcup_i x_i)$.
+
+Der folgende Satz ist eine abgeschwächte Version des sogenannten
+Fixpunktsatzes von Knaster und Tarski.
+
+\begin{satz}
+  Es sei $f:D->D$ eine monotone und stetige Abbildung auf einer
+  vollständigen Halbordnung $(D,\sqleq)$ mit kleinstem Element
+  $\bottom$. Elemente $x_i\in D$ seien wie folgt definiert:
+  \begin{align*}
+    x_0 &= \bottom \\
+    \forall i\in\N_0: x_{i+1} &= f(x_i) 
+  \end{align*}
+  Dann gilt:
+  \begin{enumerate}
+  \item Die $x_i$ bilden eine Kette: $x_0 \sqleq x_1\sqleq x_2 \sqleq
+    \cdots$.
+  \item Das Supremum $x_f=\bigsqcup_i x_i$ dieser Kette ist Fixpunkt von
+    $f$, also $f(x_f)=x_f$.
+  \item $x_f$ ist der kleinste Fixpunkt von $f$: Wenn $f(y_f)=y_f$
+    ist, dann ist $x_f\sqleq y_f$.
+  \end{enumerate}
+\end{satz}
+
+\begin{beweis}
+  Mit den Bezeichnungen wie im Satz gilt:
+  \begin{enumerate}
+  \item Dass für alle $i\in\N_0$ gilt $x_i\sqleq x_{i+1}$, sieht man
+    durch vollständige Induktion: $x_0\sqleq x_1$ gilt, weil
+    $x_0=\bottom$ das kleinste Element der Halbordnung ist. Und wenn
+    man schon weiß, dass $x_i\sqleq x_{i+1}$ ist, dann folgt wegen der
+    Monotonie von $f$ sofort $f(x_i)\sqleq f(x_{i+1})$, also
+    $x_{i+1}\sqleq x_{i+2}$.
+  \item Wegen der Stetigkeit von $f$ ist $f(x_f)= f(\bigsqcup_i x_i)
+    =\bigsqcup_i f(x_i) = \bigsqcup_i x_{i+1}$. Die Folge der $x_{i+1}$
+    unterscheidet sich von der Folge der $x_i$ nur durch das fehlende
+    erste Element $\bottom$. Also haben "`natürlich"' beide Folgen das
+    gleiche Supremum $x_f$; also ist $f(x_f)=x_f$.
+
+    Falls Sie das nicht ganz "`natürlich"' fanden, hier eine ganz
+    genaue Begründung:
+    \begin{itemize}
+    \item Einerseits ist für alle $i\geq 1$: $x_i\sqleq \bigsqcup_i
+      x_{i+1}$. Außerdem ist $\bottom=x_0\sqleq \bigsqcup_i
+      x_{i+1}$. Also ist $\bigsqcup_i x_{i+1}$ eine obere Schranke für
+      alle $x_i$, $i\in\N_0$, also ist $\bigsqcup_i x_i\sqleq
+      \bigsqcup_i x_{i+1}$.
+    \item Andererseits ist für alle $i\geq 1$: $x_i\sqleq \bigsqcup_i
+      x_i$. Also ist $\bigsqcup_i x_i$ eine obere Schranke für alle
+      $x_{i+1}$, $i\in\N_0$, also ist $\bigsqcup_i x_{i+1}\sqleq
+      \bigsqcup_i x_i$.
+    \item Aus $\bigsqcup_i x_i\sqleq \bigsqcup_i x_{i+1}$ und
+      $\bigsqcup_i x_{i+1}\sqleq \bigsqcup_i x_i$ folgt mit der
+      Antisymmetrie von $\sqleq$ sofort die Gleichheit der beiden
+      Ausdrücke.
+    \end{itemize}
+  \item Durch Induktion sieht man zunächst einmal: $\forall i\in\N_0:
+    x_i \sqleq y_f$. Denn $x_0\sqleq y_f$ gilt, weil $x_0=\bottom$ das
+    kleinste Element der Halbordnung ist. Und wenn man schon weiß,
+    dass $x_i\sqleq y_f$ ist, dann folgt wegen der Monotonie von $f$
+    sofort $f(x_i)\sqleq f(y_f)$, also $x_{i+1}\sqleq y_f$. Also ist
+    $y_f$ eine obere Schranke der Kette, also ist gilt für die
+    kleinste obere Schranke: $x_f=\bigsqcup_i x_i \sqleq y_f$.
+  \end{enumerate}
+\end{beweis}
+%
+Dieser Fixpunktsatz (und ähnliche) finden in der Informatik an
+mehreren Stellen Anwendung. Zum Beispiel kann er Ihnen in Vorlesungen
+über Sematik von Programmiersprachen wieder begegnen.
+
+Hier können wir Ihnen schon andeuten, wie er im Zusammenhang mit
+kontextfreien Grammatiken nützlich sein kann. Betrachten wir als
+Terminalzeichenalphabet $T=\{\#a,\#b\}$ und die kontextfreie Grammatik
+$G=(\{X\},T,X,P)$ mit Produktionenmenge $P=\{X -> \#a X \#b \mid
+\eps\}$.  Als halbgeordnete Menge $D$ verwenden wir die Potenzmenge
+$D=2^{T^*}$ der Menge aller Wörter mit Inklusion als
+Halbordnungsrelation. Die Elemente der Halbordnung sind also Mengen
+von Wörtern, \dh formale Sprachen. Kleinstes Element der Halbordnung
+ist die leere Menge $\emptyset$. Wie erwähnt, ist diese Halbordnung
+vollständig.
+
+\begin{tutorium}
+  \begin{itemize}
+  \item Aus dem Skript: Gegeben sei Terminalzeichenalphabet
+    $T=\{\#a,\#b\}$ und als halbgeordnete Menge $D$ die Potenzmenge
+    $D=2^{T^*}$ der Menge aller Wörter mit Inklusion als
+    Halbordnungsrelation. Die Elemente der Halbordnung sind also
+    Mengen von Wörtern, \dh formale Sprachen. Kleinstes Element der
+    Halbordnung ist die leere Menge $\emptyset$. Wie weiter vorne
+    erwähnt, ist diese Halbordnung vollständig.
+  \item Es sei $v\in T^*$ ein Wort und $f_v:D->D$ die Abbildung
+    $f_v(L)=\{v\}L$, die vor jedes Wort von $L$ vorne $v$
+    konkateniert.
+  \item Behauptung: $f_v$ ist stetig.
+  \item Beweis: Es sei $L_0\subseteq L_1\subseteq L_2\subseteq
+    \cdots$ eine Kette und $L=\bigcup L_i$ ihr Supremum.
+
+    $f_v(L_i)=\{ vw\mid w\in L_i\}$, also $\bigcup_i f_v(L_i)=\{
+    vw\mid \exists i\in\N_0: w\in L_i\} = \{v\}\{w \mid \exists
+    i\in\N_0: w\in L_i\}$ $=\{v\}\bigcup_i L_i = f(\bigcup_i L_i)$.
+  \item analog für Konkatenation von rechts
+  \item Das ist der wesentliche Teil von dem, was im Skript aus
+    Bequemlichkeit weggelassen wurde bei der letzten Andeutung zu
+    "`Grammatiken als Gleichungssysteme"'.
+  \end{itemize}
+\end{tutorium}
+Es sei nun $f:D->D$ die Abbildung mit $f(L)= \{\#a\}L\{\#b\}
+\cup\{\eps\}$. Der Bequemlichkeit halber wollen wir nun einfach
+glauben, dass $f$ stetig ist. (Wenn Ihnen das nicht passt, prüfen Sie
+es nach. Es ist nicht schwer.) Der Fixpunktsatz besagt, dass man den
+kleinsten Fixpunkt dieser Abbildung erhält als Supremum, hier also
+Vereinigung, aller der folgenden Mengen:
+\begin{align*}
+  L_0 &= \emptyset\\
+  L_1 &= f(L_0) = \{\#a\}L_0\{\#b\}\cup\{\eps\} \\
+  &= \{\eps\} \\
+  L_2 &= f(L_1) = \{\#a\}L_1\{\#b\}\cup\{\eps\} \\
+  &= \{\#{ab},\eps\} \\
+  L_3 &= f(L_2) = \{\#a\}L_2\{\#b\}\cup\{\eps\} \\
+  &= \{\#{aabb},\#{ab},\eps\} \\
+\end{align*}
+%
+Sie sehen, wie der Hase läuft. Der kleinste Fixpunkt ist
+$L=\{\#a^k\#b^k\mid k\in \N_0\}$. Das ist auch genau die Sprache, die
+die Grammatik erzeugt. Und  $L$ ist Fixpunkt von $f$, also
+\[
+L = \{\#a\}L\{\#b\}\cup\{\eps\}
+\]
+Es ist also sozusagen die kleinste Lösung der Gleichung $X =
+\{\#a\}X\{\#b\}\cup\{\eps\}$. Was das mit den Produktionen der
+Grammatik zu tun, sehen Sie vermutlich.
+
+
+
+% -----------------------------------------------------------------------
+\Tut\section{Ordnungen}
+\label{sub:ord-rel}
+
+Eine Relation $R\subseteq M\x M$ ist eine
+\mdefine{Ordnung}\index{Ordnung}, oder auch genauer \mdefine{totale
+  Ordnung}\index{totale Ordnung}\index{Ordnung!total}, wenn $R$
+Halbordnung ist und außerdem  gilt:
+\[
+\forall x,y\in M: x R y \lor y R x
+\]
+
+Wie kann man aus der weiter vorne definierten Halbordnung $\sqleq_p$
+auf $A^*$ eine totale Ordnung machen?  Dafür gibt es natürlich
+verschiedene Möglichkeiten. Auf jeden Fall muss aber \zB festgelegt
+werden, ob $\#a\sqleq\#b$ oder $\#b\sqleq \#a$.
+
+Es ist also auf jeden Fall eine totale Ordnung $\sqleq_A$ auf den
+Symbolen des Alphabetes erforderlich. Nehmen wir an, wir haben das:
+also \zB $\#a \sqleq_A \#b$.
+
+Dann betrachtet man des öfteren zwei sogenannte
+\mdefine[lexikographische Ordnung]{lexikographische
+  Ordnungen}\index{lexikographische
+  Ordnung}\index{Ordnung!lexikographische}. Die eine ist die
+naheliegende Verallgemeinerung dessen, was man aus Wörterbüchern
+kennt. Die andere ist für algorithmische Zwecke besser geeignet.
+\begin{itemize}
+\item Die lexikographische Ordnung $\sqleq_1$, nach der Wörter in
+  Lexika \usw sortiert sind, kann man wie folgt definieren. Seien
+  $w_1,w_2\in A^*$. Dann gibt es das eindeutig bestimmte maximal lange
+  gemeinsame Präfix von $w_1$ und $w_2$, also das maximal lange Wort
+  $v\in A^*$, so dass es $u_1, u_2\in A^*$ gibt mit $w_1=v\,u_1$ und
+  $w_2=v\,u_2$. Drei Fälle sind möglich:
+  \begin{enumerate}
+  \item\label{pkt:lex1} Falls $v=w_1$ ist, gilt $w_1\sqleq_1 w_2$.
+  \item\label{pkt:lex2} Falls $v=w_2$ ist, gilt $w_2\sqleq_1 w_1$.
+  \item\label{pkt:lex3} Falls $w_1\not=v\not=w_2$, gibt es $x,y\in
+    A$ und $u'_1, u'_2\in A^*$ mit
+    \begin{itemize}
+    \item $x\not=y$ und
+    \item $w_1=v\,x\,u'_1$ und $w_2=v\,y\,u'_2$.
+    \end{itemize}
+    Dann gilt $w_1\sqleq_1 w_2 <==> x\sqleq_A y$.
+  \end{enumerate}
+  Muss man wie bei einem Wörterbuch nur endlich viele Wörter ordnen,
+  dann ergibt sich zum Beispiel
+  \begin{align*}
+    \#{a} &\sqleq_1 \#{aa} \sqleq_1 \#{aaa} \sqleq_1 \#{aaaa} \\
+    &\sqleq_1 \#{ab} \sqleq_1 \#{aba} \sqleq_1 \#{abbb}\\
+     \sqleq_1 \#{b} &\sqleq_1 \#{baaaaaa} \sqleq_1 \#{baab} \\
+    &\sqleq_1 \#{bbbbb}
+  \end{align*}
+  Allgemein auf der Menge aller Wörter ist diese Ordnung aber nicht
+  ganz so "`harmlos"'.  Wir gehen gleich noch darauf ein.
+\item Eine andere lexikographische Ordnung $\sqleq_2$ auf $A^*$ kann
+  man definieren, indem man festlegt, dass $w_1 \sqleq_2 w_2$ genau
+  dann gilt, wenn
+  \begin{itemize}
+    \item entweder $|w_1| < |w_2|$
+    \item oder $|w_1| = |w_2|$ und $w_1 \sqleq_1 w_2 $ gilt.
+  \end{itemize}
+  % 
+  Diese Ordnung beginnt also \zB im Falle $A=\{\#a,\#b\}$ mit der
+  naheliegenden Ordnung $\sqleq_A$ so:
+  \begin{align*}
+    \eps &\sqleq_2 \#{a} \sqleq_2 \#{b} \\
+    &\sqleq_2 \#{aa} \sqleq_2 \#{ab} \sqleq_2 \#{ba} \sqleq_2 \#{bb}\\
+    &\sqleq_2 \#{aaa} \sqleq_2 \cdots \sqleq_2 \#{bbb} \\
+    &\sqleq_2 \#{aaaa } \sqleq_2 \cdots \sqleq_2 \#{bbbb} \\
+    &\cdots
+  \end{align*}
+\end{itemize}
+%
+\begin{tutorium}
+  \subsubsection*{lexikographische Ordnung erster und zweiter Art}
+  \begin{itemize}
+  \item Man betrachte Beispiele für $\sqleq_1$
+    ("`Wörterbuchordnung"'):
+    \begin{itemize}
+    \item  Warum ist $\#{aa} \sqleq_1 \#{aabba}$?
+    \item  Warum ist $\#{aa} \sqleq_1 \#{bba}$?
+    \item  Warum ist $\#{aaaaa} \sqleq_1 \#{bba}$?
+    \item  Warum ist $\#{aaaab} \sqleq_1 \#{aab}$?
+    \end{itemize}
+  \item Man betrachte Beispiele für $\sqleq_2$ (primär nach Länge,
+    erst danach alphabetisch ordnen):
+    \begin{itemize}
+    \item  Warum ist $\#{aa} \sqleq_2 \#{aabba}$?
+    \item  Warum ist $\#{aa} \sqleq_2 \#{bba}$?
+    \item  Warum ist $\#{bba} \sqleq_2 \#{aaaaa}$? (vergleiche $\sqleq_1$!)
+    \item  Warum ist $\#{aab} \sqleq_2 \#{aaaab}$? (vergleiche $\sqleq_1$!)
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+%
+Wir wollen noch darauf hinweisen, dass die lexikographische Ordnung
+$\sqleq_1$ als Relation auf der Menge aller Wörter einige
+Eigenschaften hat, an die man als Anfänger vermutlich nicht gewöhnt
+ist. Zunächst einmal merkt man, dass die Ordnung nicht vollständig
+ist. Die aufsteigende Kette
+\[
+\eps \sqleq_1 \#{a} \sqleq_1 \#{aa} \sqleq_1 \#{aaa} \sqleq_1 \#{aaaa} \sqleq_1 \cdots
+\]
+besitzt kein Supremum. Zwar ist jedes Wort, das mindestens ein \#b
+enthält, obere Schranke, aber es gibt keine kleinste. Das merkt man,
+wenn man die absteigende Kette
+\[
+\#b \sqgeq_1 \#{ab}\sqgeq_1 \#{aab}\sqgeq_1 \#{aaab}\sqgeq_1 \#{aaaab}\sqgeq_1 \cdots
+\]
+betrachtet. Jede obere Schranke der aufsteigenden Kette muss ein \#b
+enthalten. Aber gleich, welche obere Schranke $w$ man betrachtet, das
+Wort $\#a^{|w|}\#b$ ist eine echt kleinere obere Schranke. Also gibt es
+keine kleinste.
+
+Dass es sich bei obigen Relationen überhaupt um totale Ordnungen
+handelt, ist auch unterschiedlich schwer zu sehen. Als erstes sollte
+man sich klar machen, dass $\sqleq_1$ auf der Menge $A^n$ aller Wörter
+einer festen Länge $n$ eine totale Ordnung ist. Das liegt daran, dass
+für verschiedene Wörter gleicher Länge niemals Punkt~\ref{pkt:lex1}
+oder Punkt~\ref{pkt:lex2} zutrifft. Und da $\sqleq_A$ als totale
+Ordnung vorausgesetzt wird, ist in Punkt~\ref{pkt:lex3} stets
+$x\sqleq_A y$ oder $y\sqleq_A x$ und folglich $w_1\sqleq_1 w_2$ oder
+$w_2\sqleq_1 w_1$.
+
+Daraus folgt schon einmal das auch $\sqleq_2$ auf der Menge $A^n$
+aller Wörter einer festen Länge $n$ eine totale Ordnung ist, und damit
+überhaupt eine totale Ordnung.
+
+Für $\sqleq_1$ muss man dafür noch einmal genauer Wörter
+unterschiedlicher Länge in Betracht ziehen. Wie bei der Formulierung
+der Definition schon suggeriert, decken die drei Punkte alle
+Möglichkeiten ab.
+
+%-----------------------------------------------------------------------
+\section{Ausblick}
+
+Vollständige Halbordnungen spielen zum Beispiel eine wichtige Rolle,
+wenn man sich mit sogenannter denotationaler Semantik von
+Programmiersprachen beschäftigt und die Bedeutung von while-Schleifen
+und Programmen mit rekursiven Funktionsaufrufen präzisieren will. Den
+erwähnten Fixpunktsatz (oder verwandte Ergebnisse) kann man auch zum
+Beispiel bei der automatischen statischen Datenflussanalyse von
+Programmen ausnutzen. Diese und andere Anwendungen werden ihnen in
+weiteren Vorlesungen begegnen.
+
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-master: "../k-21-relationen/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

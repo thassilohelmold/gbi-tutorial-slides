@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+%\setcounter{blattnr}{1}
+\newcommand{\ausgabetermin}{28.~Oktober 2015}
+\newcommand{\abgabetermin}{6.~Novber 2015}
+\newcommand{\punkteblatt}{13} % Blatt 1
+\newcommand{\punktetotal}{13} % Blatt 1
+\newcommand{\punkteblattphysik}{13} % Blatt 1
+\newcommand{\punktetotalphysik}{13} %
+% =======================================================
+
+\begin{document}
+
+% -----------------------------------------------------------------------------
+\def\ssm{\smallsetminus}
+\begin{aufgabe}[3]
+  Es sei $M$
+  eine Menge und es seien $A\subseteq M$
+  und $B\subseteq M$. Beweisen Sie:
+  \[
+    M \smallsetminus (A\cup B) = (M\smallsetminus A) \cap (M\smallsetminus B)
+  \]
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{description}
+  \item[$\subseteq$:]
+    Es sei $x\in M \ssm (A\cup B)$.
+    Dann ist $x\in M$,
+    und $x\notin A\cup B$.
+    Also ist $x \in M$,
+    und $x\notin A$ und $x\notin B$. Somit ist
+    \begin{itemize}
+    \item $x\in M$ und $x\notin A$ und
+    \item $x\in M$ und $x\notin B$.
+    \end{itemize}
+    Damit ist $x\in M\ssm A$ und $x\in M\ssm B$.
+    Folglich ist $x\in (M\ssm A)\cap(M\ssm B)$.
+  \item[$\supseteq$:]
+    Es sei $x \in (M\smallsetminus A) \cap (M\smallsetminus B)$.
+    Dann ist $x \in M\smallsetminus A$ und $x \in M\smallsetminus B$.
+    Also ist $x \in M$ und $x \notin A$, und $x \in M$ und $x \notin B$.
+    Somit ist $x \in M$, und $x \notin A$ und $x \notin B$.
+    Damit ist $x \in M$ und $x \notin A \cup B$.
+    Folglich ist $x \in M \ssm (A\cup B)$.
+  \end{description}
+
+  \begin{korrektur}
+    falls zwei Inklusionen gezeigt: je 1.5 Punkte \\
+    falls mit lauter "`gdw."' argumentiert: geeignete Abzüge bei Fehlern
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+\begin{aufgabe}[1 + 1 + 1 + 1 + 2 = 6]
+  Es sei $f\colon A \to B$
+  eine Abbildung. Zu $f$ definieren wir die Abbildung
+  \[
+    f^{-1}\colon 2^B \to 2^A, M \mapsto \{ a\in A \mid f(a) \in M \}
+  \]
+  Für jedes $M\subseteq B$
+  nennt man $f^{-1}(M)$ das \define{Urbild} von $M$ (unter $f$).
+
+  \begin{enumerate}
+  \item Welche Bedingung muss $f$
+    erfüllen, damit $f^{-1}$ injektiv ist?
+  \item Welche Bedingung muss $f$
+    erfüllen, damit $f^{-1}$ surjektiv ist?
+  \item\label{it:d} Es sei $M\subseteq B$.
+    Welche Mengenbeziehung besteht zwischen $M$ und $f(f^{-1}(M))$?
+  \item Es sei $M\subseteq A$.
+    Welche Mengenbeziehung besteht zwischen $M$ und $f^{-1}(f(M))$?
+  \item Beweisen Sie Ihre Behauptung in Teilaufgabe \ref{it:d}.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+  \item $f$ muss surjektiv sein.
+  \item $f$ muss injektiv sein.
+  \item $f(f^{-1}(M)) \subseteq M$. Anders ausgedrückt: $M \supseteq f(f^{-1}(M))$
+  \item $M \subseteq f^{-1}(f(M))$. Anders ausgedrückt: $f^{-1}(f(M)) \supseteq M$
+  \item Es sei $b\in f(f^{-1}(M))$.
+    \begin{itemize}
+    \item Dann gibt es ein $a\in f^{-1}(M)$
+      mit $f(a) =b$.
+    \item $a\in f^{-1}(M)$
+      bedeutet gerade $f(a)\in M$.
+    \item Wegen $b = f(a)$, folgt $b\in M$.
+    \end{itemize}
+  \end{enumerate}
+  \begin{korrektur}
+    \begin{itemize}
+    \item a) bis d) je 1 Punkt für richtige Antwort;\\
+      kann man sich Fälle vorstellen für 0.5 Punkte?
+    \item bei e):
+    \end{itemize}
+  \end{korrektur}
+\end{loesung}
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[0.5 + 1.5 + 2 = 4]
+  \begin{enumerate}
+  \item Nichtnegative ganze Zahlen $x_i$,
+    $i\in\N_0$, seien wie folgt definiert:
+    %
+    \[\begin{aligned}[t]
+      x_0 &= 4 \;,\\
+      \text{für jedes } n\in\N_0\colon x_{n+1} &= x_n + 2n + 5 \;.
+    \end{aligned}
+    \]%$\\[0.5\baselineskip]
+
+    Geben Sie die Zahlenwerte von $x_1$, $x_2$, $x_3$ und $x_4$ an.
+  \item Geben Sie für jedes $n\in\N_0$
+    einen arithmetischen Ausdruck $E_n$,
+    in dem kein $x_i$ vorkommt, so an, dass gilt: $x_n = E_n$.
+  \item Geben Sie die induktive Definition für ganze Zahlen $y_i$,
+    $i\in\N_0$, so an, dass für jedes $n\in\N_0$ gilt:
+    \[
+      y_n =
+      \begin{cases}
+        n, & \text{ falls $n$ gerade ist,} \\
+        -n, & \text{ falls $n$ ungerade ist.}
+      \end{cases}
+    \]
+    \emph{Hinweis:} In der Definition von $y_{n+1}$
+    müssen Sie $y_n$
+    sinnvoll benutzen. "`Scheinbenutzungen"' wie $\cdots y_n-y_n \cdots$ sind nicht ausreichend.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+  \item $x_1=9$, $x_2=16$, $x_3=25$, $x_4=36$
+  \item $E_n=(n+2)^2$
+  \item zum Beispiel:
+    \begin{align*}
+      y_0 &= 0\\
+      \text{für jedes } n\in\N_0\colon y_{n+1} &= -y_n + (-1)^{n+1}
+    \end{align*}
+    oder
+    \begin{align*}
+      y_0 &= 0\\
+      \text{für jedes } n\in\N_0\colon y_{n+1} &= y_n + (-1)^{n+1}(2n+1)
+    \end{align*}
+  \end{enumerate}
+
+  \begin{korrektur}
+    \begin{enumerate}
+    \item bei einem Fehler noch 0.5 Punkte, sonst 0 Punkte
+    \item was machen wir mit $E_n=n^2+4n+4$?
+    \item statt $(-1)^{n+1}$
+      kann man \zB auch $(n\bmod 2) - ((n+1) \bmod 2)$
+      schreiben\\
+      bitte gründlich prüfen, ob studentische Lösungen
+      korrekt sind
+      und $y_n$ nichttrivial verwendet wird \\
+      0.5 Punkte auf Anfang und 1.5 auf richtige Rekursion
+    \end{enumerate}
+  \end{korrektur}
+\end{loesung}
+% -----------------------------------------------------------------------------
+
+\noindent
+\emph{Allgemeiner Hinweis:} In dieser Vorlesung kommen an einigen
+Stellen griechische Buchstaben vor. In anderen Vorlesungen wird das
+auch passieren. Hier ist die Liste der Kleinbuchstaben (manchmal gibt
+es verschiedene Schreibweisen):
+
+$\alpha$,
+$\beta$,
+$\gamma$,
+$\delta$,
+$\varepsilon$
+(oder $\epsilon$),
+$\zeta$,
+$\eta$,
+$\theta$
+(oder $\vartheta$),
+$\iota, \kappa$,
+$\lambda$,
+$\mu$,
+$\nu$,
+$\xi$,
+$o$,
+$\pi$,
+$\rho$,
+$\sigma$,
+$\tau$, $\upsilon,$ $\phi$, $\chi$, $\psi$, $\omega$
+
+\noindent
+Machen Sie sich mit der Schreibweise und den Namen der Zeichen vertraut!
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

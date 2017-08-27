@@ -1,0 +1,391 @@
+%=======================================================================
+\Tut\chapter{Formale Sprachen}
+\label{k:sprachen}
+
+Den Begriff der formalen Sprache haben wir schon in Kapitel~\ref{k:woerter}
+eingeführt.
+%
+Eine formale Sprache über einem Alphabet $A$
+ist eine Teilmenge $L\subseteq A^*$. 
+%
+In diesem kurzen Kapitel definieren wir noch einige nützliche Operationen auf
+formalen Sprachen.
+
+%-----------------------------------------------------------------------
+\Tut\section{Operationen auf formalen Sprachen}
+
+%-----------------------------------------------------------------------
+\Tut\subsection{Produkt oder Konkatenation formaler Sprachen}
+\label{subsec:produkt-sprachen}
+
+Wir haben schon definiert, was die Konkatenation zweier Wörter ist. 
+%
+Das erweitern wir nun auf eine übliche Art und Weise auf Mengen von Wörtern:
+Für zwei formale Sprachen $L_1$ und $L_2$ heißt
+\[
+L_1\cdot L_2=\{ w_1 w_2 \mid w_1\in L_1\text{ und } w_2\in L_2 \}
+\]
+das \mdefine[Produkt von Sprachen]{Produkt der Sprachen $L_1$ und
+  $L_2$.}\index{Sprache!Produkt}\index{Produkt!formaler Sprachen}
+%
+\begin{tutorium}
+  \noindent\textbf{Produkt von Sprachen}
+  \begin{itemize}
+  \item Def: $L_1\cdot L_2 = \{w_1w_2 \mid w_1\in L_1 \text{ und } w_2\in L_2\}$
+  \item Beispiel: noch mal: formale Sprache $L$ aller Wörter über
+    $A=\{\literal{a},\literal{b}\}$, in denen nirgends das Teilwort
+    $\literal{ab}$ vorkommt.\\
+    kann man jetzt so schreiben: $L=\{\literal{b}\}^*\{\literal{a}\}^*$
+  \item Beispiel: Menge aller Wörter über $A$ außer dem leeren: $A \cdot A^*$,
+    denn jedes nichtleere Wort hat ein erstes Symbol und dahinter kommt ein
+    beliebiges (evtl auch leeres) Wort
+  \item formale Sprache $L_I$ der legalen Zahlen vom Typ \textbf{int}:
+    \begin{itemize}
+    \item Versuch:
+      $A=\{\literal{0},\ldots,\literal{9}\}$ \\
+      $L_I= A \cdot A^*$
+    \item Was fehlt? jedenfalls das Minuszeichen; \\
+      besser: $\{\eps,\literal{-}\}\cdot A \cdot A^*$
+    \item Was ist mit Präfix $\literal{0x}$? gibts den? ich weiß es nicht 
+    \end{itemize}
+  \item formale Sprache $L_V$ der legalen Variablennamen in Java:
+    \begin{itemize}
+    \item Versuch:
+      $A=\{\literal{\_},\literal{a},\ldots,\literal{z},\literal{A},\ldots,\literal{Z}\}$,
+      $B=A \cup \{\literal{0},\ldots,\literal{9}\}$ \\
+      $L_V= A \cdot B^*$.
+    \item es fehlen die Umlaute, \dots
+    \item Was ist noch falsch? \zB Schlüsselwörter (\textbf{if},
+      \dots) sind als Variablennamen verboten. \\
+      also eher sowas wie $L_V= (A \cdot B^*)
+      \smallsetminus\{\literal{if}, \literal{class}, \dots\}$ \\
+      Mitteilung: da könnte man jetzt alle endlich vielen Schlüsselwörter
+      aufzählen, aber wenn nur endlich viele Wörter verboten sind, geht es im
+      Prinzip ohne Mengendifferenz
+    \end{itemize}
+  \item $L_1=\{\literal{a}^n \mid n\in\N_0\}$ und  $L_2=\{\literal{b}^n \mid n\in\N_0\}$ \\
+    \textbf{Achtung:} $L_1L_2=\{\literal{a}^k\literal{b}^m \mid
+    k\in\N_0\text{ und } m\in\N_0\}$  die \textbf{Exponenten können verschieden
+      sein!} \\
+    hier steht nichts anderes als $\{\literal{a}\}^*\{\literal{b}\}^*$
+  \end{itemize}
+\end{tutorium}
+%
+\begin{lemma}
+  \label{lem:L-eps}
+  Für jede formale Sprache $L$ ist 
+  \[
+  L\cdot\{\eps\} = L = \{\eps\}\cdot L \;.
+  \]
+\end{lemma}
+
+\begin{beweis}
+  Einfaches Nachrechnen:
+  \begin{align*}
+    L\cdot\{\eps\} &=  \{ w_1 w_2 \mid w_1\in L \text{ und }  w_2\in \{\eps\} \} \\
+    &= \{ w_1 w_2 \mid w_1\in L \text{ und }  w_2 =\eps \} \\
+    &= \{ w_1\eps  \mid w_1\in L \} \\
+    &= \{ w_1 \mid w_1\in L \} \\
+    &= L
+  \end{align*}
+  Analog zeigt man $L = \{\eps\}\cdot L$.
+\end{beweis}
+%
+\def\Lemail{L_{\text{\itshape email}}}
+\def\Lheader{L_{\text{\itshape header}}}
+\def\Lbody{L_{\text{\itshape body}}}
+\def\Lleer{L_{\text{\itshape leer}}}
+In Abschnitt~\ref{subsec:woerter-aufbau-emails} haben wir ein erstes Mal über
+den Aufbau von E-Mails gesprochen. 
+%
+Produkte formaler Sprachen könnte man nun benutzen, um folgende Festlegung zu
+treffen:
+\begin{itemize}
+\item Die formale Sprache $\Lemail$ der syntaktisch korrekten E-Mails ist
+  \[
+  \Lemail = \Lheader \cdot \Lleer \cdot \Lbody
+  \]
+\item Dabei sei
+  \begin{itemize}
+  \item $\Lheader$ die formale Sprache der syntaktisch korrekten E-Mail-Köpfe,
+  \item $\Lleer$ die formale Sprache, die nur die Leerzeile enthält, also
+    $\Lleer=\{\,\kasten{CR}\,\kasten{LF}\,\}$ und
+  \item $\Lbody$ die formale Sprache der syntaktisch korrekten E-Mail-Rümpfe.
+  \end{itemize}
+\end{itemize}
+% 
+$\Lheader$ und $\Lbody$ muss man dann natürlich auch noch definieren.
+%
+Eine Möglichkeit, das bequem zu machen, werden wir in einem späteren Kapitel
+kennenlernen.
+
+Wie bei Wörtern will man \mdefine{Potenzen $L^k$}\index{Potenzen!einer
+  formalen Sprache}\index{formale Sprache!Potenzen} definieren. 
+%
+Der "`Trick"' besteht darin, für den Fall $k=0$
+etwas Sinnvolles zu finden --- Lemma~\ref{lem:L-eps} gibt einen Hinweis. 
+%
+Die Definition geht wieder induktiv:
+\begin{align*}
+  L^0 &= \{\eps\} \\
+  \text{für jedes } k\in\N_0:\; L^{k+1} &= L \cdot L^k
+\end{align*}
+%
+Wie auch schon bei der Konkatenation einzelner Wörter kann man auch hier
+wieder nachrechnen, dass \zB gilt:
+\begin{align*}
+  L^1 &= L \\
+  L^2 &= L\cdot L \\
+  L^3 &= L\cdot L\cdot L \\
+\end{align*}
+%
+\begin{tutorium}
+  \noindent\textbf{Potenzen von $L$}
+
+  \begin{itemize}
+  \item Def: $L^0=\{\eps\}$ und $L^{i+1}=L^i\cdot L$
+  \item Beispiel: $L=\{\literal{a}\}^*\{\literal{b}\}^*$\\
+    dann enthält \zB 
+    \begin{itemize}
+    \item $L^0=\{\eps\}$
+    \item $L^1=L=\{\eps, \literal{aabbbbb}, \literal{aaaaab}, \literal{aaaa},
+      \literal{bbbbbbbb}, \dots \}$
+    \item $L^2=\{\eps, \literal{aabbbbaaaaab}, \literal{aaaaabab}, \literal{aaaaa},
+      \literal{bbbbbbb}, \dots \}$
+    \item \usw
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+Genau genommen hätten wir in der dritten Zeile $L\cdot (L\cdot L)$ schreiben
+müssen. Aber Sie dürfen glauben (oder nachrechnen), dass sich die
+Assoziativität vom Produkt von Wörtern auf das Produkt von Sprachen überträgt.
+
+Als einfaches Beispiel betrachte man $L=\{\literal{aa}, \literal{b}\}$. Dann
+ist
+\begin{align*}
+  L^0 &= \{\eps\} \\
+  L^1 &= \{\literal{aa}, \literal{b}\} \\
+  L^2 &= \{\literal{aa}, \literal{b}\}\cdot \{\literal{aa}, \literal{b}\} 
+       = \{\literal{aa}\cdot\literal{aa}, \literal{aa}\cdot\literal{b}, \literal{b}\cdot\literal{aa}, \literal{b}\cdot\literal{b}\} \\
+      &= \{\literal{aaaa}, \literal{aab}, \literal{baa}, \literal{bb}\} 
+  \\
+  L^3 &= \begin{aligned}[t]
+         \{&\literal{aa}\cdot\literal{aa}\cdot\literal{aa}, \; 
+           \literal{aa}\cdot\literal{aa}\cdot\literal{b}, \; 
+           \literal{aa}\cdot\literal{b}\cdot\literal{aa}, \; 
+           \literal{aa}\cdot\literal{b}\cdot\literal{b}, \; \\
+           &\literal{b}\cdot\literal{aa}\cdot\literal{aa}, \; 
+           \literal{b}\cdot\literal{aa}\cdot\literal{b}, \; 
+           \literal{b}\cdot\literal{b}\cdot\literal{aa}, \; 
+           \literal{b}\cdot\literal{b}\cdot\literal{b}\} 
+         \end{aligned} \\
+         &= \{\literal{aaaaaa}, 
+           \literal{aaaab}, 
+           \literal{aabaa}, 
+           \literal{aabb},
+           \literal{baaaa},
+           \literal{baab},
+           \literal{bbaa}, 
+           \literal{bbb}\} \\
+\end{align*}
+%
+In diesem Beispiel ist $L$ endlich. 
+%
+Man beachte aber, dass die Potenzen auch definiert sind, wenn $L$
+unendlich ist. 
+%
+Betrachten wir etwa den Fall
+\[
+L = \{ \literal{a}^n\literal{b}^n \mid n\in\N_+\} \;,
+\]
+es ist also (angedeutet)
+\[
+L = \{ \literal{ab}, \literal{aabb}, \literal{aaabbb},\literal{aaaabbbb},
+\dots \} \;.
+\]
+Welche Wörter sind in $L^2$?  
+%
+Die Definion besagt, dass man alle Produkte $w_1w_2$
+von Wörtern $w_1\in L$ und $w_2\in L$ bilden muss.
+%
+Man erhält also (erst mal ungenau hingeschrieben)
+\begin{equation*}
+  L^2 = \begin{aligned}[t]
+    & \{ \literal{ab}\cdot\literal{ab}, \literal{ab}\cdot\literal{aabb}, \literal{ab}\cdot\literal{aaabbb}, \dots \} \\
+    \cup\  & \{ \literal{aabb}\cdot\literal{ab}, \literal{aabb}\cdot\literal{aabb}, \literal{aabb}\cdot\literal{aaabbb}, \dots \} \\
+    \cup\  & \{ \literal{aaabbb}\cdot\literal{ab}, \literal{aaabbb}\cdot\literal{aabb}, \literal{aaabbb}\cdot\literal{aaabbb}, \dots \} \\
+    \vdots \\
+  \end{aligned}
+\end{equation*}
+%
+Mit anderen Worten ist
+\[
+L^2 = \{ \literal{a}^{n_1}\literal{b}^{n_1}\literal{a}^{n_2}\literal{b}^{n_2} \mid n_1\in\N_+  \text{ und }  n_2\in\N_+ \} \;.
+\]
+Man beachte, dass bei die Exponenten $n_1$ "`vorne"' und $n_2$ "`hinten"'
+verschieden sein dürfen.
+
+Für ein Alphabet $A$ und für $i\in\N_0$ hatten wir auch die Potenzen $A^i$
+definiert.  
+%
+Und man kann jedes Alphabet ja auch als eine formale Sprache auf"|fassen, die
+genau alle Wörter der Länge $1$ über $A$ enthält.
+%
+Machen Sie sich klar, dass die beiden Definitionen für Potenzen konsistent
+sind, \dh $A^i$ 
+ergibt immer die gleiche formale Sprache, egal, welche Definition man zu
+Grunde legt.
+      
+%-----------------------------------------------------------------------
+\Tut\subsection{Konkatenationsabschluss einer formalen Sprache}
+
+Bei Alphabeten hatten wir neben den $A^i$ auch noch $A^*$ definiert und darauf
+hingewiesen, dass für ein Alphabet $A$ gilt:
+\[
+A^* =\bigcup_{i\in\N_0} A^i \;.
+\]
+Das nehmen wir zum Anlass nun den \mdefine{Konkatenationsabschluss $L^*$ von
+  $L$}\index{Konkatenationsabschluss} und den \mdefine[$\eps$-freier
+Konkatenationsabschluss $L^+$ von $L$]{$\eps$-freien Konkatenationsabschluss
+  $L^+$ von $L$}%
+\index{Konkatenationsabschluss!$\eps$-freier}%
+\index{e-freier@{$\eps$-freier Konkatenationsabschluss}} definieren:
+%
+\begin{equation*}
+  L^+ = \bigcup_{i\in\N_+} L^i \text{\qquad und\qquad}
+  L^* = \bigcup_{i\in\N_0} L^i
+\end{equation*}
+% 
+Wie man sieht, ist $L^*=L^0\cup L^+$. In $L^*$ sind also alle Wörter, die sich
+als Produkt einer beliebigen Zahl (einschließlich $0$) von Wörtern schreiben
+lassen, die alle Element von $L$ sind.
+%
+\begin{tutorium}
+  \noindent\textbf{Kokatenationsabschluss}
+  \begin{itemize}
+  \item Def: 
+    \begin{equation*}
+      L^+ = \bigcup_{i\in\N_+} L^i \text{\qquad und\qquad}
+      L^* = \bigcup_{i\in\N_0} L^i
+    \end{equation*}
+  \item Beispiel: $L=\{\literal{a}\}^*\{\literal{b}\}^*$
+    \begin{itemize}
+    \item Man mache sich klar: $L^* = \{\literal{a},\literal{b}\}^*$, also
+      alles
+    \item da geht \zB so: (die Studenten möglichst selber drauf kommen lassen)
+      zerhacke beliebiges aber festes $w\in \{\literal{a},\literal{b}\}^*$ an
+      allen Stellen, wo Teilwort $\literal{ba}$ vorkommt, zwischen dem
+      $\literal{b}$ und dem $\literal{a}$.
+      Die entstehenden Teilwörter sind aus $L$.
+    \end{itemize}
+  \item Man beweise:  $ L^*\cdot L = L^+$
+    \begin{itemize}
+    \item Wie beweist man, dass zwei Mengen gleich sind?
+    \item Zum Beispiel, indem man zeigt, dass $\subseteq$ und
+      $\supseteq$ gelten.
+    \item Also:
+      \begin{itemize}
+      \item $\subseteq$: \\
+        Wenn $w\in L^*\cdot L$, dann $w=w'w''$ mit
+        $w'\in L^*$ und $w''\in L$. \\
+        Also existiert ein $i\in\N_0$ mit $w'\in L^i$.\\
+        Also $w=w'w''\in L^i\cdot L = L^{i+1}$. \\
+        Da $i+1\in\N_+$, ist $L^{i+1}\subseteq L^+$, also $w\in L^+$.
+      \item $\supseteq$: Wenn $w\in L^+$, dann existiert ein $i\in\N_+$
+        mit $w\in L^i$. \\
+        Da $i\in \N_+$ ist $i=j+1$ für ein $j\in\N_0$, \\
+        also ist für ein $j\in\N_0$: $w\in L^{j+1}= L^j\cdot L$. \\
+        also $w=w'w''$ mit $w'\in L^j$ und $w''\in L$ . \\
+        Wegen $L^j\subseteq L^*$ ist $w=w'w''\in L^*\cdot L$.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{tutorium}
+
+Als Beispiel betrachten wieder $L = \{ \literal{a}^n\literal{b}^n \mid
+n\in\N_+\}$. 
+%
+Weiter vorne hatten wir schon gesehen:
+%
+\[
+L^2 = \{ \literal{a}^{n_1}\literal{b}^{n_1}\literal{a}^{n_2}\literal{b}^{n_2}
+\mid n_1\in\N_+  \text{ und }  n_2\in\N_+ \} \;.
+\]
+%
+Analog ist 
+%
+\[
+L^3 = \{ \literal{a}^{n_1}\literal{b}^{n_1}\literal{a}^{n_2}\literal{b}^{n_2}
+\literal{a}^{n_3}\literal{b}^{n_3} \mid n_1\in\N_+  \text{ und }  n_2\in\N_+  \text{ und } 
+n_3\in\N_+ \} \;.
+\]
+%
+Wenn wir uns erlauben, Pünktchen zu schreiben, dann ist allgemein
+%
+\[
+L^i = \{
+\literal{a}^{n_1}\literal{b}^{n_1}\cdots \literal{a}^{n_i}\literal{b}^{n_i}
+\mid n_1\ldots, n_i\in\N_+ \} \;.
+\]
+Und für $L^+$ könnte man vielleicht notieren:
+\[
+L^+ = \{
+\literal{a}^{n_1}\literal{b}^{n_1}\cdots \literal{a}^{n_i}\literal{b}^{n_i}
+\mid i\in\N_+  \text{ und }   n_1\ldots, n_i\in\N_+ \} \;.
+\]
+Aber man merkt (hoffentlich!) an dieser Stelle doch, dass uns $^+$ und $^*$
+die Möglichkeit geben, etwas erstens präzise und zweitens auch noch kürzer zu
+notieren, als wir es sonst könnten.
+
+Zum Abschluss wollen wir noch darauf hinweisen, dass die Bezeichnung
+$\eps$-freier Konkatenationsabschluss für $L^+$ leider (etwas?) irreführend
+ist. 
+%
+Wie steht es um das leere Wort bei $L^+$ und $L^*$? Klar sollte
+inzwischen sein, dass für \emph{jede} formale Sprache $L$ gilt: $\eps\in
+L^*$. 
+%
+Das ist so, weil ja $\eps\in L^0\subseteq L^*$ ist.
+%
+Nun läuft zwar in der Definition von $L^+$
+die Vereinigung der $L^i$
+nur ab $i=1$.
+%
+Es kann aber natürlich sein, dass $\eps\in L$ ist.
+%
+In diesem Fall ist dann aber offensichtlich $\eps\in L=L^1\subseteq L^+$.
+Also kann $L^+$ sehr wohl das leere Wort enthalten.
+
+Außerdem sei erwähnt, dass die Definition von $L^*$ zur Folge hat, dass gilt:
+\[
+\{\}^* = \{\eps\}
+\]
+
+%-----------------------------------------------------------------------
+\section{Zusammenfassung}
+
+In diesem Kapitel wurden \emph{Produkt} und der \emph{Konkatenationsabschluss}
+\emph{formaler Sprachen} eingeführt.
+
+Wir haben gesehen, dass man damit jedenfalls manche formalen Sprachen kurz und
+verständlich beschreiben kann. 
+%
+Dass diese Notationsmöglichkeiten auch in der Praxis Verwendung finden, wird
+später noch deutlich werden.
+%
+Manchmal reicht das, was wir bisher an Notationsmöglichkeiten haben, aber noch
+nicht.
+%
+Deshalb werden wir in späteren Kapiteln auch mächtigere Hilfsmittel
+kennenlernen.
+ 
+\cleardoublepage
+
+%-----------------------------------------------------------------------
+%%%
+%%% Local Variables:
+%%% fill-column: 78
+%%% mode: latex
+%%% TeX-master: "../k-07-sprachen/skript.tex"
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

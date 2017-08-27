@@ -1,0 +1,223 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+\allowdisplaybreaks
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{3}
+\newcommand{\ausgabetermin}{11.~November 2015}
+\newcommand{\abgabetermin}{20.~November 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+\newcommand{\punkteblatt}{18} % Blatt 3
+\newcommand{\punktetotal}{48} %
+\newcommand{\punkteblattphysik}{18} % Blatt 3
+\newcommand{\punktetotalphysik}{45} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben werden von
+%Studenten der Physik bitte nicht bearbeitet.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2 + 4 = 6]
+  Die Zahlen $x_n$, $n \in \N_0$, seien induktiv definiert durch
+  \begin{align*}
+    x_0 &= 0,\\
+    \text{für jedes } n \in \N_+ \colon x_n &= n - x_{n - 1}.
+  \end{align*}
+  \begin{enumerate}
+    \item Geben Sie die Zahlenwerte von $x_1$, $x_2$, $x_3$ und $x_4$ an.
+    \item Beweisen Sie durch vollständige Induktion, dass für jedes
+          $n \in \N_0$ gilt:
+          \begin{equation*}
+            x_n = \begin{dcases*}
+                    \frac{n}{2},     &falls $n$ gerade,\\
+                    \frac{n + 1}{2}, &falls $n$ ungerade.
+                  \end{dcases*}
+          \end{equation*}
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item $x_1 = 1$, $x_2 = 1$, $x_3 = 2$, $x_4 = 2$.
+          \begin{korrektur}
+            Je Zahlenwert 0,5 Punkte
+          \end{korrektur}
+    \item \emph{Induktionsanfang}: $x_0 = 0 = \frac{0}{2}$.
+
+          \emph{Induktionsschritt}: Es sei $n \in \N_0$ so, dass gilt:
+          \begin{equation}\tag{Induktionsvoraussetzung}
+            x_n = \begin{dcases*}
+                    \frac{n}{2},     &falls $n$ gerade,\\
+                    \frac{n + 1}{2}, &falls $n$ ungerade.
+                  \end{dcases*}
+          \end{equation}
+          Nach Definition von $x_{n + 1}$ im ersten Schritt, der Induktionsvoraussetzung im zweiten Schritt und elementarer Arithmetik in den folgenden Schritten gilt:
+          \begin{align*}
+            x_{n + 1} &= (n + 1) - x_n\\
+                      &= (n + 1) - \begin{dcases*}
+                                     \frac{n}{2},     &falls $n$ gerade,\\
+                                     \frac{n + 1}{2}, &falls $n$ ungerade,
+                                   \end{dcases*}\\
+                      &= \begin{dcases*}
+                           (n + 1) - \frac{n}{2},     &falls $n$ gerade,\\
+                           (n + 1) - \frac{n + 1}{2}, &falls $n$ ungerade,
+                         \end{dcases*}\\
+                      &= \begin{dcases*}
+                           \frac{n}{2} + 1, &falls $n$ gerade,\\
+                           \frac{n + 1}{2}, &falls $n$ ungerade,
+                         \end{dcases*}\\
+                      &= \begin{dcases*}
+                           \frac{n + 2}{2}, &falls $n$ gerade,\\
+                           \frac{n + 1}{2}, &falls $n$ ungerade,
+                         \end{dcases*}\\
+                      &= \begin{dcases*}
+                           \frac{(n + 1) + 1}{2}, &falls $n$ gerade,\\
+                           \frac{n + 1}{2},       &falls $n$ ungerade,
+                         \end{dcases*}\\
+                      &= \begin{dcases*}
+                           \frac{(n + 1) + 1}{2}, &falls $n + 1$ ungerade,\\
+                           \frac{n + 1}{2},       &falls $n + 1$ gerade,
+                         \end{dcases*}\\
+                      &= \begin{dcases*}
+                           \frac{n + 1}{2},       &falls $n + 1$ gerade,\\
+                           \frac{(n + 1) + 1}{2}, &falls $n + 1$ ungerade.
+                         \end{dcases*}\\
+          \end{align*}
+
+          \emph{Schlussworte}: Gemäß des Prinzips der vollständigen Induktion
+          gilt zu beweisende Aussage.
+          \begin{korrektur}
+            1 Punkt für den Induktionsanfang
+
+            3 Punkte für den Induktionsschritt, davon 1 Punkt für die Induktionsvoraussetzung
+          \end{korrektur}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[1 + 1 + 1 = 3]
+  \begin{enumerate}
+    \item Es sei $w = \#{10011}$. Geben Sie $u = \fNum_2(w)$ und $v = \fNum_3(w)$ an.
+    \item Geben Sie $\mu = \fRepr_3(285)$ und $\nu = \fRepr_9(285)$ an.
+    \item Das Wort $\mu$ der vorangegangenen Teilaufgabe hat die Länge $6$. Geben Sie $\xi = \fRepr_9(\fNum_3(\mu(0)\mu(1))) \cdot \fRepr_9(\fNum_3(\mu(2)\mu(3))) \cdot \fRepr_9(\fNum_3(\mu(4)\mu(5)))$ und $\zeta = \fNum_9(\xi)$ an.
+
+          \emph{Erinnerung:} Für jedes $i \in \Z_6$ ist $\mu(i)$ das $i$-te Zeichen des Wortes $\mu$.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item $u = \fNum_2(w) = 1 \cdot 2^0 + 1 \cdot 2^1 + 1 \cdot 2^4 = 1 + 2 + 16 = 19$
+
+          $v = \fNum_3(w) = 1 \cdot 3^0 + 1 \cdot 3^1 + 1 \cdot 3^4 = 1 + 3 + 81 = 85$
+    \item $\mu = \#{101120}$
+
+          $\nu = \#{346}$
+
+
+    \item $\xi = \#{346} = \nu$
+
+          $\zeta = 285$
+  \end{enumerate}
+  \begin{korrektur}
+    Je Wort 0,5 Punkte
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2 + 4 + 3 = 9]
+  Die Abbildung $I$ sei induktiv definiert durch
+  \begin{align*}
+    I \colon \{\#0, \#1\}^* &\to     \{\#0, \#1\}^*,\\
+                   \epsilon &\mapsto \#1,\\
+                w \cdot \#0 &\mapsto w \cdot \#1, \text{ wobei } w \in \{\#0, \#1\}^*,\\
+                w \cdot \#1 &\mapsto I(w) \cdot \#0, \text{ wobei } w \in \{\#0, \#1\}^*.
+  \end{align*}
+  \begin{enumerate}
+    \item Berechnen Sie $I(\epsilon)$, $I(I(\epsilon))$, $I(I(I(\epsilon)))$ und $I(I(I(I(\epsilon))))$.
+    \item Beweisen Sie durch vollständige Induktion über die Wortlänge, dass für jedes $w \in \{\#0, \#1\}^*$ gilt:
+          \begin{equation*}
+            \text{Es gibt ein } i \in \Z_{|I(w)|} \text{ so, dass } (I(w))(i) = \#1.
+          \end{equation*}
+          \emph{Erinnerung:} Für jedes $w \in \{\#0, \#1\}^*$ und jedes $i \in \Z_{|I(w)|}$ ist $(I(w))(i)$ das $i$-te Zeichen des Wortes $I(w)$.
+    \item Es sei $E = \{u \in \{\#0, \#1\}^* \mid \text{es gibt ein } i \in \Z_{|u|} \text{ so, dass } u(i) = \#1\}$. Nach der vorangegangenen Teilaufgabe gilt $I(w) \in E$ für jedes $w \in \{\#0, \#1\}^*$. Definieren Sie induktiv eine Abbildung $S \colon E \to \{\#0, \#1\}^*$ so, dass für jedes $w \in \{\#0, \#1\}^*$ gilt: $\fNum_2(S(I(w))) = \fNum_2(w)$.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate}
+    \item $I(\epsilon) = \#1$
+
+          $I(I(\epsilon)) = I(\#1) = I(\epsilon \cdot \#1) = I(\epsilon) \cdot \#0 = \#1 \cdot \#0 = \#{10}$
+
+          $I(I(I(\epsilon))) = I(\#(10)) = I(\#1 \cdot \#0) = \#1 \cdot \#1 = \#{11}$
+
+          $I(I(I(I(\epsilon)))) = I(\#{11}) = I(\#1 \cdot \#1) = I(\#1) \cdot \#0 = \#{10} \cdot \#0 = \#{100}$
+
+          \begin{korrektur}
+            Je Wort 0,5 Punkte
+          \end{korrektur}
+    \item Es ist zu zeigen, dass für jedes $n \in \N_0$ gilt:
+          \begin{equation*}
+            \text{Für jedes } w \in \{\#0, \#1\}^n \text{ gibt es ein } i \in \Z_{|I(w)|} \text{ so, dass } (I(w))(i) = \#1.
+          \end{equation*}
+
+          \emph{Induktionsanfang:} Es sei $w \in \{\#0, \#1\}^0$. Dann ist $w = \epsilon$. Foglich ist $I(w) = \#1$. Also ist $(I(w))(0) = \#1$.
+
+          \emph{Induktionsschritt:} Es sei $n \in \N_0$ so, dass gilt:
+          \begin{equation}\label{eq:iv}\tag{I.V.}
+            \text{Für jedes } u \in \{\#0, \#1\}^n \text{ gibt es ein } i \in \Z_{|I(u)|} \text{ so, dass } (I(u))(i) = \#1.
+          \end{equation}
+          Weiter sei $w \in \{\#0, \#1\}^{n + 1}$. Dann gibt es ein $u \in \{\#0, \#1\}^n$ und ein $x \in \{\#0, \#1\}$ so, dass $u \cdot x = w$.
+          \begin{description}
+            \item[Fall 1:] $x = \#0$. Dann ist $I(w) = I(u \cdot x) = u \cdot \#1$. Also ist $(I(w))(|w| - 1) = \#1$.
+            \item[Fall 2:] $x = \#1$. Dann ist $I(w) = I(u \cdot x) = I(u) \cdot \#0$. Nach \eqref{eq:iv} gibt es ein $i \in \Z_{|I(u)|}$ so, dass $(I(u))(i) = \#1$. Also ist $(I(w))(i) = (I(u))(i) = \#1$.
+          \end{description}
+          In jedem Fall gibt es ein $i \in \Z_{|I(w)|}$ so, dass $(I(w))(i) = \#1$.
+
+          \emph{Schlussworte:} Gemäß des Prinzips der vollständigen Induktion gilt zu beweisende Aussage.
+
+          \begin{korrektur}
+            1 Punkt für den Induktionsanfang
+
+            3 Punkte für den Induktionsschritt, davon 1 Punkt für die Induktionsvoraussetzung
+          \end{korrektur}
+    \item Interpretiert man Wörter in $\{\#0, \#1\}^*$ als Zahlen in Binärdarstellung, wobei man das leere Wort als die Zahl $0$ interpretiert, so ist $I(w)$ die Summe von $w$ und $1$. Unter dieser Interpretation bedeutet $S(I(w)) = w$, dass $S(I(w))$ die Differenz von $I(w)$ und $1$ ist. Die Abbildung $S$ muss die \enquote{Transformationen}, die $I$ vornimmt rückgängig machen, lax gesagt, müssen wir um die Definition von $S$ zu erhalten die Pfeile der Form $\mapsto$ in der Definition von $I$ umdrehen. Eine mögliche induktive Definition von $S$ ist:
+          \begin{align*}
+            S \colon E &\to     \{\#0, \#1\}^*,\\
+                   \#1 &\mapsto \epsilon,\\
+           w \cdot \#1 &\mapsto w \cdot \#0, \text{ wobei } w \in \{\#0, \#1\}^+,\\
+           w \cdot \#0 &\mapsto S(w) \cdot \#1, \text{ wobei } w \in \{\#0, \#1\}^*.
+          \end{align*}
+          Dies ist tatsächlich wohldefiniert, da der Definitionsbereich von $S$ nur Wörter enthält in denen mindestens eine $\#1$ vorkommt.
+
+          \begin{korrektur}
+            Korrekter Ansatz wichtig
+
+            Randfälle nicht bedacht oder Flüchtigkeitsfehler 0,5 oder 1 Punkt Abzug
+          \end{korrektur}
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

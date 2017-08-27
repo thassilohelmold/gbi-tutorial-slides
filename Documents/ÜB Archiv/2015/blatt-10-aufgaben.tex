@@ -1,0 +1,248 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows,shapes}
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{10}
+\newcommand{\ausgabetermin}{13.~Januar 2015}
+\newcommand{\abgabetermin}{22.~Januar 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+%\newcommand{\punkteblatt}{18} % Blatt 5
+%\newcommand{\punkteblattphysik}{18} % Blatt 5
+%\newcommand{\punkteblatt}{20} % Blatt 6
+%\newcommand{\punkteblattphysik}{20} % Blatt 6
+%\newcommand{\punkteblatt}{20} % Blatt 7
+%\newcommand{\punkteblattphysik}{0} % Blatt 7
+%\newcommand{\punkteblatt}{18} % Blatt 8
+%\newcommand{\punkteblattphysik}{18} % Blatt 8
+%\newcommand{\punkteblatt}{17} % Blatt 9
+%\newcommand{\punkteblattphysik}{17} % Blatt 9
+\newcommand{\punkteblatt}{16} % Blatt 9
+\newcommand{\punktetotal}{175} %
+\newcommand{\punkteblattphysik}{16} % Blatt 9
+\newcommand{\punktetotalphysik}{152} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben müssen von
+%Studenten der Physik nicht bearbeitet werden.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Es sei $T = (V, E)$ ein gerichteter Baum und es sei $r$ die Wurzel von $T$. Beweisen Sie, dass es keine Zyklen in $T$ gibt.
+\end{aufgabe}
+
+\begin{loesung}
+  Angenommen es gibt einen Zyklus $z$ in $T$. Bezeichne den Start- und Zielknoten von $z$ mit $v$. Da $T$ ein Baum ist, gibt es einen Pfad $p$ von $r$ nach $v$. Der Pfad $p'$, der zunächst entlang $p$ von $r$ nach $v$ läuft und dann entlang $z$ von $v$ nach $v$, ist ein Pfad von $r$ nach $v$. Da Zyklen mindestens die Länge $1$ haben, ist $p'$ länger als $p$, also insbesondere verschieden von $p$. Somit gibt es zwei Pfade von $r$ nach $v$, im Widerspruch zur Definition von Bäumen.
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Es sei $G = (V, E)$ ein gerichteter Graph und es sei $G' = (V, E^*)$, wobei $E^*$ die reflexiv-transitive Hülle von $E$ ist. Beweisen Sie durch vollständige Induktion, dass für jedes $n \in \N_0$, jeden Knoten $v \in V$ und jeden Knoten $w \in V$ genau dann $(v, w) \in E^n$ gilt, wenn es in $G$ einen Pfad der Länge $n$ von $v$ nach $w$ gibt. % Beweisen Sie, dass für jeden Knoten $v \in V$ und jeden Knoten $w \in V$ genau dann $(v, w) \in E^*$ gilt, wenn es in $G$ einen Pfad von $v$ nach $w$ gibt, indem Sie durch vollständige Induktion beweisen, dass für jedes $n \in \N_0$, jeden Knoten $v \in V$ und jeden Knoten $w \in V$ genau dann $(v, w) \in E^n$ gilt, wenn es in $G$ einen Pfad der Länge $n$ von $v$ nach $w$ gibt.
+%  \begin{enumerate} % Bei den auskommentierten Aussagen und deren Beweisen muss man noch Wiederholungsfreiheit oder ähnliches verwenden und sicherstellen, damit die Argumentation korrekt ist.
+%    \item
+%    \item Beweisen Sie, dass es für jeden Knoten $v \in V$ und jeden Knoten $w \in V$ genau dann einen Pfad von $v$ nach $w$ in $G'$ gibt, wenn es einen mindestens so langen Pfad von $v$ nach $w$ in $G$ gibt.
+%    \item Beweisen Sie: Wenn es keine Zyklen in $G$ gibt, dann gibt es keine Zyklen der Mindestlänge $2$ in $G'$ gibt.
+%  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{description}
+    \item[Induktionsanfang.] Es seien $v$, $w \in V$. Es gilt $(v, w) \in E^0$ genau dann, wenn $v = w$ gilt. Und es gilt $v = w$ genau dann, wenn es in $G$ einen Pfad der Länge $0$ von $v$ nach $w$ gibt.
+    \item[Induktionsschritt.] Es sei $n \in \N_0$ derart, dass für jedes $v \in V$ und jedes $w' \in V$ genau dann $(v, w') \in E^n$ gilt, wenn es in $G$ einen Pfad der Länge $n$ von $v$ nach $w'$ gibt (Induktionsvoraussetzung). 
+
+Weiter seien $v$, $w \in V$. Es gilt $(v, w) \in E^{n + 1} = E^n \circ E$ genau dann, wenn es ein $w' \in V$ gibt so, dass $(v, w') \in E^n$ und $(w', w) \in E$. 
+
+Die rechte Seite gilt nach Induktionsvoraussetzung genau dann, wenn es ein $w' \in V$ gibt so, dass es in $G$ einen Pfad der Länge $n$ von $v$ nach $w'$ gibt und $(w', w) \in E$ gilt. Die rechte Seite gilt genau dann, wenn es in $G$ einen Pfad der Länge $n + 1$ von $v$ nach $w$ gibt.
+  \end{description}
+
+  \begin{korrektur}
+    Ind.anfang und Ind.vorauss.~jeweils 1 Punkt, restliche Argumentation 2 Punkte.
+
+    Man beachte, dass man "`genau dann, wenn"' beweisen muss! Wer nur
+    eine Richtung macht, bekommt jeweils nur die halbe Punktzahl.
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+% taken from http://www.texample.net/tikz/examples/prims-algorithm/
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\tikzstyle{vertex}=[circle, draw=black, minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=white]
+\tikzstyle{edge} = [draw,thick,-]
+\tikzstyle{weight} = [font=\small]
+\tikzstyle{selected edge} = [draw,line width=5pt,-,red!50]
+\tikzstyle{ignored edge} = [draw]
+
+\begin{aufgabe}[4]
+  Es sei $G = (V, E)$ ein kantenmarkierter, zusammenhängender und ungerichteter Graph mit Markierungsabbildung $m_E \colon E \to \N_0$. Ein Teilgraph $G' = (V', E')$ von $G$ heißt genau dann \emph{Spannbaum von $G$}, wenn $G'$ ein ungerichteter Baum ist und $V' = V$ gilt. Ein Spannbaum $G' = (V', E')$ von $G$ heißt genau dann \emph{minimal}, wenn für jeden anderen Spannbaum $G'' = (V'', E'')$ von $G$ gilt:
+  \begin{equation*}
+    \sum_{e'' \in E''} m_E(e'') \geq \sum_{e' \in E'} m_E(e').
+  \end{equation*}
+%  Die Knoten $v_i$, Mengen $V_i$ und Mengen $E_i$, für $i \in \Z_{|V|}$, und Kanten $e_i$, für $i \in \Z_{|V|} \smallsetminus \{0\}$, seien induktiv gewählt durch
+%  \begin{align*}
+%    K_0 &= V,\\
+%    v_0 &\in K_0,\\
+%    V_0 &= \{v_0\},\\
+%    E_0 &= \{\},\\
+%    \forall i \in \Z_{|V| - 1} \colon
+%    K_{i + 1} &= \{v \in V \smallsetminus V_i \mid \exists w \in V_i \colon \{v, w\} \in E\},
+%    v_{i + 1} &\in \{v \in K_{i + 1} \mid \forall v' \in K_{i + 1}\; \forall y' \in V_i \text{ mit } \{v', y'\} \in E \colon m_E(\{v', y'\}) \geq m_E(\{v, y\})\},\\
+%    V_{i + 1} &= V_i \cup \{v_{i + 1}\},\\
+%    e_{i + 1} &\in \{\{v_{i + 1}, y\} \in E \mid y \in V_i \land \forall y' \in V_i \text{ mit } \{x', y'\} \in E \colon m_E(\{v_{i + 1}, y'\}) \geq m_E(\{v_{i + 1}, y\})\},\\
+%    E_{i + 1} &= E_i \cup \{e_{i + 1}\}
+%  \end{align*}
+  Der folgende "`Algorithmus"' berechnet einen minimalen Spannbaum $G' = (V', E')$ von $G$:
+  \begin{align*}
+    & \text{wähle } x_0 \in V\\
+    & V' \gets \{x_0\}\\
+    & E' \gets \{\}\\
+    & i \gets 1\\
+    & \kw{while } V \smallsetminus V' \neq \{\} \kw{ do}\\
+    & \quad \text{wähle } x_i \in V' \text{ und } y_i \in V \smallsetminus V' \text{ derart, dass } \{x_i, y_i\} \in E \text{ und}\\
+    & \quad \quad \quad \quad \forall x \in V'\; \forall y \in V \smallsetminus V' \colon \bigl(\{x, y\} \in E \rightarrow m_E(\{x, y\}) \geq m_E(\{x_i, y_i\})\bigr)\\
+    & \quad V' \gets V' \cup \{y_i\}\\
+    & \quad E' \gets E' \cup \{\{x_i, y_i\}\}\\
+    & \quad i \gets i + 1\\
+    & \kw{od}
+  \end{align*}
+  \emph{Hinweis:} An den beiden Stellen, an denen \emph{"`wähle"'} steht, ist es für
+  die Korrektheit des Verfahrens nicht wichtig, welche Wahl man
+  trifft, sofern sie den angegebenen Bedingungen entspricht.
+
+  Geben Sie die Werte der Variablen $x_k$ und $y_k$, für $k \in \Z_n \smallsetminus \{0\}$, nach der Berechnung des minimalen Spannbaums des Graphen
+
+  \begin{tikzpicture}[x={(16mm,0mm)},y={(0,12mm)}, auto,swap]
+    \foreach \pos/\name in {{(0,2)/a}, {(2,2)/b}, {(4,2)/c}, {(0,0)/d}, {(2,0)/e}, {(2,-2)/f}, {(4,-2)/g}}
+        \node[vertex] (\name) at \pos {$\#{\name}$};
+    \foreach \source/ \dest /\weight in {b/a/7, c/b/8,d/a/5,d/b/9,
+                                         e/b/7, e/c/5,e/d/15,
+                                         f/d/6,f/e/8,
+                                         g/e/9,g/f/11}
+        \path[edge] (\source) -- node[weight] {$\weight$} (\dest);
+  \end{tikzpicture}\\
+  mit dem obigen Algorithmus an, wobei im allerersten Schritt als $x_0$ der Knoten $\#a$ gewählt werde.
+\end{aufgabe}
+
+\begin{loesung}
+  $x_1 = \#a$, $y_1 = \#d$, \\
+  $x_2 = \#d$, $y_2 = \#f$, \\
+  $x_3 = \#a$, $y_3 = \#b$, \\
+  $x_4 = \#b$, $y_4 = \#e$, \\
+  $x_5 = \#e$, $y_5 = \#c$, \\
+  $x_6 = \#e$, $y_6 = \#g$
+
+  In der folgenden Darstellung bilden alle Knoten zusammen mit den hellgrau hinterlegten Kanten den minimalen Spannbaum, den der Algorithmus mit der Wahl $x_0 = \#a$ berechnet:
+
+  \tikzstyle{selected edge} = [draw,line width=5pt,-,black!20]
+
+  \begin{tikzpicture}[x={(16mm,0mm)},y={(0,12mm)}, auto,swap]
+    \foreach \pos/\name in {{(0,2)/a}, {(2,2)/b}, {(4,2)/c}, {(0,0)/d}, {(2,0)/e}, {(2,-2)/f}, {(4,-2)/g}}
+        \node[vertex] (\name) at \pos {$\#{\name}$};
+    \foreach \source/ \dest /\weight in {b/a/7, c/b/8,d/a/5,d/b/9,
+                                         e/b/7, e/c/5,e/d/15,
+                                         f/d/6,f/e/8,
+                                         g/e/9,g/f/11}
+        \path[edge] (\source) -- node[weight] {$\weight$} (\dest);
+    \foreach \vertex / \fr in {d/1,a/2,f/3,b/4,e/5,c/6,g/7}
+            \path node[selected vertex] at (\vertex) {$\vertex$};
+    \begin{pgfonlayer}{background}
+        \foreach \source / \dest in {d/a,d/f,a/b,b/e,e/c,e/g}
+            \path[selected edge] (\source.center) -- (\dest.center);
+        \foreach \source / \dest / \fr in {d/b/4,d/e/5,e/f/5,b/c/6,f/g/7}
+            \path[ignored edge] (\source.center) -- (\dest.center);
+    \end{pgfonlayer}
+  \end{tikzpicture}
+
+  \begin{korrektur}
+    Die Zahlen wurden so gewählt, dass der minimale Spannbaum
+    eindeutig ist. Da nur die Angabe der $(x_k,y_k)$ verlangt war (und
+    kein Bild) ist die Korrektur hoffentlich schnell möglich.
+
+    Problematisch wird es, wenn jemand schon bei der ersten oder
+    zweiten Kante einen Fehler gemacht hat. Dann sollten Sie bitte
+    gucken, ob der Rest "`nur"' Folgefehler sind. Für letztere nichts
+    abziehen (sofern die Aufgabe nicht signifikant leichter wurde).
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[4]
+  Es sei $G = (\Z_n, E)$ ein gerichteter Graph und es sei $A$ die Adjazenzmatrix von $G$. Wir nummerieren die Zeilen und Spalten von $A$ mit $0$ beginnend durch und bezeichnen für jedes $i \in \Z_n$ und jedes $j \in \Z_n$ mit $A_{i,j}$ den Eintrag von $A$ in der $i$-ten Zeile und $j$-ten Spalte. Die Matrix $A$ heißt genau dann
+%  Es sei $n$ eine positive ganze Zahl und es sei $A$ eine Matrix mit $n$ Zeilen, $n$ Spalten und ganzzahligen Einträgen. Wir nummerieren die Zeilen und Spalten von $A$ mit $0$ beginnend durch und bezeichnen für jedes $i \in \Z_n$ und jedes $j \in \Z_n$ mit $A_{i,j}$ den Eintrag von $A$ in der $i$-ten Zeile und $j$-ten Spalte. Die Matrix $A$ heißt genau dann
+  \begin{itemize}
+    \item \emph{hohl}, wenn % siehe https://en.wikipedia.org/wiki/Hollow_matrix
+          \begin{equation*}
+            \forall i \in \Z_n \colon A_{i,i} = 0;
+          \end{equation*}
+    \item \emph{symmetrisch}, wenn
+          \begin{equation*}
+            \forall i \in \Z_n\; \forall j \in \Z_n \colon A_{i,j} = A_{j,i};
+          \end{equation*}
+    \item \emph{strikte obere Dreiecksmatrix}, wenn
+          \begin{equation*}
+            \forall i \in \Z_n\; \forall j \in \Z_{i + 1} \colon A_{i,j} = 0;
+          \end{equation*}
+    \item \emph{hohle $(2 \times 2)$-Blockmatrix}, wenn
+          \begin{equation*}
+            \exists k \in \Z_n \colon
+              (\forall (i,j) \in \Z_k^2 \colon A_{i,j} = 0) \land
+              (\forall (i,j) \in (\Z_n \smallsetminus \Z_k)^2 \colon A_{i,j} = 0).
+          \end{equation*}
+  \end{itemize}
+%  Es sei $G = (V, E)$ ein gerichteter Graph. Der Graph $G$ heißt genau dann
+  Der Graph $G$ heißt genau dann
+  \begin{itemize}
+    \item \emph{bipartit}, wenn es zwei Teilmengen $A$ und $B$ von $V$ gibt so, dass $A \cap B = \{\}$ und $E \subseteq (A \times B) \cup (B \times A)$;
+    \item \emph{zyklenfrei} oder \emph{DAG}, wenn es keine Zyklen in $G$ gibt;
+    \item \emph{schlingenfrei}, wenn es keine Schlingen in $G$ gibt;
+    \item \emph{richtungslos}, wenn für jedes $(v, w) \in E$ gilt $(w, v) \in E$. % eigentlich 'symmetrisch' aber ...
+  \end{itemize}
+%  Fortan sei $G = (\Z_n, E)$ ein gerichteter Graph und es sei $A$ die Adjazenzmatrix von $G$.
+  Beantworten Sie mit jeweils einem Wort die folgenden Fragen:
+  \begin{enumerate}
+    \item Falls $A$ eine strikte obere Dreiecksmatrix ist, welche der oben genannten Eigenschaften hat $G$?
+    \item Falls $A$ eine hohle $(2 \times 2)$-Blockmatrix ist, welche der oben genannten Eigenschaften hat $G$?
+    \item Falls $G$ schlingenfrei ist, welche der oben genannten Eigenschaften hat $A$?
+    \item Falls $G$ richtungslos ist, welche der oben genannten Eigenschaften hat $A$?
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \begin{enumerate*}[itemjoin={{\qquad}}]
+    \item zyklenfrei
+    \item bipartit
+    \item hohl
+    \item symmetrisch
+  \end{enumerate*}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:

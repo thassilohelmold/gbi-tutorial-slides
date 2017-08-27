@@ -1,0 +1,415 @@
+\documentclass[12pt,twoside]{report}
+\setcounter{errorcontextlines}{4}
+
+\setlength{\textheight}{236mm}
+\addtolength{\topmargin}{-20mm}
+\addtolength{\textwidth}{5mm}
+\addtolength{\oddsidemargin}{5mm}
+\addtolength{\evensidemargin}{-10mm}
+
+%% %%%%%%%%% PACKAGES
+%\usepackage{../../skript/gbi}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{german}
+\usepackage{graphicx}
+\usepackage[latin1]{inputenc}
+%% %\usepackage{latexsym}
+\usepackage{mdwlist}
+%\usepackage{thwmathligs}
+\usepackage{thwpalatino}
+%\usepackage{mdwlist}
+\usepackage{pst-all}
+\usepackage{tabularx}
+%% \usepackage{thwalg}
+%\usepackage{thwmathabbrevs}
+%\usepackage{thwtextabbrevs}
+% \usepackage{url}
+
+\pagestyle{fancy}
+\addtolength{\headheight}{5pt}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[RO]{Matr.-Nr.:\hspace*{40mm}}
+\fancyhead[LO]{Name:}
+\fancyfoot[CE,CO]{\thepage}
+
+\usepackage[digits]{at}
+\usepackage{cmtt}
+\newatcommand N[1]{\ensuremath{\langle}\hbox{\textit{#1}}\ensuremath{\rangle}}
+\newatcommand T[1]{\hbox{\upshape\mttfamily\bfseries{#1}}}
+\newatcommand M[1]{\ensuremath{\big#1}}
+\newatcommand .{\ensuremath{\mathop{\hbox{\textbullet}}\,}}
+\let\Hash=\#
+\renewcommand{\#}[1]{\textup{\texttt{#1}}}
+\newcommand{\act}{\ensuremath{\mathit{act}}}
+\newcommand{\goto}{\ensuremath{\mathit{goto}}}
+\def\strich{\underline{\hspace*{1cm}}}
+\def\Strich{\underline{\hspace*{2cm}}}
+
+\def\JANEIN{\qquad ja: \strich\qquad nein: \strich }
+
+\newcounter{afgnr}
+\setcounter{afgnr}{1}
+
+\parskip=12pt
+\parindent=0pt
+
+\newenvironment{aufgabe}[1][\relax]%
+  {\clearpage
+    \noindent\textbf{Aufgabe \arabic{afgnr}}%
+    \if#1\relax\else{ (#1 Punkte)}\fi
+    \\
+  }%
+  {\addtocounter{afgnr}{1}}%
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+  \bfseries \Large
+  Klausur zur Vorlesung \\
+  Grundbegriffe der Informatik \\
+  10. März 2010 \\[8mm]
+  \begin{tabular}{l@{\quad}|c|c|c|}
+    \cline{2-4}
+    Klausur- &
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 8mm depth 1mm}\\
+    nummer &
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}&
+    \hbox to 20mm{\hss \vrule width 0pt height 6mm depth 5mm}\\
+    \cline{2-4}
+  \end{tabular}
+
+\end{center}
+
+\vspace*{10mm}
+\def\Q{\hspace*{12mm}}
+\begin{center}
+  \begin{tabular}[t]{|l|*{8}{c|}}
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Name:} \\
+    \multicolumn{5}{|l|}{} \\
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Vorname:} \\
+    \multicolumn{5}{|l|}{} \\
+    \cline{1-5}
+    \multicolumn{5}{|l|}{} \\
+    \multicolumn{5}{|l|}{Matr.-Nr.:} \\
+    \multicolumn{5}{|l|}{} \\
+%     \cline{1-5}
+%     \multicolumn{2}{|l|}{} & & & \\
+%     \multicolumn{2}{|l|}{Klausur.-Nr.:} & & &\\
+%     \multicolumn{2}{|l|}{} & & & \\
+    \cline{1-5}
+    \multicolumn{7}{c}{ } \\
+    \multicolumn{7}{c}{ } \\
+    \multicolumn{7}{c}{ } \\
+    \multicolumn{7}{c}{ } \\
+    \cline{1-7}
+    \            &   &   &   &   &   &     \\
+    Aufgabe      & 1 & 2 & 3 & 4 & 5 & 6   \\
+    \            & \Q& \Q& \Q& \Q& \Q& \Q  \\
+    \cline{1-7}
+    \            &   &   &   &   &   &      \\
+    max. Punkte  & 6 & 6 & 7 & 7 & 8 & 11    \\
+    \            &   &   &   &   &   &      \\
+    \cline{1-7}
+    \            &   &   &   &   &   &      \\
+    tats. Punkte &   &   &   &   &   &      \\
+    \            &   &   &   &   &   &      \\
+  \cline{1-7}
+    \multicolumn{6}{c}{ } \\
+    \multicolumn{6}{c}{ } \\
+    \multicolumn{6}{c}{ } \\
+    \multicolumn{7}{c}{ } \\
+    \cline{1-4}\cline{6-7}
+    \multicolumn{4}{|l|}{ } &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{ } & \multicolumn{1}{c}{ }\\
+    \multicolumn{4}{|l|}{Gesamtpunktzahl:} &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{Note:} & \multicolumn{1}{c}{ }\\
+    \multicolumn{4}{|l|}{ } &
+    \multicolumn{1}{c}{ } &
+    \multicolumn{2}{|l|}{ } & \multicolumn{1}{c}{ } \\
+    \cline{1-4}\cline{6-7}
+  \end{tabular}
+\end{center}
+
+
+%=======================================================================
+\begin{aufgabe}[2+2+2 = 6]
+  In dieser Aufgabe geht es um Abbildungen; für $n \in \mathbb{N}_+$ gelte 
+  wie in der Vorlesung: $\mathbb{G}_n=\{0, 1, \ldots, n-1\}$.
+
+  \begin{enumerate}[a)]
+  \item Sei $n \ge 1$. Wie viele Abbildungen gibt es von einer $n$-elementigen Menge
+    in eine 2-elementige Menge, die \textbf{nicht} surjektiv sind?
+  \item Geben Sie zwei Zahlen $n, m \in \mathbb{N}_+$ an, für die gilt:
+    Es gibt mehr injektive Abbildungen von $\mathbb{G}_n$ nach $\mathbb{G}_m$
+    als surjektive Abbildungen von $\mathbb{G}_m$ nach $\mathbb{G}_n$.
+
+    \textbf{Hinweis:} Achten Sie auf die Indizes!
+  \item Geben Sie zwei Zahlen $n, m \in \mathbb{N}_+$ an, für die gilt:
+    Es gibt mehr surjektive Abbildungen von $\mathbb{G}_n$ nach $\mathbb{G}_m$
+    als injektive Abbildungen von $\mathbb{G}_m$ nach $\mathbb{G}_n$.
+  
+    \textbf{Hinweis:} Achten Sie auf die Indizes!
+     
+  \end{enumerate}
+ 
+%\clearpage
+%\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+%=======================================================================
+\begin{aufgabe}[2+2+2 = 6]
+  In dieser Aufgabe geht es um Huffman-Codierungen.
+
+  Gegeben sei ein Wort über dem Alphabet $A=\{\#a, \#b, \#c, \#d\}$ mit
+  folgenden \textbf{relativen} Häufigkeiten:
+
+  \begin {tabular}{c|c|c|c}
+    $\#a$&$\#b$&$\#c$&$\#d$ \\ \hline
+    \hphantom{.}&&&\\[-4mm]
+    $x$&$\frac{1}{4}$&$\frac{1}{4}$&$\frac{1}{2}-x$
+  \end {tabular}
+
+  wobei $0 \le x \le \frac{1}{4}$ gilt.
+
+  \begin{enumerate}[a)]
+  \item Erstellen Sie den Huffman-Baum für $x=\frac{1}{16}$.
+  \item Welche Struktur muss der Huffman-Baum haben, damit die
+    Huffman-Codierung eines Wortes $w \in A^+$ mit
+    den in der Tabelle angegebenen relativen Häufigkeiten
+    echt kürzer als $2|w|$ sein kann?
+  \item Für welche $x \in \mathbb{R}$ mit $0 \le x \le \frac{1}{4}$
+    werden Wörter mit den angegebenen relativen Häufigkeiten auf
+    genau doppelt so lange Wörter über $\{0, 1\}$ abgebildet?
+      
+  \end{enumerate}
+ 
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+
+%=======================================================================
+\begin{aufgabe}[2+2+3 = 7]
+  In dieser Aufgabe geht es um Mealy-Automaten.
+
+  \begin{enumerate}[a)]
+  \item Sei $X=\{\#0, \#1, \#2, \#3\}$ und $w=\#{2103} \in X^*$.
+    Geben Sie ein Wort $w' \in \{\#0, \#1\}^*$ an, so dass
+    $Num_2(w')=Num_4(w)$ gilt.
+  \item Geben Sie einen Mealy-Automaten $A=(Z, z_0, X, f, Y, g)$
+    mit $|Z|\leq 3, X=\{\#0, \#1, \#2, \#3\}$ und $Y=\{\#0, \#1\}$ an, so dass für
+    alle Wörter $w \in X^*$ gilt:\\
+    $Num_4(w)=Num_2(g^{**}(z_0, w))$.
+
+      
+  \item Geben Sie einen Mealy-Automaten $A=(Z, z_0, X, f, Y, g)$
+    mit $|Z|\leq 3, X=\{\#0, \#1\}$ und $Y=\{\#0, \#1, \#2, \#3\}$ an, so dass für
+    alle Wörter $w \in X^*$ \textbf{mit gerader Länge} 
+    gilt: $Num_2(w)=Num_4(g^{**}(z_0, w))$.
+  \end {enumerate}
+  
+  \textbf{Hinweis 1:} $g^{**}(z_0, w)$ ist die Konkatenation aller Ausgaben,
+  die $A$ bei Eingabe von $w$ erzeugt.
+  
+  \textbf{Hinweis 2:} Wenn Ihre Automaten mehr als drei Zustände
+  haben, bekommen Sie weniger Punkte.
+  
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+
+
+%=======================================================================
+\begin{aufgabe}[4+2+1 = 7]
+  Es sei die kontextfreie Grammatik $G=(\{S\}, \{\#a, \#b\}, S, 
+  \{S \rightarrow \#aS\#a \mid \#aS \mid \#b\})$ gegeben.
+  
+  \begin{enumerate}[a)]
+  \item Zeigen Sie durch vollständige Induktion, dass für alle $k \in \mathbb{N}_0$ gilt:
+
+    Wenn $S \Rightarrow^kw$ gilt, dann auch $\exists n, m \in
+    \mathbb{N}_0: n \ge m \wedge w \in \{\#a^nS\#a^m, \#a^nb\#a^m\}$.
+  \item Seien $n, m \in  \mathbb{N}_0$ mit $n \ge m$ gegeben.
+
+    Erklären Sie, wie man das Wort $\#a^n\#b\#a^m$ aus $S$ ableiten kann.
+
+  \item Geben Sie eine mathematische Beschreibung von $L(G)$ an.
+
+    \textbf{Hinweis:} Abwandlungen von $L(G)=\{w \in X^* \mid S \Rightarrow^* w\}$
+    geben \textbf{keine} Punkte!
+
+  \end{enumerate}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[2+3+1+2 = 8]
+  Sei $G=(V, E)$ ein gerichteter Graph.
+
+  Die Relation $S \subseteq V \times V$ sei gegeben durch 
+  $\forall x, y \in V: xSy \iff$ es gibt in $G$ einen Pfad von $x$ nach $y$
+  und es gibt in $G$ einen Pfad von $y$ nach $x$.
+
+  Die Relation $R \subseteq V \times V$ sei gegeben durch 
+  $\forall x, y \in V: xRy \iff$ es gibt in $G$ einen Pfad von $x$ nach $y$.
+
+  \begin{enumerate}[a)]
+    \item Geben Sie die Relation $S$ für folgenden Graphen $G$ an:
+
+      \psset{xunit=2.5cm, yunit=2.5cm, runit=2.5cm}
+      \begin {center}
+        \begin {pspicture}(0, 0)(4, 2)
+          
+          \cnodeput(1, 0.5){A}{$A$}
+          \cnodeput(2, 0.5){B}{$B$}
+          \cnodeput(3, 0.5){D}{$C$}
+          \cnodeput(1.5, 1.5){C}{$D$}
+          
+          \ncline[arrowscale=2]{->}{A}{B}
+          \ncline[arrowscale=2]{->}{B}{C}
+          \ncline[arrowscale=2]{->}{C}{A}
+          \ncline[arrowscale=2]{->}{D}{B}
+          
+          
+        \end {pspicture}
+      \end {center}
+      
+
+  \item  Zeigen Sie, dass $S$ für beliebige gerichtete Graphen $G$ eine Äquivalenzrelation ist.
+
+  \item Für welche Graphen $G$ gibt es nur eine Äquivalenzklasse bezüglich $S$?
+
+  \item 
+    Zeigen Sie: Für alle $x_1, x_2, y_1, y_2 \in V$ gilt: $x_1Sx_2 \wedge y_1Sy_2 \wedge x_1Ry_1 \Rightarrow
+    x_2Ry_2$.
+   
+
+  \end{enumerate}
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+\end{aufgabe}
+
+%=======================================================================
+\begin{aufgabe}[1+1+1+2+2+2+2 = 11]
+  Gegeben sei die folgende Turingmaschine $T$:
+  \begin{itemize*}
+  \item Zustandsmenge ist $Z=\{z_0, z_1, z_2, z_3, z_4, z_5\}$.
+  \item Anfangszustand ist $z_0$.
+  \item Bandalphabet ist $X=\{\Box,\#a,\#b \}$.
+  \item Die Arbeitsweise ist wie folgt festgelegt:
+
+     \begin{tabular}{c|cccccc}
+       &$z_0$&$z_1$&$z_2$&$z_3$&$z_4$&$z_5$\\ \hline
+       \  \\
+       $\#a$& $(z_1, \Box, 1)$ & $(z_1, \#a, 1)$ &$(z_3, \#a, -1)$ & - &$(z_4, \#a, -1)$&$(z_5, \#b, 1)$\\
+       $\#b$& $(z_5, \#a, 1)$ & $(z_2, \#b, 1)$ &$(z_2, \#b, 1)$ &$(z_4, \#a, -1)$ &$(z_4, \#b, -1)$&$(z_5, \#a, 1)$\\
+       $\Box$ & - & - &$(z_3, \Box, -1)$ & - &$(z_0, \Box, 1)$ & $(z_4, \Box, -1)$\\
+    \end {tabular}
+
+    (Darstellung als Graph auf der nächsten Seite)
+
+        
+  \end{itemize*}
+  
+  Die Turingmaschine wird im folgenden für Eingaben $w \in \{\#a^n\#b^m \mid n, m \in \mathbb{N}_0\}$
+  verwendet, wobei der Kopf der Turingmaschine anfangs auf dem ersten Zeichen von $w$
+  stehe (sofern $w$ nicht das leere Wort ist).
+
+  \begin{enumerate}[a)]
+  \item Geben Sie die Endkonfiguration der Turingmaschine
+    für die Eingabe $w=\#{aaabb}$ an.
+  \item Die Eingabe sei $w=\#{aaabbbbb}$. Geben Sie die Bandbeschriftung an,
+    wenn $T$ das erste Mal von Zustand $z_5$ in den Zustand $z_4$ übergeht.
+  \item Beschreiben Sie, was $T$ macht, wenn $T$ sich im Zustand $z_4$
+    befindet (bis sich der Zustand von $T$ ändert).
+  \item Seien $n, m\in \mathbb{N}_0$ mit  $n \ge m$ und die Eingabe $w=\#a^n\#b^m$.
+    Welches Wort steht am Ende der Berechnung auf dem Band?
+  \item Seien $n, m\in \mathbb{N}_0$ mit $n<m$ und die Eingabe $w=\#a^n\#b^m$.
+    Welches Wort steht auf dem Band zu dem Zeitpunkt,
+    an dem $T$ zum ersten Mal von Zustand $z_5$ in den Zustand $z_4$ wechselt?
+  \item Seien $n, m\in \mathbb{N}_+$ mit $n < m$.
+    Geben Sie Zahlen $n', m' \in \mathbb{N}_0$ mit $n'+m'<n+m$ an,
+    so dass gilt:
+
+    Bei Eingabe von $\#a^n\#b^m$ ist am Ende der Berechnung das Band leer $\iff$
+    Bei Eingabe von $\#a^{n'}\#b^{m'}$ ist am Ende der Berechnung das Band leer.
+
+  \item Geben Sie vier verschiedene Paare $(n, m) \in \mathbb{N}_+ \times \mathbb{N}_+$ an,
+    für die gilt: Bei Eingabe von $\#a^n\#b^m$ ist am Ende der Berechnung das Band leer.
+    
+  \end{enumerate}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+
+Darstellung der Turingmaschine als Graph:
+
+\vspace*{-6\baselineskip}
+
+\psset{xunit=2.5cm, yunit=2.5cm, runit=2.5cm}
+\begin{center}
+      \begin {pspicture}(0, 0)(4, 6)
+        \pnode(0.6, 3){X}
+        
+        \cnodeput(1, 3){A}{$z_0$}
+        \cnodeput(1, 4){B}{$z_1$}
+        \cnodeput(2, 4){C}{$z_2$}
+        \cnodeput(3, 3){D}{$z_3$}
+        \cnodeput(2, 3){E}{$z_4$}
+        \cnodeput(1, 2){F}{$z_5$}
+        
+        \ncline[arrowscale=2]{->}{X}{A}
+        
+        \ncline[arrowscale=2]{->}{A}{B}
+        \naput{$\#a | \Box R$}
+        \ncline[arrowscale=2]{->}{B}{C}
+        \naput{$\#b | \#b R$}
+        \ncline[arrowscale=2]{->}{C}{D}
+        \naput{$\#a | \#a L, \Box | \Box L$}
+        \ncline[arrowscale=2]{->}{D}{E}
+        \naput{$\#b | \#a L$}
+        \ncline[arrowscale=2]{->}{E}{A}
+        \naput{$\Box | \Box R$}
+        \ncline[arrowscale=2]{->}{A}{F}
+        \nbput{$\#b | \#a R$}
+        \ncline[arrowscale=2]{->}{F}{E}
+        \nbput{$\Box | \Box L$}
+
+        \nccircle[arrowscale=2]{->}{B}{0.2}
+        \nbput{$\#a | \#a R$} 
+        \nccircle[arrowscale=2]{->}{C}{0.2}
+        \nbput{$\#b | \#b R$} 
+        \nccircle[arrowscale=2]{->}{E}{0.2}
+        \nbput{$\#a | \#a L, \#b | \#b L$} 
+        \nccircle[arrowscale=2, angle=180]{->}{F}{0.2}
+        \nbput{$\#b | \#a R, \#a | \#b R$}
+      \end {pspicture}
+    \end {center}
+
+\clearpage
+\textit{Weiterer Platz für Antworten zu Aufgabe \theafgnr:}
+
+
+\end{aufgabe}
+%=======================================================================
+\end{document}
+%%% Local Variables:
+%%% TeX-command-default: "XPDFLaTeX"
+%%% End:

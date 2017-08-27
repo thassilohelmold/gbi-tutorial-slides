@@ -1,0 +1,246 @@
+\documentclass[12pt]{article}
+
+\input{preamble-aufgaben}
+% =======================================================
+
+% =======================================================
+%\newcounter{blattnr}
+\setcounter{blattnr}{6}
+\newcommand{\ausgabetermin}{2.~Dezember 2015}
+\newcommand{\abgabetermin}{11.~Dezember 2015}
+%\newcommand{\punkteblatt}{13} % Blatt 1
+%\newcommand{\punkteblattphysik}{13} % Blatt 1
+%\newcommand{\punkteblatt}{17} % Blatt 2
+%\newcommand{\punkteblattphysik}{14} % Blatt 2
+%\newcommand{\punkteblatt}{18} % Blatt 3
+%\newcommand{\punkteblattphysik}{18} % Blatt 3
+%\newcommand{\punkteblatt}{18} % Blatt 4
+%\newcommand{\punkteblattphysik}{18} % Blatt 4
+%\newcommand{\punkteblatt}{18} % Blatt 5
+%\newcommand{\punkteblattphysik}{18} % Blatt 5
+\newcommand{\punkteblatt}{20} % Blatt 6
+\newcommand{\punktetotal}{104} %
+\newcommand{\punkteblattphysik}{20} % Blatt 6
+\newcommand{\punktetotalphysik}{101} %
+% =======================================================
+
+\begin{document}
+
+%\noindent
+%Mit \textbf{[nicht Physik]} gekennzeichnete Aufgaben werden von
+%Studenten der Physik bitte nicht bearbeitet.\\
+
+% -----------------------------------------------------------------------------
+
+\begin{aufgabe}[2 + 2 + (2 + 1 + 1 + 2) + 2 + 2 = 14]
+  Es sei $A$ ein Alphabet; es sei $\mathcal{L}$ die Menge aller formalen Sprachen über $A$, das heißt, $\mathcal{L} = \{L \mid L \subseteq A^*\}$; es sei $f \colon \mathcal{L} \to \mathcal{L}$ eine Abbildung derart, dass für jede formale Sprache $S \in \mathcal{L}$ und jede formale Sprache $T \in \mathcal{L}$ mit $S \subseteq T$ gilt: $f(S) \subseteq f(T)$; es seien die formalen Sprachen $L_n$, $n \in \N_0$, induktiv definiert durch
+  \begin{align*}
+    L_0 &= \{\},\\
+    \text{für jedes } n \in \N_0 \colon L_{n + 1} &= f(L_n);
+  \end{align*}
+  und es sei $L_\infty$ die formale Sprache $\bigcup_{n \in \N_0} L_n$.
+  \begin{enumerate}
+    \item Beweisen Sie durch vollständige Induktion, dass für jedes $n \in \N_0$ gilt: $L_n \subseteq L_{n + 1}$.
+    \item Beweisen Sie, dass $f(L_\infty) = L_\infty$ gilt. Eine formale Sprache mit dieser Eigenschaft nennt man \emph{Fixpunkt von $f$}.
+
+          \emph{Hinweis:} Für jede Menge $I$ und alle formalen Sprachen $S_i \subseteq A^*$, $i \in I$, gilt $f(\bigcup_{i \in I} S_i) = \bigcup_{i \in I} f(S_i)$.
+    \item In dieser Teilaufgabe sei $A = \{\#0,\#1\}$ und es sei
+          \begin{align*}
+            f \colon \mathcal{L} &\to     \mathcal{L},\\
+                               L &\mapsto \{\#0,\#1\} \cup (\{\#0,\#1\} \cdot L).
+          \end{align*}
+          \begin{enumerate}[(i)]
+            \item Geben Sie $L_1$, $L_2 \setminus L_1$ und $L_3 \setminus L_2$ so explizit wie möglich in der Form $\{ \dotsc \}$ an.
+            \item Geben Sie einen arithmetischen Ausdruck $E$, in dem das Symbol $n$ vorkommt und die Sprachen $L_n$, $n \in \N_0$, nicht vorkommen, so an, dass für jedes $n \in \N_0$ gilt: $|L_{n + 1} \setminus L_n| = E$.
+            \item Geben Sie $L_\infty$ ohne Bezug auf die formalen Sprachen $L_n$, $n \in \N_0$, an.
+            \item Geben Sie eine kontextfreie Grammatik $G$ so an, dass die von ihr erzeugte formale Sprache $L(G)$ gleich $L_\infty$ ist.
+          \end{enumerate}
+    \item In dieser Teilaufgabe sei $A = \{\#0,\#1,\#;\}$ und es sei
+          \begin{align*}
+            f \colon \mathcal{L} &\to     \mathcal{L},\\
+                               L &\mapsto \{\#0,\#1\}^+ \cup (\{\#0,\#1\}^+ \cdot \{\#;\} \cdot L).
+          \end{align*}
+          Geben Sie eine kontextfreie Grammatik $G$ so an, dass $L(G) = L_\infty$ gilt.
+    \item In dieser Teilaufgabe sei $A = \{ \#(, \#) \}$ und es sei $G = (N, T, \#S, P)$ die Grammatik mit den Nichtterminalsymbolen $N = \{ \#S \}$, den Terminalsymbolen $T = \{ \#(, \#) \}$ und den Produktionen
+          \begin{equation*}
+            P = \{ \#S \rightarrow \varepsilon \mid \#{S(S)} \}.
+          \end{equation*}
+          Geben Sie eine Abbildung $f \colon \mathcal{L} \to \mathcal{L}$ so an, dass $L_\infty = L(G)$ gilt.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  \emph{Nebenbei:} Jede Abbildung $g \colon A^* \to A^*$ induziert eine Abbildung $f \colon \mathcal{L} \to \mathcal{L}$ vermöge $L \mapsto g(L)$ mit der gewünschten Eigenschaft. Und für jedes $n \in \N_0$ gilt $L_n = f^n(\{\})$. Und $L_\infty = \bigcup_{n \in \N_0} f^n(\{\})$. Und $f(L_\infty) = \bigcup_{n \in \N_0} f^{n+1}(\{\})$.
+  \begin{enumerate}
+    \item \emph{Induktionsanfang:} Die leere Menge ist Teilmenge jeder Menge. Insbesondere gilt $L_0 = \{\} \subseteq f(\{\}) = L_1$.
+
+          \emph{Induktionsschritt:} Es sei $n \in \N_0$ derart, dass $L_n \subseteq L_{n + 1}$. Dann gilt $L_{n + 1} = f(L_n) \subseteq f(L_{n + 1}) = L_{(n + 1) + 1}$.
+
+          \emph{Schlussworte:} Nach dem Prinzip der vollständigen Induktion gilt die Behauptung.
+          \begin{korrektur}
+            0,5 Punkte für den Induktionsanfang; 1,5 Punkte für den Induktionsschritt und davon 0,5 Punkte für die Induktionsvoraussetzung.
+          \end{korrektur}
+    \item Es gilt
+          \begin{multline*}
+            f(L_\infty) = f(\bigcup_{n \in \N_0} L_n)
+                        = \bigcup_{n \in \N_0} f(L_n)
+                        = \bigcup_{n \in \N_0} L_{n + 1}
+                        = \bigcup_{k \in \N_+} L_k\\
+                        = \{\} \cup \bigcup_{k \in \N_+} L_k
+                        = L_0 \cup \bigcup_{k \in \N_+} L_k
+                        = \bigcup_{k \in \N_0} L_k
+                        = L_\infty.
+          \end{multline*}
+    \item \begin{enumerate}
+            \item $L_1 \setminus L_0 = \{\#0,\#1\}$, $L_2 \setminus L_1 = \{\#{00},\#{01},\#{10},\#{11}\}$, $L_3 \setminus L_2 = \{\#{000},\#{001},\#{010},\#{011},\#{100},\#{101},\#{110},\#{111}\}$.
+                  \begin{korrektur}
+                    Jeweils 0,5 Punkte für $L_1$ und $L_2$; 1 Punkt für $L_3$.
+                  \end{korrektur}
+            \item $E = 2^{n + 1}$.
+            \item $L_\infty = \{\#0,\#1\}^+$ oder $L_\infty = \{\#0,\#1\} \cdot \{\#0,\#1\}^*$ oder $L_\infty = \{w \in \{\#0,\#1\}^* \mid |w| \geq 1\}$ oder ...
+            \item Die Grammatik $G = (N, T, \#B, P)$ mit den Nichtterminalsymbolen $\{ \#B \}$, den Terminalsymbolen $\{ \#0, \#1 \}$ und den Produktionen $\{ \#B \rightarrow \#0 \mid \#1 \mid \#{0B} \mid \#{1B} \}$ leistet das Gewünschte.
+
+                  \emph{Nebenbei:} Für jedes $L \in \mathcal{L}$ gilt $f(L) = \{\#0\} \cup \{\#1\} \cup \{\#0\} \cdot L \cup \{\#1\} \cdot L$. Entfernt man aus diesem Ausdruck die Symbole $\{$, $\}$ und $\cdot$, ersetzt $\cup$ durch $\mid$, $L$ durch $\#B$, ${=}$ durch $\rightarrow$ und $f(L)$ durch $\#B$, so erhält man die Produktionen in $P$.
+          \end{enumerate}
+    \item Die Grammatik $G = (N, T, \#S, P)$ mit den Nichtterminalsymbolen $\{ \#S, \#B \}$, den Terminalsymbolen $\{ \#0, \#1, \#; \}$ und den Produktionen
+          \begin{align*}
+            \{
+              \#S &\rightarrow \#B \mid \#{B;S},\\
+              \#B &\rightarrow \#0 \mid \#1 \mid \#{0B} \mid \#{1B}
+            \}
+          \end{align*}
+          leistet das Gewünschte.
+    \item Die Abbildung
+          \begin{align*}
+            f \colon \mathcal{L} &\to     \mathcal{L},\\
+                               L &\mapsto \{\varepsilon\} \cup L \cdot \{\#(\} \cdot L \cdot \{\#)\},
+          \end{align*}
+          leistet das Gewünschte.
+  \end{enumerate}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\newpage
+\begin{aufgabe}[2 + 4 = 6]
+  Es sei $G = (N, T, \#S, P)$ die Grammatik mit den Nichtterminalsymbolen $N = \{ \#S, \#U, \#X, \#Q \}$, den Terminalsymbolen $T = \{ \#a \}$ und den Produktionen
+  \begin{align*}
+    P = \{
+          \#S &\rightarrow \#{aU} \mid \#{aXa} \mid \#{Qaa},\\
+          \#U &\rightarrow \#{aaU} \mid \varepsilon,\\
+          \#X &\rightarrow \#{Qaaa} \mid \#a,\\
+          \#Q &\rightarrow \#{aXa} \mid \#a
+        \}
+  \end{align*}
+  \begin{enumerate}
+    \item Leiten Sie aus dem Startsymbol das Wort $\#{a}^7$ ab. Geben Sie dabei jeden Ableitungsschritt an.
+    \item Zeichnen Sie den Ableitungsbaum für das Wort $\#{a}^{16}$. %$\#{aa}^6 \cdot \#a$.
+  \end{enumerate}
+\end{aufgabe}
+
+\begin{loesung}
+  Aus dem Nichtterminalsymbol $\#U$ sind alle Wörter über $T$ gerader Länge ableitbar. Somit sind aus $\#{aU}$ alle Wörter über $T$ ungerader Länge ableitbar. Aus den Nichtterminalsymbolen $\#X$ und $\#Q$ sind alle Wörter über $T$ der Längen $x_n$ beziehungsweise $q_n$, $n \in \N_0$, ableitbar, wobei die nicht-negativen ganzen Zahlen $x_n$ und $q_n$, $n \in \N_0$, wechselseitig induktiv definiert sind durch
+  \begin{align*}
+    &\qquad x_0 = 1,\\
+    &\qquad q_0 = 1,\\
+    \text{für jedes } n \in \N_0 \colon &\begin{dcases*}
+                                          x_{n + 1} = q_n + 3,\\
+                                          q_{n + 1} = 1 + x_n + 1.
+                                        \end{dcases*}
+  \end{align*}
+  Somit sind aus $\#{aXa}$ und $\#{Qaa}$ alle Wörter über $T$ der Längen $1 + x_n + 1$ beziehungsweise $q_n + 2$, $n \in \N_0$, ableitbar. Es gelten $x_0 = 1$, $q_0 = 1$, $x_1 = q_0 + 3 = 4$, $q_1 = 1 + x_0 + 1 = 3$, $x_2 = 6$, $q_2 = 6$, $x_3 = 9$, $q_3 = 8$, $x_4 = 11$, $q_4 = 11$, $x_5 = 14$, $q_5 = 13$.
+  \begin{enumerate}
+    \item Da das Wort ungerade Länge hat kann es über $\#{aU}$ aus $\#S$ wie folgt abgeleitet werden:
+          \begin{equation*}
+            \#S \Rightarrow \#{aU}
+                \Rightarrow \#{aaaU}
+                \Rightarrow \#{aaaaaU}
+                \Rightarrow \#{aaaaaaaU}
+                \Rightarrow \#{aaaaaaa}.
+          \end{equation*}
+    \item Da das Wort gerade Länge hat, ist es nicht über $\#{aU}$ aus $\#S$ ableitbar. Da $1 + x_5 + 1 = 16$ gilt, ist das Wort über $\#{aXa}$ aus $\#S$ ableitbar.
+
+          \begin{forest}
+            [\#S, baseline
+              [\#a]
+              [\#X
+                [\#Q
+                  [\#a]
+                  [\#X
+                    [\#Q
+                      [\#a]
+                      [\#X
+                        [\#Q
+                          [\#a]
+                        ]
+                        [\#a]
+                        [\#a]
+                        [\#a]
+                      ]
+                      [\#a]
+                    ]
+                    [\#a]
+                    [\#a]
+                    [\#a]
+                  ]
+                  [\#a]
+                ]
+                [\#a]
+                [\#a]
+                [\#a]
+              ]
+              [\#a]
+            ]
+          \end{forest}
+  \end{enumerate}
+  \begin{korrektur}
+    Es gibt viele Punkte ($4$) zu verteilen.
+    \begin{itemize}
+    \item Ziehen Sie für Fehler auch viel ab \texttt{;-)}.
+    \item $2$ Punkte dafür, dass irgendwie erkennbar ist, wie man zu
+      dem Wort kommen kann
+    \item $2$ Punkte dafür, dass wirklich ein Ableitungsbaum da steht
+    \end{itemize}
+    \noindent
+    Standardfehler bei Ableitungsbäumen (oder dem, was Studenten dafür
+    halten):
+
+    \begin{itemize}
+    \item von einem Nichterminal nach unten nicht drei oder vier oder
+      \dots Striche, sondern nur einer, also \zB
+          \begin{forest}
+            [\#S, baseline
+              [\#{aXa}
+                [\#{Qaaa}
+                  [\#{aXa}
+                    [\#{Qaaa}
+                      [\#{aXa}
+                        [\#{Qaaa}
+                          [\#a]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          \end{forest}
+
+          oder noch kreativere Varianten davon; \\
+          dafür $0/2$ Punkte mehr.
+        \item Baum passt gar nicht zu dem Produktionen; \\
+          je nicht passendem Ableitungsschritt $0.5$ Punkte abziehen
+    \end{itemize}
+  \end{korrektur}
+\end{loesung}
+
+% -----------------------------------------------------------------------------
+
+\end{document}
+%%%
+%%% Local Variables:
+%%% fill-column: 70
+%%% mode: latex
+%%% TeX-command-default: "XPDFLaTeX"
+%%% TeX-master: "korrektur.tex"
+%%% End:
