@@ -1,0 +1,24 @@
+In dieser Datei werden Todos, evtl. Todos und generelle Ideen sowie Inhalte gesammelt
+
+-----------------------------------------
+TODO: 
+Dinge, die wirklich noch erledigt werden sollten, bevor die Folien (erneut) veröffentlicht / gezeigt werden.
+-----------------------------------------
+- Name und andere Daten in Konfig-Datei auslagern, die gitignored wird.
+
+
+-----------------------------------------
+NICE TO DO:
+Dinge, die schön wären und die Qualität oder Didaktik verbessern würden, aber nicht wirklich notwendig sind.
+-----------------------------------------
+
+
+
+-----------------------------------------
+SAMMLUNG:
+Eine Sammlung von Ideen und Inhalten, die man mit verarbeiten könnte, wenn Zeit und Platz ist.
+Nichts davon ist konkret wichtig oder bereits konkret ausgearbeitet.
+-----------------------------------------
+- Funktionales (map): 14, Blatt 4
+- Funktionales (Fold): 15, Ü2
+- Option zum Ein/Ausschalten des Logos
