@@ -1,6 +1,8 @@
 .DS_Store
 .DS_Store/
 
+config.tex
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof

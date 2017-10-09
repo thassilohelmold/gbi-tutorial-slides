@@ -1,5 +1,5 @@
-% Toggle Handout mode by including this line before including style_tut:
-% \newcommand{\handout}{}
+
+\input{../config.tex}
 
 %% Beamer-Klasse im korrekten Modus
 \ifdefined \handout
@@ -80,9 +80,9 @@
 \newcounter{weeknum}
 
 %% Titelinformationen
-\title[GBI Tutorium, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium 36}
-\subtitle{Termin \theweeknum \ | \mydate \\ Thassilo Helmold}
-\author[Thassilo Helmold]{Thassilo Helmold}
+\title[GBI Tutorium, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium \mytutnumber}
+\subtitle{Termin \theweeknum \ | \mydate \\ \myname}
+\author[\myname]{\myname}
 \institute{KIT -- Karlsruher Institut für Technologie}
 \date{\mydate}
 
@@ -145,9 +145,10 @@
 
 \newcommand{\slideThanks}{
 	\begin{frame}
-		\frametitle{Danksagung}
+		\frametitle{Credits}
 		\begin{block}{}
-			Dieser Foliensatz basiert in Teilen auf Folien von:\\[1em]
+			Vorgänger dieses Foliensatzes wurden erstellt von:\\[1em]
+			Thassilo Helmold \\
 			Philipp Basler \\
 			Nils Braun \\
 			Dominik Doerner \\
