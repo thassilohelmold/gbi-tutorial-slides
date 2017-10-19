@@ -1,11 +1,13 @@
+%beamer
+
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{20.01.2017}
+%\newcommand{\mydate}{20.01.2017}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+%\newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 
 \graphicspath{{../figures/}}
 
@@ -52,11 +54,10 @@
 	\end{figure}
 	
 	\begin{itemize}
-		\truefalseQ{1}{myGreen}{Dieser Graph ist gerichtet}{W}
+		\TrueQuestionE{Dieser Graph ist gerichtet}{}
 		\truefalseQ{3}{myRed}{(1,3,2) ist ein gültiger Weg in diesem Graph}{\newline Nein, aber ein gültiger Pfad!}
-		\truefalseQ{5}{myGreen}{(1) ist ein gültiger Pfad in diesem Graph}{W}
-		\truefalseQ{7}{myRed}{() ist ein gültiger Pfad in diesem Graph}{F \newline Ein Pfad darf nicht leer sein!}
-	\end{itemize}
+		\TrueQuestionE{(1) ist ein gültiger Pfad in diesem Graph}{}
+		\FalseQuestionE{() ist ein gültiger Pfad in diesem Graph}{Ein Pfad darf nicht leer sein!}	\end{itemize}
 \end{frame}
 
 % TODO: Zum Aufwärmen

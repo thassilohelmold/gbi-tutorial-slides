@@ -1,6 +1,13 @@
 .DS_Store
 .DS_Store/
 
+0*/gbitut*.pdf
+1*/gbitut*.pdf
+
+customdata
+
+.idea
+
 config.tex
 
 ## Core latex/pdflatex auxiliary files:

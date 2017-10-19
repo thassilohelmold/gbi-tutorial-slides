@@ -1,36 +1,59 @@
+%% Beamer-Klasse im korrekten Modus
+\ifdefined \handout
+\documentclass[handout]{beamer} % Handout mode
+\else
+\documentclass{beamer}
+\fi
+
+%% UTF-8-Encoding
+\usepackage[utf8]{inputenc}
+
 \input{../TutTexbib/gbi-macros}
 \usepackage{../TutTexbib/thwregex}
+\usepackage{environ}
+\usepackage{bm}
+\usepackage{calc}
+\usepackage{varwidth}
+\usepackage{wasysym}
 
-\newcommand{\nM}{\mathbb{M}}
-\newcommand{\nR}{\mathbb{R}}
-\newcommand{\nN}{\mathbb{N}}
-\newcommand{\nZ}{\mathbb{Z}}
-\newcommand{\nQ}{\mathbb{Q}}
-\newcommand{\nB}{\mathbb{B}}
-\newcommand{\nC}{\mathbb{C}}
-\newcommand{\nK}{\mathbb{K}}
-\newcommand{\nF}{\mathbb{F}}
-\newcommand{\nG}{\mathbb{G}}
+\input{../config.tex}
+
+
+% define custom \handout command flag if handout mode is toggled  #DirtyAsHellButWell...
+\only<beamer:0>{\def\handout{}} %beamer:0 == handout mode
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\G}{\mathbb{G}}
 \newcommand{\nullel}{\mathcal{O}}
 \newcommand{\einsel}{\mathds{1}}
-\newcommand{\nP}{\mathbb{P}}
 \newcommand{\Pot}{\mathcal{P}}
 \renewcommand{\O}{\text{O}}
 
 %\newcommand{\literal}[1]{\textcolor{blue}{\texttt{#1}}}
 \newcommand{\realTilde}{\textasciitilde \ }
-\newcommand{\setsize}[1]{\; \mid #1 \mid \; }
+\newcommand{\setsize}[1]{\ensuremath{\lvert #1 \rvert}}
 
-\definecolor{myRed}{RGB}{255,75,20}
-\colorlet{myGreen}{KITpalegreen}
+% Modified by DJ
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing % proper emptyset
 
-\newcounter{tfqtempcount}
-\newcommand{\truefalseQ}[4]{
-	\setcounter{tfqtempcount}{#1}
-	\addtocounter{tfqtempcount}{1}
-	\truefalseQuestion{#1}{\value{tfqtempcount}}{#2}{#3}{#4}
-}
-\newcommand{\truefalseQuestion}[5]{\item<#1-|handout:#1-> \color<#2-|handout:#2->{#3} #4 \qquad \visible<#2-|handout:#2->{#5}}
+%\definecolor{myRed}{RGB}{255,75,20}
+%\colorlet{myGreen}{KITpalegreen}
+
+%\newcounter{tfqtempcount}
+%\newcommand{\truefalseQ}[4]{
+%	\setcounter{tfqtempcount}{#1}
+%	\addtocounter{tfqtempcount}{1}
+%	\truefalseQuestion{#1}{\value{tfqtempcount}}{#2}{#3}{#4}
+%}
+
+%\newcommand{\truefalseQuestion}[5]{\item<#1-|handout:#1-> \color<#2-|handout:#2->{#3} #4 \qquad \visible<#2-|handout:#2->{#5}}
 
 \newcommand{\boder}{\ensuremath{\textcolor{blue}{\vee}}\text{} }
 \newcommand{\bund}{\ensuremath{\textcolor{blue}{\wedge}}\text{}}
@@ -44,8 +67,8 @@
 \newcommand{\summe}[2]{\sum\limits_{#1}^{#2}}
 \newcommand{\limes}[1]{\lim\limits_{#1}}
 
-\newcommand{\numpp}{\advance \value{weeknum} by -2 \theweeknum \advance \value{weeknum} by 2}
-\newcommand{\nump}{\advance \value{weeknum} by -1 \theweeknum \advance \value{weeknum} by 1}
+%\newcommand{\numpp}{\advance \value{weeknum} by -2 \theweeknum \advance \value{weeknum} by 2}
+%\newcommand{\nump}{\advance \value{weeknum} by -1 \theweeknum \advance \value{weeknum} by 1}
 
 \newcommand{\mycomment}[1]{}
 
@@ -56,7 +79,184 @@
     }
 }{\end{list}}
 
-\renewcommand{\mod}{\mathop{\textbf{mod} }}
-\renewcommand{\div}{\mathop{\textbf{div} }}
+
+
+\renewcommand{\mod}{\mathop{\textbf{mod}}}
+\renewcommand{\div}{\mathop{\textbf{div}}}
+
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\Matrix}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\newcommand{\braced}[1]{\left\lbrace #1 \right\rbrace}
+
+\def\·{\cdot}
+\def\*{\cdot}
+
+\newcommand{\tight}[1]{{\renewcommand{\arraystretch}{0.76} #1}}
+\newcommand{\stackedtight}[1]{{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix}} }
+\newcommand{\stacked}[1]{\begin{matrix} #1 \end{matrix} }
+\newcommand{\casesl}[1]{\left\lbrace\hspace{-.3\baselineskip}\begin{array}{ll} #1 \end{array}\right.}
+\newcommand{\casesr}[1]{\left.\begin{array}{ll} #1 \end{array}\right\rbrace}
+\newcommand{\caseslr}[1]{\left\lbrace\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
+
+\def\q#1uad{\ifnum#1=0\relax\else\quad\q{\the\numexpr#1-1\relax}uad\fi}
+% e.g. \q1uad = \quad, \q2uad = \qquad etc.
+
+\newcommand{\qqquad}{\q3uad}
+
+\newcommand{\impl}{\ifmmode\ensuremath{\mskip\thinmuskip\Rightarrow\mskip\thinmuskip}\else$\Rightarrow$\fi\xspace}
+\newcommand{\Impl}{\ifmmode\implies\else$\Longrightarrow$\fi\xspace}
+
+\newcommand{\gdw}{\ifmmode\mskip\thickmuskip\Leftrightarrow\mskip\thickmuskip\else$\Leftrightarrow$\fi\xspace}
+\newcommand{\Gdw}{\ifmmode\iff\else$\Longleftrightarrow$\fi\xspace}
+
+\newcommand{\symbitemnegoffset}{\hspace{-.2\baselineskip}}
+\newcommand{\implitem}{\item[\impl\symbitemnegoffset]}
+\newcommand{\Implitem}{\item[\Impl\symbitemnegoffset]}
+
+
+\newcommand{\forcenewline}{\mbox{}\\}
+
+
+% proper math typography
+\newcommand{\functionto}{\longrightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\let\oldsubset\subset
+\renewcommand{\subset}{\subseteq} % for all idiots out there using subset
+
+\newcommand{\mailto}[1]{\href{mailto:#1}{{\textcolor{blue}{\underline{#1}}}}}
+\newcommand{\urlnamed}[2]{\href{#1}{\textcolor{blue}{\underline{#2}}}}
+\renewcommand{\url}[1]{\urlnamed{#1}{#1}}
+
+\newcommand{\hanging}{\hangindent=0.7cm}
+\newcommand{\indented}{\hanging}
+
+%requires \thisyear to be defined (s. config.tex)!
+\edef\nextyear{\the\numexpr\thisyear+1\relax}
+
+
+
+
+% --- \frameheight constant ---
+\newlength\fullframeheight
+\newlength\framewithtitleheight
+\setlength\fullframeheight{.92\textheight}
+\setlength\framewithtitleheight{.86\textheight}
+
+\newlength\frameheight
+\setlength\frameheight{\fullframeheight}
+
+\let\frametitleentry\relax
+\let\oldframetitle\frametitle
+\def\frametitle#1{\global\def\frametitleentry{#1}\if\relax\frametitleentry\relax\else\setlength\frameheight{\framewithtitleheight}\fi\oldframetitle{#1}}
+% --- \frameheight constant end ---
+
+
+\newenvironment{headframe}{\Huge THIS IS AN ERROR. PLEASE CONTACT THE ADMIN OF THIS TEX CODE. (headframe env def failed)}{}
+\RenewEnviron{headframe}[1][]{
+	\begin{frame}\frametitle{\ }
+		\centering
+		\Huge\textbf{\textsc{\BODY} \\
+		}
+		\Large {#1}
+		\frametitle{\ }
+	\end{frame}
+}
+
+
+\makeatletter
+% Provides color if undefined.
+\newcommand{\colorprovide}[2]{%
+	\@ifundefinedcolor{#1}{\colorlet{#1}{#2}}{}}
+\makeatother
+
+
+\colorprovide{lightred}{red!30}
+\colorprovide{lightgreen}{green!40}
+\colorprovide{lightyellow}{yellow!50}
+\colorprovide{fullred}{red!60}
+\colorprovide{fullgreen}{green}
+\definecolor{darkred}{RGB}{115,48,38}
+\definecolor{darkgreen}{RGB}{48,115,38}
+\definecolor{darkyellow}{RGB}{100,100,0}
+
+\only<handout:0>{\colorlet{adaptingred}{lightred}}
+\only<beamer:0>{\colorlet{adaptingred}{fullred}}
+\only<handout:0>{\colorlet{adaptinggreen}{lightgreen}}
+\only<beamer:0>{\colorlet{adaptinggreen}{fullgreen}}
+
+
+
+\newcommand{\TrueQuestion}[1]{
+	\TrueQuestionE{#1}{}
+}
+
+\newcommand{\YesQuestion}[1]{
+	\YesQuestionE{#1}{}
+}
+
+\newcommand{\FalseQuestion}[1]{
+	\FalseQuestionE{#1}{}
+}
+
+\newcommand{\NoQuestion}[1]{
+	\NoQuestionE{#1}{}
+}
+
+\newcommand{\DependsQuestion}[1]{
+	\DependsQuestionE{#1}{}
+}
+
+\newcommand{\QuestionVspace}{\vspace{4pt}}
+\newcommand{\QuestionParbox}[1]{\begin{varwidth}{.85\linewidth}#1\end{varwidth}}
+\newcommand{\ExplanationParbox}[1]{\begin{varwidth}{.99\linewidth}#1\end{varwidth}}
+\colorlet{questionlightgray}{gray!20}
+\let\defaultfboxrule\fboxrule
+
+% #1: bg color
+% #2: fg color short answer
+% #3: short answer text
+% #4: question
+% #5: explanation
+\newcommand{\GenericQuestion}[5]{
+	\setlength\fboxrule{2pt}
+	\only<+|handout:0>{\hspace{-2pt}\fcolorbox{white}{questionlightgray}{\QuestionParbox{#4} \quad\textbf{?}}}
+	\visible<+->{\hspace{-2pt}\fcolorbox{white}{#1}{\QuestionParbox{#4} \quad\textbf{\textcolor{#2}{#3}}} \ExplanationParbox{#5}} \\
+	\setlength\fboxrule{\defaultfboxrule}
+}
+
+% #1: Q text
+% #2: Explanation
+\newcommand{\TrueQuestionE}[2]{
+	\GenericQuestion{lightgreen}{darkgreen}{Wahr.}{#1}{#2}
+}
+
+% #1: Q text
+% #2: Explanation
+\newcommand{\YesQuestionE}[2]{
+	\GenericQuestion{lightgreen}{darkgreen}{Ja.}{#1}{#2}
+}
+
+% #1: Q text
+% #2: Explanation
+\newcommand{\FalseQuestionE}[2]{
+	\GenericQuestion{lightred}{darkred}{Falsch.}{#1}{#2}
+}
+
+% #1: Q text
+% #2: Explanation
+\newcommand{\NoQuestionE}[2]{
+	\GenericQuestion{lightred}{darkred}{Nein.}{#1}{#2}
+}
+
+% #1: Q text
+% #2: Explanation
+\newcommand{\DependsQuestionE}[2]{
+	\GenericQuestion{lightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
+}
+
+
 
 %\newcommand{\sgn}{\text{sgn}}

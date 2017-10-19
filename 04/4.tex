@@ -1,12 +1,13 @@
+%beamer
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{18.11.2016}
+%\newcommand{\mydate}{18.11.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+%\newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 
 \graphicspath{{../figures/}}
 
@@ -32,10 +33,11 @@
 	\frametitle{Übungsblätter: Häufige Fehler}
 	
 	\begin{itemize}
-		\truefalseQ{1}{myGreen}{Beweise fängt man mit der Behauptung an}{W}
-		\truefalseQ{3}{myRed}{Wenn wir $A$ schreiben, ist das immer eine Menge}{F \\Das muss man explizit angeben}
-		\truefalseQ{5}{myRed}{Ein Beispiel ersetzt einen Beweis.}{F \\ Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
-		\truefalseQ{7}{myRed}{$\setsize{M} = M$}{F $\; \setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$}
+		\TrueQuestionE{Beweise fängt man mit der Behauptung an}{}
+		\FalseQuestionE{Wenn wir $A$ schreiben, ist das immer eine Menge}{Das muss man explizit angeben}
+		\FalseQuestionE{Ein Beispiel ersetzt einen Beweis.}{Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
+		% Modified by DJ (a more subtle version):
+		\FalseQuestionE{$\setsize{M} = M$ für M \subseteq \N}{$\; \setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$}
 	\end{itemize}
 
 	\pause[9]
@@ -76,11 +78,11 @@
 
 \begin{frame}
 	\begin{itemize}
-		\truefalseQ{1}{myRed}{Jede Sprache enthält Wörter}{F $\quad \emptyset$ ist auch eine gültige Sprache}
-		\truefalseQ{3}{myRed}{$01^* = \{\varepsilon, 01, 0101, ...\}$}{F $\quad 01^*$ gibt es nicht, denn $01 \neq \{01\}$}
-		\truefalseQ{5}{myGreen}{Es gibt Sprachen L, für die gilt $\varepsilon \in L^+$}{W $\quad L = \{\varepsilon\}$}
-		\truefalseQ{7}{myRed}{$L^+ = L^* \setminus L^0$}{F $\quad$ Das gilt nicht, wenn $\varepsilon \in L$}
-		\truefalseQ{9}{myGreen}{$\{\}^* \neq \{\} $}{W $\quad \{\}^* = \{\varepsilon\}$}
+		\FalseQuestionE{Jede Sprache enthält Wörter}{ $\quad \emptyset$ ist auch eine gültige Sprache}
+		\FalseQuestionE{$01^* = \{\varepsilon, 01, 0101, ...\}$}{$\quad 01^*$ gibt es nicht, denn $01 \neq \{01\}$}
+		\TrueQuestionE{Es gibt Sprachen L, für die gilt $\varepsilon \in L^+$}{}
+		\FalseQuestionE{$L^+ = L^* \setminus L^0$}{Das gilt nicht, wenn $\varepsilon \in L$}
+		\TrueQuestionE{$\{\}^* \neq \{\} $}{ $\quad \{\}^* = \{\varepsilon\}$}
 	\end{itemize}	
 \end{frame}
 

@@ -35,7 +35,7 @@
 \begin{frame}
 	\frametitle{Relationen}	
 	\begin{block}{Beispiel}
-		$ P = \nZ \times \nN_+ \times \nN_0 $ \\
+		$ P = \Z\times \nN_+ \times \nN_0 $ \\
 		$ \cdot \; = \{(n, m, r) \in P \mid n * m = r \} \subseteq P $ \\[0.5em]
 		\pause
 		$ \cdot \; = \{(0, 1, 0), (0, 2, 0), (1, 1, 1), (1, 2, 2), (6, 7, 42) ...\} $ \\[0.5em]
@@ -164,7 +164,7 @@
 	Was kann man über die Surjektivität, Injektivität, Bijektivität folgender Abbildungen sagen? Begründen Sie jeweils kurz.
 	
 	\begin{alist}
-		\item $f: \nR \to \nR: x \mapsto x^2$
+		\item $f: \R\to \nR: x \mapsto x^2$
 		\item $f: \nR_+ \to \nR_+: x \mapsto x^2$
 		\item $f: \nN_0 \to \nN_0 : x \mapsto \begin{cases} 42 &\text{wenn $x = 0$} \\ x - 1 &\text{sonst} \end{cases}$
 	\end{alist}
@@ -173,7 +173,7 @@
 \begin{frame}
 	\frametitle{Lösung}
 	\begin{alist}
-		\item $f: \nR \to \nR: x \mapsto x^2$ \\
+		\item $f: \R\to \nR: x \mapsto x^2$ \\
 		\pause
 		Diese Funktion ist weder injektiv ($f(-2) = f(2) = 4$) noch surjektiv (Es gibt kein $x$ welches z.B. auf $-1 \in \nR$ abgebildet wird). Somit auch nicht bijektiv.
 		
@@ -192,9 +192,9 @@
 	\begin{block}{Wahr oder Falsch?}
 		Sei $M$ eine beliebige endliche Menge und $f$ eine Abbildung $f : M \to M$.
 		\begin{itemize}
-			\truefalseQ{1}{myGreen}{Wenn $f$ injektiv ist, dann ist $f$ auch surjektiv.}{W}
-			\truefalseQ{1}{myGreen}{Wenn $f$ surjektiv ist, dann ist $f$ auch injektiv}{W}
-			\truefalseQ{4}{myRed}{Die beiden Aussagen gelten auch, wenn $M$ nicht endlich ist.}{F}
+			\TrueQuestionE{Wenn $f$ injektiv ist, dann ist $f$ auch surjektiv.}{}
+			\TrueQuestionE{Wenn $f$ surjektiv ist, dann ist $f$ auch injektiv}{}
+			\FalseQuestion{Die beiden Aussagen gelten auch, wenn $M$ nicht endlich ist.}
 		\end{itemize}
 	\end{block}
 

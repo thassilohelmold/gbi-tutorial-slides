@@ -1,17 +1,19 @@
-% TODO: 
+%beamer
+
+% TODO:
 % - VL-Folien einarbeiten
 % - Weniger f_* etc. Theorie, mehr Aufgaben zwischendrin und zu Akzeptoren
 % - Bessere Hinleitung zu Akzeptoren
 
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{27.01.2017}
+%\newcommand{\mydate}{27.01.2017}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+%\newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
 \begin{document}
@@ -45,16 +47,15 @@
 
 \begin{frame}{Wahr oder Falsch?}
 	\begin{itemize}
-		\truefalseQ{1}{myGreen}{$x^4 \in \Oh{{(x^3)}^3}$}{W $\qquad {(x^3)}^3 = x^9$}
-		\truefalseQ{3}{myRed}{$\sqrt{n} \in \Om{2^n}$}{F}
-		\truefalseQ{5}{myGreen}{$log_{5000} n \in \Th{\log_2{n^4}}$}{W $\qquad \log_2{n^4} = 4 \cdot \log_2{n}$}
-		\truefalseQ{7}{myRed}{$O(f_1) + f_2 = O(f_1 + f_2)$}{F \newline Aber: $O(f_1) + O(f_2) = O(f_1 + f_2)$}
-	\end{itemize}
+		\TrueQuestionE{$x^4 \in \Oh{{(x^3)}^3}$}{ $\qquad {(x^3)}^3 = x^9$}
+		\FalseQuestionE{$\sqrt{n} \in \Om{2^n}$}{}
+		\TrueQuestionE{$log_{5000} n \in \Th{\log_2{n^4}}$}{ $\qquad \log_2{n^4} = 4 \cdot \log_2{n}$}
+		\FalseQuestionE{$O(f_1) + f_2 = O(f_1 + f_2)$}{Aber: $O(f_1) + O(f_2) = O(f_1 + f_2)$}	\end{itemize}
 \end{frame}
 
 \begin{frame}{Wahr oder Falsch?}
 	\begin{itemize}
-		\truefalseQ{1}{myRed}{Für zwei Funktionen $f, g$ gilt immer $f \preceq g$ oder $f \succeq g$}{F}
+		\FalseQuestion{Für zwei Funktionen $f, g$ gilt immer $f \preceq g$ oder $f \succeq g$}
 	\end{itemize}
 	\medskip
 	

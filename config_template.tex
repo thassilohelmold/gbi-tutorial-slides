@@ -11,9 +11,38 @@
 \newcommand{\aboutMeFrame}{
 	\begin{frame}{Über mich}
 		\myname \\
-		Informatik, 3. Fachsemester (Bachelor)
+		Informatik, X. Fachsemester (Bachelor)
 	\end{frame}
 }
+
+\def\thisyear{2017}
+
+\def\mydate#1{
+		  \ifnum#1=1\relax	  23. Oktober \thisyear \
+	\else \ifnum#1=2\relax	  30. Oktober \thisyear \
+	\else \ifnum#1=3\relax    06. November \thisyear \
+	\else \ifnum#1=4\relax    13. November \thisyear \
+	\else \ifnum#1=5\relax    20. November \thisyear \
+	\else \ifnum#1=6\relax    27. November \thisyear \
+	\else \ifnum#1=7\relax    04. Dezember \thisyear \
+	\else \ifnum#1=8\relax    11. Dezember \thisyear \
+	\else \ifnum#1=9\relax    18. Dezember \thisyear \
+	\else \ifnum#1=10\relax   08. Januar \nextyear \
+	\else \ifnum#1=11\relax   15. Januar \nextyear \
+	\else \ifnum#1=12\relax   22. Januar \nextyear \
+	\else \ifnum#1=13\relax   29. Januar \nextyear \
+	\else \ifnum#1=14\relax   05. Februar \nextyear \
+	\else \textbf{Datum undefiniert!} 
+	\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi\fi
+}
+
+\def\mylasttimestext{Was letztes Mal geschah...}
+
+\colorlet{lightred}{red!30}
+\colorlet{lightgreen}{green!40}
+\colorlet{lightyellow}{yellow!50}
+\colorlet{fullred}{red!60}
+\colorlet{fullgreen}{green}
 
 % Toggle Handout mode by including the following line before including style_tut
 % and removing the % at the start (but do NOT remove it here, otherwise handout mode will always be on!)

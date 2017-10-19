@@ -1,3 +1,5 @@
+%beamer
+
 % TODO: Jede menge:
 % Reguläre Ausdrüke in \rx umwandeln
 % * Problem mit \rx fixen
@@ -7,13 +9,13 @@
 % Strukturelle Induktion: Bessere Einführung, neues Beispiel, neue Aufgabe
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{03.02.2017}
+%\newcommand{\mydate}{03.02.2017}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+%\newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
 \begin{document}
@@ -41,11 +43,10 @@
 
 \begin{frame}{Wahr oder Falsch?}
 	\begin{itemize}
-		\truefalseQ{1}{myRed}{Das (komplizierte) Master-Theorem kann man immer anwenden.}{F \newline Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
-		\truefalseQ{3}{myRed}{Jeder Moore-Automat kann in einen Mealy-Automat gewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{F \newline Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
-		\truefalseQ{5}{myGreen}{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{0, 1\}$}{W}
-		\truefalseQ{7}{myRed}{Mit endlichen Automaten kann jede beliebige Sprache erkannt werden}{F $\quad$ Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}
-	\end{itemize}
+		\FalseQuestionE{Das (komplizierte) Master-Theorem kann man immer anwenden.}{ Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
+		\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automat gewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
+		\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{0, 1\}$}{}
+		\FalseQuestionE{Mit endlichen Automaten kann jede beliebige Sprache erkannt werden}{Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}	\end{itemize}
 \end{frame}
 
 % TODO: Zum Auwärmen: MI2-Türcode als endlicher Akzeptor (beschränken auf 1,2,3)

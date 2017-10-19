@@ -1,11 +1,13 @@
+%beamer
+
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{09.12.2016}
+% \newcommand{\mydate}{09.12.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+% \newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 
 \graphicspath{{../figures/}}
 
@@ -37,10 +39,10 @@
 \begin{frame}{Wahr oder Falsch?}
 	\begin{block}{}
 	\begin{itemize}
-		\truefalseQ{1}{myRed}{Alle Vögel haben die gleiche Farbe}{F (siehe Termin 6)}
-		\truefalseQ{3}{myRed}{Im IR der MIMA wird die Adresse des aktuellen Befehls gespeichert}{F\\ Das geschieht im IAR. Im IR steht der Befehl selbst}
-		\truefalseQ{5}{myGreen}{Die Befehlsholphase ist jede Ausführungsrunde identisch}{W}
-		\truefalseQ{7}{myRed}{Der Akku führt bei der MIMA Berechnungen aus}{F\\ Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert}
+		\FalseQuestionE{Alle Vögel haben die gleiche Farbe}{ (siehe Termin 6)}
+		\FalseQuestionE{Im IR der MIMA wird die Adresse des aktuellen Befehls gespeichert}{Das geschieht im IAR. Im IR steht der Befehl selbst}
+		\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch}{}
+		\FalseQuestionE{Der Akku führt bei der MIMA Berechnungen aus}{Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert}
 	\end{itemize}
 	\end{block}
 \end{frame}
@@ -48,8 +50,8 @@
 \begin{frame}{Wahr oder Falsch?}
 	\begin{block}{}
 		\begin{itemize}
-			\truefalseQ{1}{myRed}{LDC -5 lädt -5 in den Akku}{F\\ LDC funktioniert nicht mit negativen Konstanten!}
-			\truefalseQ{3}{myRed}{Mit der MIMA können wir Zufallszahlen erzeugen}{F\\ Die MIMA arbeitet rein deterministisch und damit ohne jeden Zufall.}
+			\FalseQuestionE{LDC -5 lädt $-5$ in den Akku}{LDC funktioniert nicht mit negativen Konstanten!}
+			\FalseQuestionE{Mit der MIMA können wir Zufallszahlen erzeugen}{Die MIMA arbeitet rein deterministisch und damit ohne jeden Zufall.}
 		\end{itemize}
 		\visible<5>{
 			\begin{figure}[H]

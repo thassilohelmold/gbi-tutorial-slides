@@ -1,12 +1,13 @@
+%beamer
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{11.11.2016}
+% \newcommand{\mydate}{11.11.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+% \newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 
 \graphicspath{{../figures/}}
 
@@ -39,11 +40,11 @@
 \begin{frame}
 	\begin{block}{Wahr oder Falsch?}
 		\begin{itemize}
-			\truefalseQ{1}{myRed}{Eine Funktion muss linkseindeutig sein}{F \\ Richtig: Eine Funktion muss rechtseindeutig und linkstotal sein}
-			\truefalseQ{3}{myGreen}{Eine injektive Funktion ist linkseindeutig}{W}
-			\truefalseQ{5}{myGreen}{Eine surjektive Funktion ist rechtstotal}{W}
-			\truefalseQ{7}{myRed}{Jede Relation ist eine Funktion}{F}
-			\truefalseQ{9}{myGreen}{Jede Funktion ist eine Relation}{W}
+			\FalseQuestionE{Eine Funktion muss linkseindeutig sein}{Richtig: Eine Funktion muss rechtseindeutig und linkstotal sein}
+			\TrueQuestionE{Eine injektive Funktion ist linkseindeutig}{}
+			\TrueQuestionE{Eine surjektive Funktion ist rechtstotal}{}
+			\FalseQuestion{Jede Relation ist eine Funktion}
+			\TrueQuestionE{Jede Funktion ist eine Relation}{}
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -51,9 +52,9 @@
 \begin{frame}
 	\begin{block}{Wahr oder Falsch?}
 	\begin{itemize}
-		\truefalseQ{1}{myRed}{$aaba \in \{a,b\}^2\times\{a,b\}^2$}{F $\quad$Aber: $(\text{aa}, \text{ba}) \in \{a,b\}^2\times\{a,b\}^2$}
-		\truefalseQ{3}{myRed}{Ich benutze für jeden Beweis Induktion.}{F\\ Mit einem Schraubenschlüssel bekommt man keinen Nagel in die Wand.}
-		\truefalseQ{5}{myRed}{$\setsize{\{ \varepsilon \}} = 0$}{F $\quad \{ \varepsilon \} \neq \emptyset$}
+		\FalseQuestionE{$aaba \in \{a,b\}^2\times\{a,b\}^2$}{Aber: $(\text{aa}, \text{ba}) \in \{a,b\}^2\times\{a,b\}^2$}
+		\FalseQuestionE{Ich benutze für jeden Beweis Induktion.}{Mit einem Schraubenschlüssel bekommt man keinen Nagel in die Wand.}
+		\FalseQuestionE{$\setsize{\{ \varepsilon \}} = 0$}{\{ \varepsilon \} \neq \emptyset$}
 	\end{itemize}
 	\end{block}
 \end{frame}

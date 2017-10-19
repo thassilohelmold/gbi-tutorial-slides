@@ -1,13 +1,15 @@
+%beamer
+
 % TODO: Negations-Besipiel beim ZK (schrittweise def. einer induktiven ZK-Fkt.)
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{25.11.2016}
+%\newcommand{\mydate}{25.11.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+% \newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 
 \usepackage{graphicx}
 \graphicspath{{../figures/}}
@@ -34,11 +36,11 @@
 \begin{frame}
 	\begin{block}{Wahr oder falsch?}
 	\begin{itemize}
-		\truefalseQ{1}{myGreen}{$\forall x \in \nZ : x \mod 2 = 0 \iff x \text{ ist gerade}$}{W $\qquad \text{Und auch: } x \mod 2 = 1 \iff \text{x ist ungerade}$}
-		\truefalseQ{3}{myRed}{$4 \cdot (x \div 4) = x$}{F $\qquad 4 \cdot (x \div 4) + (x \mod 4) = x$}
-		\truefalseQ{5}{myGreen}{$\left(\{a\}^\ast\cdot \{b,\epsilon\}\right)^\ast = \{a,b\}^\ast$}{W}
-		\truefalseQ{7}{myRed}{Jede Abbildung besitzt eine Umkehrabbildung}{F Nur bijektive Abbildungen besitzen eine Umkehrabbildung}
-		\truefalseQ{9}{myGreen}{Für jede Abbildung können wir das Urbild angeben}{W}
+		\TrueQuestionE{$\forall x \in \Z: x \mod 2 = 0 \iff x \text{ ist gerade}$}{ $\qquad \text{Und auch: } x \mod 2 = 1 \iff \text{x ist ungerade}$}
+		\FalseQuestionE{$4 \cdot (x \div 4) = x$}{ $\qquad 4 \cdot (x \div 4) + (x \mod 4) = x$}
+		\TrueQuestionE{$\left(\{a\}^\ast\cdot \{b,\epsilon\}\right)^\ast = \{a,b\}^\ast$}{}
+		\FalseQuestionE{Jede Abbildung besitzt eine Umkehrabbildung}{ Nur bijektive Abbildungen besitzen eine Umkehrabbildung}
+		\TrueQuestionE{Für jede Abbildung können wir das Urbild angeben}{}
 	\end{itemize}
 	\end{block}	
 \end{frame}

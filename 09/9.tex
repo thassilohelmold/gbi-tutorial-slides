@@ -1,11 +1,11 @@
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{23.12.2016}
+% \newcommand{\mydate}{23.12.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+% \newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
 \begin{document}
@@ -28,9 +28,9 @@
 	Sei $Rel_{PL} = \{R,S\}$ mit $ar(R) = 2$ und $ar(S) = 1$, \\
 	$Fun_{PL} = \{f,g\}$ mit $ar(f) = 1$ und $ar(g) = 2$ 
 	\begin{itemize}
-		\truefalseQ{1}{myGreen}{$R(y,g(x,y))$ ist präd.log. syntaktisch korrekt.}{W}
-		\truefalseQ{3}{myRed}{$f(S(x))$ ist präd.log. syntaktisch korrekt.}{F \\ Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie kein Term, sondern eine atomare Formel darstellt.}
-		\truefalseQ{5}{myRed}{\enquote{Nicht alle Kinder spielen nicht} $\equiv \forall x(child(x)\to play(x)) $}{F\\ Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
+		\TrueQuestionE{$R(y,g(x,y))$ ist präd.log. syntaktisch korrekt.}{}
+		\FalseQuestionE{$f(S(x))$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie kein Term, sondern eine atomare Formel darstellt.}
+		\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht} $\equiv \forall x(child(x)\to play(x)) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
 		%TODO: PL Substitution
 	\end{itemize}
 \end{frame}

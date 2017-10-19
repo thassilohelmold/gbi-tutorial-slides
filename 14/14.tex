@@ -1,14 +1,16 @@
+%beamer
+
 % This video for Turing:
 % https://www.youtube.com/watch?v=VxvY4rI15sM
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{10.02.2017}
+%\newcommand{\mydate}{10.02.2017}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+%\newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
 \begin{document}
@@ -29,11 +31,11 @@
 
 \begin{frame}{Wahr oder Falsch?}
 	\begin{itemize}
-		\truefalseQ{1}{myRed}{Jede kontextfreie Grammatik lässt sich als regulärer Ausdruck darstellen}{F $\qquad$ Die Grammatik muss rechtslinear sein, kontextfrei kann \enquote{mehr}}
-		\truefalseQ{3}{myGreen}{Jeder regulären Ausdruck lässt sich durch eine kontextfreie Grammatik darstellen}{W}
-		\truefalseQ{5}{myGreen}{Für jede Sprache $L$ und jedes Wort $w \in L$ gilt: Es existiert ein endlicher Automat, der $w$ erkennt}{W}
-		\truefalseQ{7}{myRed}{Die Sprache der gültigen Klammerausdrücke ist regulär}{F}
-		\truefalseQ{9}{myGreen}{Die Sprache der gültigen Klammerausdrücke ist kontextfrei}{W}
+		\FalseQuestionE{Jede kontextfreie Grammatik lässt sich als regulärer Ausdruck darstellen}{Die Grammatik muss rechtslinear sein, kontextfrei kann \enquote{mehr}}
+		\TrueQuestionE{Jeder regulären Ausdruck lässt sich durch eine kontextfreie Grammatik darstellen}{}
+		\TrueQuestionE{Für jede Sprache $L$ und jedes Wort $w \in L$ gilt: Es existiert ein endlicher Automat, der $w$ erkennt}{}
+		\FalseQuestion{Die Sprache der gültigen Klammerausdrücke ist regulär}
+		\TrueQuestionE{Die Sprache der gültigen Klammerausdrücke ist kontextfrei}{}
 	\end{itemize}
 \end{frame}
 

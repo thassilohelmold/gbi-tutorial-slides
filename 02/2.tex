@@ -1,12 +1,13 @@
+%beamer
 
 % Define a global usable date. Must come before StyleTut
-\newcommand{\mydate}{04.11.2016}
+% \newcommand{\mydate}{04.11.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+% \newcommand{\handout}{}
 
-\input{../TutTexbib/Style_Tut.tex}
 \input{../TutTexbib/PraeambelTut.tex}
+\input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
 \begin{document}
@@ -41,11 +42,11 @@
 \begin{frame}
 	\begin{block}{Wahr oder Falsch?}
 		\begin{itemize}
-			\truefalseQ{1}{myGreen}{$ \setsize{\emptyset} = 0$}{W}
-			\truefalseQ{3}{myRed}{$ \setsize{ \{ \{ \; \} \} } = 0$}{F: $ \setsize{ \{ \{ \; \} \} } = \setsize{\{\emptyset\}} =1$}
-			\truefalseQ{5}{myGreen}{$ \{1, 2\} = \{2, 1\}$}{W}
-			\truefalseQ{7}{myRed}{$ (1, 2) = (2, 1)$}{F}
-			\truefalseQ{9}{myRed}{$ \left(M\cup A\right)\setminus M = A $}{F: $ M = A = \{1\}$}
+			\TrueQuestionE{$ \setsize{\emptyset} = 0$}{}
+			\FalseQuestionE{$ \setsize{ \{ \{ \; \} \} } = 0$}{$ \setsize{ \{ \{ \; \} \} } = \setsize{\{\emptyset\}} =1$}
+			\TrueQuestionE{$ \{1, 2\} = \{2, 1\}$}{}
+			\FalseQuestion{$ (1, 2) = (2, 1)$}
+			\FalseQuestionE{$ \left(M\cup A\right)\setminus M = A $}{für z.~B. $ M = A = \{1\}$}
 		\end{itemize}
 	\end{block}
 

@@ -1,14 +1,4 @@
 
-\input{../config.tex}
-
-%% Beamer-Klasse im korrekten Modus
-\ifdefined \handout
-\documentclass[handout]{beamer} % Handout mode
-\else
-\documentclass{beamer}
-\fi
-
-
 % Das ist der KIT-Stil
 %\usepackage{../TutTexbib/beamerthemekit}
 \usepackage[deutsch,titlepage0]{../TutTexbib/KIT/beamerthemeKITmod}
@@ -29,8 +19,7 @@
 %% Deutsche Silbentrennung und Beschriftungen
 \usepackage[ngerman]{babel}
 
-%% UTF-8-Encoding
-\usepackage[utf8]{inputenc}
+
 
 \usepackage{csquotes}
 
@@ -79,12 +68,18 @@
 %% Wochennummer
 \newcounter{weeknum}
 
+
+
 %% Titelinformationen
-\title[GBI Tutorium, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium \mytutnumber}
-\subtitle{Termin \theweeknum \ | \mydate \\ \myname}
-\author[\myname]{\myname}
+\title[GBI-Tutorium, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium \mytutnumber}
+
+\subtitle{Termin \theweeknum \ | \mydate{\theweeknum} \\ \myname}
+\author[\myname]{\myname (\mailto{\mymail})}
 \institute{KIT -- Karlsruher Institut für Technologie}
-\date{\mydate}
+\date{\mydate{\theweeknum}\ }
+
+% Modified, DJ (better safe than sorry)
+\AuthorTitleSep{ – }
 
 %% Titel einfügen
 \newcommand{\titleframe}{\frame{\titlepage}}
@@ -97,10 +92,9 @@
 
 
 \newcommand{\framePrevEpisode}{
-	\begin{frame}
-		\centering
-		\textbf{In the previous episode of GBI...}
-	\end{frame}
+	\begin{headframe}
+		\mylasttimestext
+	\end{headframe}
 }
 
 %% Legacy: Lastframe. Not for further usage!
