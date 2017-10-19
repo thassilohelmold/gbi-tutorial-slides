@@ -44,7 +44,7 @@
 	\frametitle{Teilmengen}
 	
 	\begin{block}{Definition}
-		Die Anzahl der Elemente in einer endlichen Menge (Kardinalität) bezeichnet man mit $\mid M \mid$. Es gilt $$ \setsize{M \cup N} \ = \ \setsize{M} + \setsize{N} - \setsize{M \cap N} $$
+		Die Anzahl der Elemente in einer endlichen Menge (Kardinalität) bezeichnet man mit $\setsize{M}$. Es gilt $$ \setsize{M \cup N} \ = \ \setsize{M} + \setsize{N} - \setsize{M \cap N} $$
 	\end{block} 
 	\pause
 
@@ -67,12 +67,10 @@
 	\begin{block}{Beispiel}
 		
 	\begin{align*}
-		\mid \{1,2,3,2,1\} \mid &= \only<2->{3} \\
-		\mid \emptyset \mid &= \only<3->{0} \\
-		%\{1,2\} \only<1-3>{\ &? \ } \only<4->{&\subseteq}  \{1,2,3\} \\
-		\{1,2\} \only<4->{&\subseteq}  \{1,2,3\} \\ %TODO: Handout line
-		%\{1,2\} \only<1-4>{\ &? \ } \only<5->{&\nsubseteq} \{Hund, Katze, Maus\}
-		\{1,2\} \only<5->{&\nsubseteq} \{Hund, Katze, Maus\} %TODO: Handout line
+		\setsize{\{1,2,3,2,1\}} &= \only<2->{3} \\
+		\setsize{ \emptyset } &= \only<3->{0} \\
+		\{1,2\} \only<1-3|handout:0>{\ &\mathrel{?} \ } \only<4->{&\subseteq}  \{1,2,3\} \\
+		\{1,2\} \only<1-4|handout:0>{\ &\mathrel{?} \ } \only<5->{&\nsubseteq} \{\text{Hund}, \text{Katze}, \text{Maus}\}
 	\end{align*}
 	\end{block} 
 
@@ -87,7 +85,7 @@
 
 \begin{frame}{Mengengleichheit: Beispiel}
 	\begin{itemize}
-		\item<1-> Sei $ A $ und $M$ beliebige Mengen. Zeigen Sie das gilt 
+		\item<1-> Sei $ A $ und $M$ beliebige Mengen. Zeigen Sie, dass gilt 
 		\begin{align*}
 		A &=  \underbrace{ \left(A \setminus M \right)}_{T_1} \cup  \underbrace{ \left(A \cap M \right)}_{T_2}  
 		\end{align*}		 
@@ -146,9 +144,9 @@
 
 	\begin{block}{Weitere Beispiele}
 		\begin{align*}
-			A &\cup \emptyset \only<3->{ = A }  \\
-			A &\cap \emptyset \only<4->{ = \emptyset }\\
-			\N_+ &\cup \{0\} \only<5->{ = \N_0} \\
+			A \cup \emptyset \only<3->{ &= A }  \\
+			A \cap \emptyset \only<4->{ &= \emptyset }\\
+			\N_+ \cup \{0\} \only<5->{ &= \N_0} \\
 		\end{align*}
 	\end{block}
 
