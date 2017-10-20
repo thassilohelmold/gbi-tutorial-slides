@@ -546,9 +546,13 @@
 	{\textcolor{white}{\KIT@fnt@inst \insertinstitute}}
 	\fill[white] (0\KIT@mm,101.5\KIT@mm) rectangle (254\KIT@mm,190.5\KIT@mm);
 	\KIT@MFrame[\KIT@MFbadd]
-	%\pgftext[at=\pgfpoint{11\KIT@mm}{180.5\KIT@mm},left,top]
-	%{\pgfimage[interpolate=true,width=45\KIT@mm]{\KIT@logo}}
-	%\pgftext[at=\pgfpoint{243\KIT@mm}{180.5\KIT@mm},right,top]{\KIT@ologo}
+	
+	\ifdefined \noKITLogo \else
+	\pgftext[at=\pgfpoint{11\KIT@mm}{180.5\KIT@mm},left,top]
+	{\pgfimage[interpolate=true,width=45\KIT@mm]{\KIT@logo}}
+	\pgftext[at=\pgfpoint{243\KIT@mm}{180.5\KIT@mm},right,top]{\KIT@ologo}
+	\fi
+	
 	%%   \pgftext[at=\pgfpoint{19.0\KIT@mm}{133\KIT@mm},left,base]
 	%%      {\parbox[b]{226\KIT@mm}{%
 	%%%       \raggedright\fontsize{32\KIT@pt}{36\KIT@pt}\bfseries\inserttitle}}
@@ -627,8 +631,12 @@
 		\useasboundingbox (-4.415748mm, 0.000mm) rectangle (123.584252mm,96.000mm);
 		%\useasboundingbox (0mm,0mm) rectangle (128mm,96mm);
 		\KIT@MFrame[\KIT@MFbadd]
-		%\pgftext[at=\pgfpoint{243\KIT@mm}{180.5\KIT@mm},right,top]
-		%{\pgfimage[interpolate=true,width=30\KIT@mm]{\KIT@logo}}
+		
+		\ifdefined \noKITLogo \else
+		\pgftext[at=\pgfpoint{243\KIT@mm}{180.5\KIT@mm},right,top]
+		{\pgfimage[interpolate=true,width=30\KIT@mm]{\KIT@logo}}
+		\fi
+		
 		%%    \pgftext[at=\pgfpoint{15\KIT@mm}{172\KIT@mm},left,base]
 		%%      {\fontsize{30\KIT@pt}{32\KIT@pt}\bfseries\insertframetitle}
 		\pgftext[at=\pgfpoint{11\KIT@mm}{172.5\KIT@mm},left,base]
