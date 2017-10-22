@@ -96,6 +96,8 @@
 \setbeamercolor*{itemize subitem}{fg=black}
 \setbeamercolor*{itemize subsubitem}{fg=black}
 
+\renewcommand{\qedsymbol}{\textcolor{black}{\openbox}}
+
 \renewcommand{\mod}{\mathop{\textbf{mod}}}
 \renewcommand{\div}{\mathop{\textbf{div}}}
 
@@ -226,7 +228,7 @@
 
 \newcommand{\QuestionVspace}{\vspace{4pt}}
 \newcommand{\QuestionParbox}[1]{\begin{varwidth}{.85\linewidth}#1\end{varwidth}}
-\newcommand{\ExplanationParbox}[1]{\begin{varwidth}{.99\linewidth}#1\end{varwidth}}
+\newcommand{\ExplanationParbox}[1]{\begin{varwidth}{.97\linewidth}#1\end{varwidth}}
 \colorlet{questionlightgray}{gray!20}
 \let\defaultfboxrule\fboxrule
 
@@ -271,6 +273,8 @@
 \newcommand{\DependsQuestionE}[2]{
 	\GenericQuestion{lightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
 }
+
+\ifnum\thisyear=2017 \else \errmessage{Old ILIAS link inside preamble. Please update.} \fi
 
 \newcommand{\ILIAS}{\urlnamed{ILIAS}{https://ilias.studium.kit.edu/ilias.php?ref\_id=729057\&cmdClass=ilrepositorygui\&cmdNode=75\&baseClass=ilrepositorygui}\xspace}
 

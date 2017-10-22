@@ -123,9 +123,9 @@
 		\begin{align*}
 		\setsize{\{1,2,3,2,1\}} &= \only<2->{3} \\
 		\setsize{ \emptyset } &= \only<3->{0} \\
-		\{1,2\} \only<1-3|handout:0>{\ &\mathrel{?} \ } \only<4->{&\subseteq}  \{1,2,3\} \\
-		\{1,2\} \only<1-4|handout:0>{\ &\mathrel{?} \ } \only<5->{&\nsubseteq} \{\text{Hund}, \text{Katze}, \text{Maus}\} \\
-		\{1,2,3\} \only<1-5|handout:0>{\ &\mathrel{?} \ } \only<+->{&\supseteq} \{1,2\}
+		\{1,2\} \only<1-3|handout:0>{ &\mathrel{?\ }  } \only<4->{&\subseteq}  \{1,2,3\} \\
+		\{1,2\} \only<1-4|handout:0>{ &\mathrel{?\ } } \only<5->{&\nsubseteq} \{\text{Hund}, \text{Katze}, \text{Maus}\} \\
+		\{1,2,3\} \only<1-5|handout:0>{ &\mathrel{?\ } } \only<6->{&\supseteq} \{1,2\}
 		\end{align*}
 	\end{block} 
 	
@@ -136,10 +136,10 @@
 	
 	\begin{block}{Definition}
 		Seien $M$ und $N$ zwei Mengen. Dann heißen
-		$$M \cap N := \{x \mid x \in M \text{ und } x \in N\} \qquad M \cup N := \{x \mid x \in M \text{ oder } x \in N\} $$
+		$$M \cap N := \left\{x \mid x \in M \text{ und } x \in N \right\} \qquad M \cup N := \left\{x \mid x \in M \text{ oder } x \in N \right\} $$
 		\textbf{Durchschnitt} bzw. \textbf{Vereinigung} von $M$ und $N$.\\[1em] 
 		\pause
-		$M$, $N$ heißen \textbf{disjunkt}, wenn sie keine gemeinsamen Elemente haben, also $M \cap N = \emptyset$ (der Schnitt ist leer).
+		$M$ und $N$ heißen \textbf{disjunkt}, wenn sie keine gemeinsamen Elemente haben, also $M \cap N = \emptyset$ (der Schnitt ist leer).
 		%Zwei Mengen $M$, $N$ heißen \textbf{disjunkt}, wenn ihr Durchschnitt leer ist, sie also keine gemeinsamen Elemente besitzen. $$M \cap N = \emptyset$$
 	\end{block}
 	
@@ -173,26 +173,27 @@
 	\begin{block}{Weitere Beispiele}
 		\vspace{-2\baselineskip} % WtF LaTeX??
 		\begin{align*}
-		A \cup \emptyset \only<3->{ &= A }  \\
-		A \cap \emptyset \only<4->{ &= \emptyset }\\
-		\N_+ \cup \{0\} \only<5->{ &= \N_0} \\
-		\N_0 \setminus \{0\} \only<6->{ &= \N_+} 
+		A \cup \emptyset \uncover<4->{ &= A }  \\
+		A \cap \emptyset \uncover<5->{ &= \emptyset }\\
+		\N_+ \cup \{0\} \uncover<6->{ &= \N_0} \\
+		\N_0 \setminus \{0\} \uncover<7->{ &= \N_+} 
 		\end{align*}
 	\end{block}
 	
 \end{frame}
 
-\begin{frame}{Mengengleichheit: Beispiel}
+\begin{frame}[t]{Mengengleichheit: Beispiel}
 	\begin{itemize}
 		\item<1-> Sei $ A $ und $M$ beliebige Mengen. Zeigt, dass gilt 
 		\begin{align*}
 		A &=  \underbrace{ \left(A \setminus M \right)}_{T_1} \cup  \underbrace{ \left(A \cap M \right)}_{T_2}  
 		\end{align*}		 
-		\item<2-5> \textbf{Richtung}: $ A \subseteq T_1 \cup T_2 $ 
-		\only<3-5>{\item<3-5> Wähle $x\in A$ und unterscheide:
+		\only<2-5>{
+			\item<2-5> \textbf{Richtung}: $ A \subseteq T_1 \cup T_2 $ 
+			\item<3-5> Wähle $x\in A$ und unterscheide:
 			\item<4-5> Fall 1: Ist $x\in M$, so gilt $x\in A $ und $x\in M$ und damit $x\in A\cap M  = T_2 $
 			\item<5-5> Fall 2 : Ist $x\notin M$, so gilt $x\in T_1$, da $T_1 = \left\{x \mid x \in A \text{ und } x\notin M \right\} $  }
-		\only<6->{\item<6-> \textbf{Richtung} : $T_1 \cup T_2 \subseteq A $ 
+		\only<6->{\item<6-> \textbf{Richtung}: $T_1 \cup T_2 \subseteq A $ 
 			\item<7-> Wähle $x\in T_1 \cup T_2$. Dies bedeutet $x\in T_1 $ oder $x\in T_2$. 
 			\item<8-> Fall 1: $x\in T_1$. Aus Definition folgt $x\in A$.
 			\item<9-> Fall 2: $x\in T_2$. Somit $x\in A$ und $x\in M$. $\qed$}
@@ -204,7 +205,7 @@
 		Wir haben Mengen $A = \{1, 2\}, B = \{3\}, C = \{1, 3\}; A,B,C \subseteq M = \{1, 2, 3\}$.\\
 		Dann ist:
 		\begin{align*}
-		A \cup B &= \only<2->{ \{1, 2, 3\} }  \\
+		A \cup B &= \visible<2->{ \{1, 2, 3\} }  \\
 		A \cap C &= \only<3->{ \{1\} }\\
 		A \setminus C &= \only<4->{ \{2\} }\\
 		B \setminus A &= \only<5->{ \{3\} }\\
@@ -224,7 +225,7 @@
 	\begin{block}{Definition}
 		Die \textbf{Potenzmenge} $2^M$ oder auch $\Pot (M)$ ist die Menge aller möglicher Teilmengen von $M$. 
 		\begin{align*}
-			2^M = \{N \mid N \subseteq M\}
+			2^M = \left\{ N \mid N \subseteq M \right\}
 		\end{align*}
 	\end{block}
 	\pause
@@ -234,7 +235,7 @@
 		
 		Dann gilt  
 		\begin{align*}   
-		2^M &= \pause \left\lbrace \emptyset, \{ 0 \}, \{ 1 \}, \{ 2 \}, \{ 0,1 \} , \{ 0,2 \}, \{ 1,2 \}, \{ 0,1,2 \} \right\rbrace
+		2^M &= \left\{ \emptyset, \{ 0 \}, \{ 1 \}, \{ 2 \}, \{ 0,1 \} , \{ 0,2 \}, \{ 1,2 \}, \{ 0,1,2 \} \right\}
 		\end{align*}
 		
 		\textbf{Beachte}: Es gilt immer $M \in 2^M \ \text{und} \ \emptyset \in 2^M$.
@@ -251,7 +252,7 @@
 	\end{block}
 	
 	\pause
-	\begin{block}{Aufgabe}
+	\begin{block}{Noch ne Aufgabe}
 		Gebt eine Abbildung $\phi \colon 2^{M} \functionto 2^{M}$ so an,
 		dass für jedes $L \in 2^{M}$ und für jedes $w \in M$ gilt:
 		\begin{equation*}
@@ -296,6 +297,14 @@
 	\begin{block}{Beispiel}
 		$$ (KI, T) = (KI, T) \qquad (KI, T) \neq (T, KI) \qquad (1, 1) \neq \underbrace{(1)}_{\mathclap{\text{überhaupt gar kein Paar!}}} $$
 	\end{block}
+\end{frame}
+
+\begin{frame}
+	\centering
+	\Huge
+	\alert{Runde und geschweifte Klammern 
+		   $$\Big(\;\Big) \textbf{\quad vs. \quad} \Big\{\;\Big\}$$ \\
+		   \textbf{NICHT VERWECHSELN!}}
 \end{frame}
 
 \begin{frame}{Paare}
