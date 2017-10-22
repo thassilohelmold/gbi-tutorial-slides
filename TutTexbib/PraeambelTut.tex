@@ -15,8 +15,11 @@
 \usepackage{calc}
 \usepackage{varwidth}
 \usepackage{wasysym}
+\usepackage{mathtools}
+
 
 \input{../config.tex}
+
 
 
 % define custom \handout command flag if handout mode is toggled  #DirtyAsHellButWell...
@@ -71,6 +74,7 @@
 %\newcommand{\nump}{\advance \value{weeknum} by -1 \theweeknum \advance \value{weeknum} by 1}
 
 \newcommand{\mycomment}[1]{}
+\newcommand{\Comment}[1]{}
 
 \newcounter{abc}
 \newenvironment{alist}{
@@ -80,6 +84,17 @@
 }{\end{list}}
 
 
+\newcommand{\morescalingdelimiters}{   % for proper \left( \right) typography
+	\delimitershortfall=0pt  
+	\delimiterfactor=1
+}
+
+\newcommand{\centered}[1]{\vspace{-\baselineskip}\begin{center}#1\end{center}\vspace{-\baselineskip}}
+
+% for \implitem and \item[bla] stuff to look right:
+\setbeamercolor*{itemize item}{fg=black}
+\setbeamercolor*{itemize subitem}{fg=black}
+\setbeamercolor*{itemize subsubitem}{fg=black}
 
 \renewcommand{\mod}{\mathop{\textbf{mod}}}
 \renewcommand{\div}{\mathop{\textbf{div}}}
@@ -111,7 +126,7 @@
 \newcommand{\gdw}{\ifmmode\mskip\thickmuskip\Leftrightarrow\mskip\thickmuskip\else$\Leftrightarrow$\fi\xspace}
 \newcommand{\Gdw}{\ifmmode\iff\else$\Longleftrightarrow$\fi\xspace}
 
-\newcommand{\symbitemnegoffset}{\hspace{-.2\baselineskip}}
+\newcommand{\symbitemnegoffset}{\hspace{-.5\baselineskip}}
 \newcommand{\implitem}{\item[\impl\symbitemnegoffset]}
 \newcommand{\Implitem}{\item[\Impl\symbitemnegoffset]}
 
@@ -127,7 +142,7 @@
 \renewcommand{\subset}{\subseteq} % for all idiots out there using subset
 
 \newcommand{\mailto}[1]{\href{mailto:#1}{{\textcolor{blue}{\underline{#1}}}}}
-\newcommand{\urlnamed}[2]{\href{#1}{\textcolor{blue}{\underline{#2}}}}
+\newcommand{\urlnamed}[2]{\href{#2}{\textcolor{blue}{\underline{#1}}}}
 \renewcommand{\url}[1]{\urlnamed{#1}{#1}}
 
 \newcommand{\hanging}{\hangindent=0.7cm}
@@ -257,6 +272,16 @@
 	\GenericQuestion{lightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
 }
 
+\newcommand{\ILIAS}{\urlnamed{ILIAS}{https://ilias.studium.kit.edu/ilias.php?ref\_id=729057\&cmdClass=ilrepositorygui\&cmdNode=75\&baseClass=ilrepositorygui}\xspace}
 
+\newcommand{\thasse}[1]{
+	\ifdefined\ThassesTut #1\xspace \else\fi
+}
+\newcommand{\daniel}[1]{
+	\ifdefined\DanielsTut #1\xspace \else\fi
+}
+\newcommand{\thassedaniel}[2]{\ifdefined\ThassesTut #1\else\ifdefined\DanielsTut #2\fi\fi\xspace}
+
+\ifdefined\ThassesTut \ifdefined\DanielsTut \errmessage{ERROR: Both ThassesTut and DanielsTut flags are set. This is most likely an error. Please check your config.tex file.} \else \fi \else \ifdefined\DanielsTut \else \errmessage{ERROR: Neither ThassesTut  nor DanielsTut flags are set. This is most likely an error. Please check your config.tex file.} \fi\fi
 
 %\newcommand{\sgn}{\text{sgn}}

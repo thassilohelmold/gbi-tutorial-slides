@@ -4,7 +4,7 @@
 % https://www.youtube.com/watch?v=Dy0hJWltsyE
 
 % Comment/uncomment this line to toggle handout mode
-%\newcommand{\handout}{}
+\newcommand{\handout}{}
 
 \input{../TutTexbib/PraeambelTut.tex}
 \input{../TutTexbib/Style_Tut.tex}
@@ -13,139 +13,130 @@
 \begin{document}
 \starttut{1}
 
-\section{Organisatorisches}
+\section{\thassedaniel{Organisatorisches}{Orga-Kram}}
 
 \aboutMeFrame
 
-\begin{frame}{Disclaimer}
-	\begin{itemize}
-		\item Diese Folien sind für Tutanden der Veranstaltung \enquote{Grundbegriffe der Informatik} am KIT. Die Weitergabe dieser Folien an Dritte oder eine Veröffentlichung ist nicht gestattet!
-		\item Die Folien wurden mit größter Sorgfalt erstellt. Trotzdem ist es wahrscheinlich, dass noch inhaltliche oder formale Fehler enthalten sind. Für die Klausur maßgeblich sind ausschließlich die offiziellen Materialien der Lehrveranstaltung.
-	\end{itemize}
-\end{frame}
-
-%\begin{headframe}[Das Genie beherrscht das Chaos \\ \forcenewline Oder...]
-%	Hashing
-%\end{headframe}
-
-\begin{frame}{Grundbegriffe ?}
+\begin{frame}{Grundbegriffe?}
 	\begin{itemize}
 		\item Cloud
 		\item Künstliche Intelligenz
+		\item Compilerbau
 		\item Big Data
-		\item App
+		\item Apps
 		\item Roboter
-		\item Informatik
+		\item Industrie~4.0
 	\end{itemize}
 
 	\pause
-	Das alles sind \emph{keine} Grundbegriffe!\\
-	Was erwartet euch also?
+	Kommt alles noch... Aber nicht in GBI.
 \end{frame}
 
-\begin{frame} {Grundbegriffe !}
+\begin{frame}{Grundbegriffe!}
 	\begin{itemize}
-		\item Menge, Relation, Funktion
-		\item Wort, Sprach, Grammatik
-		\item Graph
-		\item Algorithmus
-		\item Turingmaschine
+		\item Mengen, Relationen, Funktionen
+		\item Wörter, Sprachen, Grammatiken
+		\item Graphen
+		\item Algorithmen
+		\item Turingmaschinen
 		\item Logik
-		\item Prozessor
+		\item Prozessoren
 		\item ...
 	\end{itemize}
+	\impl You have been warned. :P
 \end{frame}
 
-\begin{frame}[t]{Tutorium}
+\begin{frame}[t]{Was machen wir hier?}
 	\begin{itemize}[<+->]
-		\item Inhalte der Vorlesung erläutern und anwenden
-		\item Beispiele, Aufgaben (ihr seid dran!)
-		\item Hier sollt ihr Fragen stellen!
-		\item \textbf{Kein} Ersatz für die Vorlesung.\\
-			  Themen, die nicht im Tutorium dran kommen, sind trotzdem wichtig!
-		\item Hier weniger formales Vorgehen als in der Vorlesung. Das heißt nicht, dass das formale vorgehen nicht wichtig ist.
+		\item Tut-Folien bekommt ihr im \ILIAS. Keine Panik.
+		\item Inhalte der VL verstehen und anwenden
+		\item Beispiele, Aufgaben (da kommt \textbf{ihr} ins Spiel! \smiley)
+		\item \textbf{Eure Fragen} klären! 
+		\item \textbf{Kein} Ersatz für die VL. \\
+			  Was zeitlich hier nicht mehr reinpasst, kann trotzdem wichtig sein!
+	    \item Den Stoff etwas weniger formal behandeln \impl \thassedaniel{Formelles}{Formal-Kram} kann trotzdem wichtig sein! 
+	    \item Wenn ich / meine Folien Blödsinn reden: \\
+		      Schreien! / Mail an mich! \impl Sonst kann ich's nicht fixen... \frownie \\
+		      Verbindlich \textbf{nur} Inhalt aus der VL/Übung! 
 	\end{itemize}
-	\YesQuestion{Kriegt ihr hier Antworten?}
-	\YesQuestionE{Wird Plagiarismus mit dem Tode bestraft?}{Natürlich! \smiley}
-	\NoQuestionE{Dürft ihr mich siezen?}{Ihr werdet sonst erschossen. \smiley}
+	\NoQuestionE{Dürft ihr mich siezen?}{Ihr werdet sonst erschossen. \smiley \hspace{.5\linewidth}\mbox{} \\ \impl Sagt einfach \textbf{Du}.} 
 \end{frame}
 
-\begin{frame}{Übungsblätter}
-	Handschriftlich, mit Deckblatt (Tutoriums-Nummer!) und getackert rechtzeitig	abgeben! \\ \pause
-	Keine Plagiate, keine Gruppenabgabe! \\[1em] \pause
-	Voraussichtlich 6--7 Blätter  Bearbeitungszeit. \\ \pause
-	Ausgabe:  Mittwochs, 14 tägig
-	Abgabe:   Donnerstag, 16 Uhr, ca \realTilde 2 Wochen später
-	Rückgabe: Hier im Tutorium (Nach 2 Wochen Abholung beim Dozenten)
-\end{frame}
-
-\begin{frame}{Übungsblätter}
-	Noch ein paar spezielle Hinweise:
+\begin{frame}{Leistungen}
 	\begin{itemize}
-		\item Text in Schwarz oder Blau (oder andere dunkle Farbe $\notin \{\text{Rot}, \text{Grün}, \text{Weiß}\}$ )
-		\item Links und rechts bitte jeweils einen Rand frei lassen.
-		\item Aufgabennummer deutlich kenntlich machen
-		\item Für (sehr) unsaubere Abgaben ist Punktabzug möglich!
+		\item \textbf{Übungsschein}: \\
+			  bestanden, wenn 50~\% der Gesamtpunkte aller Übungsblätter erreicht \\
+		\item \textbf{Klausur}: 08.~März~2018, 14:00–16:00~Uhr \\
+			  schriftlich, keine Hilfsmittel. \quad Stay tuned...
 	\end{itemize}
-\end{frame}
-
-\begin{frame} {Leistungen}
-	Wir sind Teil der \textbf{Orientierungsprüfung}!
+	Wir sind Teil der \textbf{Orientierungsprüfungen} für Informatiker!
 	\begin{itemize}
-		\item Übungsschein:\\ 
-			50\% aller erreichbarer Punkte hinreichend\\
-			Wichtig: Versuchen im ersten Semester (da im Zweiten nicht angeboten)!
-		\item Klausur \\
-			Teilnahme auch ohne Übungsschein möglich.
-			Versuch spätestens im 2. Semester, bestehen im 3.
+		\implitem Übungsschein im ersten Semester \textbf{versuchen} (da im Zweiten nicht angeboten), im Dritten bestehen! 
+		\implitem Klausur: \\
+		Teilnahme auch ohne Übungsschein möglich. \\
+		Versuch \textbf{spätestens} im zweiten Semester, bestehen im Dritten!
 	\end{itemize}
-
-	\pause
-	\DependsQuestionE{Ich studiere \enquote{Europäische Kultur und Ideengeschichte},\\ brauche ich den Übungsschein?}{Es kann nie schaden, die Übungen zu bearbeiten.}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Kontaktmöglichkeiten}
 	
-	\begin{block}{Tutorium}
+	\pause
+	\DependsQuestionE{Ich studiere \enquote{Europäische Kultur und Ideengeschichte},\\ brauche ich den Übungsschein?}{Es kann nie schaden, die Blätter zu machen. Außerdem: Wer die Blätter macht, fällt seltener durch. Wirklich! \smiley}
+\end{frame}
+
+\begin{frame}{Übungsblätter}
+	\begin{itemize}
+		\item \textbf{Ausgabe}: Mittwochs, alle zwei Wochen im \ILIAS \\
+			  \textbf{Abgabe}: Donnerstag zwei Wochen später, 16:00~Uhr, im GBI-Kasten im U-Geschoss des Infobaus
+		\item Handschriftlich, \\ 
+		mit \textbf{Deckblatt} (Tutoriums-Nr. \mytutnumber\  drauf!), \\ 
+		\textbf{getackert} abgeben!
+		\item Rechtzeitig! \\(16:01~Uhr ist höchstwahrscheinlich zu spät!)
+		\item \textbf{Keine} Plagiate, \textbf{keine} Gruppenabgabe (sonst \textbf{Übungsschein weg}!) 
+		\item Voraussichtlich 6--7~Blätter dieses Semester
+		\item \textbf{Rückgabe}: Hier im Tut \\ (Nach zwei Wochen Abholung beim Stüker/Zenkel... tba. Keine Ahnung.) %TODO
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}{Übungsblätter}
+	Außerdem:
+	\begin{itemize}
+		\item Text in Schwarz oder Blau (oder andere dunkle Farbe $\notin \{\text{Rot}, \text{Grün}, \text{Weiß}\}$ ) \\
+			  \textbf{Kein Bleistift!}
+		\item Links und rechts bitte einen Rand frei lassen. \\
+			  Dann kann ich's auch korrigieren. \smiley
+		\item \textbf{Welche Aufgabe} ist das gerade?! \impl Deutlich machen!
+		\item Was ich nicht lesen kann, gibt keine Punkte! \\
+			  \small Was ich schwer lesen kann, u.~U. auch... 
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Fragen? Hilfe?}	
+	\begin{block}{Fragen}
 		\begin{itemize}
-			\item Mail: \mymail
-			\item Folien bekommt ihr im ILIAS.
-		\end{itemize} 
+			\item \textbf{Hier} im Tut!
+			\item Ins \ILIAS. (Dann haben alle was davon. \smiley) \\
+				  Im ILIAS hat's sogar einen Sprechstunden-Chat! :D
+			\item Organisatorischer Spezialkram? \impl an Zenkel/Stüker (\mailto{thomas.zenkel@kit.edu} / \mailto{sebastian.stueker@kit.edu}) \\
+			Bei Orga-Problemen aber \textbf{Name} und \textbf{Matrikelnummer}  mitangeben! \\
+			Fachliches bitte nicht per Mail, lieber \impl Sprechstunde, ILIAS...!
+			\item Tut-spezifisches an \textbf{mich} (\mailto{\mymail})
+		\end{itemize}
 	\end{block}
-	\pause
 	
-	\begin{block}{Vorlesung}
+	\begin{block}{Content}
 		\begin{itemize}
-			\item Forum: ILIAS
-			\item Bitte alle fachlichen und allgemein organisatorischen Fragen im Forum!
-			\item Dozent: sebastian.stueker@kit.edu (Bitte immer Name und Matrikelnummer mit angeben!)
+			\item VL-Folien, Skript, Ü-Blätter, Altklausuren...: im \ILIAS.
+			\item Archiv: \url{http://gbi.ira.uka.de} \\
+			Weitere Altklausuren, Alte ÜBs, Lösungen...
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Ressourcen}
-	
-	\begin{itemize}
-		\item Vorlesungsfolien
-		\item Skript
-		\item Archiv (gbi.ira.uka.de)\\
-			  Alte Klausuren, Übungsblätter, Lösungen
-	\end{itemize}
-
-	\bigskip
-	Sehr gute Inhalte, Erklärungen, Übungen findet man auch bei
-	\begin{itemize}
-		\item EDX (edx.org)
-		\item Coursera (coursera.org)
-	\end{itemize}
-	
-\end{frame}
 
 \section{Information}
-\begin{frame}
-	\frametitle{Nachricht, Information, ...}
+
+\begin{frame}{Nachricht, Information, ...}
 	
 	\begin{block}{Nachricht}
 		      Mitteilung, bei der vom Medium und den Einzelheiten der Signale abstrahiert wird.
@@ -162,18 +153,14 @@
 		      Naturalis: log$_{e}$ \\
 		      Hartley: log$_{10}$ \\
 		      Shannon: log$_{2}$ \\[1em]
-		Mehr dazu in TGI
+		\impl Mehr dazu in TGI
 	\end{block}
 
 \end{frame}
 
-
 \input{../Bloecke/Mengen.tex}
 
-
 \begin{frame}
-	\frametitle{}
-	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
 			\item wie man mit Mengen umgeht
@@ -186,15 +173,16 @@
 		\begin{itemize}
 			\item wie man mehr als zwei Elemente geordnet zusammenbringt (Tupel)
 			\item wie man mit Relationen Ordnung in das Chaos bringt
-			\item [...] und noch vieles mehr!
-			%TODO: Fg color := black for \item []-titles!
+			\item[...] und noch vieles mehr!
 		\end{itemize}
 	\end{block}
 \end{frame}
 
+\only<handout:0>{\slideThanks}
+
 %% Letzte Seite 
 \lastframe{0.35}{30}{xkcd/good_code.png}{http://xkcd.com/844}
 
-\slideThanks
+\only<beamer:0>{\slideThanks}
 
 \end{document}
