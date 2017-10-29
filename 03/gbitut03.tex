@@ -14,38 +14,65 @@
 \begin{document}
 \starttut{3}
 
-\begin{frame}
-	\frametitle{Übungsblätter}
-	\pause
-	... gibt es natürlich noch nicht ;-) \\[1em]
-	\pause
-	
-	Und ganz wichtig: Frühzeitig anfangen! ÜB 2 sowie folgende ÜB sind \textbf{doppelt so umfangreich} wie ÜB 1 (und geben entsprechend viele Punkte)!
-\end{frame}
-
 \framePrevEpisode
 
 \subsection{Wahr oder Falsch?}
 \begin{frame}
 	\begin{block}{Wahr oder Falsch?}
-		\begin{itemize}
 			\FalseQuestionE{Eine Funktion muss linkseindeutig sein}{Richtig: Eine Funktion muss rechtseindeutig und linkstotal sein}
 			\TrueQuestionE{Eine injektive Funktion ist linkseindeutig}{}
 			\TrueQuestionE{Eine surjektive Funktion ist rechtstotal}{}
 			\FalseQuestion{Jede Relation ist eine Funktion}
 			\TrueQuestionE{Jede Funktion ist eine Relation}{}
-		\end{itemize}
 	\end{block}
 \end{frame}
 
 \begin{frame}
 	\begin{block}{Wahr oder Falsch?}
-	\begin{itemize}
 		\FalseQuestionE{$aaba \in \{a,b\}^2\times\{a,b\}^2$}{Aber: $(\text{aa}, \text{ba}) \in \{a,b\}^2\times\{a,b\}^2$}
 		\FalseQuestionE{Ich benutze für jeden Beweis Induktion.}{Mit einem Schraubenschlüssel bekommt man keinen Nagel in die Wand.}
-		\FalseQuestionE{$\setsize{\{ \varepsilon \}} = 0$}{\{ \varepsilon \} \neq \emptyset$}
-	\end{itemize}
+		\FalseQuestionE{$\setsize{\{ \varepsilon \}} = 0$}{$\{ \varepsilon \} \neq \emptyset$}
 	\end{block}
+\end{frame}
+
+\section{Induktive Definitionen}
+
+\begin{frame}{Zum Aufwärmen: Domino}
+	3 Dominosteine sind mit gleichem Abstand (kleiner halbe Größe) in einer Reihe aufgestellt. Wir stoßen den ersten Stein der Reihe in Richtung des zweiten Steins um. \\
+	Wird der dritte Stein umfallen? Kann man das (einfach) beweisen? \\[1em]
+	\pause
+	Nun stehen (abzählbar) unendlich viele Dominosteine wie oben hintereinander. Wieder stoßen wir den ersten Stein um. \\
+	Wird jeder Stein irgendwann umfallen? Kann man das (einfach) beweisen? \\[1em]
+	\pause
+	Werden irgendwann alle Steine umgefallen sein? \\
+	\pause Nein, denn für jeden Zeitpunkt können wir (mindestens) einen Stein angeben, der noch nicht umgefallen ist.\\
+	Wir sehen also: Alle Steine fallen um, aber es sind niemals alle umgefallen.
+\end{frame}
+
+\begin{frame}{Induktive Definition}
+	Betrachten wir die \emph{Fibonacci}-Reihe.
+	Es gilt 
+	\begin{align*}
+	\mathcal{F}_{0} &= 0 \\
+	\mathcal{F}_1 &= 1 \\
+	\mathcal{F}_{n+2} &= \mathcal{F}_{n+1} + \mathcal{F}_n 		
+	\end{align*}
+	\pause
+	\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+		\hline
+		n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+		$\mathcal{F}_n$ & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 \\ \hline
+	\end{tabular}
+	\end{table}
+	
+	\pause
+	\textbf{Wohldefiniertheit}: 
+	\begin{itemize}
+	\item Für alle Fälle etwas definieren 
+	\item Nicht für einen Fall widersprüchliches definieren
+	\end{itemize}
 \end{frame}
 
 \frame{
@@ -62,11 +89,7 @@
 
 \input{../Bloecke/Aussagenlogik.tex}
 
-%\input{../Bloecke/VollstaendigeInduktion.tex}
-
 \input{../Bloecke/FormaleSprachen.tex}
-
-%\input{../Bloecke/BinäreOperationen.tex}
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
