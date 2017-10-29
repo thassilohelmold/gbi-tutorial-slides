@@ -1,10 +1,9 @@
-In dieser Datei werden Todos, evtl. Todos und generelle Ideen sowie Inhalte gesammelt
+﻿In dieser Datei werden Todos, evtl. Todos und generelle Ideen sowie Inhalte gesammelt
 
 -----------------------------------------
 TODO: 
 Dinge, die wirklich noch erledigt werden sollten, bevor die Folien (erneut) veröffentlicht / gezeigt werden.
 -----------------------------------------
-- Name und andere Daten in Konfig-Datei auslagern, die gitignored wird.
 
 
 -----------------------------------------
@@ -21,4 +20,3 @@ Nichts davon ist konkret wichtig oder bereits konkret ausgearbeitet.
 -----------------------------------------
 - Funktionales (map): 14, Blatt 4
 - Funktionales (Fold): 15, Ü2
-- Option zum Ein/Ausschalten des Logos
