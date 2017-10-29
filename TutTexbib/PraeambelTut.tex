@@ -17,6 +17,13 @@
 \usepackage{wasysym}
 \usepackage{mathtools}
 
+%% Tabellen
+\usepackage{array}
+\usepackage{multicol}
+
+%% Bibliotheken für viele mathematische Symbole
+\usepackage{amsmath, amsfonts, amssymb}
+
 
 \input{../config.tex}
 
@@ -38,9 +45,16 @@
 \newcommand{\Pot}{\mathcal{P}}
 \renewcommand{\O}{\text{O}}
 
+\def\word#1{\hbox{\textcolor{blue}{\texttt{#1}}}}
+\def\sp{\scalebox{1}[.5]{\textvisiblespace}}
+
 %\newcommand{\literal}[1]{\textcolor{blue}{\texttt{#1}}}
 \newcommand{\realTilde}{\textasciitilde \ }
-\newcommand{\setsize}[1]{\ensuremath{\lvert #1 \rvert}}
+\newcommand{\setsize}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
+\let\size\setsize
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\tuple}[1]{\left(#1\right)}
+\newcommand{\normalvar}[1]{\text{$#1$}}
 
 % Modified by DJ
 \let\oldemptyset\emptyset
@@ -85,7 +99,7 @@
 
 
 \newcommand{\morescalingdelimiters}{   % for proper \left( \right) typography
-	\delimitershortfall=0pt  
+	\delimitershortfall=-1pt  
 	\delimiterfactor=1
 }
 
@@ -95,6 +109,10 @@
 \setbeamercolor*{itemize item}{fg=black}
 \setbeamercolor*{itemize subitem}{fg=black}
 \setbeamercolor*{itemize subsubitem}{fg=black}
+
+\setbeamercolor*{description item}{fg=black}
+\setbeamercolor*{description subitem}{fg=black}
+\setbeamercolor*{description subsubitem}{fg=black}
 
 \renewcommand{\qedsymbol}{\textcolor{black}{\openbox}}
 
@@ -107,15 +125,20 @@
 \newcommand{\Matrix}[1]{\begin{pmatrix} #1 \end{pmatrix}}
 \newcommand{\braced}[1]{\left\lbrace #1 \right\rbrace}
 
+\def\fract#1/#2 {\frac{#1}{#2}} % ! Trailing space is crucial!
+\def\dfract#1/#2 {\dfrac{#1}{#2}} % ! Trailing space is crucial!
+
+\newcommand{\Mid}{\;\middle|\;}
+
 \def\·{\cdot}
 \def\*{\cdot}
 
 \newcommand{\tight}[1]{{\renewcommand{\arraystretch}{0.76} #1}}
 \newcommand{\stackedtight}[1]{{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix}} }
 \newcommand{\stacked}[1]{\begin{matrix} #1 \end{matrix} }
-\newcommand{\casesl}[1]{\left\lbrace\hspace{-.3\baselineskip}\begin{array}{ll} #1 \end{array}\right.}
-\newcommand{\casesr}[1]{\left.\begin{array}{ll} #1 \end{array}\right\rbrace}
-\newcommand{\caseslr}[1]{\left\lbrace\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
+\newcommand{\casesl}[1]{\delimitershortfall=0pt  \left\lbrace\hspace{-.3\baselineskip}\begin{array}{ll} #1 \end{array}\right.}
+\newcommand{\casesr}[1]{\delimitershortfall=0pt  \left.\begin{array}{ll} #1 \end{array}\right\rbrace}
+\newcommand{\caseslr}[1]{\delimitershortfall=0pt  \left\lbrace\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
 
 \def\q#1uad{\ifnum#1=0\relax\else\quad\q{\the\numexpr#1-1\relax}uad\fi}
 % e.g. \q1uad = \quad, \q2uad = \qquad etc.
@@ -142,6 +165,14 @@
 \renewcommand{\leq}{\leqslant}
 \let\oldsubset\subset
 \renewcommand{\subset}{\subseteq} % for all idiots out there using subset
+
+\newenvironment{threealign}{%
+	\[
+	\begin{array}{r@{\ }c@{\ }l}
+}{%
+	\end{array}	
+	\]
+}
 
 \newcommand{\mailto}[1]{\href{mailto:#1}{{\textcolor{blue}{\underline{#1}}}}}
 \newcommand{\urlnamed}[2]{\href{#2}{\textcolor{blue}{\underline{#1}}}}
@@ -193,12 +224,21 @@
 \colorprovide{lightred}{red!30}
 \colorprovide{lightgreen}{green!40}
 \colorprovide{lightyellow}{yellow!50}
+\colorprovide{beamerlightred}{lightred}
+\colorprovide{beamerlightgreen}{lightgreen}
+\colorprovide{beamerlightyellow}{lightyellow}
 \colorprovide{fullred}{red!60}
 \colorprovide{fullgreen}{green}
 \definecolor{darkred}{RGB}{115,48,38}
 \definecolor{darkgreen}{RGB}{48,115,38}
 \definecolor{darkyellow}{RGB}{100,100,0}
 
+\only<handout:0>{\colorlet{adaptinglightred}{beamerlightred}}
+\only<handout:0>{\colorlet{adaptinglightgreen}{beamerlightgreen}}
+\only<handout:0>{\colorlet{adaptinglightred}{beamerlightred}}
+\only<beamer:0>{\colorlet{adaptinglightred}{lightred}}
+\only<beamer:0>{\colorlet{adaptinglightgreen}{lightgreen}}
+\only<beamer:0>{\colorlet{adaptinglightred}{lightred}}
 \only<handout:0>{\colorlet{adaptingred}{lightred}}
 \only<beamer:0>{\colorlet{adaptingred}{fullred}}
 \only<handout:0>{\colorlet{adaptinggreen}{lightgreen}}
@@ -229,7 +269,7 @@
 \newcommand{\QuestionVspace}{\vspace{4pt}}
 \newcommand{\QuestionParbox}[1]{\begin{varwidth}{.85\linewidth}#1\end{varwidth}}
 \newcommand{\ExplanationParbox}[1]{\begin{varwidth}{.97\linewidth}#1\end{varwidth}}
-\colorlet{questionlightgray}{gray!20}
+\colorlet{questionlightgray}{gray!25}
 \let\defaultfboxrule\fboxrule
 
 % #1: bg color
@@ -247,31 +287,31 @@
 % #1: Q text
 % #2: Explanation
 \newcommand{\TrueQuestionE}[2]{
-	\GenericQuestion{lightgreen}{darkgreen}{Wahr.}{#1}{#2}
+	\GenericQuestion{adaptinglightgreen}{darkgreen}{Wahr.}{#1}{#2}
 }
 
 % #1: Q text
 % #2: Explanation
 \newcommand{\YesQuestionE}[2]{
-	\GenericQuestion{lightgreen}{darkgreen}{Ja.}{#1}{#2}
+	\GenericQuestion{adaptinglightgreen}{darkgreen}{Ja.}{#1}{#2}
 }
 
 % #1: Q text
 % #2: Explanation
 \newcommand{\FalseQuestionE}[2]{
-	\GenericQuestion{lightred}{darkred}{Falsch.}{#1}{#2}
+	\GenericQuestion{adaptinglightred}{darkred}{Falsch.}{#1}{#2}
 }
 
 % #1: Q text
 % #2: Explanation
 \newcommand{\NoQuestionE}[2]{
-	\GenericQuestion{lightred}{darkred}{Nein.}{#1}{#2}
+	\GenericQuestion{adaptinglightred}{darkred}{Nein.}{#1}{#2}
 }
 
 % #1: Q text
 % #2: Explanation
 \newcommand{\DependsQuestionE}[2]{
-	\GenericQuestion{lightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
+	\GenericQuestion{adaptinglightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
 }
 
 \ifnum\thisyear=2017 \else \errmessage{Old ILIAS link inside preamble. Please update.} \fi

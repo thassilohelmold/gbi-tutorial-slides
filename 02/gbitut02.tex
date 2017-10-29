@@ -10,51 +10,57 @@
 \input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{2}
 
-\begin{frame}
-	\frametitle{Organisatorisches}
+\Comment{
+\begin{frame}{Organisatorisches}
 	
-	\begin{itemize}
-		\item Nächsten Donnerstag: Abgabe des ersten Übungsblattes! (Achtung: Bei nachfolgenden Blättern werde ich nicht mehr auf die Abgabe hinweisen!)
-	\end{itemize}
+	
+		\begin{itemize}
+			\item Nächsten Donnerstag: Abgabe des ersten Übungsblattes! (Achtung: Bei nachfolgenden Blättern müsst ihr euch selber erinnern!)
+		\end{itemize}
+	
 \end{frame}
+}
 
 \framePrevEpisode
 
-\begin{frame}
-	\frametitle{Zurück zu unserem Problem}
-	Ordnen wir diese in eine Teilmenge $M$ für Filme/Serien und jeweils eine Teilmenge $A_m$ für die Schauspieler eines Films $m \in M$. \\[0.5em]
-	$M = \{$ The Imitation Game, Sherlock, Zurück in die Zunkunft $\}$ \\[0.3em]
-	$A_{Sherlock} = \{$ Benedict Cumberbatch, Martin Freeman, Mark Gatiss $\}$ \\
-	$A_{Imitation Game} = \{$ Benedict Cumberbatch, Keira Knightley $\}$ \\
-	$A_{BTTF} = \{$ Michael Fox, Christopher Lloyd, Lea Thompson, Crispin Glover $\}$ \\[2em]
-	
-	Ordnung durch Mengen, Teilmengen, \textbf{Paare}\\ \pause
-	(The Imiatation Game, Benedict Cumberbatch), (BTTF, Michael Fox), ...
-	
-\end{frame}
+\Comment{
+	\begin{frame}
+		\frametitle{Zurück zu unserem Problem}
+		Ordnen wir diese in eine Teilmenge $M$ für Filme/Serien und jeweils eine Teilmenge $A_m$ für die Schauspieler eines Films $m \in M$. \\[0.5em]
+		$M = \{$ The Imitation Game, Sherlock, Zurück in die Zunkunft $\}$ \\[0.3em]
+		$A_{Sherlock} = \{$ Benedict Cumberbatch, Martin Freeman, Mark Gatiss $\}$ \\
+		$A_{Imitation Game} = \{$ Benedict Cumberbatch, Keira Knightley $\}$ \\
+		$A_{BTTF} = \{$ Michael Fox, Christopher Lloyd, Lea Thompson, Crispin Glover $\}$ \\[2em]
+		
+		Ordnung durch Mengen, Teilmengen, \textbf{Paare}\\ \pause
+		(The Imiatation Game, Benedict Cumberbatch), (BTTF, Michael Fox), ...
+		
+	\end{frame}
+}
 
 \begin{frame}
 	\begin{block}{Wahr oder Falsch?}
-		\begin{itemize}
-			\TrueQuestionE{$ \setsize{\emptyset} = 0$}{}
-			\FalseQuestionE{$ \setsize{ \{ \{ \; \} \} } = 0$}{$ \setsize{ \{ \{ \; \} \} } = \setsize{\{\emptyset\}} =1$}
-			\TrueQuestionE{$ \{1, 2\} = \{2, 1\}$}{}
-			\FalseQuestion{$ (1, 2) = (2, 1)$}
-			\FalseQuestionE{$ \left(M\cup A\right)\setminus M = A $}{für z.~B. $ M = A = \{1\}$}
-		\end{itemize}
+		\TrueQuestionE{$ \setsize{\emptyset} = 0$}{}
+		\FalseQuestionE{$ \setsize{ \set{\set{}} } = 0$}{$ \setsize{\set{\set{}}} = \setsize{\set{\emptyset}} = 1$}
+		\TrueQuestionE{$ \{1, 2\} = \{2, 1\}$}{}
+		\FalseQuestion{$ (1, 2) = (2, 1)$}
+		\FalseQuestionE{$ \left(M\cup A\right)\setminus M = A $}{für z.~B. $ M = A = \{1\}$}
 	\end{block}
 
 	\only<11->{
 	\begin{block}{Bemerkungen}
-		Ob Menge oder Tupel: Auf die Klammern kommt es an! \\
-		Trivialbeispiele helfen oftmals wirklich!
+		Menge / Tupel: Klammern beachten! \\
+		Einfache Beispiele helfen!
 	\end{block}
 	}
 \end{frame}
 
+\Comment{
 \section{Induktive Definitionen}
 
 \begin{frame}{Zum Aufwärmen: Domino}
@@ -94,6 +100,7 @@
 		\item Nicht für einen Fall widersprüchliches definieren
 	\end{itemize}
 \end{frame}
+}
 
 \input{../Bloecke/Relationen1.tex}
 
@@ -102,17 +109,17 @@
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\item Wie man mit Relationen arbeitet
+			\item Wie man mit Relationen umgeht
 			\item Welche Eigenschaften Relationen haben können
 			\item Was Abbildungen sind und welche Eigenschaften sie haben können
-			\item Wie man mit Wörtern \enquote{rechnet}
+			\item Wie man mit Wörtern rechnet
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item \enquote{egnarts si efiL} ist als Wort wenig sinnvoll: Formale Sprachen
-			\item Endlich wird alles logisch: Aussagenlogik
+			\item Sinnvollere Gebilde als \word{retsinnaL\sp nosrO} mit \emph{formalen Sprachen}
+			\item Endlich mal logische Aussagen mit \emph{Aussagenlogik}
 		\end{itemize}
 	\end{block}
 \end{frame}
