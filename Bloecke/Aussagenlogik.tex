@@ -42,21 +42,21 @@
 
 \begin{frame}
 	\frametitle{Syntax}
-	\begin{block}{Definition}
+	\begin{Definition}
 		$Var_{AL}$ ist die Menge aller Aussagevariablen. \\
 		$A_{AL} = \{ \bleftBr, \brightBr, \bnot, \bund, \boder, \bimp \} \cup Var_{AL}$
-	\end{block}
+	\end{Definition}
 	\pause
-	\begin{block}{Definition}
+	\begin{Definition}
 		$For_{AL}$ ist die Menge aller syntaktisch korrekten Formeln über $Var_{AL}$.\\
 		Formal wird diese induktiv über Konstruktionsabbildungen definiert (\emph{VL}).
 		Wendet man Klammereinsparungen an, entspricht das Ergebnis unserer intuitiven Verwendung.
-	\end{block}
+	\end{Definition}
 	\pause
-	\begin{block}{Beispiel}
+	\begin{Beispiel}
 		$$Var_{AL} = \{A, B, C\}$$
 		$$For_{AL} = \{(A  \bimp B) \boder \bnot B, ...\}$$
-	\end{block}
+	\end{Beispiel}
 \end{frame}
 
 \begin{frame}
@@ -65,16 +65,16 @@
 	Hierbei werden den Symbolen aus $A_{AL}$ boolsche Funktionen zugeordnet.
 	
 	\pause
-	\begin{block}{Definition}
+	\begin{Definition}
 		Eine \textbf{boolesche Funktion} ist eine Abbildung der Form
 		$f: \BB^n \to \BB$.
-	\end{block}
+	\end{Definition}
 
 	\pause
-	\begin{block}{Beispiel}
+	\begin{Beispiel}
 		\enquote{Übliche} boolesche Funktionen sind  $b_{\bnot}$,
 		$b_{\bund}$, $b_{\boder}$ und $b_{\bimp}$
-	\end{block}
+	\end{Beispiel}
 \end{frame}
 
 \begin{frame}<handout:0>
@@ -100,19 +100,19 @@
 \begin{frame}
 	\frametitle{Semantik}
 	Der Wahrheitswert einer zusammengesetzten Aussage hängt von den Wahrheitswerten der verwendeten Aussagevariablen ab. \\
-	\begin{block}{Definition}
+	\begin{Definition}
 		Sei $V \subseteq Var_{AL}$ die Menge der verwendeten Aussagevariablen.\\
 		Eine Funktion $I: V \to \BB$ bezeichnet man als \textbf{Interpretation}.
-	\end{block}
+	\end{Definition}
 	
 	\pause
 	
-	\begin{block}{Definition}
+	\begin{Definition}
 		Eine \textbf{Tautologie} ist eine aussagenlogische Formel, bei der für alle möglichen Interpretationen $I$ gilt: $val_I(A) = \textbf{w}$.\\[0.5em]
 		
 		\pause
 		Liefert die Auswertung von zwei aussagenlogischen Formeln $A$ und $B$ für jede Interpretation $I$ jeweils den gleichen Wert, also $val_I(A) = val_I(B)$, so bezeichnen wir diese Formeln als \textbf{äquivalent} und schreiben $A \equiv B$.
-	\end{block}
+	\end{Definition}
 
 \end{frame}
 
