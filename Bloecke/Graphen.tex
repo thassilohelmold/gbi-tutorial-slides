@@ -37,7 +37,7 @@
 
 \begin{frame}{Graphen}
 	\begin{block}{Hinweis}
-		Häufig wählt man $V = \nZ_k = \{0,1,2,...,k-1\}$\\
+		Häufig wählt man $V = \Z_k = \{0,1,2,...,k-1\}$\\
 		
 		Da $V$ immer endlich ist, muss auch $E$ endlich sein.\\
 		$E = \emptyset$ ist aber erlaubt!
@@ -80,7 +80,7 @@
 \end{frame}
 
 \begin{frame}{Aufgabe: Graphen Zeichnen}
-	Zeichnet die Graphen $G_i = (V, E_i)$ mit $V = \nZ_4$ und
+	Zeichnet die Graphen $G_i = (V, E_i)$ mit $V = \Z_4$ und
 	$E_1 = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$\\
 	$E_2 = \{\{0,1\}, \{0,2\}, \{0,3\} \}$\\
 	$E_3 = \emptyset$\\
@@ -90,7 +90,7 @@
 
 \begin{frame}{Lösung: Graphen Zeichnen}
 	Zeichnet den Graphen $G = (V, E)$ mit
-	$$V = \nZ_4 \qquad E = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$$
+	$$V = \Z_4 \qquad E = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$$
 	
 	\pause
 	\bigskip
@@ -193,7 +193,7 @@
 	\pause
 	Die Länge eines Pfades ist die Anzahl der Kanten ($|p| - 1$)
 	\begin{Beispiel}
-		Sei $G = (V, E)$ mit $V = \nZ_9, \quad E = V \times V$\\ \pause
+		Sei $G = (V, E)$ mit $V = \Z_9, \quad E = V \times V$\\ \pause
 		$p_1 = (7)$ ist ein Pfad der Länge 0.\\
 		$p_2 = (0, 1, 2, 3, 0)$ ist ein Pfad der Länge 4.
 	\end{Beispiel}
@@ -429,18 +429,18 @@ gibt.} \\[2em]
 \begin{frame}
 	\frametitle{Aufgabe (WS 2009) \stars{4}}
 	Eine Zahl $n$ ist genau dann eine Primzahl, wenn sie eine positive ganze Zahl ist und genau zwei Teiler hat, nämlich 1 und n. Insbesondere ist 1 keine Primzahl. \\
-	Für $n \in \nN^+$ sei der Graph $G_n = (V_n , E_n )$ gegeben durch
-	$$V_n =\{m \in \nN^+ \ | \ m \text{ teilt } n\}$$
+	Für $n \in \N^+$ sei der Graph $G_n = (V_n , E_n )$ gegeben durch
+	$$V_n =\{m \in \N^+ \ | \ m \text{ teilt } n\}$$
 	$$E_n =\{(k, m) \in V_n \times V_n \ | \ k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl} \}$$
 	\begin{itemize}
 		\item Zeichnen Sie $G_{12}$ , $G_{16}$ und $G_{30}$.
-		\item Zeigen Sie: $$\forall \ n, m \in \nN^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m$$.
+		\item Zeigen Sie: $$\forall \ n, m \in \N^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m$$.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
 	\frametitle{Lösung}
-	$$V_n =\{m \in \nN^+ \ | \ m \text{ teilt } n\}$$
+	$$V_n =\{m \in \N^+ \ | \ m \text{ teilt } n\}$$
 	$$E_n =\{(k, m) \in V_n \times V_n \ | \ k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl} \}$$
 	\textit{Zeichnen Sie $G_{12}$ , $G_{16}$ und $G_{30}$.} \\[1,5em]
 	
@@ -479,7 +479,7 @@ gibt.} \\[2em]
 \end{frame}	
 
 \begin{frame}{Lösung}
-	\textit{Zeigen Sie: $$\forall \ n, m \in \nN^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m$$}\\[2em] \pause 
+	\textit{Zeigen Sie: $$\forall \ n, m \in \N^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m$$}\\[2em] \pause
 	Gelte also $n$ teilt $m$. Zu zeigen sind zwei Dinge:
 	\begin{itemize}
 		\item $V_n \subseteq V_m$

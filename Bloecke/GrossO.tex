@@ -28,7 +28,7 @@
 \subsection{Definitionen}
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
-		Zwei Funktionen $f,g: \nN_0 \to \nR_0^+$ wachsen asymptotisch genauso schnell, wenn es zwei Konstanten $c, c' \in \nR^+$ gibt, so dass gilt $$\exists n_0 \in \nN_0: \ \forall n > n_0: \ c f(n) \leq g(n) \leq c'f(n) $$ 
+		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch genauso schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n > n_0: \ c f(n) \leq g(n) \leq c'f(n) $$
 		Man schreibt dafür $$f \asymp g$$
 	\end{Definition} \pause
 	Diese Relation ist eine Äquivalenzrelation!
@@ -48,9 +48,9 @@
 
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
-		Für zwei Funktionen $f,g: \nN_0 \to \nR_0^+$ definiert man:
-		$$g \preceq f \qquad \exists c \in \nR^+ \ \exists n_0 \in \nN_0 \ \forall n > n_0: \ g(n) \leq c f(n)$$
-		$$g \succeq f \qquad \exists c \in \nR^+ \ \exists n_0 \in \nN_0 \ \forall n > n_0: \ g(n) \geq c f(n)$$
+		Für zwei Funktionen $f,g: \N_0 \to \R_0^+$ definiert man:
+		$$g \preceq f \qquad \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \leq c f(n)$$
+		$$g \succeq f \qquad \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \geq c f(n)$$
 	\end{Definition} \pause
 	Diese Relationen sind keine Äquivalenzrelation!
 \end{frame}
@@ -132,14 +132,14 @@
 %	Für $n > 1$ gilt:
 %	$$g(n) = n^2 \leq n^3 < 4n^3 = 2(n^3 + n^3) < 2(n^4 + n^3) = 2 f(n)$$
 %	
-%	Also gibt es ein $c$ in $\nR^+$ (nämlich 2), so dass es ein $n_0 \in \nN$ gibt (nämlich 1), so dass für alle $n > 1$ gilt: $$g(n) \leq c f(n)$$
+%	Also gibt es ein $c$ in $\R^+$ (nämlich 2), so dass es ein $n_0 \in \N$ gibt (nämlich 1), so dass für alle $n > 1$ gilt: $$g(n) \leq c f(n)$$
 %	\end{block}
 %\end{frame}
 %
 %\begin{frame}{Polynome}
 %	Betrachten wir zwei Polynome $f(n) = n^4 + n^3$ und $g(n) = n^2$: \\
 %	\begin{block}{Ann. $f \in O(g)$}
-%	Dann müsste es ein $c' \in \nR^+$ geben, so dass es ein $n_0 \in \nN$ gibt, so dass für alle $n > n_0$ gilt: $$f(n) < c' g(n)$$ Wähle jetzt ein $n' > n_0$ so, dass $f(n'), g(n') \neq 0$ gilt. Insbesondere wäre dann $$\frac{f(n')}{g(n')} = n^2 + n \leq c$$ Dies ist ein Widerspruch
+%	Dann müsste es ein $c' \in \R^+$ geben, so dass es ein $n_0 \in \N$ gibt, so dass für alle $n > n_0$ gilt: $$f(n) < c' g(n)$$ Wähle jetzt ein $n' > n_0$ so, dass $f(n'), g(n') \neq 0$ gilt. Insbesondere wäre dann $$\frac{f(n')}{g(n')} = n^2 + n \leq c$$ Dies ist ein Widerspruch
 %	\end{block}
 %\end{frame}
 

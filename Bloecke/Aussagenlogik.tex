@@ -28,13 +28,13 @@
 	\begin{itemize}
 		\pause
 		\item Jede Aussage ist entweder falsch oder wahr.\\
-		Wir schreiben im Folgenden $\B= \{\text{w}, \text{f}\}$
+		Wir schreiben im Folgenden $\BB= \{\text{w}, \text{f}\}$
 		\pause
 		\item Der Wahrheitswert einer zusammengesetzten Aussage ist durch die
 		Wahrheitswerte der Teilaussagen eindeutig festgelegt. \\
 		\enquote{$2 + 2 = 5 \; \bimp \; \text{Pinguine können fliegen}$} ist \textbf{wahr}.\\[0.2em]
 		%TODO
-		%Et falsor quod libitum
+		%Ex falso quodlibet
 	\end{itemize}
 
 	Wir abstrahieren daher vom Inhalt und betrachten \textbf{Aussagevariablen}.
@@ -42,21 +42,21 @@
 
 \begin{frame}
 	\frametitle{Syntax}
-	\begin{Definition}
+	\begin{block}{Definition}
 		$Var_{AL}$ ist die Menge aller Aussagevariablen. \\
 		$A_{AL} = \{ \bleftBr, \brightBr, \bnot, \bund, \boder, \bimp \} \cup Var_{AL}$
-	\end{Definition}
+	\end{block}
 	\pause
-	\begin{Definition}
+	\begin{block}{Definition}
 		$For_{AL}$ ist die Menge aller syntaktisch korrekten Formeln über $Var_{AL}$.\\
 		Formal wird diese induktiv über Konstruktionsabbildungen definiert (\emph{VL}).
 		Wendet man Klammereinsparungen an, entspricht das Ergebnis unserer intuitiven Verwendung.
-	\end{Definition}
+	\end{block}
 	\pause
-	\begin{Beispiel}
+	\begin{block}{Beispiel}
 		$$Var_{AL} = \{A, B, C\}$$
 		$$For_{AL} = \{(A  \bimp B) \boder \bnot B, ...\}$$
-	\end{Beispiel}
+	\end{block}
 \end{frame}
 
 \begin{frame}
@@ -65,16 +65,16 @@
 	Hierbei werden den Symbolen aus $A_{AL}$ boolsche Funktionen zugeordnet.
 	
 	\pause
-	\begin{Definition}
+	\begin{block}{Definition}
 		Eine \textbf{boolesche Funktion} ist eine Abbildung der Form
-		$f: \B^n \to \B$.
-	\end{Definition}
+		$f: \BB^n \to \BB$.
+	\end{block}
 
 	\pause
-	\begin{Beispiel}
+	\begin{block}{Beispiel}
 		\enquote{Übliche} boolesche Funktionen sind  $b_{\bnot}$,
 		$b_{\bund}$, $b_{\boder}$ und $b_{\bimp}$
-	\end{Beispiel}
+	\end{block}
 \end{frame}
 
 \begin{frame}<handout:0>
@@ -100,19 +100,19 @@
 \begin{frame}
 	\frametitle{Semantik}
 	Der Wahrheitswert einer zusammengesetzten Aussage hängt von den Wahrheitswerten der verwendeten Aussagevariablen ab. \\
-	\begin{Definition}
+	\begin{block}{Definition}
 		Sei $V \subseteq Var_{AL}$ die Menge der verwendeten Aussagevariablen.\\
-		Eine Funktion $I: V \to \B$ bezeichnet man als \textbf{Interpretation}.
-	\end{Definition}
+		Eine Funktion $I: V \to \BB$ bezeichnet man als \textbf{Interpretation}.
+	\end{block}
 	
 	\pause
 	
-	\begin{Definition}
+	\begin{block}{Definition}
 		Eine \textbf{Tautologie} ist eine aussagenlogische Formel, bei der für alle möglichen Interpretationen $I$ gilt: $val_I(A) = \textbf{w}$.\\[0.5em]
 		
 		\pause
 		Liefert die Auswertung von zwei aussagenlogischen Formeln $A$ und $B$ für jede Interpretation $I$ jeweils den gleichen Wert, also $val_I(A) = val_I(B)$, so bezeichnen wir diese Formeln als \textbf{äquivalent} und schreiben $A \equiv B$.
-	\end{Definition}
+	\end{block}
 
 \end{frame}
 
@@ -133,7 +133,7 @@
 \begin{frame}
 	\frametitle{Auswertung}
 	\only<1|handout:1>{\includegraphics[scale=0.65]{al_uebung_1}\\[2em]
-	Quelle: GBI Übung 2015/2016}
+	Quelle: GBI-Übung 2015/2016}
 	\only<2|handout:2>{\includegraphics[scale=0.65]{al_uebung_2}}
 	\only<3|handout:3>{\includegraphics[scale=0.65]{al_uebung_3}}
 	\only<4|handout:4>{\includegraphics[scale=0.65]{al_uebung_4}}

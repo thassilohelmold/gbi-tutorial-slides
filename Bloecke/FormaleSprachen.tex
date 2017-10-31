@@ -130,12 +130,16 @@
 
 \begin{frame}
 	\frametitle{Aufgabe \stars{3}}
-	Es sei $A = \{a, b\}$. Beschreiben Sie die folgenden formalen Sprachen mit den Symbolen $\{, \}, a, b,
-\varepsilon, \cup, \ast,$ Komma,$ ), ($ und $+$:
+	Es sei $A = \{a, b\}$. Beschreiben Sie die folgenden formalen Sprachen mit den Symbolen $\word\{, \word\}, \word a, \word b, \eps, 
+	\mword{\cup}, 
+	\mword{{}^*}, 
+	\word, , \word), \word( \text{ und } 
+	\word{{}^+} 
+	$:
 	\begin{itemize}
-		\item die Menge aller Wörter über $A$, die das Teilwort \code{ab} enthalten.
-		\item die Menge aller Wörter über $A$, deren vorletztes Zeichen ein b ist.
-		\item die Menge aller Wörter über $A$, in denen nirgends zwei b’s unmittelbar hintereinander vorkommen.
+		\item die Menge aller Wörter über $A$, die das Teilwort \word{ab} enthalten.
+		\item die Menge aller Wörter über $A$, deren vorletztes Zeichen ein \word b ist.
+		\item die Menge aller Wörter über $A$, in denen nirgends zwei \word bs unmittelbar hintereinander vorkommen.
 	\end{itemize}
 \end{frame}
 
@@ -146,7 +150,7 @@
 			$$\{a,b\}^\ast \cdot \{ab\} \cdot \{a,b\}^\ast$$ \pause
 		\item \textit{die Menge aller Wörter über $A$, deren vorletztes Zeichen ein b ist.}  \pause
 			$$\{a,b\}^\ast \cdot \{b\} \cdot \{a,b\}$$ \pause
-		\item \textit{die Menge aller Wörter über $A$, in denen nirgends zwei b’s unmittelbar hintereinander vorkommen.}  \pause
+		\item \textit{die Menge aller Wörter über $A$, in denen nirgends zwei \word bs unmittelbar hintereinander vorkommen.}  \pause
 			$$\{a, ba\}^\ast \cdot \{b, \varepsilon \}$$
 	\end{itemize}
 \end{frame}

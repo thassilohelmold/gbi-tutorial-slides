@@ -11,7 +11,7 @@
 \input{../TutTexbib/gbi-macros}
 \usepackage{../TutTexbib/thwregex}
 \usepackage{environ}
-\usepackage{bm}
+%\usepackage{bm}
 \usepackage{calc}
 \usepackage{varwidth}
 \usepackage{wasysym}
@@ -46,6 +46,8 @@
 \renewcommand{\O}{\text{O}}
 
 \def\word#1{\hbox{\textcolor{blue}{\texttt{#1}}}}
+\let\literal\word
+\def\mword#1{\hbox{\textcolor{blue}{$\mathtt{#1}$}}}  % math word
 \def\sp{\scalebox{1}[.5]{\textvisiblespace}}
 
 %\newcommand{\literal}[1]{\textcolor{blue}{\texttt{#1}}}

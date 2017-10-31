@@ -52,7 +52,7 @@
 		$$L^\ast \cdot L = L^+ $$ } \\[1em] \pause
 	Diese Aussage ist wahr! 
 	\begin{block}{1. Schritt: $L^\ast \cdot L \subseteq L^+$:} \pause
-	Wenn $w \in L^\ast \cdot L$ liegt, dann lässt es sich in Teilwörter auftrennen $$ w = w_1 \cdot w_2$$ mit $w_1 \in L^\ast$ und $w_2 \in L$. Für $w_1$ existiert ein $i \in \nN_0$ mit $w_1 \in L^i$. Also $$w = w_1 w_2 \in L^i \cdot L = L^{i+1} \subset L^+$$
+	Wenn $w \in L^\ast \cdot L$ liegt, dann lässt es sich in Teilwörter auftrennen $$ w = w_1 \cdot w_2$$ mit $w_1 \in L^\ast$ und $w_2 \in L$. Für $w_1$ existiert ein $i \in \N_0$ mit $w_1 \in L^i$. Also $$w = w_1 w_2 \in L^i \cdot L = L^{i+1} \subset L^+$$
 	\end{block}
 \end{frame}
 
@@ -62,7 +62,7 @@
 		$$L^\ast \cdot L = L^+ $$ } \\[1em] 
 	Diese Aussage ist wahr! 
 	\begin{block}{2. Schritt: $L^\ast \cdot L \supseteq L^+$:} \pause
-	Wähle nun $w \in L^+$. Dann existiert ein $i \in \nN_+$ mit $w \in L^i$. Da $i > 0$ lässt es sich schreiben als $i = j + 1$ für ein $j \in \nN_0$. Also ist $$w \in L^{j+1} = L^j \cdot L \subset L^\ast \cdot L$$
+	Wähle nun $w \in L^+$. Dann existiert ein $i \in \N_+$ mit $w \in L^i$. Da $i > 0$ lässt es sich schreiben als $i = j + 1$ für ein $j \in \N_0$. Also ist $$w \in L^{j+1} = L^j \cdot L \subset L^\ast \cdot L$$
 	\end{block}
 \end{frame}
 
@@ -87,7 +87,7 @@
 \begin{frame}
 	\frametitle{Lösung}
 	\begin{block}{Induktionsannahme}  \pause
-		Für ein festes $k \in \nN$ gilt, dass alle Wörter über $\{a, b\}^\ast$, die genau $k$-mal das Zeichen $b$ enthalten, in $L$ liegen.
+		Für ein festes $k \in \N$ gilt, dass alle Wörter über $\{a, b\}^\ast$, die genau $k$-mal das Zeichen $b$ enthalten, in $L$ liegen.
 	\end{block} \pause
 	\begin{block}{Induktionsschritt}  \pause
 		Wir betrachten ein Wort $w$, das genau $k + 1$ mal das Zeichen $b$ enthält. Dann kann man $w$ zerlegen in $w$ = $w_1 \cdot w_2$, wobei $w_1$ genau einmal das Zeichen $b$ enthält und $w_2$ genau $k$-mal das Zeichen $b$. \pause Nach Induktionsanfang liegt $w_1$ in $\{a\}^\ast \{b\}\{a\}^\ast$. Nach Induktionsvoraussetzung liegt $w_2$ in $(\{a\}^\ast \{b\}\{a\}^\ast )^\ast$, was bedeutet, dass $w = w_1 \cdot w_2$ in $$(\{a\}^\ast \{b\}\{a\}^\ast )(\{a\}^\ast \{b\}\{a\}^\ast )^\ast \subseteq (\{a\}^\ast \{b\}\{a\}^\ast )^\ast = L$$ liegt und die Behauptung ist gezeigt.

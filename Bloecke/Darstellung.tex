@@ -10,7 +10,7 @@
 	\end{Definition}
 
 	\pause
-	Beachte: $Num_b : Z_b^* \to \nZ$ ist Abbildung, die einem Wort (Zahlendarstellung) eine Zahl (Wert) zuordnet. Wir müssen diesen Wert aber natürlich wieder in eine  Darstellung umwandeln, um ihn aufschreiben zu können.
+	Beachte: $Num_b : Z_b^* \to \Z$ ist Abbildung, die einem Wort (Zahlendarstellung) eine Zahl (Wert) zuordnet. Wir müssen diesen Wert aber natürlich wieder in eine  Darstellung umwandeln, um ihn aufschreiben zu können.
 \end{frame}
 \begin{frame}{Aufgabe}
 	Berechnet die Zahlenwerte von $ 11_2, 321_4, B2_{16}$.
@@ -41,7 +41,7 @@
 	\begin{itemize}
 		\only<1-2>{\item<1->[\emph{IA}] $n = 0 = \vert w \vert \implies w = \varepsilon $. \\
 		Für $w = \varepsilon $ ist $\text{Num}_b$ wohldefiniert und sinnvoll (nämlich $Num_b(\varepsilon) = 0$).
-		\item<2->[\emph{IV}] Für ein beliebig aber festes $n\in\nN_0$ sei $Num_b(w) für alle w mit \setsize{w} = n wohldefiniert und entspreche dem Zahlenwert.$ }
+		\item<2->[\emph{IV}] Für ein beliebig aber festes $n\in\N_0$ sei $Num_b(w) für alle w mit \setsize{w} = n wohldefiniert und entspreche dem Zahlenwert.$ }
 		\only<3->{\item<3->[\emph{IS}] Wähle $w'$ mit $\vert w' \vert = n+1 $, dann gibt es ein $w\in Z_b^n, x\in Z_b$, so dass $ w' = wx $ \\
 		Mit der Definition gilt nun $$ \text{Num}_b(w') = b\cdot \underbrace{\text{Num}_b(w)}_{IV} + \text{num}_b(x) $$
 		Die Summe ist laut $IV$ wohldefiniert. Auch ist laut $IV$ $\text{Num}_b(w)$ der Zahlenwert von $w$ und damit auch $\text{Num}_b(w')$.}
@@ -52,13 +52,13 @@
 
 %\subsection{Aufgabe}
 %\begin{frame}{Aufgabe. WS 2010 }
-%Es bezeichne $\nZ$ die Menge der ganzen Zahlen. Gegeben sei eine Ziffernmenge $Z_{-2} = \{N, E\}$ mit der Festlegung $num_2 (N) = 0$ und $num_2 (E) = 1$. Wir definieren eine Abbildung $Num_{-2} : Z_{-2}^\ast \to \nZ$ wie folgt:
+%Es bezeichne $\Z$ die Menge der ganzen Zahlen. Gegeben sei eine Ziffernmenge $Z_{-2} = \{N, E\}$ mit der Festlegung $num_2 (N) = 0$ und $num_2 (E) = 1$. Wir definieren eine Abbildung $Num_{-2} : Z_{-2}^\ast \to \Z$ wie folgt:
 %	$$Num_{-2} (\varepsilon) = 0$$
 %	$$\forall \ w \in Z_{-2}^\ast \ \forall \ x \in Z_{-2} : Num_{-2} (wx) = -2 \cdot Num_{-2} (w) + num_2 ( x )$$
 %
 %	\begin{itemize}	
 %		\item Geben Sie für $w \in \{E, EN, EE, ENE, EEN, EEE\}$ jeweils $Num_{-2} (w)$ an.
-%		\item Für welche Zahlen $x \in \nZ$ gibt es ein $w \in Z_{-2}^\ast$ mit $Num_{-2} (w) = x$?
+%		\item Für welche Zahlen $x \in \Z$ gibt es ein $w \in Z_{-2}^\ast$ mit $Num_{-2} (w) = x$?
 %	\end{itemize}
 %\end{frame}
 %
@@ -75,7 +75,7 @@
 %	\end{tabular}
 %	\end{table}
 %	\pause
-%	\textit{Für welche Zahlen $x \in \nZ$ gibt es ein $w \in Z_{-2}^\ast$ mit $Num_{-2} (w) = x$?} \\[1em]\pause
+%	\textit{Für welche Zahlen $x \in \Z$ gibt es ein $w \in Z_{-2}^\ast$ mit $Num_{-2} (w) = x$?} \\[1em]\pause
 %	Für alle!
 %\end{frame}
 
@@ -89,7 +89,7 @@
 	\pause
 	
 	\begin{block}{Beobachtung}
-		$ x\div y \in \nN_0 \qquad x\mod y \in \{0,\dots, y-1\} $
+		$ x\div y \in \N_0 \qquad x\mod y \in \{0,\dots, y-1\} $
 	\end{block}
 	\pause
 	
@@ -135,7 +135,7 @@
 \begin{frame}{Repräsentation}
 	Wir definieren
 	\begin{align*}
-		Repr_k : \; &\nN_0 \to Z_k  \\
+		Repr_k : \; &\N_0 \to Z_k  \\
 		n&\mapsto \begin{cases} repr_k(n) & n<k \\ Repr_k\left( n\div k \right) \cdot repr_k\left( n \mod k \right) & n\geq k 
 		\end{cases} 
 	\end{align*}

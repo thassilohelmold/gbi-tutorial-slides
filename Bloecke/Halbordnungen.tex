@@ -44,24 +44,24 @@
 \end{frame}
 \subsection{Lösung}
 \begin{frame}
-	Betrachte die Relation $\leq$. Dann gilt mit $$ a\leq b \iff \exists \alpha \in \nR^+_0 : a + \alpha = b $$  \pause
+	Betrachte die Relation $\leq$. Dann gilt mit $$ a\leq b \iff \exists \alpha \in \R^+_0 : a + \alpha = b $$  \pause
 	\only<2-4>{
 	\begin{itemize}
 		\only<2>{\item \emph{Reflexivität}
 		\begin{align*}
-			a\leq a & \iff \exists \alpha\geq 0 : a + \alpha = a \\ &\implies \alpha = 0 \in \nR^+_0 
+			a\leq a & \iff \exists \alpha\geq 0 : a + \alpha = a \\ &\implies \alpha = 0 \in \R^+_0
 		\end{align*}
 		}
 		\only<3>{\item
 		\emph{Antisymmetrie}
 		\begin{align*}
-			a \leq b \wedge b \leq a &\iff \exists \alpha, \beta \in\nR^+_0 : a + \alpha = b \wedge b + \beta = a \\ &\implies a + \alpha + \beta = a \\ &\overset{\alpha,\beta\geq 0}{\implies} \alpha = \beta = 0 \\ &\implies a = b
+			a \leq b \wedge b \leq a &\iff \exists \alpha, \beta \in\R^+_0 : a + \alpha = b \wedge b + \beta = a \\ &\implies a + \alpha + \beta = a \\ &\overset{\alpha,\beta\geq 0}{\implies} \alpha = \beta = 0 \\ &\implies a = b
 		\end{align*}
 		}
 		\only<4>{\item
 		\emph{Transitivität}
 		\begin{align*}
-			a \leq b \wedge b \leq c &\iff \exists \alpha,\beta \in\nR^+_0 : a + \alpha = b \wedge b+\beta = c \\ &\implies a + \alpha + \beta = c \\ &\overset{\gamma=\alpha+\beta}{\implies} \exists \gamma \in\nR^+_0 : a + \gamma = c \\ &\implies a\leq c
+			a \leq b \wedge b \leq c &\iff \exists \alpha,\beta \in\R^+_0 : a + \alpha = b \wedge b+\beta = c \\ &\implies a + \alpha + \beta = c \\ &\overset{\gamma=\alpha+\beta}{\implies} \exists \gamma \in\R^+_0 : a + \gamma = c \\ &\implies a\leq c
 		\end{align*}
 		}
 	\end{itemize}	
