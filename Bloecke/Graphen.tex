@@ -265,8 +265,7 @@
 	Oftmals hierdurch bereits Ausschluss möglich.
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.7]{Graphen/Graph_Iso.pdf}
@@ -329,16 +328,14 @@
 	$n(n-1)/2$
 \end{frame}
 
-\begin{frame}
-	\frametitle{Aufgabe (WS 2008) \stars{2}}
+\begin{frame}{Aufgabe (WS 2008) \stars{2}}
 	\begin{itemize}	
 		\item Zeichnen Sie alle möglichen gerichteten Bäume mit genau vier Knoten, von denen keine zwei isomorph sind.
 		\item Zeichnen Sie alle möglichen ungerichteten Bäume mit genau fünf Knoten, von denen keine zwei isomorph sind.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Zeichnen Sie alle möglichen gerichteten Bäume mit genau vier Knoten, von denen keine zwei isomorph sind.} \pause
 	\begin{center}
 		\begin{minipage}{0.3\linewidth}
@@ -390,14 +387,12 @@
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Aufgabe: Bäume (WS 2010) \stars{1}}
+\begin{frame}{Aufgabe: Bäume (WS 2010) \stars{1}}
 	Sei $T_1 = (V_1 , E_1 )$ ein gerichteter Baum mit Wurzel $r_1$, $T_2 = (V_2 , E_2 )$ ein gerichteter Baum mit Wurzel $r_2$, und es gelte $V_1 \cap V_2 = \{\}$. Sei $r \not\in V_1 \cup V_2$. \\
 Zeigen Sie: $$T_1 \circ_r T_2 = (V_1 \cup V_2 \cup {r}, E_1 \cup E_2 \cup \{(r, r_1 ), (r, r_2 )\})$$ ist ein gerichteter Baum mit Wurzel $r$.
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Zeigen Sie: $$T_1 \circ_r T_2 = (V_1 \cup V_2 \cup {r}, E_1 \cup E_2 \cup \{(r, r_1 ), (r, r_2 )\})$$ ist ein gerichteter Baum mit Wurzel $r$.} \\[2em] \pause
 	Zwei Dinge sind zu zeigen:
 	\begin{itemize}[<+->]
@@ -406,8 +401,7 @@ Zeigen Sie: $$T_1 \circ_r T_2 = (V_1 \cup V_2 \cup {r}, E_1 \cup E_2 \cup \{(r, 
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Wir zeigen zuerst, dass es von $r$ zu jedem Knoten $v \in V_1 \cup V_2 \cup \{r\}$ einen Pfad
 gibt.} \\[2em]
 	\pause
@@ -419,15 +413,13 @@ gibt.} \\[2em]
 	\visible<5>{Somit gibt es für alle Knoten $v \in V_1 \cup V_2 \cup \{r\}$ einen Pfad von $r$ nach $v$.}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Wir zeigen nun noch, dass es für keinen Knoten zwei verschiedenen Pfade von r nach v gibt.} \\[2em]\pause
 	Für $v = r$ gibt es offensichtlich keine zwei verschiedenen Pfade. \pause \\ Sei also exemplarisch $v \in V_1$. Da $V_1 \cap V_2 = \{\}$, sind von $r_2$ nur Elemente aus $V_2$ zu erreichen. Somit muss ein Pfad von $r$ nach $v$ über $r_1$ gehen (weil von $r_2$ kein Pfad zurück führt). \pause Da $T_1$ aber ein Baum ist, ist der Pfad von $r_1$ nach $v$ eindeutig. Der Pfad von $r$ nach $r_1$ ebenso. \pause Also ist der Pfad von $r$ nach $v$ auch eindeutig. Analog zu $v \in V_2$.
 \end{frame}
 
 % Pufferaufgabe
-\begin{frame}
-	\frametitle{Aufgabe (WS 2009) \stars{4}}
+\begin{frame}{Aufgabe (WS 2009) \stars{4}}
 	Eine Zahl $n$ ist genau dann eine Primzahl, wenn sie eine positive ganze Zahl ist und genau zwei Teiler hat, nämlich 1 und n. Insbesondere ist 1 keine Primzahl. \\
 	Für $n \in \N^+$ sei der Graph $G_n = (V_n , E_n )$ gegeben durch
 	$$V_n =\{m \in \N^+ \ | \ m \text{ teilt } n\}$$
@@ -438,8 +430,7 @@ gibt.} \\[2em]
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	$$V_n =\{m \in \N^+ \ | \ m \text{ teilt } n\}$$
 	$$E_n =\{(k, m) \in V_n \times V_n \ | \ k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl} \}$$
 	\textit{Zeichnen Sie $G_{12}$ , $G_{16}$ und $G_{30}$.} \\[1,5em]
@@ -488,8 +479,7 @@ gibt.} \\[2em]
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Zuerst $V_n \subseteq V_m$.} \\[1em] \pause
 	Sei $v \in V_n$ beliebig. Nach Definition gilt: $v$ teilt $n$. Da $n$ aber $m$ teilt, muss $v$ auch $m$ teilen, liegt also in $V_m$. Also gilt $$V_n \subseteq V_m$$ \pause
 	

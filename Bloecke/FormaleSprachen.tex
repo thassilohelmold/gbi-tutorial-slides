@@ -1,7 +1,6 @@
 \section{Formale Sprachen}
 
-\begin{frame}
-	\frametitle{Rückblick}
+\begin{frame}{Rückblick}
 	Sei $\Sigma = \{A, B, ..., Z, a, b, ..., z\}$ ein Alphabet.\\
 	\pause
 	Dann enthält $\Sigma^*$ alle Wörter, die man mit Zeichen aus $\Sigma$ bilden kann. Aber nicht jedes dieser Wörter ist auch sinnvoll.\\[1em]
@@ -12,8 +11,7 @@
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Formale Sprachen}
+\begin{frame}{Formale Sprachen}
 		\begin{Definition}
 			Sei $\Sigma$ ein Alphabet.\\
 			Eine formale Sprache $L$ ist eine Teilmenge von $\Sigma^*$.
@@ -31,8 +29,7 @@
 		\end{Beispiel}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Formale Sprachen}
+\begin{frame}{Formale Sprachen}
 	
 	\begin{Beispiel}
 		Formale Sprache $L$ aller Wörter über $A=\{\literal{a},\literal{b}\}$, in denen nirgends das Teilwort $\literal{ab}$ vorkommt.
@@ -63,8 +60,7 @@
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Beispiele aus dem Leben}
+\begin{frame}{Beispiele aus dem Leben}
 	\begin{itemize}
 		\item Sprache der korrekten IP4-Adressen \pause
 		\begin{align*}
@@ -80,8 +76,7 @@
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Produkt}
+\begin{frame}{Produkt}
 		\begin{Definition}
 			Seien $L_1$ und $L_2$ zwei formale Sprachen. Dann bezeichnet
 				$$L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$$
@@ -92,8 +87,7 @@
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Produkt}
+\begin{frame}{Produkt}
 	\begin{Beispiele}
 		$\{a, b\} \cdot \{c, d\} = \{ac, ad, bc, bd\}$\\[0.3em]
 		\pause
@@ -105,8 +99,7 @@
 	\end{Beispiele}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Potenzen}
+\begin{frame}{Potenzen}
 	\begin{Definition}
 	Damit kann man induktiv die Potenz formaler Sprachen definieren:
 	$$L^0 = \{\varepsilon \}$$
@@ -115,8 +108,7 @@
 	$L^i$ enthält also alle Kombinationen von $i$ (nicht unbedingt verschiedenen) Wörtern aus $L$.
 \end{frame}
 
-\begin{frame}
-	\frametitle{Konkatenationsabschluss}
+\begin{frame}{Konkatenationsabschluss}
 	\begin{Definition}
 		Der Konkatenationsabschluss einer formalen Sprache $L$ ist $$L^\ast = \bigcup \limits_{i=0}^\infty L^i$$ 
 		\pause
@@ -128,8 +120,7 @@
 \end{frame}
 
 
-\begin{frame}
-	\frametitle{Aufgabe \stars{3}}
+\begin{frame}{Aufgabe \stars{3}}
 	Es sei $A = \{a, b\}$. Beschreiben Sie die folgenden formalen Sprachen mit den Symbolen $\word\{, \word\}, \word a, \word b, \eps, 
 	%TODO!!!!!!!
 	\mword{\cup}, 
@@ -144,8 +135,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\begin{itemize}
 		\item \textit{die Menge aller Wörter über $A$, die das Teilwort \code{ab} enthalten.}  \pause
 			$$\{a,b\}^\ast \cdot \{ab\} \cdot \{a,b\}^\ast$$ \pause

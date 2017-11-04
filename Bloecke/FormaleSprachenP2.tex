@@ -1,7 +1,6 @@
 \section{Formale Sprachen}
 
-\begin{frame}
-	\frametitle{Beispiel}
+\begin{frame}{Beispiel}
 	Sei $A = \{a,b\}$ ein Alphabet. Mit $L$ wollen wir alle Wörter beschreiben, die genau ein $b$ enthalten. \\ \pause
 	$$ L = \{w_1 b w_2 \mid w_1, w_2 \in \{a\}^\ast \}  \qquad  L = \{a\}^\ast \cdot \{b \} \cdot \{a\}^\ast$$
 	
@@ -13,8 +12,7 @@
 	Alle Wörter, die aus $i$ $b$'s bestehen, aber auch noch mindestens ein $a$ enthalten. \\
 \end{frame}
 
-\begin{frame}
-	\frametitle{Aufgabe}
+\begin{frame}{Aufgabe}
 	Welche Eigenschaft muss eine formale Sprache $L$ über einem Alphabet
 	$A$ erfüllen, damit gilt: $$ L^0 \subseteq L^1 \subseteq L^2 \subseteq L^3 \subseteq ... $$
 	
@@ -26,8 +24,7 @@
 \end{frame}
 
 \subsubsection{A1}
-\begin{frame}
-	\frametitle{Aufgabe (Klausur) \stars{4}}
+\begin{frame}{Aufgabe (Klausur) \stars{4}}
 		\begin{itemize}
 			\item Wiederlegen Sie: Für alle formalen Sprachen $L_1 , L_2$ gilt: 
 			$$L_1^\ast \cup L_2^\ast = (L_1 \cup L_2 )^\ast$$
@@ -39,15 +36,13 @@
 	Tipp zu 2) (nicht in der Klausur gegeben): Hier handelt es sich um eine Mengengleichheit, also argumentieren wir mit \enquote{$\subseteq$} und \enquote{$\supseteq$}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Für alle formalen Sprachen $L_1 , L_2$ gilt: 
 		$$L_1^\ast \cup L_2^\ast = (L_1 \cup L_2 )^\ast$$ } \\[2em] \pause
 	Diese Aussage ist falsch: Sei $L_1 = \{a\}$ und $L_2 = \{b\}$. Dann liegt \code{ab} in $(L_1 \cup L_2 )^\ast = \{a, b\}^\ast$ aber nicht in $L_1^\ast \cup L_2^\ast = \{a\}^\ast \cup \{b\}^\ast$.
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Für alle formalen Sprachen $L$ gilt: 
 		$$L^\ast \cdot L = L^+ $$ } \\[1em] \pause
 	Diese Aussage ist wahr! 
@@ -56,8 +51,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\textit{Für alle formalen Sprachen $L$ gilt: 
 		$$L^\ast \cdot L = L^+ $$ } \\[1em] 
 	Diese Aussage ist wahr! 
@@ -67,16 +61,14 @@
 \end{frame}
 
 \subsubsection{A2}
-\begin{frame}
-	\frametitle{Aufgabe (WS 2008) \stars{3}}
+\begin{frame}{Aufgabe (WS 2008) \stars{3}}
 	Es sei $A = \{a, b\}$. Die Sprache $L \subset A^\ast$ sei definiert durch $$L = (\{a\}^\ast \cdot \{b\} \cdot \{a\}^\ast)^\ast$$
 	Zeigen Sie, dass jedes Wort $w$ aus $\{a, b\}^\ast$, das mindestens einmal das Zeichen
 	$b$ enthält, in $L$ liegt. (Hinweis: Führen Sie eine Induktion über die Anzahl der
 	Vorkommen des Zeichens $b$ in $w$ durch.)
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	$$L = (\{a\}^\ast \cdot \{b\} \cdot \{a\}^\ast)^\ast$$
 	Sei $k$ die Anzahl der Vorkommen von $b$ in einem Wort $w \in \{a, b\}^\ast$.
 	\begin{block}{Induktionsanfang}  \pause
@@ -84,8 +76,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	\begin{block}{Induktionsannahme}  \pause
 		Für ein festes $k \in \N$ gilt, dass alle Wörter über $\{a, b\}^\ast$, die genau $k$-mal das Zeichen $b$ enthalten, in $L$ liegen.
 	\end{block} \pause

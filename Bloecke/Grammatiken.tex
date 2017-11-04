@@ -231,8 +231,7 @@
 
 
 \subsection{Aufgabe 1}
-\begin{frame}
-	\frametitle{Aufgabe (WS 2008) \stars{2}}
+\begin{frame}{Aufgabe (WS 2008) \stars{2}}
 	\begin{itemize}
 		\item Geben Sie eine kontextfreie Grammatik $$G = (N, \{a, b\}, S, P )$$ an, für die $L(G)$ die Menge aller Palindrome über dem Alphabet $\{a, b\}$ ist.
 		\item Geben Sie eine Ableitung der Wörter \code{baaab} und \code{abaaaba} aus dem Startsymbol Ihrer Grammatik an.
@@ -241,15 +240,13 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	Die Grammatik $$G = (\{S\}, \{a, b\}, S, P = \{S \to aSa \ | \ bSb \ | \ a \ | \ b \ | \varepsilon \})$$ erzeugt gerade die Menge der Palindrome. \pause Die Ableitungen der Wörter mit dieser Grammatik sind 
 	$$S \Rightarrow bSb \Rightarrow baSab \Rightarrow baaab$$
 	$$S \Rightarrow aSa \Rightarrow abSba \Rightarrow abaSaba \Rightarrow abaaaba$$
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 	Sei $w$ ein Palindrom über $\{a, b\}$. Wir zeigen durch Induktion über $n = \vert w \vert$, dass alle Palindrome aus $S$ abgeleitet werden können. \pause
 	\begin{block}{Induktionsanfang} \pause
 		Für $n = 0$ ist das leere Wort $\varepsilon$ in einem Schritt aus $S$ ableitbar. \\
@@ -261,8 +258,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Lösung}
+\begin{frame}{Lösung}
 		\begin{block}{Induktionsschritt}
 			Sei $w$ ein Palindrom der Länge $n + 2$. Das erste (und damit auch das letzte) Zeichen sei oBdA ein $a$. Dann gibt es ein $w' \in \{a, b\}^\ast$, so dass $w = aw'a$ ist. Da $w$ ein Palindrom ist, muss auch $w'$ ein Palindrom sein. Weiterhin gilt $|w'| = n$. \pause Nach IV gibt es somit eine Ableitung $S \Rightarrow^\ast w'$. Somit gibt es die Ableitung $$S \Rightarrow aSa \overset{IV}{\Rightarrow^\ast} aw'a = w$$ und $w \in L(G)$ folgt. \pause Entsprechendes gilt, wenn das erste Zeichen von w ein b ist. \\
 			Mit der IV haben wir also gezeigt, dass auch Palindrome der Länge $n+1$ und $n+2$ aus $S$ ableitbar sind.
