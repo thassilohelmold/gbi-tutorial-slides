@@ -1,85 +1,44 @@
 \section{Formale Sprachen}
 
 \begin{frame}{Rückblick}
-	Sei $\Sigma = \{A, B, ..., Z, a, b, ..., z\}$ ein Alphabet.\\
+	Sei $A = \{\word A, \word B, ..., \word Z, \word a, \word b, ..., \word z, \word\sp\}$ ein Alphabet.\\
 	\pause
-	Dann enthält $\Sigma^*$ alle Wörter, die man mit Zeichen aus $\Sigma$ bilden kann. Aber nicht jedes dieser Wörter ist auch sinnvoll.\\[1em]
+	Dann enthält $A^*$ alle Wörter, die man mit Zeichen aus $A$ bilden kann. Aber nicht jedes dieser Wörter ist auch sinnvoll.\\[1em]
 	
-	\enquote{egnarts si efiL} ist kein sinnvolles Wort. \pause Oder? \\[1em]
+	\enquote{\word{\thassedaniel{egnarts\sp si\sp efiL}{retsinnaL\sp nosrO}}} ist kein sinnvolles Wort. \pause Oder? \\[1em]
 	\pause
-	Wie wir sehen, hängt es immer vom Kontext ab, welche Wörter wir als (syntaktisch) korrekt betrachten.\\
+	\impl Hängt vom Kontext ab!\\
 	
 \end{frame}
 
 \begin{frame}{Formale Sprachen}
 		\begin{Definition}
-			Sei $\Sigma$ ein Alphabet.\\
-			Eine formale Sprache $L$ ist eine Teilmenge von $\Sigma^*$.
+			Sei $A$ ein Alphabet.\\
+			Eine \textbf{formale Sprache} $L$ ist eine Teilmenge von $A^*$.
 		\end{Definition}
 		\pause
 		\vspace{10pt}
-		Durch die formale Sprache geben wir an, welche der möglichen Wörter wir als  \emph{syntaktisch korrekt} ansehen.\\
+		Durch eine formale Sprache geben wir an, welche der möglichen Wörter über $A$ wir als  \emph{syntaktisch korrekt} ansehen.\\
 		\pause
 		Formale Sprachen werden häufig nicht direkt, sondern über Bildungsvorschriften angegeben.
 		
 		\pause
 		\begin{Beispiel}
-			$\Sigma = \{0, 1\}$ \\
-			$L = \{ \omega \in \Sigma^* \mid \omega \text{ endet auf } 10 \}  = \{10, 010, 110, 0010, ...\}$
+			$A = \{\word 0, \word 1\}$ \\
+			$L = \{ w \in A^* \mid w \text{ endet auf } \word{10} \}  = \{\word{10}, \word{010}, \word{110}, \word{0010}, ...\}$
 		\end{Beispiel}
 \end{frame}
 
-\begin{frame}{Formale Sprachen}
-	
-	\begin{Beispiel}
-		Formale Sprache $L$ aller Wörter über $A=\{\literal{a},\literal{b}\}$, in denen nirgends das Teilwort $\literal{ab}$ vorkommt.
-		\begin{itemize}
-			\pause
-			\item $L=\{\literal{a},\literal{b}\}^*
-			\setminus \{w_1 \cdot \literal{ab} \cdot w_2 \mid w_1,w_2\in
-			\{\literal{a},\literal{b}\}^*\}$
-			
-			\pause
-			\item Erst ein beliebiges Wort (evtl. $\varepsilon$) nur aus $\literal{b}$,\\
-			danach ein beliebiges Wort (evtl. $\varepsilon$) nur aus $\literal{a}$.
-			
-			\pause
-			\item $L=\{w_1w_2 \mid w_1\in 
-			\{\literal{b}\}^*  \text{ und }  w_2\in \{\literal{a}\}^* \}$
-		\end{itemize}
-	\end{Beispiel}
-
-	\begin{block}{Bemerkungen}
-		\begin{itemize}
-			\pause
-			\item Die Beschreibung einer formalen Sprache ist nicht eindeutig (siehe oben).
-			\pause
-			\item Immer auf den Unterschied achten: $\{\literal{abc} \} \neq \literal{abc} $
-		\end{itemize}
-	\end{block}
-\end{frame}
 
 
-\begin{frame}{Beispiele aus dem Leben}
-	\begin{itemize}
-		\item Sprache der korrekten IP4-Adressen \pause
-		\begin{align*}
-		192.168.178.1,\\
-		76.147.112.6, ...
-		\end{align*} 
-		\pause Aber nicht: $000.999.123.666$ \pause
-		\item Formale Sprache der Schlüsselwörter in Java $$L = \{ class, int , if, \dots \}$$ \pause
-		\item Formale Sprache der legalen Zahlen vom Typ \textbf{int}: Mit $A = \{0...9\}$ 
-		\pause $$A \cdot A^* = \{-19, 12849, 1001, 42, ...\}$$ 
-		\pause Und minus? Also besser $ \{ -, \varepsilon \} \cdot A \cdot A^*$
-	\end{itemize}
-\end{frame}
+
+
 
 
 \begin{frame}{Produkt}
 		\begin{Definition}
 			Seien $L_1$ und $L_2$ zwei formale Sprachen. Dann bezeichnet
-				$$L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$$
+				$$L_1 \cdot L_2 := \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$$
 				das \textbf{Produkt} der Sprachen $L_1$ und $L_2$.
 		\end{Definition}
 		\pause
@@ -89,7 +48,7 @@
 
 \begin{frame}{Produkt}
 	\begin{Beispiele}
-		$\{a, b\} \cdot \{c, d\} = \{ac, ad, bc, bd\}$\\[0.3em]
+		$\{\word a, \word b\} \cdot \{\word c, \word d\} = \{\word{ac}, \word{ad}, \word{bc}, \word{bd}\}$\\[0.3em]
 		\pause
 		$ L = \{w_1w_2 \mid w_1\in \{\literal{b}\}^* ,  w_2\in \{\literal{a}\}^* \} 
 		= \{\literal{b}\}^* \cdot \{\literal{a}\}^* $\\[1em]
@@ -99,50 +58,93 @@
 	\end{Beispiele}
 \end{frame}
 
+
+
 \begin{frame}{Potenzen}
 	\begin{Definition}
-	Damit kann man induktiv die Potenz formaler Sprachen definieren:
-	$$L^0 = \{\varepsilon \}$$
-	$$L^{i+1} = L^i \cdot L$$
+	Potenzen formaler Sprachen definieren wir induktiv so: 
+	$$L^0 := \{\varepsilon \}$$
+	$$L^{i+1} := L^i \cdot L$$
 	\end{Definition} \pause
 	$L^i$ enthält also alle Kombinationen von $i$ (nicht unbedingt verschiedenen) Wörtern aus $L$.
 \end{frame}
 
 \begin{frame}{Konkatenationsabschluss}
 	\begin{Definition}
-		Der Konkatenationsabschluss einer formalen Sprache $L$ ist $$L^\ast = \bigcup \limits_{i=0}^\infty L^i$$ 
+		Der \textbf{Konkatenationsabschluss} einer Sprache $L$ ist \quad $L^\ast = \bigcup \limits_{i=0}^\infty L^i$. \\
+		$$ \set{}^* = \set{ \eps } \qquad \set{\word{abc}, \word{xy}}^* = \set{\eps, \word{abc}, \word{xy}, \word{abcabc}, \word{abcabcxy}, \word{xyabc}, ...} $$ 
+		\medskip
 		\pause
-		Der $\varepsilon$-freie Konkatenationsabschluss ist $$L^+ = \bigcup \limits_{i=1}^\infty L^i$$
+		Der \textbf{$\eps$-freie Konkatenationsabschluss} ist \quad $L^+ = \bigcup \limits_{i=1}^\infty L^i$. \\
+		$$ \set{}^+ = \set{} \qquad \set{\word{abc}, \word{xy}}^* = \set{\word{abc}, \word{xy}, \word{abcabc}, \word{abcabcxy}, \word{xyabc}, ...} $$
 	\end{Definition} \pause
-	Achtung: Der $\varepsilon$-freie Konkatenationsabschluss muss nicht $\varepsilon$-frei sein! \pause
+	\textbf{Achtung}: Der $\eps$-freie Konkatenationsabschluss muss nicht $\eps$-frei sein! \\ \pause
+	$$ \set{\eps}^+ = \underbrace{\set{\eps}}_{\mathclap{\text{enthält ein $\eps$!}}} $$
 	
-	$$ \{\}^* = \{\varepsilon\} $$
+\end{frame}
+
+\begin{frame}{Beispiele aus dem Leben}
+	\begin{itemize}
+		\item Sprache der korrekten IP4-Adressen: \pause
+		\begin{align*}
+		\set{192.168.178.1, \quad 
+			76.147.112.6, ... }
+		\end{align*} 
+		\pause Enthält aber nicht: $000.999.123.666$ \pause
+		\item Formale Sprache der Schlüsselwörter in Java: $$L = \{ \word{class}, \word{int} , \word{if}, \dots \}$$ \pause
+		\item Formale Sprache der ganzen Zahlen: Mit $A = \{0...9\}$ bauen wir
+		\pause $$A \cdot A^* = \{12849, 1001, 42, ...\}$$ 
+		\pause Und minus? Also besser $ \{ \mword-, \varepsilon \} \cdot A \cdot A^*$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Formale Sprachen}
+	
+	\begin{Beispiel}
+		Sei $L$ formale Sprache aller Wörter über $A=\{\literal{a},\literal{b}\}$, in denen nirgends das Teilwort $\literal{ab}$ vorkommt.
+		\begin{itemize}
+			\pause
+			\implitem $L=\{\literal{a},\literal{b}\}^*
+			\setminus \set{w_1 \cdot \literal{ab} \cdot w_2 \mid w_1,w_2\in
+			\{\literal{a},\literal{b}\}^* }$
+			
+			\pause
+			\item Erst ein beliebiges Wort (evtl. $\varepsilon$) nur aus $\literal{b}$,\\
+			danach ein beliebiges Wort (evtl. $\varepsilon$) nur aus $\literal{a}$.
+			
+			\pause
+			\implitem $L=\set{w_1w_2 \mid w_1\in 
+			\{\literal{b}\}^*  \text{ und }  w_2\in \{\literal{a}\}^* }$
+		\end{itemize}
+	\end{Beispiel}
+	
+	\begin{block}{Bemerkungen}
+		\begin{itemize}
+			\pause
+			\item Die Beschreibung einer formalen Sprache ist \textbf{nicht} eindeutig (siehe oben).
+			\pause
+			\item Immer auf den Unterschied achten: $\{\literal{abc} \} \neq \literal{abc} $
+		\end{itemize}
+	\end{block}
 \end{frame}
 
 
 \begin{frame}{Aufgabe \stars{3}}
-	Es sei $A = \{a, b\}$. Beschreiben Sie die folgenden formalen Sprachen mit den Symbolen $\word\{, \word\}, \word a, \word b, \eps, 
-	%TODO!!!!!!!
+	Es sei $A = \{\word a, \word b\}$. Beschreibt die folgenden formalen Sprachen mit den Symbolen $\word\{, \word\}, \word a, \word b, \textcolor{blue}{\eps}, 
 	\mword{\cup}, 
-	%\mword{{}^*}, 
-	\word, , \word), \word( \text{ und } 
-	%\word{{}^+} 
+	\mword{{}^*}, \mword{{}^+},
+	\word, , \mword{\cdot} , \word( \text{ und } 
+	\word)
 	$:
 	\begin{itemize}
-		\item die Menge aller Wörter über $A$, die das Teilwort \word{ab} enthalten.
-		\item die Menge aller Wörter über $A$, deren vorletztes Zeichen ein \word b ist.
-		\item die Menge aller Wörter über $A$, in denen nirgends zwei \word bs unmittelbar hintereinander vorkommen.
+		\item die Menge aller Wörter über $A$, die das Teilwort \word{ab} enthalten. \\
+		\uncover<2-|handout:2>{$\{\word a, \word b\}^\ast \cdot \{\word{ab}\} \cdot \{\word a, \word b\}^\ast$}
+		\item die Menge aller Wörter über $A$, deren vorletztes Zeichen ein \word b ist. \\
+		\uncover<3-|handout:2>{$\{\word a, \word b\}^\ast \cdot \{\word b\} \cdot \{\word a, \word b\}$}
+		% $\{\word a, \word b\}^\ast \cdot \{\word b\} \cdot \{\word a, \word b\}$
+		\item die Menge aller Wörter über $A$, in denen nirgends zwei \word bs unmittelbar hintereinander vorkommen. \\
+		\uncover<4-|handout:2>{$\{\word a, \word{ba}\}^\ast \cdot \{ \word b, \eps \}$}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Lösung}
-	\begin{itemize}
-		\item \textit{die Menge aller Wörter über $A$, die das Teilwort \code{ab} enthalten.}  \pause
-			$$\{a,b\}^\ast \cdot \{ab\} \cdot \{a,b\}^\ast$$ \pause
-		\item \textit{die Menge aller Wörter über $A$, deren vorletztes Zeichen ein b ist.}  \pause
-			$$\{a,b\}^\ast \cdot \{b\} \cdot \{a,b\}$$ \pause
-		\item \textit{die Menge aller Wörter über $A$, in denen nirgends zwei \word bs unmittelbar hintereinander vorkommen.}  \pause
-			$$\{a, ba\}^\ast \cdot \{b, \varepsilon \}$$
-	\end{itemize}
-\end{frame}
 

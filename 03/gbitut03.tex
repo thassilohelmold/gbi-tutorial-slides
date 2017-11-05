@@ -11,34 +11,42 @@
 
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{3}
+
+\begin{frame}{Erinnerung (nur fürs erste Blatt jetzt)}
+	Nächsten \textbf{Donnerstag} (09. November): \textbf{Abgabefrist Blatt~1}!
+	
+	\bigskip
+	Die nächsten Male dürft ihr euch selber erinnern! \smiley
+\end{frame}
 
 \framePrevEpisode
 
 \subsection{Wahr oder Falsch?}
-\begin{frame}
-	\begin{block}{Wahr oder Falsch?}
-			\FalseQuestionE{Eine Funktion muss linkseindeutig sein}{Richtig: Eine Funktion muss rechtseindeutig und linkstotal sein}
-			\TrueQuestionE{Eine injektive Funktion ist linkseindeutig}{}
-			\TrueQuestionE{Eine surjektive Funktion ist rechtstotal}{}
-			\FalseQuestion{Jede Relation ist eine Funktion}
-			\TrueQuestionE{Jede Funktion ist eine Relation}{}
-	\end{block}
+\begin{frame}[t]{Wahr oder Falsch?}
+	\FalseQuestionE{Eine Funktion muss linkseindeutig sein.}{\impl Eine Funktion muss rechtseindeutig \textbf{und linkstotal} sein.}
+	\TrueQuestion{Eine injektive Funktion ist linkseindeutig.}
+	\TrueQuestion{Eine surjektive Funktion ist rechtstotal.}
+	\FalseQuestion{Jede Relation ist eine Funktion.}
+	\TrueQuestion{Jede Funktion ist eine Relation.}
 \end{frame}
 
-\begin{frame}
-	\begin{block}{Wahr oder Falsch?}
-		\FalseQuestionE{$aaba \in \{a,b\}^2\times\{a,b\}^2$}{Aber: $(\text{aa}, \text{ba}) \in \{a,b\}^2\times\{a,b\}^2$}
-		\FalseQuestionE{Ich benutze für jeden Beweis Induktion.}{Mit einem Schraubenschlüssel bekommt man keinen Nagel in die Wand.}
-		\FalseQuestionE{$\setsize{\{ \varepsilon \}} = 0$}{$\{ \varepsilon \} \neq \emptyset$}
-	\end{block}
+\begin{frame}[t]{Wahr oder Falsch?}
+	\delimitershortfall=0pt
+	\FalseQuestionE{$\word{aaba} \in \{ \word a, \word b\}^2\times\{\word a,\word b\}^2$}{Aber: $(\word{aa}, \word{ba}) \in \{\word a, \word b\}^2\times\{\word a, \word b\}^2$}
+	%TODO: Move to induction tutorial:
+	%\FalseQuestionE{Ich benutze für jeden Beweis Induktion.}{Mit einem Schraubenschlüssel bekommt man keinen Nagel in die Wand.}
+	\FalseQuestionE{$\setsize{\{ \eps \}} = 0$}{$\{ \eps \} \neq \{\}$}
+	\FalseQuestionE{Wenn $\eps \in A^*$, dann $\size{\eps^3} = 3$.}{$\size{\eps^3} = 0$; außerdem gilt $\eps \in A^*$  immer, also für alle Alphabete $A$.}
 \end{frame}
 
 \section{Induktive Definitionen}
 
 \begin{frame}{Zum Aufwärmen: Domino}
-	3 Dominosteine sind mit gleichem Abstand (kleiner halbe Größe) in einer Reihe aufgestellt. Wir stoßen den ersten Stein der Reihe in Richtung des zweiten Steins um. \\
+	Drei Dominosteine sind mit gleichem Abstand (kleiner halbe Größe) in einer Reihe aufgestellt. Wir stoßen den ersten Stein der Reihe in Richtung des zweiten Steins um. \\
 	Wird der dritte Stein umfallen? Kann man das (einfach) beweisen? \\[1em]
 	\pause
 	Nun stehen (abzählbar) unendlich viele Dominosteine wie oben hintereinander. Wieder stoßen wir den ersten Stein um. \\
@@ -49,13 +57,14 @@
 	Wir sehen also: Alle Steine fallen um, aber es sind niemals alle umgefallen.
 \end{frame}
 
-\begin{frame}{Induktive Definition}
-	Betrachten wir die \emph{Fibonacci}-Reihe.
-	Es gilt 
+\newcommand{\Fib}{\mathcal{F}\hspace{-1pt}}
+
+\begin{frame}{Induktive Definitionen}
+	Beispiel: \emph{Fibonacci}-Reihe 
 	\begin{align*}
-	\mathcal{F}_{0} &= 0 \\
-	\mathcal{F}_1 &= 1 \\
-	\mathcal{F}_{n+2} &= \mathcal{F}_{n+1} + \mathcal{F}_n 		
+	\Fib_{0} &:= 0 \\
+	\Fib_1 &:= 1 \\
+	\text{Für } n \geq 0: \quad \Fib_{n+2} &:= \Fib_{n+1} + \Fib_n 		
 	\end{align*}
 	\pause
 	\begin{table}
@@ -63,7 +72,7 @@
 	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
 		\hline
 		n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
-		$\mathcal{F}_n$ & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 \\ \hline
+		$\Fib_n$ & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 \\ \hline
 	\end{tabular}
 	\end{table}
 	
@@ -71,7 +80,7 @@
 	\textbf{Wohldefiniertheit}: 
 	\begin{itemize}
 	\item Für alle Fälle etwas definieren 
-	\item Nicht für einen Fall widersprüchliches definieren
+	\item Nicht für einen Fall was Widersprüchliches definieren
 	\end{itemize}
 \end{frame}
 
@@ -103,8 +112,8 @@
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item So viele Sprachen: Mehr zu formalen Sprachen
-			\item Aus 2 mach 10: Übersetzungen
+			\item So viele Sprachen: Noch mehr zu formalen Sprachen
+			\item Aus \word2 mach \word{10}: Übersetzungen
 		\end{itemize}
 	\end{block}
 \end{frame}
