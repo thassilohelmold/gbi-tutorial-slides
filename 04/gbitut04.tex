@@ -4,7 +4,7 @@
 %\newcommand{\mydate}{18.11.2016}
 
 % Comment/uncomment this line to toggle handout mode
-%\newcommand{\handout}{}
+\newcommand{\handout}{}
 
 \input{../TutTexbib/PraeambelTut.tex}
 \input{../TutTexbib/Style_Tut.tex}
@@ -14,54 +14,53 @@
 \begin{document}
 \starttut{4}
 
-\begin{frame}
-	\frametitle{Übungsblätter}
+\begin{frame}{Übungsblätter}
 	
-	Durchschnitt: 11,4 / 19 Punkten
+	Schnitt: \thassedaniel{XXX}{XXX} / 23~Punkte
 	
 	\begin{itemize}
-		\item Bitte erwartet keine volle Punktzahl. Übungsblätter sind dazu da, Fehler zu machen und daraus zu lernen.\\
-		\item Versucht möglichst alle Aufgaben zu bearbeiten.\\
-		\item Wenn keine Begründung/Beweis gefordert ist, müsst ihr keinen angeben.\\
-		\item Nicht mehrere Alternativen angeben, unter denen ich mir die richtige heraussuchen soll.
+		\item Erstmal: Volle Punktzahl ist utopisch. Fehler macht man, um draus zu lernen – dazu sind ÜBs da
+		\item Versucht alle Aufgaben zu bearbeiten (sofern es Sinn macht)
+		\item Wenn keine Begründung/Beweis gefordert ist, müsst ihr keinen angeben.
+		\item Nicht mehrere Alternativen angeben, unter denen ich mir die richtige heraussuchen soll. (That's \emph{your} job!)
+		\item \textbf{TACKERN} und \textbf{DECKBLÄTTER}! Sonst \alert{\textbf{null Punkte}}!
+		\item Bitte die Aufgabenblätter nicht komplett mitabgeben (Deckblatt reicht), sonst wird mein Stapel so fett. \smiley
 	\end{itemize}
-	
 	
 \end{frame}
 
-\begin{frame}
-	\frametitle{Übungsblätter: Häufige Fehler}
+\begin{frame}[t]{Übungsblätter: Häufige Fehler}
 	
-	\begin{itemize}
-		\TrueQuestionE{Beweise fängt man mit der Behauptung an}{}
-		\FalseQuestionE{Wenn wir $A$ schreiben, ist das immer eine Menge}{Das muss man explizit angeben}
-		\FalseQuestionE{Ein Beispiel ersetzt einen Beweis.}{Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
+		\TrueQuestionE{Beweise fängt man mit der Behauptung an.}{}
+		\FalseQuestionE{Wenn wir $A$ schreiben, ist das immer eine Menge.}{Das muss man \textbf{explizit} angeben.}
+		\FalseQuestionE{Ein Beispiel langt als Beweis.}{...bis ein anderes Beispiel herkommt, bei dem es kaputt geht... \\
+			\impl eine Behauptung \textbf{widerlegen} geht mit nem Beispiel sehr gut!}
+			%Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
 		% Modified by DJ (a more subtle version):
-		\FalseQuestionE{$\setsize{M} = M$ für M \subseteq \N}{$\; \setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$}
-	\end{itemize}
+		\FalseQuestionE{$\setsize{M} = M$ für $M \subseteq \N$}{$\setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$. Nix mit „Betrag“:}
+	
+	\medskip
 
 	\pause[9]
 	Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
-	$90 \% $ der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
+	90~\% der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
 	
 	\pause[10]
-	Passt auf, was eure Variablen sind und welche Operationen ihr darauf anwenden könnt. Mengen kann man nicht mit $\bund, \boder$ verknüpfen
+	Passt auf, was eure Variablen sind und welche Operationen ihr darauf anwenden könnt. Mengen kann man nicht mit $\bund$ und $\boder$ verknüpfen
 \end{frame}
 
 \framePrevEpisode
 
-\begin{frame}
-	\frametitle{Rückblick}
+\begin{frame}{Rückblick}
 	\begin{itemize}
-		\item Alphabet $\Sigma$ mit Zeichen, aus denen wir Wörter zusammensetzen
+		\item Alphabet $A$ mit Zeichen, aus denen wir Wörter zusammenbauen
 		\item Wir können nicht immer allen Wörtern einen Sinn zuordnen 
 		\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
 		\item Das ist eine formale Sprache: Eine Teilmenge aller möglichen Wörter
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Rückblick}
+\begin{frame}{Rückblick}
 	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörter:
 	\begin{itemize}
 		\item $L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$\\
@@ -77,21 +76,20 @@
 \end{frame}
 
 \begin{frame}
-	\begin{itemize}
-		\FalseQuestionE{Jede Sprache enthält Wörter}{ $\quad \emptyset$ ist auch eine gültige Sprache}
-		\FalseQuestionE{$01^* = \{\varepsilon, 01, 0101, ...\}$}{$\quad 01^*$ gibt es nicht, denn $01 \neq \{01\}$}
-		\TrueQuestionE{Es gibt Sprachen L, für die gilt $\varepsilon \in L^+$}{}
-		\FalseQuestionE{$L^+ = L^* \setminus L^0$}{Das gilt nicht, wenn $\varepsilon \in L$}
-		\TrueQuestionE{$\{\}^* \neq \{\} $}{ $\quad \{\}^* = \{\varepsilon\}$}
-	\end{itemize}	
+		\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\quad \emptyset$ ist auch eine gültige Sprache}
+		\FalseQuestionE{$01^* = \{\eps, 01, 0101, ...\}$}{$\quad 01^*$ gibt es nicht, denn $01 \neq \{01\}$}
+		\TrueQuestionE{Es gibt Sprachen $L$, für die gilt $\eps \in L^+$.}{}
+		\FalseQuestionE{$L^+ = L^* \setminus L^0$.}{Das gilt nicht, wenn $\varepsilon \in L$}
+		\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\quad \{\}^* = \{\varepsilon\}$}	
 \end{frame}
+
+\input{../Bloecke/Induktion_Vögel.tex}
 
 \input{Sprache_gesucht_beamer.tex}
 
 \input{../Bloecke/FormaleSprachenP2.tex}
 
-\begin{frame}
-	\frametitle{Ausblick: Klammerausdrücke}
+\begin{frame}{Ausblick: Klammerausdrücke}
 	
 	Was ist mit der Sprache aller gültigen Klammerausdrücke? Können wir diese auch mit Mengen, Konkatenation und Kleenschem Abschluss angeben? \only<beamer:0>{\\ \emph{Spoiler: Nein, das geht nicht!}}\\[1em]
 	\pause
@@ -110,7 +108,7 @@
 	\end{figure}
 \end{frame}
 
-\input{../Bloecke/Darstellung.tex}
+%\input{../Bloecke/Darstellung.tex}
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
