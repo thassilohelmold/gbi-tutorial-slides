@@ -1,15 +1,15 @@
 \section{Formale Sprachen}
 
 \begin{frame}{Beispiel}
-	Sei $A = \{a,b\}$ ein Alphabet. Mit $L$ wollen wir alle Wörter beschreiben, die genau ein $b$ enthalten. \\ \pause
-	$$ L = \{w_1 b w_2 \mid w_1, w_2 \in \{a\}^\ast \}  \qquad  L = \{a\}^\ast \cdot \{b \} \cdot \{a\}^\ast$$
+	Sei $A = \set{\word a,\word b}$ ein Alphabet. Mit $L$ wollen wir alle Wörter beschreiben, die genau ein $\word b$ enthalten. \\ \pause
+	$$ L = \set{w_1 \word b w_2 \mid w_1, w_2 \in \{\word a\}^\ast } = \{\word a\}^\ast \cdot \{\word b \} \cdot \{\word a\}^\ast$$
 	
 	Was ist $L^3$? Was enthält $L^i$? \pause
-	Zum Beispiel ist $$aaababaaaabaa = aaaba \ baa \ aabaa \in L_3$$ \pause
-	$L^i$ enthält alle Wörter, die genau $i$-mal ein $b$ enthalten! \\[1em]
+	Zum Beispiel ist $$\word{aaababaaaabaa} = \word{aaaba} \cdot \word{baa} \cdot \word{aabaa} \in L_3$$ \pause
+	$L^i$ enthält alle Wörter, die genau $i$-mal ein \word b enthalten! \\[1em]
 	
-	Was enthält $$L^i \setminus \{b\}^\ast$$ \pause
-	Alle Wörter, die aus $i$ $b$'s bestehen, aber auch noch mindestens ein $a$ enthalten. \\
+	Was enthält $$L^i \setminus \{\word b\}^\ast ?$$ \pause
+	Alle Wörter, die aus $i$ \word bs bestehen, aber auch noch mindestens ein \word a enthalten. \\
 \end{frame}
 
 \begin{frame}{Aufgabe}
@@ -26,62 +26,62 @@
 \subsubsection{A1}
 \begin{frame}{Aufgabe (Klausur) \stars{4}}
 		\begin{itemize}
-			\item Wiederlegen Sie: Für alle formalen Sprachen $L_1 , L_2$ gilt: 
+			\item[(1)] Widerlegt: Für alle formalen Sprachen $L_1 , L_2$ gilt: 
 			$$L_1^\ast \cup L_2^\ast = (L_1 \cup L_2 )^\ast$$
 			
-			\item Zeigen Sie: Für alle formalen Sprachen $L$ gilt: 
+			\item[(2)] Zeigt: Für alle formalen Sprachen $L$ gilt: 
 				$$L^\ast \cdot L = L^+ $$ 
 	\end{itemize}
 
-	Tipp zu 2) (nicht in der Klausur gegeben): Hier handelt es sich um eine Mengengleichheit, also argumentieren wir mit \enquote{$\subseteq$} und \enquote{$\supseteq$}
+	Tipp zu (2) (nicht in der Klausur gegeben): Hier handelt es sich um eine Mengengleichheit, also brav mit \enquote{$\subseteq$} und \enquote{$\supseteq$} beweisen! \smiley 
 \end{frame}
 
-\begin{frame}{Lösung}
+\begin{frame}[t]{Lösung}
 	\textit{Für alle formalen Sprachen $L_1 , L_2$ gilt: 
 		$$L_1^\ast \cup L_2^\ast = (L_1 \cup L_2 )^\ast$$ } \\[2em] \pause
-	Diese Aussage ist falsch: Sei $L_1 = \{a\}$ und $L_2 = \{b\}$. Dann liegt \code{ab} in $(L_1 \cup L_2 )^\ast = \{a, b\}^\ast$ aber nicht in $L_1^\ast \cup L_2^\ast = \{a\}^\ast \cup \{b\}^\ast$.
+	Diese Aussage ist falsch: Sei $L_1 = \{\word a\}$ und $L_2 = \{\word b\}$. Dann liegt \word {ab} in $(L_1 \cup L_2 )^\ast = \{\word a, \word b\}^\ast$ aber nicht in $L_1^\ast \cup L_2^\ast = \{\word a\}^\ast \cup \{\word b\}^\ast$.
 \end{frame}
 
-\begin{frame}{Lösung}
+\begin{frame}[t]{Lösung}
 	\textit{Für alle formalen Sprachen $L$ gilt: 
 		$$L^\ast \cdot L = L^+ $$ } \\[1em] \pause
 	Diese Aussage ist wahr! 
 	\begin{block}{1. Schritt: $L^\ast \cdot L \subseteq L^+$:} \pause
-	Wenn $w \in L^\ast \cdot L$ liegt, dann lässt es sich in Teilwörter auftrennen $$ w = w_1 \cdot w_2$$ mit $w_1 \in L^\ast$ und $w_2 \in L$. Für $w_1$ existiert ein $i \in \N_0$ mit $w_1 \in L^i$. Also $$w = w_1 w_2 \in L^i \cdot L = L^{i+1} \subset L^+$$
+	Wenn $w \in L^\ast \cdot L$ liegt, dann lässt es sich in Teilwörter auftrennen $$ w = w_1 \cdot w_2$$ mit $w_1 \in L^\ast$ und $w_2 \in L$. Für $w_1$ existiert ein $i \in \N_0$ mit $w_1 \in L^i$. Also $$w = w_1 w_2 \in L^i \cdot L = L^{i+1} \subset L^+.$$
 	\end{block}
 \end{frame}
 
-\begin{frame}{Lösung}
+\begin{frame}[t]{Lösung}
 	\textit{Für alle formalen Sprachen $L$ gilt: 
 		$$L^\ast \cdot L = L^+ $$ } \\[1em] 
 	Diese Aussage ist wahr! 
 	\begin{block}{2. Schritt: $L^\ast \cdot L \supseteq L^+$:} \pause
-	Wähle nun $w \in L^+$. Dann existiert ein $i \in \N_+$ mit $w \in L^i$. Da $i > 0$ lässt es sich schreiben als $i = j + 1$ für ein $j \in \N_0$. Also ist $$w \in L^{j+1} = L^j \cdot L \subset L^\ast \cdot L$$
+	Wähle nun $w \in L^+$. Dann existiert ein $i \in \N_+$ mit $w \in L^i$. Da $i > 0$ lässt es sich schreiben als $i = j + 1$ für ein $j \in \N_0$. Also ist $$w \in L^{j+1} = L^j \cdot L \subset L^\ast \cdot L. \qed$$
 	\end{block}
 \end{frame}
 
 \subsubsection{A2}
 \begin{frame}{Aufgabe (WS 2008) \stars{3}}
-	Es sei $A = \{a, b\}$. Die Sprache $L \subset A^\ast$ sei definiert durch $$L = (\{a\}^\ast \cdot \{b\} \cdot \{a\}^\ast)^\ast$$
-	Zeigen Sie, dass jedes Wort $w$ aus $\{a, b\}^\ast$, das mindestens einmal das Zeichen
-	$b$ enthält, in $L$ liegt. (Hinweis: Führen Sie eine Induktion über die Anzahl der
-	Vorkommen des Zeichens $b$ in $w$ durch.)
+	Es sei $A = \{\word a, \word b\}$. Die Sprache $L \subset A^\ast$ sei definiert durch $$L = \left(\{\word a\}^\ast \cdot \{\word b\} \cdot \{\word a\}^\ast \right)^\ast$$
+	Zeigt, dass jedes Wort $w$ aus $\{\word a, \word b\}^\ast$, das mindestens einmal das Zeichen
+	\word b enthält, in $L$ liegt. (Hinweis: Macht eine Induktion über die Anzahl der
+	Vorkommen des Zeichens \word b in $w$.)
 \end{frame}
 
 \begin{frame}{Lösung}
-	$$L = (\{a\}^\ast \cdot \{b\} \cdot \{a\}^\ast)^\ast$$
-	Sei $k$ die Anzahl der Vorkommen von $b$ in einem Wort $w \in \{a, b\}^\ast$.
+	$$L = \left(\{\word a\}^\ast \cdot \{\word b\} \cdot \{\word a\}^\ast \right)^\ast$$
+	Sei $k$ die Anzahl der Vorkommen von \word b in einem Wort $w \in \{\word a, \word b\}^\ast$.
 	\begin{block}{Induktionsanfang}  \pause
-		Für $k = 1$: In diesem Fall lässt sich das Wort $w$ aufteilen in $$w = w_1 \cdot b \cdot w_2$$ wobei $w_1$ und $w_2$ keine $b$ enthalten und somit in $\{a\}^\ast$ liegen. Damit gilt $w \in \{a\}^\ast \cdot \{b\} \cdot \{a\}^\ast$ und somit auch $$w \in (\{a\}^\ast \cdot \{b\} \cdot \{a\}^\ast)^\ast = L$$
+		Für $k = 1$: In diesem Fall lässt sich das Wort $w$ aufteilen in $$w = w_1 \cdot \word b \cdot w_2$$ wobei $w_1$ und $w_2$ keine \word b enthalten und somit in $\{\word a\}^\ast$ liegen. Damit gilt $w \in \{\word a\}^\ast \cdot \{\word b\} \cdot \{\word a\}^\ast$ und somit auch $$w \in \left(\{\word a\}^\ast \cdot \{\word b\} \cdot \{\word a\}^\ast \right)^\ast = L$$
 	\end{block}
 \end{frame}
 
 \begin{frame}{Lösung}
-	\begin{block}{Induktionsannahme}  \pause
-		Für ein festes $k \in \N$ gilt, dass alle Wörter über $\{a, b\}^\ast$, die genau $k$-mal das Zeichen $b$ enthalten, in $L$ liegen.
+	\begin{block}{Induktionsvoraussetzung}  \pause
+		Für ein festes $k \in \N$ gilt, dass alle Wörter über $\{\word a, \word b\}^\ast$, die genau $k$-mal das Zeichen \word b enthalten, in $L$ liegen.
 	\end{block} \pause
 	\begin{block}{Induktionsschritt}  \pause
-		Wir betrachten ein Wort $w$, das genau $k + 1$ mal das Zeichen $b$ enthält. Dann kann man $w$ zerlegen in $w$ = $w_1 \cdot w_2$, wobei $w_1$ genau einmal das Zeichen $b$ enthält und $w_2$ genau $k$-mal das Zeichen $b$. \pause Nach Induktionsanfang liegt $w_1$ in $\{a\}^\ast \{b\}\{a\}^\ast$. Nach Induktionsvoraussetzung liegt $w_2$ in $(\{a\}^\ast \{b\}\{a\}^\ast )^\ast$, was bedeutet, dass $w = w_1 \cdot w_2$ in $$(\{a\}^\ast \{b\}\{a\}^\ast )(\{a\}^\ast \{b\}\{a\}^\ast )^\ast \subseteq (\{a\}^\ast \{b\}\{a\}^\ast )^\ast = L$$ liegt und die Behauptung ist gezeigt.
+		Wir betrachten ein Wort $w$, das genau $k + 1$ mal das Zeichen \word b enthält. Dann kann man $w$ zerlegen in $w = w_1 \cdot w_2$, wobei $w_1$ genau einmal das Zeichen \word b enthält und $w_2$ genau $k$-mal das Zeichen \word b. \pause Nach Induktionsanfang liegt $w_1$ in $\{\word a\}^\ast \{\word b\}\{\word a\}^\ast$. Nach Induktionsvoraussetzung liegt $w_2$ in $(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast )^\ast$, was bedeutet, dass $w = w_1 \cdot w_2$ in $$\left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right) \· \left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right)^\ast \subseteq \left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right)^\ast = L$$ liegt und die Behauptung ist gezeigt. $\qed$
 	\end{block}
 \end{frame}
 

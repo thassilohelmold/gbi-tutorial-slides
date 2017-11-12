@@ -77,11 +77,12 @@
 \newcommand{\boder}{\ensuremath{\mathbin{\textcolor{blue}{\vee}}}\xspace}
 \newcommand{\bund}{\ensuremath{\mathbin{\textcolor{blue}{\wedge}}}\xspace}
 \newcommand{\bimp}{\ensuremath{\mathrel{\textcolor{blue}{\to}}}\xspace}
+\newcommand{\bgdw}{\ensuremath{\mathrel{\textcolor{blue}{\leftrightarrow}}}\xspace}
 \newcommand{\bnot}{\ensuremath{\textcolor{blue}{\neg}}\xspace}
 \newcommand{\bone}{\ensuremath{\textcolor{blue}{1}}\text{}}
 \newcommand{\bzero}{\ensuremath{\textcolor{blue}{0}}\text{}}
-\newcommand{\bleftBr}{\ensuremath{\textcolor{blue}{(}}\text{}}
-\newcommand{\brightBr}{\ensuremath{\textcolor{blue}{)}}\text{}}
+\newcommand{\bleftBr}{\ensuremath{\textcolor{blue}{\texttt{(}}}\text{}}
+\newcommand{\brightBr}{\ensuremath{\textcolor{blue}{\texttt{)}}}\text{}}
 
 \newcommand{\summe}[2]{\sum\limits_{#1}^{#2}}
 \newcommand{\limes}[1]{\lim\limits_{#1}}
@@ -92,6 +93,21 @@
 \newcommand{\mycomment}[1]{}
 \newcommand{\Comment}[1]{}
 
+%% DISCLAIMER START 
+% It is INSANELY IMPORTANT NOT TO DO THIS OUTSIDE BEAMER CLASS! IN ARTCILE DOCUMENTS, THIS IS VERY LIKELY TO BUG AROUND!
+\makeatletter%
+\@ifclassloaded{beamer}%
+{
+	% TODO 
+	% no time...
+	% redefine section to ignore multiple \section calls with the same title
+}%
+{
+	\errmessage{ERROR: section command redefinition outside of beamer class document! Please contact the author of this code.}
+}%
+\makeatother%
+%% DISCLAIMER END
+
 \newcounter{abc}
 \newenvironment{alist}{
   \begin{list}{(\alph{abc})}{
@@ -99,6 +115,9 @@
     }
 }{\end{list}}
 
+
+\newcommand{\stdarraystretch}{1.20}
+\renewcommand{\arraystretch}{\stdarraystretch}  % for proper row spacing in tables
 
 \newcommand{\morescalingdelimiters}{   % for proper \left( \right) typography
 	\delimitershortfall=-1pt  
@@ -139,8 +158,8 @@
 \newcommand{\stackedtight}[1]{{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix}} }
 \newcommand{\stacked}[1]{\begin{matrix} #1 \end{matrix} }
 \newcommand{\casesl}[1]{\delimitershortfall=0pt  \left\lbrace\hspace{-.3\baselineskip}\begin{array}{ll} #1 \end{array}\right.}
-\newcommand{\casesr}[1]{\delimitershortfall=0pt  \left.\begin{array}{ll} #1 \end{array}\right\rbrace}
-\newcommand{\caseslr}[1]{\delimitershortfall=0pt  \left\lbrace\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
+\newcommand{\casesr}[1]{\delimitershortfall=0pt  \left.\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
+\newcommand{\caseslr}[1]{\delimitershortfall=0pt  \left\lbrace\hspace{-.3\baselineskip}\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
 
 \def\q#1uad{\ifnum#1=0\relax\else\quad\q{\the\numexpr#1-1\relax}uad\fi}
 % e.g. \q1uad = \quad, \q2uad = \qquad etc.
@@ -174,6 +193,15 @@
 }{%
 	\end{array}	
 	\]
+}
+
+\newcommand{\concludes}{ \\ \hline  }
+\newcommand{\deduction}[1]{
+	\begin{varwidth}{.8\linewidth}
+		\begin{tabular}{>{$}c<{$}}
+			#1
+		\end{tabular}
+	\end{varwidth}	
 }
 
 \newcommand{\mailto}[1]{\href{mailto:#1}{{\textcolor{blue}{\underline{#1}}}}}
