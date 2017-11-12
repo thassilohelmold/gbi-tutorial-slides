@@ -66,6 +66,14 @@
 	\end{itemize}
 \end{frame}
 
+
+\input{../Bloecke/Aussagenlogik2}
+
+\input{../Bloecke/Induktion.tex}
+
+\section{Sprachen: Aufwärmen}
+
+
 \begin{frame}{Rückblick}
 	\begin{itemize}
 		\item \textbf{Alphabet} $A$ mit Zeichen, aus denen wir Wörter zusammenbauen
@@ -75,8 +83,6 @@
 		%\item Das ist eine formale Sprache: Eine Teilmenge aller möglichen Wörter
 	\end{itemize}
 \end{frame}
-
-
 
 \begin{frame}{Rückblick}
 	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörtern:
@@ -95,19 +101,12 @@
 \end{frame}
 
 \begin{frame}[t]{Wahr oder falsch?}
-		\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\emptyset$ ist auch eine gültige Sprache.}
-		\FalseQuestionE{$\word{01}^* = \{\eps, \word{01}, \word{0101}, ...\}$}{$\word{01}^*$ gibt es nicht, denn $\word{01} \neq \{\word{01}\}$.}
-		\TrueQuestionE{Es gibt Sprachen $L$, für die gilt $\eps \in L^+$.}{}
-		\FalseQuestionE{$L^+ = L^* \setminus L^0$.}{Gilt nicht, wenn $\varepsilon \in L$.}
-		\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\{\}^* = \{\varepsilon\}$.}	
+	\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\emptyset$ ist auch eine gültige Sprache.}
+	\FalseQuestionE{$\word{01}^* = \{\eps, \word{01}, \word{0101}, ...\}$}{$\word{01}^*$ gibt es nicht, denn $\word{01} \neq \{\word{01}\}$.}
+	\TrueQuestionE{Es gibt Sprachen $L$, für die gilt $\eps \in L^+$.}{}
+	\FalseQuestionE{$L^+ = L^* \setminus L^0$.}{Gilt nicht, wenn $\varepsilon \in L$.}
+	\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\{\}^* = \{\varepsilon\}$.}	
 \end{frame}
-
-
-\input{../Bloecke/Induktion.tex}
-
-\input{../Bloecke/Aussagenlogik2}
-
-\section{Sprache gesucht}
 
 \input{Sprache_gesucht_beamer.tex}
 

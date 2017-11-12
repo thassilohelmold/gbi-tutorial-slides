@@ -4,56 +4,65 @@
 
 % Induktion Vorstellung
 \begin{frame}{Vollständige Induktion}
-	Wir haben: Aussage $A_n$ für alle $n \in \N_0$ (z.B. $A_n: \size{\word{a}^n} = n$) \\
+	Wir haben: Aussage $A_n$ für alle $n \in \N_0$ (z.B. $A_n$: „$\size{\word{a}^n} = n$“) \\
 	Wir wollen beweisen: $A_n$ ist für alle $n \in \N_0$ wahr \\[0.5em]
-	Zeige dazu: \centered{$A_n$ ist für $n = 0$ wahr }
-	\centered{\textbf{und}}
-	\centered{Wenn $A_n$ für $n$ wahr ist, dann ist $A_n$ auch für $n+1$ wahr}
+	\pause
+	Zeige dazu: \centered{	
+		$A_n$ ist für $n = 0$ wahr  \\
+		\textbf{und} \\
+		Wenn $A_n$ für $n$ wahr ist, dann ist $A_n$ auch für $n+1$ wahr 
+	}
 \end{frame}
 
 \begin{frame}{Vorgehen}
-	Behauptung: $\forall n \in \N_0: (n^3 - n) \mod 3 = 0$
+	Behauptung: $\forall n \in \N_0: (n^3 - n) \text{ ist durch 3 teilbar (tb)}$.
+	\pause
 	\begin{block}{Induktionsanfang (IA)}
 		Beweise die Aussage für die erste Zahl (Basisfall):\\
-		$n = 0 \impl (0^3 - 0) \mod 3 = 0 \mod 3 = 0$
+		$n = 0 \impl (0^3 - 0) = 0$ ist durch 3 tb. \; \textbf{\checked}
 	\end{block}
+	\pause
 	\begin{block}{Induktionsvoraussetzung (IV)}
-		Wir nehmen ein $n$, von dem wir schon gezeigt haben, das die Aussage gilt:\\
-		Für ein beliebiges aber festes $n \in \N_0$ gelte: $(n^3 - n) \mod 3 = 0$
+		Wir nehmen ein $n$, von dem wir schon gezeigt haben, dass die Aussage gilt:\\
+		Für \textbf{ein beliebiges aber festes} $n \in \N_0$ gelte: $(n^3 - n)$ ist durch 3 tb. 
 	\end{block}
 \end{frame}
 
 \begin{frame}{Vorgehen}
-	\begin{block}{Induktionsschluss (IS)}
-		Zeige die Aussage für $n+1$, verwende dabei die IV:\\
+	\begin{block}{Induktions\thassedaniel{schluss}{schritt} (IS)}
+		Zeige die Aussage für $n+1$, verwende dabei die IV.\\
+		\pause
+		\medskip
+		Wir formen erst mal um:
 		\begin{align*}
-			(n+1)^3 - (n+1) &= n^3 + 3n^2 + 3n + 1 - n - 1\\
-			&= (n^3 - n) + (3n^2 + 3n)\\
-			&= (n^3-n) + 3 \* (n^2 + n)
+			(n+1)^3 - (n+1) &= n^3 + 3n^2 + 3n + 1 - n - 1 \\
+			&= (n^3 - n) + (3n^2 + 3n) \\
+			&= \underbrace{(n^3-n)}_{\shortstack{\footnotesize nach IV \\ \footnotesize durch 3 tb.}} + \underbrace{3 \* (n^2 + n)}_{\shortstack{\footnotesize offensichtlich \\ \footnotesize durch 3 tb.}}. \qed
 		\end{align*}
-		$((n^3-n) + 3 \* (n^2 + n)) \mod 3 = \underbrace{(n^3-n) \mod 3}_{\text{nach IV\;} = 0} + \underbrace{3 \* (n^2 + n) \mod 3}_{= 0}$
 	\end{block}
-	{$\square$ }
+
 \end{frame}
 
 \begin{frame}{Induktionsvoraussetzung}
 	\Huge \centering
-	Für \textbf{ein} $n \in \N_0$ gelte.\\
-	\bigskip
-	{ \LARGE
-	Nicht: Für alle.\\
-	Das wollen wir mit der Induktion erst zeigen!
+	\alert{
+		„Für \textbf{ein} $n \in \N_0$ gelte ...“ \\
+		\bigskip
+		{ \LARGE
+		Nicht: „Für alle...“,\\
+		das wollen wir mit der Induktion ja erst zeigen!
+		}
 	}
 \end{frame}
 
-\begin{frame}{Vollständige Induktion}
+\begin{frame}[t]{Vollständige Induktion}
 	\begin{itemize}
-		\item Der Schraubendreher im Beweis-Werkzeugkasten des Informatikers
-		\item Einfaches Prinzip (Verstehen: Reines Auswendiglernen des Schemas führt zu Fehlern!), vielfältige Anwendungsmöglichkeiten
-		\item Variationen möglich: Induktionsanfang bei $1, 42, ...$
+		\item Der Schraubenzieher im Beweis-Werkzeugkasten des Informatikers
+		\item \textbf{Einfaches} Prinzip (Verstehen: Reines Auswendiglernen des Schemas kann schief gehen!), vielfältige Anwendungsmöglichkeiten
+		\item \textbf{Variationen} möglich: Induktionsanfang bei $1, 42, ...$
 	\end{itemize}
 	
-	\FalseQuestionE{Ich benutze für jeden Beweis Induktion.}{Mit einem Schraubendreher bekommt man keinen Nagel in die Wand.}
+	\FalseQuestionE{Ich benutze für jeden Beweis Induktion.}{Mit einem Schraubenzieher bekommt man keinen Nagel in die Wand.}
 \end{frame}
 
 \input{../Bloecke/Induktion_Vogel.tex}
@@ -89,41 +98,52 @@
 % Induktion Wörter Länge
 \begin{frame}{Und jetzt mit Wörtern}
 	\begin{block}{Behauptung}
-		Seien $A, B$ zwei beliebige Alphabete. Definiere die Funktion $f: A^* \to A^*$
+		Seien $A, B$ zwei beliebige Alphabete. Definiere die Funktion $f \from A^* \functionto A^*$,
 		\begin{align*}
-			f(\eps) &= \eps \\
-			\text{Für } w \in A^*, \mu \in A: f(\mu \· w) &= 
+			f(\eps) &:= \eps \\
+			\text{Für } w \in A^*, \mu \in A: \quad f(\mu \· w) &:= 
 			\begin{cases}
-				\mu \· f(w) &\mu \in B \\
-				f(w) &\text{sonst}
+				\mu \· f(w), &\mu \in B \\
+				f(w), &\text{sonst}
 			\end{cases}\\
 		\end{align*}
 	
-	Dann gilt: $\forall w \in A^*: \size{f(w)} \le \size w$
+	Dann gilt $\forall w \in A^*: \size{f(w)} \le \size w$.
 	\end{block}
 \end{frame}
 
 \begin{frame}{Und jetzt mit Wörtern}
 	Induktion über die Wortlänge ($n = \size w$):\\[0.5em]
+	\pause
 	\begin{block}{Induktionsanfang}
-		$n = 0$: Nur das leere Wort hat Länge 0. Also $w = \eps$\\
-		$f(\eps) = \eps \impl \size{f(w)} = \size w = 0$
+		$n = 0$: Nur das leere Wort hat Länge 0. Also $w = \eps$.\\
+		$f(\eps) = \eps \impl \size{f(w)} = \size w = 0$. \; \textbf{\checked}
 	\end{block}
+	\pause
 	\begin{block}{Induktionsvoraussetzung}
-		Für ein $n \in \N_0$ gelte: Für alle Wörter der Länge $n$ über $A$ (also $w \in A^n$) ist $\size{f(w)} \le \size w$
+		Für \textbf{ein} $n \in \N_0$ gelte: Für alle Wörter der Länge $n$ über $A$ (also $w \in A^n$) ist $\size{f(w)} \le \size w$.
 	\end{block}
 \end{frame}
 
 \begin{frame}{Und jetzt mit Wörtern}
-
-	\begin{block}{Induktionsschluss}
+	\begin{block}{Induktions\thassedaniel{schluss}{schritt}}
 		Zeige die Aussage für $n+1$:\\
-		Sei $w \in A^{(n+1)}$ ein Wort der Länge $n+1$.\\
-		Dann teilen wir es auf in $w = \mu \· v$ wobei $\mu \in A$ und $v \in A^n$.\\
-		Nach IV gilt: $\size{f(v)} \le \size v$\\
-		Fall 1: $\mu \in B$: $f(w) = \mu \· f(v)$ \impl $\size{f(w)} = 1 + \size{f(v)} \le 1 + \size v = 1+n = \size w$\\
-		Fall 2: $\mu \notin B$: $f(w) = f(v)$ \impl $\size{f(w)} = \size{f(v)} \le \size v = n \le n+1 = \size w$\\
+		Sei $w \in A^{n+1}$ ein Wort der Länge $n+1$.\\
+		\pause
+		Dann teilen wir es auf in $w = \mu \· v$, wobei $\mu \in A$ und $v \in A^n$.\\
+		Nach IV gilt: $\size{f(v)} \le \size v$.\\
+		\pause
 		\smallskip
-		Also gilt: $\size{f(w)} \le \size w$
+		\textbf{Fall 1}: \\
+			\quad $\mu \in B$: $f(w) = \mu \· f(v)$ \\
+			\quad \impl $\size{f(w)} = 1 + \size{f(v)} \le 1 + \size v = 1+n = \size w$.\\
+		\pause
+		\smallskip
+		\textbf{Fall 2}: \\
+			\quad $\mu \notin B$: $f(w) = f(v)$ \\
+			\quad \impl $\size{f(w)} = \size{f(v)} \le \size v = n \le n+1 = \size w$.\\
+		\pause
+		\smallskip
+		Also gilt: $\size{f(w)} \le \size w. \qed$
 	\end{block}
 \end{frame}
