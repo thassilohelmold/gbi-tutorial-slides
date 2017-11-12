@@ -68,32 +68,33 @@
 \input{../Bloecke/Induktion_Vogel.tex}
 
 % Induktion Übung
-% -------------------------
 
 \begin{frame}{Und jetzt ihr}
 	Behauptung: \[\forall n \in \N_+ : \sum_{k=0}^{n}{\frac{1}{2^k}} = 2 \* (1 - \frac{1}{2^{n+1}})\]
+	
+	\pause
 	\begin{block}{Induktionsanfang}
 		$n = 1$: $\sum_{k=0}^{1}{\frac{1}{2^k}} = \frac{3}{2} = 2 \* \frac{3}{4}$. \; \textbf{\checked}
 	\end{block}
+	\pause
 	\begin{block}{Induktionsvoraussetzung}
 		Für ein $n \in \N_0$ gelte: $\sum_{k=0}^{n}{\frac{1}{2^k}} = 2 \* (1 - \frac{1}{2^{n+1}})$.
 	\end{block}
 \end{frame}
 
 \begin{frame}{Und jetzt ihr}
-
+	\uncover<+->{}
 	\begin{block}{Induktionsschritt}
 		Zeige die Aussage für $n+1$:\\
 		\begin{align*}
 			\sum_{k=0}^{n+1}{\frac{1}{2^k}}
-				&= \underbrace{\sum_{k=0}^{n}{\frac{1}{2^k}}}_{\stackrel{\text{IV}}{=} 2 \* (1 - \frac{1}{2^{n+1}})} + \frac{1}{2^{n+1}}\\
-				&= 2 \* (1 - \frac{1}{2^{n+1}}) + \frac{1}{2^{n+1}}\\
+				&= \uncover<+->{\underbrace{\sum_{k=0}^{n}{\frac{1}{2^k}}}_{\stackrel{\text{IV}}{=} 2 \* (1 - \frac{1}{2^{n+1}})} + \frac{1}{2^{n+1}}}\\
+				\uncover<+->{&= 2 \* (1 - \frac{1}{2^{n+1}}) + \frac{1}{2^{n+1}}\\
 				&= 2 \* (1 - \frac{2}{2^{n+2}} + \frac{1}{2^{n+2}})\\
-				&= 2 \* (1 - \frac{1}{2^{(n+1)+1}}). \qed
+				&= 2 \* (1 - \frac{1}{2^{(n+1)+1}}). \qed}
 		\end{align*}
 	\end{block}
 \end{frame}
-% -------------------------
 
 % Induktion Wörter Länge
 \begin{frame}{Und jetzt mit Wörtern}
