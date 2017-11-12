@@ -1,5 +1,9 @@
+\def\mycircle{\raisebox{1pt}{\Circle}}
+
+\morescalingdelimiters
+
 \begin{frame}{Zum Aufwärmen: Sprache gesucht!} 
-	$A = \{ \triangle, \square, \circ \}$.\\
+	Haben Alphabet $A = \{ \mword \triangle, \mword \square, \mword \mycircle \}$.\\
 \end{frame}
 
 %\begin{frame}
@@ -14,36 +18,36 @@
 \begin{frame}{Zum Aufwärmen: Sprache gesucht!}
 	
 	Die Sprache der Wörter, die mit einem Kreis beginnen und danach keinen Kreis mehr enthalten.
-	\vspace{15mm}
+	\bigskip
 	\pause
 	
-	$$ \{\circ\} \cdot \{\triangle, \square\}^* $$
-	\vspace{15mm}
+	$$ \{\mword \mycircle\} \cdot \{\mword \triangle, \mword \square\}^* $$
+	\bigskip
 	\pause
 	
-	$$ \{w \in \Sigma^* \mid w = \circ \cdot v, v \in \{\triangle, \square\}^* \} $$
+	$$ \set{w \in A^* \mid w = \mword \Circle \cdot v, v \in \{\mword \triangle, \mword \square\}^* } $$
 
 \end{frame}
 
 \begin{frame}{Zum Aufwärmen: Sprache gesucht!}
 	
 	Die Sprache der Wörter, deren vorletztes Zeichen ein Dreieck ist.
-	\vspace{15mm}
+	\bigskip
 	\pause
 	
-	$$ \{\triangle, \square, \circ\}^* \cdot \triangle \cdot \{\triangle, \square, \circ\} $$
-	\vspace{15mm}
+	$$ \{\mword \triangle, \mword \square, \mword \mycircle\}^* \cdot \set{\mword \triangle} \cdot \{\mword \triangle, \mword \square, \mword \mycircle\} $$
+	\bigskip
 	\pause
 
-	$$ \{w \in \Sigma^* \mid w = v \cdot \triangle \cdot \mu, v \in \Sigma^*, \mu \in \Sigma \} $$
+	$$ \{w \in A^* \mid w = v \cdot \mword \triangle \cdot z, v \in A^*, z \in A \} $$
 
 	
 \end{frame}
 
 \begin{frame}{Zum Aufwärmen: Sprache gesucht!}
 	
-	$$ (\{\square, \circ\}^* \cdot \{\triangle\triangle\}^* )^* $$
-	\vspace{15mm}
+	$$ \left(\{\mword \square, \mword \mycircle\}^* \cdot \{\mword \triangle\mword \triangle\}^* \right)^* $$
+	\bigskip
 	\pause
 
 	Die Sprache der Wörter, in denen nirgends eine ungerade Anzahl an Dreiecken nebeneinander steht.
@@ -51,8 +55,8 @@
 
 \begin{frame}{Zum Aufwärmen: Sprache gesucht!}
 	
-	$$ \{\triangle, \circ\}^* \cdot ( \{\square\} \cdot \{\triangle, \circ\}^* \cdot \{\square\} \cdot \{\triangle, \circ\}^* )^* $$
-	\vspace{15mm}
+	$$ \{\mword \triangle, \mword \mycircle\}^* \cdot \left( \{\mword \square\} \cdot \{\mword \triangle, \mword \mycircle\}^* \cdot \{\mword \square\} \cdot \{\mword \triangle, \mword \mycircle\}^* \right)^* $$
+	\bigskip
 	\pause
 	
 	Die Sprache der Wörter, in denen eine gerade Anzahl an Vierecken vorkommt.
@@ -61,8 +65,8 @@
 
 \begin{frame}{Zum Aufwärmen: Sprache gesucht!}
 	
-	$$ \{\square, \triangle\}^* \cdot ( \{\circ\} \cdot \{\square, \triangle\}^+ )^* \cdot \{\circ, \varepsilon\} $$
-	\vspace{15mm}
+	$$ \{\mword \square, \mword \triangle\}^* \cdot \left( \{\mword \mycircle\} \cdot \{\mword \square, \mword \triangle\}^+ \right)^* \cdot \{\mword \mycircle, \varepsilon\} $$
+	\bigskip
 	\pause
 
 	Die Sprache der Wörter, in denen nirgends zwei Kreise aufeinander folgen.

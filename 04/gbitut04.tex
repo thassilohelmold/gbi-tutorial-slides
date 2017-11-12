@@ -4,12 +4,14 @@
 %\newcommand{\mydate}{18.11.2016}
 
 % Comment/uncomment this line to toggle handout mode
-\newcommand{\handout}{}
+%\newcommand{\handout}{}
 
 \input{../TutTexbib/PraeambelTut.tex}
 \input{../TutTexbib/Style_Tut.tex}
 
 \graphicspath{{../figures/}}
+
+\morescalingdelimiters
 
 \begin{document}
 \starttut{4}
@@ -37,14 +39,16 @@
 			\impl eine Behauptung \textbf{widerlegen} geht mit nem Beispiel sehr gut!}
 			%Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
 		% Modified by DJ (a more subtle version):
-		\FalseQuestionE{$\setsize{M} = M$ für $M \subseteq \N$}{$\setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$. Nix mit „Betrag“:}
+		\FalseQuestionE{$\setsize{M} = M$ für $M \subseteq \N$.}{$\setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$. Nix mit „Betrag“.}
 	
 	\medskip
 
+	%TODO
 	\pause[9]
 	Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
 	90~\% der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
 	
+	%TODO
 	\pause[10]
 	Passt auf, was eure Variablen sind und welche Operationen ihr darauf anwenden könnt. Mengen kann man nicht mit $\bund$ und $\boder$ verknüpfen
 \end{frame}
@@ -53,37 +57,58 @@
 
 \begin{frame}{Rückblick}
 	\begin{itemize}
-		\item Alphabet $A$ mit Zeichen, aus denen wir Wörter zusammenbauen
-		\item Wir können nicht immer allen Wörtern einen Sinn zuordnen 
-		\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
-		\item Das ist eine formale Sprache: Eine Teilmenge aller möglichen Wörter
+		\item \textbf{Aussagen} sind Sätze, die wahr oder falsch sind
+		\item Wir können Aussagen mit \textbf{Konnektiven} zusammenbauen: \\
+		\bund, \boder, \bnot, \bimp
+		\item \textbf{Aussagevariablen} helfen dabei, konkrete Inhalte zu ignorieren 
+		\item \textbf{Interpretationen} liefern Wahrheitswerte zu Variablen
+		\item $val_I(\·)$ liefert Wahrheitswert für ganze Formel (rekursiv)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Rückblick}
-	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörter:
+	\begin{itemize}
+		\item \textbf{Alphabet} $A$ mit Zeichen, aus denen wir Wörter zusammenbauen
+		\item Nicht immer haben all diese Wörter einen Sinn
+		\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
+		\item Eine solche Teilmenge aller möglichen Wörter nennen wir \textbf{formale Sprache}
+		%\item Das ist eine formale Sprache: Eine Teilmenge aller möglichen Wörter
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Rückblick}
+	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörtern:
 	\begin{itemize}
 		\item $L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$\\
-		Ein Wort aus L1 konkateniert mit einem Wort aus L2.
+		Jeweils ein Wort aus $L_1$ konkateniert mit einem Wort aus $L_2$.
 		\pause
-		\item $L^0 = \{\varepsilon \} \qquad L^{i+1} = L^i \cdot L$\\
-		Alle Wörter die aus i Wörtern der Sprache zusammengesetzt wurden
+		\item $L^0 = \{\varepsilon \}, \qquad L^{i+1} = L^i \cdot L$\\
+		Alle Wörter, die aus $i = 0,1,2...$ Wörtern der Sprache zusammengesetzt wurden
 		\pause
 		\item $L^+ = \bigcup \limits_{i=1}^\infty L^i \qquad L^* = L^+ \cup L^0$\\
-		Alle Wörter, die sich aus den Wörtern der Sprache bilden lassen
+		Alle Wörter, die sich aus den Wörtern der Sprache bilden lassen \\ 
+		(ohne/mit zusätzlichem $\eps$ als Würze).
 	\end{itemize}
-	Ein Alphabet kann man auch als formale Sprache mit Wörtern der Länge 1 auffassen.
+	Ein Alphabet selbst ist \textbf{auch} ne formale Sprache, nämlich mit Wörtern der Länge 1.
 \end{frame}
 
-\begin{frame}
-		\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\quad \emptyset$ ist auch eine gültige Sprache}
-		\FalseQuestionE{$01^* = \{\eps, 01, 0101, ...\}$}{$\quad 01^*$ gibt es nicht, denn $01 \neq \{01\}$}
+\begin{frame}[t]{Wahr oder falsch?}
+		\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\emptyset$ ist auch eine gültige Sprache.}
+		\FalseQuestionE{$\word{01}^* = \{\eps, \word{01}, \word{0101}, ...\}$}{$\word{01}^*$ gibt es nicht, denn $\word{01} \neq \{\word{01}\}$.}
 		\TrueQuestionE{Es gibt Sprachen $L$, für die gilt $\eps \in L^+$.}{}
-		\FalseQuestionE{$L^+ = L^* \setminus L^0$.}{Das gilt nicht, wenn $\varepsilon \in L$}
-		\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\quad \{\}^* = \{\varepsilon\}$}	
+		\FalseQuestionE{$L^+ = L^* \setminus L^0$.}{Gilt nicht, wenn $\varepsilon \in L$.}
+		\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\{\}^* = \{\varepsilon\}$.}	
 \end{frame}
+
+\input{../Bloecke/Aussagenlogik2}
+
+\section{Vollständige Induktion}
 
 \input{../Bloecke/Induktion_Vögel.tex}
+
+\section{Sprache gesucht}
 
 \input{Sprache_gesucht_beamer.tex}
 
@@ -91,13 +116,13 @@
 
 \begin{frame}{Ausblick: Klammerausdrücke}
 	
-	Was ist mit der Sprache aller gültigen Klammerausdrücke? Können wir diese auch mit Mengen, Konkatenation und Kleenschem Abschluss angeben? \only<beamer:0>{\\ \emph{Spoiler: Nein, das geht nicht!}}\\[1em]
+	Was ist mit der Sprache aller gültigen Klammerausdrücke? Können wir die auch mit $\set{}$, $\·$, ${}^*$ und ${}^+$ angeben? \only<beamer:0>{\\ \emph{Spoiler: Nein, das geht nicht!}}\\[1em]
 	\pause
 	
 	\begin{block}{}
 		\Large
 		\centering
-		SOON\\[1em]
+		COMING SOON... \\[1em]
 	\end{block}
 
 	\begin{figure}[H]
@@ -113,24 +138,31 @@
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\item Wie man formale Sprachen angibt
+			\item Wie man wahre Aussagen konstruiert \qquad (\#NoFakeNews!) 
+			\item Wie vollständige Induktion geht
+			\item Wie man formale Sprachen angeben kann
 			\item Wie man Beweise mit formalen Sprachen führt
-			\item Wie man von Zahlendarstellungen zu Zahlen kommt...
-			\item ... und wieder zurück
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
+			\item Wie man von Zahlendarstellungen zu Zahlen kommt...
+			\item[] ... und wieder zurück
 			\item Nicht immer so positiv: Negative Zahlen
-			\item Komprimierung: Huffmann-Codierungen
+			%\item Komprimierung: Huffmann-Codierungen
 		\end{itemize}
 	\end{block}
 \end{frame}
 
 %% Letzte Seite
+\thassedaniel{
+	\lastframe{0.7}{0}{xkcd/1_to_10.png}{https://xkcd.com/953/} %TODO
+}{
+	\lastframetitled{0.7}{0}{xkcd/win_by_induction.png}{ https://xkcd.com/1516/}{Win by Induction}
+}
 
-\lastframe{0.7}{0}{xkcd/1_to_10.png}{https://xkcd.com/953/}
+
 \slideThanks
 
 \end{document}
