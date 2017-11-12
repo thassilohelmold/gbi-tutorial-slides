@@ -6,7 +6,7 @@
 		Eine Interpretation $I$ heißt \textbf{Modell} von $G$, wenn gilt: \quad $val_I(G) = \W$. \\
 		\pause
 		\medskip
-		Sei $\Gamma$ eine Formelmenge.
+		Sei $\Gamma$\thasse{\footnote{Gamma}} eine Formelmenge.
 		Eine Interpretation $I$ heißt \textbf{Modell} von $\Gamma$, wenn für alle Formeln $G \in  \Gamma$ gilt: \quad $val_I(G) = \W$.
 	\end{Definition}
 	\bigskip
@@ -66,7 +66,7 @@
 	\end{block}
 	\pause
 	\begin{Beispiel}
-		\centered{$\bnot\bnot G \bgdw G$ ist Tautologie, also $\bnot\bnot G \equiv G$}
+		\centered{$\bnot(\bnot G) \bgdw G$ ist Tautologie, also $\bnot(\bnot G) \equiv G$}
 	\end{Beispiel}
 \end{frame}
 
@@ -86,7 +86,7 @@
 			\item Davon nennen wir einige bestimmte \textbf{Axiome} \\
 			\impl setzen wir als Tautologien voraus
 			\item Eine \emph{Schlussregel}: \textbf{Modus Ponens} \\
-			...um neue Tautologien zu konstruieren
+			...um aus Axiomen neue Tautologien zu konstruieren oder aus einer Formelmenge Schlüsse abzuleiten
 		\end{itemize}
 	\end{block}
 \end{frame}
@@ -150,12 +150,13 @@
 	\end{block}
 	\pause 
 	\begin{block}{Lemma}
-		Eine Formel $G$ ist genau dann Tautologie, wenn $G$ ein Theorem des Kalküls ($=$~im Kalkül beweisbar) ist. \\
+		Eine AL-Formel $G$ ist genau dann Tautologie, wenn $G$ ein Theorem des AL-Kalküls ($=$~im Kalkül beweisbar) ist. \\
 		\smallskip
 		\centered{--- bzw. ---} 
 		\smallskip
-		Für jede Formel $G$ gilt: \qquad $\models G \; \Gdw \; \vdash G$.
+		Für jede AL-Formel $G$ gilt: \qquad $\models G \; \Gdw \; \vdash G$.\\
 	\end{block}
+	(Achtung: Es gibt Kalküle / Logiken, für die so etwas nicht gilt!)
 	\pause
 	\begin{block}{Lemma}
 		Für Formeln $G$, $H$ gilt $G \vdash H$ genau dann, wenn $\vdash \bleftBr G \bimp H \brightBr$.
