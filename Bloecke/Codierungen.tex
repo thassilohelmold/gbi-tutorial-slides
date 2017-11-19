@@ -1,86 +1,109 @@
 \section{Codierungen}
 
-\begin{frame}
-	\textbf{Übersetzung:} Bedeutungserhaltende Abbildung \\[0.5em] \pause
+\begin{frame}{Übersetzungen}
+	\textbf{Übersetzung:} „Bedeutungserhaltende“ Abbildung \\[0.5em] \pause
 	\textbf{Codierung:} Injektive Übersetzung \\ \pause
-	Es reicht eine injektive Abbildung: Dann können wir für jedes $f(w)$ eindeutig das erzeugende $w$ angeben und somit die Bedeutung von $f(w)$ als die Bedeutung von $w$ festlegen. \\[1em]
+	\begin{itemize}
+		\item Injektiv reicht, weil wir jedem $f(w)$ sein erzeugendes $w$ zuordnen können
+		\implitem Definiere Bedeutung von $f(w) := \text{Bedeutung von } w$
+	\end{itemize}
 	
 	\pause
-	\emph{Beliebige }Codierungen zu speichern ist sehr aufwendig, bei unendlichem Definitionsbereich sogar unmöglich.\\
-	Also bringen wir etwas Struktur ins Spiel!
+	\begin{itemize}
+		\item \textbf{Problem}: \emph{Beliebige} Codierungen zu speichern sehr aufwendig
+		\item $\abs{\text{Definitionsbereich}} = \infty$ \impl sogar unmöglich!
+		\implitem Bringen wir etwas Struktur ins Spiel!
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Homomorphismen}
-	Ein Homomorphismus ist eine strukturerhaltende Abbildung. \\ \pause
-	\begin{align*}
-		\Phi : A &\to B \\
-		\text{ mit } \forall a \in A, b \in B: \Phi(a \; \square \; b) &= \Phi(a) \; \triangle \; \Phi(b)
-	\end{align*} 
+	Ein \textbf{Homomorphismus} ist eine \textit{strukturerhaltende} Abbildung \\ \pause
+	\begin{threealign}
+		\Phi : A &\functionto& B \\
+		\text{ mit } \forall a \in A, b \in B: \quad  \Phi(a \sim b) &=& \Phi(a) \bowtie \Phi(b)
+	\end{threealign}
+	\medskip \\
+	Dabei stehen $\sim$ und $\bowtie$ hier für feste beliebige Operationen, wie z.~B. $+, -, \·, /, \oplus, \barwedge, ...$ \\
+	(Muss es auf $A$ bzw. $B$ natürlich geben!)
 \end{frame}
 
 \begin{frame}{Homomorphismen}
-	In GBI: Homomorphismen auf Wörtern, dabei muss die Konkatenation erhalten werden.\\
-	$A, B$ Alphabete, dann ist Abbildung $h: A^* \to B^*$ ein Homomorphismus, wenn
-	$$ \forall\ x, y\in A^* : h(x \cdot y) = h(x) \cdot h(y) $$
+	In GBI: Homomorphismen auf Wörtern mit „$\·$“ als Operation.\\
+	\impl $A, B$ Alphabete, dann ist $h: A^* \functionto B^*$ ein Homomorphismus, wenn
+	$$ \forall x, y \in A^* : \quad h(x \cdot y) = h(x) \cdot h(y). $$
 	
 	\pause
-	Damit sind alle Funktionswerte durch die Bilder der einzelnen Zeichen aus A festgelegt. Das ist aber eine \enquote{endliche Tabelle} (da $A$ endlich ist) und lässt sich daher gut speichern und \enquote{handhaben}.
+	\impl Brauchen nur Funktionswerte für einzelne Zeichen $a \in A$, dann kennen wir schon das ganze $h$! \\
+	\impl Brauchen uns nur eine Tabelle für die Zeichen zu merken 
+	\impl $A$ endlich \impl Tabelle endlich \impl gut speicherbar
 	
 	\pause
 	\begin{Beispiel}
-		Sei $h$ ein Homomorphismus mit $h(a) = 2, h(b) = 3$. \\
-		Dann gilt $h(aba) = h(a) \cdot h(b) \cdot h(a) = 232 $ \\[0.5em]
-		$Trans_{16,2}$ ist auch (fast) ein Homomorphismus (siehe dazu ÜB WS15/16)
+		Sei $h$ ein Homomorphismus, für den gilt: $h(\word a) = \word 2, h(\word b) = \word 3$. \\
+		Dann gilt $h(\word{aba}) = h(\word a) \cdot h(\word b) \cdot h(\word a) = \word{232}. $ \\[0.5em]
+		$Trans_{3,2}$ ist kein Homomorphismus (siehe dazu ÜB WS15/16)
 	\end{Beispiel}
 \end{frame}
 
-\begin{frame}{Homomorphismen konstruieren}
-	Wir können uns aber aus einer Abbildung der einzelnen Zeichen einen Homomorphismus auf Wörtern konstruieren.
+\begin{frame}{Homomorphismen bauen}
+	Haben: Abbildung der einzelnen Zeichen \\
+	Wollen: Abbildung ganzer Wörter 
 	\begin{Definition}
-		Sei $f: A \to B^*,$ \pause definiere $f^{**}:A^* \to B^*$ als
+		Sei $f: A \functionto B^*,$ \pause definiere $f^{**}:A^* \functionto B^*$ als
 		\begin{align*}
-		f^{**}(\varepsilon) &= \varepsilon  \\
-		\forall w\in A^*, x\in A: f^{**}(wx) &= f^{**}(w) f(x)       
+		f^{**}(\eps) &= \eps  \\
+		\forall w\in A^*, x\in A: \quad  f^{**}(w \· x) &= f^{**}(w) \· f(x)       
 		\end{align*}
 	\end{Definition}
 
-	$f^{**}$ ist der durch $f$ \textbf{induzierte} Homomorphismus.
+	$f^{**}$ heißt der durch $f$ \textbf{induzierte} Homomorphismus.
 \end{frame}
 
-\begin{frame}{$\varepsilon-$Freiheit}
-	Klar ist: $h(\varepsilon) = \varepsilon$
+\begin{frame}{$\eps$-Freiheit}
+	Klar ist: Für jeden Hom. $h$ ist $h(\eps) = \eps$.
 	
 	\pause
 	\begin{Definition}
-		Ein Homomorphismus heißt $\varepsilon-$frei, wenn 	$$ \forall\ x\in A : h(x) \neq \varepsilon $$
+		Ein Homomorphismus heißt $\eps$-frei, wenn 	$$ \forall x\in A : h(x) \neq \eps. $$
 	\end{Definition}
 
-	Was ist das Problem mit Homomorphismen, die nicht $\varepsilon-$frei sind? \\ \pause
-	Es \enquote{geht Information verloren}.\\
-	Sei $h(c) = \varepsilon, h(b) = 2, w \in \{b, c\}^*, h(w) = 2$.\\
-	Wie kommen wir zu $w$?\\ \pause 
-	Gar nicht! Wir wissen nicht, wie viele $c$ in dem Wort $w$ sind.
+	
+	Was ist das Problem mit Homomorphismen, die nicht $\eps$-frei sind? \\ \pause
+	\impl Es geht Information verloren.\\
+	
+	\begin{Beispiel}
+		Sei $h$ ein Hom. mit $h(\word c) = \eps, \; h(\word b) = \word 2$. \\
+		Haben unbekanntes $w \in \{\word b, \word c\}^*$ und wissen: $h(w) = \word 2$. \\
+		\smallskip
+		Wie kommen wir von $h(w)$ wieder zu $w$ zurück? \\ \pause
+		\impl Gar nicht! (Wissen nicht, wieviel \word c in $w$ drin sind.)
+	\end{Beispiel}
 \end{frame}
 
 \begin{frame}{Präfixfreiheit}
 	\begin{Definition}
-		Ein Homomorphismus heißt \emph{präfixfrei}, wenn für
+		Ein Homomorphismus heißt \textbf{präfixfrei}, wenn für
 		\emph{keine} zwei verschiedenen Symbole $x_1,x_2\in A$ gilt: $h(x_1)$
 		ist ein Präfix von $h(x_2)$.
 	\end{Definition}
 
-	\vspace{5mm}
+	\bigskip
 	Was ist das Problem mit Homomorphismen, die nicht präfixfrei sind? \\ \pause
-	Es \enquote{geht Information verloren}.\\
+	\impl Es geht Information verloren.\\
 	
-	Sei $h(a) = 2, h(b) = 3, h(c) = 23, , w \in \{a, b, c\}^*, h(w) = 23$. \\
-	Wie kommen wir zu $w$?\\ \pause
-	Gar nicht! $w = c$ oder $w = ab$, wir wissen es nicht!
+	\begin{Beispiel}
+		Sei $h$ ein Hom. mit $h(\word a) = \word 2, \; h(\word b) = \word 3, \; h(\word c) = \word{23}$. \\ 
+		Haben unbek. $w \in \{\word a, \word b, \word c\}^*$ und wissen: $h(w) = \word{23}$. \\
+		\smallskip
+		Wie kommen wir von $h(w)$ wieder zu $w$ zurück?\\ \pause
+		\impl Gar nicht! $w = \word c$ oder $w = \word{ab}$, wir wissen es nicht!
+	\end{Beispiel}
+	
 \end{frame}
 
 \begin{frame}{Zurück zu Codierungen}
 	\begin{block}{Beobachtung}
-		Präfixfreie Homomorphismen sind $\varepsilon-$frei
+		Präfixfreie Homomorphismen sind $\eps$-frei.
 	\end{block}
 
 	\pause
@@ -94,11 +117,12 @@
 		\[
 		u(w) = 
 		\begin{cases}
-		\varepsilon, & \text{ falls } w=\varepsilon\\
-		x\,u(w'), & \text{ falls } w=h(x)w' \text{ für ein } x\in A \\
+		\eps, & \text{ falls } w=\eps\\
+		x\·u(w'), & \text{ falls } w=h(x) \· w' \text{ für ein } x\in A \\
 		\bot,  & \text{ sonst }\\
 		\end{cases}
 		\]
 	\end{block}
+	($\bot$: „undefiniert“, „bottom“.)
 	
 \end{frame}

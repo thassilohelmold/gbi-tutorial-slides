@@ -11,7 +11,7 @@
 \input{../TutTexbib/gbi-macros}
 \usepackage{../TutTexbib/thwregex}
 \usepackage{environ}
-%\usepackage{bm}
+\usepackage{bm}
 \usepackage{calc}
 \usepackage{varwidth}
 \usepackage{wasysym}
@@ -151,8 +151,11 @@
 
 \newcommand{\Mid}{\;\middle|\;}
 
+\let\after\circ
+
 \def\·{\cdot}
 \def\*{\cdot}
+\def\?>{\ensuremath{\rightsquigarrow}}  % Fuck you, Latex
 
 \newcommand{\tight}[1]{{\renewcommand{\arraystretch}{0.76} #1}}
 \newcommand{\stackedtight}[1]{{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix}} }

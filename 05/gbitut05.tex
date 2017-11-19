@@ -14,66 +14,71 @@
 \usepackage{graphicx}
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{5}
 
 % Zum Aufwärmen: PEBA Tutorenprogramm Aktivierung Code merken (PDF im gleichen Ordner zu finden)
 
-\framePrevEpisode
+% \framePrevEpisode
 
-\begin{frame}{Rückblick: Zahlendarstellung}
-	\begin{itemize}
-		\item Zahlen sind Objekte, die einen festen numerischen Wert haben.\\
+\input{../Bloecke/Darstellung}
+
+\mycomment{
+	\begin{frame}{Rückblick: Zahlendarstellung}
+		\begin{itemize}
+			\item Zahlen sind Objekte, die einen festen numerischen Wert haben.\\
 			Um eine Zahl aufzuschreiben, benötigen wir aber eine Darstellung. \\
 			Die gleiche Zahl kann viele verschiedenen Darstellungen annehmen.
-		\item Mit der Auswertungsfunktion $Num_b(\cdot)$ berechnen wir von einer Zahlendarstellung den numerischen Wert.
-		\item Mit der Funktion $Repr_b(\cdot)$ können wir eine Zahl in einer beliebigen Darstellung angeben.
-	\end{itemize}
+			\item Mit der Auswertungsfunktion $Num_b(\cdot)$ berechnen wir von einer Zahlendarstellung den numerischen Wert.
+			\item Mit der Funktion $Repr_b(\cdot)$ können wir eine Zahl in einer beliebigen Darstellung angeben.
+		\end{itemize}
+		
+		Bis jetzt haben wir das alles nur für positive Zahlen gesehen!
+	\end{frame}
 	
-	Bis jetzt haben wir das alles nur für positive Zahlen gesehen!
-\end{frame}
 
-\begin{frame}
-	\begin{block}{Wahr oder falsch?}
-	\begin{itemize}
-		\TrueQuestionE{$\forall x \in \Z: x \mod 2 = 0 \iff x \text{ ist gerade}$}{ $\qquad \text{Und auch: } x \mod 2 = 1 \iff \text{x ist ungerade}$}
-		\FalseQuestionE{$4 \cdot (x \div 4) = x$}{ $\qquad 4 \cdot (x \div 4) + (x \mod 4) = x$}
-		\TrueQuestionE{$\left(\{a\}^\ast\cdot \{b,\epsilon\}\right)^\ast = \{a,b\}^\ast$}{}
-		\FalseQuestionE{Jede Abbildung besitzt eine Umkehrabbildung}{ Nur bijektive Abbildungen besitzen eine Umkehrabbildung}
-		\TrueQuestionE{Für jede Abbildung können wir das Urbild angeben}{}
-	\end{itemize}
-	\end{block}	
-\end{frame}
+	
+}
+
+
+
+
 
 \begin{frame}{Aufgabe: Zahlendarstellung}
 	Berechnet die folgenden Zahlenwerte:
 	\begin{align*}
-		Num_2(1) &= \only<2->{1} \\
-		Num_2(11) &= \only<3->{3} \\
-		Num_2(111) &= \only<4->{7} \\
-		Num_2(1111) &= \only<5->{15}
+		Num_2(\word 1) &= \visible<2->{1} \\
+		Num_2(\word{11}) &= \visible<3->{3} \\
+		Num_2(\word{111}) &= \visible<4->{7} \\
+		Num_2(\word{1111}) &= \visible<5->{15}
 	\end{align*}
 	
 	Gibt es ein allgemeines Muster? \\ \pause[6]
-	Ja, es gilt $$Num_2(1^l) = 2^l - 1$$ und allgemein $$Num_b((b-1)^l) = b^l - 1$$
+	\delimitershortfall=0pt
+	Ja, es gilt $$Num_2(\word 1^\ell) = 2^\ell - 1$$ und allgemein $$Num_b\left({\underbrace{(b-1)}_{\text{\footnotesize $\in Z_b$ }}}^\ell\right) = b^\ell - 1$$
 \end{frame}
 
 \input{../Bloecke/Zweierkomplement.tex}
 
 \begin{frame}{Von einer Zahlendarstellung zur Anderen}
 	Eigentlich recht intuitiv:
-	$$Trans_{3,5} = Repr_3 \circ Num_5$$
+	$$\fTrans_{3,5} = \fRepr_3 \after \fNum_5$$
 	
 	\begin{block}{Aufgabe}
 		Berechne folgende Darstellungen:\\
-		$Repr_2(42) = \visible<2->{ 101010_2}$ \\
-		$Trans_{4,2}(101010) = \visible<3->{ 222_4}$ \\
-		$Trans_{8,10}(42) = \visible<4->{ 52_8}$ \\
-		$Trans_{16,10}(42) = \visible<5->{ 2A_{16}}$
+		\begin{enumerate}[(1)]
+			\item $\fRepr_2(42) = \visible<2->{ \word{101010}_2}$ 
+			\item $\fTrans_{4,2}(\word{101010}) = \visible<3->{ \word{222}_4}$ 
+			\item $\fTrans_{8,10}(\word{42}) = \visible<4->{ \word{52}_8}$ 
+			\item $\fTrans_{16,10}(\word{42}) = \visible<5->{ \word{2A}_{16}}$
+		\end{enumerate}
 	\end{block}
 
-	Was ist bei allen Wörtern gleich? \only<6->{Die Bedeutung!} \\
-	Was macht die Rechnungen 2 - 4 vergleichsweise einfach? \pause[6] Wir können die Struktur ausnutzen und zeichenweise vorgehen! ($Trans_{8,10}(42) = Trans_{8,2}(101 \cdot 010) = Trans_{8,2}(101) \cdot Trans_{8,2}(010)$)
+	Was ist bei allen Wörtern gleich? \only<6->{\impl Die Bedeutung!} \\
+	Was macht die Rechnungen (2) -- (4) vergleichsweise einfach? \pause[6] \\
+	\impl Wir können die Struktur ausnutzen und zeichenweise vorgehen! ($\fTrans_{8,10}(\word{42}) = \fTrans_{8,2}(\word{101} \cdot \word{010}) = \fTrans_{8,2}(\word{101}) \cdot \fTrans_{8,2}(\word{010})$)
 \end{frame}
 
 \input{../Bloecke/Codierungen.tex}
@@ -87,6 +92,7 @@
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
+			\item Wie man Zahlen anders darstellt
 			\item Wie man das Zweierkomplement bildet
 			\item Übersetzungen und Codierungen
 			\item Huffman-Codierung
@@ -95,13 +101,14 @@
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Speicher - Damit wir nicht alles gleich wieder vergessen
-			\item MIMA - Den Bits beim Arbeiten zuschauen
+			\item Speicher -- Damit wir nicht alles gleich wieder vergessen
+			\item MIMA -- Den Bits beim Arbeiten zuschauen
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-\lastframe{0.75}{0}{xkcd/tar.png}{https://www.xkcd.com/1168/}
+\thassedaniel{\lastframe{0.75}{0}{xkcd/tar.png}{https://www.xkcd.com/1168/}}{\lastframe{0.49}{0}{xkcd/cant_sleep.png}{https://www.xkcd.com/571/}}
+
 \slideThanks
 
 \end{document}
