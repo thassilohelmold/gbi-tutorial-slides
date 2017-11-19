@@ -106,14 +106,13 @@
 	}
 \end{frame}
 
-%TODO: Make solution frame!
 \begin{frame}{Huffman-Codes}
 		Huffman-Codierungen funktionieren immer nur gut für Wörter, die eine \textbf{ähnliche relative Zeichenhäufigkeit} haben wie das Wort, für das der Code erstellt wurde.
 		\begin{Beispiel}
 			$w_1 = \word{badcfehg}, \quad w_2 = \word a^1 \word b^2 \word c^4 \word d^8 \word e^{16} \word f^{32} \word g^{64} \word h^{128}$. \\
 			Erstellt eine Huffman-Codierung für jedes Wort und codiert $w_1$ mit mit beiden Codierungen.\\
 			Was verhalten sich die Längen der Codewörter?
-			\visible<all:2->{
+			\visible<2->{
 				\newcommand{\css}{\;\,}
 				%\vspace{-.8\baselineskip}
 				\begin{columns}[T] 
@@ -145,22 +144,9 @@
 				\end{columns}
 				
 			}
-			%  
-			% 
-			% |h_2(w_2)| = 501
-			% |h_2(w_1)| = 35
 		\end{Beispiel}
 \end{frame}
 
-\begin{frame}{Huffman-Codes}
-	Huffman-Codierungen funktionieren immer nur gut für Wörter, die eine \textbf{ähnliche relative Zeichenhäufigkeit} haben wie das Wort, für das der Code erstellt wurde.
-	
-	\begin{Beispiel}
-		$w_1 = \word{badcfehg}, \quad w_2 = \word a^1 \word b^2 \word c^4 \word d^8 \word e^{16} \word f^{32} \word g^{64} \word h^{128}$. \\
-		Erstellt eine Huffman-Codierung für jedes Wort und codiert beide mit mit beiden Codierungen.\\
-		Was verhalten sich die Längen der Codewörter?
-	\end{Beispiel}
-\end{frame}
 
 \begin{frame}{Huffman-Codes}
 	\begin{block}{Erweiterung}
