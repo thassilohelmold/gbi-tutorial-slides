@@ -1,4 +1,4 @@
-﻿In dieser Datei werden Todos, evtl. Todos und generelle Ideen sowie Inhalte gesammelt
+In dieser Datei werden Todos, evtl. Todos und generelle Ideen sowie Inhalte gesammelt
 
 -----------------------------------------
 TODO: 
@@ -20,3 +20,11 @@ Nichts davon ist konkret wichtig oder bereits konkret ausgearbeitet.
 -----------------------------------------
 - Funktionales (map): 14, Blatt 4
 - Funktionales (Fold): 15, Ü2
+
+
+-----------------------------------------
+Textblöcke:
+Sammlung von verwahrlosten Textblöcken, die auf ein neues Zuhause warten
+-----------------------------------------
+Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
+90~\% der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]

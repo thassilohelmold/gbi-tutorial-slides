@@ -1,8 +1,5 @@
 %beamer
 
-% Define a global usable date. Must come before StyleTut
-%\newcommand{\mydate}{18.11.2016}
-
 % Comment/uncomment this line to toggle handout mode
 %\newcommand{\handout}{}
 
@@ -18,7 +15,7 @@
 
 \begin{frame}{Übungsblätter}
 	
-	Schnitt: \thassedaniel{XXX}{21.9} / 23~(bzw. 28)~P
+	Schnitt: \thassedaniel{20.7}{21.9} / 23~(bzw. 28)~P
 	
 	\begin{itemize}
 		\item Erstmal: Volle Punktzahl ist utopisch. Fehler macht man, um draus zu lernen – dazu sind ÜBs da
@@ -32,25 +29,18 @@
 	
 \end{frame}
 
-\begin{frame}[t]{Übungsblätter: Häufige Fehler und anderer Kram}
+\begin{frame}[t]{Übungsblätter: Häufige Fehler \daniel{und anderer Kram}}
 	
 		\TrueQuestionE{Beweise fängt man mit der Behauptung an.}{}
 		\FalseQuestionE{Wenn wir $A$ schreiben, ist das immer eine Menge, \\ und $f, g$ sind immer Funktionen.}{Das muss man \textbf{explizit} angeben.}
 		\FalseQuestionE{Ein Beispiel langt als Beweis.}{...bis ein anderes Beispiel herkommt, bei dem es kaputt geht... \\
 			\impl eine Behauptung \textbf{widerlegen} geht mit nem Beispiel sehr gut!}
 			%Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
-		% Modified by DJ (a more subtle version):
 		\FalseQuestionE{$\setsize{M} = M$ für $M \subseteq \N$.}{$\setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$. Nix mit „Betrag“.}
 	
 	\medskip
 
-	%TODO
-	%\pause[9]
-	%Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
-	%90~\% der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
 	\uncover<9->{Passt auf, was eure Variablen sind und welche Operationen ihr darauf anwenden könnt. Mengen kann man nicht mit $\bund$ und $\boder$ verknüpfen und auch keine \impl dazwischen tun.}
-	%%TODO
-	%\pause[10]
 	
 \end{frame}
 
@@ -81,7 +71,6 @@
 		\item Nicht immer haben all diese Wörter einen Sinn
 		\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
 		\item Eine solche Teilmenge aller möglichen Wörter nennen wir \textbf{formale Sprache}
-		%\item Das ist eine formale Sprache: Eine Teilmenge aller möglichen Wörter
 	\end{itemize}
 \end{frame}
 
@@ -109,6 +98,8 @@
 	\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\{\}^* = \{\varepsilon\}$.}	
 \end{frame}
 
+% TODO: Im letzten Jahr hat die Zeit nicht gereicht,
+% daher diesen Inhalt hier eher streichen.
 \input{Sprache_gesucht_beamer.tex}
 
 \input{../Bloecke/FormaleSprachenP2.tex}
