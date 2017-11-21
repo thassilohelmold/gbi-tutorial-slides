@@ -20,7 +20,7 @@
 	Ein \textbf{Homomorphismus} ist eine \textit{strukturerhaltende} Abbildung \\ \pause
 	\begin{threealign}
 		\Phi : A &\functionto& B \\
-		\text{ mit } \forall a,b \in A: \quad  \Phi(a \sim b) &=& \Phi(a) \bowtie \Phi(b)
+		\text{ mit } \forall x,y \in A: \quad  \Phi(x \sim y) &=& \Phi(x) \bowtie \Phi(y)
 	\end{threealign}
 	\medskip \\
 	Dabei stehen $\sim$ und $\bowtie$ hier für feste beliebige Operationen, wie z.~B. $+, -, \·, /, \oplus, \barwedge, ...$ \\
@@ -41,6 +41,7 @@
 	\begin{Beispiel}
 		Sei $h$ ein Homomorphismus, für den gilt: $h(\word a) = \word 2, h(\word b) = \word 3$. \\
 		Dann gilt $h(\word{aba}) = h(\word a) \cdot h(\word b) \cdot h(\word a) = \word{232}. $ \\[0.5em]
+		\pause
 		$\fTrans_{16,2}$ ist fast ein Homomorphismus (führende Nullen machen Probleme)\\
 		$\fTrans_{3,2}$ ist kein Homomorphismus (siehe dazu ÜB WS15/16)
 	\end{Beispiel}
@@ -126,4 +127,17 @@
 	\end{block}
 	($\bot$: „undefiniert“, „bottom“.)
 	
+\end{frame}
+
+\begin{frame}{Dekodierung: Übung}
+	\begin{block}{Aufgabe}
+	Decodiert das folgende Codewort mit der jeweiligen Codierung:\\
+	\word{011000000001}
+	\smallskip
+	
+	(1) $f(E) = \word{10} \quad f(M) = \word{01} \quad f(A) = \word{0001} \quad f(T) = \word{0000}$ \\
+	\visible<2->{META}\\[0.5em]
+	(2) $f(E) = \word 1 \quad f(M) = \word 0 \quad f(A) = \word{0001} \quad f(T) = \word{0000}$ \\
+	\visible<3->{Nicht eindeutig möglich, da nicht präfixfrei.}\\[0.5em]
+	\end{block}
 \end{frame}

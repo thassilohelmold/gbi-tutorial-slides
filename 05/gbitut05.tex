@@ -1,10 +1,5 @@
 %beamer
 
-% TODO: Negations-Besipiel beim ZK (schrittweise def. einer induktiven ZK-Fkt.)
-
-% Define a global usable date. Must come before StyleTut
-%\newcommand{\mydate}{25.11.2016}
-
 % Comment/uncomment this line to toggle handout mode
 % \newcommand{\handout}{}
 
@@ -24,6 +19,9 @@
  \framePrevEpisode
 
  \begin{frame}[t]{Wahr oder Falsch?}
+ 	% Socrative: https://b.socrative.com/teacher/#import-quiz/31489145
+ 	\Socrative
+ 	
  	\TrueQuestion{Dieser Satz ist eine Aussage.}
  	\FalseQuestionE{$x \boder y = y \boder x$}{Das sind syntaktisch verschiedene AL-Formeln!}
  	\TrueQuestion{$x \boder y \equiv y \boder x$}
@@ -47,14 +45,7 @@
 		
 		Bis jetzt haben wir das alles nur für positive Zahlen gesehen!
 	\end{frame}
-	
-
-	
 }
-
-
-
-
 
 \begin{frame}{Aufgabe: Zahlendarstellung}
 	Berechnet die folgenden Zahlenwerte:
@@ -67,7 +58,7 @@
 	
 	Gibt es ein allgemeines Muster? \\ \pause[6]
 	\delimitershortfall=0pt
-	Ja, es gilt $$Num_2(\word 1^\ell) = 2^\ell - 1$$ und allgemein $$Num_b\left({\underbrace{(b-1)}_{\text{\footnotesize $\in Z_b$ }}}^\ell\right) = b^\ell - 1$$
+	Ja, es gilt $$Num_2(\word 1^\ell) = 2^\ell - 1$$ und allgemein \pause[7] $$Num_b\left({\underbrace{(b-1)}_{\text{\footnotesize $\in Z_b$ }}}^\ell\right) = b^\ell - 1$$
 \end{frame}
 
 \input{../Bloecke/Zweierkomplement.tex}
@@ -79,10 +70,10 @@
 	\begin{block}{Aufgabe}
 		Berechne folgende Darstellungen:\\
 		\begin{enumerate}[(1)]
-			\item $\fRepr_2(42) = \visible<2->{ \word{101010}_2}$ 
-			\item $\fTrans_{4,2}(\word{101010}) = \visible<3->{ \word{222}_4}$ 
-			\item $\fTrans_{8,10}(\word{42}) = \visible<4->{ \word{52}_8}$ 
-			\item $\fTrans_{16,10}(\word{42}) = \visible<5->{ \word{2A}_{16}}$
+			\item $\fRepr_2(42) = \visible<1->{ \word{101010}_2}$ 
+			\item $\fTrans_{4,2}(\word{101010}) = \visible<2->{ \word{222}_4}$ 
+			\item $\fTrans_{8,10}(\word{42}) = \visible<3->{ \word{52}_8}$ 
+			\item $\fTrans_{16,10}(\word{42}) = \visible<4->{ \word{2A}_{16}}$
 		\end{enumerate}
 	\end{block}
 
@@ -92,8 +83,6 @@
 \end{frame}
 
 \input{../Bloecke/Codierungen.tex}
-
-\lastframe{0.5}{0}{xkcd/digital_data.png}{https://www.xkcd.com/1683/}
 
 %\input{../Bloecke/Huffmann.tex}
 

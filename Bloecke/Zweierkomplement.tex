@@ -29,19 +29,6 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{ZK-Beispiel}
-	\begin{block}{Beispiele}
-		\begin{align*}
-			\fZkpl_5(0)  &= \visible<2->{\word{00000}} \\
-			\fZkpl_5(2) &= \visible<3->{\word{00010}} \\
-			\fZkpl_5(15) &= \visible<4->{\word{01111}} \\
-			\fZkpl_5(-1) &= \visible<5->{\word{11111}} \\
-			\fZkpl_5(-6) &= \visible<6->{\word{11010}} \\
-			\fZkpl_5(-16) &= \visible<7->{\word{10000}}
-		\end{align*}
-	\end{block}
-\end{frame}
-
 \begin{frame}{ZK ausrechnen}
 	$x \geq 0$: geschenkt \smiley \\
 	$x < 0$:
@@ -54,6 +41,19 @@
 	
 	\begin{Beispiel}
 		 $$\fZkpl_4(-2): 2 \stackrel{\fRepr_2}{\?>} \word{10} \stackrel{\text{Nullen}}{\?>} \word{0010} \stackrel{\text{negieren}}{\?>} \word{1101} \stackrel{+1}{\?>} \underline{\word{1110}}. $$
+	\end{Beispiel}
+\end{frame}
+
+\begin{frame}{ZK ausrechnen}
+	\begin{Beispiel}
+		\begin{align*}
+		\fZkpl_5(0)  &= \visible<2->{\word{00000}} \\
+		\fZkpl_5(2) &= \visible<3->{\word{00010}} \\
+		\fZkpl_5(15) &= \visible<4->{\word{01111}} \\
+		\fZkpl_5(-1) &= \visible<5->{\word{11111}} \\
+		\fZkpl_5(-6) &= \visible<6->{\word{11010}} \\
+		\fZkpl_5(-16) &= \visible<7->{\word{10000}}
+		\end{align*}
 	\end{Beispiel}
 \end{frame}
 
