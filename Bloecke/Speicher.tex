@@ -2,35 +2,35 @@
 
 \begin{frame}{Funktionen}
 	\begin{Definition}
-		Seien A und B Mengen. Mit $B^A$ bezeichnen wir die Menge aller Abbildungen von $A$ nach $B$, also $$B^A = \{f \mid f : A \to B \}$$
+		Seien A und B Mengen. Dann ist $$B^A := \set{f \Mid f \from A \functionto B }$$ die Menge aller Abbildungen von $A$ nach $B$.
 	\end{Definition}
 
-	Man kann sich das wie eine Tabelle vorstellen. Wir wählen für jedes $a \in A$ ein $b \in B$.
+	Abbildungen kann man sich auch als Tabellen vorstellen: \\
+	Wir wählen für jedes $a \in A$ ein $b \in B$.
 	
 	\begin{block}{Beobachtung}
 		Für endliche Mengen A und B gilt:
-		$$|B^A| = |B|^{|A|}$$
+		\delimitershortfall=0pt
+		$$\setsize{B^A} = \setsize B^{\setsize A}$$
 	\end{block}
 \end{frame}
 
-\newcommand{\filter}{filter_{\only<2-4|handout:1>{even}\only<5|handout:2>{odd}\only<6|handout:3>{solves}}}
+\newcommand{\filter}{filter_{\only<2-3|handout:1>{even}\only<4|handout:2>{odd}\only<5|handout:3>{Uglg}}}
 
 \begin{frame}{Problem: Ziffern filtern}
 	Wir wollen aus einer Ziffernfolge (Wort aus $Z^*_{10}$) Ziffern herausfiltern, die eine bestimmte Eigenschaft haben:\\
-	\only<2-4|handout:1>{Gerade}
-	\only<5|handout:2>{Ungerade}
-	\only<6|handout:3>{Löst die Ungleichung $x^2 - 3*x < 20$}
+	\visible<2->{\impl\ }\only<2-3|handout:1>{Gerade}\only<4|handout:2>{Ungerade}\only<5|handout:3>{Löst die Ungleichung $x^2 - 3x < 20$}
 	
 	\visible<3-> {
-		\begin{align*}
-		\filter : Z^*_{10} &\to Z^*_{10} \\
-		\varepsilon &\mapsto \varepsilon \\
-		z \cdot v &\mapsto \begin{cases}
-		z \cdot \filter(v) &\text{falls } \only<3-4|handout:1>{\visible<4>{z \in \{2,4,6,8,0\}}} \only<5|handout:2>{z \in \{1,3,5,7,9\}} \only<6|handout:3>{z^2 - 3*z < 20 }\\
+		\begin{threealign}
+		\filter \from Z^*_{10} &\functionto& Z^*_{10} \\
+		\eps &\mapsto& \eps \\
+		z \cdot v &\mapsto& \begin{cases}
+		z \cdot \filter(v) &\text{falls } \only<2-3|handout:1>{z \in \{\word 2,\word 4,\word 6,\word 8,\word 0\}} \only<4|handout:2>{z \in \{\word 1,\word 3,\word 5,\word 7,\word 9\}} \only<5|handout:3>{z^2 - 3z < 20 }\\
 		\filter(v) &\text{sonst}
 		\end{cases}\\
-		&\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*
-		\end{align*}
+		& \multicolumn{2}{l}{\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*.}
+		\end{threealign}
 	}
 \end{frame}
 
@@ -40,91 +40,154 @@
 		\begin{itemize}
 			\item $> 5$
 			\item $< 5$
-			\item $<2 \text{ oder } >7$
+			\item $<2$ oder $>7$
 			\item ... die perfekt sind
 			\item ... die sich ausmalen lassen
 		\end{itemize}
 	\end{block}
 
 	\pause
-	Nein, das wäre natürlich Unsinn!\\
-	Alle Funktionen unterscheiden sich nur an einer Stelle: \pause Der Bedingung, die erfüllt sein muss, damit die Ziffer in das Ergebnis mit aufgenommen wird.\\
+	\impl Blödsinn!\\
+	Alle Funktionen unterscheiden sich nur \textbf{an einer Stelle}: \pause \\
+	Der \textbf{Bedingung}, die überprüft wird.
 \end{frame}
 
 \begin{frame}{Filter}
-	Definiere stattdessen eine universelle Filter-Funktion:
+	Definiere stattdessen eine \textbf{universelle} Filter-Funktion:
 	
-	\begin{align*}
-		filter_p : Z^*_{10} &\to Z^*_{10} \\
-		\varepsilon &\mapsto \varepsilon \\
-		z \cdot v &\mapsto \begin{cases}
-		z \cdot filter_p(v) &\text{falls } p(v) = \textbf{w}\\
+	\begin{threealign}
+		filter_p : Z^*_{10} &\functionto& Z^*_{10} \\
+		\eps &\mapsto& \eps \\
+		z \cdot v &\mapsto& \begin{cases}
+		z \cdot filter_p(v) &\text{falls } p(z) = \W\\
 		filter_p(v) &\text{sonst}
 		\end{cases}\\
-		&\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*
-	\end{align*}
-	Für alle $$p: Z_{10} \to \BB$$
+		&\multicolumn{2}{l}{\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*}
+	\end{threealign}
+	\medskip
+	und zwar für alle \quad $p: Z_{10} \functionto \BB$.
 \end{frame}
 
 \begin{frame}{Filter}
+	\begin{threealign}
+		filter_p : Z^*_{10} &\functionto& Z^*_{10} \\
+		\eps &\mapsto& \eps \\
+		z \cdot v &\mapsto& \begin{cases}
+		z \cdot filter_p(v) &\text{falls } p(z) = \W\\
+		filter_p(v) &\text{sonst}
+		\end{cases}\\
+		&\multicolumn{2}{l}{\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*}
+	\end{threealign}
+	
 	Definiere beispielsweise nun:
-	$$ even:  Z_{10} \to \BB, z \mapsto \begin{cases}
-	\textbf{w} &\text{falls } z \in \{2, 4, 6, 8, 0\}\\
+	$$ even:  Z_{10} \functionto \BB, \; z \mapsto \begin{cases}
+	\textbf{w} &\text{falls } z \in \{\word 2,\word  4,\word  6,\word  8,\word  0\}\\
 	\textbf{f} &\text{sonst }
 	\end{cases}$$
 	
-	Dann ist $filter_{even}(123456) = 135$
+	\pause
+	Dann ist $filter_{even}(\word{123456}) = \word{246}$.
 	
-	Auch für alle anderen Filter müssen wir nur noch die $p$-Funktionen definieren, was viel einfacher und kürzer ist als jedes Mal die ganze Filter-Funktion neu zu definieren.
+	\smallskip
+	\impl Brauchen bloß $p$-Funktionen definieren anstatt jedes Mal ganze Filter-Funktion!
+	
 \end{frame}
 
-\begin{frame}{Charakteristische Funktion}
-	Sei $M$ eine abzählbar unendliche Menge und $L \subseteq M$.
-	
-	\begin{Definition}
-		Die Charakteristische Funktion einer (Teil-)Menge $L$ ist die Funktion 
-		\begin{align*}
-			C_L : M &\to \{0, 1\}\\
-			x &\mapsto \begin{cases}
+% TOO MUCH FOR THE FIRST TIME, I GUESS...
+\mycomment{
+	\begin{frame}{Charakteristische Funktion}
+		Sei $M$ eine abzählbar unendliche Menge und $L \subseteq M$.
+		
+		\begin{Definition}
+			Die \textbf{Charakteristische Funktion} einer (Teil-)Menge $L$ ist die Funktion 
+			\begin{threealign}
+			C_L : M &\functionto& \{0, 1\}\\
+			x &\mapsto& \begin{cases}
 			1 &x \in L \\
 			0 &x \notin L
-			\end{cases}
-		\end{align*}
-	\end{Definition}
-
-	Also gilt $C_L \in \{0, 1\}^M$
+			\end{cases}.
+			\end{threealign}
+		\end{Definition}
+		
+		Also ist $C_L \in \{0, 1\}^M$.
+		\smallskip
+		
+		Klar ist außerdem: Es gibt eine Bijektion $C$ zwischen Mengen und Charakteristischen Funktionen: $$C : 2^M \to \{0, 1\}^M, L \mapsto C_L$$
+	\end{frame}
 	
-	Klar ist außerdem: Es gibt eine Bijektion $C$ zwischen Mengen und Charakteristischen Funktionen: $$C : 2^M \to \{0, 1\}^M, L \mapsto C_L$$
+	\begin{frame}{Charakteristische Funktion}
+		Jetzt können wir auf diesen Funktionen äquivalente Operationen wie auf Mengen definieren...
+		
+		Vereinigung: $V\colon \{0,1\}^M \times \{0,1\}^M\to \{0,1\}^M$\\[1em]
+		
+		\only<2|handout:1>{
+			Beispielbild für $L_1=\{a,c,d\}$ und $L_2=\{b,c\}$
+			
+			\begin{tabular}{*{4}{>{$}c<{$}}}
+				& L_1 & L_2 & L_1\cup L_2 \\
+				x & f_1(x) & f_2(x) & V(f_1,f_2) \\
+				a & 1 & 0 & 1 \\
+				b & 0 & 1 & 1 \\
+				c & 1 & 1 & 1 \\
+				d & 1 & 0 & 1 \\
+				e & 0 & 0 & 0 \\
+			\end{tabular}
+		}
+		
+		\only<3-|handout:2> {
+			Wie definiert man $V(f_1,f_2)$? Zum Beispiel so:
+			\begin{align*}
+			V \colon \{0,1\}^M \times  \{0,1\}^M &\to \{0,1\}^M \\
+			(f_1,f_2) &\mapsto (x \mapsto \max(f_1(x),f_2(x))) \\
+			\end{align*}
+		} \only<4|handout:2> {
+		Oder so: $V(f_1,f_2) (x) = \max(f_1(x),f_2(x))$
+	}
+	\end{frame}
+}
+
+\newcommand{\yellow}[1]{\fcolorbox{white}{yellow!60}{\ensuremath{#1}}}
+\begin{frame}{Funktionen auf LSD: Filter}
+	\impl Idee: Mache $p$ zu einem Argument von $filter$!
+	\medskip
+	\begin{threealign}
+		filter \from \yellow{\BB^{Z_{10}} \times } Z^*_{10} &\functionto& Z^*_{10} \\
+		(\yellow{p}, \eps) &\mapsto& \eps \\
+		(\yellow{p}, z \cdot v) &\mapsto& \begin{cases}
+		z \cdot filter(\yellow{p, }v) &\text{falls } p(z) = \W\\
+		filter(\yellow{p, }v) &\text{sonst}
+		\end{cases}\\
+		&\multicolumn{2}{l}{\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*.}
+	\end{threealign} \\
+	\pause
+	
+	\impl $filter(even, \word{123456}) = \word{246}$. \\
+	\impl $filter(odd, \word{123456}) = \word{135}$.
+	\medskip
+	
+	\impl $filter$ ist jetzt eine Funktion, die \textbf{eine Funktion als Argument} nimmt.
 \end{frame}
 
-\begin{frame}{Charakteristische Funktion}
-	Jetzt können wir auf diesen Funktionen äquivalente Operationen wie auf Mengen definieren...
+\newcommand{\fconst}{\text{const}}
+\begin{frame}{Funktionen auf LSD: const}
+	Schnell: Gebt sieben verschiedene konstante Funktionen an. \\
+	\pause
+	\impl Zu aufwendig? \visible<6->{\impl Nicht mit \fconst: $\set{\fconst(1),\fconst(2),\fconst(3),...}$}
+	\pause
 	
-	Vereinigung: $V\colon \{0,1\}^M \times \{0,1\}^M\to \{0,1\}^M$\\[1em]
+	\begin{threealign}
+		\fconst \from \R &\functionto& \R^\R \\
+		\fconst(a) &:=& \underbrace{\big( x \mapsto a \big)}_{\text{eine Funktion!}}
+	\end{threealign} \\
+	\pause
+	\impl Definiere $f := \fconst(42)$. \quad Dann ist $f(5) = f(1000) = f(-2.3) = 42$. \\
+	\smallskip
+	\pause
+	Oder auch: $\left(\fconst(42)\right)(5) = 42$. \\
+	\medskip
+	\pause[7]
 	
-	\only<2|handout:1>{
-	Beispielbild für $L_1=\{a,c,d\}$ und $L_2=\{b,c\}$
-	
-	\begin{tabular}{*{4}{>{$}c<{$}}}
-		& L_1 & L_2 & L_1\cup L_2 \\
-		x & f_1(x) & f_2(x) & V(f_1,f_2) \\
-		a & 1 & 0 & 1 \\
-		b & 0 & 1 & 1 \\
-		c & 1 & 1 & 1 \\
-		d & 1 & 0 & 1 \\
-		e & 0 & 0 & 0 \\
-	\end{tabular}
-	}
-	
-	\only<3-|handout:2> {
-	Wie definiert man $V(f_1,f_2)$? Zum Beispiel so:
-	\begin{align*}
-	V \colon \{0,1\}^M \times  \{0,1\}^M &\to \{0,1\}^M \\
-	(f_1,f_2) &\mapsto (x \mapsto \max(f_1(x),f_2(x))) \\
-	\end{align*}
-	} \only<4|handout:2> {
-	Oder so: $V(f_1,f_2) (x) = \max(f_1(x),f_2(x))$
-	}
+	\impl $\fconst$ ist eine Funktion, die \textbf{eine Funktion als Ergebnis} zurückliefert.
 \end{frame}
 
 \begin{frame}
@@ -133,81 +196,103 @@
 		\item Eine Abbildung, die eine Funktion auf einen Wert abbildet
 		\item Eine Abbildung, die einen Wert auf eine Funktion abbildet
 	\end{itemize}
-	Gleich werden wir das kombinieren!\\[1em]
-	(Hinweis: Abbildung und Funktion sind hier synonyme Begriffe!)
+	Gleich werden wir das kombinieren! \\
+	\medskip
+	(Hinweis: Abbildung $=$ Funktion, gell? \smiley)
 \end{frame}
 
 \section{Speicher}
 
-\begin{frame}{Bit vs Byte}
+\begin{frame}{Bit vs. Byte}
 	\begin{Definition}
-		Eine \textbf{Bit} ist ein Zeichen des Alphabets $\{0, 1\}$ \\
-		Ein Wort aus 8 \emph{Bits} wird \emph{Byte} genannt. 
+		Eine \textbf{Bit} ist ein Zeichen des Alphabets $\{\word 0, \word 1\}$. \\
+		Ein Wort aus 8 \emph{Bits} wird \textbf{Byte} genannt. 
 	\end{Definition}
 	\pause	
 	
 	\begin{Definition}
-		Ein \emph{Speicher} $m$ bildet Adressen ($Adr$) auf Werte ($Val$) ab.\\
-		Also $m \in Val^{Adr}$
+		Ein \textbf{Speicher} $$m \from \Adr \functionto \Val$$ bildet Adressen ($\Adr$) auf Werte ($\Val$) ab.\\
+		Wir schreiben $\Mem$ für $\Val^\Adr$. \\
+		Also: $m \in \Val^{\Adr}$ \quad bzw. \quad $m \in \Mem$.
 	\end{Definition}
-	Hier interessiert uns nicht die konkrete Realisierung der Speicherung, sondern nur die abstrakte Funktionsweise.
+	\impl Betrachten abstrakte Funktionsweise anstatt konkrete Realisierung 
+	%Hier interessiert uns nicht die konkrete Realisierung der Speicherung, sondern nur die abstrakte Funktionsweise.
 	\pause
 	
 	\begin{block}{Hinweis}
-		Im Umgang mit Speicher benutzen wir hier nur Zahlen im Binärsystem. \\
-		D.h. $Adr = 2^k, Val = 2^l \quad k,l \in \N_+$.
+		Häufig: Adressen und Werte als Binärzahlen. \\
+		%Im Umgang mit Speichern benutzen wir hier nur Zahlen im Binärsystem. \\
+		% Zu detailliert:                     und was ist mit negatiuven Zahlen?
+		%$\Adr = \set{0, ..., 2^k-1}, \Val = {0,...,2^l-1} \quad \text{für } k,l \in \N_+$.
 	\end{block}
 \end{frame}
 
 \begin{frame}{Speicher}
 
-	Methoden:\\
-	\emph{memread} $(m, adr)$ um eine Zelle zu lesen. \\ \pause
-	\emph{memwrite} $(m, adr, val)$ um in eine Zelle zu schreiben. \\
+	Operationen: \\
+	\begin{itemize}
+		\item $\memread(m, adr)$, um eine Speicherzelle zu lesen 
+		\pause
+		\item $\memwrite(m, adr, val)$, um in eine Speicherzelle zu „schreiben“.  
+	\end{itemize}
 	
 	\pause
-	\begin{align*}
-	memread : Val^{Adr} \times Adr &\to Val \\
-	(m,a) &\mapsto m(a) \\
-	\end{align*}	
-	\pause
-	\begin{align*}
-	memwrite : Val^{Adr} \times Adr \times Val \to& Val^{Adr} \\
-	(m,a,v) \mapsto& m' 
-	\end{align*}
-	\pause
-	Mit
-	\begin{equation*}
-	m'(a') =
-	\begin{cases}
-	v & \text{ falls } a'=a \\
-	m(a') & \text{ falls } a'\not=a \\
-	\end{cases}
-	\end{equation*}
-	
+	\begin{threealign}
+		\memread \from \Val^{\Adr} \times \Adr &\functionto& \Val \\
+		(m,a) &\mapsto& m(a)  \medskip  
+		\visible<4->{ \\
+			\memwrite \from \Val^{\Adr} \times \Adr \times \Val &\functionto& \Val^{\Adr} \\
+			(m,a',v') &\mapsto& m' , \quad \text{wobei} 
+		} 
+		\visible<5->{ \\ 
+				m'(a) &=&
+				\begin{cases}
+				v' & \text{ falls } a=a' \\
+				m(a) & \text{ falls } a\not=a' \\
+				\end{cases}	
+		}
+	\end{threealign}	
+	\pause[6]
+	$\memwrite$ gibt die neue Speichertabelle $m'$ zurück!
 \end{frame}
 
 \begin{frame}{Speicher}
 	\begin{block}{Beispiel}
 		
-	$memread(m, 01) = \only<2->{00000111}$\\
-	\visible<2-|handout:2>{$memwrite(m, 01, 11111100)$\\}
-	\visible<4-|handout:2>{$memread(memwrite(m, 01, 11111100), 01) = 11111100$\\}
+	$\memread(m, \word{01}) = \only<2->{\word{00000111}}$\\
+	\visible<2-|handout:2>{$m' := \memwrite(m, \word{01}, \word{11111100})$\\}
+	\visible<3-|handout:2>{$\memread\big(\underbrace{\memwrite(m, \word{01}, \word{11111100})}_{m'}, \word{01}\big) = \word{11111100}$\\}
 	\bigskip
 	
 	\begin{table}
+		\begin{tabular}{r}
+			\\ \\ \\ \\  \\
+			\visible<4-|handout:2>{Realworld-Analogie: }
+		\end{tabular}
 		\begin{tabular}{|c|c|}
 			\hline
 			\multicolumn{2}{|c|}{Speicher $m$} \\
 			\hline
-			00 & 00101000 \\
-			\only<-2|handout:1>{01 & 00000111}\only<3-|handout:2>{\color{blue} 01 & \color{blue} 11111100}  \\
-			10 & 10010110 \\
-			11 & 00100101 \\
-			\hline
-		\end{tabular} \par
-		\bigskip
-		Zustand bei \only<-2|handout:1>{$t=0$}\only<3-|handout:2>{\color{blue}$t=1$}
+			\word{00} & \word{00101000} \\
+			\word{01} & \word{00000111} \\
+			\word{10} & \word{10010110} \\
+			\word{11} & \word{00100101} \\ 
+			\hline 
+			\multicolumn{2}{c}{\visible<4-|handout:2>{Zustand bei $t=0$}}
+		\end{tabular} 
+		\visible<2-|handout:2>{
+			\begin{tabular}{|c|c|}
+				\hline
+				\multicolumn{2}{|c|}{Speicher $m'$} \\
+				\hline
+				\word{00} & \word{00101000} \\
+				\underline{\word{01}} & \underline{\word{11111100}} \\
+				\word{10} & \word{10010110} \\
+				\word{11} & \word{00100101} \\
+				\hline
+				\multicolumn{2}{c}{\visible<4-|handout:2>{Zustand bei $t=1$}}
+			\end{tabular} 
+		}
 	\end{table}
 
 	\end{block}

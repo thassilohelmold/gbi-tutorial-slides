@@ -11,82 +11,91 @@
 
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{6}
 
-\lastframe{0.65}{25}{xkcd/advent_calendar.png}{https://www.xkcd.com/994/}
+
+\thasse{\lastframe{0.65}{25}{xkcd/advent_calendar.png}{https://www.xkcd.com/994/}}
 
 
-\begin{frame}  % TODO: Einsortieren in 06.tex
-	\begin{block}{Wahr oder falsch?}
-		\TrueQuestionE{$\forall x \in \Z: \quad x \mod 2 = 0 \iff x \text{ ist gerade}$}{ $\text{Und auch: } x \mod 2 = 1 \iff \text{x ist ungerade}$}
-		\FalseQuestionE{$4 \cdot (x \div 4) = x$}{ $ 4 \cdot (x \div 4) + (x \mod 4) = x$}
-		\TrueQuestionE{$\left(\{a\}^\ast\cdot \{b,\epsilon\}\right)^\ast = \{a,b\}^\ast$}{}
+\begin{frame}[t]{Wahr oder falsch?} 
+		\TrueQuestionE{$\forall x \in \Z: \quad x \mod 2 = 0 \iff x \text{ ist gerade}$.}{ $\text{Und auch: \quad} x \mod 2 = 1 \iff \text{x ist ungerade}$.}
+		\FalseQuestionE{$4 \cdot (x \div 4) = x$.}{ $ 4 \cdot (x \div 4) + (x \mod 4) = x$}
+		\TrueQuestionE{$\left(\{\word a\}^\ast\cdot \{\word b,\eps\}\right)^\ast = \{\word a,\word b\}^\ast$}{}
 		\FalseQuestionE{Jede Abbildung besitzt eine Umkehrabbildung.}{ Nur bijektive Abbildungen besitzen eine Umkehrabbildung.}
 		\TrueQuestionE{Für jede Abbildung können wir das Urbild angeben.}{}
-	\end{block}	
+		\TrueQuestionE{Das Zweierkomplement ist gut zum Rechnen.}{(Für den Rechner schon!)}
 \end{frame}
 
-\begin{frame}{Zum letzten Übungsblatt}
-	\only<beamer>{Korrektur dauert noch eine Woche.}
-	\begin{itemize}
-		\pause
-		\item Vollständige Induktion: Die Induktionsvoraussetzung lautet\\
-		{\enquote{für \textbf{ein} i gilt...}}.\\
-		Für alle i zeigt ihr es erst in der Induktion!
-		\pause
-		\item Kaum jemand hat das richtig gemacht, es ist aber wirklich essentiell. Wer das bei der Klausur falsch macht, verschenkt einfache Punkte!
-		\pause
-		\item \color{myRed}Folgendes ist \textbf{nicht} korrekt, um A zu zeigen:\\
-		$A \implies B$, B ist wahr. Also ist auch A wahr.\\
-		Hier bedarf es Äquivalenz, damit aus B auch A folgt!
-	\end{itemize}
-\end{frame}
+%TODO copy parts to next week if needed...
+\mycomment{
+	\begin{frame}{Zu Blatt \#2}
+		Korrektur dauert noch eine Woche.
+			\begin{itemize}
+				\pause
+				\item Vollständige Induktion: Die Induktionsvoraussetzung lautet\\
+				{\enquote{für \textbf{ein} i gilt...}}.\\
+				Für alle i zeigt ihr es erst in der Induktion!
+				\pause
+				\item Kaum jemand hat das richtig gemacht, es ist aber wirklich essentiell. Wer das bei der Klausur falsch macht, verschenkt einfache Punkte!
+				\pause
+				\item \alert{Folgendes ist \textbf{nicht} korrekt, um A zu zeigen:}\\
+				$A \implies B$, B ist wahr. Also ist auch A wahr.\\
+				Hier bedarf es Äquivalenz, damit aus B auch A folgt!
+			\end{itemize}
+		
+	\end{frame}
+}
 
 \framePrevEpisode
 
 \begin{frame}{Rückblick: Codierungen}
 	\begin{itemize}
 		\item Codierungen: Injektive Abbildungen (meist Homomorphismen)
-		\item $\varepsilon$-Freiheit, Präfixfreiheit
-		\item Einfaches decodieren für präfixfreie Homomorphismen
+		\item $\eps$-Freiheit, Präfixfreiheit
+		\item Einfaches Decodieren für präfixfreie Homomorphismen
 		\item Huffman-Codierungen: Präfixfreie Codes mit optimaler Länge
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-	\begin{block}{Wahr oder falsch?}
-	\begin{itemize}
-		\TrueQuestionE{Das Zweierkomplement ist gut zum Rechnen}{}
-		\FalseQuestion{Jeder Homomorphismus ist präfixfrei}
-		\TrueQuestionE{Jede Huffman-Codierung ist präfixfrei}{}
-		\FalseQuestionE{Jeder $\varepsilon$-freie Homomorphismus ist präfixfrei}{ $\qquad$ Aber:\\ Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei}		\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
-	\end{itemize}
-	\end{block}
-\end{frame}
+\mycomment{ % TODO next week!
+	\begin{frame}[t]{Wahr oder falsch?}
+		
+		
+		\FalseQuestion{Jeder Homomorphismus ist präfixfrei.}
+		\TrueQuestionE{Jede Huffman-Codierung ist präfixfrei.}{}
+		\FalseQuestionE{Jeder $\eps$-freie Homomorphismus ist präfixfrei.}{ Aber: Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei.}		\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
+		
+	\end{frame}
+}
 
-%% Zum Aufwärmen
-\input{../Bloecke/Induktion_Vögel}
+
+\input{../Bloecke/Huffmann}
 
 %% Inhalt
 
 \input{../Bloecke/Speicher.tex}
 
-\input{../Bloecke/MIMA.tex}
+%\input{../Bloecke/MIMA.tex}
 
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\item Speicher - Abbildungen, die Abbildungen auf Abbildungen abbilden!
-			\item Wie ein einfacher Prozessor aufgebaut ist
-			\item Wie man die MIMA für einfache Aufgaben nutzt
+			\item Wie die Huffman-Codierung funktioniert
+			\item Speicher und Abbildungen, die Abbildungen auf Abbildungen abbilden!
+			%\item Wie ein einfacher Prozessor aufgebaut ist
+			%\item Wie man die MIMA für einfache Aufgaben nutzt
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Grammatik ist schwer - aber nicht bei uns!
+			\item MIMA – Den Bits beim Arbeiten zuschauen
+			%\item  Grammatik ist schwer - aber nicht bei uns!
+			\item Subjekt, Objekt, Prädikat – Grammatiken
 		\end{itemize}
 	\end{block}
 \end{frame}

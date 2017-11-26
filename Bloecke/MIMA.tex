@@ -9,11 +9,11 @@
 	\begin{itemize}[<+->]
 		\item Adressen sind 20 Bit lang
 		\item \enquote{Werte} sind 24 Bit lang
-		\item Befehlscodierungen:
+		\item Befehlscodierungen -- zwei Formate:
 		\begin{itemize}
 			\item 4 Bit für den OpCode und 20 Bit für einen Parameter (Adresse / Konstante)
 			\item 8 Bit Befehl (Rest irrelevant)\\
-			\includegraphics[width=100px]{MIMA_commands.png}\\
+			\item[]<+(-2)-> \includegraphics[width=100px]{MIMA_commands.png} 
 		\end{itemize} 
 	\end{itemize}
 \end{frame}
@@ -42,66 +42,70 @@
 	\end{figure}
 	\pause
 	\only<2-6>{\begin{itemize}
-		\only<2|handout:1> {\item[1] IAR $\to $ SAR  und IAR $\to$ X 
+		\only<2|handout:1> {\item[1.] IAR $\to $ SAR  und IAR $\to$ X 
 			\item[] Befehlsadresse dem Speicher übergeben und Zähler zum Erhöhen an ALU geben.}
-		\only<3|handout:2>{\item[2] Eins $\to$ Y  
+		\only<3|handout:2>{\item[2.] Eins $\to$ Y  
 			\item[] 1-Wert für Erhöhung des Zählers an ALU geben.}
-		\only<4|handout:3>{\item[3] ALU aufaddieren (Z=X+Y) 
+		\only<4|handout:3>{\item[3.] ALU aufaddieren ($Z=X+Y$) 
 			\item[] Nächste Befehlsadresse berechnen. }
-		\only<5|handout:4>{\item[4] Z $\to$ IAR 
+		\only<5|handout:4>{\item[4.] Z $\to$ IAR 
 			\item[] Adresse für nächste Runde speichern. }
-		\only<6|handout:5>{\item[5] SDR $\to$ IR 
+		\only<6|handout:5>{\item[5.] SDR $\to$ IR 
 			\item[] Wert zur angefragten Adresse erhalten. }
 	\end{itemize}}	
 \end{frame}
 
+\newcommand{\itemizeconfig}{\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}}
 \begin{frame}{Befehle}
-	Die MIMA besitzt einen Befehlssatz mit möglichen Befehlen. Andere Befehle (oder Varianten) werden NICHT unterstützt und können daher nicht verwendet werden!
-	
-	\begin{itemize}[<+->]
-		\item Rechenoperationen
-		\begin{itemize}
-			\item ADD adr
+	Die MIMA besitzt einen Befehlssatz mit möglichen Befehlen. %Andere Befehle (oder Varianten) werden NICHT unterstützt und können daher nicht verwendet werden!
+	\textbf{Nur die Befehle aus der VL} dürft ihr benutzen! \\ 
+	\smallskip
+	(Befehle, die eigentlich zwei Operanden brauchen, lesen zusätzl. vom Akku.)
+	{
+	\begin{itemize}[<+->] \itemizeconfig
+		\item Rechenoperationen:
+		\begin{itemize} 
+			\item ADD adr 
 			\item AND, OR, XOR adr
-			\item NOT, RAR (keine Paramter)
+			\item NOT, RAR \quad (keine Parameter \impl Akku) \quad „Rotate Akku Right“
 		\end{itemize}
-		\item Zugriffsoperationen
+		\item Datentransport:
 		\begin{itemize}
-			\item LDC const (const ist dabei eine \textbf{20-Bit} Konstante)
-			\item LDV, STV adr
-			\item LDIV, STIV adr
+			\item LDC const \quad (const ist dabei eine \textbf{20-Bit}-Konstante)
+			\item LDV, STV adr \quad (Lese/Schreibe von/an Adresse)
+			\item LDIV, STIV adr \quad (Lese/Schreibe von/an Adresse, die an der Adresse steht)
 		\end{itemize}
-		\item Vergleichsoperation: EQL adr (-1 wenn gleich, 0 sonst)
-		\item Sprünge
+		\item Vergleichsoperation: EQL adr \quad ($-1$ wenn gleich, 0 sonst)
+		\item Sprünge:
 		\begin{itemize}
 			\item JMP adr
-			\item JMN adr (Jump if negative)
+			\item JMN adr \quad „JuMp if Negative“
 		\end{itemize}
 		\item HALT
-	\end{itemize}
+	\end{itemize}}
 \end{frame}
 
 \begin{frame}{Bemerkungen}
-	\begin{block}{Indirekte Adressierung}
+	\begin{block}{Indirekte Adressierung (LDIV, STIV)}
 		\centering
 		\includegraphics[width=150px]{MIMA_indirect.png}
 	\end{block}
 	
 	\pause
 	\begin{block}{HALT}
-		Jedes Programm muss mit HALT enden! Sonst läuft das Programm endlos weiter!
+		Jedes Programm muss mit HALT enden! Sonst läuft das Programm endlos weiter! (Kostet Punkte!)
 	\end{block}
 
 	\pause
 	\begin{block}{Negative Konstanten}
-		Negative Konstanten können nicht mit LDC geladen werden.\\
-		Warum? \pause Unser Akku ist 24 Bit breit, aber wir können nur in die hinteren 20 Bit laden!
+		Negative Konstanten können \textbf{nicht} mit LDC geladen werden. Warum? \\
+		\pause \impl Unser Akku ist 24 Bit breit, aber wir können nur in die \textbf{hinteren 20 Bit} laden!
 	\end{block}
 \end{frame}
 
 \begin{frame}{Negative Zahlen}
 	\begin{block}{Aufgabe}
-		Schreibe ein Programm, das von einer an Adresse $a_1$ gegebenen positiven Zahl das Zweierkomplement berechnet und an Adresse $a_2$ ablegt.
+		Schreibt ein Programm, das von einer an Adresse $a_1$ gegebenen positiven Zahl das Zweierkomplement berechnet und an Adresse $a_2$ ablegt.
 	\end{block}
 
 	\visible<2|handout:2>{
@@ -117,8 +121,8 @@
 \end{frame}
 
 \begin{frame}{Beispiele}
-	Beispiele zur Umsetzung von Answeisungen aus Hochsprachen:\\
-	Siehe Übung
+	Beispiele zur Umsetzung von Anweisungen aus Hochsprachen:\\
+	Siehe Übung WS 15/16
 \end{frame}
 
 \begin{frame}{Übung: Modulo}
@@ -130,27 +134,32 @@
 \end{frame}
 
 \begin{frame}{Lösung: Modulo 2}
-	start:   LDC 1 //000000000000000000000001 \\
-	$\qquad$ AND $a_1$ \\
-	$\qquad$ STV $a_1$ \\
-	$\qquad$ HALT
+	\begin{tabbing}
+		start:  \= LDC 1 \quad  //$=$ 000000000000000000000001 \\
+				\> AND $a_1$ \\
+				\> STV $a_1$ \\
+				\> HALT
+	\end{tabbing}
+	
 \end{frame}
 
 \begin{frame}{Lösung: Modulo 3}
-	start:   LDC 1 \\
-	$\qquad$ STV One\\
-	$\qquad$ LDC 3\\
-	$\qquad$ NOT\\
-	$\qquad$ ADD One\\
-	$\qquad$ STV MThree\\
-	\medskip
-	while:   LDV MThree\\
-	$\qquad$ ADD $a_1$\\
-	$\qquad$ JMN abschluss\\
-	$\qquad$ STV $a_1$\\
-	$\qquad$ JMP while\\
-	\medskip
-	ende:    LDC 3\\
-	$\qquad$ ADD $a_1$\\
-	$\qquad$ HALT\\
+  \begin{tabbing}
+    start:\; \= LDC 1 \\
+           \> STV One\\
+           \> LDC 3\\
+           \> NOT\\
+           \> ADD One\\
+           \> STV MThree\\
+    \medskip
+    while: \> LDV MThree\\
+           \> ADD $a_1$\\
+           \> JMN ende\\
+           \> STV $a_1$\\
+           \> JMP while\\
+    \medskip
+    ende:  \> LDC 3\\
+           \> ADD $a_1$\\
+           \> HALT\\
+  \end{tabbing}
 \end{frame}
