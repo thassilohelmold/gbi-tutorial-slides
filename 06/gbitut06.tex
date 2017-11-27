@@ -1,8 +1,5 @@
 %beamer
 
-% Define a global usable date. Must come before StyleTut
-%\newcommand{\mydate}{02.12.2016}
-
 % Comment/uncomment this line to toggle handout mode
 %\newcommand{\handout}{}
 
@@ -17,7 +14,7 @@
 \starttut{6}
 
 
-\thasse{\lastframe{0.65}{25}{xkcd/advent_calendar.png}{https://www.xkcd.com/994/}}
+%\thasse{\lastframe{0.65}{25}{xkcd/advent_calendar.png}{https://www.xkcd.com/994/}}
 
 
 \begin{frame}[t]{Wahr oder falsch?} 
@@ -29,26 +26,6 @@
 		\TrueQuestionE{Das Zweierkomplement ist gut zum Rechnen.}{(Für den Rechner schon!)}
 \end{frame}
 
-%TODO copy parts to next week if needed...
-\mycomment{
-	\begin{frame}{Zu Blatt \#2}
-		Korrektur dauert noch eine Woche.
-			\begin{itemize}
-				\pause
-				\item Vollständige Induktion: Die Induktionsvoraussetzung lautet\\
-				{\enquote{für \textbf{ein} i gilt...}}.\\
-				Für alle i zeigt ihr es erst in der Induktion!
-				\pause
-				\item Kaum jemand hat das richtig gemacht, es ist aber wirklich essentiell. Wer das bei der Klausur falsch macht, verschenkt einfache Punkte!
-				\pause
-				\item \alert{Folgendes ist \textbf{nicht} korrekt, um A zu zeigen:}\\
-				$A \implies B$, B ist wahr. Also ist auch A wahr.\\
-				Hier bedarf es Äquivalenz, damit aus B auch A folgt!
-			\end{itemize}
-		
-	\end{frame}
-}
-
 \framePrevEpisode
 
 \begin{frame}{Rückblick: Codierungen}
@@ -59,17 +36,6 @@
 		\item Huffman-Codierungen: Präfixfreie Codes mit optimaler Länge
 	\end{itemize}
 \end{frame}
-
-\mycomment{ % TODO next week!
-	\begin{frame}[t]{Wahr oder falsch?}
-		
-		
-		\FalseQuestion{Jeder Homomorphismus ist präfixfrei.}
-		\TrueQuestionE{Jede Huffman-Codierung ist präfixfrei.}{}
-		\FalseQuestionE{Jeder $\eps$-freie Homomorphismus ist präfixfrei.}{ Aber: Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei.}		\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
-		
-	\end{frame}
-}
 
 
 \input{../Bloecke/Huffmann}
@@ -94,14 +60,14 @@
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
 			\item MIMA – Den Bits beim Arbeiten zuschauen
-			%\item  Grammatik ist schwer - aber nicht bei uns!
 			\item Subjekt, Objekt, Prädikat – Grammatiken
 		\end{itemize}
 	\end{block}
 \end{frame}
 
 
-\lastframe{0.55}{30}{xkcd/processor.png}{https://www.xkcd.com/676/}
+%\lastframe{0.55}{30}{xkcd/processor.png}{https://www.xkcd.com/676/} % Legacy
+\lastframe{0.50}{0}{xkcd/exploits_of_a_mom.png}{https://www.xkcd.com/327/}
 \slideThanks
 
 \end{document}

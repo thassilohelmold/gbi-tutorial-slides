@@ -1,8 +1,5 @@
 %beamer
 
-% Define a global usable date. Must come before StyleTut
-%\newcommand{\mydate}{16.12.2016}
-
 % Comment/uncomment this line to toggle handout mode
 % \newcommand{\handout}{}
 
@@ -25,6 +22,79 @@
 
 \framePrevEpisode
 
+\begin{frame}{Rückblick: MIMA}
+	\begin{itemize}[<+->]
+		\item Ein idealisierter Prozessor
+		\item Einfach zu verstehen, aufwändig zu programmieren
+		\item Hardware-Details beachten: Keine negativen Konstanten mit LDC möglich!
+		\item Programme sind oftmals mit \enquote{Bit-Magie} einfacher und kürzer (aber auch schwerer zu verstehen)
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Wahr oder Falsch?}
+	\begin{block}{}
+	\begin{itemize}
+		\FalseQuestionE{Im IR der MIMA wird die Adresse des aktuellen Befehls gespeichert}{Das geschieht im IAR. Im IR steht der Befehl selbst}
+		\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch}{}
+		\FalseQuestionE{Der Akku führt bei der MIMA Berechnungen aus}{Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert}
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Wahr oder Falsch?}
+	\begin{block}{}
+	\begin{itemize}
+	\FalseQuestionE{LDC -5 lädt $-5$ in den Akku}{LDC funktioniert nicht mit negativen Konstanten!}
+	\FalseQuestionE{Mit der MIMA können wir Zufallszahlen erzeugen}{Die MIMA arbeitet rein deterministisch und damit ohne jeden Zufall.}
+	\end{itemize}
+	\visible<5>{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.6]{xkcd/random_number}
+		\vspace{-7pt}
+		\caption{ \texttt{\url{http://xkcd.com/}} }
+	\end{figure} 	
+	}
+	\end{block}
+\end{frame}
+
+%% Zum Aufwärmen
+
+\begin{frame}{Der Philosoph am Scheideweg}
+	\only<1|handout:1>{
+	Ein Weg führt in die Wüste, auf dem ein Wanderer marschiert. 
+	Nach einem eintägigen Fußmarsch gelangt er an eine Weggabelung, an der eine kleine Hütte steht.\\
+	\bigskip
+	Neben der Eingangstüre ist ein Plakat mit folgendem Text befestigt:
+	}
+	\only<2|handout:1>{
+	Einer der beiden weiterführenden Wege führt zu mehreren guten Oasen; nur auf diesem Weg kannst du dein Ziel lebend erreichen.\\
+	\bigskip
+	Der andere Weg führt in die unendliche Wüste; er hat noch jedem den Tod gebracht, der ihn wählte.\\
+	\bigskip
+	}
+	\only<2-3|handout:2>{
+	In dieser Hütte haust ein Philosoph, der die Ziele der beiden Wege sicher kennt; \textbf{streng abwechselnd sagt er an einem Tag die Wahrheit und am darauf folgenden Tag lügt er}.\\
+	\bigskip
+	Keiner außer ihm weiß aber, ob der heute die Wahrheit sagt oder aber heute lügt.\\
+	\bigskip
+	}
+	\only<3|handout:2>{
+	Du darfst dem Philosophen nur eine einzige Frage stellen, mit der du den Weg zu den Oasen erfahren willst.\\
+	\bigskip
+	Was fragst du ihn?
+	}
+\end{frame}
+
+\begin{frame}{Der Philosoph am Scheideweg}
+	Was fragst du ihn?\\[1em] \pause
+	Was würdest du sagen, wenn ich dich morgen fragen würde, ob der linke Weg der richtige ist?\\
+	\bigskip
+	%Und wenn der Philosoph jeden Morgen würfelt, ob er die Wahrheit sagt oder lügt?\\ 
+	%\only<2|handout:2>{
+	%Was würdest du sagen, wenn ich dich \textbf{heute} fragen würde, ob der linke Weg der richtige ist?\\ }
+\end{frame}
+
 \begin{frame}{Rückblick: Kontextfreie Grammatiken}
 	\begin{itemize}[<+->]
 		\item Ein Vier-Tupel: $G = (N, T, S, P)$
@@ -44,6 +114,7 @@
 		\FalseQuestionE{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}	\end{itemize}
 \end{frame}
 
+\mycomment{ % Kam letztes Jahr nicht gut an, ist wohl etwas "albern"
 \begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
 	Weihnachten steht vor der Tür, aber Geschenke sind von Jahr zu Jahr teurer geworden! Um den Staatshaushalt des Nordpols zu schonen, hat sich der Weihnachtsmann etwas einfallen lassen: Dieses Jahr bringt er nur den Haushalten Geschenke, bei denen das für ihn bereitgestellte Gebäck seinen speziellen Qualitätsanforderungen genügt.\\[1em]
 	
@@ -92,6 +163,7 @@
 		  &\cup \{F_0 \to \eps \}
 	\end{align*}
 \end{frame}
+}
 
 \input{../Bloecke/Prädikatenlogik.tex}
 
