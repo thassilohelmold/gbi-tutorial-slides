@@ -8,48 +8,42 @@
 
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{7}
 
-\lastframe{0.40}{25}{xkcd/password_strength.png}{https://www.xkcd.com/936/}
+% Was hat das mit MIMA zu tun? => Vllt. ans Ende?
+% \lastframe{0.40}{25}{xkcd/password_strength.png}{https://www.xkcd.com/936/}
 
-%TODO if needed...
-\mycomment{
-	\begin{frame}{Zu Blatt \#2}
-	Korrektur dauert noch eine Woche.
-	\begin{itemize}
-		\pause
-		\item Vollständige Induktion: Die Induktionsvoraussetzung lautet\\
-		{\enquote{für \textbf{ein} i gilt...}}.\\
-		Für alle i zeigt ihr es erst in der Induktion!
-		\pause
-		\item Kaum jemand hat das richtig gemacht, es ist aber wirklich essentiell. Wer das bei der Klausur falsch macht, verschenkt einfache Punkte!
-		\pause
-		\item \alert{Folgendes ist \textbf{nicht} korrekt, um A zu zeigen:}\\
-		$A \implies B$, B ist wahr. Also ist auch A wahr.\\
-		Hier bedarf es Äquivalenz, damit aus B auch A folgt!
+\begin{frame}{Zu Blatt \#2}
+	Durchschnitt: etwa \thassedaniel{XXX}{61} \% der Punkte 
+	\begin{itemize}		
+		\item Vollständige Induktion: Eine Standard-IV lautet \\
+		{\enquote{für \textbf{\alert{ein}} $n$ gilt...}}.\\
+		Für alle $n$ wollt ihr's ja \textbf{zeigen}!
+		\item \textbf{A~2.2}: IV mit „$K=L$“ funktioniert nicht: \\ 
+		Das ist ne $\forall$-Aussage wegen der $\bigcup\limits^\infty_{n=0}$-Definition \\
+		\impl Besser $K_n = L_n$ zeigen
+		\item \textbf{A~2.3}: hat 11 statt 10 Gesamtpunkte (Zenkel hat sich verrechnet...~:P) \\
+		\impl Nicht wundern, wenn ihr einen Punkt mehr habt, als ihr solltet
+		\item \textbf{A~2.3b}: IA für $n=0 \textbf{ und } 1$, \; IS: $n \?> n+\mathbf{2}$ \quad --- alles andere geht nicht
+		\item \textbf{A~2.6}: \emph{Surjektivität} per Induktion geht NICHT!
+		\item \textbf{A~2.7}: \emph{Induktive} Definitionen: KEINE Set comprehensions mit Wortlängen-Magie! (Sonst könnt ihr direkt die Def. abschreiben)
 	\end{itemize}
 	
 \end{frame}
 
-
-\begin{frame}{Zum letzten Übungsblatt}
-	\begin{itemize}[<+->]
-		\item Aufgabe 2.5: Die Abbildungen müssen wohldefiniert sein!
-		\item Aufgabe 2.6: Def.-Bereich beachten (Alphabet oder Wort?)
-		\item Aufgabe 2.6: Zielbereich: Surjektivität!
-		\item Und noch einmal: Die Induktionsvorraussetzung latutet: Es gelte für EIN n ...
-	\end{itemize}
-\end{frame}
-}
-
 \framePrevEpisode
 
 \begin{frame}[t]{Wahr oder falsch?}
-	\FalseQuestionE{Für jede Codierung gilt $h(\eps) = \eps$}{Das muss nur für Homomorphismen gelten.}
+	\FalseQuestionE{Für jede Codierung gilt $h(\eps) = \eps$.}{Das muss nur für Homomorphismen gelten.}
 	\FalseQuestion{Jeder Homomorphismus ist präfixfrei.}
 	\TrueQuestionE{Jede Huffman-Codierung ist präfixfrei.}{}
-	\FalseQuestionE{Jeder $\eps$-freie Homomorphismus ist präfixfrei.}{ Aber: Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei.}		\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
+	\FalseQuestionE{Jeder $\eps$-freie Homomorphismus ist präfixfrei.}{ Aber: Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei.}		
+	\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
+	\FalseQuestionE{$\memwrite(m,a,v) \in \Val$.}{$\memwrite(m,a,v) \in \Val^\Adr$.}
+	\FalseQuestionE{$\memread(\memwrite(m,a,v), a) = m(a)$ \quad für alle $m,a,v$.}{$\memread(\memwrite(m,a,v), a) = v$.}
 \end{frame}
 
 \input{../Bloecke/MIMA.tex}
@@ -58,10 +52,11 @@
 
 \begin{frame}{Noch offen: Klammerausdrücke}
 	A long, long time ago, in a land far away:\\
-	Formale Sprachen angeben durch Mengen, Konkatenation und Kleenschem Abschluss...\\
-	Was ist mit der Sprache aller gültigen Klammerausdrücke? Können wir diese auch auf diese Weise angeben?\\[1em]
+	\medskip
+	Formale Sprachen angeben durch $\set{}, \·, {}^+, {}^*$...\\
+	Was ist mit der \textbf{Sprache aller gültigen Klammerausdrücke}? Können wir die auch so angeben?\\[1em]
 	\pause
-	Jetzt wissen wir: Nein, das geht nicht! (Siehe VL)\\[1em]
+	\impl Jetzt wissen wir: \textbf{Nein}, das geht nicht! (Siehe VL)\\[1em]
 	
 	\begin{figure}[H]
 		\centering
@@ -77,22 +72,34 @@
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\item Mehr Eigenschaften von Relationen
+			%\item Mehr Eigenschaften von Relationen
+			\item Wie die MIMA funktioniert und wie ihr Programme dafür schreibt
 			\item Was eine kontextfreie Grammatik ist
-			\item Wie man Sprachen aus Grammatiken ableiten kann
+			\item Wie man Sprachen mit Grammatiken beschreiben kann
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Nachts sind alle Katzen grau - Prädikatenlogik
-			\item Algorithmen: Kochrezepte der Informatik
+			\item Noch mehr Grammatiken
+			\item Nachts sind alle Katzen grau -- Prädikatenlogik
+			%\item Algorithmen: Kochrezepte der Informatik
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-%\lastframe{0.50}{0}{xkcd/exploits_of_a_mom.png}{https://www.xkcd.com/327/} % Legacy
-\lastframe{0.55}{30}{xkcd/processor.png}{https://www.xkcd.com/676/}
+
+\ifnum\thisyear=2017 
+	\thassedaniel{
+		\lastframe{0.55}{30}{xkcd/processor.png}{https://www.xkcd.com/676/}
+	}{
+	\lastframe{0.50}{0}{xkcd/exploits_of_a_mom.png}{https://www.xkcd.com/327/} % Legacy
+	}
+\else
+	\errmessage{Replace xkcd with processor (mom's exploits in tut 6...)}
+\fi
+
+
 \slideThanks
 
 \end{document}

@@ -4,110 +4,159 @@
 	\begin{Definition}
 		Eine \textbf{kontextfreie Grammatik} ist ein 4-Tupel $G = (N, T, S ,P)$ mit
 		\begin{itemize}
-			\item[N] Alphabet von Nichtterminalsymbolen
-			\item[T] Alphabet von Terminalsymbolen ($N \cap T = \emptyset$)
-			\item[S] Startsymbol ($S \in N$)
-			\item[P] Produktionsmenge ($P \subseteq N \times (N \cup T)^\ast$)
+			\item[$N$] Alphabet von Nichtterminalsymbolen
+			\item[$T$] Alphabet von Terminalsymbolen ($N \cap T = \emptyset$)
+			\item[$S$] Startsymbol ($S \in N$)
+			\item[$P$] Produktionsmenge ($P \subseteq N \times (N \cup T)^\ast$)
 		\end{itemize}
 	\end{Definition}
 
 	\pause
 	\begin{Beispiel}
-		Sei $A$ das deutsche Alphabet (mit Klein-/Großbuchstaben)\\
-		$G_{MI} = (\{S, M, I, N\}, A \cup \N_+, S, P)$
+		Sei $A$ das deutsche Alphabet (mit Klein-/Großbuchstaben).\\
+		$G_{MI} := \left(\{S, M, I, N\}, \, A \cup \N_+, \, S, \, P\right)$ mit
 		\begin{align*}
-			P = \{S &\to \text{M\textvisiblespace I\textvisiblespace N}, \\
-			M &\to Monkey, \\
-			I &\to Island, \\
-			N &\to 1 \mid 2 \mid 3 \}
+			P = \{S &\to \text{M\word\sp I\word\sp N}, \\
+			M &\to \word{Monkey}, \\
+			I &\to \word{Island}, \\
+			N &\to \word 1 \mid \word 2 \mid \word 3 \}
 		\end{align*}
 	\end{Beispiel}
 \end{frame}
 
 \begin{frame}{Kontextfreie Grammatiken}
 	\begin{block}{Produktionen}
-		Menge von gültigen Ersetzungen. Ersetzt wird immer \textbf{genau ein Nichtterminal} (kontextfrei) mit einem Wort von Zeichen aus $(N \cup T)$.\\
+		$=$ Menge von Ersetzungsregeln. \\
+		Schema: \\
+		\qqquad $\underbrace{L}_{\mathclap{\text{\textbf{genau ein} Nichtterminal}}} \to [\text{rechte Seite aus \word{Terminalen} und/oder Nichtterminalen}]$ \\
+		\smallskip
+		Heißt: Wir können in \textbf{einem} Ersetzungsschritt \textbf{genau ein} solches Nichtterminal $L$ mit der rechten Seite ersetzen. \textbf{Wenn wir wollen}. \\
+		\medskip
 		\pause
-		Vereinfachende Schreibweise: $$S \to a \mid b$$ ($S$ kann durch a oder b ersetzt werden)
+		Mehrere Möglichkeiten zur Auswahl: \\
+		\qquad $L \to [\text{rechte Seite}]_1 \mid [\text{rechte Seite}]_2 \mid [\text{rechte Seite}]_3$ \\
+		Heißt: $L$ kann durch die rechte Seite 1, 2 oder 3 ersetzt werden. \textbf{Wie wir wollen.} \\
+		\pause
+		\begin{Beispiel}
+			$S \to \word aB\word x \mid \word{zz}$ \\
+			\impl $S$ kann durch $\word aB\word x$ oder \word{zz} ersetzt werden.
+		\end{Beispiel}
 	\end{block}
 \end{frame}
 
-\begin{frame}{Ableitung}
+\begin{frame}{Ableitungen von Wörtern}
+	\mycomment{
 	\begin{Definition}
 		Für ein  $u \in V^\ast$ mit $u = w_1 \cdot X \cdot w_2 \; (w_1, w_2 \in V^\ast, X \in N)$ nennen wir ein Wort $v = w_1 \cdot w \cdot w_2 \in V^\ast$ \textbf{ableitbar}, wenn eine Produktion $X \to w$ existiert.\\
-		Wir schreiben $$u \Rightarrow v$$
+		Wir schreiben $$u \derives v$$
+	\end{Definition}	
+	}
+	
+	\begin{Definition}
+		Wort $u = .....X.....$ \textbf{ableitbar} nach $v = ..... w......$ \\
+		wenn es eine Produktion $X \to w$ gibt. \\
+		Schreibweise: \quad $u \derives v$ \quad oder \quad $u \derives^1 v$ \\
 	\end{Definition}
+	
+	\medskip
+	\textbf{\alert{Achtung}}: Aufpassen mit Pfeilen: \quad  $\derives$ vs. $\to$
 	
 	\pause
 	\begin{Beispiel}
-		Für $G_{MI}$ gilt: $S \Rightarrow \text{M\textvisiblespace I\textvisiblespace N}$\\
-		$ \text{M\textvisiblespace I\textvisiblespace N} \Rightarrow$ Monkey\textvisiblespace I\textvisiblespace N\\
-		Es gibt kein Wort, das aus Monkey Island 1 abgeleitet werden kann.
+		Für $G_{MI}$ gilt: \\
+		$S \derives M\word{\sp} I\word{\sp}N$\\
+		$ M\word{\sp} I\word{\sp}N \derives \word{Monkey}\word{\sp} I\word{\sp} N \derives \word{Monkey}\word{\sp} I\word{\sp 3}$ \\
+		$\word{Monkey}\word{\sp} I\word{\sp} N \derives \word{Monkey}\word{\sp} I\word{\sp 1} \derives \word{Monkey}\word{\sp}\word{Island}\word{\sp 1}$ \\
+		Es gibt kein Wort, das aus \word{Monkey\sp Island\sp 1} abgeleitet werden kann.
 	\end{Beispiel}
 	
 \end{frame}
 
 \begin{frame}{Ableitung}	
-	\begin{Definition}
-		\begin{align*}
-		u \Rightarrow^0 v &\text{ genau dann, wenn } u=v \\
-		u \Rightarrow^{i+1} v &\text{ genau dann, wenn für ein}  w\in V^*: u \Rightarrow w \Rightarrow^i v\\
-		u \Rightarrow^* v &\text{ genau dann, wenn für ein } i\in\N_0: u \Rightarrow^i v \\
-		\end{align*}
-	\end{Definition}
-	
-	\pause
-	\begin{block}{Beobachtung}
-		Die Definitionen stimmen mit den Potenzen der Relation $\Rightarrow$ überein.\\
-		$\Rightarrow^\ast$ ist die reflexiv-transitive Hülle von $\Rightarrow$.
+	\mycomment {
+			\begin{Definition}
+				\begin{align*}
+				u \derives^0 v &\text{ genau dann, wenn } u=v \\
+				u \derives^{i+1} v &\text{ genau dann, wenn für ein}  w\in V^*: u \derives w \derives^i v\\
+				u \derives^* v &\text{ genau dann, wenn für ein } i\in\N_0: u \derives^i v \\
+				\end{align*}
+			\end{Definition}
+	}
+	\begin{block}{Schreibweisen}
+		$u \derives^k v$ \quad heißt: $u$ in $k$ Schritten ableitbar zu $v$ \\
+		$u \derives^0 v$ \quad heißt also: in 0 Schritten ableitbar ($u=v$) \\
+		\smallskip
+		$u \derives^* v$ \quad heißt: $u$ in \emph{beliebig vielen} Schritten ableitbar zu $v$
 	\end{block}
-
+	
+	\mycomment{
+		\pause
+		\begin{block}{Beobachtung}
+			Die Definitionen stimmen mit den Potenzen der Relation $\derives$ überein.\\
+			$\derives^\ast$ ist die reflexiv-transitive Hülle von $\derives$.
+		\end{block}
+	}
+	
 	\pause
 	\begin{Beispiel}
-		Für $G_{MI}$ gilt: $S \Rightarrow^2$ Monkey Island N $\Rightarrow$ Monkey Island 3\\
-		$S \Rightarrow^*$ Monkey Island 2
+		Für $G_{MI}$ gilt: $S \derives^2 \word{Monkey\sp Island\sp}N \derives \word{Monkey\sp Island\sp3}$\\
+		$S \derives^* \word{Monkey\sp Island\sp2}$
 	\end{Beispiel}
 \end{frame}
 
 
-\begin{frame}{Erzeugte Sprache}
+\begin{frame}{Erzeugte Sprache einer Grammatik}
 	\begin{Definition}
-		Sei $G$ eine kontextfreie Grammatik. Wir bezeichnen die Sprache $$L(G) = \{w \in T^\ast \mid S \Rightarrow^\ast w \} \subseteq T^*$$ als die von der Grammatik $G$ \textbf{erzeugte Sprache}.
+		Sei $G = (N, T, S, P)$ eine kontextfreie Grammatik. Wir nennen die Sprache $$L(G) := \{w \in T^\ast \mid S \Rightarrow^\ast w \} \subseteq T^*$$ die von $G$ \textbf{erzeugte Sprache}.
 	\end{Definition} \pause
-	Das sind also alle Wörter aus Terminalsymbolen, die vom Startsymbol aus ableitbar sind.\\
-	Achtung: Die erzeugte Sprache kann auch leer sein. \\
-	Beispiel: \pause $L\left(\left(\{X\},\{a,b\},X,\{X\to X\}\right)\right) = \{\}$
+	Das sind also alle Wörter aus \emph{Terminalsymbolen}, die vom Startsymbol aus ableitbar sind.\\
+	\bigskip
+	Achtung: Die erzeugte Sprache kann auch \textbf{leer} sein. \\
+	Beispiel: \pause $L\left(\left(\{X\},\{\word a, \word b\},X,\{X\to X\}\right)\right) = \{\}$
 \end{frame}
 
 \begin{frame}{Erzeugte Sprache}
 	\begin{Beispiel}
-		$L(G_{MI}) = \{$Monkey Island 1, Monkey Island 2, Monkey Island 3$\}$\\
-		M I N $\notin L(G_{MI})$
+		$L(G_{MI}) = \{\word{Monkey\sp Island\sp1}, \word{Monkey\sp Island\sp 2}, \word{Monkey\sp Island\sp 3}\}$\\
+		$M\wordsp I\wordsp N \notin L(G_{MI})$ \quad (enthält nämlich  Nichtterminale!)
 	\end{Beispiel}
 	
 	\pause
 	\begin{Definition}
-		Eine Sprache L, für die eine kontextfreie Grammatik G mit $L(G) = L$ existiert, heißt \textbf{kontextfrei}.
+		Eine Sprache $L$, für die irgendeine kontextfreie Grammatik G mit $L(G) = L$ existiert, heißt \textbf{kontextfrei}.
 	\end{Definition}
-
-	Viele \enquote{natürlich vorkommende} Sprachen sind kontextfrei.
+	\medskip
+	
+	Viele Programmiersprachen sind kontextfrei. \\
+	Eine vereinfachte Variante der englischen Sprache auch. \smiley
+% Grob falsch:
+%	Viele \enquote{natürlich vorkommende} Sprachen sind kontextfrei.
 		
 \end{frame}
 
 \subsection{Beispiele}
 \begin{frame}{Beispiel}
-	$$ G = (\{X\}, \{a, b\}, X, \{X \to aXb \mid \varepsilon\}) $$
-	
+	$$ G = (\{X\}, \, \{\word a, \word  b\}, \, X, \, \{X \to \word aX\word b \mid \eps\}) $$
+	\delimitershortfall=1pt
 	\begin{itemize}
-		\item Gilt $X \Rightarrow aXb$, $X \Rightarrow aaXbb$, $XX \Rightarrow aXbaXb$?
-		\item Welche Wörter lassen sich aus aaXbb ableiten? Und aus XX?
-		\item Gib $L(G)$ an!
+		\item Gilt $X \derives \word aX\word b$, \; $X \derives \word{aa}X\word{bb}$, \; $XX \derives \word{a}X\word{ba}X\word{b}$? \\
+			  \visible<2-|handout:2->{Ja, Nein, Nein.}
+		\item Welche Wörter lassen sich aus $\word{aa}X\word{bb}$ ableiten? Und aus $XX$? \\
+			  \visible<3-|handout:2->{
+				  Aus $\word{aa}X\word{bb}$: \quad $\set{\word a^k\word b^k \mid k \geq 2}$ \\
+				  Aus $XX$: \quad $\set{\word a^k\word b^k \word a^\ell \word b^\ell \mid k,\ell \in \N_0}$
+			  }
+		\item Gebt $L(G)$ an! \\
+		      \visible<4-|handout:2->{ $L(G) = \set{\word a^k\word b^k\mid k \in \N_0}$ }
 	\end{itemize}
 	
 \end{frame}
 
-\begin{frame}{Musikgrammatik}
-	Wir betrachten die Grammatik $$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
+
+
+\thasse{
+	\begin{frame}{Musikgrammatik}
+		Wir betrachten die Grammatik $$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
 		Wie kann man $A$ ableiten? Und $ABC$? \pause Und
 		\begin{figure}[h!]
 			\centering
@@ -115,29 +164,40 @@
 			\includegraphics[scale=0.2]{acdc-black-ice.jpg} \hspace{2em} \pause
 			\includegraphics[scale=0.26]{ADAC-Logo.png} \pause
 		\end{figure} 
-	
+		
 		$X \Rightarrow AX \Rightarrow ABX \Rightarrow ABBX \Rightarrow ABBAX \Rightarrow ABBA$
 		
+	\end{frame}
+	
+	\begin{frame}{Musikgrammatik}
+		$$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
+		
+		Welche Wörter \only<3-|handout:2>{über $\{A, B, C, D\}$}kann man nicht ableiten?\\
+		\only<2|handout:1>{
+			\centering
+			\begin{figure}
+				\includegraphics[scale=0.2]{mozart_jungle}
+			\end{figure}
+		}
+		\only<4|handout:2>{
+			Keine! Die erzeugte Sprache ist
+			$$L(G) = \{A,B,C,D\}^\ast$$
+		}
+	\end{frame}
+}
+
+\begin{frame}{Klammerausdrücke}
+	Gegeben sei die Grammatik $$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$$
+	\begin{itemize}
+		\item Wie leitet man \word{((((()))))} ab?
+		\item Wie leitet man \word{()(())()()} ab?
+		\item Kann man \word{(()(} ableiten? \pause \impl Nein!
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Musikgrammatik}
-	$$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
-	
-	Welche Wörter \only<3-|handout:2>{über $\{A, B, C, D\}$}kann man nicht ableiten?\\
-	\only<2|handout:1>{
-		\centering
-		\begin{figure}
-			\includegraphics[scale=0.2]{mozart_jungle}
-		\end{figure}
-	}
-	\only<4|handout:2>{
-		Keine! Die erzeugte Sprache ist
-		$$L(G) = \{A,B,C,D\}^\ast$$
-	}
-\end{frame}
 
 \begin{frame}{Ableitungsbäume}
-	$$G = (\{X\}, \{(, )\}, X, \{X \to XX \mid (X) \mid \varepsilon\})$$
+	$$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$$
 	\pause
 	\begin{tikzpicture}
 	[level 1/.style={sibling distance=50mm},
@@ -175,33 +235,25 @@
 	\end{tikzpicture}
 \end{frame}
 
-\begin{frame}{Klammerausdrücke}
-	Gegeben sei die Grammatik $$G = (\{X\}, \{(, )\}, X, \{X \to XX \mid (X) \mid \varepsilon\})$$
-	\begin{itemize}
-		\item Wie leitet man $((((()))))$ ab?
-		\item Wie leitet man $()(())()()$ ab?
-		\item Kann man $(()($ ableiten? \pause Nein!
-	\end{itemize}
-\end{frame}
 
 \begin{frame}{Klammerausdrücke}
-	Gegeben sei die Grammatik $$G = (\{X\}, \{(, )\}, X, \{X \to XX \mid (X) \mid \varepsilon\}$$
-	Was ist $L(G)$? Was kann man also aus X ableiten?\\ \pause 
-	Alle \enquote{\textit{wohlgeformten Klammerausdrücke}}\\[1em]
+	Gegeben sei die Grammatik $$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$$
+	Was ist $L(G)$? Was kann man also aus $X$ ableiten?\\ \pause 
+	Alle \enquote{\textit{wohlgeformten Klammerausdrücke}} \quad ($=$ alle, die Sinn machen).\\[1em]
 	
 	Was bedeutet wohlgeformt in diesem Kontext?\\ \pause
-	$$\forall w \in L(G): N_((w) = N_)(w)$$ 
-	Reicht das? \pause Notwendig aber nicht hinreichend! 
+	$$\forall w \in L(G): N_{\word(}(w) = N_{\word)}(w)$$ 
+	Reicht das? \pause \impl Notwendig, aber nicht hinreichend! 
 
 \end{frame}
 
 \begin{frame}{Klammerausdrücke}
 	Wir dürfen eine Klammer erst schließen, \textit{nachdem} wir sie geöffnet haben.\\
 	Also: Anzahl der schließenden Klammern darf nie größer als Anzahl der öffnenden Klammern sein! \pause \\[1em]
-	Für jedes Präfix $v$ von einem Wort $w \in L(G)$ gilt $$N_( (v) \geq N_) (v)$$ \pause
+	\impl Für jedes Präfix $v$ von einem Wort $w \in L(G)$ gilt $$N_{\word(} (v) \geq N_{\word)} (v)$$ \pause
 	
-	Achtung: Grammatiken sind nicht eindeutig! Wir können zur gleichen Sprache mehrere verschiedene erzeugende Grammatiken finden. \\
-	Alternative Grammatik für wohlgeformte Klammerausdrücke: \pause $$G = (\{X\}, \{(, )\}, X, \{X \to (X)X \mid \varepsilon\})$$
+	\textbf{Achtung}: Grammatiken sind \textbf{nicht eindeutig}! Wir können zur gleichen Sprache mehrere verschiedene erzeugende Grammatiken finden. \\
+	Alternative Grammatik für wohlgeformte Klammerausdrücke: \pause $$G = (\{X\}, \, \{\word (, \word )\}, \, X, \, \{X \to \word(X\word)X \mid \varepsilon\})$$
 \end{frame}
 
 \begin{frame}{Und jetzt ihr...}

@@ -11,8 +11,8 @@
 		\item \enquote{Werte} sind 24 Bit lang
 		\item Befehlscodierungen -- zwei Formate:
 		\begin{itemize}
-			\item 4 Bit für den OpCode und 20 Bit für einen Parameter (Adresse / Konstante)
-			\item 8 Bit Befehl (Rest irrelevant)\\
+			\item[a)] 4 Bit für den OpCode und 20 Bit für einen Parameter (Adresse / Konstante)
+			\item[b)] 8 Bit Befehl (Rest irrelevant)\\
 			\item[]<+(-2)-> \includegraphics[width=100px]{MIMA_commands.png} 
 		\end{itemize} 
 	\end{itemize}
@@ -22,20 +22,21 @@
 \begin{frame}{Wichtige Register}
 	\begin{itemize}[<+->]
 		\item \emph{IAR} : InstruktionsAdressRegister : Speichert Adresse des aktuell auszuführenden Befehls.
-		\item \emph{IR}: InstruktionsRegister : Speichert den auszuführenden Befehl.
+		\item \emph{IR}: InstruktionsRegister : Speichert den auszuführenden Befehl selbst.
 		\item \emph{SAR}: SpeicherAdressRegister : Enthält die Adresse eines Wertes, der aus dem Speicher gelesen werden soll.
 		\item \emph{SDR}: SpeicherDatenRegister : Enthält einen Wert, der aus dem Speicher geladen wurde.
+		\item \emph{Akku}: enthält Ausgangswerte/Ergebnisse von Berechnungen
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Aufbau}
+\begin{frame}[t]{Aufbau}
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{MIMA.png}
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Befehlsholphase}
+\begin{frame}[t]{Befehlsholphase}
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{MIMA.png}
@@ -75,7 +76,7 @@
 			\item LDV, STV adr \quad (Lese/Schreibe von/an Adresse)
 			\item LDIV, STIV adr \quad (Lese/Schreibe von/an Adresse, die an der Adresse steht)
 		\end{itemize}
-		\item Vergleichsoperation: EQL adr \quad ($-1$ wenn gleich, 0 sonst)
+		\item Vergleichsoperation: EQL adr \quad (liefert $-1$ wenn gleich, 0 sonst)
 		\item Sprünge:
 		\begin{itemize}
 			\item JMP adr
@@ -121,45 +122,61 @@
 \end{frame}
 
 \begin{frame}{Beispiele}
-	Beispiele zur Umsetzung von Anweisungen aus Hochsprachen:\\
+	Beispiele zur Umsetzung von Anweisungen aus Hochsprachen (if, while, for....):\\
 	Siehe Übung WS 15/16
 \end{frame}
 
-\begin{frame}{Übung: Modulo}
-	Schreibe ein Programm, das eine an Speicheradresse $a_1$ gegebenen Zahl Modulo R rechnet und an Adresse $a_2$ ablegt.
-	\begin{itemize}
-		\item Modulo 2
-		\item Modulo 3
-	\end{itemize}
+\begin{frame}{Übung: Modulo 2 und Betrag}
+	1. Schreibe ein Programm, das eine an Speicheradresse $a_1$ gegebenen Zahl Modulo 2 rechnet und an Adresse $a_2$ ablegt. \\
+	\medskip
+	2. Schreibe ein Programm, das den Betrag einer an Adresse $a_1$ gegebenen Zahl berechnet und an Adresse $a_2$ ablegt.
 \end{frame}
 
 \begin{frame}{Lösung: Modulo 2}
 	\begin{tabbing}
-		start:  \= LDC 1 \quad  //$=$ 000000000000000000000001 \\
+		start: \; \= LDC 1 \quad  //$= 000000000000000000000001_2$ \\
 				\> AND $a_1$ \\
-				\> STV $a_1$ \\
+				\> STV $a_2$ \\
 				\> HALT
 	\end{tabbing}
-	
+\end{frame}
+
+\begin{frame}{Lösung: Betrag}
+	\begin{tabbing}
+		start: \quad \= LDV $a_1$ \\
+					 \> JMN negate \\
+		end: 		 \> STV $a_2$ \\
+					 \> HALT \\
+		negate:		 \> NOT \\
+					 \> STV $a_2$ \\
+					 \> LDC 1 \\
+					 \> ADD $a_2$  \\
+					 \> JMP end	 \\		 
+	\end{tabbing}
+\end{frame}
+
+\begin{frame}{Übung: Modulo 3}
+	Schreibe ein Programm, das eine an Speicheradresse $a_1$ gegebenen Zahl Modulo \textbf{3} (drei!) rechnet und an Adresse $a_2$ ablegt.
 \end{frame}
 
 \begin{frame}{Lösung: Modulo 3}
   \begin{tabbing}
-    start:\; \= LDC 1 \\
+    start: \quad \= LDC 1 \\
            \> STV One\\
            \> LDC 3\\
            \> NOT\\
            \> ADD One\\
-           \> STV MThree\\
+           \> STV MinusThree\\
     \medskip
-    while: \> LDV MThree\\
+    while: \> LDV MinusThree\\
            \> ADD $a_1$\\
-           \> JMN ende\\
+           \> JMN end\\
            \> STV $a_1$\\
            \> JMP while\\
     \medskip
-    ende:  \> LDC 3\\
+    end:  \> LDC 3\\
            \> ADD $a_1$\\
+           \> STV $a_2$ \\
            \> HALT\\
   \end{tabbing}
 \end{frame}

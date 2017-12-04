@@ -49,6 +49,7 @@
 \let\literal\word
 \def\mword#1{\hbox{\textcolor{blue}{$\mathtt{#1}$}}}  % math word
 \def\sp{\scalebox{1}[.5]{\textvisiblespace}}
+\def\wordsp{\word{\sp}}
 
 %\newcommand{\literal}[1]{\textcolor{blue}{\texttt{#1}}}
 \newcommand{\realTilde}{\textasciitilde \ }
@@ -171,6 +172,8 @@
 
 \newcommand{\impl}{\ifmmode\ensuremath{\mskip\thinmuskip\Rightarrow\mskip\thinmuskip}\else$\Rightarrow$\fi\xspace}
 \newcommand{\Impl}{\ifmmode\implies\else$\Longrightarrow$\fi\xspace}
+
+\newcommand{\derives}{\Rightarrow}
 
 \newcommand{\gdw}{\ifmmode\mskip\thickmuskip\Leftrightarrow\mskip\thickmuskip\else$\Leftrightarrow$\fi\xspace}
 \newcommand{\Gdw}{\ifmmode\iff\else$\Longleftrightarrow$\fi\xspace}
