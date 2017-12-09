@@ -167,14 +167,14 @@
            \> NOT\\
            \> ADD One\\
            \> STV MinusThree\\
+           \> LDV $a_1$\\
     \medskip
-    while: \> LDV MinusThree\\
-           \> ADD $a_1$\\
+    while: \> ADD MinusThree\\
            \> JMN end\\
-           \> STV $a_1$\\
            \> JMP while\\
     \medskip
-    end:  \> LDC 3\\
+    end:   \> STV $a_1$\\
+           \> LDC 3\\
            \> ADD $a_1$\\
            \> STV $a_2$ \\
            \> HALT\\
