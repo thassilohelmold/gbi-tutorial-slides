@@ -18,8 +18,6 @@
 \begin{document}
 \starttut{8}
 
-\lastframe{0.50}{0}{xkcd/logic_principle_of_explosion.png}{https://www.xkcd.com/}
-
 \framePrevEpisode
 
 \begin{frame}{Rückblick: MIMA}
@@ -32,21 +30,15 @@
 \end{frame}
 
 \begin{frame}{Wahr oder Falsch?}
-	\begin{block}{}
-	\begin{itemize}
-		\FalseQuestionE{Im IR der MIMA wird die Adresse des aktuellen Befehls gespeichert}{Das geschieht im IAR. Im IR steht der Befehl selbst}
-		\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch}{}
-		\FalseQuestionE{Der Akku führt bei der MIMA Berechnungen aus}{Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert}
-	\end{itemize}
-	\end{block}
+	\thasse{\Socrative}
+	\FalseQuestionE{Im IR der MIMA wird die Adresse des aktuellen Befehls gespeichert}{Das geschieht im IAR. Im IR steht der Befehl selbst}
+	\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch}{}
+	\FalseQuestionE{Der Akku führt bei der MIMA Berechnungen aus}{Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert}
 \end{frame}
 
 \begin{frame}{Wahr oder Falsch?}
-	\begin{block}{}
-	\begin{itemize}
 	\FalseQuestionE{LDC -5 lädt $-5$ in den Akku}{LDC funktioniert nicht mit negativen Konstanten!}
 	\FalseQuestionE{Mit der MIMA können wir Zufallszahlen erzeugen}{Die MIMA arbeitet rein deterministisch und damit ohne jeden Zufall.}
-	\end{itemize}
 	\visible<5>{
 	\begin{figure}[H]
 		\centering
@@ -55,41 +47,47 @@
 		\caption{ \texttt{\url{http://xkcd.com/}} }
 	\end{figure} 	
 	}
-	\end{block}
 \end{frame}
 
 %% Zum Aufwärmen
 
-\begin{frame}{Der Philosoph am Scheideweg}
+\begin{frame}{Dr. Meta am Nordpol}
+	Dr Meta, der wissenschaftlichste aller Superschurken, ist entsetzt.\\
+	Seit Jahren sinken seine Bekanntheitswerte, mittlerweile kennt nur noch eine kleine Gruppe von Studenten an einer einzigen Universität seinen Namen (Vielleicht hätte er seine Twitter-Kampagne aktiver verfolgen sollen - Nein, die Übungsblätter in GBI zu infiltrieren war wichtiger).\\
+	\bigskip \pause
+	Damit alle Welt von seinen Schurkentaten erfährt, verfolgt er einen ehrgeizigen Plan: Er möchte seine Memoiren an sämtliche Haushalte verteilen. Dies von Hand zu erledigen ist eines Superschurkens seiner Größe jedoch nicht würdig. Daher möchte er das effizienteste und flächendekendste Logistiksystem der Welt verwenden:\\ 
+	Er wird den Weihnachtsmann dazu „überreden“, in diesem Jahr zusammen mit den Geschenken an jeden Haushalt auch seine Memoiren zu verteilen.
+\end{frame}
+
+\begin{frame}{Dr. Meta am Nordpol}
 	\only<1|handout:1>{
-	Ein Weg führt in die Wüste, auf dem ein Wanderer marschiert. 
-	Nach einem eintägigen Fußmarsch gelangt er an eine Weggabelung, an der eine kleine Hütte steht.\\
+	Am Nordpol angekommen muss Dr. Meta leider feststellen, dass das Weihnachtsdorf nicht so leicht zu erreichen ist wie erhofft.\\
+	Nach Tage des Umherirrens gerät er an eine Hütte, von der zwei Wege fortführen. Vor der Hütte steht ein Schild:\\
 	\bigskip
-	Neben der Eingangstüre ist ein Plakat mit folgendem Text befestigt:
 	}
-	\only<2|handout:1>{
-	Einer der beiden weiterführenden Wege führt zu mehreren guten Oasen; nur auf diesem Weg kannst du dein Ziel lebend erreichen.\\
-	\bigskip
-	Der andere Weg führt in die unendliche Wüste; er hat noch jedem den Tod gebracht, der ihn wählte.\\
-	\bigskip
+	\only<1-3|handout:2>{
+	Willkommen im Servicezentrum für unangemeldete Eindringlinge!\\
+	\smallskip
 	}
 	\only<2-3|handout:2>{
-	In dieser Hütte haust ein Philosoph, der die Ziele der beiden Wege sicher kennt; \textbf{streng abwechselnd sagt er an einem Tag die Wahrheit und am darauf folgenden Tag lügt er}.\\
-	\bigskip
-	Keiner außer ihm weiß aber, ob der heute die Wahrheit sagt oder aber heute lügt.\\
-	\bigskip
+	Einer der beiden Wege führt direkt zum Weihnachtsdorf, der andere jedoch…\\
+	Nur der Wächterwichtel weiß, welcher Weg der richtige ist.\\
+	\textbf{Streng abwechselnd sagt er an einem Tag die Wahrheit und am darauf folgenden Tag lügt er}.\\ 
+	\smallskip
+	Keiner außer ihm weiß, ob der heute die Wahrheit sagt oder aber heute lügt.\\
 	}
 	\only<3|handout:2>{
-	Du darfst dem Philosophen nur eine einzige Frage stellen, mit der du den Weg zu den Oasen erfahren willst.\\
+	Du darfst dem Wichtel genau eine Frage stellen, danach musst du dich für einen der Wege entscheiden.\\
 	\bigskip
-	Was fragst du ihn?
+	Hilf Dr. Meta, das Weihnachtsdorf zu erreichen, indem du die richtige Frage stellst.\\
 	}
 \end{frame}
 
-\begin{frame}{Der Philosoph am Scheideweg}
-	Was fragst du ihn?\\[1em] \pause
-	Was würdest du sagen, wenn ich dich morgen fragen würde, ob der linke Weg der richtige ist?\\
+\begin{frame}{Dr. Meta am Nordpol\footnote{Rätselidee frei übernommen nach: Der Philosoph am Scheideweg}}
+	Hilf Dr. Meta, das Weihnachtsdorf zu erreichen, indem du die richtige Frage stellst. Wie lautet die richtige Frage?\\[1em]
+	Was würdest du sagen, wenn ich dich morgen fragen würde, ob der linke Weg zum Weihnachtsdorf führt?\\
 	\bigskip
+	
 	%Und wenn der Philosoph jeden Morgen würfelt, ob er die Wahrheit sagt oder lügt?\\ 
 	%\only<2|handout:2>{
 	%Was würdest du sagen, wenn ich dich \textbf{heute} fragen würde, ob der linke Weg der richtige ist?\\ }
@@ -106,12 +104,11 @@
 
 \begin{frame}{Wahr oder Falsch?}
 	Sei $G=(\{X,Y\},\{a,b\},X,P)$ eine kontextfreie Grammatik.
-	\begin{itemize}
 		\FalseQuestion{Die Produktion $XY \to a$ ist gültig}
 		\FalseQuestion{Die Produktion $a \to XY$ ist gültig}
 		\TrueQuestionE{Die Produktion $X \to XaX$ ist gültig}{}
 		\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \Rightarrow w$}{}
-		\FalseQuestionE{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}	\end{itemize}
+		\FalseQuestionE{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}	
 \end{frame}
 
 \mycomment{ % Kam letztes Jahr nicht gut an, ist wohl etwas "albern"
@@ -165,7 +162,7 @@
 \end{frame}
 }
 
-\input{../Bloecke/Prädikatenlogik.tex}
+\input{../Bloecke/Praedikatenlogik.tex}
 
 % Evtl. Übung: Nicht-Palindrome?
 
@@ -194,7 +191,8 @@
 	Frohe Weihnachten und einen guten Start in das neue Jahr!
 \end{frame}
 
-\lastframe{0.50}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835}
+\lastframe{0.50}{0}{xkcd/logic_principle_of_explosion.png}{https://www.xkcd.com/}
+%\lastframe{0.50}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835} % Dieses Jahr dürften noch genügend Tutanden beim nächsten Termin kommen
 \slideThanks
 
 \end{document}
