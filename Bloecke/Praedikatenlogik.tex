@@ -184,19 +184,50 @@
 \end{figure} 
 \end{frame}
 
+\begin{frame}{Aufgabe 2 (WS 15/16, Blatt 7)}
+	\begin{block}{Aufgabe}
+		Formuliert die folgenden Aussagen als Formeln in Prädikatenlogik:
+		\begin{enumerate}
+			\item Nicht alle Vögel können fliegen.
+			\item Wenn es irgendjemand kann, dann kann es Donald Ervin Knuth.
+			\item John liebt jeden, der sich nicht selbst liebt.
+		\end{enumerate}
+	\end{block}
+	
+	\visible<2-|handout:2>{
+		\begin{block}{Lösung}
+			\begin{enumerate}
+				\item \qqquad $\plexist \plx {\plka \plfoo{Vogel}{\plka \plx \plkz} \aland \alnot \plfoo{flugfähig}{\plka \plx \plkz} \plkz}$
+				\visible<3-|handout:2>{
+					\item \qqquad $
+					\plexist \plx {\plka \plfoo{kann\_es}{\plka \plx \plkz} \plkz}
+					\alimpl
+					\plfoo{kann\_es}{\plka \plfoo{knuth} \plkz}
+					$
+				}
+				\visible<4-|handout:2>{
+					\item \qqquad $
+					\plall \plx {\plka \alnot \plfoo{liebt}{\plka \plx \plcomma \plx \plkz} \alimpl \plfoo{liebt}{\plka \plfoo{John} \plcomma \plx \plkz} \plkz}
+					$
+				}
+			\end{enumerate}
+		\end{block}
+	}
+\end{frame}
+
 \begin{frame}{Freie und gebundene Variablenvorkommen}
 	\textbf{Vorkommen} einer Variable in einer PL-Formel: \\
 	$G = \plall \word{x\,R(\underline{x})}$ \Impl \word x kommt in $G$ vor. \\
-	Direkt hinter Quantoren zählt nicht! \\
+	„Direkt hinter Quantoren“ zählt nicht! \\
 	Bsp.: $F = \plall \word{x\,R(c)}$ \Impl \word x kommt \textbf{nicht} in $F$ vor! \\
 	\medskip \pause
 	
 	\textbf{Freie Variablenvorkommen} \quad $\fv(F)$ \\
-	Alle, die \emph{irgendwo} in $F$ vorkommen, ohne dass „ein Quantor davorsteht“. \\
+	Alle, die \emph{irgendwo} in $F$ vorkommen, ohne dass sie quantifiziert sind {\small ($=$ ein Quantor sie einführt)}. \\
 	\medskip \pause
 	
 	\textbf{Gebundene Variablenvorkommen} \quad $\bv(F)$ \\
-	Alle, die \emph{irgendwo} in $F$ vorkommen, wobei „ein Quantor davorsteht“. \\
+	Alle, die \emph{irgendwo} in $F$ vorkommen und dabei quantifziert sind. \\
 	\medskip \pause
 	
 	Formel $F$ heißt \textbf{geschlossen} $:\!\!\Gdw \fv(F) = \emptyset$\\
@@ -235,32 +266,53 @@
 	
 \end{frame}
 
+\mycomment{
+	\begin{frame}{Substitutionen}
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[scale=0.6]{pl/subs.png} \hspace{2em} 
+		\end{figure} 
+	\end{frame}
+}
 
 \begin{frame}{Substitutionen}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.6]{pl/subs.png} \hspace{2em} 
-	\end{figure} 
+	Wollen \textbf{Variablen} (!) durch andere Terme ersetzen. \\
+	\impl Eine Substitutionsabbildung $$\sigma_S \from \LFor \functionto \LFor, \, \text{längliche Definition s. VL}$$ wendet Ersetzungen aus $S$ auf einen Term an. \\
+	\medskip \pause
+	
+	Beispiel: \\
+	$\sigma_{\set{\word x/\word y}}\left(\word x \pleq \word c\right) = \word y \pleq \word c$. \\
+	$\sigma_{\set{\word x/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists \word y\,\word y \pleq \word x\right) = \word{R(\word{f(c)},y)} \aland \plexists \word y\,\word y \pleq \word{f(c)}$. \\
+	\medskip \pause
+	
+	Mehrere auf einmal: \\
+	$\sigma_{\set{\word x/\word y, \, \word y/\word x}}\left(\word x \pleq \word y\right) = \word y \pleq \word x$.
 \end{frame}
 
 \begin{frame}{Substitutionen}
 	Ersetzt werden nur \textbf{freie Variablenvorkommen}!\\
-	Gebundene Vorkommen, also Variablen im Wirkungsbereich eines Quantors, werden \textbf{nicht} ersetzt.
+	Gebundene Vorkommen, also Variablen im Wirkungsbereich eines Quantors, werden \textbf{nicht} ersetzt. \\
+	\medskip \pause
 	
-	\pause
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.5]{pl/subs_bsp.png} \hspace{2em} 
-	\end{figure} 
+	Beispiel: \\
+	$\sigma_{\set{\word y/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists \word y\,\word y \pleq \word x\right) = \word{R(x,\word{f(c)})} \aland \plexists \word y\,\word y \pleq \word x$
+	
+	
+	\mycomment{
+		\begin{figure}[h!]
+			\centering
+			\includegraphics[scale=0.5]{pl/subs_bsp.png} \hspace{2em} 
+		\end{figure} 
+	}
 \end{frame}
 
 \begin{frame}{Substitutionen: Kollisionsfreiheit}
 	Bei einer \textbf{kollisionsfreien} Substitution werden keine Variablen \enquote{aus Versehen} gebunden.\\[1em]
-	Ersetzen wir eine freie Variable $x$ durch einen Term, in dem die Variable $y$ frei vorkommt, so darf sich $x$ nicht im Wirkungsbereich eines Quantors über $y$ befinden.
+	Ersetzen wir eine freie Variable $\word x$ durch einen Term, in dem die Variable $\word y$ frei vorkommt, so darf sich $\word x$ nicht im Wirkungsbereich eines Quantors über $\word y$ befinden.
 	
 	\pause
 	\begin{Beispiel}
-		$L = \plall \plx (\plx \aland \ply)$\\
+		$F = \plall \plx \plka\plx \aland \ply\plkz$\\
 		Kollisionsfrei: $\sigma_{\{\ply/\plz\}}$\\
 		Nicht kollisionsfrei: $\sigma_{\{\ply/\plx\}}$
 	\end{Beispiel}
@@ -282,7 +334,7 @@
 	\begin{block}{Aufgabe 1.2}
 		Gebt eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ ist.\\[1em] \pause
 		
-		Die Substitution $\sigma_{\{(\ply/\plx)\}}$ leistet das Gewünschte.
+		Die Substitution $\sigma_{\{\ply/\plx\}}$ leistet das Gewünschte.
 	\end{block}
 	
 \end{frame}
@@ -297,7 +349,7 @@
 	\end{figure} 
 \end{frame}
 
-\begin{frame}{Aufgabe 1 (15/16, Blatt 7)}
+\begin{frame}{Aufgabe 1 (WS 15/16, Blatt 7)}
 	  \begin{equation*}
 	\alnot \plexist \plx
 	{\plka
@@ -311,15 +363,15 @@
 	\end{equation*}\\[1em]
 	
 	\begin{block}{Aufgabe 1.3}
-		Geben Sie eine Interpretation $(D_1, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \textbf{W}$ gilt.\\[0.5em]
+		Gebt eine Interpretation $(D_1, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\[0.5em]
 		
-		\visible<2-|handout:2>{Die Interpretation $(D_1, I_1) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_1 \colon \VPL \to D$, $v \mapsto 0$, leisten das Gewünschte.}
+		\visible<2-|handout:2>{Die Interpretation $(D_1, I_1) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_1 \colon \VPL \functionto D$, $v \mapsto 0$, leisten das Gewünschte.}
 	\end{block}
 
 	\begin{block}{Aufgabe 1.4}
-		Geben Sie eine Interpretation $(D_2, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(F) = \textbf{F}$ gilt.\\[0.5em]
+		Gebt eine Interpretation $(D_2, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(F) = \F$ gilt.\\[0.5em]
 		
-		\visible<3-|handout:2>{Die Interpretation $(D_2, I_2) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_2 \colon \VPL \to D$, $v \mapsto 1$, leisten das Gewünschte.}
+		\visible<3-|handout:2>{Die Interpretation $(D_2, I_2) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_2 \colon \VPL \functionto D$, $v \mapsto 1$, leisten das Gewünschte.}
 	\end{block}
 \end{frame}
 
@@ -332,36 +384,7 @@
 	Vgl. Übung WS 15/16
 \end{frame}
 
-\begin{frame}{Aufgabe 2 (WS 15/16, Blatt 7)}
-	\begin{block}{Aufgabe}
-		Formulieren Sie die folgenden Aussagen als Formeln in Prädikatenlogik:
-		\begin{enumerate}
-			\item Nicht alle Vögel können fliegen.
-			\item Wenn es irgendjemand kann, dann kann es Donald Ervin Knuth.
-			\item John liebt jeden, der sich nicht selbst liebt.
-		\end{enumerate}
-	\end{block}
-	
-	\visible<2-|handout:2>{
-	\begin{block}{Lösung}
-		\begin{enumerate}
-				\item \qqquad $\plexist \plx {\plka \plfoo{Vogel}{\plka \plx \plkz} \aland \alnot \plfoo{flugfähig}{\plka \plx \plkz} \plkz}$
-			\visible<3-|handout:2>{
-				\item \qqquad $
-				\plexist \plx {\plka \plfoo{kann\_es}{\plka \plx \plkz} \plkz}
-				\alimpl
-				\plfoo{kann\_es}{\plka \plfoo{knuth} \plkz}
-				$
-			}
-			\visible<4-|handout:2>{
-				\item \qqquad $
-				\plall \plx {\plka \alnot \plfoo{liebt}{\plka \plx \plcomma \plx \plkz} \alimpl \plfoo{liebt}{\plka \plfoo{John} \plcomma \plx \plkz} \plkz}
-				$
-			}
-		\end{enumerate}
-	\end{block}
-	}
-\end{frame}
+
 
 \begin{frame}{Weitere Aufgaben}
 	Siehe Übung WS 15/16
