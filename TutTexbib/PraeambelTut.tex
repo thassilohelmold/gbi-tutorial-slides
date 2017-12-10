@@ -221,8 +221,6 @@
 \edef\nextyear{\the\numexpr\thisyear+1\relax}
 
 
-
-
 % --- \frameheight constant ---
 \newlength\fullframeheight
 \newlength\framewithtitleheight
@@ -234,8 +232,13 @@
 
 \let\frametitleentry\relax
 \let\oldframetitle\frametitle
-\def\frametitle#1{\global\def\frametitleentry{#1}\if\relax\frametitleentry\relax\else\setlength\frameheight{\framewithtitleheight}\fi\oldframetitle{#1}}
+\def\newframetitle#1{\global\def\frametitleentry{#1}\if\relax\frametitleentry\relax\else\setlength\frameheight{\framewithtitleheight}\fi\oldframetitle{#1}}
+\let\frametitle\newframetitle
+
+\def\newframetitleoff{\let\frametitle\oldframetitle}
+\def\newframetitleon{\let\frametitle\newframetitle}
 % --- \frameheight constant end ---
+
 
 
 \newenvironment{headframe}{\Huge THIS IS AN ERROR. PLEASE CONTACT THE ADMIN OF THIS TEX CODE. (headframe env def failed)}{}

@@ -34,7 +34,7 @@
 		\medskip
 		\pause
 		Mehrere Möglichkeiten zur Auswahl: \\
-		\qquad $L \to [\text{rechte Seite}]_1 \mid [\text{rechte Seite}]_2 \mid [\text{rechte Seite}]_3$ \\
+		\qquad $L \to [\text{rechte Seite}]_1 \mid [\text{rechte Seite}]_2 \mid [\text{rechte Seite}]_3 \mid ...$ \\
 		Heißt: $L$ kann durch die rechte Seite 1, 2 oder 3 ersetzt werden. \textbf{Wie wir wollen.} \\
 		\pause
 		\begin{Beispiel}
@@ -54,7 +54,7 @@
 	
 	\begin{Definition}
 		Wort $u = .....X.....$ \textbf{ableitbar} nach $v = ..... w......$ \\
-		wenn es eine Produktion $X \to w$ gibt. \\
+		wenn es eine Produktion $X \to w$ gibt. \; ($X$ ist Nichtterminal.) \\
 		Schreibweise: \quad $u \derives v$ \quad oder \quad $u \derives^1 v$ \\
 	\end{Definition}
 	
@@ -112,7 +112,7 @@
 	Das sind also alle Wörter aus \emph{Terminalsymbolen}, die vom Startsymbol aus ableitbar sind.\\
 	\bigskip
 	Achtung: Die erzeugte Sprache kann auch \textbf{leer} sein. \\
-	Beispiel: \pause $L\left(\left(\{X\},\{\word a, \word b\},X,\{X\to X\}\right)\right) = \{\}$
+	Beispiel: \pause $L\left(\left(\{X\},\, \{\word a, \word b\},\, X\, ,\{X\to X\}\right)\right) = \{\}$
 \end{frame}
 
 \begin{frame}{Erzeugte Sprache}
@@ -257,25 +257,25 @@
 \end{frame}
 
 \begin{frame}{Und jetzt ihr...}
-	Gebt jeweils eine Grammatik über dem Alphabet $T = \{a, b\}$ an, die folgende Sprache erzeugt:
+	Gebt jeweils eine Grammatik über dem Alphabet $T = \{\word a, \word b\}$ an, die folgende Sprache erzeugt:
 	\begin{itemize}
-		\item Alle Wörter, in denen irgendwo das Teilwort $baa$ vorkommt.\\
+		\item Alle Wörter, in denen irgendwo das Teilwort $\word{baa}$ vorkommt.\\
 		\visible<2-|handout:2>{
-			$(\{X,Y\},T,X,P)$ mit $P=\{X \to YbaaY, Y \to aY|bY|\varepsilon\}$
+			$(\{X,Y\},T,X,P)$ mit $P=\{X \to Y\word{baa}Y, Y \to \word aY \mid \word bY \mid \varepsilon\}$
 		}
 		
 		\item Die Menge aller Wörter $w\in T^*$ mit der Eigenschaft, dass
-		für alle Präfixe $v$ von $w$ gilt: $|N_a(v) - N_b(v)| \leq
+		für alle Präfixe $v$ von $w$ gilt: $\setsize{N_{\word{a}}(v) - N_{\word{b}}(v)} \leq
 		1$.\\
-		Tipp: Was für eine Struktur haben Wörter der Länge $2$, $4$, \dots? \\
+		\emph{Tipp}: Was für eine Struktur haben Wörter der Länge $2$, $4$, \dots? \\
 		% $\{ab, ba\}^*$
 		\visible<3-|handout:2>{
-			$(\{X,Y\},T,X,P)$ mit $P=\{X \to abX|baX|a|b|\varepsilon\}$
+			$(\{X,Y\},T,X,P)$ mit $P=\{X \to \word{ab}X \mid \word{ba}X \mid \word a \mid \word b \mid \varepsilon\}$
 		}
 		
-		\item Alle Wörter, in denen $ab$ als Teilwort vorkommt oder kein $a$ enthalten ist. \\
+		\item Alle Wörter, in denen $\word{ab}$ als Teilwort vorkommt oder kein $\word a$ enthalten ist. \\
 		\visible<4-|handout:2>{
-			$G = (\{X, Y\}, \{a,b\}, X, P)$ mit $P = \{X \to bX \mid YabY \mid \varepsilon, Y \to aY \mid bY \mid \varepsilon\}$
+			$G = (\{X, Y\}, \{\word a, \word b\}, X, P)$ mit $P = \{X \to \word bX \mid Y\word{ab}Y \mid \varepsilon, Y \to \word aY \mid \word bY \mid \varepsilon\}$
 		}
 		
 	\end{itemize}
@@ -285,24 +285,24 @@
 \subsection{Aufgabe 1}
 \begin{frame}{Aufgabe (WS 2008) \stars{2}}
 	\begin{itemize}
-		\item Geben Sie eine kontextfreie Grammatik $$G = (N, \{a, b\}, S, P )$$ an, für die $L(G)$ die Menge aller Palindrome über dem Alphabet $\{a, b\}$ ist.
-		\item Geben Sie eine Ableitung der Wörter \code{baaab} und \code{abaaaba} aus dem Startsymbol Ihrer Grammatik an.
-		\item Beweisen Sie, dass Ihre Grammatik jedes Palindrom über dem Alphabet $\{a, b\}$ erzeugt.\\
-		Tipp: Induktion: Wenn $n$ und $n+1$ gelten, dann gilt auch $n+2$
+		\item Geben Sie eine kontextfreie Grammatik $$G = (N, \{\word a, \word b\}, S, P )$$ an, für die $L(G)$ die Menge aller Palindrome über dem Alphabet $\{\word a, \word b\}$ ist.
+		\item Geben Sie eine Ableitung der Wörter \word{baaab} und \word{abaaaba} aus dem Startsymbol Ihrer Grammatik an.
+		\item Beweisen Sie, dass Ihre Grammatik jedes Palindrom über dem Alphabet $\{\word a, \word b\}$ erzeugt.\\
+		(\emph{Tipp}: Induktion: Wenn $n$ und $n+1$ gelten, dann gilt auch $n+2$.)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Lösung}
-	Die Grammatik $$G = (\{S\}, \{a, b\}, S, P = \{S \to aSa \ | \ bSb \ | \ a \ | \ b \ | \varepsilon \})$$ erzeugt gerade die Menge der Palindrome. \pause Die Ableitungen der Wörter mit dieser Grammatik sind 
-	$$S \Rightarrow bSb \Rightarrow baSab \Rightarrow baaab$$
-	$$S \Rightarrow aSa \Rightarrow abSba \Rightarrow abaSaba \Rightarrow abaaaba$$
+	Die Grammatik $$G = (\{S\}, \{\word a, \word b\}, S, P = \{S \to \word aS\word a \ | \ \word bS\word b \ | \ \word a \ | \ \word b \ | \ \varepsilon \})$$ erzeugt gerade die Menge der Palindrome. \pause Die Ableitungen der Wörter mit dieser Grammatik sind 
+	$$S \derives \word bS\word b \derives \word{ba}S\word{ab} \derives \word{baaab}$$
+	$$S \derives \word aS\word a \derives \word{ab}S\word{ba} \derives \word{aba}S\word{aba} \derives \word{abaaaba}$$
 \end{frame}
 
 \begin{frame}{Lösung}
-	Sei $w$ ein Palindrom über $\{a, b\}$. Wir zeigen durch Induktion über $n = \vert w \vert$, dass alle Palindrome aus $S$ abgeleitet werden können. \pause
+	Sei $w$ ein Palindrom über $\{\word a,\word b\}$. Wir zeigen durch Induktion über $n = \size{w}$, dass alle Palindrome aus $S$ abgeleitet werden können. \pause
 	\begin{block}{Induktionsanfang} \pause
 		Für $n = 0$ ist das leere Wort $\varepsilon$ in einem Schritt aus $S$ ableitbar. \\
-		Für $n=1$: Die einzigen Wörter aus $\{a, b\}^\ast$ der Länge 1 sind $a$ und $b$. Auch diese sind offensichtlich aus $S$ ableitbar.
+		Für $n=1$: Die einzigen Wörter aus $\{\word a,\word b\}^\ast$ der Länge 1 sind $\word a$ und $\word b$. Auch diese sind offensichtlich aus $S$ ableitbar.
 	\end{block}
  	\pause
 	\begin{block}{Induktionsvoraussetzung} \pause
@@ -312,23 +312,25 @@
 
 \begin{frame}{Lösung}
 		\begin{block}{Induktionsschritt}
-			Sei $w$ ein Palindrom der Länge $n + 2$. Das erste (und damit auch das letzte) Zeichen sei oBdA ein $a$. Dann gibt es ein $w' \in \{a, b\}^\ast$, so dass $w = aw'a$ ist. Da $w$ ein Palindrom ist, muss auch $w'$ ein Palindrom sein. Weiterhin gilt $|w'| = n$. \pause Nach IV gibt es somit eine Ableitung $S \Rightarrow^\ast w'$. Somit gibt es die Ableitung $$S \Rightarrow aSa \overset{IV}{\Rightarrow^\ast} aw'a = w$$ und $w \in L(G)$ folgt. \pause Entsprechendes gilt, wenn das erste Zeichen von w ein b ist. \\
+			Sei $w$ ein Palindrom der Länge $n + 2$. Das erste (und damit auch das letzte) Zeichen sei oBdA. ein $\word a$. Dann gibt es ein $w' \in \{\word a, \word b\}^\ast$, so dass $w = \word aw'\word a$ ist. Da $w$ ein Palindrom ist, muss auch $w'$ ein Palindrom sein. Weiterhin gilt $\size{w'} = n$. \pause Nach IV gibt es somit eine Ableitung $S \derives^\ast w'$. Somit gibt es die Ableitung $$S \derives \word aS\word a \overset{IV}{\derives^\ast} \word aw'\word a = w$$ und $w \in L(G)$ folgt. \pause Entsprechendes gilt, wenn das erste Zeichen von w ein \word b ist. \\
 			Mit der IV haben wir also gezeigt, dass auch Palindrome der Länge $n+1$ und $n+2$ aus $S$ ableitbar sind.
 	\end{block}
 
 \end{frame}
 
 \begin{frame}{Gibt es noch mehr?}
-	\enquote{Die meisten} Sprachen in der Informatik sind kontextfrei.\\[1em]
-	Was ist mit der Sprache $L_{vv} = \{vcv \mid v \in \{a, b\}^*\}$\\
+	Viele Sprachen in der Informatik sind kontextfrei.\\[1em]
+	Was ist mit der Sprache $L_{vv} = \{v\word cv \mid v \in \{\word a,\word b\}^*\}$\\
+	\smallskip
 	\pause
 	In der Vorlesung: Es gibt keine kontextfreie Grammatik, die $L_{vv}$ erzeugt.\\
+	\medskip
 	\pause
 	Können wir die Sprache trotzdem irgendwie \enquote{verarbeiten}?
 	
 	\begin{block}{}
 		\Large
 		\centering
-		Soon\\[1em]
+		Soon...\\[1em]
 	\end{block}
 \end{frame}

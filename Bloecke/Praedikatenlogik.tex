@@ -1,30 +1,120 @@
 \newcommand{\plB}{\plfoo{B}}
 \newcommand{\plE}{\plfoo{E}}
 
-\begin{frame}{}
-	\begin{block} {Aussagenlogik}
-	\begin{itemize}
-		\item \enquote{Es regnet und alle Vögel sind grau.}
-		\item atomar: \enquote{Es regnet.}, \enquote{ Alle Vögel sind grau.}
-		\item Diese beiden Aussagen lassen sich ihrerseits nicht in weitere Teilaussagen zerlegen!
-	\end{itemize}
-	\end{block}
-
-	\pause
-	\begin{block} {Prädikatenlogik}	
-		\begin{itemize}
-		\item In der Prädikatenlogik werden atomare Aussagen hinsichtlich ihrer inneren Struktur untersucht.
-		\item \enquote{Alle Vögel sind grau}
-		\item lässt sich in : \enquote{Alle Vögel}, \enquote{sind grau} zerlegen.
-	\end{itemize}
-	
-	\end{block}
-\end{frame}
+\thasse{
+	\begin{frame}{}
+		\begin{block} {Aussagenlogik}
+			\begin{itemize}
+				\item \enquote{Es regnet und alle Vögel sind grau.}
+				\item atomar: \enquote{Es regnet.}, \enquote{ Alle Vögel sind grau.}
+				\item Diese beiden Aussagen lassen sich ihrerseits nicht in weitere Teilaussagen zerlegen!
+			\end{itemize}
+		\end{block}
+		
+		\pause
+		\begin{block} {Prädikatenlogik}	
+			\begin{itemize}
+				\item In der Prädikatenlogik werden atomare Aussagen hinsichtlich ihrer inneren Struktur untersucht.
+				\item \enquote{Alle Vögel sind grau}
+				\item lässt sich in : \enquote{Alle Vögel}, \enquote{sind grau} zerlegen.
+			\end{itemize}
+			
+		\end{block}
+	\end{frame}
+}
 
 \section{Prädikatenlogik: Syntax}
 
-\begin{frame}{Aufgabe 1 (15/16, Blatt 7)}
-	  Es seien $\CPL = \{ \}$, $\VPL = \{ \plx, \ply, \plz \}$, $\FPL = \{ \}$ und $\RPL = \{ \plE, \pleq \}$ mit $\ar(\plE) = 2$, und es sei $F$ die prädikatenlogische Formel
+
+
+\begin{frame}{Syntax}
+	\begin{block}{Aufbau von prädikatenlogischen Formeln}
+	\begin{itemize}[<+->]
+		\item \textbf{Terme}: Liefern \enquote{Werte} (Zahlen, Wörter, whatever...); \\ 
+		Aus Konstanten, Variablen und Funktionssymbolen zusammengesetzt.
+		\item \textbf{Atomare Formeln}: Liefern Wahrheitswerte $\in \BB$; \\
+		 Aus Termen und Relationssymbolen zusammengesetzt.
+		\item \textbf{Prädikatenlogische Formeln}: aus atomaren Formeln und AL-Konnektiven sowie Quantoren ($\forall, \exists$) zusammengesetzt. 
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Terme}
+	Bestehen aus... \\
+	\medskip
+	
+	\textbf{Variablen} \, (endlich viele) \quad Alphabet $\VPL$ \\
+	$\word{x}_i$ \quad $\word x, \word y, \word z$ \\
+	Können in einer Formel beliebig verschiedene Werte annehmen \\
+	\medskip \pause
+	
+	\textbf{Konstanten} \, (endlich viele) \quad Alphabet $\CPL$ \\
+	$\word{c}_i$ \quad $\word c, \word d$ \\
+	Konstanter Wert in der gesamten Formel \\
+	\medskip \pause
+	
+	\textbf{Funktionen} \, (endlich viele) \quad Alphabet $\FPL$ \\
+	$\word{f}_i$ \quad $\word f, \word g, \word h$ \\
+	Liefern Werte für irgendwelche Eingaben (wie gewohnt) \\
+	Jedes $\word{f}_i$ hat Stelligkeit $\ar(\word{f}_i) \in \N_+$ \quad „Wieviel Argumente $\word{f}_i$ nimmt“ {\small (Arität)} \\
+	\smallskip \pause
+	
+	Beispiel: 
+	\quad Funktionen $\word f$ mit $\ar(\word f) = 2$, \quad $\word g$ mit $\ar(\word g) = 1$. \\ \pause
+	\quad OK: \qquad \word{f(x,y)} \qquad \word{g(c)} \qquad \word{g(f(x,c))} \\
+	\quad Kaputt: \qquad \word{f(c)} \qquad \word{g(x,y,z)} \qquad \word{f(x,y} \qquad \word{f(x,,}
+\end{frame}
+
+\begin{frame}{Atomare Formeln}
+	Bestehen aus... \\
+	\medskip
+	
+	\textbf{Termen} (von eben) \\
+	\medskip
+	
+	\textbf{Relationen} \, (endlich viele) \quad Alphabet $\RPL$  \\
+	$\pleq$ und beliebige $\word R_i$ \quad $\word R, \word S$ \\
+	Liefern Wahrheitswerte in $\BB = \set{\W, \F}$ \\
+	Haben auch Stelligkeit $\ar(\word R_i) \in \N_+$ \\
+	\medskip \pause
+	
+	Beispiele: \quad Relationen \word R mit $\ar(\word R) = 1$, \quad \word S mit $\ar(\word S) = 2$ \\
+	\quad $\word x \pleq \word c$ \qquad $\word{g(x)} \pleq \word{g(y)}$ \qquad $\word{R(g(c))}$ \qquad $\word{S(x,f(x,y))}$
+	\medskip \pause
+	
+	Relationen und Funktionen können \textbf{nur mit Termen} aufgerufen werden! \\
+	\impl \quad $\word x \pleq \word{(}\word y \pleq \word z\word{)}$ \qquad \word{g(S(x))} \qquad \word{R(S(x,y))} \qquad $\word{R(x)} \pleq \word{S(x,y)}$ \\
+	Alles \textbf{falsch}!
+\end{frame}
+
+\begin{frame}{Prädikatenlogische Formeln}
+	Bestehen aus... \\
+	\medskip
+	
+	\textbf{Atomaren Formeln} (von eben) \\
+	\medskip
+	
+	\textbf{AL-Konnektiven} \\
+	$\alnot, \aland, \alor, \alimpl$ und Klammern {\small (einsparbar)} \\
+	Verknüpfen PL-Formeln \\
+	\medskip \pause
+	
+	\textbf{Quantoren} \\
+	$\plall$ All-Quantor \quad $\plexist$ Existenz-Quantor \\
+	Verwendung: $\bleftBr\plall \word x_i \text{...Formel...}\brightBr$ \quad $\bleftBr\plexist \word x_i \text{...Formel...}\brightBr$ \\
+	\impl NUR \textbf{Variablen} können quantifiziert werden! \\
+	\medskip 
+	
+	Klammerregeln: Wie bei AL-Formeln; Quantoren binden stärker als alles andere.
+	\bigskip \pause
+	
+	\textbf{Falsch}: \\
+	$\bleftBr\plexist \word c \text{...Formel...}\brightBr$ mit $\word c \in \CPL$ \quad \word c keine Variable! \\
+	$\bleftBr\plall \word x \word{:} \text{...Formel...}\brightBr$ \quad KEINE Doppelpunkte! \\
+\end{frame}
+
+\begin{frame}{Aufgabe 1 (WS 15/16, Blatt 7)}
+	Es seien $\CPL = \{ \}$, $\VPL = \{ \plx, \ply, \plz \}$, $\FPL = \{ \}$ und $\RPL = \{ \plE, \pleq \}$ mit $\ar(\plE) = 2$, und es sei $F$ die prädikatenlogische Formel
 	\begin{equation*}
 	\alnot \plexist \plx
 	{\plka
@@ -37,57 +127,48 @@
 		\plkz}
 	\end{equation*}
 	
-	\begin{block}{Aufgabe 1.0}
-	Ist diese prädikatenlogische Formel syntaktisch korrekt?\\ \pause
-	Ja
+	\begin{block}{Aufgabe 1}
+		Ist diese prädikatenlogische Formel syntaktisch korrekt?\\ \pause
+		Ja
 	\end{block}
 \end{frame}
 
-\begin{frame}{Syntax}
-	\begin{block}{Aufbau von prädikatenlogischen Formeln}
-	\begin{itemize}[<+->]
-		\item \textbf{Terme}: Liefern \enquote{Werte}; Aus Konstanten, Variablen und Funktionssymbolen zusammengesetzt.
-		\item \textbf{Atomare Formeln}: Liefern \enquote{Wahrheitswerte}; Aus Termen und Relationssymbolen zusammengesetzt.
-		\item \textbf{Prädikatenlogische Formeln}: Verknüpfen und Quantifizieren atomare Formeln; Aus atomaren Formeln und aussagenlogischen Konnektiven sowie Quantoren zusammengesetzt. 
-	\end{itemize}
-	\end{block}
-\end{frame}
-
-
-\begin{frame}{Terme - Alphabet}
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{pl/TermeAlphabet.png} \hspace{2em} 
-\end{figure} 
-\end{frame}
-
-\begin{frame}{Terme - Grammatik}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.2]{pl/TermeGrammatik.png} \hspace{2em} 
-\end{figure} 
-\end{frame}
-
-\begin{frame}{Atomare Formeln}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.2]{pl/AFormeln.png} \hspace{2em} 
-\end{figure} 
-\end{frame}
-
-\begin{frame}{Atomare Formeln - Beispiel}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.2]{pl/AFormelnBsp.png} \hspace{2em} 
-\end{figure} 
-\end{frame}
-
-\begin{frame}{Prädikatenlogische Formeln}
-\begin{figure}[h!]
-	\centering
-	\includegraphics[scale=0.2]{pl/PFormeln.png} \hspace{2em} 
-\end{figure} 
-\end{frame}
+\mycomment{ % LEGACY. Kann wohl weg.
+	\begin{frame}{Terme - Alphabet}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.2]{pl/TermeAlphabet.png} \hspace{2em} 
+	\end{figure} 
+	\end{frame}
+	
+	\begin{frame}{Terme - Grammatik}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.2]{pl/TermeGrammatik.png} \hspace{2em} 
+	\end{figure} 
+	\end{frame}
+	
+	\begin{frame}{Atomare Formeln}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.2]{pl/AFormeln.png} \hspace{2em} 
+	\end{figure} 
+	\end{frame}
+	
+	\begin{frame}{Atomare Formeln - Beispiel}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.2]{pl/AFormelnBsp.png} \hspace{2em} 
+	\end{figure} 
+	\end{frame}
+	
+	\begin{frame}{Prädikatenlogische Formeln}
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.2]{pl/PFormeln.png} \hspace{2em} 
+	\end{figure} 
+	\end{frame}
+}
 
 \begin{frame}{Quiz}
 \begin{figure}[h!]
@@ -101,6 +182,30 @@
 	\only<7|handout:7>{\includegraphics[scale=0.2]{pl/q7.png}}
 	\hspace{2em}
 \end{figure} 
+\end{frame}
+
+\begin{frame}{Freie und gebundene Variablenvorkommen}
+	\textbf{Vorkommen} einer Variable in einer PL-Formel: \\
+	$G = \plall \word{x\,R(\underline{x})}$ \Impl \word x kommt in $G$ vor. \\
+	Direkt hinter Quantoren zählt nicht! \\
+	Bsp.: $F = \plall \word{x\,R(c)}$ \Impl \word x kommt \textbf{nicht} in $F$ vor! \\
+	\medskip \pause
+	
+	\textbf{Freie Variablenvorkommen} \quad $\fv(F)$ \\
+	Alle, die \emph{irgendwo} in $F$ vorkommen, ohne dass „ein Quantor davorsteht“. \\
+	\medskip \pause
+	
+	\textbf{Gebundene Variablenvorkommen} \quad $\bv(F)$ \\
+	Alle, die \emph{irgendwo} in $F$ vorkommen, wobei „ein Quantor davorsteht“. \\
+	\medskip \pause
+	
+	Formel $F$ heißt \textbf{geschlossen} $:\!\!\Gdw \fv(F) = \emptyset$\\
+	\medskip \pause
+	 
+	Beispiel: \\
+	$\fv\left(\word{R(\underline{x},\underline{y},c)} \aland \plexist \word x\, \word x \pleq \underline{\word y}  \right) = \set{\word x, \word y}$ \\ 
+	\pause
+	$\bv\left(\word{R(x,y,c)} \aland \plexist \word x\, \underline{\word x} \pleq \word y \right) = \set{\word x}$
 \end{frame}
 
 \begin{frame}{Freie und gebundene Variablenvorkommen}
@@ -125,7 +230,7 @@
 	\begin{block}{Lösung}
 		Nur die Variable $\fv(F) = \{\ply\}$ kommt frei in $F$ vor.\\
 		Genau die Variablen $\bv(F) = \{\plx, \ply, \plz\}$ kommen gebunden in $F$ vor.\\
-		Da $\fv(F) \neq \emptyset$ ist $F$ nicht geschlossen.
+		Da $\fv(F) \neq \emptyset$, ist $F$ nicht geschlossen.
 	\end{block}
 	
 \end{frame}
@@ -175,7 +280,7 @@
 	\end{equation*}
 	
 	\begin{block}{Aufgabe 1.2}
-		Geben sie eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ ist.\\[1em] \pause
+		Gebt eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ ist.\\[1em] \pause
 		
 		Die Substitution $\sigma_{\{(\ply/\plx)\}}$ leistet das Gewünschte.
 	\end{block}
@@ -227,7 +332,7 @@
 	Vgl. Übung WS 15/16
 \end{frame}
 
-\begin{frame}{Aufgabe 2 (15/16, Blatt 7)}
+\begin{frame}{Aufgabe 2 (WS 15/16, Blatt 7)}
 	\begin{block}{Aufgabe}
 		Formulieren Sie die folgenden Aussagen als Formeln in Prädikatenlogik:
 		\begin{enumerate}
@@ -237,26 +342,21 @@
 		\end{enumerate}
 	\end{block}
 	
-	\only<2-|handout:2>{
+	\visible<2-|handout:2>{
 	\begin{block}{Lösung}
 		\begin{enumerate}
-				\item
-				\begin{equation*}
-				\plexist \plx {\plka \plfoo{Vogel}{\plka \plx \plkz} \aland \alnot \plfoo{flugfaehig}{\plka \plx \plkz} \plkz}
-				\end{equation*}
-			\only<3-|handout:2>{
-				\item
-				\begin{equation*}
+				\item \qqquad $\plexist \plx {\plka \plfoo{Vogel}{\plka \plx \plkz} \aland \alnot \plfoo{flugfähig}{\plka \plx \plkz} \plkz}$
+			\visible<3-|handout:2>{
+				\item \qqquad $
 				\plexist \plx {\plka \plfoo{kann\_es}{\plka \plx \plkz} \plkz}
 				\alimpl
 				\plfoo{kann\_es}{\plka \plfoo{knuth} \plkz}
-				\end{equation*}
+				$
 			}
-			\only<4-|handout:2>{
-				\item
-				\begin{equation*}
+			\visible<4-|handout:2>{
+				\item \qqquad $
 				\plall \plx {\plka \alnot \plfoo{liebt}{\plka \plx \plcomma \plx \plkz} \alimpl \plfoo{liebt}{\plka \plfoo{John} \plcomma \plx \plkz} \plkz}
-				\end{equation*}
+				$
 			}
 		\end{enumerate}
 	\end{block}
