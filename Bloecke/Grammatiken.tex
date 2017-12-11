@@ -154,7 +154,7 @@
 
 
 
-\thasse{
+\mycomment{
 	\begin{frame}{Musikgrammatik}
 		Wir betrachten die Grammatik $$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
 		Wie kann man $A$ ableiten? Und $ABC$? \pause Und
@@ -189,16 +189,22 @@
 \begin{frame}{Klammerausdrücke}
 	Gegeben sei die Grammatik $$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$$
 	\begin{itemize}
-		\item Wie leitet man \word{((((()))))} ab?
-		\item Wie leitet man \word{()(())()()} ab?
+		\item Wie leitet man \word{(())} ab?
+		\item Wie leitet man \word{()()} ab?
 		\item Kann man \word{(()(} ableiten? \pause \impl Nein!
+		\item Und wie leitet man \word{(())()()} ab?\\ \pause
+			$X \derives XX \derives XXX \derives \word(X\word)XX \derives \word(X\word)X\word(X\word) \derives \word(X\word)\word(X\word)\word(X\word)$ \\
+			$\quad \derives \word(X\word{)()(}X\word) \derives \word{((}X\word{))()(}X\word) \derives \word{((}X\word{))()()} \derives \word{(())()()}$\\
+			Geht das auch übersichtlicher? \impl Ableitungsbäume
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Ableitungsbäume}
-	$$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$$
-	\pause
+	\centering
+	$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$
+	\medskip
+	
 	\begin{tikzpicture}
 	[level 1/.style={sibling distance=50mm},
 	level 2/.style={sibling distance=30mm},
@@ -282,8 +288,7 @@
 \end{frame}
 
 
-\subsection{Aufgabe 1}
-\begin{frame}{Aufgabe (WS 2008) \stars{2}}
+\begin{frame}{Aufgabe: Palindrome}
 	\begin{itemize}
 		\item Geben Sie eine kontextfreie Grammatik $$G = (N, \{\word a, \word b\}, S, P )$$ an, für die $L(G)$ die Menge aller Palindrome über dem Alphabet $\{\word a, \word b\}$ ist.
 		\item Geben Sie eine Ableitung der Wörter \word{baaab} und \word{abaaaba} aus dem Startsymbol Ihrer Grammatik an.
