@@ -50,7 +50,7 @@
 	}
 \end{frame}
 
-\thasse{ %TODO move to 09... (DJ)
+\thasse{
 	\begin{frame}{Rückblick: Kontextfreie Grammatiken}
 		\begin{itemize}[<+->]
 			\item Ein Vier-Tupel: $G = (N, T, S, P)$
@@ -59,15 +59,6 @@
 			\item $L(G)$ sind alle aus $S$ ableitbaren Wörter über $T$ (die also nur aus Terminalsymbolen bestehen)
 		\end{itemize}
 	\end{frame}
-	
-	\begin{frame}{Wahr oder Falsch?}
-		Sei $G=(\{X,Y\},\{a,b\},X,P)$ eine kontextfreie Grammatik.
-		\FalseQuestion{Die Produktion $XY \to a$ ist gültig}
-		\FalseQuestion{Die Produktion $a \to XY$ ist gültig}
-		\TrueQuestionE{Die Produktion $X \to XaX$ ist gültig}{}
-		\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \Rightarrow w$}{}
-		\FalseQuestionE{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}	
-	\end{frame}
 }
 
 \daniel{\input{../Bloecke/Grammatiken.tex}}
@@ -75,13 +66,11 @@
 %% Zum Aufwärmen
 
 \begin{frame}{Dr. Meta am Nordpol}
-	%Dr. Meta, der wissenschaftlichste aller Superschurken, ist entsetzt.\\
 	Der ebenso geniale wie hochwissenschaftliche Superbösewicht Dr. Meta ist entsetzt.
 	Seit Jahren sinken seine Bekanntheitswerte, mittlerweile kennt nur noch eine kleine Gruppe von Studenten an einer einzigen Universität seinen Namen. (Vielleicht hätte er seine Twitter-Kampagne aktiver verfolgen sollen – nein, die Übungsblätter in GBI zu infiltrieren war wichtiger!)\\
 	\bigskip \pause
 	Damit alle Welt von seinen Schurkentaten erfährt, verfolgt er einen ehrgeizigen Plan: Er möchte seine Memoiren an sämtliche Haushalte verteilen. Dies von Hand zu erledigen ist eines Superschurkens seiner Größe jedoch nicht würdig. Daher möchte er das effizienteste und flächendeckendste Logistiksystem der Welt verwenden:\\ 
 	Den Weihnachtsmann! Statt Geschenken soll es dieses Jahr Angst und Schrecken unterm Tannenbaum geben.
-	%Er wird den Weihnachtsmann dazu „überreden“, in diesem Jahr anstatt der Geschenke an jeden Haushalt seine Memoiren zu verteilen.
 \end{frame}
 
 \begin{frame}{Dr. Meta am Nordpol}
@@ -120,60 +109,6 @@
 	%\only<2|handout:2>{
 	%Was würdest du sagen, wenn ich dich \textbf{heute} fragen würde, ob der linke Weg der richtige ist?\\ }
 \end{frame}
-
-
-
-
-\mycomment{ % Kam letztes Jahr nicht gut an, ist wohl etwas "albern"
-\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
-	Weihnachten steht vor der Tür, aber Geschenke sind von Jahr zu Jahr teurer geworden! Um den Staatshaushalt des Nordpols zu schonen, hat sich der Weihnachtsmann etwas einfallen lassen: Dieses Jahr bringt er nur den Haushalten Geschenke, bei denen das für ihn bereitgestellte Gebäck seinen speziellen Qualitätsanforderungen genügt.\\[1em]
-	
-	Dazu hat der Weihnachtsmann drei Gebäckarten (Lebkuchen $L$, Zimtstern $Z$, Dominostein $D$) normiert und eine kontextfreie Grammatik aufgestellt, die gültige Kombinationen beschreibt.
-\end{frame}
-
-\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
-	\begin{align*}
-		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
-		S &\to A \mid B\\
-		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
-		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
-		\})
-	\end{align*}
-	\begin{enumerate}
-		\item Welche Kombinationen sind gültig?\\[0.5em]
-		\item Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
-		3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
-		Stelle eine Kontextfreie Grammatik dafür auf.
-	\end{enumerate}
-\end{frame}
-
-\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
-	\begin{align*}
-		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
-		S &\to A \mid B\\
-		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
-		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
-		\})
-	\end{align*}
-
-	Welche Kombinationen sind gültig?\\[0.5em] \pause
-	$\{ L^n \mid n \geq 10\} \cup \{w \mid \text{w ist Palindrom und } |w|_L \leq 1\}$
-\end{frame}
-
-\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
-	Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
-	3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
-	Stelle eine Kontextfreie Grammatik dafür auf.
-	
-	\pause
-	\begin{align*}
-		G &= (\{S\} \cup \{F_i \mid 0 \leq i \leq 42 \}, \{L, Z, D\}, S, P)\\
-		P &= \{S \to F_{42}LF_{17}LF_{41} \}\\
-		  &\cup \{F_i \to ZF_{i-1}, F_i \to DF_{i-1} \mid 1 \leq i \leq 42 \} \\
-		  &\cup \{F_0 \to \eps \}
-	\end{align*}
-\end{frame}
-}
 
 \input{../Bloecke/Praedikatenlogik.tex}
 

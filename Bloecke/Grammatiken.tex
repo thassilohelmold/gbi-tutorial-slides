@@ -45,13 +45,6 @@
 \end{frame}
 
 \begin{frame}{Ableitungen von Wörtern}
-	\mycomment{
-	\begin{Definition}
-		Für ein  $u \in V^\ast$ mit $u = w_1 \cdot X \cdot w_2 \; (w_1, w_2 \in V^\ast, X \in N)$ nennen wir ein Wort $v = w_1 \cdot w \cdot w_2 \in V^\ast$ \textbf{ableitbar}, wenn eine Produktion $X \to w$ existiert.\\
-		Wir schreiben $$u \derives v$$
-	\end{Definition}	
-	}
-	
 	\begin{Definition}
 		Wort $u = .....X.....$ \textbf{ableitbar} nach $v = ..... w......$ \\
 		wenn es eine Produktion $X \to w$ gibt. \; ($X$ ist Nichtterminal.) \\
@@ -73,15 +66,6 @@
 \end{frame}
 
 \begin{frame}{Ableitung}	
-	\mycomment {
-			\begin{Definition}
-				\begin{align*}
-				u \derives^0 v &\text{ genau dann, wenn } u=v \\
-				u \derives^{i+1} v &\text{ genau dann, wenn für ein}  w\in V^*: u \derives w \derives^i v\\
-				u \derives^* v &\text{ genau dann, wenn für ein } i\in\N_0: u \derives^i v \\
-				\end{align*}
-			\end{Definition}
-	}
 	\begin{block}{Schreibweisen}
 		$u \derives^k v$ \quad heißt: $u$ in $k$ Schritten ableitbar zu $v$ \\
 		$u \derives^0 v$ \quad heißt also: in 0 Schritten ableitbar ($u=v$) \\
@@ -151,40 +135,6 @@
 	\end{itemize}
 	
 \end{frame}
-
-
-
-\mycomment{
-	\begin{frame}{Musikgrammatik}
-		Wir betrachten die Grammatik $$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
-		Wie kann man $A$ ableiten? Und $ABC$? \pause Und
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[scale=0.2]{ABBA_Gold_cover.png} \hspace{2em} \pause
-			\includegraphics[scale=0.2]{acdc-black-ice.jpg} \hspace{2em} \pause
-			\includegraphics[scale=0.26]{ADAC-Logo.png} \pause
-		\end{figure} 
-		
-		$X \Rightarrow AX \Rightarrow ABX \Rightarrow ABBX \Rightarrow ABBAX \Rightarrow ABBA$
-		
-	\end{frame}
-	
-	\begin{frame}{Musikgrammatik}
-		$$G = (\{X\}, \{A, B, C, D\}, X, \{X \to \varepsilon \mid AX \mid BX \mid CX \mid DX\})$$
-		
-		Welche Wörter \only<3-|handout:2>{über $\{A, B, C, D\}$}kann man nicht ableiten?\\
-		\only<2|handout:1>{
-			\centering
-			\begin{figure}
-				\includegraphics[scale=0.2]{mozart_jungle}
-			\end{figure}
-		}
-		\only<4|handout:2>{
-			Keine! Die erzeugte Sprache ist
-			$$L(G) = \{A,B,C,D\}^\ast$$
-		}
-	\end{frame}
-}
 
 \begin{frame}{Klammerausdrücke}
 	Gegeben sei die Grammatik $$G = (\{X\}, \{\word{(}, \word)\}, X, \{X \to XX \mid \word(X\word) \mid \eps\})$$
@@ -270,18 +220,18 @@
 			$(\{X,Y\},T,X,P)$ mit $P=\{X \to Y\word{baa}Y, Y \to \word aY \mid \word bY \mid \varepsilon\}$
 		}
 		
+		\item Alle Wörter, in denen $\word{ab}$ als Teilwort vorkommt oder kein $\word a$ enthalten ist. \\
+		\visible<3-|handout:2>{
+			$G = (\{X, Y\}, \{\word a, \word b\}, X, P)$ mit $P = \{X \to \word bX \mid Y\word{ab}Y \mid \varepsilon, Y \to \word aY \mid \word bY \mid \varepsilon\}$
+		}
+		
 		\item Die Menge aller Wörter $w\in T^*$ mit der Eigenschaft, dass
 		für alle Präfixe $v$ von $w$ gilt: $\setsize{N_{\word{a}}(v) - N_{\word{b}}(v)} \leq
 		1$.\\
 		\emph{Tipp}: Was für eine Struktur haben Wörter der Länge $2$, $4$, \dots? \\
 		% $\{ab, ba\}^*$
-		\visible<3-|handout:2>{
-			$(\{X,Y\},T,X,P)$ mit $P=\{X \to \word{ab}X \mid \word{ba}X \mid \word a \mid \word b \mid \varepsilon\}$
-		}
-		
-		\item Alle Wörter, in denen $\word{ab}$ als Teilwort vorkommt oder kein $\word a$ enthalten ist. \\
 		\visible<4-|handout:2>{
-			$G = (\{X, Y\}, \{\word a, \word b\}, X, P)$ mit $P = \{X \to \word bX \mid Y\word{ab}Y \mid \varepsilon, Y \to \word aY \mid \word bY \mid \varepsilon\}$
+			$(\{X,Y\},T,X,P)$ mit $P=\{X \to \word{ab}X \mid \word{ba}X \mid \word a \mid \word b \mid \varepsilon\}$
 		}
 		
 	\end{itemize}

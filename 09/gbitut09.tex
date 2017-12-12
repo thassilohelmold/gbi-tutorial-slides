@@ -16,6 +16,27 @@
 
 \framePrevEpisode
 
+\daniel{
+	\begin{frame}{Rückblick: Kontextfreie Grammatiken}
+		\begin{itemize}[<+->]
+			\item Ein Vier-Tupel: $G = (N, T, S, P)$
+			\item Produktionen definieren Ersetzungen eines Nichtterminals mit Wörtern über $N \cup T$
+			\item Wir wenden Produktionen in Ableitungsschritten an: $v \Rightarrow w, v \Rightarrow^* w$
+			\item $L(G)$ sind alle aus $S$ ableitbaren Wörter über $T$ (die also nur aus Terminalsymbolen bestehen)
+		\end{itemize}
+	\end{frame}
+}
+
+\begin{frame}{Wahr oder Falsch?}
+	\thasse{\Socrative}
+	Sei $G=(\{X,Y\},\{a,b\},X,P)$ eine kontextfreie Grammatik.
+	\FalseQuestion{Die Produktion $XY \to a$ ist gültig}
+	\FalseQuestion{Die Produktion $a \to XY$ ist gültig}
+	\TrueQuestionE{Die Produktion $X \to XaX$ ist gültig}{}
+	\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \Rightarrow w$}{}
+	\FalseQuestionE{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}	
+\end{frame}
+
 \begin{frame}{Rückblick: Prädikatenlogik}
 	\begin{itemize}[<+->]
 		\item Deutlich komplizierterer Aufbau als Aussagenlogik
@@ -27,17 +48,16 @@
 \begin{frame}{Wahr oder Falsch?}
 	Sei $Rel_{PL} = \{R,S\}$ mit $ar(R) = 2$ und $ar(S) = 1$, \\
 	$Fun_{PL} = \{f,g\}$ mit $ar(f) = 1$ und $ar(g) = 2$ 
-	\begin{itemize}
 		\TrueQuestionE{$R(y,g(x,y))$ ist präd.log. syntaktisch korrekt.}{}
 		\FalseQuestionE{$f(S(x))$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie kein Term, sondern eine atomare Formel darstellt.}
 		\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht} $\equiv \forall x(child(x)\to play(x)) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
-		%TODO: PL Substitution
-	\end{itemize}
+		%TODO: Eine W/F-Frage zu freien/gebundenen Variablen
+		%TODO: Eine W/F-Frage zu PL Substitution
 \end{frame}
 
 % TODO: Zum Aufwärmen
 
-
+\input{../Bloecke/Praedikatenlogik2}
 
 \input{../Bloecke/Hoare.tex}
 

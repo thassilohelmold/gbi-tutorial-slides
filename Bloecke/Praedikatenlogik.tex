@@ -1,5 +1,3 @@
-\newcommand{\plB}{\plfoo{B}}
-\newcommand{\plE}{\plfoo{E}}
 
 \thasse{
 	\begin{frame}{}
@@ -24,8 +22,6 @@
 }
 
 \section{Prädikatenlogik: Syntax}
-
-
 
 \begin{frame}{Syntax}
 	\begin{block}{Aufbau von prädikatenlogischen Formeln}
@@ -133,43 +129,6 @@
 	\end{block}
 \end{frame}
 
-\mycomment{ % LEGACY. Kann wohl weg.
-	\begin{frame}{Terme - Alphabet}
-	\begin{figure}
-		\centering
-		\includegraphics[scale=0.2]{pl/TermeAlphabet.png} \hspace{2em} 
-	\end{figure} 
-	\end{frame}
-	
-	\begin{frame}{Terme - Grammatik}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.2]{pl/TermeGrammatik.png} \hspace{2em} 
-	\end{figure} 
-	\end{frame}
-	
-	\begin{frame}{Atomare Formeln}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.2]{pl/AFormeln.png} \hspace{2em} 
-	\end{figure} 
-	\end{frame}
-	
-	\begin{frame}{Atomare Formeln - Beispiel}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.2]{pl/AFormelnBsp.png} \hspace{2em} 
-	\end{figure} 
-	\end{frame}
-	
-	\begin{frame}{Prädikatenlogische Formeln}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.2]{pl/PFormeln.png} \hspace{2em} 
-	\end{figure} 
-	\end{frame}
-}
-
 \begin{frame}{Quiz}
 \begin{figure}[h!]
 	\centering
@@ -266,15 +225,6 @@
 	
 \end{frame}
 
-\mycomment{
-	\begin{frame}{Substitutionen}
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[scale=0.6]{pl/subs.png} \hspace{2em} 
-		\end{figure} 
-	\end{frame}
-}
-
 \begin{frame}{Substitutionen}
 	Wollen \textbf{Variablen} (!) durch andere Terme ersetzen. \\
 	\impl Eine Substitutionsabbildung $$\sigma_S \from \LFor \functionto \LFor, \; \text{längliche Definition s. VL}$$ wendet Ersetzungen aus $S$ auf eine Formel an. \\
@@ -297,13 +247,6 @@
 	Beispiel: \\
 	$\sigma_{\set{\word y/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists \word y\,\word y \pleq \word x\right) = \word{R(x,\word{f(c)})} \aland \plexists \word y\,\word y \pleq \word x$
 	
-	
-	\mycomment{
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[scale=0.5]{pl/subs_bsp.png} \hspace{2em} 
-		\end{figure} 
-	}
 \end{frame}
 
 \begin{frame}{Substitutionen: Kollisionsfreiheit}
@@ -339,53 +282,3 @@
 	
 \end{frame}
 
-
-\section{Prädikatenlogik: Semantik}
-
-\begin{frame}{Interpretation}
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[scale=0.6]{pl/int.png} \hspace{2em} 
-	\end{figure} 
-\end{frame}
-
-\begin{frame}{Aufgabe 1 (WS 15/16, Blatt 7)}
-	  \begin{equation*}
-	\alnot \plexist \plx
-	{\plka
-		\plE{\plka \plx \plcomma \ply \plkz}
-		\alor
-		\alnot \plall \plz \plall \plx \plall \ply
-		{\plka
-			\plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz} \alimpl \plx \pleq \ply
-			\plkz}
-		\plkz}
-	\end{equation*}\\[1em]
-	
-	\begin{block}{Aufgabe 1.3}
-		Gebt eine Interpretation $(D_1, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\[0.5em]
-		
-		\visible<2-|handout:2>{Die Interpretation $(D_1, I_1) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_1 \colon \VPL \functionto D$, $v \mapsto 0$, leisten das Gewünschte.}
-	\end{block}
-
-	\begin{block}{Aufgabe 1.4}
-		Gebt eine Interpretation $(D_2, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(F) = \F$ gilt.\\[0.5em]
-		
-		\visible<3-|handout:2>{Die Interpretation $(D_2, I_2) = (\{ 0, 1 \}, {<})$ und die Variablenbelegung $\beta_2 \colon \VPL \functionto D$, $v \mapsto 1$, leisten das Gewünschte.}
-	\end{block}
-\end{frame}
-
-
-
-\section{Prädikatenlogik: Aufgaben}
-
-\begin{frame}{Prädikatenlogische Formeln aufstellen}
-	% TODO Übung einbinden
-	Vgl. Übung WS 15/16
-\end{frame}
-
-
-
-\begin{frame}{Weitere Aufgaben}
-	Siehe Übung WS 15/16
-\end{frame}

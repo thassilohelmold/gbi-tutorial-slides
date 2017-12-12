@@ -28,3 +28,56 @@ Sammlung von verwahrlosten Textblöcken, die auf ein neues Zuhause warten
 -----------------------------------------
 Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
 90~\% der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
+
+------ Weihnachtsgebäck ------
+\mycomment{ % Kam letztes Jahr nicht gut an, ist wohl etwas "albern"
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	Weihnachten steht vor der Tür, aber Geschenke sind von Jahr zu Jahr teurer geworden! Um den Staatshaushalt des Nordpols zu schonen, hat sich der Weihnachtsmann etwas einfallen lassen: Dieses Jahr bringt er nur den Haushalten Geschenke, bei denen das für ihn bereitgestellte Gebäck seinen speziellen Qualitätsanforderungen genügt.\\[1em]
+	
+	Dazu hat der Weihnachtsmann drei Gebäckarten (Lebkuchen $L$, Zimtstern $Z$, Dominostein $D$) normiert und eine kontextfreie Grammatik aufgestellt, die gültige Kombinationen beschreibt.
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	\begin{align*}
+		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
+		S &\to A \mid B\\
+		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
+		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
+		\})
+	\end{align*}
+	\begin{enumerate}
+		\item Welche Kombinationen sind gültig?\\[0.5em]
+		\item Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
+		3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
+		Stelle eine Kontextfreie Grammatik dafür auf.
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	\begin{align*}
+		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
+		S &\to A \mid B\\
+		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
+		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
+		\})
+	\end{align*}
+
+	Welche Kombinationen sind gültig?\\[0.5em] \pause
+	$\{ L^n \mid n \geq 10\} \cup \{w \mid \text{w ist Palindrom und } |w|_L \leq 1\}$
+\end{frame}
+
+\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+	Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
+	3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
+	Stelle eine Kontextfreie Grammatik dafür auf.
+	
+	\pause
+	\begin{align*}
+		G &= (\{S\} \cup \{F_i \mid 0 \leq i \leq 42 \}, \{L, Z, D\}, S, P)\\
+		P &= \{S \to F_{42}LF_{17}LF_{41} \}\\
+		  &\cup \{F_i \to ZF_{i-1}, F_i \to DF_{i-1} \mid 1 \leq i \leq 42 \} \\
+		  &\cup \{F_0 \to \eps \}
+	\end{align*}
+\end{frame}
+}
+------------------------------
