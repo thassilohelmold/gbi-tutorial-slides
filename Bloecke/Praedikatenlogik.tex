@@ -109,39 +109,23 @@
 	$\bleftBr\plall \word x \word{:} \text{...Formel...}\brightBr$ \quad KEINE Doppelpunkte! \\
 \end{frame}
 
-\begin{frame}{Aufgabe 1 (WS 15/16, Blatt 7)}
-	Es seien $\CPL = \{ \}$, $\VPL = \{ \plx, \ply, \plz \}$, $\FPL = \{ \}$ und $\RPL = \{ \plE, \pleq \}$ mit $\ar(\plE) = 2$, und es sei $F$ die prädikatenlogische Formel
-	\begin{equation*}
-	\alnot \plexist \plx
-	{\plka
-		\plE{\plka \plx \plcomma \ply \plkz}
-		\alor
-		\alnot \plall \plz \plall \plx \plall \ply
-		{\plka
-			\plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz} \alimpl \plx \pleq \ply
-			\plkz}
-		\plkz}
-	\end{equation*}
-	
-	\begin{block}{Aufgabe 1}
-		Ist diese prädikatenlogische Formel syntaktisch korrekt?\\ \pause
-		Ja
-	\end{block}
+\begin{frame}{Aufgabe: Syntaktische Fehler}
+	Findet jeweils den syntaktischen Fehler in den folgenden prädikatenlogischen Formeln:
+	\begin{itemize}
+		\item $\plexists \word z \: \plka \word{c(z)} \plkz$\\
+		Konstanten sind keine Relationen!
+		\item $\word{S(c)} \aland \word{T(d)} \alimpl \word{S(R(c,d))}$\\
+		Innerhalb von Relationen können nur Terme stehen, keine Relation.
+		\item $\plall \plx \plall \ply \: \word{R(f(x,f(x,y)))}$\\
+		$\ar(\word f) = 1$ oder $\ar(\word f) = 2$, aber nicht beides gleichzeitig.
+		\item $\plall \plx \: \plka \word{S(x)} \aland \word{T(x)} \plkz \alimpl \plexists \word R \: \plka \plall \plx \: \word{R(x,x)} \plkz $\\
+		Relationen können nicht quantifiziert werden.
+		\item $\plall \word f \: \word{S(f)} \aland \plall \plx \: \word{g(R(x))}$\\
+		Innerhalb einer Funktion können nur Terme stehen, keine Relationen.\\
+		Hinweis: $\plall \word f \: \word{S(f)}$ ist \emph{erlaubt}. Hier ist $f$ nur eine Variable für eine Funktion, die selbst einen Wert darstellt, aber in der Formel nicht angewendet wird.
+	\end{itemize}
 \end{frame}
 
-\begin{frame}{Quiz}
-\begin{figure}[h!]
-	\centering
-	\only<1|handout:1>{\includegraphics[scale=0.2]{pl/q1.png}}
-	\only<2|handout:2>{\includegraphics[scale=0.2]{pl/q2.png}} 
-	\only<3|handout:3>{\includegraphics[scale=0.2]{pl/q3.png}}
-	\only<4|handout:4>{\includegraphics[scale=0.2]{pl/q4.png}}
-	\only<5|handout:5>{\includegraphics[scale=0.2]{pl/q5.png}}
-	\only<6|handout:6>{\includegraphics[scale=0.2]{pl/q6.png}}
-	\only<7|handout:7>{\includegraphics[scale=0.2]{pl/q7.png}}
-	\hspace{2em}
-\end{figure} 
-\end{frame}
 
 \begin{frame}{Aufgabe 2 (WS 15/16, Blatt 7)}
 	\begin{block}{Aufgabe}
