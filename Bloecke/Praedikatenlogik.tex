@@ -113,16 +113,16 @@
 	Findet jeweils den syntaktischen Fehler in den folgenden prädikatenlogischen Formeln:
 	\begin{itemize}
 		\item $\plexists \word z \: \plka \word{c(z)} \plkz$\\
-		Konstanten sind keine Relationen!
+		\visible<2-|handout:2>{Konstanten sind keine Relationen!}
 		\item $\word{S(c)} \aland \word{T(d)} \alimpl \word{S(R(c,d))}$\\
-		Innerhalb von Relationen können nur Terme stehen, keine Relation.
+		\visible<3-|handout:2>{Innerhalb von Relationen können nur Terme stehen, keine Relation.}
 		\item $\plall \plx \plall \ply \: \word{R(f(x,f(x,y)))}$\\
-		$\ar(\word f) = 1$ oder $\ar(\word f) = 2$, aber nicht beides gleichzeitig.
+		\visible<4-|handout:2>{$\ar(\word f) = 1$ oder $\ar(\word f) = 2$, aber nicht beides gleichzeitig.}
 		\item $\plall \plx \: \plka \word{S(x)} \aland \word{T(x)} \plkz \alimpl \plexists \word R \: \plka \plall \plx \: \word{R(x,x)} \plkz $\\
-		Relationen können nicht quantifiziert werden.
+		\visible<5-|handout:2>{Relationen können nicht quantifiziert werden.}
 		\item $\plall \word f \: \word{S(f)} \aland \plall \plx \: \word{g(R(x))}$\\
-		Innerhalb einer Funktion können nur Terme stehen, keine Relationen.\\
-		Hinweis: $\plall \word f \: \word{S(f)}$ ist \emph{erlaubt}. Hier ist $f$ nur eine Variable für eine Funktion, die selbst einen Wert darstellt, aber in der Formel nicht angewendet wird.
+		\visible<6-|handout:2>{Innerhalb einer Funktion können nur Terme stehen, keine Relationen.\\
+		Hinweis: $\plall \word f \: \word{S(f)}$ ist \emph{erlaubt}. Hier ist $f$ nur eine Variable für eine Funktion, die selbst einen Wert darstellt, aber in der Formel nicht angewendet wird.}
 	\end{itemize}
 \end{frame}
 
