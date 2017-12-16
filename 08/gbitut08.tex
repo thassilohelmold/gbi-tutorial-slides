@@ -19,6 +19,12 @@
 \begin{document}
 \starttut{8}
 
+\begin{frame}{Schwarzes Brett}
+	\textbf{Bonusaufgaben} von Blatt 4 auch im \ILIAS im Ordner zu Tutorium~\mytutnumber\ ganz unten einreichbar! \\
+	\medskip
+	(\impl Weniger Chaos als per Mail. \smiley)
+\end{frame}
+
 \framePrevEpisode
 
 \begin{frame}{Rückblick: MIMA}
@@ -63,6 +69,8 @@
 
 \daniel{\input{../Bloecke/Grammatiken.tex}}
 
+\thasse{
+	%TODO DJ move to 09...
 %% Zum Aufwärmen
 
 \begin{frame}{Dr. Meta am Nordpol}
@@ -99,7 +107,7 @@
 \end{frame}
 
 \begin{frame}{Dr. Meta am Nordpol\textsuperscript{\thefootnote}}
-	\stepcounter{footnote}\footnotetext{Rätselidee frei übernommen nach: Der Philosoph am Scheidweg} % Fuck you, LaTeX...
+	\stepcounter{footnote}\footnotetext{Rätselidee frei übernommen nach: Der Philosoph am Scheideweg} % Fuck you, LaTeX...
 		Helft Dr. Meta, das Weihnachtsdorf zu erreichen, indem ihr die richtige Frage stellt. %Wie lautet die richtige Frage?
 	\\[1em]
 	\impl „Was würdest du sagen, wenn ich dich morgen fragen würde, ob der linke Weg zum Weihnachtsdorf führt?“\\
@@ -111,20 +119,27 @@
 \end{frame}
 
 \input{../Bloecke/Praedikatenlogik.tex}
+}
 
 % Evtl. Übung: Nicht-Palindrome?
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
-		\begin{itemize}
+		\thassedaniel{\begin{itemize}
 			\item Wie Prädikatenlogische Formeln aufgebaut sind...
 			\item ... und was sie bedeuten.
-		\end{itemize}
+		\end{itemize}}{
+			\begin{itemize}
+				\item Wie man mit Grammatiken Sprachen beschreiben kann, die vorher nicht beschreibbar waren
+				\item Wie man aus einer Grammatik Wörter ableiten kann
+				\item Wie man Ableitungsbäume malt
+			\end{itemize}
+		}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Alles Korrekt? – Beweise mit dem Hoare-Kalkül
+			\item \thassedaniel{Alles Korrekt? – Beweise mit dem Hoare-Kalkül}{Alle Vögel haben die gleiche Farbe – Prädikatenlogik.}
 		\end{itemize}
 	\end{block}
 \end{frame}
