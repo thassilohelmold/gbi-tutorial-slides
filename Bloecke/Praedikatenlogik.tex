@@ -113,16 +113,16 @@
 	Findet jeweils den syntaktischen Fehler in den folgenden prädikatenlogischen Formeln:
 	\begin{itemize}
 		\item $\plexists \word z \: \plka \word{c(z)} \plkz$\\
-		\visible<2-|handout:2>{Konstanten sind keine Relationen!}
+		\visible<2-|handout:2>{Konstanten (\word c) sind keine Relationen!}
 		\item $\word{S(c)} \aland \word{T(d)} \alimpl \word{S(R(c,d))}$\\
-		\visible<3-|handout:2>{Innerhalb von Relationen können nur Terme stehen, keine Relation.}
+		\visible<3-|handout:2>{Nur Terme als Argumente, keine Relationen (\word{R(c,d)}).}
 		\item $\plall \plx \plall \ply \: \word{R(f(x,f(x,y)))}$\\
 		\visible<4-|handout:2>{$\ar(\word f) = 1$ oder $\ar(\word f) = 2$, aber nicht beides gleichzeitig.}
 		\item $\plall \plx \: \plka \word{S(x)} \aland \word{T(x)} \plkz \alimpl \plexists \word R \: \plka \plall \plx \: \word{R(x,x)} \plkz $\\
-		\visible<5-|handout:2>{Relationen können nicht quantifiziert werden.}
+		\visible<5-|handout:2>{Relationen können nicht quantifiziert werden ($\plexists \word R$).}
 		\item $\plall \word f \: \word{S(f)} \aland \plall \plx \: \word{g(R(x))}$\\
-		\visible<6-|handout:2>{Innerhalb einer Funktion können nur Terme stehen, keine Relationen.\\
-		Hinweis: $\plall \word f \: \word{S(f)}$ ist \emph{erlaubt}. Hier ist $f$ nur eine Variable für eine Funktion, die selbst einen Wert darstellt, aber in der Formel nicht angewendet wird.}
+		\visible<6-|handout:2>{Nur Terme als Argumente, keine Relationen (\word{R(x)}).\\
+		Hinweis: $\plall \word f \: \word{S(f)}$ ist \emph{erlaubt}. Hier ist $\word f$ nur eine Variable für eine Funktion, die selbst einen Wert darstellt, aber in der Formel nicht angewendet (\word{f(}...\word{)}) wird.}
 	\end{itemize}
 \end{frame}
 
@@ -167,19 +167,19 @@
 	
 	\textbf{Freie Variablenvorkommen} \quad $\fv(F)$ \\
 	Alle, die \emph{irgendwo} in $F$ vorkommen, ohne dass sie quantifiziert sind {\small ($=$ ein Quantor sie einführt)}. \\
+	\smallskip \pause
+	Beispiel: $\fv\left(\word{R(\underline{x},\underline{y},c)} \aland \plexist \word x\, \plka \word x \pleq \underline{\word y} \plkz \right) = \set{\word x, \word y}$ \\
 	\medskip \pause
 	
 	\textbf{Gebundene Variablenvorkommen} \quad $\bv(F)$ \\
 	Alle, die \emph{irgendwo} in $F$ vorkommen und dabei quantifziert sind. \\
+	\smallskip \pause
+	Beispiel: $\bv\left(\word{R(x,y,c)} \aland \plexist \word x\, \plka \underline{\word x} \pleq \word y \plkz \right) = \set{\word x}$ \\
 	\medskip \pause
 	
 	Formel $F$ heißt \textbf{geschlossen} $:\!\!\Gdw \fv(F) = \emptyset$\\
-	\medskip \pause
-	 
-	Beispiel: \\
-	$\fv\left(\word{R(\underline{x},\underline{y},c)} \aland \plexist \word x\, \word x \pleq \underline{\word y}  \right) = \set{\word x, \word y}$ \\ 
-	\pause
-	$\bv\left(\word{R(x,y,c)} \aland \plexist \word x\, \underline{\word x} \pleq \word y \right) = \set{\word x}$
+	\medskip 
+
 \end{frame}
 
 \begin{frame}{Freie und gebundene Variablenvorkommen}
@@ -210,13 +210,14 @@
 \end{frame}
 
 \begin{frame}{Substitutionen}
+	\delimitershortfall=0pt
 	Wollen \textbf{Variablen} (!) durch andere Terme ersetzen. \\
-	\impl Eine Substitutionsabbildung $$\sigma_S \from \LFor \functionto \LFor, \; \text{längliche Definition s. VL}$$ wendet Ersetzungen aus $S$ auf eine Formel an. \\
+	\impl Eine Substitutionsabbildung $$\sigma_S \from \LFor \functionto \LFor, \quad \text{längliche Definition s. VL}$$ wendet Ersetzungen aus $S$ auf eine Formel an. \\
 	\medskip \pause
 	
 	Beispiel: \\
 	$\sigma_{\set{\word x/\word y}}\left(\word x \pleq \word c\right) = \word y \pleq \word c$. \\
-	$\sigma_{\set{\word x/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists \word y\,\word y \pleq \word x\right) = \word{R(\word{f(c)},y)} \aland \plexists \word y\,\word y \pleq \word{f(c)}$. \\
+	$\sigma_{\set{\word x/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists  \word y\,\plka\word y \pleq \word x \plkz\right) = \word{R(\word{f(c)},y)} \aland \plexists  \word y\,\plka\word y \pleq \word{f(c) \plkz}$. \\
 	\medskip \pause
 	
 	Mehrere auf einmal: \\
@@ -224,24 +225,27 @@
 \end{frame}
 
 \begin{frame}{Substitutionen}
+	\delimitershortfall=0pt
 	Ersetzt werden nur \textbf{freie Variablenvorkommen}!\\
-	Gebundene Vorkommen, also Variablen im Wirkungsbereich eines Quantors, werden \textbf{nicht} ersetzt. \\
+	Gebundene Vorkommen, also Variablen im Wirkungsbereich eines (eigenen) Quantors, werden \textbf{nicht} ersetzt. \\
 	\medskip \pause
 	
 	Beispiel: \\
-	$\sigma_{\set{\word y/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists \word y\,\word y \pleq \word x\right) = \word{R(x,\word{f(c)})} \aland \plexists \word y\,\word y \pleq \word x$
+	$\sigma_{\set{\word y/\word{f(c)}}}\left(\word{R(x,y)} \aland \plexists \word y\, \plka\word y \pleq \word x \plkz\right) = \word{R(x,\word{f(c)})} \aland \plexists \word y\,\plka\word y \pleq \word x \plkz$
 	
 \end{frame}
 
 \begin{frame}{Substitutionen: Kollisionsfreiheit}
-	Bei einer \textbf{kollisionsfreien} Substitution werden keine Variablen \enquote{aus Versehen} gebunden.\\[1em]
-	Ersetzen wir eine freie Variable $\word x$ durch einen Term, in dem die Variable $\word y$ frei vorkommt, so darf sich $\word x$ nicht im Wirkungsbereich eines Quantors über $\word y$ befinden.
+	Bei einer \textbf{kollisionsfreien} Substitution werden keine Variablen durch Ersetzung \enquote{aus Versehen} gebunden.  \\
+	\medskip
+	Ersetzen wir eine freie Variable $\word x$ durch einen Term, in dem die Variable $\word y$ frei vorkommt, so darf sich $\word x$ nicht im Wirkungsbereich eines Quantors über $\word y$ befinden. \\
+	(Sonst wird \word y nämlich unfreiwillig quantifiziert und die Bedeutung ändert sich!)
 	
 	\pause
 	\begin{Beispiel}
-		$F = \plall \plx \plka\plx \aland \ply\plkz$\\
-		Kollisionsfrei: $\sigma_{\{\ply/\plz\}}$\\
-		Nicht kollisionsfrei: $\sigma_{\{\ply/\plx\}}$
+		$F = \plall \plx \plka\plx \pleq \ply\plkz$\\
+		Kollisionsfrei: $\sigma_{\{\ply/\plz\}}(\plall \plx \plka\plx \pleq \ply\plkz) = \plall \plx \plka\plx \pleq \underline{\plz}\plkz$\\
+		Nicht kollisionsfrei: $\sigma_{\{\ply/\plx\}}(\plall \plx \plka\plx \pleq \ply\plkz) = \plall \plx \plka\plx \pleq \underline{\plx}\plkz$ 
 	\end{Beispiel}
 \end{frame}
 
@@ -261,7 +265,7 @@
 	\begin{block}{Aufgabe 1.2}
 		Gebt eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ ist.\\[1em] \pause
 		
-		Die Substitution $\sigma_{\{\ply/\plx\}}$ leistet das Gewünschte.
+		\impl Die Substitution $\sigma_{\{\ply/\plx\}}$ macht $F$ kaputt.
 	\end{block}
 	
 \end{frame}

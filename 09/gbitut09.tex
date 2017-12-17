@@ -8,82 +8,97 @@
 \input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{9}
 
-% TODO: Split into 4 panels and spread over the presentation
-\lastframe{0.35}{30}{xkcd/ineffective_sorts.png}{https://www.xkcd.com/1185}
+
+\thasse{  % TODO: Split into 4 panels and spread over the presentation
+	\lastframe{0.35}{30}{xkcd/ineffective_sorts.png}{https://www.xkcd.com/1185}
+}
 
 \framePrevEpisode
 
-\daniel{
-	\begin{frame}{Rückblick: Kontextfreie Grammatiken}
+\begin{frame}[t]{Wahr oder Falsch?}
+	\thasse{\Socrative}
+	Sei $G=(\{X,Y\},\, \{a,b\},\, X,\, P)$ eine kontextfreie Grammatik. \\
+	\FalseQuestion{Die Produktion $XY \to a$ könnte eine Produktion sein.}
+	\FalseQuestion{Die Produktion $a \to XY$ könnte eine Produktion sein.}
+	\TrueQuestionE{Die Produktion $X \to XaX$ könnte eine Produktion sein.}{}
+	\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \derives w$.}{}
+	\FalseQuestionE{Wenn $X \derives w$ gilt, dann ist $X \to w$ eine Produktion in P.}{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \derives Xa$, aber $XX \to Xa \notin P$}	
+\end{frame}
+
+\thasse
+{
+	\begin{frame}{Rückblick: Prädikatenlogik}
 		\begin{itemize}[<+->]
-			\item Ein Vier-Tupel: $G = (N, T, S, P)$
-			\item Produktionen definieren Ersetzungen eines Nichtterminals mit Wörtern über $N \cup T$
-			\item Wir wenden Produktionen in Ableitungsschritten an: $v \Rightarrow w, v \Rightarrow^* w$
-			\item $L(G)$ sind alle aus $S$ ableitbaren Wörter über $T$ (die also nur aus Terminalsymbolen bestehen)
+			\item Deutlich komplizierterer Aufbau als Aussagenlogik
+			\item Auswertung mit Interpretation und Variablenbelegung
+			\item Quantoren erlauben allgemeine Aussagen
 		\end{itemize}
 	\end{frame}
-}
-
-\begin{frame}{Wahr oder Falsch?}
-	\thasse{\Socrative}
-	Sei $G=(\{X,Y\},\{a,b\},X,P)$ eine kontextfreie Grammatik.
-	\FalseQuestion{Die Produktion $XY \to a$ ist gültig}
-	\FalseQuestion{Die Produktion $a \to XY$ ist gültig}
-	\TrueQuestionE{Die Produktion $X \to XaX$ ist gültig}{}
-	\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \Rightarrow w$}{}
-	\FalseQuestionE{Wenn $X \Rightarrow w$ gilt, dann ist $X \to w$ eine Produktion in P }{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \Rightarrow Xa$, aber $XX \to Xa \notin P$}	
-\end{frame}
-
-\begin{frame}{Rückblick: Prädikatenlogik}
-	\begin{itemize}[<+->]
-		\item Deutlich komplizierterer Aufbau als Aussagenlogik
-		\item Auswertung mit Interpretation und Variablenbelegung
-		\item Quantoren erlauben allgemeine Aussagen
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Wahr oder Falsch?}
-	Sei $Rel_{PL} = \{R,S\}$ mit $ar(R) = 2$ und $ar(S) = 1$, \\
-	$Fun_{PL} = \{f,g\}$ mit $ar(f) = 1$ und $ar(g) = 2$ 
-		\TrueQuestionE{$R(y,g(x,y))$ ist präd.log. syntaktisch korrekt.}{}
-		\FalseQuestionE{$f(S(x))$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie kein Term, sondern eine atomare Formel darstellt.}
-		\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht} $\equiv \forall x(child(x)\to play(x)) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
+	
+	\begin{frame}{Wahr oder Falsch?}
+		Sei $\RPL = \{R,S\}$ mit $\ar(R) = 2$ und $\ar(S) = 1$, \\
+		$\FPL = \{f,g\}$ mit $\ar(f) = 1$ und $\ar(g) = 2$ 
+		\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
+		\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie keinen Term, sondern eine atomare Formel darstellt.}
+		\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
 		%TODO: Eine W/F-Frage zu freien/gebundenen Variablen
 		%TODO: Eine W/F-Frage zu PL Substitution
-\end{frame}
+	\end{frame}
+	
+	% TODO: Zum Aufwärmen
+}
 
-% TODO: Zum Aufwärmen
+\daniel{
+	\input{../Bloecke/Praedikatenlogik}
+}
+
 
 \input{../Bloecke/Praedikatenlogik2}
 
-\input{../Bloecke/Hoare.tex}
+\daniel{\input{../Bloecke/DrMetaNordpol}}
+
+%TODO
+%\input{../Bloecke/Hoare.tex}
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
+		\mycomment{ %TODO move nexttut
 		\begin{itemize}
-			\item Wie das Hoare-Kalkül funktioniert
+			\item Wie der Hoare-Kalkül funktioniert
 			\item Wie man mit dem Hoare-Kalkül ein Programm beweist.
+		\end{itemize}	
+		}
+		\begin{itemize}
+			\daniel{
+				\item Wie prädikatenlogische Formeln aufgebaut sind
+				\item Wie man damit präzise Aussagen trifft
+				\item Syntaxkram :P
+			}
+			\item Wie prädikatenlogische Formeln ausgewertet werden
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
+		\mycomment{  %TODO move nexttut
+			\begin{itemize}
+				\item Graphen -- Alles Vernetzt
+				\item Systematisches Suchen und Wandern -- Algorithmen auf Graphen
+			\end{itemize}
+		}
 		\begin{itemize}
-			\item Graphen - Alles Vernetzt
-			\item Systematisches Suchen und Wandern - Algorithmen auf Graphen
+			\item Alles Korrekt? – Beweise mit dem Hoare-Kalkül
+			%\item Systematisches Suchen und Wandern -- Algorithmen auf Graphen
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-\begin{frame}
-	\Large
-	\centering
-	Frohe Weihnachten und einen guten Start in das neue Jahr!
-\end{frame}
 
-\lastframe{0.50}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835}
+\lastframetitled{0.47}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835}{\vspace{-1.66\baselineskip}\\Frohe Weihnachten und einen \\ guten Start ins neue Jahr! \smiley}
 \slideThanks
 
 \end{document}
