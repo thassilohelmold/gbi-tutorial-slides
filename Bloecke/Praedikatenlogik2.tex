@@ -14,7 +14,7 @@
 		\only<all:1>{
 			\begin{itemize}
 				\item $D = \N_0$
-				\item $I(c) = 42$
+				\item $I(\word c) = 42$
 				\item $\ar(\word f) = 1$, \\ $I(\word f) \from \N_0 \functionto \N_0, \, I(\word f)(n) = n+2$
 				\item $\ar(\word R) = 2$, \; $I(\word R) = \set{(n, m) \Mid 2n \geq m }$ 
 			\end{itemize}
@@ -35,8 +35,8 @@
 		Mehrere verschiedene für eine feste Interpretation $(D,I)$ möglich! \\
 		Beispiel: \\
 		\begin{itemize}
-			\item $\beta(\word x) = 42, \beta(\word y) = 1337$ \quad oder
-			\item $\beta(\word x) = 2, \beta(\word y) = 10000$ 
+			\item $\beta(\word x) = 42$ und $\beta(\word y) = 1337$ \quad oder
+			\item $\beta(\word x) = 2$ und $\beta(\word y) = 10000$ 
 		\end{itemize}
 	\end{block}
 	\pause
@@ -64,14 +64,14 @@
 \begin{frame}{Aufgabe}
 	\[ F := \plexists \plx {\plka \word{f(x)} \pleq \plx \aland \plx \pleq \ply \plkz}  \]
 	
-	Gebt eine Interpretation $(D_1, I_1)$, $D \nsubseteq \R$, und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\
+	Gebt eine Interpretation $(D_1, I_1)$, $D_1 \nsubseteq \R$, und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\
 	\smallskip
 	\visible<2-|handout:2>{Die Interpretation $(D_1, I_1)$ mit $ D_1 = \{ \word a, \word b \}^*, \, I_1(\word f)(w) = \word a$ und die Variablenbelegung $\beta_1 \colon \VPL \functionto D_1$, $v \mapsto \word a$, tun es.} \\
 	\medskip
 	
 	\[ G := \alnot\word{S(z)} \aland \plexists \plx {\plka \word{S(x)} \aland \plall \ply \word{R(x,y)} \plkz}  \]
 	
-	Gebt eine Interpretation $(D_2, I_2)$, $D \subseteq \N$, und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(G) = \W$ gilt.\\
+	Gebt eine Interpretation $(D_2, I_2)$, $D_2 \subseteq \N$, und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(G) = \W$ gilt.\\
 	\smallskip
 	\visible<3-|handout:2>{Die Interpretation $(D_2, I_2)$ mit $ D_2 = \set{0, ..., 5}, \, I_2(\word S) = \set{n \Mid \text{$n$ ist prim}}, I_2(\word R) = {\geq} $ und die Variablenbelegung $\beta_2 \colon \VPL \functionto D_2$, $\plz \mapsto 4, \, \text{...Rest beliebig...}$, tun es.}
 	

@@ -18,16 +18,29 @@
 	\lastframe{0.35}{30}{xkcd/ineffective_sorts.png}{https://www.xkcd.com/1185}
 }
 
+\begin{frame}{Zu Blatt \#3}
+	Durchschnitt: \quad etwa \thassedaniel{XX}{53}~\% der Punkte \\
+	\begin{itemize}
+		\item \textbf{Induktionen}: Schreibt mir bitte die Aussage hin, über die ihr die Induktion macht. Wenn IV falsch, hab ich sonst keinen Plan, was ihr zeigen wollt.
+		\item \textbf{A3.1}: Schaut euch Injektivität/Surjektivität nochmal an...
+		\item \textbf{A3.2}: Huffman-Bäume: Es werden IMMER die zwei KLEINSTEN Knoten verbunden. Auch „über Kreuz“. 
+		\item \textbf{A3.3}: Terme mit zu vielen Pünktchen („...“) sind keine Definition. \\ Alles, was nicht rekursiv ist, muss falsch sein wegen Klammerausdrücken.
+		\item \textbf{A3.6}: Induktion über $n = \size{w_1} = \size{w_2}$, also beide Wortlängen gleichzeitig, geht NICHT! (Gibt nämlich auch Wörter, wo beide Längen nicht gleich sind... :P)
+		
+	\end{itemize}
+\end{frame}
+
 \framePrevEpisode
 
 \begin{frame}[t]{Wahr oder Falsch?}
 	\thasse{\Socrative}
 	Sei $G=(\{X,Y\},\, \{a,b\},\, X,\, P)$ eine kontextfreie Grammatik. \\
-	\FalseQuestion{Die Produktion $XY \to a$ könnte eine Produktion sein.}
-	\FalseQuestion{Die Produktion $a \to XY$ könnte eine Produktion sein.}
-	\TrueQuestionE{Die Produktion $X \to XaX$ könnte eine Produktion sein.}{}
+	\FalseQuestion{Die Produktion $XY \to a$ könnte eine gültige Produktion sein.}
+	\FalseQuestion{Die Produktion $a \to XY$ könnte eine gültige Produktion sein.}
+	\TrueQuestionE{Die Produktion $X \to XaX$ könnte eine gültige Produktion sein.}{}
 	\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \derives w$.}{}
-	\FalseQuestionE{Wenn $X \derives w$ gilt, dann ist $X \to w$ eine Produktion in P.}{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \derives Xa$, aber $XX \to Xa \notin P$}	
+	%TODO
+	%\FalseQuestionE{Wenn $X \derives w$ gilt, dann ist $X \to w$ eine Produktion in P.}{Sei $P=\{X \to XX \mid a\}$. Dann gilt $XX \derives Xa$, aber $XX \to Xa \notin P$}	
 \end{frame}
 
 \thasse
