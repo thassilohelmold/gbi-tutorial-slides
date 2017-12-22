@@ -35,8 +35,8 @@
 		Mehrere verschiedene für eine feste Interpretation $(D,I)$ möglich! \\
 		Beispiel: \\
 		\begin{itemize}
-			\item $\beta(\word x) = 42$ und $\beta(\word y) = 1337$ \quad oder
-			\item $\beta(\word x) = 2$ und $\beta(\word y) = 10000$ 
+			\item $\beta_1(\word x) = 42$ und $\beta_1(\word y) = 1337$ \quad oder
+			\item $\beta_2(\word x) = 2$ und $\beta_2(\word y) = 10000$ 
 		\end{itemize}
 	\end{block}
 	\pause
@@ -52,16 +52,23 @@
 	\end{block}
 \end{frame}
 
-\mycomment{
-	\begin{frame}{Interpretation}
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[scale=0.6]{pl/int.png} \hspace{2em} 
-		\end{figure} 
-	\end{frame}
-}
+\begin{frame}{Aufgabe 1}
+	\[ F := \word{R(42)} \aland \plexists \plx {\plka \plx \pleq \ply \plkz}  \]
+	Gebt eine Interpretation $(D_1 = \N_0, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\
+	\smallskip
+	$I_1(R) = \visible<2-|handout:2>{\{42\}}$ \qquad
+	$\beta_1 \colon \VPL \functionto D_1, \beta_1(\ply) = $ \visible<2-|handout:2>{$1$}
+	
+	\medskip
+	
+	\[ G := \plexists \plx {\plka \word{R(f(x))} \aland \plx \pleq \ply \plkz}  \]
+	Gebt eine Interpretation $(D_2 = \N_0, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(G) = \W$ gilt.\\
+	\smallskip
+	\visible<3-|handout:2>{$I_2(R) = \N_0 \qquad I_2(f)(x) = x$ \qquad
+	$\beta_2 \colon \VPL \functionto D_2, \beta_2(\ply) = 1$}
+\end{frame}
 
-\begin{frame}{Aufgabe}
+\begin{frame}{Aufgabe 2}
 	\[ F := \plexists \plx {\plka \word{f(x)} \pleq \plx \aland \plx \pleq \ply \plkz}  \]
 	
 	Gebt eine Interpretation $(D_1, I_1)$, $D_1 \nsubseteq \R$, und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\
@@ -71,41 +78,8 @@
 	
 	\[ G := \alnot\word{S(z)} \aland \plexists \plx {\plka \word{S(x)} \aland \plall \ply \word{R(x,y)} \plkz}  \]
 	
-	Gebt eine Interpretation $(D_2, I_2)$, $D_2 \subseteq \N$, und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(G) = \W$ gilt.\\
+	Gebt eine Interpretation $(D_2, I_2)$, $D_2 \subseteq \N_0$, und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(G) = \W$ gilt.\\
 	\smallskip
 	\visible<3-|handout:2>{Die Interpretation $(D_2, I_2)$ mit $ D_2 = \set{0, ..., 5}, \, I_2(\word S) = \set{n \Mid \text{$n$ ist prim}}, I_2(\word R) = {\geq} $ und die Variablenbelegung $\beta_2 \colon \VPL \functionto D_2$, $\plz \mapsto 4, \, \text{...Rest beliebig...}$, tun es.}
 	
-\end{frame}
-
-\begin{frame}{Aufgabe 1 (WS 15/16, Blatt 7)}
-	  \begin{equation*}
-	F = \alnot \plexist \plx
-	{\plka
-		\plE{\plka \plx \plcomma \ply \plkz}
-		\alor
-		\alnot \plall \plz \plall \plx \plall \ply
-		{\plka
-			\plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz} \alimpl \plx \pleq \ply
-			\plkz}
-		\plkz}
-	\end{equation*}\\[1em]
-	
-	\begin{block}{Aufgabe 1.3}
-		Gebt eine Interpretation $(D_1, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\[0.5em]
-		
-		\visible<2-|handout:2>{Die Interpretation $(D_1, I_1)$ mit $ D_1 = \{ 0, 1 \}, \, I_1(\word E) = {<}$ und die Variablenbelegung $\beta_1 \colon \VPL \functionto D_1$, $v \mapsto 0$, tun es.}
-	\end{block}
-
-	\begin{block}{Aufgabe 1.4}
-		Gebt eine Interpretation $(D_2, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(F) = \F$ gilt.\\[0.5em]
-		
-		\visible<3-|handout:2>{Die Interpretation $(D_2, I_2)$ mit $ D_2 = \{ 0, 1 \}, \, I_2(\word E) = {<}$ und die Variablenbelegung $\beta_2 \colon \VPL \functionto D_2$, $v \mapsto 1$, tun es.}
-	\end{block}
-\end{frame}
-
-\section{Prädikatenlogik: Aufgaben}
-
-\begin{frame}{Prädikatenlogische Formeln aufstellen}
-	% TODO Aufgaben!
-	Vgl. Übung WS 15/16
 \end{frame}

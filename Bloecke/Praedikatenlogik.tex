@@ -65,7 +65,7 @@
 	Zusammengesetzt aus... \\
 	\medskip
 	
-	(\textbf{Termen} (von eben)) \\
+	\textbf{Termen} (von eben) als Argumente in \\
 	\medskip
 	
 	\textbf{Relationen} \, (endlich viele) \quad Alphabet $\RPL$  \\
@@ -79,7 +79,7 @@
 	\medskip \pause
 	
 	Relationen und Funktionen können \textbf{nur mit Termen} aufgerufen werden! \\
-	\impl \quad $\word x \pleq \word{(}\word y \pleq \word z\word{)}$ \qquad \word{g(S(x))} \qquad \word{R(S(x,y))} \qquad $\word{R(x)} \pleq \word{S(x,y)}$ \\
+	\impl \quad \word{R(S(x,y))} \qquad \word{g(S(x))} \qquad $\word{R(x)} \pleq \word{S(x,y)}$ \qquad $\word x \pleq \word{(}\word y \pleq \word z\word{)}$ \\
 	Alles \textbf{falsch}!
 \end{frame}
 
@@ -126,6 +126,16 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Formeln aufstellen}
+	\begin{Beispiel}
+		Alle Menschen lieben Weihnachten.\\ % Aber Gänse eher nicht...
+		\medskip
+		
+		\pause
+		$\plall \plx \; {\plka \word{Mensch(x)} \alimpl \word{liebt(x,Weihnachten)} \plkz}$
+	\end{Beispiel}
+% TODO: 2. Beispiel (evtl. aus Übung klauen)
+\end{frame}
 
 \begin{frame}{Aufgabe 2 (WS 15/16, Blatt 7)}
 	\begin{block}{Aufgabe}
@@ -184,18 +194,14 @@
 
 \begin{frame}{Freie und gebundene Variablenvorkommen}
 	\begin{equation*}
-	F = \alnot \plexist \plx
-	{\plka
-		\plE{\plka \plx \plcomma \ply \plkz}
-		\alor
-		\alnot \plall \plz \plall \plx \plall \ply
-		{\plka
-			\plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz} \alimpl \plx \pleq \ply
-			\plkz}
+	F = \plexist \plx \, \plE{\plka \plx \plcomma \ply \plkz}
+		\, \alor \,
+		\plall \plz \, \plall \plx \, \plall \ply \, {\plka
+			\plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz}
 		\plkz}
 	\end{equation*}
 	
-	\begin{block}{Aufgabe 1.1}
+	\begin{block}{Aufgabe}
 		Welche Variablenvorkommen sind frei ($\fv$) und welche gebunden ($\bv$)?\\
 		Ist die Formel geschlossen?
 	\end{block}
@@ -249,24 +255,17 @@
 	\end{Beispiel}
 \end{frame}
 
-\begin{frame}{Substitutionen}
-	\begin{equation*}
-	F = \alnot \plexist \plx
-	{\plka
-		\plE{\plka \plx \plcomma \ply \plkz}
-		\alor
-		\alnot \plall \plz \plall \plx \plall \ply
-		{\plka
-			\plE{\plka \plx \plcomma \plz \plkz} \aland \plE{\plka \ply \plcomma \plz \plkz} \alimpl \plx \pleq \ply
-			\plkz}
-		\plkz}
-	\end{equation*}
+\begin{frame}{Substitutionen: Aufgabe}
+	$F = \alnot \plexist \plx {\plka \plE{\plka \plx \plcomma \ply \plkz}\plkz}$\\
+	$G = \plall \plx \plall \ply {\plka 
+			\plE{\plka \plx \plcomma \plz \plkz} \aland 
+			\plE{\plka \ply \plcomma \plz \plkz} \plkz}$
+	\medskip
 	
-	\begin{block}{Aufgabe 1.2}
-		Gebt eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ ist.\\[1em] \pause
+	Gebt jeweils eine Substitution $\sigma$ an, die \emph{nicht} kollisionsfrei für $F$ bzw. $G$ ist.\\[1em] \pause
 		
-		\impl Die Substitution $\sigma_{\{\ply/\plx\}}$ macht $F$ kaputt.
-	\end{block}
+	\impl Die Substitution $\sigma_{\{\ply/\plx\}}$ macht $F$ kaputt.\\ \pause
+	\impl Die Substitutionen $\sigma_{\{\plz/\plx\}}$ oder $\sigma_{\{\plz/\ply\}}$ machen $G$ kaputt.
 	
 \end{frame}
 

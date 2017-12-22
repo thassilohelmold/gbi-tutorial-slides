@@ -15,13 +15,8 @@
 \begin{document}
 \starttut{9}
 
-
-\thasse{  % TODO: Split into 4 panels and spread over the presentation
-	\lastframe{0.35}{30}{xkcd/ineffective_sorts.png}{https://www.xkcd.com/1185}
-}
-
 \begin{frame}{Zu Blatt \#3}
-	Durchschnitt: \quad etwa \thassedaniel{XX}{53}~\% der Punkte \\
+	Durchschnitt: \quad etwa \thassedaniel{58}{53}~\% der Punkte \\
 	\begin{itemize}
 		\item \textbf{Induktionen}: Schreibt mir bitte die Aussage hin, über die ihr die Induktion macht. Wenn IV falsch, hab ich sonst keinen Plan, was ihr zeigen wollt.
 		\item \textbf{A3.1}: Schaut euch Injektivität/Surjektivität nochmal an...
@@ -45,40 +40,34 @@
 	\FalseQuestionE{Wenn $X \derives^* w$ gilt, dann ist $X \to w$ eine Produktion in P.}{Sei $P=\{X \to XX \mid \word a\}$. Dann gilt $X \derives^* X\word a$, aber $X \to X\word a \notin P$.}
 \end{frame}
 
-\thasse
-{
-	\begin{frame}{Rückblick: Prädikatenlogik}
-		\begin{itemize}[<+->]
-			\item Deutlich komplizierterer Aufbau als Aussagenlogik
-			\item Auswertung mit Interpretation und Variablenbelegung
-			\item Quantoren erlauben allgemeine Aussagen
-		\end{itemize}
-	\end{frame}
-	
-	\begin{frame}{Wahr oder Falsch?}
-		Sei $\RPL = \{R,S\}$ mit $\ar(R) = 2$ und $\ar(S) = 1$, \\
-		$\FPL = \{f,g\}$ mit $\ar(f) = 1$ und $\ar(g) = 2$ 
-		\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
-		\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie keinen Term, sondern eine atomare Formel darstellt.}
-		\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
-		%TODO: Eine W/F-Frage zu freien/gebundenen Variablen
-		%TODO: Eine W/F-Frage zu PL Substitution
-	\end{frame}
-	
-	% TODO: Zum Aufwärmen
-}
-
 \daniel{
 	\input{../Bloecke/Praedikatenlogik}
 }
 
-
 \input{../Bloecke/Praedikatenlogik2}
 
-\daniel{\input{../Bloecke/DrMetaNordpol}}
+\thasse{
+	%	\begin{frame}{Rückblick: Prädikatenlogik}
+	%		\begin{itemize}[<+->]
+	%			\item Deutlich komplizierterer Aufbau als Aussagenlogik
+	%			\item Auswertung mit Interpretation und Variablenbelegung
+	%			\item Quantoren erlauben allgemeine Aussagen
+	%		\end{itemize}
+	%	\end{frame}
+	
+	\begin{frame}{Wahr oder Falsch?}
+	Sei $\RPL = \{R,S\}$ mit $\ar(R) = 2$ und $\ar(S) = 1$, \\
+	$\FPL = \{f,g\}$ mit $\ar(f) = 1$ und $\ar(g) = 2$ 
+	\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
+	\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie keinen Term, sondern eine atomare Formel darstellt.}
+	\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
+	%TODO: Eine W/F-Frage zu freien/gebundenen Variablen
+	%TODO: Eine W/F-Frage zu PL Substitution
+\end{frame}
 
-%TODO
-%\input{../Bloecke/Hoare.tex}
+}
+
+\input{../Bloecke/DrMetaNordpol}
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
