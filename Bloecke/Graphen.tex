@@ -88,9 +88,9 @@
 	$E_5 = \{(0,1), (1,2), (1,3)\}$
 \end{frame}
 
-\begin{frame}{Lösung: Graphen Zeichnen}
-	Zeichnet den Graphen $G = (V, E)$ mit
-	$$V = \Z_4 \qquad E = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$$
+\begin{frame}{Lösung: Graphen zeichnen}
+	Zeichnet den Graphen $G_1 = (V, E_1)$ mit
+	$$V = \Z_4 \qquad E_1 = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$$
 	
 	\pause
 	\bigskip
@@ -112,7 +112,101 @@
 		\end{tikzpicture}
 	\end{figure}
 \end{frame}
-% TODO: Lösungen für weitere Zeichenaufgaben
+
+\begin{frame}{Lösung: Graphen zeichnen}
+	Zeichnet den Graphen $G_2 = (V, E_2)$ mit
+	$$V = \Z_4 \qquad E_2 = \{\{0,1\}, \{0,2\}, \{0,3\} \}$$
+	
+	\pause
+	\bigskip
+	\begin{figure}[H]
+		\begin{tikzpicture}[-,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=10mm,inner sep=2pt},row sep=15mm,column sep=15mm,ampersand replacement=\&]
+		{
+			|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+			\& |(3)| 3 \& \\
+		};
+		\draw  (0) -- (1);
+		\draw  (0)  to [bend left] (2);
+		\draw  (0) -- (3);
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Lösung: Graphen zeichnen}
+	Zeichnet den Graphen $G_3 = (V, E_3)$ mit
+	$$V = \Z_4 \qquad E_3 = \emptyset$$
+	
+	\pause
+	\bigskip
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=10mm,inner sep=2pt},row sep=15mm,column sep=15mm,ampersand replacement=\&]
+		{
+			|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+			\& |(3)| 3 \& \\
+		};
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\def\bend{8}
+\begin{frame}{Lösung: Graphen zeichnen}
+	Zeichnet den Graphen $G_4 = (V, E_4)$ mit
+	$$V = \Z_4 \qquad E_4 = V \times V$$
+	
+	\pause
+	\bigskip  %TODO!!
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=10mm,inner sep=2pt},row sep=25mm,column sep=25mm,ampersand replacement=\&]
+		{
+			|(0)| 0 \& |(1)| 1 \\
+			|(2)| 2 \& |(3)| 3 \\
+		};
+		\path (0) edge [loop left] ();
+		\path (1) edge [loop right] ();
+		\path (2) edge [loop left] ();
+		\path (3) edge [loop right] ();
+		
+		\draw  (0) to [bend left=\bend] (1);
+		\draw  (0) to [bend left=\bend] (2);
+		\draw  (0) to [bend left=\bend] (3);
+		\draw  (1) to [bend left=\bend] (0);
+		\draw  (1) to [bend left=\bend] (2);
+		\draw  (1) to [bend left=\bend] (3);
+		\draw  (2) to [bend left=\bend] (0);
+		\draw  (2) to [bend left=\bend] (1);
+		\draw  (2) to [bend left=\bend] (3);
+		\draw  (3) to [bend left=\bend] (0);
+		\draw  (3) to [bend left=\bend] (1);
+		\draw  (3) to [bend left=\bend] (2);
+		
+		
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Lösung: Graphen zeichnen}
+	Zeichnet den Graphen $G_5 = (V, E_5)$ mit
+	$$V = \Z_4 \qquad E_5 = \{ (0,1), (1,2), (1,3) \}$$
+	
+	\pause
+	\bigskip
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=10mm,inner sep=2pt},row sep=15mm,column sep=15mm,ampersand replacement=\&]
+		{
+			|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+			\& |(3)| 3 \& \\
+		};
+		\draw  (0) -- (1);
+		\draw  (1) -- (2);
+		\draw  (1) -- (3);
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
 
 \begin{frame}{Teilgraphen}
 	\begin{Definition}
@@ -124,7 +218,7 @@
 
 \begin{frame}{Teilgraphen: Beispiel}
 	\begin{columns}
-		\column{0.3 \linewidth}
+		\column[T]{0.3 \linewidth}
 		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
 		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
 		{
@@ -142,11 +236,12 @@
 		\end{tikzpicture}
 		
 		\pause
-		\column{0.3 \linewidth}
+		\column[T]{0.3 \linewidth}
 		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
 		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
 		{
 			|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+			\&  \& \\
 		};
 		\draw  (0) -- (1);
 		\draw  (1) -- (2);
@@ -154,13 +249,14 @@
 		\end{tikzpicture}
 		
 		\pause
-		\column{0.3 \linewidth}
+		\column[T]{0.3 \linewidth}
 		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
 		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
 		{
-			|(0)| 0 \& |(1)| 1\\
-			\& |(3)| 3 \& \\
+			|(0)| 0 \& |(1)| 1 \& |(2)[white]| 2 \\  % (2): stealth node
+			        \& |(3)| 3 \& \\
 		};
+		\draw[->, white]  (0) to [bend left] (2); % stealth edge
 		\draw  (0) -- (1);
 		\draw  (0) -- (3);
 		\draw (1) -- (3);
