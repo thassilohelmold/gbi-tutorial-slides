@@ -101,7 +101,7 @@
 		$$ \{\sigma_{\{\text{x/E}\}} (Q)\} \quad x \leftarrow E \quad \{Q\} $$
 	\end{block}
 	\pause
-	Nach einer Zuweisung gilt jede Aussage für die Variable, welche vorher für die linke Seite der Zuweisung galt.
+	Nach einer Zuweisung gilt jede Aussage für die Variable, welche vorher für die rechte Seite der Zuweisung galt.
 	\begin{itemize}
 		\item $\sigma_{\{\text{x/E}\}} (Q) $ ist die Aussage, die dadurch entsteht, dass man in Q jedes freie Vorkommen von x durch E ersetzt.
 		\item \textbf{Achtung}: $\sigma_{\{\text{x/E}\}}$ muss kollisionfrei sein!
@@ -331,7 +331,7 @@
 	\begin{align*}
 		&\assert{x=a \land y=b }  \\
 		&\assert{ x+y=a+b }  \\
-		&\kw{while } \; y\not=0 \kw{ do } \\
+		&\kw{while } y\not=0 \kw{ do } \\
 		&\qquad\assert{x+y=a+b \land y\not=0 }  \\
 		&\qquad\assert{x+1+y-1=a+b } \\
 		&\qquad y \gets y-1 \\
