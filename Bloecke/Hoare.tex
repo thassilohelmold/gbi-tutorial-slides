@@ -1,40 +1,40 @@
-\renewcommand{\assert}[1]{\ensuremath{\{\;#1\;\}}}
+\renewcommand{\assert}[1]{\hoareassert{#1}}
+\renewcommand{\kw}[1]{\textbf{#1}}
 
 \section{Algorithmen: Hoare-Kalkül}
 
 \subsection{Algorithmen}
-\begin{frame}
+\begin{frame}{Algorithmen}
 	\begin{block}{Definition}
 		Über die Eigenschaften von Algorithmen:
 		\begin{itemize}[<+->]
-			\item Eine endliche Beschreibung...
-			\item ...aus elementaren Aussagen...
-			\item ... die deterministisch ausgeführt werden.\\
-				(Manchmal auch gemischt mit (Pseudo-)Zufallselementen)
+			\item Eine endliche Beschreibung
+			\item aus elementaren Aussagen, 
+			\item die deterministisch ($=$ ohne Zufall!) ausgeführt werden.\\
+				{\small (Manchmal auch gemischt mit (Pseudo-)Zufallselementen)}
 			\item Eine endliche Eingabe gibt endliche Ausgabe...
 			\item in endlich vielen Schritten.
 			\item Das funktioniert für beliebig große Eingaben und
-			\item ist nachvollziehbar bzw. verständlich
+			\item ist nachvollziehbar bzw. verständlich.
 		\end{itemize}
 	\end{block}
-	\pause
+	\pause[8]
 	Woher wissen wir, ob ein Algorithmus korrekt ist?
 \end{frame}
 
 \begin{frame}{Korrektheit}
-	Einige Algorithmen haben besonders hohe Anforderungen an die Korrektheit:
+	Einige Algorithmen haben besonders hohe Anforderungen an ihre Korrektheit:
 	Banking-Server, Airbag-Steuerprogramm, Herzschrittmacher, ...
 	\bigskip
 
 	\pause
-	Wie können wir die Korrektheit beweisen?
-	\begin{itemize}[<+->]
-		\item Testen? Was, wenn wir einen Sonderfall vergessen?
-		\item Alle Eingaben testen? Oft nicht möglich.
-		\item Formal beweisen: Hoare-Kalkül
+	Korrektheit garantieren?
+	\begin{itemize}
+		\item Testen? Was, wenn wir einen Sonderfall vergessen? \pause
+		\item Alle Eingaben testen? Oft nicht möglich. \pause
+		\item Formal beweisen: \textbf{Hoare-Kalkül} \pause
 	\end{itemize}
 	
-	\pause
 	\begin{block}{In der Praxis}
 		Theoretisch müsste die komplette Werkzeugkette bewiesen werden:
 		Programm, Compiler, Prozessor...\\
@@ -45,13 +45,13 @@
 \end{frame}
 
 \subsection{Hoare-Kalkül}
-\begin{frame}{Das Hoare-Kalkül}
+\begin{frame}{Der Hoare-Kalkül}
 	\begin{block}{Definition}
-		Ein \emph{Hoare-Tripel} ist ein Tupel $(\{P\}\ S\ \{Q\})$ mit einem Programmstück $S$ und prädikatenlogischen \emph{Zusicherungen} $P,Q$.
+		Ein \emph{Hoare-Tripel} ist ein Tripel $\set{P}\ S \ \set{Q}$ mit einem Programmstück $S$ und prädikatenlogischen \emph{Zusicherungen} $P,Q$.
 	\end{block}
 	\pause
-	$P = $ Bedingung vor der Ausführung \\
-	$Q = $ Zusicherung nach der Ausführung\\
+	$P = $ Vorbedingung vor der Ausführung \\
+	$Q = $ Nachbedingung nach der Ausführung\\
 	$S = $ Programmstück
 	
 	\pause
@@ -61,56 +61,74 @@
 		\item Fester Grundbereich (explizit angegeben oder implizit ableitbar)
 		\item Funktionen und Relationen \enquote{wie üblich} interpretiert.
 		\item Konstanten beliebig, als \enquote{Eingabe} des Programms.\\
-		Muss also für alle Möglichkeiten = Eingaben gelten.
+		Muss also für alle Möglichkeiten $=$ Eingaben gelten.
 	\end{itemize}
 \end{frame}
 
 %TODO
-\begin{frame}{Das Hoare-Kalkül}
+\begin{frame}{Der Hoare-Kalkül}
 	\begin{block}{Definition}
-		Ein Hoare-Tripel $\htr{P}{S}{Q}$ ist gültig, wenn für jede relevante Interpretation und jede Variablenbelegung $\beta$ gilt:\\
-		Wenn vor der Ausführung $\val_{D,I,\beta}(P)=\W$ ist und wenn die Ausführung von $S$ für $I$ und $\beta$ endet und hinterher Variablenbelegung $\beta'$ vorliegt, dann gilt am Ende $\val_{D,I,\beta'}(Q)=\W$.
+		Ein Hoare-Tripel $\htr{P}{S}{Q}$ ist \textbf{gültig}, wenn für jede relevante Interpretation und jede Variablenbelegung $\beta$ gilt:\\
+		Wenn vor der Ausführung $\val_{D,I,\beta}(P)=\W$ ist und wenn die Ausführung von $S$ für $I$ und $\beta$ endet und hinterher Variablenbelegung $\beta'$ vorliegt, dann gilt am Ende $\val_{D,I,\beta'}(Q)=\W$. \\
+		\medskip
+		Auf Deutsch: \\
+		$\htr{P}{S}{Q}$ ist \textbf{gültig} \Gdw Wenn anfangs $P$ gilt, wir $S$ ausführen und dann zum Schluss $Q$ gilt.
 	\end{block}
+\end{frame}
 
+\begin{frame}{Hoare-Tripel}
+	\begin{Beispiel}
+		$\assert{x = 5}$ \\
+		$x \gets x + 1$ \\
+		$\assert{x = 6}$ \\
+		ist gültig.  \\
+		\medskip
+		$\assert{x = 5}$ \\
+		$x \gets x + 1$ \\
+		$\assert{x = 42}$ \\
+		ist nicht gültig.
+	\end{Beispiel}
+	
 	\pause
 	\begin{block}{Hoare-Kalkül}
-		Das \emph{Hoare-Kalkül} definiert Regeln, wie gültige \emph{Hoare-Tripel} schrittweise abgeleitet werden können.
+		Der \emph{Hoare-Kalkül} definiert Regeln, wie gültige \emph{Hoare-Tripel} schrittweise aus Axiomen abgeleitet werden können.
 	\end{block}
 \end{frame}
 
 
 \begin{frame}{HT-A}
-	\begin{block} {Axiom HT-A}
-		$$ \{\sigma_{\text{x/E}} (Q)\} \ x \leftarrow E \ \{Q\} $$
+	\begin{block} {Axiom HT-A \quad „Assignment“}
+		$$ \{\sigma_{\{\text{x/E}\}} (Q)\} \quad x \leftarrow E \quad \{Q\} $$
 	\end{block}
 	\pause
 	Nach einer Zuweisung gilt jede Aussage für die Variable, welche vorher für die linke Seite der Zuweisung galt.
 	\begin{itemize}
-		\item $\sigma_{\text{x/E}} (Q) $ ist die Aussage, die dadurch entsteht, dass man in Q jedes freie Vorkommen von x durch E ersetzt.
-		\item Achtung: $\sigma_{\text{x/E}}$ muss kollisionfrei sein!
+		\item $\sigma_{\{\text{x/E}\}} (Q) $ ist die Aussage, die dadurch entsteht, dass man in Q jedes freie Vorkommen von x durch E ersetzt.
+		\item \textbf{Achtung}: $\sigma_{\{\text{x/E}\}}$ muss kollisionfrei sein!
 	\end{itemize}
-	\vspace{2em}
+	
 	\begin{Beispiel}
-		$\{ x + 1 = 43\} \ y := x + 1\ \{y = 43 \}.$
+		$\{ x + 1 = 43\} \ y \gets x + 1\ \{y = 43 \}$ ist gültig. \pause (Bzw. umgeformt \\
+		$\{ x = 42 \} \ y \gets x + 1\ \{y = 43 \}$).
 	\end{Beispiel}
 	
 \end{frame}
 
 \begin{frame}{HT-E}
 	\begin{block}{Regel HT-E}
-		Wenn $\{P\}\ S\ \{Q\}$ gültig ist, dann auch $\{P'\}\ S\ \{Q'\}$ mit $P' \implies P$ und $Q \implies Q'$.
+		Wenn $\{P\}\ S\ \{Q\}$ gültig ist, dann auch $\{P'\}\ S\ \{Q'\}$ mit $P' \impl P$ und $Q \impl  Q'$.
 	\end{block}
 	\pause
-	Vorbedingungen können stärker, Nachbedingungen können schwächer werden.
+	Heißt: Vorbedingungen können stärker, Nachbedingungen können schwächer werden.
 
 \end{frame}
 
 \begin{frame}{HT-S}
-	\begin{block}{Regel HT-S}
-		Wenn $\{P\}\ S_1\ \{Q\}$ und $\{Q\}\ S_2\ \{R\}$ gültig sind, dann auch $\{P\}\ S_1 S_2\ \{R\}$. 
+	\begin{block}{Regel HT-S \quad „Sequence“}
+		Wenn $\{P\}\ S_1\ \{Q\}$ und $\{Q\}\ S_2\ \{R\}$ gültig sind, dann auch $\{P\}\ S_1;  S_2\ \{R\}$. 
 	\end{block}
 	\pause
-	Hoare-Tripel können transitiv zusammengefasst werden.
+	\impl Hoare-Tripel können transitiv zusammengefasst werden.
 \end{frame}
 
 \begin{frame}
@@ -120,28 +138,27 @@
 \begin{frame}{HT-I}
 	\begin{minipage}{0.4\linewidth}
 		\begin{align*}
-			&\{ P \} \\
-			& \textbf{if } B \\
-			& \textbf{then} \\
-			&\hspace{2em} \{ P \wedge B \} \\
+			&\assert{ P } \\
+			& \textbf{if } B \textbf{ then} \\
+			&\hspace{2em} \assert{ P \wedge B } \\
 			&\hspace{2em} S_1 \\
-			&\hspace{2em} \{ Q \}\\
+			&\hspace{2em} \assert{ Q }\\
 			&\textbf{else} \\
-			&\hspace{2em} \{ P \wedge \neg B \} \\
+			&\hspace{2em} \assert{ P \wedge \neg B } \\
 			&\hspace{2em} S_2 \\
-			&\hspace{2em} \{ Q \}  \\
+			&\hspace{2em} \assert{ Q }  \\
 			&\textbf{fi}\\
-			&\{Q \}
+			&\assert{Q }
 		\end{align*}
 	\end{minipage}
 	\begin{minipage}{0.55\linewidth}
-		\begin{block}{Regel HT-I}
-			$\textbf{if } B\text{ } \textbf{then } S_1 \textbf{ else } S_2 \textbf{ fi}$
-			\vspace{1em}
+		\begin{block}{Regel HT-I \quad „If“}
+			$\textbf{if } B\text{ } \textbf{ then } S_1 \textbf{ else } S_2 \textbf{ fi}$
+			\smallskip
 			\begin{itemize}
-				\item Wenn $\{ P \wedge B \} S_1 \{ Q \}$ gültig 
-				\item und $\{ P \wedge \neg B \} S_2 \{ Q \}$ gültig
-				\item dann auch $\{ P \} \textbf{ if } B \textbf{ then } S_1 \textbf{ else } S_2 \textbf{ fi} \{ Q \} $ gültig
+				\item Wenn $\{ P \wedge B \}\ S_1\ \{ Q \}$ gültig 
+				\item und $\{ P \wedge \neg B \}\ S_2\ \{ Q \}$ gültig
+				\item dann auch \\ $\{ P \} \textbf{ if } B \textbf{ then } S_1 \textbf{ else } S_2 \textbf{ fi } \{ Q \} $ gültig
 			\end{itemize}
 		\end{block}
 %		\emph{HT4 : } $\textbf{if } B\text{ } \textbf{then } S_1 \textbf{ else } S_2 \textbf{ fi}$
@@ -153,109 +170,128 @@
 	\end{minipage}
 \end{frame}
 
-\begin{frame}{Beispiel $\vert x \vert$}
+\begin{frame}{Beispiel: Berechnung von $\vert x \vert$}
 	\vspace{-10mm}
 	\begin{align*}
-		&\{ x \in\R\} \\
-		&\textbf{if } x < 0 \\
-		&\textbf{then } \\
-		&\hspace{2em} \{ \only<6->{ z\in\R\wedge x < 0 } \} \\
-		&\hspace{2em} \{ \only<5->{ -x = \vert x \vert } \} \\
-		&\hspace{2em}  z \leftarrow -x   \\
-		&\hspace{2em} \{ \only<2->{ z = \vert x \vert } \} \\
+		&\assert{ x \in\R} \\
+		&\textbf{if } x < 0 \textbf{ then } \\
+		&\hspace{2em} \assert{ \visible<6->{ x\in\R\wedge x < 0 } } \\
+		&\hspace{2em} \assert{ \visible<5->{ {-x} = \vert x \vert } } \\
+		&\hspace{2em}  z \gets -x   \\
+		&\hspace{2em} \assert{ \visible<2->{ z = \vert x \vert } } \\
 		&\textbf{else} \\
-		&\hspace{2em} \{ \only<4->{ z\in\R\wedge x\geq 0 } \} \\
-		&\hspace{2em} \{ \only<3->{ x = \vert x \vert } \} \\
-		&\hspace{2em} z \leftarrow x \\
-		&\hspace{2em} \{ \only<2->{ z = \vert x \vert } \} \\
+		&\hspace{2em} \assert{ \visible<4->{ x\in\R\wedge x\geq 0 } } \\
+		&\hspace{2em} \assert{ \visible<3->{ x = \vert x \vert } } \\
+		&\hspace{2em} z \gets x \\
+		&\hspace{2em} \assert{ \visible<2->{ z = \vert x \vert } } \\
 		&\textbf{fi} \\
-		&\{ z = \vert x \vert \} 
+		&\assert{ z = \vert x \vert } 
 	\end{align*}
 \end{frame}
 
 \begin{frame}{Aufgabe}
 	\vspace{-10mm}
-	  \begin{alignat*}{2}
+	  \begin{align*}
 	&\assert{x=a \land y=b}  \\
-	&\kw{if } x>y  \\
-	&\kw{then } \\
-	&&&\assert{ \dots\ } \\
-	&&& z \gets y  \\
-	&&&\assert{ \dots\ } \\
+	&\kw{if } x>y \kw{ then } \\
+	&\hspace{2em} \assert{ \dots\ } \\
+	&\hspace{2em}  z \gets y  \\
+	&\hspace{2em} \assert{ \dots\ } \\
 	&\kw{else } \\
-	&&&\assert{ \dots\ } \\
-	&&& z \gets x  \\
-	&&&\assert{ \dots\ } \\
+	&\hspace{2em} \assert{ \dots\ } \\
+	&\hspace{2em}  z \gets x  \\
+	&\hspace{2em} \assert{ \dots\ } \\
 	&\kw{fi } \\
 	&\assert{z=\min(a,b)}
-	\end{alignat*}
+	\end{align*}
 \end{frame}
 
 \begin{frame}{Lösung}	
-	\vspace{-15mm}
+	\vspace{-2.5\baselineskip}
 	\begin{alignat*}{2}
 	&\assert{x=a \land y=b}  \\
-	&\kw{if } x>y  \\
-	&\kw{then } \\
-	&&&\assert{x=a \land y=b \land x>y} \\
-	&&&\assert{y=\min(a,b)} \\
-	&&& z \gets y  \\
-	&&&\assert{z=\min(a,b)} \\
+	&\kw{if } x>y \kw{ then } \\
+	&\hspace{2em} \assert{x=a \land y=b \land x>y} \\
+	&\hspace{2em} \assert{y=\min(a,b)} \\
+	&\hspace{2em}  z \gets y  \\
+	&\hspace{2em} \assert{z=\min(a,b)} \\
 	&\kw{else } \\
-	&&&\assert{x=a \land y=b \land  \lnot (x>y)} \\
-	&&&\assert{x=\min(a,b)} \\
-	&&& z \gets x  \\
-	&&&\assert{z=\min(a,b)} \\
+	&\hspace{2em} \assert{x=a \land y=b \land  \lnot (x>y)} \\
+	&\hspace{2em} \assert{x=\min(a,b)} \\
+	&\hspace{2em}  z \gets x  \\
+	&\hspace{2em} \assert{z=\min(a,b)} \\
 	&\kw{fi } \\
 	&\assert{z=\min(a,b)}
 	\end{alignat*}
 \end{frame}
 
 
+\mycomment{
 %TODO: Lösung!!!
+\begin{frame}{Jetzt seid ihr dran}
+	\begin{align*}
+	& z \gets x + y \\
+	& z \gets z / 2 \\
+	&\textbf{if } x \mod 2 = 0 \textbf{ then } \\
+	&\hspace{2em} y \gets x + x \\
+	&\hspace{2em} y \gets y / 4 \\
+	&\textbf{else} \\
+	&\hspace{2em} y \gets x - 1 \\
+	&\hspace{2em} y \gets y / 2 \\
+	&\textbf{fi} \\
+	& z \gets z \· y \\
+	&\assert{ z = div_2(a) \· (a+b)/2 } % WTF is div_2 ? => (2 `div`) ? a, b vs. x, y?
+	\end{align*}
+\end{frame}	
+}
+
+
 %\begin{frame}
-%	\frametitle{Jetzt seid ihr dran}
-%	\begin{align*}
-%		& z \leftarrow x + y \\
-%		& z \leftarrow z / 2 \\
-%		&\textbf{if } x\ mod\ 2 = 0 \\
-%		&\textbf{then } \\
-%		&\hspace{2em} y \leftarrow x + x \\
-%		&\hspace{2em} y \leftarrow y / 4 \\
-%		&\textbf{else} \\
-%		&\hspace{2em} y \leftarrow x - 1 \\
-%		&\hspace{2em} y \leftarrow y / 2 \\
-%		&\textbf{fi} \\
-%		& z \leftarrow z * y \\
-%		&\{ z = div_2(a) * (a+b)/2 \} 
-%	\end{align*}
+%	\includegraphics[scale=0.5]{hoare/htw}
 %\end{frame}
 
-\begin{frame}
-	\includegraphics[scale=0.5]{hoare/htw}
-\end{frame}
-
-\subsection{Schleifeninvarianten}
-\begin{frame}{Schleifeninvarianten}
-	\begin{block}{}
-		Schleifeninvarianten ... 
+\subsection{HT-W, Schleifeninvarianten}
+\begin{frame}{HT-W}
+	\begin{columns}[T] 
+		\begin{column}[T]{.4\textwidth} 
+			\vspace{-2\baselineskip}
+			\begin{align*}
+			&\assert{I} \q3uad \text{„Schleifeninvariante“} \\
+			&\kw{while } B \kw{ do } \\
+			&\qquad \assert{I \land B} \\
+			&\qquad S \\
+			&\qquad \assert{I} \\
+			&\kw{od} \\
+			&\assert{I \land \lnot B}
+			\end{align*}
+			\vspace{-1\baselineskip}
+		\end{column}
+		\begin{column}[T]{.4\textwidth} 
+			\begin{block}{Regel HT-W \quad „While“}
+				Wenn \htr{$I \land B$}{$S$}{$I$} gültig ist, dann ist auch die ganze \kw{while}-Schleife (s. links) gültig
+			\end{block}
+		\end{column}
+	\end{columns}
+	
+	\pause
+	\begin{block}{Schleifeninvarianten}
 		\begin{itemize}
-			\item sind Aussagen, die bei jedem Schleifendurchgang gültig sind
+			\item sind Aussagen, die zu Beginn und Ende jedes Schleifendurchganges gültig sind
 			\item helfen, die Korrektheit eines Programmes zu beweisen
-			\item muss man ebenfalls beweisen
+			\item muss man ebenfalls beweisen 
 			\item garantieren nicht die Korrektheit des Programms:\pause \\
-			 Terminierung der Schleife muss zusätzlich gezeigt werden!
+			 Terminierung der Schleife muss zusätzlich gezeigt werden! (nicht in GBI)
 		\end{itemize}
 	\end{block}
 \end{frame}
 	
-\begin{frame}{Beispiel}
-	\begin{minipage}{0.49\linewidth}
+\begin{frame}{Beispiel Schleifeninvarianten}
+	\begin{columns}
+	\begin{column}[T]{0.49\linewidth}
 	\begin{align*}
 		&\assert{x=a \land y=b}  \\
 		&\assert{ \dots\ } \\
-		&\kw{while } \; y\not=0  \\
-		&\kw{do } \\
+		&\kw{while } y\not=0 \kw{ do } \\
 		&\qquad\assert{ \dots } \\
 		&\qquad y \gets y-1 \\
 		&\qquad\assert{ \dots } \\
@@ -265,58 +301,76 @@
 		&\assert{ \dots\ } \\ \pause
 		&\assert{x=a+b} \\
 	\end{align*}
-	\end{minipage} \pause
-	\begin{minipage}{0.5\linewidth}
-		\begin{block}{Wertetabelle für a=3 und b=4}
-			\centering
-			\begin{tabular}{ccc}	 
-				i & x & y \\
-				0 & 3 & 4 \\
-				1 & 4 & 3 \\
-				2 & 5 & 2 \\
-				3 & 6 & 1 \\
-				4 & 7 & 0 \\
-			\end{tabular}
-		\end{block}
-		\pause
-		Schleifeninvariante : $$ x_i + y_i = a + b $$ 
-	\end{minipage}
+	\end{column} 
+	
+	\begin{column}[T]{0.5\linewidth}
+		\visible<2->{
+			\bigskip
+			\begin{block}{Wertetabelle für $a=3$ und $b=4$}
+				\centering
+				\medskip
+				\begin{tabular}{c|cc}	 
+					i & x & y \\ 
+					\hline 
+					0 & 3 & 4 \\
+					1 & 4 & 3 \\
+					2 & 5 & 2 \\
+					3 & 6 & 1 \\
+					4 & 7 & 0 \\
+				\end{tabular}
+			\end{block}
+			\pause
+			Schleifeninvariante: $$ x_i + y_i = a + b $$ 
+		}
+	\end{column}
+	\end{columns}
 \end{frame}
 
-\begin{frame}{Beispiel}
+\begin{frame}{Beispiel Schleifeninvarianten}
 	\vspace{-5mm}
 	\begin{align*}
 		&\assert{x=a \land y=b }  \\
-		&\assert{x+y=a+b }  \\
-		&\kw{while } \; y\not=0  \\
-		&\kw{do } \\
+		&\assert{ x+y=a+b }  \\
+		&\kw{while } \; y\not=0 \kw{ do } \\
 		&\qquad\assert{x+y=a+b \land y\not=0 }  \\
 		&\qquad\assert{x+1+y-1=a+b } \\
 		&\qquad y \gets y-1 \\
 		&\qquad\assert{x+1+y = a+b} \\
 		&\qquad x \gets x+1 \\
-		&\qquad\assert{x+y = a+b} \\
+		&\qquad\assert{ x+y = a+b} \\
 		&\kw{od } \\
-		&\assert{x+y = a+b \land (y=0) } \\
+		&\assert{ x+y = a+b \land (y=0) } \\
 		&\assert{x=a+b} \\
 	\end{align*}
 \end{frame}
 
-\begin{frame}{SIV mit Vollständiger Induktion}
-	Wir zeigen mit vollständiger Induktion die Gültigkeit der Schleifeninvariante. Dabei sei $i$ die Anzahl der bisherigen Schleifendurchläufe.\\
+\begin{frame}{Exkurs: Schl.-Inv. mit Vollst. Induktion}
+	Wir zeigen mit vollständiger Induktion die Gültigkeit der Schleifeninvariante. Dabei sei $i$ die Anzahl der bisher durchgelaufenen Schleifendurchläufe.\\
 	
-	\emph{Behauptung}: $$ \forall\ i \in \{0,b\} : x_i + y_i = a+b $$ \pause
+	\emph{Behauptung}: $$ \forall\ i \in \{0,...,b\} : x_i + y_i = a+b $$ \pause
 	\begin{block}{Induktionsanfang}
 		Für $i=0$ gilt $ x_0+y_0 = a+b $ nach Vorbedingung
 	\end{block} \pause 
 	\begin{block}{Induktionsvorrausetzung}
-		Für ein beliebig aber festes $i\in \{0,b\}$ gelte die Behauptung
+		Für ein beliebig aber festes $i\in \{0,...,b\}$ gelte die Behauptung
 	\end{block}
 \end{frame}
 
-\begin{frame}{SIV mit Vollständiger Induktion}
-	\begin{block}{Induktionsschluß}
-		Zu zeigen $$ x_{i+1} + y_{i+1} = a+b $$ \pause
+\begin{frame}{Exkurs: Schl.-Inv. mit Vollst. Induktion}
+	\vspace{-2\baselineskip}
+	\begin{align*}
+	&\assert{x=a \land y=b}  \\
+	&\assert{ x+y=a+b }\\
+	&\kw{while } y\not=0 \kw{ do } \\
+	&\qquad y \gets y-1 \\
+	&\qquad x \gets x+1 \\
+	&\kw{od } \\
+	&\assert{x=a+b} \\
+	\end{align*}
+	\vspace{-2\baselineskip}
+	\begin{block}{Induktionsschluss}
+		Zu zeigen: $ x_{i+1} + y_{i+1} = a+b $ \pause
+	%\vspace{-1.3\baselineskip}
 		\begin{align*}
 		x_{i+1}+y_{i+1} &= x_i +1 + y_i -1 \\
 		&= x_i + y_i \\

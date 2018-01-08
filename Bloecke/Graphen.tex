@@ -5,7 +5,7 @@
 
 
 \section{Graphen}
-\begin{frame}{Graphen - Wofür?}
+\begin{frame}{Graphen -- Wofür?}
 	\begin{itemize}
 		\item Straßennetze und andere Verkehrsnetze (Kürzeste Wege)
 		\item Kabelnetze (Minimale Spannbäume)
@@ -22,15 +22,15 @@
 
 \begin{frame}{Graphen}
 	\begin{Definition}
-		Ein \textbf{gerichteter Graph} ist ein Paar $G = (V, E)$ mit einer \emph{endlichen}, nicht leeren Menge an \textbf{Knoten} $V$ und einer Menge an \textbf{Kanten}\\
+		Ein \textbf{gerichteter Graph} ist ein Paar $G = (V, E)$ mit einer \emph{endlichen}, \emph{nichtleeren} Menge an \textbf{Knoten} $V$ und einer Menge an \textbf{Kanten}\\
 		$E \subseteq V \times V$.
 	\end{Definition} \pause
 	$E$ enthält also Paare (geordnet) von Elementen aus $V$. \pause
 	
 	\bigskip
 	\begin{Definition}
-		Ein \textbf{ungerichteter Graph} ist ein Paar $G = (V, E)$ mit einer \emph{endlichen}, nicht leeren Menge an \textbf{Knoten} $V$ und einer Menge an \textbf{Kanten}\\
-		$E \subseteq \{ \{x,y\} \mid x \in V \aland y \in V \}$.
+		Ein \textbf{ungerichteter Graph} ist ein Paar $G = (V, E)$ mit einer \emph{endlichen}, \emph{nichtleeren} Menge an \textbf{Knoten} $V$ und einer Menge an \textbf{Kanten}\\
+		$E \subseteq \set{ \{x,y\} \Mid x \in V \land y \in V }$.
 	\end{Definition} \pause
 	$E$ enthält also Mengen (ungeordnet) mit je ein oder zwei Elementen aus $V$!
 \end{frame}
@@ -57,7 +57,7 @@
 \end{frame}
 
 \begin{frame}{Beispiel}
-	Wir betrachten den gerichteten Graphen $G = (V, E)$ mit $V = \{0,1,2,3,4,5\}$ und $E = \{(0,1), (1,0), (1,2), (3,4), (4,3) ,(4,5)\}$
+	Wir betrachten den gerichteten Graphen $G = (V, E)$ mit $V = \{0,1,2,3,4,5\}$ und $E = \set{(0,1), (1,0), (1,2), (3,4), (4,3) ,(4,5)}$
 	\bigskip
 
 	\begin{figure}[H]
@@ -79,7 +79,7 @@
 
 \end{frame}
 
-\begin{frame}{Aufgabe: Graphen Zeichnen}
+\begin{frame}{Aufgabe: Graphen zeichnen}
 	Zeichnet die Graphen $G_i = (V, E_i)$ mit $V = \Z_4$ und
 	$E_1 = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$\\
 	$E_2 = \{\{0,1\}, \{0,2\}, \{0,3\} \}$\\
@@ -188,7 +188,7 @@
 \begin{frame}{Pfade und Wege}
 	\begin{Definition}
 		Sei $G$ ein \emph{gerichteter / ungerichteter} Graph.\\
-		Ein \textbf{Pfad / Weg} ist eine Folge von Knoten, die jeweils über Kanten im Graphen erreichbar sind. Also eine nichtleere Liste $$p = (v_0, v_1, \dots, v_n) \qquad (v_i, v_{i+1}) \in E$$
+		Ein \textbf{Pfad / Weg} ist eine Folge von Knoten, die jeweils über Kanten im Graphen erreichbar sind. Also eine nichtleere Liste $$p = (v_0, v_1, \dots, v_n) \quad \text{mit} \quad (v_i, v_{i+1}) \in E$$
 	\end{Definition}
 	\pause
 	Die Länge eines Pfades ist die Anzahl der Kanten ($|p| - 1$)
@@ -315,7 +315,7 @@
 	$n^2$  \\[0.3in]
 	
 	Wenn er schlingenfrei ist? \pause\\ 
-	$n^2 - n = n * (n-1)$		
+	$n^2 - n = n \· (n-1)$		
 \end{frame}
 
 \begin{frame}{Maximale Kanten}

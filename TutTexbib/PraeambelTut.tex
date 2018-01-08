@@ -213,6 +213,9 @@
 	\end{varwidth}	
 }
 
+\definecolor{hoareorange}{rgb}{1,.85,.6}
+\newcommand{\hoareassert}[1]{\setlength{\fboxsep}{1pt}\setlength{\fboxrule}{-1.4pt}\fcolorbox{white}{hoareorange}{\ensuremath{\{\;#1\;\}}}\setlength\fboxrule{\defaultfboxrule}\setlength{\fboxsep}{3pt}}
+
 \newcommand{\mailto}[1]{\href{mailto:#1}{{\textcolor{blue}{\underline{#1}}}}}
 \newcommand{\urlnamed}[2]{\href{#2}{\textcolor{blue}{\underline{#1}}}}
 \renewcommand{\url}[1]{\urlnamed{#1}{#1}}
