@@ -27,11 +27,11 @@
 	Banking-Server, Airbag-Steuerprogramm, Herzschrittmacher, ...
 	\bigskip
 
-	\pause
-	Korrektheit garantieren?
+	
+	Korrektheit garantieren?\pause
 	\begin{itemize}
-		\item Testen? Was, wenn wir einen Sonderfall vergessen? \pause
-		\item Alle Eingaben testen? Oft nicht möglich. \pause
+		\item Testen? \pause Was, wenn wir einen Sonderfall vergessen? \pause
+		\item Alle Eingaben testen? \pause Oft nicht möglich. \pause
 		\item Formal beweisen: \textbf{Hoare-Kalkül} \pause
 	\end{itemize}
 	
@@ -69,7 +69,7 @@
 \begin{frame}{Der Hoare-Kalkül}
 	\begin{block}{Definition}
 		Ein Hoare-Tripel $\htr{P}{S}{Q}$ ist \textbf{gültig}, wenn für jede relevante Interpretation und jede Variablenbelegung $\beta$ gilt:\\
-		Wenn vor der Ausführung $\val_{D,I,\beta}(P)=\W$ ist und wenn die Ausführung von $S$ für $I$ und $\beta$ endet und hinterher Variablenbelegung $\beta'$ vorliegt, dann gilt am Ende $\val_{D,I,\beta'}(Q)=\W$. \\
+		Wenn vor der Ausführung $\val_{D,I,\beta}(P)=\W$ ist und die Ausführung von $S$ für $I$ und $\beta$ mit der neuen Variablenbelegung $\beta'$ endet, dann gilt anschließend auch $\val_{D,I,\beta'}(Q)=\W$. \\
 		\medskip
 		Auf Deutsch: \\
 		$\htr{P}{S}{Q}$ ist \textbf{gültig} \Gdw Wenn anfangs $P$ gilt, wir $S$ ausführen und dann zum Schluss $Q$ gilt.
@@ -77,17 +77,37 @@
 \end{frame}
 
 \begin{frame}{Hoare-Tripel}
-	\begin{Beispiel}
-		$\assert{x = 5}$ \\
-		$x \gets x + 1$ \\
-		$\assert{x = 6}$ \\
-		ist gültig.  \\
-		\medskip
-		$\assert{x = 5}$ \\
-		$x \gets x + 1$ \\
-		$\assert{x = 42}$ \\
-		ist nicht gültig.
-	\end{Beispiel}
+	
+	\begin{minipage}{0.4\linewidth}
+			\begin{Beispiel}
+			$\assert{x = 5}$ \\
+			$x \gets x + 1$ \\
+			$\assert{x = 6}$ \\
+			ist gültig.  \\
+			
+			\bigskip
+			$\assert{x = 5}$ \\
+			$x \gets x + 1$ \\
+			$\assert{x = 42}$ \\
+			ist nicht gültig.
+		\end{Beispiel}
+	\end{minipage}
+	\pause % Hier KEINE LEERZEILE sonst verhaut es alles!
+	\begin{minipage}{0.4\linewidth}
+		\begin{block}
+			
+			$\assert{z = 5}$ \\
+			$x \gets x + 1$ \\
+			$\assert{z = 5}$ \\
+			ist gültig.  \\
+			
+			\bigskip
+			$\assert{x = x}$ \\
+			$\kw{while True do } x \gets x + 1 \kw{ od}$ \\
+			$\assert{\W = \F}$ \\
+			ist gültig (Q wird nie erreicht).
+		\end{block}
+	\end{minipage}
 	
 	\pause
 	\begin{block}{Hoare-Kalkül}
@@ -121,6 +141,10 @@
 	\pause
 	Heißt: Vorbedingungen können stärker, Nachbedingungen können schwächer werden.
 
+	\begin{Beispiel}
+		Aus $\{ x = 41\} \ x \gets x + 1\ \{x = 42 \}$ können wir \\
+		$\{ x + y = 42 \aland y = 1 \} \ y \gets x + 1\ \{x \in \R \}$ ableiten.
+	\end{Beispiel}
 \end{frame}
 
 \begin{frame}{HT-S}
