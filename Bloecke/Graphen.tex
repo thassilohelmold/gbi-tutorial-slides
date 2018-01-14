@@ -9,7 +9,7 @@
 \begin{frame}{Ein Graph}
 	
 	\begin{figure}[H]
-		\begin{tikzpicture}[-,>=stealth,baseline=-5mm]
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
 		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=10mm,inner sep=2pt},row sep=15mm,column sep=15mm,ampersand replacement=\&]
 		{
 			|(1)| 1 \& |(3)| 3 \\
@@ -60,19 +60,19 @@
 		Häufig wählt man $V = \Z_k = \{0,1,2,...,k-1\}$\\
 		
 		Da $V$ immer endlich ist, muss auch $E$ endlich sein.\\
-		$E = \emptyset$ ist aber erlaubt!
+		$E = \emptyset$ geht aber!
 	\end{block}
 
 	\pause
 	\begin{Definition}
-		Zwei Knoten $x$ und $y$ in einem Graphen $G$ heißen \textbf{adjazent}, wenn sie durch eine Kante verbunden sind.
+		Zwei Knoten $x$ und $y$ in einem Graphen $G$ heißen \textbf{adjazent}, wenn eine Kante von $x$ nach $y$ zeigt.
 	\end{Definition}
-	Achtung: Im gerichteten Fall ist diese Aussage nicht symmetrisch!
+	\textbf{Achtung}: Im gerichteten Fall ist diese Aussage nicht symmetrisch!
 
 	\pause
 	\begin{Definition}
 		Eine Kante mit identischem Start- und Endpunkt nennt man \textbf{Schlinge}.\\
-		Also $(x,x) \in E$ bzw. $\{x\} \in E$\\
+		Also $(x,x) \in E$ (gerichtet) bzw. $\{x\} \in E$ (ungerichtet).\\
 	\end{Definition}
 \end{frame}
 
@@ -101,14 +101,14 @@
 
 \begin{frame}{Aufgabe: Graphen zeichnen}
 	Zeichnet die Graphen $G_i = (V, E_i)$ mit $V = \Z_4$ und
-	$E_1 = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$\\
-	$E_2 = \{\{0,1\}, \{0,2\}, \{0,3\} \}$\\
+	$E_1 = \set{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)}$\\
+	$E_2 = \set{\{0,1\}, \{0,2\}, \{0,3\} }$\\
 	$E_3 = \emptyset$\\
 	$E_4 = V \times V$\\
-	$E_5 = \{(0,1), (1,2), (1,3)\}$
+	$E_5 = \set{(0,1), (1,2), (1,3)}$
 \end{frame}
 
-\begin{frame}{Lösung: Graphen zeichnen}
+\begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_1 = (V, E_1)$ mit
 	$$V = \Z_4 \qquad E_1 = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$$
 	
@@ -133,7 +133,7 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Lösung: Graphen zeichnen}
+\begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_2 = (V, E_2)$ mit
 	$$V = \Z_4 \qquad E_2 = \{\{0,1\}, \{0,2\}, \{0,3\} \}$$
 	
@@ -153,7 +153,7 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Lösung: Graphen zeichnen}
+\begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_3 = (V, E_3)$ mit
 	$$V = \Z_4 \qquad E_3 = \emptyset$$
 	
@@ -171,7 +171,7 @@
 \end{frame}
 
 \def\bend{8}
-\begin{frame}{Lösung: Graphen zeichnen}
+\begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_4 = (V, E_4)$ mit
 	$$V = \Z_4 \qquad E_4 = V \times V$$
 	
@@ -207,7 +207,7 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Lösung: Graphen zeichnen}
+\begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_5 = (V, E_5)$ mit
 	$$V = \Z_4 \qquad E_5 = \{ (0,1), (1,2), (1,3) \}$$
 	
@@ -228,17 +228,21 @@
 \end{frame}
 
 
+
 \begin{frame}{Teilgraphen}
 	\begin{Definition}
-		Ein \textbf{Teilgraph} $T = (V',E')$ von $G$ ist ein Graph bei dem Knoten- und Kantenmenge Teilmengen des Graphens $G$ sind und deren Kanten nicht aus dem Teilgraph hinausführen. Also (für gerichtete Graphen):
+		Ein \textbf{Teilgraph} $T = (V',E')$ von $G$ ist ein Graph, den man kriegt, wenn man aus $G$ beliebige Knoten und Kanten so wegwirft, dass keine Kante \enquote{in die Luft} zeigt.  Also (für gerichtete Graphen):
+		%Ein \textbf{Teilgraph} $T = (V',E')$ von $G$ ist ein Graph, bei dem Knoten- und Kantenmenge Teilmengen des Graphens $G$ sind und deren Kanten nicht aus dem Teilgraph hinausführen. Also (für gerichtete Graphen):
 		$$V' \subseteq V \qquad E' \subseteq E \cap (V' \times V')$$
 	\end{Definition} \pause
-	Hinweis: Natürlich dürfen wir auch Kanten aus $E'$ \enquote{weglassen}!
+
+	Hinweis: Natürlich dürfen wir in $E'$ auch Kanten aus $E \cap (V' \times V')$ \enquote{weglassen}!
 \end{frame}
 
 \begin{frame}{Teilgraphen: Beispiel}
 	\begin{columns}
 		\column[T]{0.3 \linewidth}
+		
 		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
 		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
 		{
@@ -254,6 +258,9 @@
 		\path (2) edge [loop right] ();
 		\draw (1) -- (3);
 		\end{tikzpicture}
+		\begin{center}
+			Graph $G$
+		\end{center}
 		
 		\pause
 		\column[T]{0.3 \linewidth}
@@ -267,6 +274,9 @@
 		\draw  (1) -- (2);
 		\draw  (0) to [bend left]  (2);
 		\end{tikzpicture}
+		\begin{center}
+			Teilgraph $T_1$ von $G$
+		\end{center}
 		
 		\pause
 		\column[T]{0.3 \linewidth}
@@ -280,34 +290,85 @@
 		\draw  (0) -- (1);
 		\draw  (0) -- (3);
 		\draw (1) -- (3);
-		\end{tikzpicture}
+		\end{tikzpicture} 
+		\begin{center}
+			Teilgraph $T_2$ von $G$
+		\end{center}
 	\end{columns}
 \end{frame}
 
+\begin{frame}{Teilgraphen: Beispiel}
+	\begin{columns}
+		\column[T]{0.3 \linewidth}
+		
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
+		{
+			|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+			\& |(3)| 3 \& \\
+		};
+		\draw  (0) -- (1);
+		\draw  (0) -- (3);
+		\draw  (2)  to [bend left] (3);
+		\draw  (1) -- (2);
+		\draw  (3) to [bend left] (2);
+		\draw  (0) to [bend left]  (2);
+		\path (2) edge [loop right] ();
+		\draw (1) -- (3);
+		\end{tikzpicture}
+		\begin{center}
+			Graph $G$
+		\end{center}
+		
+		\column[T]{0.5 \linewidth}
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
+		{
+			|(2)[white]| 2  \& |(0)| 0 \& |(1)[white]| 1 \\ % (1), (2): stealth nodes
+			\& \& |(3)[white]| 3  \\
+		};
+		\draw[myalertcolor]  (0) -- (1);
+		\draw[myalertcolor]  (0) -- (3);
+		\draw[->, white]  (2) to [bend left] (1); % stealth edge
+		\end{tikzpicture}
+		\begin{center}
+			...ist überhaupt kein Graph \\ \impl auch kein Teilgraph!
+		\end{center}
+	\end{columns}	
+\end{frame}
+
 \begin{frame}{Knotengrade}
-	Im gerichteten Graphen:
+	
 	\begin{Definition}
-		Der \textbf{Eingangsgrad} eines Knoten $k$ ist die Anzahl der Knoten $x$, die mit einer Kante zum Knoten $k$ verbunden sind. Also $$d^-(k) = \vert \{ x \mid (x,k) \in E\} \vert$$
+		In \emph{gerichteten} Graphen:
+		Der \textbf{Eingangsgrad} eines Knoten $k$ ist die Anzahl der Knoten, die auf $k$ zeigen. \\
+		Der \textbf{Ausgangsgrad} eines Knoten $k$ ist die Anzahl der Knoten, die von $k$ wegzeigen.  Also: 
+		\begin{align*}
+			d^-(k) = \abs{\set{ x \Mid (x,k) \in E}} \\
+			d^+(k) = \abs{\set{ x \Mid (k,x) \in E}}
+		\end{align*}
 		\pause
-		Der \textbf{Ausgangsgrad} $d^+$ wird analog definiert.\\
-		Der Grad eines Knotens ist $d = d^+ + d^-$
+		Der \textbf{Grad} eines Knotens $k$ ist $d(k) = d^+(k) + d^-(k)$.
 	\end{Definition}
 
 	\pause
 	\bigskip
-	Im ungerichteten Graphen (bei uns!):\\
-	Knotengrad $d$ ist Anzahl der adjazenten Knoten (ohne den Knoten selbst). Für Schlingen zählen wir 2 hinzu.\\
-	Also tatsächlich \enquote{Anzahl der Berührungen von Linien mit dem Kreis}.
+	In \emph{ungerichteten} Graphen (bei uns!):\\
+	Knotengrad $d(k)$ ist Anzahl der \enquote{Linien}, die $k$ berühren.\\
+	Schlingen zählen also zweifach!
+	%Also tatsächlich \enquote{Anzahl der Berührungen von Linien mit dem Kreis}.
 \end{frame}
 
 \subsection{Pfade und Wege}
 \begin{frame}{Pfade und Wege}
 	\begin{Definition}
 		Sei $G$ ein \emph{gerichteter / ungerichteter} Graph.\\
-		Ein \textbf{Pfad / Weg} ist eine Folge von Knoten, die jeweils über Kanten im Graphen erreichbar sind. Also eine nichtleere Liste $$p = (v_0, v_1, \dots, v_n) \quad \text{mit} \quad (v_i, v_{i+1}) \in E$$
+		Ein \textbf{Pfad / Weg} ist eine Folge von Knoten, die jeweils über Kanten im Graphen erreichbar sind. Also eine \alert{nichtleere} Liste $$p = (v_0, v_1, \dots, v_n) \quad \text{mit} \quad (v_i, v_{i+1}) \in E$$
 	\end{Definition}
 	\pause
-	Die Länge eines Pfades ist die Anzahl der Kanten ($|p| - 1$)
+	Die Länge eines Pfades ist die Anzahl der Kanten \quad $n = \abs{p} - 1$ \; (!). \\
+	\smallskip
+	$w$ heißt \textbf{von $v$ erreichbar}, wenn es einen Pfad von $v$ nach $w$ gibt.
 	\begin{Beispiel}
 		Sei $G = (V, E)$ mit $V = \Z_9, \quad E = V \times V$\\ \pause
 		$p_1 = (7)$ ist ein Pfad der Länge 0.\\
@@ -315,38 +376,39 @@
 	\end{Beispiel}
 \end{frame}
 
-\begin{frame}{Pfade}
+\begin{frame}[t]{Pfade}
 	Sei $G$ ein gerichteter Graph. Ein Pfad $p = (v_0, \dots, v_n)$ heißt
-	\begin{description}
-		\item[geschlossen] \pause wenn $v_0 = v_n$ gilt 
-		\item[Zyklus] \pause wenn er geschlossen ist und Länge $\geq 1$ gilt
-		\item[wiederholungsfrei] \pause Wenn alle Knoten (mit Ausnahme des ersten und letzten) paarweise verschieden sind
-		\item[einfacher Zyklus] \pause wenn er ein wiederholungsfreier Zyklus ist
-	\end{description}
-
-	Azyklischer Graph: Graph ohne Zyklen\\
-	Oftmals auch DAG (Directed Acyclic Graph)
+	\begin{tabular}{>{\itshape}rp{.7\textwidth}}
+		geschlossen & wenn $v_0 = v_n$ gilt  \\
+		Zyklus & wenn er geschlossen ist und Länge $\geq 1$ gilt \\
+		wiederholungsfrei & Wenn alle Knoten paarweise verschieden sind \newline ($v_0 = v_n$ geht aber!) \\
+		einfacher Zyklus &  wenn er ein wiederholungsfreier Zyklus ist  \\
+	\end{tabular}
+	\medskip \\
+	\textbf{Azyklischer} Graph: Graph ohne Zyklen\\
+	\impl Oftmals auch DAG (Directed Acyclic Graph)
 \end{frame}
 
-\begin{frame}{Wege}
-	Sei $G$ ein ungerichteter Graph. Ein Weg $p = (v_0, \dots, v_n)$ heißt
-	\begin{description}
-		\item[geschlossen] \pause wenn $v_0 = v_n$ gilt 
-		\item[Kreis] \pause wenn er geschlossen ist und Länge $\geq 1$ gilt
-		\item[wiederholungsfrei] \pause Wenn alle Knoten (mit Ausnahme des ersten und letzten) paarweise verschieden sind
-		\item[einfacher Kreis] \pause wenn er ein wiederholungsfreier Kreis \emph{mit mindestens 3 verschiedenen Knoten} ist
-	\end{description}
+\begin{frame}[t]{Wege}
+	Sei $G$ ein \alert{un}gerichteter Graph. Ein \alert{Weg} $p = (v_0, \dots, v_n)$ heißt
+	\begin{tabular}{>{\itshape}rp{.7\textwidth}}
+		geschlossen & wenn $v_0 = v_n$ gilt  \\
+		\alert{Kreis} & wenn er geschlossen ist und Länge $\geq 1$ gilt \\
+		wiederholungsfrei & Wenn alle Knoten paarweise verschieden sind \newline ($v_0 = v_n$ geht aber!) \\
+		einfacher \alert{Kreis} &  wenn er ein wiederholungsfreier Kreis \alert{mit mind. 3~versch. Knoten} ist  \\
+	\end{tabular}
+
 \end{frame}
 
 \begin{frame}{Teilpfade}
 	\begin{Definition}
-		Ein Teilpfad eines Pfades entsteht durch Streichen von Knoten am Anfang und Ende des Pfades.
+		Ein \emph{Teilpfad} eines Pfades entsteht durch Streichen von Knoten am Anfang und Ende des Pfades.
 	\end{Definition}
 
 	\pause
 	\begin{block}{Beachte}
-		Mindestens ein Knoten muss übrig bleiben! (Sonst kein gültiger Pfad mehr)\\
-		Es darf nicht aus der Mitte gestrichen werden! (Sonst evtl. kein Pfad mehr, wenn die entsprechenden Kanten nicht im Graphen vorhanden sind)
+		Mindestens einen Knoten übrig lassen! (Sonst kein gültiger Pfad mehr)\\
+		Es darf \textbf{nicht} aus der Mitte gestrichen werden! (Sonst evtl. kein Pfad mehr, wenn die entsprechenden Kanten nicht im Graphen vorhanden sind)
 	\end{block}
 
 	\pause
@@ -365,13 +427,42 @@
 %• Beachte: Knoten dürfen in Pfad mehrfach vorkommen
 %• Beispiel machen, in dem von x nach y unterschiedlich lange Pfade vorkommen
 
+\begin{frame}{Gerichtet $\leftrightsquigarrow$ ungerichtet umwandeln}
+	Einen gerichteten Graphen $G = (V,E)$ kann man in den \textbf{zu $G$ gehörigen ungerichteten Graphen} umwandeln, indem man die Pfeilspitzen weglässt. \\
+	
+	\medskip
+	Andersrum: Aus einer Kante zwei machen und Pfeile in beide Richtungen.
+	
+	%TODO (strenger) Zusammenhang
+	%\bigskip
+	%$G$ gerichtet heißt \textbf{streng zusammenhängend}.....
+\end{frame}
+
+\begin{frame}{Gerichtete Bäume}
+	\begin{Definition}
+		Ein gerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt eine \textbf{Wurzel} $r \in V$, sodass zu jedem Knoten \emph{genau ein Pfad} von $r$ aus existiert. \\
+		\smallskip
+		Diese Wurzel ist eindeutig und hat Eingangsgrad $= 0$.
+		
+	\end{Definition}
+\end{frame}
+
+\begin{frame}{Ungerichtete Bäume}
+	\begin{Definition}
+		Ein ungerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt einen gerichteten Baum, den man zum ungerichteten $T$ umwandeln kann. \\
+		\smallskip
+		Dessen Wurzel ist \textbf{nicht} eindeutig.
+		
+	\end{Definition}
+\end{frame}
+
 \begin{frame}{Isomorphie}
 	Zwei Graphen heißen \textbf{isomorph}, wenn sie \enquote{bis auf eine Umbenennung der Knoten identisch sind}, also die gleiche Struktur besitzen.\\
 	
 	\pause
 	\smallskip
 	\begin{block}{Aufgabe (WS 2010)}
-		Jeweils zwei der sechs Graphen sind isomorph zueinander. Geben Sie die Paare von isomorphen Graphen sowie den zugehörigen Isomorphismus in Tabellenform an.
+		Jeweils zwei der sechs Graphen sind isomorph zueinander. Geben Sie die Paare von isomorphen Graphen sowie den zugehörigen Isomorphismus ($=$ „Umbenennung“) in Tabellenform an.
 		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=0.7]{Graphen/Graph_Iso.pdf}
