@@ -80,18 +80,20 @@
 
 \input{../Bloecke/Graphen2}
 
-\begin{frame}{Rückblick: Graphen}
-	\begin{itemize}[<+->]
-		\item Gerichtete und ungerichtete Graphen
-		\item Knoten, Kanten, Schleifen, Isomorphie
-		\item Pfade, Wege, Zyklen, Kreise
-		\item Bäume
-		\item Adjazenzlisten und Adjazenzmatrizen
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[t]{Wahr oder Falsch?}
-	\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+%TODO nexttut
+\mycomment{
+	\begin{frame}{Rückblick: Graphen}
+		\begin{itemize}[<+->]
+			\item Gerichtete und ungerichtete Graphen
+			\item Knoten, Kanten, Schleifen, Isomorphie
+			\item Pfade, Wege, Zyklen, Kreise
+			\item Bäume
+			\item Adjazenzlisten und Adjazenzmatrizen
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[t]{Wahr oder Falsch?}
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
 		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=5mm,inner sep=2pt},row sep=10mm,column sep=10mm,ampersand replacement=\&]
 		{
 			|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
@@ -105,63 +107,65 @@
 		\draw  (0) to [bend left]  (2);
 		\path (2) edge [loop right] ();
 		\draw (1) -- (3);
-	\end{tikzpicture}
+		\end{tikzpicture}
+		
+		\TrueQuestionE{Dieser Graph ist gerichtet.}{}
+		\FalseQuestionE{$(1,3,2)$ ist ein gültiger Weg in diesem Graph.}{Nein, aber ein gültiger Pfad!}
+		\TrueQuestionE{$(1)$ ist ein gültiger Pfad in diesem Graph.}{}
+		\FalseQuestionE{$()$ ist ein gültiger Pfad in diesem Graph.}{Ein Pfad darf nicht leer sein!}
+	\end{frame}
 	
-	\TrueQuestionE{Dieser Graph ist gerichtet.}{}
-	\FalseQuestionE{$(1,3,2)$ ist ein gültiger Weg in diesem Graph.}{Nein, aber ein gültiger Pfad!}
-	\TrueQuestionE{$(1)$ ist ein gültiger Pfad in diesem Graph.}{}
-	\FalseQuestionE{$()$ ist ein gültiger Pfad in diesem Graph.}{Ein Pfad darf nicht leer sein!}
-\end{frame}
-
-
-\begin{frame}{Wiederholung: Adjazenzmatrix}
-	\begin{Definition}
-		Die \textbf{Adjazenzmatrix} eines Graphen $(V, E)$ mit $n$ Knoten ist die Matrix $A\in \{0,1\}^n\times\{0,1\}^n$ mit $$ A_{ij} = \begin{cases} 0 & (i,j) \notin E \\ 1 & (i,j) \in E \end{cases} $$ 
-	\end{Definition}
-\end{frame}
-
-\begin{frame}{Übung: Adjazenzmatrix}
-	\begin{columns}
-		\column{0.4\linewidth}
-		$$ A = 
-		\begin{pmatrix} 
+	
+	\begin{frame}{Wiederholung: Adjazenzmatrix}
+		\begin{Definition}
+			Die \textbf{Adjazenzmatrix} eines Graphen $(V, E)$ mit $n$ Knoten ist die Matrix $A\in \{0,1\}^n\times\{0,1\}^n$ mit $$ A_{ij} = \begin{cases} 0 & (i,j) \notin E \\ 1 & (i,j) \in E \end{cases} $$ 
+		\end{Definition}
+	\end{frame}
+	
+	\begin{frame}{Übung: Adjazenzmatrix}
+		\begin{columns}
+			\column{0.4\linewidth}
+			$$ A = 
+			\begin{pmatrix} 
 			1 & 1 & 0 & 1 & 0 & 0 \\ 
 			0 & 0 & 0 & 1 & 0 & 0 \\ 
 			0 & 1 & 1 & 1 & 0 & 0 \\ 
 			0 & 0 & 1 & 0 & 0 & 0 \\
 			1 & 0 & 0 & 0 & 0 & 0 \\
 			0 & 0 & 0 & 0 & 0 & 0 \\
-		\end{pmatrix} $$
+			\end{pmatrix} $$
+			
+			\column{0.4\linewidth}
+			\only<4>{
+				\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+				\matrix[matrix of math nodes,nodes={draw,circle,minimum size=6mm,inner sep=2pt},row sep=13mm,column sep=10mm,ampersand replacement=\&]
+				{
+					|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
+					|(4)| 4 \& |(3)| 3 \& |(5)| 5 \\
+				};
+				\draw  (0) -- (1);
+				\draw  (0) -- (3);
+				\draw  (4) -- (0);
+				\draw  (1) -- (3);
+				\draw  (2)  to [bend left] (3);
+				\draw  (2) -- (1);
+				\draw  (3) to [bend left] (2);
+				\path  (2) edge [loop right] ();
+				\path  (0) edge [loop left] ();
+				\end{tikzpicture}
+			}
+		\end{columns}
 		
-		\column{0.4\linewidth}
-		\only<4>{
-			\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
-			\matrix[matrix of math nodes,nodes={draw,circle,minimum size=6mm,inner sep=2pt},row sep=13mm,column sep=10mm,ampersand replacement=\&]
-			{
-				|(0)| 0 \& |(1)| 1 \& |(2)| 2 \\
-				|(4)| 4 \& |(3)| 3 \& |(5)| 5 \\
-			};
-			\draw  (0) -- (1);
-			\draw  (0) -- (3);
-			\draw  (4) -- (0);
-			\draw  (1) -- (3);
-			\draw  (2)  to [bend left] (3);
-			\draw  (2) -- (1);
-			\draw  (3) to [bend left] (2);
-			\path  (2) edge [loop right] ();
-			\path  (0) edge [loop left] ();
-			\end{tikzpicture}
-		}
-	\end{columns}
+		\bigskip
+		Was kann man an der Adjazenzmatrix ablesen?
+		\begin{itemize}[<+->]
+			\item Gerichtet oder ungerichtet?
+			\item Schlingen?
+			\item Zusammenhängend?
+		\end{itemize}
+	\end{frame}
+}
 
-	\bigskip
-	Was kann man an der Adjazenzmatrix ablesen?
-	\begin{itemize}[<+->]
-		\item Gerichtet oder ungerichtet?
-		\item Schlingen?
-		\item Zusammenhängend?
-	\end{itemize}
-\end{frame}
 
 %TODO nexttut
 %\input{../Bloecke/Graphen3Matrix}
