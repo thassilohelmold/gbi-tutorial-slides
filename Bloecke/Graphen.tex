@@ -442,7 +442,9 @@
 	\begin{Definition}
 		Ein gerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt eine \textbf{Wurzel} $r \in V$, sodass zu jedem Knoten \emph{genau ein Pfad} von $r$ aus existiert. \\
 		\smallskip
-		Diese Wurzel ist eindeutig und hat Eingangsgrad $= 0$.
+		Diese Wurzel ist eindeutig und hat Eingangsgrad $= 0$. \\
+		\textbf{Blätter} sind Knoten mit Ausgangsgrad $= 0$. \\
+		\textbf{Innere Knoten} sind Knoten mit Ausgangsgrad $> 0$. 
 		
 	\end{Definition}
 \end{frame}
@@ -460,9 +462,18 @@
 	Zwei Graphen heißen \textbf{isomorph}, wenn sie \enquote{bis auf eine Umbenennung der Knoten identisch sind}, also die gleiche Struktur besitzen.\\
 	
 	\pause
-	\smallskip
+	\medskip
+	
+	Formal: Haben $G_1 = (V_1, E_1), \, G_2 = (V_2, E_2)$. \\
+	$G_1$ \textbf{isomorph} zu $G_2$, wenn es eine Bijektion $f \from V_1 \functionto V_2$ gibt mit \[\forall x,y \in V_1: \quad (x,y) \in E_1 \gdw \tuple{f(x),f(y)} \in E_2. \]
+	
+	$f$ heißt dann auch \emph{(Graph-)Isomorphismus}.
+	
+\end{frame}
+
+\begin{frame}{Aufgabe Graphisomorphie}
 	\begin{block}{Aufgabe (WS 2010)}
-		Jeweils zwei der sechs Graphen sind isomorph zueinander. Geben Sie die Paare von isomorphen Graphen sowie den zugehörigen Isomorphismus ($=$ „Umbenennung“) in Tabellenform an.
+		Jeweils zwei der sechs Graphen sind isomorph zueinander. Geben Sie die Paare von isomorphen Graphen sowie den zugehörigen Isomorphismus ($=$~„Umbenennung“) in Tabellenform an.
 		\begin{figure}[H]
 			\centering
 			\includegraphics[scale=0.7]{Graphen/Graph_Iso.pdf}
@@ -629,17 +640,17 @@ gibt.} \\[2em]
 \begin{frame}{Aufgabe (WS 2009) \stars{4}}
 	Eine Zahl $n$ ist genau dann eine Primzahl, wenn sie eine positive ganze Zahl ist und genau zwei Teiler hat, nämlich 1 und n. Insbesondere ist 1 keine Primzahl. \\
 	Für $n \in \N^+$ sei der Graph $G_n = (V_n , E_n )$ gegeben durch
-	$$V_n =\{m \in \N^+ \ | \ m \text{ teilt } n\}$$
-	$$E_n =\{(k, m) \in V_n \times V_n \ | \ k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl} \}$$
+	$$V_n =\set{m \in \N^+ \Mid m \text{ teilt } n} \quad \text{und}$$
+	$$E_n =\set{(k, m) \in V_n \times V_n \Mid k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl}}.$$
 	\begin{itemize}
 		\item Zeichnen Sie $G_{12}$ , $G_{16}$ und $G_{30}$.
-		\item Zeigen Sie: $$\forall \ n, m \in \N^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m$$.
+		\item Zeigen Sie: $$\forall n, m \in \N^+: n \text{ teilt } m \impl G_n \text{ ist Teilgraph von } G_m.$$
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Lösung}
-	$$V_n =\{m \in \N^+ \ | \ m \text{ teilt } n\}$$
-	$$E_n =\{(k, m) \in V_n \times V_n \ | \ k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl} \}$$
+	$$V_n =\set{m \in \N^+ \Mid m \text{ teilt } n}, $$
+	$$E_n =\set{(k, m) \in V_n \times V_n \Mid k \text{ teilt } m \text{ und } m/k  \text{ ist eine Primzahl}}.$$
 	\textit{Zeichnen Sie $G_{12}$ , $G_{16}$ und $G_{30}$.} \\[1,5em]
 	
 	\visible<2>{
@@ -677,7 +688,7 @@ gibt.} \\[2em]
 \end{frame}	
 
 \begin{frame}{Lösung}
-	\textit{Zeigen Sie: $$\forall \ n, m \in \N^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m$$}\\[2em] \pause
+	\textit{Zeigen Sie: $$\forall n, m \in \N^+: n \text{ teilt } m \implies G_n \text{ ist Teilgraph von } G_m.$$}\\[2em] \pause
 	Gelte also $n$ teilt $m$. Zu zeigen sind zwei Dinge:
 	\begin{itemize}
 		\item $V_n \subseteq V_m$
