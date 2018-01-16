@@ -402,7 +402,7 @@
 
 \begin{frame}{Teilpfade}
 	\begin{Definition}
-		Ein \emph{Teilpfad} eines Pfades entsteht durch Streichen von Knoten am Anfang und Ende des Pfades.
+		Ein \emph{Teilpfad} eines Pfades entsteht durch Streichen von Knoten am Anfang und/oder Ende des Pfades.
 	\end{Definition}
 
 	\pause
@@ -539,11 +539,11 @@
 \begin{frame}{Maximale Kanten}
 	Sei $G$ ein \textbf{ungerichteter} Graph mit $n$ Knoten. Wie viele Kanten kann $G$ maximal haben... \\[0.2in]
 	
-	Wenn Schlingen erlaubt sind? \pause \\ 
-	$n(n+1)/2$  \\[0.3in]
+	\visible<3->{Wenn Schlingen erlaubt sind? \\ }
+	\visible<4->{$\frac{n(n+1)}{2} \qquad ( = \frac{n(n-1)}{2} + n)$ \\[0.3in]}
 	
-	Wenn er schlingenfrei ist? \pause\\ 
-	$n(n-1)/2$
+	Wenn er schlingenfrei ist? \\ 
+	\visible<2->{$\frac{n(n-1)}{2} $\\ Man verbindet jeden Knoten mit den jeweils anderen Knoten, fasst dann jeweils 2 gleiche Kanten zusammen.}
 \end{frame}
 
 \begin{frame}{Aufgabe (WS 2008) \stars{2}}
