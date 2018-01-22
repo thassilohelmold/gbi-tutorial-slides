@@ -28,15 +28,20 @@
 \subsection{Definitionen}
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
-		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch genauso schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n > n_0: \ c f(n) \leq g(n) \leq c'f(n) $$
-		Man schreibt dafür $$f \asymp g$$
+		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch gleich schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n > n_0: \ c \· f(n) \leq g(n) \leq c' \· f(n) $$
+		Man schreibt dafür 
+		\begin{align*}
+			f &\asymp g \\
+			\textbf{oder} \quad f(n) &\asymp g(n) \quad \text{{\small (Ja, das ist auch OK!)}}  
+			% Hashtag: „n^2“ ist ein Term und keine Funktion etc... Man müsse doch [n \mapsto n^2] schreiben... VL erlaubt ersteres aber auch.
+		\end{align*}
 	\end{Definition} \pause
 	Diese Relation ist eine Äquivalenzrelation!
 \end{frame}
 
 \begin{frame}{Landau-Notation I}
 	\begin{Definition}
-		$\Theta(f)$ ist die Menge aller Funktionen $g$, die asymptotisch genauso schnell wachsen wie $f$, also $$\Theta(f)  = \{ g \mid f \asymp g \}$$
+		$\Theta(f)$ ist die Menge aller Funktionen $g$, die asymptotisch genauso schnell wachsen wie $f$, also $$\Theta(f) := \{ g \mid f \asymp g \}$$
 	\end{Definition}
 	
 	\medskip
@@ -49,30 +54,31 @@
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
 		Für zwei Funktionen $f,g: \N_0 \to \R_0^+$ definiert man:
-		$$g \preceq f \qquad \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \leq c f(n)$$
-		$$g \succeq f \qquad \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \geq c f(n)$$
+		$$g \preceq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \leq c \· f(n)$$
+		$$g \succeq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \geq c \· f(n)$$
+		(Schreibe analog auch $g(n) \preceq f(n)$ etc.)
 	\end{Definition} \pause
-	Diese Relationen sind keine Äquivalenzrelation!
+	Diese Relationen sind \textbf{keine} Äquivalenzrelationen!
 \end{frame}
 
 \begin{frame}{Landau-Notation II}
 	\begin{Definition}
-		$\Oh{f}$ ist die Menge aller Funktionen $g$, die asymptotisch höchstens so schnell wachsen wie $f$, also $$\Oh{f}  = \{ g \mid g \preceq f \}$$
-		$\Om{f}$ ist die Menge aller Funktionen $g$, die asymptotisch mindestens so schnell wachsen wie $f$, also $$\Om{f}  = \{ g \mid g \succeq f \}$$
+		$\Oh{f}$ ist die Menge aller Funktionen $g$, die asymptotisch höchstens so schnell wachsen wie $f$, also $$\Oh{f} := \{ g \mid g \preceq f \}$$
+		$\Om{f}$ ist die Menge aller Funktionen $g$, die asymptotisch mindestens so schnell wachsen wie $f$, also $$\Om{f} := \{ g \mid g \succeq f \}$$
 	\end{Definition} \pause
-	$O$ ist eine Abschätzung nach oben. $\Omega$ ist eine Abschätzung nach unten.
+	\impl $O$ ist eine Abschätzung nach oben. $\Omega$ ist eine Abschätzung nach unten.
 \end{frame}
 
 
-\begin{frame}{Schreibweise}
-	Manchmal (häufig) sieht man auch das, \textbf{bitte NICHT VERWENDEN}:
-	$$f = \Theta(g) \qquad h = \O(n^3) \qquad k = \Omega(f + g)$$
+\begin{frame}{Eine katastrophale Schreibweise}
+	Manchmal (häufig) sieht man auch das, \textbf{NICHT VERWENDEN}:
+	$$f = \Theta(g) \qquad h = \Oh{n^3} \qquad k = \Omega(f + g)$$
 	\pause
 	Dabei ist das $=$ immer als $\in$ zu verstehen!
 \end{frame}
 
 \begin{frame}{}
-	Auzug aus:
+	Auszug aus:
 	Übung 11 GBI, WS 15/16
 \end{frame}
 
@@ -123,6 +129,17 @@
 \setbeamercolor{background canvas}{bg=}
 \includepdf[pages=15]{U11.pdf}
 
+\begin{frame}{Beispiel 2}
+	\textbf{Behauptung:} \quad $ [n \mapsto \sin(n) + 2] \elem \Th{n \mapsto 1} $ \\ \medskip \pause
+	\textbf{Beweis:} \quad Wähle $c := 1, \, c' := 3, \, n_0 := 0$.  \quad Dann gilt $\forall n \geq n_0$: \\
+	\begin{align*}
+				 c \· 1 = 1 &\leq \sin(n) + 2 \leq 3 = c' \· 1 \\
+		\text{\Gdw} \qquad  -1 &\leq \sin(n) \leq 1. \qed
+	\end{align*}
+	\pause
+	\Impl Der Sinus ist also „ungefähr“ konstant\only<handout>{ (wenn man seine Brille absetzt \smiley)}.
+\end{frame}
+
 % TODO: Das ist ein unnötig kompliziert gelöstes schlechtes Trivialbeispiel, an dem man auch nicht wirklich etwas sieht.
 % Also erst einmal weg damit, bis etwas besseres da ist...
 
@@ -144,7 +161,7 @@
 %\end{frame}
 
 \begin{frame}{Logarithmen}
-	\only<handout:0>{Des Informatikers liebstes Mathematik-Werkzeug...\\}
+	\only<handout:0>{Informatiker LIEBEN Logarithmen...\\}
 	\begin{block}{Einige Rechenregeln}
 		\begin{align*}
 			a^{\log_a n} &= n\\
@@ -172,18 +189,23 @@
 
 \begin{frame}{Logarithmen}
 	Es gilt $$n = a^{\log_a n}$$ \pause
-	Daraus ergibt sich: $$ \log_b n = \log_b a^{\log_a n} = \log_a n \; \cdot \log_b a $$ \pause 
-	Setze $c = c' = \log_b a$, dann ist $$c \log_a n \leq \log_b n \leq c' \log_a n$$
+	Daraus ergibt sich: $$ \log_b n = \log_b \left(a^{\log_a n}\right) = \log_a n \; \cdot \log_b a $$ \pause 
+	Setze $c = c' = \log_b a$, dann ist $$c \· \log_a n \leq \log_b n \leq c' \· \log_a n.$$
 \end{frame}
 
 \begin{frame}{Rechenregeln}
 	Einige Rechenregeln im $O$-Kalkül
 	\begin{itemize}[<+->]
 		\item Für $a > 0$ ist $a \cdot f \in \Th{f}$ 
+		\item Für Konstanten $c, d \geq 0$ gilt: \\ 
+			\quad $f(n) \in \Oh{g(n)} \Impl f(n) + c \in \Oh{g(n) + d}$ \\
+			\quad $f(n) \in \Om{g(n)} \Impl f(n) + c \in \Om{g(n) + d}$ \\
 		\item Für $0 < a < b$ ist $n^a \preceq n^b$
-		\item Für $a,b > 1$ ist $n^a \preceq b^n$
-		\item Für Polynome $f,g$ gilt: $$grad \ f = grad \ g \iff f \asymp g $$
-		\item Für $a,b > 0$ gilt $\log_a(n) \in \Theta(\log_b n)$ 
+		\item Für $a,b > 1$ ist $n^a \preceq b^n$ \qquad {\small (Exponentialfktnen. wachsen stärker als Polynome)}
+		\item Für Polynome $f,g$ gilt: \\
+			\quad $\mathop{\text{grad}} f = \mathop{\text{grad}} g \iff f \asymp g $
+		\item Für $a,b > 0$ gilt $\log_a(n) \in \Theta(\log_b n)$
+		
 	\end{itemize}
 \end{frame}
 

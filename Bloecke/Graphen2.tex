@@ -62,7 +62,7 @@
 
 \begin{frame}{Adjazenzmatrix}
 	\begin{Definition}
-		Die \textbf{Adjazenzmatrix} eines Graphen $(V, E)$ mit $n$ Knoten ist die Matrix $A\in \{0,1\}^n\times\{0,1\}^n$ mit $$ A_{ij} = \begin{cases} 0 & (i,j) \notin E \\ 1 & (i,j) \in E \end{cases} $$ 
+		Die \textbf{Adjazenzmatrix} eines Graphen $(V, E)$ mit $n$ Knoten ist die Matrix $A\in \{0,1\}^{n\times n}$ mit $$ A_{ij} = \begin{cases} 0 & (i,j) \notin E \\ 1 & (i,j) \in E \end{cases} $$ 
 	\end{Definition}
 
 	\medskip
@@ -104,7 +104,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{Vergleich der Darstellungen}
+\begin{frame}{Exkurs: Vergleich der Darstellungen}
 	\begin{itemize}[<+->]
 		\item Adjazenzliste: Speicherplatz abhängig von Kanten $(m)$\\
 		Besser bei dünn besetzten Graphen. 
@@ -114,7 +114,7 @@
 \end{frame}
 
 
-\begin{frame}{Vergleich der Darstellungen}
+\begin{frame}{Exkurs: Vergleich der Darstellungen}
 	\begin{itemize}[<+->]
 		\item Adjazenzliste: Nachbarn ermitteln in $O(1)$\\
 		Ermitteln ob $(i,j)$ adjazent sind in $O(n)$

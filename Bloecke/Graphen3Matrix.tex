@@ -1,7 +1,7 @@
 \section{Wegematrix}
 
 \begin{frame}{Potenzen einer Adjazenzmatrix}
-	Bestimmen Sie die Matrix $A^2$ des folgenden Graphen, wobei $A$ die Adjazenzmatrix bezeichne.
+	Bestimmt die Matrix $A^2$ des folgenden Graphen, wobei $A$ die Adjazenzmatrix bezeichne.
 	\begin{figure}[H]
 		\centering 
 		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
@@ -21,8 +21,8 @@
 	\end{pmatrix} \qquad \pause A^2 = \begin{pmatrix}
 	0 & 0 & 1 & 0 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 
 	\end{pmatrix} $$ \pause
-	$(A^2)_{ij}$ gibt also Auskunft, ob es einen Weg der Länge 2 von $i$ nach $j$ gibt.\\ \pause 
-	$(A^n)_{ij}$ allgemein gibt Auskunft, ob es einen Weg der Länge $n$ von $i$ nach $j$ gibt. 
+	$(A^2)_{ij}$ gibt also Auskunft, wieviele Pfade der Länge 2 es von $i$ nach $j$ gibt.\\ \pause 
+	$(A^n)_{ij}$ allgemein gibt Auskunft, wieviele Pfade der Länge $n$ es von $i$ nach $j$ gibt. 
 \end{frame}
 
 \begin{frame}{Wegematrix}
@@ -31,7 +31,9 @@
 	\end{Definition}
 
 	\pause
-	Dabei ist $E^* = \bigcup_{k=0}^{\infty} E^k$ die \textbf{Erreichbarkeitsrelation}, das ist die reflexiv-transitive Hülle der Kantenrelation $E$.\\ \pause
+	Dabei ist $E^* = \bigcup_{k=0}^{\infty} E^k$ die \textbf{Erreichbarkeitsrelation}, das ist die reflexiv-transitive Hülle der Kantenrelation $E$.\\
+	Es ist $(i,j) \elem E^* \Gdw \text{von $i$ aus ist $j$ \textbf{erreichbar}}.$ \\
+	\pause
 	Die Wegematrix lässt sich daher folgendermaßen berechnen: 
 	$$ W = \sgn\left(\summe{k=0}{n} A^k \right) $$
 	
@@ -78,6 +80,23 @@
 \end{frame}
 
 \section{Berechnungsmethoden}
+
+\begin{frame}{Wegematrix-Algorithmus}
+	Wie rechnet man das aus? \\
+	Naiv:
+	\begin{align*}
+	&W \leftarrow 0 \\ 
+	&\mathbf{for}\ i \gets 0\ \mathbf{to}\ n-1\ \mathbf{do} & \text{// $n$-mal...}  \\
+	&\qquad M \gets I \qqquad (I = A^0) \\
+	&\qquad\mathbf{for}\ j \gets 1\ \mathbf{to}\ i\ \mathbf{do} & \text{// $i$-mal...} \\
+	&\qquad\qquad M \gets M \· A & \text{// $n^2 \· (n + n-1)$ Operationen} \\
+	&\qquad\mathbf{od} \\
+	&\qquad W \gets W + M & \text{// $n^2$ Operationen} \\
+	&\mathbf{od} \\
+	&W \gets \sgn(W) &  \text{// $n^2$ Operationen} \\
+	\end{align*}
+\end{frame}
+
 \begin{frame}{Laufzeit der Berechnung}
 	\begin{itemize}[<+->]
 		\item Jede Matrix hat $n^2$ Einträge, also ergibt sich für die Summe von $n$ Matrizen $n\cdot n^2=n^3$ Summenoperationen 
@@ -94,22 +113,33 @@
 	Can we do better? \pause
 	\bigskip
 	
-	Betrachten wir nun $ F = (Id \cup E) $ für eine Kantenmenge $E$. \\  \pause 
+	Betrachten wir nun die Relation $ F = (Id \cup E) $ für eine Kantenmenge $E$. \\  \pause 
 	So folgt $$ F^2 = (Id \cup E) \circ (Id \cup E) = Id \cup E \cup E^2 $$ \pause
 	Analog : $$ F^4 = (F^2)^2 = (Id\cup E \cup E^2) \circ (Id\cup E\cup E^2) = Id \cup E \cup E^2 \cup E^3 \cup E^4 $$ \pause 
-	Also folgt $$ F^m = \bigcup\limits_{i=0}^m E^i$$ \\
-	Setze $m = \lceil \log_2 n \rceil $
+	Also folgt $$ F^{2^m} = \bigcup\limits_{i=0}^{2^m} E^i$$ \\
+	Setze $m := \lceil \log_2 n \rceil $.
+\end{frame}
+
+\begin{frame}{Optimierungen}
+	Can we do better? – Matrixversion \pause
+	\bigskip
+	
+	Betrachten wir nun $ F = (I + A) $ für eine Adjazenzmatrix $A$. \\  \pause 
+	So folgt $$ F^2 = (I + A) \· (I + A) = I + A + A^2 $$ \pause
+	Analog : $$ F^4 = (F^2)^2 = (I + A + A^2) \· (I + A + A^2) = I + A + A^2 + A^3 + A^4 $$ \pause 
+	Also folgt $$ F^{2^m} = \sum\limits_{i=0}^{2^m} A^i$$ \\
+	Setze $m := \lceil \log_2 n \rceil $. \pause \impl $W = \sgn\big(F^{2^m}\big)$.
 \end{frame}
 
 \begin{frame}
 	Der Algorithmus sieht nun also folgendermaßen aus 
 	\begin{align*}
-		&W \leftarrow A + I & // n^2 \\ 
+		&F \leftarrow A + I & // n^2 \\ 
 		&m \leftarrow \lceil \log_2 n \rceil \\
-		&\mathbf{for}\ i \leftarrow 1\ \mathbf{to} \ m \ \mathbf{do} & // \lceil \log_2 n \rceil  \\
-		&\hspace*{2em} W \leftarrow W \cdot W & // (n+n-1)\cdot n \\
+		&\mathbf{for}\ i \leftarrow 1\ \mathbf{to} \ m \ \mathbf{do} & // \lceil \log_2 n \rceil\text{-mal} \\
+		&\hspace*{2em} F \leftarrow F \cdot F & // (n+n-1)\cdot n \\
 		&\mathbf{od}\\
-		& W\leftarrow \sgn(W) 	& // n^2
+		& W\leftarrow \sgn(F) 	& // n^2
 	\end{align*} \pause
 	Wir brauchen also nur noch $n^2 + \lceil \log_2 n \rceil \left( (2n-1)\cdot n^2 \right) +n^2 = \lceil \log_2 n \rceil \cdot 2n^3 + \dots $ Rechenoperationen  \\
 \end{frame}
@@ -127,13 +157,15 @@
 		\item (Starke) Zusammenhangskomponenten
 		\item Minimale Tour (TSP = Travelling Salesman Problem)
 	\end{itemize}
-	
+	\thasse{
 	\pause
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.5]{xkcd/tsp_399}
 		\caption{ \texttt{\url{http://www.xkcd.com/399}} }
-	\end{figure} 
+	\end{figure} 	
+	}
+	
 
 \end{frame}
 
@@ -213,7 +245,7 @@
 		\path (2) edge [loop left] ();
 		\end{tikzpicture}
 	\end{figure}
-	Geben Sie die Adjazenzliste, die Adjazenzmatrix und die Wegematrix zu diesem Graphen an.
+	Gebt die Adjazenzliste, die Adjazenzmatrix und die Wegematrix zu diesem Graphen an.
 \end{frame}
 
 \begin{frame}
