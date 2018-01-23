@@ -137,7 +137,7 @@
 		&F \leftarrow A + I & // n^2 \\ 
 		&m \leftarrow \lceil \log_2 n \rceil \\
 		&\mathbf{for}\ i \leftarrow 1\ \mathbf{to} \ m \ \mathbf{do} & // \lceil \log_2 n \rceil\text{-mal} \\
-		&\hspace*{2em} F \leftarrow F \cdot F & // (n+n-1)\cdot n \\
+		&\hspace*{2em} F \leftarrow F \cdot F & // (n+n-1)\cdot n^2 \\
 		&\mathbf{od}\\
 		& W\leftarrow \sgn(F) 	& // n^2
 	\end{align*} \pause
@@ -198,6 +198,7 @@
 		\item Minimale Tour (TSP = Travelling Salesman Problem)
 	\end{itemize}
 	\thasse{
+	\pause
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.5]{xkcd/tsp_399}
