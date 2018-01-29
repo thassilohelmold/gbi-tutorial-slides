@@ -18,8 +18,17 @@
 \input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{13}
+
+\begin{frame}{Schwarzes Brett}
+	\begin{itemize}
+		\item Anmeldung \textbf{Klausur} $+$ \textbf{Übungsschein} nicht vergessen!
+		\item \textbf{Bonusblatt} kommt diese Woche Mittwoch raus, Bearbeitungszeit: etwa \textbf{eine} Woche
+	\end{itemize}
+\end{frame}
 
 \framePrevEpisode
 
@@ -37,33 +46,33 @@
 	\includegraphics[scale=0.5]{laufzeit/polyVsExp}
 \end{frame}
 
-\begin{frame}{Wahr oder Falsch?}
-	\TrueQuestionE{$x^4 \in \Oh{{(x^3)}^3}$}{ $\qquad {(x^3)}^3 = x^9$}
+\begin{frame}[t]{Wahr oder Falsch?}
+	\TrueQuestionE{$x^4 \in \Oh{{(x^3)}^3}$}{ $ {(x^3)}^3 = x^9$}
 	\FalseQuestionE{$\sqrt{n} \in \Om{2^n}$}{}
-	\TrueQuestionE{$log_{5000} n \in \Th{\log_2{n^4}}$}{ $\qquad \log_2{n^4} = 4 \cdot \log_2{n}$}
-	\FalseQuestionE{$O(f_1) + f_2 = O(f_1 + f_2)$}{Aber: $O(f_1) + O(f_2) = O(f_1 + f_2)$}
+	\TrueQuestionE{$log_{5000} n \in \Th{\log_2{n^4}}$}{ $ \log_2{n^4} = 4 \cdot \log_2{n}$}
+	\FalseQuestionE{$O(f_1) + f_2 = O(f_1 + f_2)$}{Z.~B.: \\ $\Oh{n} + 4 = \set{f(n) + 4 \Mid f(n) \in \Oh{n}} \neq \set{f(n) \Mid f(n) \in \Oh{n}} = \Oh{n+4}$. \\ \textbf{Aber} es gilt: $O(f_1) + O(f_2) = O(f_1 + f_2)$}
 \end{frame}
 
-\begin{frame}{Wahr oder Falsch?}
-	\FalseQuestion{Für zwei Funktionen $f, g$ gilt immer $f \preceq g$ oder $f \succeq g$}
+\begin{frame}[t]{Wahr oder Falsch?}
+	\FalseQuestion{Für zwei Funktionen $f, g$ gilt immer $f \preceq g$ oder $f \succeq g$.}
 	\medskip
 	
 	\visible<2>{
-		Es gibt unvergleichbare Funktionen.
+		Es gibt unvergleichbare Funktionen! Beispiel:
 		\begin{align*}
-		f &=
+		f(n) &=
 		\begin{cases}
-		1 & \text{ falls $n$ gerade} \\
-		n & \text{ falls $n$ ungerade} \\
+		1, & \text{ falls $n$ gerade} \\
+		n, & \text{ falls $n$ ungerade} \\
 		\end{cases} \\
-		g &=
+		g(n) &=
 		\begin{cases}
-		n & \text{ falls $n$ gerade} \\
-		1 & \text{ falls $n$ ungerade} \\
+		n, & \text{ falls $n$ gerade} \\
+		1, & \text{ falls $n$ ungerade} \\
 		\end{cases} \\
 		\end{align*}
-		Es gilt \emph{nicht} $g\preceq f$, es gilt \emph{nicht} $f\preceq
-		g$ und es gilt erst recht \emph{nicht} $f\asymp g$.
+		Es gilt \textbf{nicht} $g\preceq f$, es gilt \textbf{nicht} $f\preceq
+		g$ und es gilt \textbf{erst recht nicht} $f\asymp g$.
 	}
 \end{frame}
 
@@ -91,57 +100,99 @@
 
 % ---------
 
-\begin{frame}{Rückblick: Laufzeitbetrachtungen}
-	\begin{itemize}[<+->]
-		\item Das Master-Theorem
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Rückblick: Endliche Automaten}
-	\begin{itemize}[<+->]
-		\item Mealy- und Moore-Automaten
-		\item Formale Definition und graphische Repräsentation
-		\item $f, f_*, f_{**}$
-		\item $g, g_*, g_{**}$
-		\item Endliche Akzeptoren
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Wahr oder Falsch?}
-	\begin{itemize}
-		\FalseQuestionE{Das (komplizierte) Master-Theorem kann man immer anwenden.}{ Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
-		\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automat gewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
-		\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{0, 1\}$}{}
-		\FalseQuestionE{Mit endlichen Automaten kann jede beliebige Sprache erkannt werden}{Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}	\end{itemize}
-\end{frame}
 
 
 \begin{frame}{Übung: Akzeptoren}
-	Geben Sie graphisch einen endlichen Akzeptor über dem Alphabet $A=\{a,b\}$ an, der folgende Sprache akzeptiert:
+	Gebt graphisch einen endlichen Akzeptor über dem Alphabet $X=\{\word a,\word b\}$ an, der folgende Sprache akzeptiert:
 	\begin{itemize}
-		\item Die leere Menge
-		\item Die Menge des leeren Worts
-		\item Die Menge aller Worte, die genau ein b enthalten.
-		\item Die Menge aller Worte, bei denen die Anzahl der $b$ durch 3 teilbar ist.
+		\item \begin{tabular}{lr}
+			Die leere Menge \qquad \mbox{} & Die Menge des leeren Wortes \\
+			\visible<2-|handout:2>{
+				\scalebox{.8}{
+					\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,semithick,node distance=2cm,initial text={}]
+					\tikzstyle{every state}=[]
+					
+					\node[initial,state] (M)                    {$m$};
+					
+					\path (M) edge [loop right] node {\word a, \word b} (M);
+					\end{tikzpicture}
+				}
+			}
+			&
+			\visible<3-|handout:2>{
+				\scalebox{.8}{
+					\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
+					semithick,initial text={}]
+					\tikzstyle{every state}=[]
+					
+					\node[initial,state,accepting] (A)                    {$a$};
+					\node[state]		 		   (M)  [right of=A]		{$m$};
+					
+					\path
+					(A) edge 			  node {\word a, \word b} (M) 
+					(M) edge [loop right] node {\word a, \word b} (M);
+					\end{tikzpicture}
+				}}
+		\end{tabular}  
+		\item Die Menge aller Worte, die genau ein \word b enthalten. \\
+			  \visible<4-|handout:2>{
+			  	\scalebox{.8}{
+			  	\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
+			  	semithick,initial text={}]
+			  	\tikzstyle{every state}=[]
+			  	
+			  	\node[initial,state] (A)                    {$a$};
+			  	\node[state,accepting] (B)  [right of=A]     {$b$};
+			  	\node[state]		 (M)  [right of=B]		{$m$};
+			  	
+			  	\path
+			  	(A) edge [loop above]  node {\word a} (A) 
+			  	(A) edge 			  node {\word b} (B) 
+			  	(B) edge [loop above]  node {\word a} (B) 
+			  	(B) edge 			  node {\word b} (M) 
+			  	(M) edge [loop above] node {\word a, \word b} (M);
+			  	\end{tikzpicture}
+			  }}
+		\item Die Menge aller Worte, bei denen die Anzahl der $\word b$ durch 3 teilbar ist. \\
+			  \visible<5-|handout:2>{
+			  	\scalebox{.8}{
+			  	\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
+			  	semithick,initial text={}]
+			  	\tikzstyle{every state}=[]
+			  	
+			  	\node[initial,state,accepting] (0)                    {$0$};
+			  	\node[state] (1)  [right of=A]     {$1$};
+			  	\node[state]		 (2)  [right of=B]		{$2$};
+			  	
+			  	\path
+			  	(0) edge [loop above]  node {\word a} (0) 
+			  	(0) edge 			  node {\word b} (1) 
+			  	(1) edge [loop above]  node {\word a} (1) 
+			  	(1) edge 			  node {\word b} (2) 
+			  	(2) edge [loop right] node {\word a} (2)
+			  	(2) edge [bend left]  node {\word b} (0) ;
+			  	\end{tikzpicture}
+			  }}
 	\end{itemize}
 \end{frame}
 
 % WiSe 10/11 Aufgabe 6 c 
 \begin{frame}{Übung: Akzeptoren}
-	Die Sprache $L\subseteq \{a,b\}^\ast $ sei definiert als die Menge aller Wörter $w$, die folgende Bedingungen erfüllen 
+	Die Sprache $L\subseteq \{\word a,\word b\}^\ast $ sei definiert als die Menge aller Wörter $w$, die folgende Bedingungen erfüllen:
 	\begin{align*}
-		N_b(w) &> N_a(w)\\ 
-		\forall v_1,v_2 \in \{a,b\}^\ast : w &\neq v_1 bb v_2 
+		N_{\word b}(w) &> N_{\word a}(w)\\ 
+		\forall v_1,v_2 \in \{\word a,\word b\}^\ast : \qquad w &\neq v_1 \word{bb} v_2 
 	\end{align*}
 	
-	Geben Sie einen endlichen Akzeptor an, der $L$ erkennt. \\
+	Gebt einen endlichen Akzeptor an, der $L$ erkennt. \\
 	
 	\bigskip
 	\pause
 	\begin{block}{Tipps}
 		\begin{itemize}[<+->]
-			\item Die 2. Bedingung bedeutet: Das Wort darf nirgends zwei b hintereinander enthalten.
-			\item Was passiert, wenn das Wort mit einem a startet?\\
+			\item Die zweite Bedingung bedeutet: Das Wort darf nirgends zwei \word b hintereinander enthalten.
+			\item Was passiert, wenn das Wort mit einem \word a beginnt?\\
 				  Kann das Wort noch akzeptiert werden?
 		\end{itemize}
 	\end{block}
@@ -162,20 +213,24 @@
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\item Reguläre Ausdrücke
-			\item Rechtslineare Grammatiken
+			\item Wie man rekursive Laufzeiten mastert
+			\item Endlich: Automaten!
+			\item ...und wie man damit Wörter akzeptiert/ablehnt
+			\item Nicht immer so vulgär: Reguläre Ausdrücke
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Turingmaschinen - Mächtiger wird es nicht mehr!
+			\item Rechtslineare Grammatiken
+			\item Turingmaschinen
+			%\item Turingmaschinen -- mächtiger wird es nicht mehr!
 		\end{itemize}
 	\end{block}
 \end{frame}
 
 \lastframe{0.6}{30}{xkcd/automation_1319.png}{http://www.xkcd.com/1319}
-\xkcdframe{0.5}{30}{xkcd/houston_1438.png}{http://www.xkcd.com/1438}{Oh, hi mom. No, nothing important, just work.}
+%\xkcdframe{0.5}{30}{xkcd/houston_1438.png}{http://www.xkcd.com/1438}{Oh, hi mom. No, nothing important, just work.}
 
 \slideThanks
 

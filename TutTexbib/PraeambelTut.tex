@@ -9,7 +9,7 @@
 \usepackage[utf8]{inputenc}
 
 \input{../TutTexbib/gbi-macros}
-\usepackage{../TutTexbib/thwregex}
+\usepackage[blue]{../TutTexbib/thwregex}
 \usepackage{environ}
 \usepackage{bm}
 \usepackage{calc}
@@ -162,7 +162,7 @@
 \def\?>{\ensuremath{\rightsquigarrow}}  % Fuck you, Latex
 
 \newcommand{\tight}[1]{{\renewcommand{\arraystretch}{0.76} #1}}
-\newcommand{\stackedtight}[1]{{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix}} }
+\newcommand{\stackedtight}[1]{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix} }
 \newcommand{\stacked}[1]{\begin{matrix} #1 \end{matrix} }
 \newcommand{\casesl}[1]{\delimitershortfall=0pt  \left\lbrace\hspace{-.3\baselineskip}\begin{array}{ll} #1 \end{array}\right.}
 \newcommand{\casesr}[1]{\delimitershortfall=0pt  \left.\begin{array}{ll} #1 \end{array}\hspace{-.3\baselineskip}\right\rbrace}
@@ -247,6 +247,12 @@
 \def\newframetitleoff{\let\frametitle\oldframetitle}
 \def\newframetitleon{\let\frametitle\newframetitle}
 % --- \frameheight constant end ---
+
+\newcommand{\fakeframetitle}[1]{%
+	\vspace{-2.05\baselineskip}%
+	{\Large \textbf{#1}} \\%
+	\smallskip
+}
 
 
 

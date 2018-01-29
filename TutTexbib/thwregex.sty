@@ -34,12 +34,12 @@
 %\RequirePackage{foo}
 %=== main code ===============================================================
 \ifthenelse{\boolean{blueflag}}%
-  {\gdef\@regexcolor{darkblue}}%
+  {\gdef\@regexcolor{blue}}% MODIFIED by DJ to blue, originally: {\gdef\@regexcolor{darkblue}}%
   {\gdef\@regexcolor{black}}%
 \def\@rxstar{%
   \ifthenelse{\boolean{exponentflag}}%
   {\raisebox{1ex}{{\ttfamily\scriptsize *}}}%
-  {\hbox{\ttfamily $*$}}%
+  {\hbox{\ttfamily *}}%
 }
 \def\@rxplus{%
   \ifthenelse{\boolean{exponentflag}}%

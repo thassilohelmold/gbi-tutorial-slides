@@ -20,6 +20,31 @@
 
 \framePrevEpisode
 
+\begin{frame}{Rückblick: Laufzeitbetrachtungen}
+	\begin{itemize}[<+->]
+		\item Das Master-Theorem
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Rückblick: Endliche Automaten}
+	\begin{itemize}[<+->]
+		\item Mealy- und Moore-Automaten
+		\item Formale Definition und graphische Repräsentation
+		\item $f, f_*, f_{**}$
+		\item $g, g_*, g_{**}$
+		\item Endliche Akzeptoren
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Wahr oder Falsch?}
+	\FalseQuestionE{Das (komplizierte) Master-Theorem kann man immer anwenden.}{ Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
+	\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automat gewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
+	\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{0, 1\}$.}{}
+	\FalseQuestionE{Mit endlichen Automaten kann jede beliebige Sprache erkannt \\ werden.}{Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}	
+\end{frame}
+
+% TODO ---------------------- oben und unten migrieren... ------------ 
+
 \begin{frame}{Rückblick: Reguläre Sprachen}
 	\begin{itemize}[<+->]
 		\item Endliche Akzeptoren
@@ -43,10 +68,15 @@
 % Mal was ganz anderes: Monkey Island 1, Unterwasserszene
 % Mal wieder keine Zeit für die Vorbereitung, aber dafür gibt's Kuchen...
 
+%WTF???
+\mycomment{
 \begin{frame}
 	\centering \Large
 	Dr. Meta ist zurück!
-\end{frame}
+\end{frame}	
+}
+
+\input{../Bloecke/RechtslineareGrammatiken}
 
 \input{../Bloecke/Turing}
 

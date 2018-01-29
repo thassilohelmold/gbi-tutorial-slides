@@ -27,7 +27,7 @@
 \subsection{Definitionen}
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
-		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch gleich schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n > n_0: \ c \· f(n) \leq g(n) \leq c' \· f(n) $$
+		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch gleich schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n \geq n_0: \ c \· f(n) \leq g(n) \leq c' \· f(n) $$
 		Man schreibt dafür 
 		\begin{align*}
 			f &\asymp g \\
@@ -49,10 +49,10 @@
 \end{frame}
 
 \begin{frame}{Beispiel}
-	$$f(n) = 2 \cdot n^2 + n \qquad g(n) = n^2$$
-	
+	$$f(n) := 2 \cdot n^2 + n \qqquad g(n) := n^2$$
+	\medskip
 	Zeige: $ f \in \Th{g} $.\\ \pause
-	Wir suchen $n_0, c, c'$ mit $\forall n > n_0: \ c \· g(n) \leq f(n) \leq c' \· g(n) $ \pause
+	Wir suchen $n_0, c, c'$ mit $\forall n \geq n_0: \ c \· g(n) \leq f(n) \leq c' \· g(n) $ \pause
 	\medskip
 	
 	Sei $n \geq 1$, so gilt:\\\pause
@@ -60,7 +60,7 @@
 	$f(n) = 2 \cdot n^2 + n \geq 2 \cdot n^2$
 	\medskip
 	
-	Mit $c = 2$, $c' = 3$, $n = 1$ ist die Bedingung erfüllt. \pause
+	Mit $c := 2$, \, $c' := 3$,\, $n_0 := 1$ ist die Bedingung erfüllt. \qed \pause
 	
 	\begin{block}{Quiz}
 		\TrueQuestion{$n^{100} + 10^9 n^{99} \in \Th{n^{100}}$}
@@ -82,20 +82,22 @@
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
 		Für zwei Funktionen $f,g: \N_0 \to \R_0^+$ definiert man:
-		$$g \preceq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \leq c \· f(n)$$
-		$$g \succeq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n > n_0: \ g(n) \geq c \· f(n)$$
+		$$g \preceq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n \geq n_0: \ g(n) \leq c \· f(n)$$
+		$$g \succeq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n \geq n_0: \ g(n) \geq c \· f(n)$$
 		(Schreibe analog auch $g(n) \preceq f(n)$ etc.)
 	\end{Definition} \pause
 	Diese Relationen sind \textbf{keine} Äquivalenzrelationen!
 \end{frame}
 
-\begin{frame}{Landau-Notation II}
+\begin{frame}[t]{} % erased title due to \includepdf madness... I guess it's not that important anyway. Tags: fake title faketitle include pdf frametitle
+	\fakeframetitle{Landau-Notation II}
 	\begin{Definition}
 		$\Oh{f}$ ist die Menge aller Funktionen $g$, die asymptotisch höchstens so schnell wachsen wie $f$, also $$\Oh{f} := \{ g \mid g \preceq f \}$$
 		$\Om{f}$ ist die Menge aller Funktionen $g$, die asymptotisch mindestens so schnell wachsen wie $f$, also $$\Om{f} := \{ g \mid g \succeq f \}$$
 	\end{Definition} \pause
 	\impl $O$ ist eine Abschätzung nach oben. $\Omega$ ist eine Abschätzung nach unten.
 \end{frame}
+
 
 \setbeamercolor{background canvas}{bg=}
 \includepdf[pages=15]{U11.pdf}
@@ -108,10 +110,10 @@
 \end{frame}
 
 \begin{frame}{}
-	Ordnet folgende Funktionen nach asymptotischen Wachstum an:
+	Ordnet folgende Funktionen nach asymptotischem Wachstum an:
 	\begin{itemize}
 		\item Identität $f(x) = x$
-		\item Konstante Funktion $f(x) =c$
+		\item Konstante Funktion $f(x) = c$
 		\item Wurzel
 		\item Exponentialfunktion
 		\item Logarithmus
@@ -200,7 +202,7 @@
 	\end{block}
 \end{frame}
 
-\begin{frame}{Rechenregeln}
+\begin{frame}{Rechenregeln (I)}
 	Einige Rechenregeln im $O$-Kalkül
 	\begin{itemize}[<+->]
 		\item Für $a > 0$ ist $a \cdot f \in \Th{f}$ 
@@ -217,7 +219,7 @@
 \end{frame}
 
 
-\begin{frame}{Rechenregeln}
+\begin{frame}{Rechenregeln (II)}
 	Weitere Rechenregeln im $O$-Kalkül:
 	\begin{itemize}[<+->]
 		\item $f \in O(g) \iff g \in \Omega(f)$

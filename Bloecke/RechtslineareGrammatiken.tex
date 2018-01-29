@@ -1,0 +1,113 @@
+
+\section{Rechtslineare Grammatiken}
+\begin{frame}{Rechtslineare Grammatiken}
+	\begin{Definition}
+		Eine Grammatik $G = (N, T, S, P)$ nennt man \textbf{rechtslinear} wenn bei jeder Produktion auf der rechten Seite höchstens ein Nichtterminalsymbol und dieses nur als letztes Symbol steht.\\
+		Alle Produktionen folgen dem Schema $$X \to w \quad \text{oder} \quad X \to wY$$ mit $w \in T^*, \; X,Y \in N$.
+	\end{Definition}
+\end{frame}
+
+\begin{frame}{Reguläre Sprachen}
+	\begin{Satz}
+		Für jede formale Sprache $L$ sind die folgenden drei Aussagen äquivalent:
+		\begin{itemize}
+			\item $L$ kann von einem endlichen Akzeptor erkannt werden.
+			\item $L$ kann durch einen regulären Ausdruck beschrieben werden.
+			\item $L$ kann von einer rechtslinearen Grammatik erzeugt werden.
+		\end{itemize}
+	\end{Satz}
+	
+	Eine solche Sprache nennen wir \textbf{regulär}.
+\end{frame}
+
+\begin{frame}{Beispiele für Umwandlungen}
+	Siehe Übung 13, WS 15/16
+\end{frame}
+
+\begin{frame}{Beispiele}
+	$G = (\{X, Y, Z\}, \{a, b\}, X, P )$ mit $$P = \{X \to aX \mid bY \mid \varepsilon, Y \to aX \mid bZ \mid \varepsilon, Z \to aZ \mid bZ\}$$ ist eine rechtslineare Grammatik. Die Sprache ist \pause $$L(G) = \{ w \mid \forall v_1, v_2 \in \{a,b\}^\ast: w \neq v_1 bb v_2 \}$$ Der reguläre Ausdruck ist \pause $$R =  (a\mid ba)\ast (b \mid \emptyset *)  $$ der Automat ist 
+\end{frame}
+
+\begin{frame}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\linewidth]{regulaer/L1.pdf}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	Jetzt sieht man vielleicht auch $$G = (\{X\}, \{a, b\}, X, P )$$ mit $$P = \{X \to aX \mid baX \mid b \mid \varepsilon \}$$
+\end{frame}
+
+\begin{frame}{Noch mehr Beispiele}
+	\begin{itemize}
+		\item $G = (\{X \}, \{a, b\}, X , \{X \to abX \mid bbaX \mid \varepsilon \}$ wird beschrieben durch
+			$L(G) = \lang{\visible<2-|handout:2>{ (ab\mid bba)\ast }} $
+		\item $G = (\{X , Y\}, \{a, b\}, X , \{X \to aX \mid bX \mid ababbY , Y \to aY \mid bY \mid \varepsilon \}$ wird beschrieben durch 
+			$L(G) = \lang{\visible<3-|handout:2>{ (a\mid b)\ast ababb(a\mid b)\ast }} $
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Aufgabe}
+	Gegeben ist im folgenden jeweils eine Beschreibung einer formalen Sprache $L$ und ein dazugehöriges Alphabet. Schreiben Sie jeweils den regulären Ausdruck $R$ auf, für den $L(R) = L $ gilt und stellen Sie eine rechtslineare Grammatik $G$ auf, für die $L(G) = L $ gilt:
+	\begin{itemize}
+		\item Die Menge aller Worte über dem Alphabet $A=\{a,b,c\}$, die genau ein c enthalten. \\
+		\visible<2-|handout:2>{
+			\emph{Lösung}: $(a|b)*c(a|b)*$
+		}
+		\item Die Menge aller Worte über dem Alphabet $A=\{a,b\}$, bei denen die Anzahl der $b$ durch 3 teilbar ist. \\
+		\visible<3-|handout:2>{
+			\emph{Lösung}: $a*(ba*ba*ba*)*$
+		}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Aufgabe}
+	\textit{Gegeben sei die rechtslineare Grammatik } $$ G= (\{S\},\{a,b\},S,P) \qquad P = \{S\to baaS | baS | aaS | \varepsilon \} $$
+	\begin{itemize}
+		\only<1-3|handout:1,2>{
+			\item Geben Sie einen endlichen Akzeptor $A$ an, so dass $L(A) = L(G)$ gilt
+			\only<3|handout:2>{
+				\begin{figure}[H]
+					\includegraphics[scale=0.9]{regulaer/L2.pdf}
+				\end{figure}
+			}
+		}
+		\only<1,4-5|handout:1,3>{
+			\item Geben Sie einen regulären Ausdruck $R$ an, so dass $ \langle R \rangle = L(G) $ gilt
+			\only<5|handout:3>{
+			$$ (baa|ba|aa)\ast$$
+			}
+		}
+		\only<1,6-7|handout:1,3>{
+			\item Geben Sie einen regulären Ausdruck $R$ an, der nicht das Zeichen $|$ enthält, und für den $\langle R \rangle = L(G) $ gilt.
+			\only<7|handout:3>{
+			$$ (aa)\ast (baa\ast)\ast $$
+			}
+		}
+	\end{itemize}
+\end{frame}
+
+
+
+%\begin{frame}
+%	\frametitle{Was wir können:}
+%	Von..
+%	\begin{description}
+%		\item[..rechtslinearen Gammatiken..] zu
+%		\begin{itemize}
+%			\item den Akzeptoren: \pause (mind.) jedes Nichtterminalsymbol ein Zustand, $|$ ist Verzweigung, Akzeptierende Zustände wählen \pause
+%			\item den regulären Ausdrücken: \pause Schwierig!
+%		\end{itemize}
+%		\item[..endlichen Akzeptoren..]  zu
+%		\begin{itemize}
+%			\item den Grammatiken: \pause Zustandsübergang ist eine Produktion\pause
+%			\item den regulären Ausdrücken: \pause Einzelne Wege abgehen
+%		\end{itemize}
+%		\item[..regulären Ausdrücken..] zu
+%		\begin{itemize}
+%			\item den Akzeptoren: \pause in Abschnitte teilen, $\ast$ ist Schleife, $|$ ist Verzweigung \pause
+%			\item den rechtslinearen Grammatiken: \pause genauso wie Akzeptor
+%		\end{itemize}
+%	\end{description}
+%\end{frame}
