@@ -1,7 +1,7 @@
 \section{Endliche Akzeptoren}
 \begin{frame}[t]{Endliche Akzeptoren}
 	\begin{Definition}
-		Ein \textbf{endlicher Akzeptor} $A$ ist ein \emph{Moore}-Automat mit Ausgabealphabet $ Y= \{\word 0,\word 1\}$, der zuletzt $\word 1$ ausgibt, falls ihm das Wort gefällt und \word 0 sonst. %, falls das eingegebene Wort der vorliegenden Syntax entspricht und $0$ sonst.
+		Ein \textbf{endlicher Akzeptor} $A$ ist ein \emph{Moore}-Automat mit Ausgabealphabet $ Y= \{\word 0,\word 1\}$, der zuletzt $\word 1$ ausgibt, falls ihm das Wort gefällt und \word 0 sonst.
 	\end{Definition} 
 	
 	$A$ \textbf{akzeptiert} ein Wort $w$, wenn er als Letztes eine $\word 1$ ausgibt. \\ \medskip 
@@ -49,8 +49,8 @@
 			semithick,initial text={}]
 			\tikzstyle{every state}=[]
 			
-			\node[initial, state, accepting] (A)                    {$0$};
-			\node[state] (B) [right of=A] {$1$};
+			\node[initial, state, accepting] (A)                    {Z0};
+			\node[state] (B) [right of=A] {Z1};
 			
 			\path
 				(A) edge [loop above] node {\word a,\word b}  (A)
@@ -64,11 +64,6 @@
 		Dann ist $L(A) = \set{w \in \set{\word a, \word b, \word c}^* \Mid \text{$w$ endet nicht auf \word c}}$.
 	\end{Beispiel}
 \end{frame}
-
-% DJ: Furchtbares Beispiel. Viel zu fett.
-%% Übung: Beispiel  
-%\setbeamercolor{background canvas}{bg=}
-%\includepdf[pages=44]{U12.pdf}
 
 \begin{frame}{Aufgaben}
 	Gebt einen Akzeptor an, der die Sprache aller Binärzahlen erkennt, die Zweierpotenzen darstellen. 
