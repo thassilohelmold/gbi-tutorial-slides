@@ -76,7 +76,7 @@ semithick,initial text={}]
 	Bei einem Mealy-Automaten findet die Ausgabe \textbf{bei den Zustandsübergängen} statt.
 	\begin{Definition}
 		Ein \textbf{Mealy-Automat} $ A = (Z,z_0,X,f,Y,g)$ besteht aus...
-		\thassedaniel{\begin{itemize}[<+->]}{\begin{itemize}}
+		\begin{itemize}
 			\item einer endlichen Zustandsmenge $Z$ 
 			\item einem Startzustand $z_0$
 			\item einem Eingabealphabet $X$ 
@@ -112,7 +112,6 @@ semithick,initial text={}]
 
 \begin{frame}{Eingabe eines Zeichens}
 	Was ist die Zustandsübergangsfunktion $f$? \\ \pause
-	%Bei Eingabe eines Symbols $x\in X$ und des aktuellen Zustands $z\in Z$ gibt uns die Zustandsübergangsfunktion an, in welchen Zustand $z'$ der Automat dann sein wird. \pause \\
 	\medskip
 	Haben
 	\begin{itemize}
@@ -258,20 +257,6 @@ semithick,initial text={}]
 \end{frame}
 
 
-%DJ: I don't think there is time for this, esp. if you want to get to regexes...
-\mycomment{
-	\begin{frame}{Mealy-Automaten: Aufgaben}
-		%\begin{enumerate}
-		%\item 
-		Malt einen Mealy-Automaten, der immer, nachdem er 4-mal ein \word a gelesen hat, \word{X!} ausgibt (und sonst nie etwas). Als Eingabe erhält der Automat nur Wörter aus $\set{\word a}^*$.
-		%\item Erweitert den Automaten so, dass ein \word b ein \word a „neutralisieren“ kann (und damit die Ausgabe eines \word{X!} um eins verzögert). Sonst soll sich an der Ausgabe nichts ändern.  %Ich denke, das ist zu viel... zu wenig Zeit...
-		%\end{enumerate}
-		\pause
-		% TODO Lösung
-	\end{frame}	
-}
-
-
 \subsection{Moore-Automat}
 \begin{frame}{Moore-Automat}
 	Moore-Automaten sind fast genauso aufgebaut wie Mealy-Automaten.\\ \smallskip
@@ -316,11 +301,6 @@ semithick,initial text={}]
 \begin{frame}{Beispiel Moore-Automat}
 	\includegraphics[page=11,trim=18px 47px 18px 13px,clip]{U12.pdf}	
 \end{frame}
-
-%% Übung: Beispiel
-%\setbeamercolor{background canvas}{bg=}
-%\includepdf[pages=11]{U12.pdf}
-
 
 
 \begin{frame}{Umwandlung von Automaten: Moore $\leftrightsquigarrow$ Mealy}
@@ -378,6 +358,8 @@ semithick,initial text={}]
 	\end{tikzpicture}
 \end{frame}
 
+\only<beamer:0>{
+
 \begin{headframe}[Zu hässlich zum Wegwerfen]
 	Unübersichtliche Beispiele
 \end{headframe}
@@ -429,3 +411,4 @@ semithick,initial text={}]
 %% Übung: Beispiel
 \setbeamercolor{background canvas}{bg=}
 \includepdf[pages={34-40}]{U12.pdf}
+}

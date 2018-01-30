@@ -1,12 +1,12 @@
 \section{Master-Theorem}
 
 \begin{frame}{Teile und herrsche -- divide and conquer}
-	\daniel{Manchmal sind wir zu faul, große Probleme alleine anzupacken...}
+	Manchmal sind wir zu faul, große Probleme alleine anzupacken...
 	\begin{itemize}
 		\item Probleminstanz in kleinere Teile \textbf{zerlegen}
-		\item \thassedaniel{Teile rekursiv nach gleichen Verfahren bearbeiten}{Für jeden Teil \textbf{klonen} wir uns einmal und lassen den Klon die Arbeit machen \\
-		{\small (Der Klon ist natürlich genauso faul wie wir und klont sich ebenfalls)}}
-		\item \thassedaniel{Aus Teilergebnissen Resultat rekonstruieren}{Ergebnisse von den Klonen \textbf{einsammeln} und \textbf{zusammenfügen}}
+		\item Für jeden Teil \textbf{klonen} wir uns einmal und lassen den Klon die Arbeit machen \\
+		{\small (Der Klon ist natürlich genauso faul wie wir und klont sich ebenfalls)}
+		\item Ergebnisse von den Klonen \textbf{einsammeln} und \textbf{zusammenfügen}
 	\end{itemize}
 \end{frame}
 
@@ -15,8 +15,7 @@
 	\begin{itemize}[<+->]
 		\item Wir haben einen rekursiven Algorithmus $A$ für ein Problem der Größe $n$
 		\item Bei jedem Schritt wird das Problem durch $b$ \textbf{geteilt} und es ergeben sich $d$ neue Probleminstanzen der Größe $n/b$
-		\item \thassedaniel{Aufteilen}{Klonen} und Ergebnisse zusammentragen geht in $c \· n$ Operationen (für konstantes $c$)
-		%\item Wir können die Laufzeit der jeweiligen \enquote{Auseinandernehmungs-} und \enquote{Zusammenführungsschritte} \textbf{linear} abschätzen.
+		\item Klonen und Ergebnisse zusammentragen geht in $c \· n$ Operationen (für konstantes $c$)
 	\end{itemize}
 \end{frame}
 
@@ -40,7 +39,6 @@
 	\Th{n^{\log _{\textcolor{blue}{b}} \textcolor{darkgreen}{d}}}, & \textcolor{darkgreen}{d} > \textcolor{blue}{b}
 	\end{cases}.
 	\]
-	%\includegraphics[scale=0.5]{laufzeit/masterTheorem}
 \end{frame}
 
 \begin{frame}[t]{MT: Beispiele}
