@@ -13,18 +13,31 @@
 \input{../TutTexbib/Style_Tut.tex}
 \graphicspath{{../figures/}}
 
+\morescalingdelimiters
+
 \begin{document}
 \starttut{14}
 
-\lastframe{0.55}{20}{xkcd/turing_test.png}{https://www.xkcd.com/}
+\thasse{\lastframe{0.55}{20}{xkcd/turing_test.png}{https://www.xkcd.com/}}
+
+\begin{frame}{Zu Blatt \#6}
+	Durchschnitt: \quad jeder, der regelmäßig abgab, \textbf{hat den Schein}! :D
+	\begin{itemize}
+		\item \textbf{A6.1}: $\fract \cdots/b $ \impl was, wenn $b = 0$? \lightning \\
+		\impl Umformungen waren nicht nötig, einfach Axiome benutzen und fertig.
+	\end{itemize}
+\end{frame}
 
 \framePrevEpisode
 
-\begin{frame}{Rückblick: Laufzeitbetrachtungen}
-	\begin{itemize}[<+->]
-		\item Das Master-Theorem
-	\end{itemize}
-\end{frame}
+\mycomment{
+	\begin{frame}{Rückblick: Laufzeitbetrachtungen}
+		\begin{itemize}[<+->]
+			\item Das Master-Theorem
+		\end{itemize}
+	\end{frame}
+}
+
 
 \begin{frame}{Rückblick: Endliche Automaten}
 	\begin{itemize}[<+->]
@@ -33,37 +46,32 @@
 		\item $f, f_*, f_{**}$
 		\item $g, g_*, g_{**}$
 		\item Endliche Akzeptoren
+		\item Reguläre Ausdrücke
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Wahr oder Falsch?}
 	\FalseQuestionE{Das (komplizierte) Master-Theorem kann man immer anwenden.}{ Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
-	\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automat gewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
-	\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{0, 1\}$.}{}
+	\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automaten umgewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
+	\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{\word 0,\word 1\}$.}{}
 	\FalseQuestionE{Mit endlichen Automaten kann jede beliebige Sprache erkannt \\ werden.}{Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}	
 	% TODO: W/F Akzeptor akzeptiert Sprache L (Bild von Akzeptor mit durchnummerierten Zuständen, aber Startpfeil fehlt...)
 \end{frame}
 
-% TODO ---------------------- oben und unten migrieren... ------------ 
+\mycomment{
+	\begin{frame}{Rückblick: Reguläre Sprachen}
+		\begin{itemize}[<+->]
+			\item Endliche Akzeptoren
+			
+			%\item Rechtslineare Grammatiken
+			%\item Strukturelle Induktion
+		\end{itemize}
+	\end{frame}	
+}
 
-\begin{frame}{Rückblick: Reguläre Sprachen}
-	\begin{itemize}[<+->]
-		\item Endliche Akzeptoren
-		\item Reguläre Ausdrücke
-		\item Rechtslineare Grammatiken
-		\item Strukturelle Induktion
-	\end{itemize}
-\end{frame}
 
-\begin{frame}{Wahr oder Falsch?}
-	\begin{itemize}
-		\FalseQuestionE{Jede kontextfreie Grammatik lässt sich als regulärer Ausdruck darstellen}{Die Grammatik muss rechtslinear sein, kontextfrei kann \enquote{mehr}}
-		\TrueQuestionE{Jeder regulären Ausdruck lässt sich durch eine kontextfreie Grammatik darstellen}{}
-		\TrueQuestionE{Für jede Sprache $L$ und jedes Wort $w \in L$ gilt: Es existiert ein endlicher Automat, der $w$ erkennt}{}
-		\FalseQuestion{Die Sprache der gültigen Klammerausdrücke ist regulär}
-		\TrueQuestionE{Die Sprache der gültigen Klammerausdrücke ist kontextfrei}{}
-	\end{itemize}
-\end{frame}
+
+
 
 % TODO: Zum Aufwärmen
 % Mal was ganz anderes: Monkey Island 1, Unterwasserszene
@@ -79,13 +87,21 @@
 
 \input{../Bloecke/RechtslineareGrammatiken}
 
+\begin{frame}[t]{Wahr oder Falsch?}
+	\FalseQuestionE{Jede kontextfreie Grammatik lässt sich als regulärer Ausdruck \\ darstellen.}{Die Grammatik muss dafür rechtslinear sein, kontextfrei ist \enquote{zu mächtig}.}
+	\TrueQuestion{Jeder regulären Ausdruck lässt sich durch eine kontextfreie Grammatik darstellen.}
+	\TrueQuestion{Für jede Sprache $L$ und jedes Wort $w \in L$ gilt: Es existiert ein endlicher Automat, der $w$ erkennt.}
+	\FalseQuestion{Die Sprache der gültigen Klammerausdrücke ist regulär.}
+	\TrueQuestionE{Die Sprache der gültigen Klammerausdrücke ist kontextfrei.}{}
+\end{frame}
+
 \input{../Bloecke/Turing}
 
 \input{../Bloecke/TMKomplexitaet}
 
 \begin{frame}{Turingmaschinen: Klausur}
 	Noch ein Hinweis zum Schluss:\\
-	Bisher kam in \textbf{jeder}, wirklich jeder Klausur eine Aufgabe zu Turingmaschinen dran.\\
+	Bisher kam in \textbf{jeder}, wirklich \textbf{jeder} Klausur eine Aufgabe zu Turingmaschinen dran.\\
 	Diese gibt meist relativ viele Punkte.\\
 	
 	\bigskip
@@ -93,38 +109,52 @@
 	\textbf{Also übt das!} Hier zählt vor allem Geschwindigkeit (und Präzision).
 \end{frame}
 
+\def\abbrsize{\footnotesize}
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
 			\item Turingmaschinen
 			\item Komplexität
-			\item Entscheidbarkeit -- Wir können nicht alles lösen!
+			\item Entscheidbarkeit -- Wir können alles. Außer Halteproblem. Und so Zeug.
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Und so geht es weiter...}
+		\vspace{-.3\baselineskip}
 		\begin{itemize}
 			\item Algorithmen I -- Mehr zu Algorithmen, Laufzeiten, Datenstrukturen, Graphen
-			\item TI -- Realisierung von Schaltungen, Prozessoren (MIMA, ...)
-			\item TGI -- Mehr zu Komplexität, Entscheidbarkeit, Turingmaschinen
+			\item \textbf{T}{\abbrsize echnische} \textbf{I}{\abbrsize nformatik} -- Realisierung von Schaltungen, Prozessoren (MIMA, ...)
+			\item \textbf{T}{\abbrsize heoretische} \textbf{G}{\abbrsize rundlagen der} \textbf{I}{\abbrsize nformatik} -- Mehr zu Grammatiken, Komplexität, Entscheidbarkeit, Turingmaschinen
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-\begin{frame}{Falls ihr mehr wollt...}
+\thassedaniel{
+	\begin{frame}{Falls ihr mehr wollt...}
+		\begin{block}{Persönliche Empfehlungen}
+			\begin{itemize}
+				\item Design and Analysis of Algorithms (für Algorithmen I)
+				\item CS50x
+				\item From Nand to Tetris
+				% \item ICPC-Basispraktikum  ?
+			\end{itemize}
+		\end{block}
+		
+		\begin{itemize}
+			\item EDX (edx.org)
+			\item Coursera (coursera.org)
+		\end{itemize}
+	\end{frame}
+}{
+\begin{frame}{Falls ihr mehr wollt...} % S. o.
 	\begin{block}{Persönliche Empfehlungen}
 		\begin{itemize}
-			\item Design and Analysis of Algorithms (für Algorithmen I)
-			\item CS50x
-			\item From Nand to Tetris
+			\item ICPC-Basispraktikum
 		\end{itemize}
 	\end{block}
-
-	\begin{itemize}
-		\item EDX (edx.org)
-		\item Coursera (coursera.org)
-	\end{itemize}
 \end{frame}
+}
+
 
 \begin{frame}{Das war GBI}
 	\begin{columns}
@@ -144,11 +174,14 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}
-	\huge \centering Viel Erfolg bei der Klausur!
-\end{frame}
+\begin{headframe}[ Viel Erfolg  bei \\ euren Klausuren! \smiley]
+	--- The End ---
+\end{headframe}
 
-\xkcdframe{5.8}{30}{xkcd/np_complete.png}{http://www.xkcd.com}{}
+% Scheint leider kein vernünftiges Abschieds-XKCD zu geben
+\thasse{
+	\xkcdframe{5.8}{30}{xkcd/np_complete.png}{http://www.xkcd.com}{}
+}
 
 \slideThanks
 

@@ -49,8 +49,8 @@
 			semithick,initial text={}]
 			\tikzstyle{every state}=[]
 			
-			\node[initial, state, accepting] (A)                    {Z0};
-			\node[state] (B) [right of=A] {Z1};
+			\node[initial, state, accepting] (A)                    {$z_0$};
+			\node[state] (B) [right of=A] {$z_1$};
 			
 			\path
 				(A) edge [loop above] node {\word a,\word b}  (A)
@@ -88,7 +88,7 @@
 	\end{center}
 	\pause
 	Gebt einen Akzeptor an, der die Sprache aller geraden Binärzahlen erkennt. 
-	\pause ($= \set{\word 0,\word 1}^* \· \set{\word 0}^+$) \\
+	\pause ($= \set{\word 0,\word 1}^* \· \set{\word 0}$) \\
 	%\vspace{-2\baselineskip}
 	\begin{center}
 		\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=1.8cm,
