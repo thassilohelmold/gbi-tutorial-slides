@@ -3,11 +3,8 @@
 % This video for Turing:
 % https://www.youtube.com/watch?v=VxvY4rI15sM
 
-% Define a global usable date. Must come before StyleTut
-%\newcommand{\mydate}{10.02.2017}
-
 % Comment/uncomment this line to toggle handout mode
-%\newcommand{\handout}{}
+% \newcommand{\handout}{}
 
 \input{../TutTexbib/PraeambelTut.tex}
 \input{../TutTexbib/Style_Tut.tex}
@@ -18,8 +15,9 @@
 \begin{document}
 \starttut{14}
 
-\thasse{\lastframe{0.55}{20}{xkcd/turing_test.png}{https://www.xkcd.com/}}
+%\thasse{\lastframe{0.55}{20}{xkcd/turing_test.png}{https://www.xkcd.com/}}
 
+\daniel{
 \begin{frame}{Zu Blatt \#6}
 	Durchschnitt: \quad jeder, der regelmäßig abgab, \textbf{hat den Schein}! :D
 	\begin{itemize}
@@ -27,17 +25,9 @@
 		\impl Umformungen waren nicht nötig, einfach Axiome benutzen und fertig.
 	\end{itemize}
 \end{frame}
-
-\framePrevEpisode
-
-\mycomment{
-	\begin{frame}{Rückblick: Laufzeitbetrachtungen}
-		\begin{itemize}[<+->]
-			\item Das Master-Theorem
-		\end{itemize}
-	\end{frame}
 }
 
+\framePrevEpisode
 
 \begin{frame}{Rückblick: Endliche Automaten}
 	\begin{itemize}[<+->]
@@ -51,39 +41,31 @@
 \end{frame}
 
 \begin{frame}[t]{Wahr oder Falsch?}
+	%\thasse{\Socrative}
+	\begin{figure}
+		\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
+		semithick,initial text={}]
+		\tikzstyle{every state}=[]
+		
+		\node[state,accepting] (B)   {$Z_1$};
+		\node[state]		 (M)  [right of=B]		{$Z_2$};
+		
+		\path
+		(B) edge [loop above]  node {\word 1} (B) 
+		(B) edge 			  node {\word 0} (M) 
+		(M) edge [loop above] node {\word 0, \word 1} (M);
+	\end{tikzpicture}
+	\end{figure}
+	
+	\DependsQuestionE{Dieser Automat erkennt die Sprache $ \{1\}^*$} {Die Angabe des Startzustands fehlt. Startet man in $Z_2$, akzeptiert der Automat gar nichts.}
+\end{frame}
+
+\begin{frame}[t]{Wahr oder Falsch?}
 	\FalseQuestionE{Das (komplizierte) Master-Theorem kann man immer anwenden.}{ Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
 	\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automaten umgewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
 	\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{\word 0,\word 1\}$.}{}
 	\FalseQuestionE{Mit endlichen Automaten kann jede beliebige Sprache erkannt \\ werden.}{Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}	
-	% TODO: W/F Akzeptor akzeptiert Sprache L (Bild von Akzeptor mit durchnummerierten Zuständen, aber Startpfeil fehlt...)
 \end{frame}
-
-\mycomment{
-	\begin{frame}{Rückblick: Reguläre Sprachen}
-		\begin{itemize}[<+->]
-			\item Endliche Akzeptoren
-			
-			%\item Rechtslineare Grammatiken
-			%\item Strukturelle Induktion
-		\end{itemize}
-	\end{frame}	
-}
-
-
-
-
-
-% TODO: Zum Aufwärmen
-% Mal was ganz anderes: Monkey Island 1, Unterwasserszene
-% Mal wieder keine Zeit für die Vorbereitung, aber dafür gibt's Kuchen...
-
-%WTF???
-\mycomment{
-\begin{frame}
-	\centering \Large
-	Dr. Meta ist zurück!
-\end{frame}	
-}
 
 \input{../Bloecke/RechtslineareGrammatiken}
 
@@ -101,7 +83,7 @@
 
 \begin{frame}{Turingmaschinen: Klausur}
 	Noch ein Hinweis zum Schluss:\\
-	Bisher kam in \textbf{jeder}, wirklich \textbf{jeder} Klausur eine Aufgabe zu Turingmaschinen dran.\\
+	Bisher kam in {\tiny fast} \textbf{jeder} Klausur eine Aufgabe zu Turingmaschinen dran.\\
 	Diese gibt meist relativ viele Punkte.\\
 	
 	\bigskip
@@ -136,7 +118,7 @@
 				\item Design and Analysis of Algorithms (für Algorithmen I)
 				\item CS50x
 				\item From Nand to Tetris
-				% \item ICPC-Basispraktikum  ?
+				\item ICPC-Basispraktikum
 			\end{itemize}
 		\end{block}
 		

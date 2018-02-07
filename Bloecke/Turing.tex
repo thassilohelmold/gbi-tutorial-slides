@@ -6,22 +6,6 @@
 
 \section{Turingmaschinen}
 
-\mycomment{% oder \thasse 
-	\begin{frame}{Sprachen mal wieder...}
-		Wir haben gesehen: Kontextfreie Grammatiken können mehr als endliche Automaten (Klammerausdrücke!).\\
-		Wir wollen daher ein passendes Berechnungsmodell, das ebenfalls \enquote{mehr \nolinebreak kann} als endliche Automaten.\\
-		
-		\medskip
-		\pause
-		Wie wäre es mit einem Smartphone?\\
-		Das kann ja wohl offensichtlich gültige Klammerausdrücke erkennen.\\
-		\pause
-		Als theoretisches Modell aber ungeeignet, da viel zu komplex.\\
-		\bigskip
-		Einfacheres Modell: Die \textbf{Turingmaschine}
-	\end{frame}	
-}
-
 \begin{frame}{Grenzen endlicher Automaten}
 	Automaten haben ja keinen Speicher außer ihren Zustand. \\
 	\medskip
@@ -31,8 +15,13 @@
 	Heraus kommt die...
 \end{frame}
 
+\subsection{Inhalt}
+\begin{frame}{Turingmaschine}
+	\includegraphics[scale=1]{turing/tmAufbau}
+\end{frame}
 
 % Kann ich erst Werbung für machen, nachdem ich ihn selbst gesehen habe, sonst wird's unglaubwürdig... :P
+% Dann solltest du ihn unbedingt mal anschauen!
 \thasse{
 	\begin{frame}{Alan Turing}
 		\centering
@@ -40,12 +29,6 @@
 		\includegraphics[scale=0.35]{turing/imitationGame}
 	\end{frame}
 }
-
-
-\subsection{Inhalt}
-\begin{frame}{Turingmaschine}
-	\includegraphics[scale=1]{turing/tmAufbau}
-\end{frame}
 
 %Das hier am Besten hinmalen mit Band und Schreiblesekopf und an der Tafel machen:
 \begin{frame}{Eine einfache Turingmaschine}
@@ -270,17 +253,6 @@
 }
 
 
-\thasse{
-	\begin{frame}
-		\vspace{-30pt}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[scale=0.45]{turing/Palindrom}
-		\end{figure}
-	\end{frame}
-}
-
-
 \begin{frame}{Turingmaschine}
 	\begin{Definition}
 		Eine Turingmaschine $T$ ist definiert als $$ T = (Z, z_0 , X, f,g, m)$$
@@ -339,7 +311,8 @@
 	\end{center}
 \end{frame}
 
-\thasse{ % Formalkram ist bähhh...
+\mycomment{ % Formalkram ist bähhh...
+	% Ja, aber eigentlich wichtig. Aber dieses Jahr keine Zeit.
 	\begin{frame}{Konfiguration}
 		\begin{Definition}
 			Als \textbf{Konfiguration} $ c =(z,b,p)$ bezeichnen wir den Zustand einer Turing-Maschine zu einem Zeitpunkt. Dabei ist 
@@ -432,4 +405,5 @@
 	Entwerft eine TM, die alle gültigen Klammerausdrücke entscheidet.\\
 	\medskip
 	Gültige Klammerausdrücke werden dabei von der folgenden Grammatik produziert: $ G = (\{S\},\{\word (, \word )\}, S, P )$ mit den Produktionen $\set{ S \to \eps \mid \word (S\word )S}$.
+	% TODO Lösung
 \end{frame}

@@ -28,6 +28,8 @@
 	$G = (\{X\}, \{\word a, \word b\}, X, P )$ mit 
 	$$P = \{X \to \word aX \mid \word{ba}X \mid \word b \mid \varepsilon \}$$
 	% Das da ist FALSCH:
+	% TODO: Nein, ist es nicht. Es entspricht genau der "Umsetzung" des Automaten
+	% Aber das könnte man noch besser herausarbeiten: Automat Tikzen und Zustände umbenennen, G' dann aus Automaten "ablesen"
 	%$$P = \{X \to aX \mid bY \mid \varepsilon, Y \to aX \mid bZ \mid \varepsilon, Z \to aZ \mid bZ\}$$ 
 	ist eine rechtslineare Grammatik. Die dadurch erzeugte Sprache ist \pause $$L(G) = \set{ w \mid \forall v_1, v_2 \in \{\word a,\word b\}^\ast: w \neq v_1 \word{bb} v_2 },$$ der sie beschreibende reguläre Ausdruck ist \pause $$R =  \rx{(a|ba)*(b|O*)}.  $$ Der Automat dazu sieht so aus:
 \end{frame}
@@ -39,7 +41,7 @@
 	\end{figure}
 \end{frame}
 
-% TODO Nicht rechtslin. Grammar, deren Sprache regulär ist!
+
 \begin{frame}{Achtung!}
 	Eine Grammatik kann nicht rechtslinear sein und \textbf{trotzdem} eine reguläre Sprache erzeugen! \\
 	\bigskip
@@ -59,23 +61,24 @@
 \end{frame}
 
 % Sorry, die Zeit hab ich nicht...
-\mycomment{
+% Ich auch nicht, aber zum Nachlesen lasse ich es trotzdem erstmal drin.
+\thasse{
 	\begin{frame}{Aufgabe}
 		Gegeben ist im folgenden jeweils eine Beschreibung einer formalen Sprache $L$ und ein dazugehöriges Alphabet. Schreiben Sie jeweils den regulären Ausdruck $R$ auf, für den $L(R) = L $ gilt und stellen Sie eine rechtslineare Grammatik $G$ auf, für die $L(G) = L $ gilt:
 		\begin{itemize}
-			\item Die Menge aller Worte über dem Alphabet $A=\{a,b,c\}$, die genau ein c enthalten. \\
+			\item Die Menge aller Worte über dem Alphabet $A=\{\word a,\word  b, \word c\}$, die genau ein $\word c$ enthalten. \\
 			\visible<2-|handout:2>{
-				\emph{Lösung}: $(a|b)*c(a|b)*$
+				\emph{Lösung}: $\rx{(a|b)*c(a|b)*}$
 			}
-			\item Die Menge aller Worte über dem Alphabet $A=\{a,b\}$, bei denen die Anzahl der $b$ durch 3 teilbar ist. \\
+			\item Die Menge aller Worte über dem Alphabet $A=\{\word a,\word  b\}$, bei denen die Anzahl der $\word b$ durch 3 teilbar ist. \\
 			\visible<3-|handout:2>{
-				\emph{Lösung}: $a*(ba*ba*ba*)*$
+				\emph{Lösung}: $\rx{a*(ba*ba*ba*)*}$
 			}
 		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}{Aufgabe}
-		\textit{Gegeben sei die rechtslineare Grammatik } $$ G= (\{S\},\{a,b\},S,P) \qquad P = \{S\to baaS | baS | aaS | \varepsilon \} $$
+		\textit{Gegeben sei die rechtslineare Grammatik } $$ G= (\{S\},\{\word a,\word  b\},S,P) \qquad P = \{S\to \word{baa}S \mid \word{ba}S \mid \word{aa}S \mid \varepsilon \} $$
 		\begin{itemize}
 			\only<1-3|handout:1,2>{
 				\item Geben Sie einen endlichen Akzeptor $A$ an, so dass $L(A) = L(G)$ gilt
@@ -86,15 +89,15 @@
 				}
 			}
 			\only<1,4-5|handout:1,3>{
-				\item Geben Sie einen regulären Ausdruck $R$ an, so dass $ \langle R \rangle = L(G) $ gilt
+				\item Gebt einen regulären Ausdruck $R$ an, so dass $ \lang{R} = L(G) $ gilt
 				\only<5|handout:3>{
-					$$ (baa|ba|aa)\ast$$
+					$$ \rx{(baa|ba|aa)*}$$
 				}
 			}
 			\only<1,6-7|handout:1,3>{
-				\item Geben Sie einen regulären Ausdruck $R$ an, der nicht das Zeichen $|$ enthält, und für den $\langle R \rangle = L(G) $ gilt.
+				\item Gebt einen regulären Ausdruck $R$ an, der nicht das Zeichen $\rx{|}$ enthält, und für den $\lang{R}= L(G) $ gilt.
 				\only<7|handout:3>{
-					$$ (aa)\ast (baa\ast)\ast $$
+					$$ \rx{(aa)* (baa*)*} $$
 				}
 			}
 		\end{itemize}
