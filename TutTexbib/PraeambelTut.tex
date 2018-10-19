@@ -26,6 +26,10 @@
 
 \usepackage{kbordermatrix}
 
+% kbordermatrix settings
+\renewcommand{\kbldelim}{(} % Left delimiter
+\renewcommand{\kbrdelim}{)} % Right delimiter
+
 \input{../config.tex}
 
 
@@ -369,9 +373,9 @@
 	\GenericQuestion{adaptinglightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
 }
 
-\ifnum\thisyear=2017 \else \errmessage{Old ILIAS link inside preamble. Please update.} \fi
+\ifnum\thisyear=2018 \else \errmessage{Old ILIAS link inside preamble. Please update.} \fi
 
-\newcommand{\ILIAS}{\urlnamed{ILIAS}{https://ilias.studium.kit.edu/ilias.php?ref\_id=729057\&cmdClass=ilrepositorygui\&cmdNode=75\&baseClass=ilrepositorygui}\xspace}
+\newcommand{\ILIAS}{\urlnamed{ILIAS}{https://ilias.studium.kit.edu/ilias.php?ref\_id=855240\&cmdClass=ilrepositorygui\&cmdNode=5r\&baseClass=ilrepositorygui}\xspace}
 
 \newcommand{\Socrative}{\only<handout:0>{socrative.com $\qquad \?> $ Student login \\ Raumname:  \mysocrativeroom\\ \medskip}}
 
