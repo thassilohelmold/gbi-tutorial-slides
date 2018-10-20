@@ -16,7 +16,7 @@ Wenn ihr Fragen habt, stellt sie gerne im Tutoren-ILIAS im entsprechenden Thread
 
 ### FAQ
 1. _Ich verwende eure Folien als Grundlage für meine eigenen. Ist das für euch ok?_  
- Ja, das Material darf beliebig weiterverwendet und modifziert werden. Aber wenn du Fehler findest, sei so lieb und sag uns Bescheid. Danke! :o)
+ Ja, das Material darf beliebig weiterverwendet und modifiziert werden. Aber wenn du Fehler findest, sei so lieb und sag uns Bescheid. Danke! :o)
 2. _Da sind komische LaTeX-Tags, die ich nicht kenne. Hilfe!_  
  Ja, Standard-LaTeX ist ziemlich mickrig und umständlich, weshalb wir es etwas aufgepeppt haben. :D  
  Viele Sachen sind selbsterklärend, wenn man sie im Einsatz sieht, ansonsten lohnt sich ein Blick in die `PraeambelTut.tex` bzw. `Style_Tut.tex`. (Einige Dinge sind auch aus Herrn Worschs Feder übernommen worden, siehe `gbi-macros.tex`.)  
