@@ -11,7 +11,7 @@
 	\pause
 	\begin{itemize}
 		\item \textbf{Problem}: \emph{Beliebige} Codierungen zu speichern sehr aufwendig
-		\item $\abs{\text{Definitionsbereich}} = \infty$ \impl sogar unmöglich!
+		\item Wenn $\abs{\text{Definitionsbereich}} = \infty$ \impl sogar unmöglich!
 		\implitem Bringen wir etwas Struktur ins Spiel!
 	\end{itemize}
 \end{frame}
@@ -23,12 +23,12 @@
 		\text{ mit } \forall x,y \in A: \quad  \Phi(x \sim y) &=& \Phi(x) \bowtie \Phi(y)
 	\end{threealign}
 	\medskip \\
-	Dabei stehen $\sim$ und $\bowtie$ hier für feste beliebige Operationen, wie z.~B. $+, -, \·, /, \oplus, \barwedge, ...$ \\
+	Dabei stehen $\sim$ und $\bowtie$ hier für feste beliebige Operationen, wie z.~B. $+, -, \*, /, \oplus, \barwedge, ...$ \\
 	(Muss es auf $A$ bzw. $B$ natürlich geben!)
 \end{frame}
 
 \begin{frame}{Homomorphismen}
-	In GBI: Homomorphismen auf Wörtern mit „$\·$“ als Operation.\\
+	In GBI: Homomorphismen auf Wörtern mit „$\*$“ als Operation.\\
 	\impl $A, B$ Alphabete, dann ist $h: A^* \functionto B^*$ ein Homomorphismus, wenn
 	$$ \forall x, y \in A^* : \quad h(x \cdot y) = h(x) \cdot h(y). $$
 	
@@ -54,7 +54,7 @@
 		Sei $f: A \functionto B^*,$ \pause definiere $f^{**}:A^* \functionto B^*$ als
 		\begin{align*}
 		f^{**}(\eps) &= \eps  \\
-		\forall w\in A^*, x\in A: \quad  f^{**}(w \· x) &= f^{**}(w) \· f(x)       
+		\forall w\in A^*, x\in A: \quad  f^{**}(w \* x) &= f^{**}(w) \* f(x)       
 		\end{align*}
 	\end{Definition}
 
@@ -120,7 +120,7 @@
 		u(w) = 
 		\begin{cases}
 		\eps, & \text{ falls } w=\eps\\
-		x\·u(w'), & \text{ falls } w=h(x) \· w' \text{ für ein } x\in A \\
+		x\*u(w'), & \text{ falls } w=h(x) \* w' \text{ für ein } x\in A \\
 		\bot,  & \text{ sonst }\\
 		\end{cases}
 		\]

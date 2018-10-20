@@ -81,7 +81,7 @@
 		Für ein festes $k \in \N$ gilt, dass alle Wörter über $\{\word a, \word b\}^\ast$, die genau $k$-mal das Zeichen \word b enthalten, in $L$ liegen.
 	\end{block} \pause
 	\begin{block}{Induktionsschritt}  \pause
-		Wir betrachten ein Wort $w$, das genau $k + 1$ mal das Zeichen \word b enthält. Dann kann man $w$ zerlegen in $w = w_1 \cdot w_2$, wobei $w_1$ genau einmal das Zeichen \word b enthält und $w_2$ genau $k$-mal das Zeichen \word b. \pause Nach Induktionsanfang liegt $w_1$ in $\{\word a\}^\ast \{\word b\}\{\word a\}^\ast$. Nach Induktionsvoraussetzung liegt $w_2$ in $(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast )^\ast$, was bedeutet, dass $w = w_1 \cdot w_2$ in $$\left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right) \· \left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right)^\ast \subseteq \left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right)^\ast = L$$ liegt und die Behauptung ist gezeigt. $\qed$
+		Wir betrachten ein Wort $w$, das genau $k + 1$ mal das Zeichen \word b enthält. Dann kann man $w$ zerlegen in $w = w_1 \cdot w_2$, wobei $w_1$ genau einmal das Zeichen \word b enthält und $w_2$ genau $k$-mal das Zeichen \word b. \pause Nach Induktionsanfang liegt $w_1$ in $\{\word a\}^\ast \{\word b\}\{\word a\}^\ast$. Nach Induktionsvoraussetzung liegt $w_2$ in $(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast )^\ast$, was bedeutet, dass $w = w_1 \cdot w_2$ in $$\left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right) \* \left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right)^\ast \subseteq \left(\{\word a\}^\ast \{\word b\}\{\word a\}^\ast \right)^\ast = L$$ liegt und die Behauptung ist gezeigt. $\qed$
 	\end{block}
 \end{frame}
 

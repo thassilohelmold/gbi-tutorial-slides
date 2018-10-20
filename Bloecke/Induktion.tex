@@ -101,9 +101,9 @@
 		Seien $A, B$ zwei beliebige Alphabete. Definiere die Funktion $f \from A^* \functionto A^*$,
 		\begin{align*}
 			f(\eps) &:= \eps \\
-			\text{Für } w \in A^*, \mu \in A: \quad f(\mu \· w) &:= 
+			\text{Für } w \in A^*, \mu \in A: \quad f(\mu \* w) &:= 
 			\begin{cases}
-				\mu \· f(w), &\mu \in B \\
+				\mu \* f(w), &\mu \in B \\
 				f(w), &\text{sonst}
 			\end{cases}\\
 		\end{align*}
@@ -130,12 +130,12 @@
 		Zeige die Aussage für $n+1$:\\
 		Sei $w \in A^{n+1}$ ein Wort der Länge $n+1$.\\
 		\pause
-		Dann teilen wir es auf in $w = \mu \· v$, wobei $\mu \in A$ und $v \in A^n$.\\
+		Dann teilen wir es auf in $w = \mu \* v$, wobei $\mu \in A$ und $v \in A^n$.\\
 		Nach IV gilt: $\size{f(v)} \le \size v$.\\
 		\pause
 		\smallskip
 		\textbf{Fall 1}: \\
-			\quad $\mu \in B$: $f(w) = \mu \· f(v)$ \\
+			\quad $\mu \in B$: $f(w) = \mu \* f(v)$ \\
 			\quad \impl $\size{f(w)} = 1 + \size{f(v)} \le 1 + \size v = 1+n = \size w$.\\
 		\pause
 		\smallskip
