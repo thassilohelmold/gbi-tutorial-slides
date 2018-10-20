@@ -17,12 +17,82 @@
 \usepackage{wasysym}
 \usepackage{mathtools}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Copied from Style_Tut.tex
+
+
+% Das ist der KIT-Stil
+%\usepackage{../TutTexbib/beamerthemekit}
+\usepackage[deutsch,titlepage0]{../TutTexbib/KIT/beamerthemeKITmod}
+\TitleImage[width=\titleimagewd]{../figures/titlepage.jpg}
+%\usetheme[deutsch,titlepage0]{KIT}
+
+% Include PDFs
+\usepackage{pdfpages}
+
+% Libertine font (Original GBI font)
+\usepackage{libertine}
+%\renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
+
+% Nicer math symbols
+\usepackage{eulervm}
+%\usepackage{mathpazo}
+\renewcommand\ttdefault{cmtt} % Computer Modern typewriter font, see lecture slides.
+
+
+
+
+
+\usepackage{csquotes}
+
+%%%%%%
+
+
+%% Schönere Schriften
+\usepackage[TS1,T1]{fontenc}
+
+%% Bibliothek für Graphiken
+\usepackage{graphicx}
+
+%% der wird sowieso in jeder Datei gesetzt
+%%\graphicspath{{../figures/}}
+
+%% Hyperlinks
+\usepackage{hyperref}
+% I don't know why, but this works and only includes sections and NOT subsections in the pdf-bookmarks.
+\hypersetup{bookmarksdepth=subsection} 
+
+%\usepackage{lmodern}
+\usepackage{colortbl}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{listings}
+\usepackage{forloop}
+%\usepackage{algorithmic} % PseudoCode package 
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{automata}
+\usetikzlibrary{tikzmark}
+
+% Needed for gbi-macros
+\usepackage{xspace}
+
+%%%%%%
+
+%% Verbatim
+\usepackage{moreverb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Copy end
+
 %% Tabellen
 \usepackage{array}
 \usepackage{multicol}
 
 %% Bibliotheken für viele mathematische Symbole
 \usepackage{amsmath, amsfonts, amssymb}
+
+%% Deutsche Silbentrennung und Beschriftungen
+\usepackage[ngerman]{babel}
 
 \usepackage{kbordermatrix}
 
@@ -59,7 +129,7 @@
 %\newcommand{\literal}[1]{\textcolor{blue}{\texttt{#1}}}
 \newcommand{\realTilde}{\textasciitilde \ }
 \newcommand{\setsize}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
-\let\size\setsize
+\newcommand{\size}[1]{\setsize{#1}}  % Shame on you, TeXStudio...
 \newcommand{\set}[1]{\left\{#1\right\}}
 \newcommand{\tuple}[1]{\left(#1\right)}
 \newcommand{\normalvar}[1]{\text{$#1$}}
@@ -89,6 +159,19 @@
 \newcommand{\bzero}{\ensuremath{\textcolor{blue}{0}}\text{}}
 \newcommand{\bleftBr}{\ensuremath{\textcolor{blue}{\texttt{(}}}\text{}}
 \newcommand{\brightBr}{\ensuremath{\textcolor{blue}{\texttt{)}}}\text{}}
+
+% Fix of \b... commands:
+
+\renewcommand{\boder}{\alor}
+\renewcommand{\bund}{\aland}
+\renewcommand{\bimp}{\alimpl}
+\renewcommand{\bgdw}{\aleqv}
+\renewcommand{\bnot}{\alnot}
+\renewcommand{\bleftBr}{\alka}
+\renewcommand{\brightBr}{\alkz}
+\newcommand{\alA}{\word A}
+\newcommand{\alB}{\word B}
+\newcommand{\alC}{\word C}
 
 \newcommand{\plB}{\plfoo{B}}
 \newcommand{\plE}{\plfoo{E}}
@@ -155,6 +238,9 @@
 \newcommand{\Matrix}[1]{\begin{pmatrix} #1 \end{pmatrix}}
 \newcommand{\braced}[1]{\left\lbrace #1 \right\rbrace}
 
+% "something" placeholder. Useful for repairing spacing of operator sections, like `\sth = 42`.
+\def\sth{\vphantom{.}}
+
 \def\fract#1/#2 {\frac{#1}{#2}} % ! Trailing space is crucial!
 \def\dfract#1/#2 {\dfrac{#1}{#2}} % ! Trailing space is crucial!
 
@@ -162,9 +248,12 @@
 
 \let\after\circ
 
+
+
 \def\·{\cdot}
 \def\*{\cdot}
 \def\?>{\ensuremath{\rightsquigarrow}}  % Fuck you, Latex
+\def\~~>{\ensuremath{\rightsquigarrow}}  
 
 \newcommand{\tight}[1]{{\renewcommand{\arraystretch}{0.76} #1}}
 \newcommand{\stackedtight}[1]{\renewcommand{\arraystretch}{0.76} \begin{matrix} #1 \end{matrix} }
@@ -177,6 +266,15 @@
 % e.g. \q1uad = \quad, \q2uad = \qquad etc.
 
 \newcommand{\qqquad}{\q3uad}
+\newcommand{\minusquad}{\hspace{-1em}}
+
+%% Placeholder utils
+% \§{#1}   Saves #1 as placeholder and prints it
+% \.       Prints an \hphantom with the size of the recalled placeholder.
+\def\indentstring{}
+\def\§#1{\def\indentstring{#1}#1}
+\def\.{{$\hphantom{\text{\indentstring}}$}}
+%% Placeholder utils end
 
 \newcommand{\impl}{\ifmmode\ensuremath{\mskip\thinmuskip\Rightarrow\mskip\thinmuskip}\else$\Rightarrow$\fi\xspace}
 \newcommand{\Impl}{\ifmmode\implies\else$\Longrightarrow$\fi\xspace}
@@ -185,6 +283,18 @@
 
 \newcommand{\gdw}{\ifmmode\mskip\thickmuskip\Leftrightarrow\mskip\thickmuskip\else$\Leftrightarrow$\fi\xspace}
 \newcommand{\Gdw}{\ifmmode\iff\else$\Longleftrightarrow$\fi\xspace}
+
+% Legacy code from the algo tutorial slides. Perhaps useful. Try with care.
+\mycomment{
+	\newcommand{\impl}{\ifmmode\ensuremath{\mskip\thinmuskip\Rightarrow\mskip\thinmuskip}\else$\Rightarrow$\xspace\fi}  
+	\newcommand{\Impl}{\ifmmode\implies\else$\Longrightarrow$\xspace\fi}
+	
+	\newcommand{\gdw}{\ifmmode\mskip\thickmuskip\Leftrightarrow\mskip\thickmuskip\else$\Leftrightarrow$\xspace\fi}
+	\newcommand{\Gdw}{\ifmmode\iff\else$\Longleftrightarrow$\xspace\fi}
+}
+	
+\newcommand{\gdwdef}{\ifmmode\mskip\thickmuskip:\Leftrightarrow\mskip\thickmuskip\else:$\Leftrightarrow$\xspace\fi}
+\newcommand{\Gdwdef}{\ifmmode\mskip\thickmuskip:\Longleftrightarrow\mskip\thickmuskip\else:$\Longleftrightarrow$\xspace\fi}
 
 \newcommand{\symbitemnegoffset}{\hspace{-.5\baselineskip}}
 \newcommand{\implitem}{\item[\impl\symbitemnegoffset]}
@@ -195,6 +305,9 @@
 
 \newcommand{\bfalert}[1]{\textbf{\alert{#1}}}
 \let\elem\in   % I'm a Haskell freak. Don't judge me. :P
+
+
+\def\|#1|{\text{\normalfont #1}}  % | steht für senkrecht (anstatt kursiv wie sonst im math mode)
 
 
 % proper math typography
@@ -230,6 +343,17 @@
 
 \newcommand{\hanging}{\hangindent=0.7cm}
 \newcommand{\indented}{\hanging}
+
+
+% \hstretchto prints #2 left-aligned into a box of the width of #1
+\def\hstretchto#1#2{%
+	\mbox{}\vphantom{#2}\rlap{#2}\hphantom{#1}%
+}
+
+\def\vstretchto#1#2{%
+	\mbox{}\hphantom{#2}\smash{#2}\vphantom{#1}%
+}
+
 
 %requires \thisyear to be defined (s. config.tex)!
 \edef\nextyear{\the\numexpr\thisyear+1\relax}
@@ -283,9 +407,11 @@
 \colorprovide{lightred}{red!30}
 \colorprovide{lightgreen}{green!40}
 \colorprovide{lightyellow}{yellow!50}
+\colorprovide{lightblue}{blue!10}
 \colorprovide{beamerlightred}{lightred}
 \colorprovide{beamerlightgreen}{lightgreen}
 \colorprovide{beamerlightyellow}{lightyellow}
+\colorprovide{beamerlightblue}{lightblue}
 \colorprovide{fullred}{red!60}
 \colorprovide{fullgreen}{green}
 \definecolor{darkred}{RGB}{115,48,38}
@@ -295,9 +421,11 @@
 \only<handout:0>{\colorlet{adaptinglightred}{beamerlightred}}
 \only<handout:0>{\colorlet{adaptinglightgreen}{beamerlightgreen}}
 \only<handout:0>{\colorlet{adaptinglightyellow}{beamerlightyellow}}
+\only<handout:0>{\colorlet{adaptinglightblue}{beamerlightblue}}
 \only<beamer:0>{\colorlet{adaptinglightred}{lightred}}
 \only<beamer:0>{\colorlet{adaptinglightgreen}{lightgreen}}
 \only<beamer:0>{\colorlet{adaptinglightyellow}{lightyellow}}
+\only<beamer:0>{\colorlet{adaptinglightblue}{lightblue}}
 \only<handout:0>{\colorlet{adaptingred}{lightred}}
 \only<beamer:0>{\colorlet{adaptingred}{fullred}}
 \only<handout:0>{\colorlet{adaptinggreen}{lightgreen}}
@@ -339,7 +467,7 @@
 \newcommand{\GenericQuestion}[5]{
 	\setlength\fboxrule{2pt}
 	\only<+|handout:0>{\hspace{-2pt}\fcolorbox{white}{questionlightgray}{\QuestionParbox{#4} \quad\textbf{?}}}
-	\visible<+->{\hspace{-2pt}\fcolorbox{white}{#1}{\QuestionParbox{#4} \quad\textbf{\textcolor{#2}{#3}}} \ExplanationParbox{#5}} \\
+	\visible<+->{\hspace{-2pt}\fcolorbox{white}{#1}{\QuestionParbox{#4} \quad\textbf{\textcolor{#2}{#3}}} \if\relax#5\relax\else\ExplanationParbox{#5}\fi} \\
 	\setlength\fboxrule{\defaultfboxrule}
 }
 
@@ -373,11 +501,17 @@
 	\GenericQuestion{adaptinglightyellow}{darkyellow}{Je nachdem!}{#1}{#2}
 }
 
+% #1: Q text
+% #2: Answer
+\newcommand{\ContentQuestion}[2]{
+	\GenericQuestion{adaptinglightblue}{black}{\minusquad}{#1}{#2}
+}
+
 \ifnum\thisyear=2018 \else \errmessage{Old ILIAS link inside preamble. Please update.} \fi
 
 \newcommand{\ILIAS}{\urlnamed{ILIAS}{https://ilias.studium.kit.edu/ilias.php?ref\_id=855240\&cmdClass=ilrepositorygui\&cmdNode=5r\&baseClass=ilrepositorygui}\xspace}
 
-\newcommand{\Socrative}{\only<handout:0>{socrative.com $\qquad \?> $ Student login \\ Raumname:  \mysocrativeroom\\ \medskip}}
+\newcommand{\Socrative}{\ifdefined\mysocrativeroom \only<handout:0>{socrative.com $\quad \~~> \quad $ Student login \\ Raumname:  \mysocrativeroom\\ \medskip}\else\fi}
 
 \newcommand{\thasse}[1]{
 	\ifdefined\ThassesTut #1\xspace \else\fi

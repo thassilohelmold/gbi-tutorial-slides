@@ -5,16 +5,16 @@
 		\begin{itemize}
 			\item Ein \textbf{Alphabet} $A$ ist eine endliche, nichtleere Menge von Zeichen. \pause
 			\item Ein \textbf{Wort} $w$  über einem Alphabet $A$ ist ein \textbf{endliche Folge von Zeichen} aus A \\ \pause
-				\emph{Formal}: Eine surjektive Abbildung $w \from \Z_n \functionto B$ mit $B \subseteq A$\\[0.5em]
-				Zur Erinnerung: $ \Z_n = \{i \in \N_0 \mid 0 \leq i < n \} = \set{0, ..., n-1} $ 
 		\end{itemize}
 	\end{block}	
 	
 	\pause
 	\begin{block}{Definition}
-		$A^*$ ist die \textbf{Menge aller Wörter} beliebiger Länge, die nur Zeichen aus $A$ enthalten, also:\\
+		$A^*$ ist die \textbf{Menge aller Wörter} beliebiger Länge, die nur Zeichen aus $A$ enthalten.
+		% brauchen wir das?
+		\mycomment{, also:\\
 		\pause 
-		$A^*$ ist die Menge aller Abbildungen $w \from \Z_n \functionto B$ mit $n \in \N_0$ und $B \subseteq A$. \\
+		$A^*$ ist die Menge aller Abbildungen $w \from \Z_n \functionto B$ mit $n \in \N_0$ und $B \subseteq A$. \\}
 	\end{block}
 
 	\pause
@@ -24,6 +24,27 @@
 		\impl $ w_1 \in A^*, w_2 \in A^*$
 	\end{block}
 
+\end{frame}
+
+\begin{frame}{Wörter -- \thassedaniel{formal betrachtet}{Formalkram}}
+	\begin{block}{Formale Definition}
+		Ein \textbf{Wort} $w$  über einem Alphabet $A$ ist eine \textit{surjektive} Abbildung $w \from \Z_n \functionto B$ mit $B \subseteq A$. \\ 
+		\smallskip
+		Zur Erinnerung: \; $ \Z_n = \{i \in \N_0 \mid 0 \leq i < n \} = \set{0, ..., n-1} $ 
+	\end{block}
+	
+	\begin{block}{Beispiel}
+		Sei $ A := \{ \word a, ..., \word z \} $ ein Alphabet und $B := \set{\word a, \word b, \word e, \word n, \word o, \word r, \word s, \word t} \subseteq A$. \\
+		Dann ist ein Wort $w$ gegeben durch $ w \from \Z_{12} \functionto B$, \\ 
+		\smallskip
+		\begin{tabular}{c|c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c@{\:}c}
+			$i$ & \small 0 & \small 1 & \small 2 & \small 3 & \small 4 & \small 5 & \small 6 & \small 7 & \small 8 & \small 9 & \small 10 & \small 11 \\
+			\hline
+			$w(i)$ & \word a & \word n & \word a & \word n & \word a & \word s & \word s & \word o & \word r & \word b & \word e & \word t 
+		\end{tabular} \\
+		\bigskip
+		Oder einfach wie vorhin: \quad  $w := \word{ananassorbet}$.
+	\end{block}
 \end{frame}
 
 \begin{frame}[t]{Das leere Wort}
@@ -46,19 +67,20 @@
 
 
 \begin{frame}[t]{Konkatenation von Wörtern}
-	\begin{block}{}
+	\begin{block}{Wörter „aneinanderkleben“}
 		Seien $w_1 = \word{erd}, w_2 = \word{blumentopf}$. \\
-		Dann ist $ w_1 \· w_2 = \word{erdblumentopf} \neq w_2 \· w_1 = \word{blumentopferd}$. \\ 
+		Dann ist $ w_1 \* w_2 = \word{erdblumentopf} \neq w_2 \* w_1 = \word{blumentopferd}$. \\ 
 		\pause
 		Konkatenation ist also \textbf{nicht kommutativ!} \\
-		\YesQuestion{Ist sie \textbf{assoziativ}?} \medskip
-		Außerdem gilt immer $ \eps \· w \· \eps = w $
+		\YesQuestion{Ist sie \textbf{assoziativ}?} \medskip 
+		\only<+->{Außerdem gilt immer $ \eps \* w \* \eps = w $}
+		
 	\end{block}
 	
 	
-	\visible<.->{
+	\visible<+->{
 		\begin{block}{Beobachtung}
-			Falls $w=w_1\· w_2 $ und $w_1 \in A^* , w_2 \in B^* $, dann ist
+			Falls $w=w_1\* w_2 $ und $w_1 \in A^* , w_2 \in B^* $, dann ist
 			$ w\in (A \cup B)^* $.
 		\end{block}
 	
@@ -66,7 +88,7 @@
 			\vspace{-2\baselineskip}
 			\begin{align*}
 				w^0 &= \eps \\
-				w^k &= \underbrace{w \· w \· \, \cdots \, \· w}_{\text{$k$-mal}}
+				w^k &= \underbrace{w \* w  \cdots  w}_{\text{$k$-mal}}
 			\end{align*}
 	
 		\end{block}
@@ -85,9 +107,9 @@
 
 	\pause
 	\begin{block}{Lemmata}
-		$$ \size{a \· b} = \size a + \size b $$ \\
+		$$ \size{a \* b} = \size a + \size b $$ \\
 		\pause
-		$$ \size{w^k} = k \· \size w $$
+		$$ \size{w^k} = k \* \size w $$
 	\end{block}
 
 \end{frame}
@@ -117,7 +139,7 @@
 			\impl $\word a, \word b, \word {aa}, \word {bb}, \word {ab}, \word {ba}, \word {aaa}, \word {bbb}, \dots$ \\
 			\impl $A^*$ enthält genau diese Wörter (und auch $\eps$!).
 		}
-		\item Ist das Wort $w = \word{aabb} \· \word{ba}$ ein Element der Menge $A^5$? \\
+		\item Ist das Wort $w = \word{aabb} \* \word{ba}$ ein Element der Menge $A^5$? \\
 		\visible<+-|handout:2->{
 			\impl Nein. $w = \word{aabbba}$ ist zwar ein Wort über $A$, aber hat Länge $6 \neq 5$.
 		}

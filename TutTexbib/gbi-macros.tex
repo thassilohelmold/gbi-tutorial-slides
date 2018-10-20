@@ -148,7 +148,7 @@
 \newcommand{\fTrans}{\text{Trans}}
 \newcommand{\fVal}{\text{Val}}
 
-% Modified (DJ)
+% MODIFIED (DJ)
 \newcommand{\Val}{\text{Val}}
 
 %\def\G{\mathbb{Z}}
@@ -179,8 +179,9 @@
 \newcommand{\NP}{\mathbf{NP}}
 \newcommand{\Nadd}{N_{\text{add}}}
 \newcommand{\Nmult}{N_{\text{mult}}}
-\newcommand{\Oh}[1]{O\left(#1\right)}
-\newcommand{\Om}[1]{\Omega\left(#1\right)}
+% MODIFIED (DJ): added \!, mathcal{O}
+\newcommand{\Oh}[1]{\mathcal{O}\!\left(#1\right)}
+\newcommand{\Om}[1]{\Omega\!\left(#1\right)}
 \newcommand{\personname}[1]{\textsc{#1}}
 \newcommand{\regname}[1]{\texttt{#1}}
 \newcommand{\mima}{\textsc{Mima}\xspace}
@@ -205,14 +206,15 @@
 \newcommand{\sqbox}{\mathop{\raisebox{-6.2pt}{\hbox{\hbox to 0pt{$^{^{\sqcap}}$\hss}$^{^{\sqcup}}$}}}}
 \newcommand{\sqleq}{\sqsubseteq}
 \newcommand{\sqgeq}{\sqsupseteq}
-\newcommand{\Th}[1]{\Theta\left(#1\right)}
+% MODIFIED (DJ): added \!
+\newcommand{\Th}[1]{\Theta\!\left(#1\right)}
 %\newcommand{\usw}{usw.\@\xspace}
 \newcommand{\V}[1]{\hbox{\textit{#1}}}
 \newcommand{\x}{\times}
 \newcommand{\ZK}{\mathbb{K}}
 %\newcommand{\Z}{\mathbb{Z}}
-%\newcommand{\zB}{z.\,B.\@\xspace}
-%\newcommand{\ZB}{Z.\,B.\@\xspace}
+\newcommand{\zB}{z.\,B.\@\xspace}
+\newcommand{\ZB}{Z.\,B.\@\xspace}
 % \newcommand{\bb}{{\text{bb}}}
 % \def\##1{\hbox{\textcolor{darkblue}{\texttt{#1}}}}
 % \def\A{\mathcal{A}}

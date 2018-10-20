@@ -1,0 +1,54 @@
+\section{Relationen}
+
+\begin{frame}{Kartesisches Produkt}
+	\begin{block}{Definition}
+		Für Mengen $A$ und $B$ ist
+		$$A \times B := \set{ (a,b) \Mid a \in A, b \in B }$$
+		das \textbf{kartesische Produkt} von $A$ und $B$. \\
+		\impl Für beliebig viele Mengen entsprechend induktiv (VL), \\
+		es enthält $n$-Tupel der Form $(e_1, e_2, ..., e_n)$.
+	\end{block}
+
+	\pause
+	\begin{block}{Beispiel}
+		\begin{itemize}
+			\item $\{\triangle,\square\} \times \{1, 2, 3\} = \left\{(\triangle, 1), (\triangle, 2), (\triangle, 3), (\square, 1), (\square, 2), (\square, 3)\right\}$ 
+			\item 	$\{0, 1\}^3 = \{0,1\} \times \{0,1\} \times \{0,1\} = \left\{(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)\right\} $
+		\end{itemize}
+		
+	 
+	   Für jede Menge $M$ gilt: $ M \times \emptyset = \pause \emptyset $
+	\end{block}
+\end{frame}
+
+\begin{frame}{Relationen}
+	\begin{block}{Definition}
+		Für Mengen $A$ und $B$ heißt eine Teilmenge 
+		$$R \subseteq A \times B$$
+		von Paaren $(a,b)$ eine \textbf{Relation} auf $A \times B$. \\
+		\smallskip
+		$R$ wird meistens durch eine \emph{Set-Comprehension} ($\set{... \vphantom{(} \Mid ......}$) angegeben. \\
+		\smallskip
+		Wir schreiben für $a \in A$, $b \in B$ 
+		$$a \mathrel{R} b, $$
+		wenn sie in Relation R zueinander stehen, also $(a, b) \in R$.
+	\end{block}
+	
+	\pause
+	\begin{block}{Beispiel} 
+		$\leq$ ist eine Relation auf $\N_0 \times \N_0 $. \\
+		Also: $ \text{$\leq$} = \set{(m, n) \Mid m \leq n } = \{(0, 0), (0, 1), (1, 1), (0, 2), ...\} $
+	\end{block}
+\end{frame}
+
+\begin{frame}{Relationen}	
+	\begin{block}{Beispiel}
+		$ P = \Z \times \N_+ \times \N_0 $ \\
+		$ \normalvar{\sim} = \set{\tuple{n, m, r} \in P \Mid n \* m = r } \subseteq P $ \\[0.5em]
+		\pause
+		$ \normalvar{\sim} = \set{\tuple{0, 1, 0}, \tuple{0, 2, 0}, \tuple{1, 1, 1}, \tuple{1, 2, 2}, \tuple{6, 7, 42}, ...} $ \\[0.5em]
+		$ \tuple{-1, 1, -1}, \tuple{42, 0, 0} \notin \normalvar{\sim} $\\[1em]
+		\pause
+		\impl Immer auf die \textbf{Grundmengen} achten!
+	\end{block}
+\end{frame}

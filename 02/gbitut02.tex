@@ -28,16 +28,15 @@
 
 \framePrevEpisode
 
-\begin{frame}
-	\begin{block}{Wahr oder Falsch?}
-		\TrueQuestionE{$ \setsize{\emptyset} = 0$}{}
-		\FalseQuestionE{$ \setsize{ \set{\set{}} } = 0$}{$ \setsize{\set{\set{}}} = \setsize{\set{\emptyset}} = 1$}
-		\TrueQuestionE{$ \{1, 2\} = \{2, 1\}$}{}
-		\FalseQuestion{$ (1, 2) = (2, 1)$}
-		\FalseQuestionE{$ \left(M\cup A\right)\setminus M = A $}{für z.~B. $ M = A = \{1\}$}
-	\end{block}
-
-	\only<11->{
+\begin{frame}{Wahr oder falsch?}
+	\TrueQuestionE{$ \setsize{\emptyset} = 0$.}{}
+	\FalseQuestionE{$ \setsize{ \set{\set{}} } = 0$.}{$ \setsize{\set{\set{}}} = \setsize{\set{\emptyset}} = 1$.}
+	\TrueQuestionE{$ \setsize{\set{ 1, \set{2, 3}, 4, \set{5,6,7}}} = 4$.}{$\set{2, 3}$ und $\set{5,6,7}$ sind zwei einzelne Objekte!}
+	\TrueQuestionE{$ \{1, 2\} = \{2, 1\}$.}{}
+	\FalseQuestion{$ (1, 2) = (2, 1)$.}
+	\FalseQuestionE{$ \left(M\cup A\right)\setminus M = A $.}{für z.~B. $ M = A = \{1\}$}
+	%TODO Relationen-Fragen noch? Wenn's im ersten Tut schon vorkam!
+	\visible<11->{
 	\begin{block}{Bemerkungen}
 		Menge / Tupel: Klammern beachten! \\
 		Einfache Beispiele helfen!
@@ -45,11 +44,8 @@
 	}
 \end{frame}
 
-\Comment{
 
-}
-
-\input{../Bloecke/Relationen1.tex}
+\input{../Bloecke/Relationen1b.tex}
 
 \input{../Bloecke/Woerter.tex}
 

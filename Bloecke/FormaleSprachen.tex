@@ -78,7 +78,7 @@
 		Der \textbf{$\eps$-freie Konkatenationsabschluss} ist \quad $L^+ = \bigcup \limits_{i=1}^\infty L^i$. \\
 		$$ \set{}^+ = \set{} \qquad \set{\word{abc}, \word{xy}}^+ = \set{\word{abc}, \word{xy}, \word{abcabc}, \word{abcabcxy}, \word{xyabc}, ...} $$
 	\end{Definition} \pause
-	\textbf{Achtung}: Der $\eps$-freie Konkatenationsabschluss muss nicht $\eps$-frei sein! \\ \pause
+	\textbf{Achtung}: Der $\eps$-freie Konkatenationsabschluss muss nicht „$\eps$-frei“ sein! \\ \pause
 	$$ \set{\eps}^+ = \underbrace{\set{\eps}}_{\mathclap{\text{enthält ein $\eps$!}}} $$
 	
 \end{frame}
@@ -87,13 +87,13 @@
 	\begin{itemize}
 		\item Sprache der korrekten IP4-Adressen: \pause
 		\begin{align*}
-		\set{192.168.178.1, \quad 
-			76.147.112.6, ... }
+		\set{\word{192.168.178.1}, \quad 
+			\word{76.147.112.6}, ... }
 		\end{align*} 
-		\pause Enthält aber nicht: $000.999.123.666$ \pause
+		\pause Enthält aber nicht: $\word{000.999.123.666}$ \pause
 		\item Formale Sprache der Schlüsselwörter in Java: $$L = \{ \word{class}, \word{int} , \word{if}, \dots \}$$ \pause
-		\item Formale Sprache der ganzen Zahlen: Mit $A = \{0...9\}$ bauen wir
-		\pause $$A \cdot A^* = \{12849, 1001, 42, ...\}$$ 
+		\item Formale Sprache der ganzen Zahlen: Mit $A = \{\word 0, ..., \word 9\}$ bauen wir
+		\pause $$A \cdot A^* = \{\word{12849}, \word{1001}, \word{42}, ...\}$$ 
 		\pause Und minus? Also besser $ \{ \mword-, \varepsilon \} \cdot A \cdot A^*$
 	\end{itemize}
 \end{frame}

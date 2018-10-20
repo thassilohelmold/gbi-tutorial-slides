@@ -48,12 +48,12 @@
 		$For_{AL}$ ist die Menge aller \textbf{syntaktisch korrekten Formeln} über $Var_{AL}$.\\
 		\medskip
 		(VL: induktive Definition über Konstruktionsabbildungen) \\
-		Klammern, die überflüssig sind, können weg. Wir lesen es dann wie gewohnt (\enquote{ \bnot} vor \enquote{ \bund} vor \enquote{ \boder} vor \enquote{ \bimp}  {\small \#PunktVorStrichUndSo}).
+		Klammern, die überflüssig sind, können weg. Wir lesen es dann wie gewohnt (\enquote{$\bnot$} vor \enquote{ $\bund$} vor \enquote{ $\boder$} vor \enquote{ $\bimp$}  {\small \#PunktVorStrichUndSo}).
 	\end{Definition}
 	\pause
 	\begin{Beispiel}
-		$$Var_{AL} = \{A, B, C\}$$
-		$$For_{AL} = \set{(A  \bimp B) \boder \bnot B \bund C, \ C \bimp (\bnot C), ...}$$
+		$$Var_{AL} = \{\alA, \alB, \alC\}$$
+		$$For_{AL} = \set{\alka \alA  \bimp \alB \alkz \boder \bnot \alB \bund \alC, \ \alC \bimp \alka \bnot \alC \alkz, ...}$$ 
 	\end{Beispiel}
 \end{frame}
 
@@ -97,7 +97,7 @@
 		\only<3-4|handout:2>{ 
 			\begin{tabular}{|c|c|c|}
 				\hline 
-				$A$ & $B$ & $A \bund B$ \\
+				$A$ & $B$ & $A \mathop{\bund} B$ \\
 				\hline
 				\w & \w & \uncover<4|handout:2>{\w} \\
 				\hline
@@ -112,7 +112,7 @@
 		\only<5-6|handout:3>{ 
 			\begin{tabular}{|c|c|c|}
 				\hline 
-				$A$ & $B$ & $A \boder B$ \\
+				$A$ & $B$ & $A \mathop{\boder} B$ \\
 				\hline
 				\w & \w & \uncover<6|handout:3>{\w} \\
 				\hline
@@ -127,7 +127,7 @@
 		\only<7-8|handout:4>{
 			\begin{tabular}{|c|c|c|}
 				\hline 
-				$A$ & $B$ & $A \bimp B$ \\
+				$A$ & $B$ & $A \mathop{\bimp} B$ \\
 				\hline
 				\w & \w & \uncover<8|handout:4>{\w} \\
 				\hline
@@ -161,10 +161,10 @@
 	\end{Definition}
 	
 	\begin{align*}
-	&val_I((A \bimp B) \boder \bnot B)  \\
-	\visible<2->{= \;&b_{\boder} (val_I(A\bimp B), val_I(\bnot B)) \\}
-	\visible<3->{= \;&b_{\boder} (b_{\bimp} (val_I(A), val_I(B)), b_{\bnot}(val_I(B))) \\}
-	\visible<4->{= \;&b_{\boder} (b_{\bimp} (I(A), I(B)), b_{\bnot}(I(B))) \\}
+	&val_I(\alka\alA \bimp \alB\alkz \boder \bnot \alB)  \\
+	\visible<2->{= \;&b_{\boder} (val_I(\alA\bimp \alB), val_I(\bnot \alB)) \\}
+	\visible<3->{= \;&b_{\boder} (b_{\bimp} (val_I(\alA), val_I(\alB)), b_{\bnot}(val_I(\alB))) \\}
+	\visible<4->{= \;&b_{\boder} (b_{\bimp} (I(\alA), I(\alB)), b_{\bnot}(I(\alB))) \\}
 	\end{align*}
 \end{frame}
 
@@ -198,9 +198,9 @@
 	
 	\begin{block}{Aufgabe}
 		Gegeben seien die Formeln
-		$$ F_1 = \left(\left(\left(B \bimp A \right) \boder B \right) \bimp (\bnot A)\right) \bund B$$
+		$$ F_1 = \left(\left(\left(\alB \bimp \alA \right) \boder \alB \right) \bimp (\bnot \alA)\right) \bund \alB$$
 		und
-		$$F_2 = \bnot A \bund B$$
+		$$F_2 = \bnot \alA \bund \alB$$
 		Stellt die Wahrheitstabellen von $F_1$ und $F_2$ auf. Sind die beiden Formeln äquivalent?
 	\end{block}
 \end{frame}
@@ -211,11 +211,11 @@
 	\centering
 	\begin{tabular}{|*{6}{c|}}
 	\hline
-	$A$ & $B$ & $B \bimp A$ &  $\dots \boder B$ & $\dots \bimp \bnot A$ & $\dots \bund B$ \pause \\ \hline
-	w & w & w & w & f & f  \\ \hline \pause
-	w & f & w & w & f & f  \\ \hline \pause
-	f & w & f & w & w & w  \\ \hline \pause
-	f & f & w & w & w & f \\ \hline
+	$\alA$ & $\alB$ & $\alB \bimp \alA$ &  $\dots \boder \alB$ & $\dots \bimp \bnot \alA$ & $\dots \bund \alB$ \pause \\ \hline
+	\W & \W & \W & \W & \F & \F  \\ \hline \pause
+	\W &  \F & \W & \W & \F & \F  \\ \hline \pause
+	\F & \W & \F & \W & \W & \W  \\ \hline \pause
+	\F & \F & \W & \W & \W & \F \\ \hline
 	\end{tabular}
 	\end{table}
 \end{frame}
@@ -226,17 +226,12 @@
 	\centering
 	\begin{tabular}{|*{3}{c|}}
 	\hline
-	$A$ & $B$ & $\bnot A \bund B$  \\ \hline \pause
-	w & w & f \\  \hline \pause
-	w & f & f \\  \hline \pause
-	f & w & w \\  \hline \pause
-	f & f & f \\ \hline
+	$\alA$ & $\alB$ & $\bnot \alA \bund \alB$  \\ \hline \pause
+	\W & \W & \F \\  \hline \pause
+	\W & \F & \F \\  \hline \pause
+	\F & \W & \W \\  \hline \pause
+	\F & \F & \F \\ \hline
 	\end{tabular}
 	\end{table}
 	Also sind die beiden Formeln äquivalent: $$F_1 \equiv F_2$$
-\end{frame}
-
-\begin{frame}{Beweisbarkeit}
-	Kalkül, Axiome, Schlussregeln, Modus Ponens, ...\\
-	Siehe VL!
 \end{frame}
