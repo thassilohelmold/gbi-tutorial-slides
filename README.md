@@ -4,6 +4,8 @@ WICHTIG: Dieses Repository enthält Materialien, die ausschließlich für Tutore
 Daher dürfen diese Quellen und Rohmaterialien insbesondere nicht den Tutanden oder anderen Personen zugänglich gemacht werden!
 Vielen Dank für euere Mitarbeit!
 
+Diese Folien können sich im Laufe des Semesters noch ändern. Es lohnt sich, ab und zu zu pullen. ;-)
+
 ### Verwendung
 Zunächst muss eine aktuelle Version des KIT-Themes installiert werden, siehe dazu das KIT-Vorlagen-Archiv im Ordner `Documents`. Es wird zwar eine leicht modifizierte Variante des KIT-Themes verwendet, diese greift aber trotzdem noch auf gewisse KIT-Packages zu, da das vollständige Entfernen aller Abhängigkeiten ein hoher (unnötiger) Aufwand wäre.
 
