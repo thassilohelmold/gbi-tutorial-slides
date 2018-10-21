@@ -72,16 +72,17 @@
 
 \begin{frame}{Kardinalität, Teilmengen, Gleichheit}
 	
-	\begin{block}{Beispiel}
+	\begin{exampleblock}{Beispiel}
 		
 		\begin{align*}
 		\setsize{\{1,2,3,2,1\}} &= \only<2->{3} \\
 		\setsize{ \emptyset } &= \only<3->{0} \\
-		\{1,2\} \only<1-3|handout:0>{ &\mathrel{?\ }  } \only<4->{&\subsetneq}  \{1,2,3\} \\
-		\{1,2\} \only<1-4|handout:0>{ &\mathrel{?\ } } \only<5->{&\nsubseteq} \{\text{Hund}, \text{Katze}, \text{Maus}\} \\
-		\{1,2,3\} \only<1-5|handout:0>{ &\mathrel{?\ } } \only<6->{&\supseteq} \{1,2\}
+		\setsize{\{\{\}, 1, \{2,3\} \}} &= \only<4->{3} \\
+		\{1,2\} \only<1-4|handout:0>{ &\mathrel{?\ }  } \only<5->{&\subseteq}  \{1,2,3\} \\
+		\{1,2\} \only<1-5|handout:0>{ &\mathrel{?\ } } \only<6->{&\nsubseteq} \{\text{Hund}, \text{Katze}, \text{Maus}\} \\
+		\{1,2,3\} \only<1-6|handout:0>{ &\mathrel{?\ } } \only<7->{&\supseteq} \{1,2\}
 		\end{align*}
-	\end{block} 
+	\end{exampleblock} 
 	
 
 \end{frame}
@@ -89,7 +90,7 @@
 \begin{frame}{Schnitt und Vereinigung}
 	
 	\begin{block}{Definition}
-		Seien $M$ und $N$ zwei Mengen. Dann heißen
+		Seien $M$ und $N$ zwei Mengen, so heißen
 		$$M \cap N := \left\{x \Mid x \in M \text{ und } x \in N \right\} \qquad M \cup N := \left\{x \Mid x \in M \text{ oder } x \in N \right\} $$
 		\textbf{Durchschnitt} bzw. \textbf{Vereinigung} von $M$ und $N$.\\[1em] 
 		\pause
@@ -97,9 +98,9 @@
 	\end{block}
 	
 	\pause
-	\begin{block}{Beispiel}
+	\begin{exampleblock}{Beispiel}
 		\centered{$ \{1,2\} \cup \{2,3\} = \{1,2,3\} \qquad \{1,2\} \cap \{2,3\} = \{2\} $}
-	\end{block}
+	\end{exampleblock}
 	
 	\pause
 	
@@ -112,18 +113,18 @@
 
 \begin{frame}{Mengendifferenz}
 	\begin{block}{Definition}
-		Seien $A$ und $B$ zwei beliebige Mengen, so heißt $$ A\setminus B := \left\{ x \Mid x\in A \text{ und } x\notin  B  \right\} $$ die \textbf{Differenz}(-menge) von $A$ und $B$.
+		Seien $A$ und $B$ zwei Mengen, so heißt $$ A\setminus B := \left\{ x \Mid x\in A \text{ und } x\notin  B  \right\} $$ die \textbf{Differenz}(-menge) von $A$ und $B$.
 	\end{block}
 	
 	\pause
 	
 	\begin{block}{Lemma}
-		Es gilt: $$ N \subseteq M \iff N \setminus M = \emptyset $$
+		Es gilt: $$ A \subseteq B \iff A \setminus B = \emptyset $$
 	\end{block} 
 	
 	\pause
 	
-	\begin{block}{Weitere Beispiele}
+	\begin{exampleblock}{Weitere Beispiele}
 		\vspace{-2\baselineskip} % WtF LaTeX??
 		\begin{align*}
 		A \cup \emptyset &= \uncover<4->{  A }  \\
@@ -131,7 +132,7 @@
 		\N_+ \cup \{0\} &= \uncover<6->{ \N_0} \\
 		\N_0 \setminus \{0\} &= \uncover<7->{ \N_+} 
 		\end{align*}
-	\end{block}
+	\end{exampleblock}
 	
 \end{frame}
 
@@ -183,7 +184,7 @@
 	\end{block}
 	\pause
 	
-	\begin{block}{Beispiel}
+	\begin{exampleblock}{Beispiel}
 		Sei $M = \left\{ 1,2,0 \right\} $. \\ \pause
 		
 		Dann gilt  
@@ -192,7 +193,7 @@
 		\end{align*}
 		
 		\textbf{Beachte}: Es gilt immer $M \in 2^M \ \text{und} \ \emptyset \in 2^M$.
-	\end{block}
+	\end{exampleblock}
 	
 \end{frame}
 

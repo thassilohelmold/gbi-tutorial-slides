@@ -1,17 +1,7 @@
-
-
-
-
-%% Anzeigetiefe für Inhaltsverzeichnis: 1 Stufe
-\setcounter{tocdepth}{1}
-
-
 %%%%%%%%%%%% INHALT %%%%%%%%%%%%%%%%
 
 %% Wochennummer
 \newcounter{weeknum}
-
-
 
 %% Titelinformationen
 \title[GBI-Tutorium \mytutnumber, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium \mytutnumber}
@@ -76,33 +66,12 @@
 %% Wörter DEPRECATED! DO NOT USE
 \newcommand{\code}[1]{$\mathbf{#1}$}
 
-%% Sterne DEPRECATED! DO NOT USE
-
-\newcounter{starsc}
-\newcommand{\stars}[1]{
-	\hfill
-	\begin{minipage}{100px}
-		\forloop{starsc}{0}{\value{starsc} < #1}%
-		{%
-			\includegraphics[scale=0.05]{star-full.pdf} \hspace*{1px}
-		}%
-		\forloop{starsc}{\value{starsc}}{\value{starsc} < 5}%
-		{%
-			\includegraphics[scale=0.05]{star-empty.pdf} \hspace*{1px}
-		}
-		\vspace*{2px}
-	\end{minipage}
-}
-
-% No stars for me...
-\renewcommand{\stars}[1]{}
-
 \newcommand{\slideThanks}{
 	\begin{frame}
 		\frametitle{Credits}
 		\begin{block}{}
-			Vorgänger dieses Foliensatzes wurden erstellt von:\\[1em]
-			Daniel Jungkind \\  % What a scallywag I am :P
+			An der Erstellung des Foliensatzes haben mitgewirkt:\\[1em]
+			Daniel Jungkind \\
 			Thassilo Helmold \\
 			Philipp Basler \\
 			Nils Braun \\

@@ -38,14 +38,9 @@
 %\usepackage{mathpazo}
 \renewcommand\ttdefault{cmtt} % Computer Modern typewriter font, see lecture slides.
 
-
-
-
-
 \usepackage{csquotes}
 
 %%%%%%
-
 
 %% Schönere Schriften
 \usepackage[TS1,T1]{fontenc}
@@ -55,6 +50,9 @@
 
 %% der wird sowieso in jeder Datei gesetzt
 %%\graphicspath{{../figures/}}
+
+%% Anzeigetiefe für Inhaltsverzeichnis: 1 Stufe
+\setcounter{tocdepth}{1}
 
 %% Hyperlinks
 \usepackage{hyperref}
@@ -137,18 +135,6 @@
 % Modified by DJ
 \let\oldemptyset\emptyset
 \let\emptyset\varnothing % proper emptyset
-
-%\definecolor{myRed}{RGB}{255,75,20}
-%\colorlet{myGreen}{KITpalegreen}
-
-%\newcounter{tfqtempcount}
-%\newcommand{\truefalseQ}[4]{
-%	\setcounter{tfqtempcount}{#1}
-%	\addtocounter{tfqtempcount}{1}
-%	\truefalseQuestion{#1}{\value{tfqtempcount}}{#2}{#3}{#4}
-%}
-
-%\newcommand{\truefalseQuestion}[5]{\item<#1-|handout:#1-> \color<#2-|handout:#2->{#3} #4 \qquad \visible<#2-|handout:#2->{#5}}
 
 \newcommand{\boder}{\ensuremath{\mathbin{\textcolor{blue}{\vee}}}\xspace}
 \newcommand{\bund}{\ensuremath{\mathbin{\textcolor{blue}{\wedge}}}\xspace}

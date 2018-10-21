@@ -10,15 +10,16 @@
 	\end{block}
 
 	\pause
-	\begin{block}{Beispiel}
+	\begin{exampleblock}{Beispiel}
 		\begin{itemize}
 			\item $\{\triangle,\square\} \times \{1, 2, 3\} = \left\{(\triangle, 1), (\triangle, 2), (\triangle, 3), (\square, 1), (\square, 2), (\square, 3)\right\}$ 
 			\item 	$\{0, 1\}^3 = \{0,1\} \times \{0,1\} \times \{0,1\} = \left\{(0, 0, 0), (0, 0, 1), (0, 1, 0), (0, 1, 1), (1, 0, 0), (1, 0, 1), (1, 1, 0), (1, 1, 1)\right\} $
 		\end{itemize}
 		
-	 
-	   Für jede Menge $M$ gilt: $ M \times \emptyset = \pause \emptyset $
-	\end{block}
+		\pause
+	   Im Allgemeinen gilt $ A \times B \neq B \times A $\\
+	   Für jede Menge $M$ gilt: $ M \times \emptyset = \pause \emptyset \times M = \emptyset$
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}{Relationen}
@@ -35,14 +36,14 @@
 	\end{block}
 	
 	\pause
-	\begin{block}{Beispiel} 
+	\begin{exampleblock}{Beispiel} 
 		$\leq$ ist eine Relation auf $\N_0 \times \N_0 $. \\
 		Also: $ \text{$\leq$} = \set{(m, n) \Mid m \leq n } = \{(0, 0), (0, 1), (1, 1), (0, 2), ...\} $
-	\end{block}
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}{Relationen}	
-	\begin{block}{Beispiel}
+	\begin{exampleblock}{Beispiel}
 		$ P = \Z \times \N_+ \times \N_0 $ \\
 		$ \normalvar{\sim} = \set{\tuple{n, m, r} \in P \Mid n \* m = r } \subseteq P $ \\[0.5em]
 		\pause
@@ -50,5 +51,5 @@
 		$ \tuple{-1, 1, -1}, \tuple{42, 0, 0} \notin \normalvar{\sim} $\\[1em]
 		\pause
 		\impl Immer auf die \textbf{Grundmengen} achten!
-	\end{block}
+	\end{exampleblock}
 \end{frame}
