@@ -17,8 +17,6 @@
 \usepackage{wasysym}
 \usepackage{mathtools}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Copied from Style_Tut.tex
-
 
 % Das ist der KIT-Stil
 %\usepackage{../TutTexbib/beamerthemekit}
@@ -49,7 +47,7 @@
 \usepackage{graphicx}
 
 %% der wird sowieso in jeder Datei gesetzt
-%%\graphicspath{{../figures/}}
+\graphicspath{{../figures/}}
 
 %% Anzeigetiefe für Inhaltsverzeichnis: 1 Stufe
 \setcounter{tocdepth}{1}
@@ -513,6 +511,39 @@
 
 %%%%%%%%%%%% INHALT %%%%%%%%%%%%%%%%
 
+%% Wochennummer
+\newcounter{weeknum}
+
+%% Titelinformationen
+\title[GBI-Tutorium \mytutnumber, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium \mytutnumber}
+
+\subtitle{Woche \theweeknum \ | \mydate{\theweeknum} \\ \myname \ \  \normalfont (\mailto{\mymail})}
+\author[\myname]{\myname}
+\institute{KIT -- Karlsruher Institut für Technologie}
+\date{\mydate{\theweeknum}\ }
+
+% Modified, DJ (better safe than sorry)
+\AuthorTitleSep{ – }
+
+%% Titel einfügen
+\newcommand{\titleframe}{\frame{\titlepage}}
+
+%% Alles starten mit \starttut{X}
+\newcommand{\starttut}[1]{\setcounter{weeknum}{#1}\pdfinfo{
+		/Author (\myname)
+		/Title  (GBI-Tutorium \mytutnumber, Woche \theweeknum)
+	}\titleframe\frame{\frametitle{Inhalt}\tableofcontents} \AtBeginSection[]{%
+		\begin{frame}{Wo sind wir gerade?}
+		\tableofcontents[currentsection]
+	\end{frame}\addtocounter{framenumber}{-1}}}
+
+
+\newcommand{\framePrevEpisode}{
+\begin{headframe}
+	\mylasttimestext
+\end{headframe}
+}
+
 \newcommand{\lastframetitled}[6]{
 	\frame{\frametitle{#6}
 		\vspace{-#2\baselineskip}
@@ -549,3 +580,21 @@
 {
 	\lastframetitled{#4}{#3}{xkcd/#1}{http://xkcd.com/#1}{}{#2}
 }
+
+\newcommand{\slideThanks}{
+	\begin{frame}
+	\frametitle{Credits}
+	\begin{block}{}
+		An der Erstellung des Foliensatzes haben mitgewirkt:\\[1em]
+		Daniel Jungkind \\
+		Thassilo Helmold \\
+		Philipp Basler \\
+		Nils Braun \\
+		Dominik Doerner \\
+		Ou Yue \\
+	\end{block}
+\end{frame}
+}
+
+%% Wörter DEPRECATED! DO NOT USE
+\newcommand{\code}[1]{$\mathbf{#1}$}
