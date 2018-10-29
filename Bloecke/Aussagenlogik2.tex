@@ -70,7 +70,7 @@
 	\end{Beispiel}
 \end{frame}
 
-\begin{frame}{Aussagenkalkül}
+\begin{frame}{Der Aussagenkalkül}
 	\begin{block}{Was ist ein Kalkül?}
 		\begin{itemize}
 			\item Ein \emph{Rechensystem}: \; \textbf{Dinge} und was man mit ihnen \textbf{anstellen} darf. \\
@@ -141,10 +141,25 @@
 	\end{block}
 \end{frame}
 
+\begin{frame}{Ableitungen}
+	\begin{exampleblock}{Beispiel}   % geklaut aus 2017 ÜB2 A4
+		Gegeben sei die Prämissenmenge $\Gamma = \set{\alA \bimp \alB, \, \alA \bimp \bnot \alB}$ und die Formel $F = \bnot \alA$. \\ 
+		Ableitung $\Gamma \vdash F$: \\
+		\begin{tabular}{@{}l@{\;\;}l@{\;\;}l}
+			1. & $\alA \bimp \alB$ & Prämisse 1; ist $\in \Gamma$ \\
+			2. & $\alA \bimp \bnot \alB$ & Prämisse 2; ist $\in \Gamma$ \\
+			3. & $\alka \alA \bimp \alB \alkz \bimp \alka \alka \alA \bimp \bnot \alB \alkz \bimp \bnot \alA \alkz$ & Anwendung von $Ax_{AL3}$ {\small (mit $H = \bnot \alA$ und $G = \bnot \alB$)} \\ 
+			& & ({\small  Schema $Ax_{AL3}$:  $\alka \bnot H \bimp \bnot G \alkz \bimp \alka \alka \bnot H \bimp G \alkz \bimp H \alkz $ }) \\
+			4. & $\alka \alA \bimp \bnot \alB \alkz \bimp \bnot \alA $ & MP (3, 1) \quad {\small (Modus Ponens mit Formeln 3 und 1)} \\
+			5. & $\bnot \alA$ & MP (4, 2) \quad {\small (Modus Ponens mit Formeln 4 und 2)} \\
+		\end{tabular}
+	\end{exampleblock}
+\end{frame}
+
 \begin{frame}{Beweisbarkeit}
 	\begin{block}{Beweis von $G$}
 		\impl Ableitung von $G$ aus $\Gamma  = \emptyset$ \\
-		\impl Wir verwenden nur Axiome und MP! \\
+		\impl Wir verwenden nur Axiome und MP, es gibt \textbf{keine} Prämissen! \\
 		Schreibweise: \quad $\vdash G$ \qquad „$G$ ist beweisbar“ \\
 		Ein solches beweisbares $G$ nennen wir \textbf{Theorem} des Kalküls.
 	\end{block}

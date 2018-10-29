@@ -24,6 +24,41 @@
 \end{frame}
 }
 
+\begin{frame}{Zu Blatt \#1}
+	
+	Schnitt: \quad \thassedaniel{???}{13.7} / 17~P
+	
+	\begin{itemize}
+		\item Erstmal: Volle Punktzahl ist utopisch. Fehler macht man, um draus zu lernen – dazu sind ÜBs da
+		\item \textbf{Einfachstes} Beispiel für $(A \setminus (B \setminus C)) \setminus D = (A \setminus B) \setminus (C \setminus D)$? \only<beamer:0>{\\ \impl $A = B = C = D = \emptyset$.}
+		\item Für eine Menge $A$ ist $\setsize{A + x}$ nicht definiert! \\
+		Passt mit euren \textbf{Operatoren} auf: \impl $\setsize{A \cup \set{x}}$
+		\item Wenn keine Begründung/Beweis gefordert ist, müsst ihr keinen angeben. („Geben Sie an...“ / „Was ist...“)
+		\item Nicht mehrere Alternativen angeben, unter denen ich mir die richtige heraussuchen soll. (That's \emph{your} job!)
+		\thasse{\item \textbf{TACKERN} und \textbf{DECKBLÄTTER}! Sonst \alert{\textbf{null Punkte}}!}
+		\item Bitte die Aufgabenblätter \textbf{nicht} mitabgeben (Deckblatt reicht), sonst wird mein Stapel so fett. \smiley
+	\end{itemize}
+	
+\end{frame}
+
+\mycomment{  % Keine Zeit... Auch nicht sehr nötig diesmal...
+	\begin{frame}[t]{Übungsblätter: Häufige Fehler \daniel{und anderer Kram}}
+		
+		\TrueQuestionE{Beweise fängt man mit der Behauptung an.}{}
+		\FalseQuestionE{Wenn wir $A$ schreiben, ist das immer eine Menge, \\ und $f, g$ sind immer Funktionen.}{Das muss man \textbf{explizit} angeben.}
+		\FalseQuestionE{Ein Beispiel langt als Beweis.}{...bis ein anderes Beispiel herkommt, bei dem es kaputt geht... \\
+			\impl eine Behauptung \textbf{widerlegen} geht mit nem Beispiel sehr gut!}
+		%Mit einem Beispiel kann man eine Behauptung widerlegen, es zeigt aber nicht die Allgemeingültigkeit}
+		\FalseQuestionE{$\setsize{M} = M$ für $M \subseteq \N$.}{$\setsize{M}$ ist die \textbf{Anzahl} der Elemente in $M$. Nix mit „Betrag“.}
+		
+		\medskip
+		
+		\uncover<9->{Passt auf, was eure Variablen sind und welche Operationen ihr darauf anwenden könnt. Mengen kann man nicht mit $\bund$ und $\boder$ verknüpfen und auch keine \impl dazwischen tun.}
+		
+	\end{frame}
+}
+
+
 \framePrevEpisode
 
 \begin{frame}{Wahr oder falsch?}
@@ -34,7 +69,7 @@
 	\FalseQuestion{$ (1, 2) = (2, 1)$.}
 	\FalseQuestionE{$ \left(M\cup A\right)\setminus M = A $.}{für z.~B. $ M = A = \{1\}$}
 	%TODO Relationen-Fragen noch? Wenn's im ersten Tut schon vorkam!
-	\visible<11->{
+	\visible<12->{
 	\begin{block}{Bemerkungen}
 		Menge / Tupel: Klammern beachten! \\
 		Einfache Beispiele helfen!
