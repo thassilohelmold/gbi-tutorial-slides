@@ -48,59 +48,67 @@
 \newcommand{\Fib}{\mathcal{F}\hspace{-1pt}}
 
 \begin{frame}{Induktive Definitionen}
-	Beispiel: \emph{Fibonacci}-Reihe 
-	\begin{align*}
-	\Fib_{0} &:= 0 \\
-	\Fib_1 &:= 1 \\
-	\text{Für } n \geq 0: \quad \Fib_{n+2} &:= \Fib_{n+1} + \Fib_n 		
-	\end{align*}
-	\pause
-	\begin{table}
-	\centering
-	\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
-		\hline
-		$n$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
-		$\Fib_n$ & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 \\ \hline
-	\end{tabular}
-	\end{table}
+	\begin{exampleblock}{Beispiel: \emph{Fibonacci}-Reihe}
+		\begin{align*}
+		\Fib_0 &:= 0 \\
+		\Fib_1 &:= 1 \\
+		\text{Für } n \geq 0: \quad \Fib_{n+2} &:= \Fib_{n+1} + \Fib_n 		
+		\end{align*}
+		\pause
+		\begin{table}
+			\centering
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+				\hline
+				$n$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+				$\Fib_n$ & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 \\ \hline
+			\end{tabular}
+		\end{table}
+		
+		\pause
+		\textbf{Wohldefiniertheit}: 
+		\begin{itemize}
+			\item Für alle Fälle etwas definieren 
+			\item Nicht für einen Fall was Widersprüchliches definieren
+		\end{itemize}
+		
+	\end{exampleblock}
 	
-	\pause
-	\textbf{Wohldefiniertheit}: 
-	\begin{itemize}
-	\item Für alle Fälle etwas definieren 
-	\item Nicht für einen Fall was Widersprüchliches definieren
-	\end{itemize}
 \end{frame}
 
-\frame{
-	\frametitle{Zum Aufwärmen: Logikrätsel}
-	\vspace{-2pt}
-	\begin{figure}[H]
-		\centering
-		\only<1|handout:1>{\includegraphics[scale=1]{xkcd/logic_boat_problem}}
-		\only<2|handout:2>{\includegraphics[scale=0.35]{xkcd/logic_boat_sol}}
+\mycomment{ % No time this year...
+	\frame{
+		\frametitle{Zum Aufwärmen: Logikrätsel}
 		\vspace{-2pt}
-		\url{http://xkcd.com/1134/}
-	\end{figure} 
+		\begin{figure}[H]
+			\centering
+			\only<1|handout:1>{\includegraphics[scale=1]{xkcd/logic_boat_problem}}
+			\only<2|handout:2>{\includegraphics[scale=0.35]{xkcd/logic_boat_sol}}
+			\vspace{-2pt}
+			\url{http://xkcd.com/1134/}
+		\end{figure} 
+	}
 }
+
+\input{../Bloecke/Induktion.tex}
 
 \input{../Bloecke/Aussagenlogik.tex}
 
-\input{../Bloecke/FormaleSprachen.tex}
+\input{../Bloecke/Aussagenlogik2}
+
+
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
+			\item Wie vollständige Induktion geht
 			\item Aussagenlogik: Syntax und Semantik
-			\item Was eine formale Sprache ist und warum das Konzept wichtig ist
-			\item Wie man einfache formale Sprachen formal angeben kann
-			\item Einfache Operationen auf formalen Sprachen
+			\item Wie man wahre Aussagen konstruiert \qquad (\#NoFakeNews!) 
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item So viele Sprachen: Noch mehr zu formalen Sprachen
+			\item Formale Sprachen
 			\item Aus \word2 mach \word{10}: Übersetzungen
 		\end{itemize}
 	\end{block}
