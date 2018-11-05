@@ -26,22 +26,27 @@
 \end{frame}
 
 
-\input{../Bloecke/Aussagenlogik2}
 
-\input{../Bloecke/Induktion.tex}
-
-\section{Sprachen: Aufwärmen}
+\input{../Bloecke/FormaleSprachen.tex}
 
 
-\begin{frame}{Rückblick}
-	\begin{itemize}
-		\item \textbf{Alphabet} $A$ mit Zeichen, aus denen wir Wörter zusammenbauen
-		\item Nicht immer haben all diese Wörter einen Sinn
-		\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
-		\item Eine solche Teilmenge aller möglichen Wörter nennen wir \textbf{formale Sprache}
-	\end{itemize}
-\end{frame}
 
+
+\mycomment{
+	\section{Sprachen: Aufwärmen}
+	
+	
+	\begin{frame}{Rückblick}
+		\begin{itemize}
+			\item \textbf{Alphabet} $A$ mit Zeichen, aus denen wir Wörter zusammenbauen
+			\item Nicht immer haben all diese Wörter einen Sinn
+			\item Wir definieren selbst, welche Wörter wir als korrekt ansehen und akzeptieren wollen.
+			\item Eine solche Teilmenge aller möglichen Wörter nennen wir \textbf{formale Sprache}
+		\end{itemize}
+	\end{frame}
+}
+
+% TODO ggfs in Tut 5 
 \begin{frame}{Rückblick}
 	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörtern:
 	\begin{itemize}
@@ -58,6 +63,7 @@
 	Ein Alphabet selbst ist \textbf{auch} ne formale Sprache, nämlich mit Wörtern der Länge 1.
 \end{frame}
 
+% TODO ggfs in Tut 5 
 \begin{frame}[t]{Wahr oder falsch?}
 	\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\emptyset$ ist auch eine gültige Sprache.}
 	\FalseQuestionE{$\word{01}^* = \{\eps, \word{01}, \word{0101}, ...\}$}{$\word{01}^*$ gibt es nicht, denn $\word{01} \neq \{\word{01}\}$.}
@@ -96,8 +102,9 @@
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\item Wie man wahre Aussagen konstruiert \qquad (\#NoFakeNews!) 
-			\item Wie vollständige Induktion geht
+			\item Was eine formale Sprache ist und warum das Konzept wichtig ist
+			\item Wie man einfache formale Sprachen formal angeben kann
+			\item Einfache Operationen auf formalen Sprachen
 			\item Wie man formale Sprachen angeben kann
 			\item Wie man Beweise mit formalen Sprachen führt
 		\end{itemize}
@@ -113,6 +120,7 @@
 	\end{block}
 \end{frame}
 
+% TODO 
 \thassedaniel{
 	\xkcdframevert{953}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
 }{
