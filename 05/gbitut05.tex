@@ -14,18 +14,31 @@
 
  \framePrevEpisode
 
- \begin{frame}[t]{Wahr oder Falsch?}
- 	% Socrative: https://b.socrative.com/teacher/#import-quiz/31489145
- 	\Socrative
- 	
- 	\TrueQuestion{Dieser Satz ist eine Aussage.}
- 	\FalseQuestionE{$\alA \boder \alB = \alB \boder \alA$}{Das sind syntaktisch verschiedene AL-Formeln!}
- 	\TrueQuestion{$\alA \boder \alB \equiv \alB \boder \alA$}
-	\TrueQuestion{Das AL-Kalkül ist vollständig und korrekt.}
-	\TrueQuestion{Es gibt unendlich viele Axiome im Aussagenkalkül.}
- 	\FalseQuestion{$\bleftBr \word G \bimp \word H \brightBr \; \vdash \;  \bleftBr \word H \bimp \word G \brightBr$}
- 	\FalseQuestion{Induktion kann man nur auf Zahlen anwenden.}
- \end{frame}
+
+ 
+\begin{frame}{Rückblick}
+	Auf formale Sprachen können wir \textbf{ähnliche} Operationen anwenden wie auf Wörtern:
+	\begin{itemize}
+		\item $L_1 \cdot L_2 = \{w_1 w_2 \mid w_1 \in L_1 \text{ und } w_2 \in L_2 \}$\\
+		Jeweils ein Wort aus $L_1$ konkateniert mit einem Wort aus $L_2$.
+		\pause
+		\item $L^0 = \{\varepsilon \}, \qquad L^{i+1} = L^i \cdot L$\\
+		Alle Wörter, die aus $i = 0,1,2...$ Wörtern der Sprache zusammengesetzt wurden
+		\pause
+		\item $L^+ = \bigcup \limits_{i=1}^\infty L^i \qquad L^* = L^+ \cup L^0$\\
+		Alle Wörter, die sich aus den Wörtern der Sprache bilden lassen \\ 
+		(ohne/mit zusätzlichem $\eps$ als Würze).
+	\end{itemize}
+	Ein Alphabet selbst ist \textbf{auch} ne formale Sprache, nämlich mit Wörtern der Länge 1.
+\end{frame}
+
+\begin{frame}[t]{Wahr oder falsch?}
+	\FalseQuestionE{Jede Sprache enthält Wörter.}{ $\emptyset$ ist auch eine gültige Sprache.}
+	\FalseQuestionE{$\word{01}^* = \{\eps, \word{01}, \word{0101}, ...\}$}{$\word{01}^*$ gibt es nicht, denn $\word{01} \neq \{\word{01}\}$.}
+	\TrueQuestionE{Es gibt Sprachen $L$, für die gilt $\eps \in L^+$.}{\ZB $L = \set{\eps, \word{aaa}}$.}
+	\FalseQuestionE{$L^+ = L^* \setminus L^0$.}{Gilt nicht, wenn $\varepsilon \in L$.}
+	\TrueQuestionE{$\{\}^* \neq \{\} $.}{ $\{\}^* = \{\varepsilon\}$.}	
+\end{frame}
 
 \input{../Bloecke/Darstellung}
 
