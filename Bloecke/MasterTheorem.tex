@@ -15,17 +15,17 @@
 	\begin{itemize}[<+->]
 		\item Wir haben einen rekursiven Algorithmus $A$ für ein Problem der Größe $n$
 		\item Bei jedem Schritt wird das Problem durch $b$ \textbf{geteilt} und es ergeben sich $d$ neue Probleminstanzen der Größe $n/b$
-		\item Klonen und Ergebnisse zusammentragen geht in $c \· n$ Operationen (für konstantes $c$)
+		\item Klonen und Ergebnisse zusammentragen geht in $c \* n$ Operationen (für konstantes $c$)
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Das Master-Theorem (einfache Form)}  % TODO Überarbeitung von hier wieder in Algotutfolien übertragen!
+\begin{frame}{Das Master-Theorem (einfache Form)}  
 	Seien $a, \textcolor{blue}{b}, c, \textcolor{darkgreen}{d}$ positive Konstanten und für $n \in \N$ sei 
 	\[
 	T(n) = 
 	\begin{cases}
 	a,  & \text{für } n = 1 \\
-	\textcolor{darkgreen}{d} \cdot T\large(\frac{n}{\textcolor{blue}{b}}\large) + c\·n, & \text{für } n > 1
+	\textcolor{darkgreen}{d} \cdot T\large(\frac{n}{\textcolor{blue}{b}}\large) + c\*n, & \text{für } n > 1
 	\end{cases}
 	\]
 	gegeben. \\ \smallskip

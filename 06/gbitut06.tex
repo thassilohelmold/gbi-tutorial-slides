@@ -20,22 +20,30 @@
 		\Socrative
 		\TrueQuestionE{$\forall x \in \Z: \quad x \mod 2 = 0 \iff x \text{ ist gerade}$.}{ $\text{Und auch: \quad} x \mod 2 = 1 \iff \text{x ist ungerade}$.}
 		\FalseQuestionE{$4 \cdot (x \div 4) = x$.}{ $ 4 \cdot (x \div 4) + (x \mod 4) = x$}
-		\TrueQuestionE{$\left(\{\word a\}^\ast\cdot \{\word b,\eps\}\right)^\ast = \{\word a,\word b\}^\ast$}{}
-		\FalseQuestionE{Jede Abbildung besitzt eine Umkehrabbildung.}{ Nur bijektive Abbildungen besitzen eine Umkehrabbildung.}
-		\TrueQuestionE{Für jede Abbildung können wir das Urbild angeben.}{}
+		% \TrueQuestionE{$\left(\{\word a\}^\ast\cdot \{\word b,\eps\}\right)^\ast = \{\word a,\word b\}^\ast$}{}  % not fitting here
+		% \FalseQuestionE{Jede Abbildung besitzt eine Umkehrabbildung.}{ Nur bijektive Abbildungen besitzen eine Umkehrabbildung.}  % ditto
+		% \TrueQuestionE{Für jede Abbildung können wir das Urbild angeben.}{}  % ditto
 		\TrueQuestionE{Das Zweierkomplement ist gut zum Rechnen.}{(Für den Rechner schon!)}
+		\FalseQuestionE{Für jede Codierung gilt $h(\eps) = \eps$.}{Das muss nur für Homomorphismen gelten.}
+		\FalseQuestion{Jeder Homomorphismus ist präfixfrei.}
+		\TrueQuestion{Jede Huffman-Codierung ist präfixfrei.}
+		\FalseQuestionE{Jeder $\eps$-freie Homomorphismus ist präfixfrei.}{ Aber: Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei.}		
+		\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
 \end{frame}
 
 \framePrevEpisode
 
-\begin{frame}{Rückblick: Codierungen}
-	\begin{itemize}
-		\item Codierungen: Injektive Abbildungen (meist Homomorphismen)
-		\item $\eps$-Freiheit, Präfixfreiheit
-		\item Einfaches Decodieren für präfixfreie Homomorphismen
-		\item Huffman-Codierungen: Präfixfreie Codes mit optimaler Länge
-	\end{itemize}
-\end{frame}
+\mycomment{  % Not necessary here
+	\begin{frame}{Rückblick: Codierungen}
+		\begin{itemize}
+			\item Codierungen: Injektive Abbildungen (meist Homomorphismen)
+			\item $\eps$-Freiheit, Präfixfreiheit
+			\item Einfaches Decodieren für präfixfreie Homomorphismen
+			\item Huffman-Codierungen: Präfixfreie Codes mit optimaler Länge
+		\end{itemize}
+	\end{frame}
+}
+
 
 
 %\input{../Bloecke/Huffmann}
@@ -44,7 +52,7 @@
 
 \input{../Bloecke/Speicher.tex}
 
-%\input{../Bloecke/MIMA.tex}
+\input{../Bloecke/MIMA.tex}
 
 
 \begin{frame}	
@@ -53,22 +61,20 @@
 			%\item Wie die Huffman-Codierung funktioniert
 			\item Speicher
 			\item Abbildungen, die Abbildungen auf Abbildungen abbilden!
-			%\item Wie ein einfacher Prozessor aufgebaut ist
-			%\item Wie man die MIMA für einfache Aufgaben nutzt
+			\item Wie ein einfacher Prozessor aufgebaut ist
+			\item Wie man die MIMA für einfache Aufgaben nutzt
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item MIMA – Den Bits beim Arbeiten zuschauen
-			\item Subjekt, Objekt, Prädikat – Grammatiken
+			%\item MIMA – Den Bits beim Arbeiten zuschauen
+			\item Grammatiken – mehr als Subjekt, Objekt, Prädikat
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-
-%\lastframe{0.55}{30}{xkcd/processor.png}{https://www.xkcd.com/676/} % Legacy
-\xkcdframe{327}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
+\xkcdframevert{676}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
 \slideThanks
 
 \end{document}

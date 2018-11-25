@@ -57,6 +57,7 @@
 \end{frame}
 
 \newcommand{\itemizeconfig}{\setlength{\parsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{0pt}\setlength{\partopsep}{0pt}}
+\newcommand{\explain}[1]{\hfill {\small #1 }}
 \begin{frame}{Befehle}
 	Die MIMA besitzt einen Befehlssatz mit möglichen Befehlen. %Andere Befehle (oder Varianten) werden NICHT unterstützt und können daher nicht verwendet werden!
 	\textbf{Nur die Befehle aus der VL} dürft ihr benutzen! \\ 
@@ -66,23 +67,23 @@
 	\begin{itemize}[<+->] \itemizeconfig
 		\item Rechenoperationen:
 		\begin{itemize} 
-			\item ADD adr 
-			\item AND, OR, XOR adr
-			\item NOT, RAR \quad (keine Parameter \impl Akku) \quad „Rotate Akku Right“
+			\item ADD adr \explain{Akku $\leftarrow$ Akku + Mem(adr)}
+			\item AND, OR, XOR adr \explain{Dasselbe mit bitweisem Und, Oder und eXclusive OR}
+			\item NOT, RAR \explain{Akku $\leftarrow$ not(Akku); \quad  Rotate-Akku-Right();}
 		\end{itemize}
 		\item Datentransport:
 		\begin{itemize}
-			\item LDC const \quad (const ist dabei eine \textbf{20-Bit}-Konstante)
-			\item LDV, STV adr \quad (Lese/Schreibe von/an Adresse)
-			\item LDIV, STIV adr \quad (Lese/Schreibe von/an Adresse, die an der Adresse steht)
+			\item LDC const \explain{Akku $\leftarrow$ const\quad (const ist dabei eine \textbf{20-Bit}-Konstante) }
+			\item LDV, STV adr \explain{(Lese/Schreibe in/vom Akku von/an Adresse)}
+			\item LDIV, STIV adr \explain{(Lese/Schreibe von/an Adresse, die an der Adresse steht)}
 		\end{itemize}
-		\item Vergleichsoperation: EQL adr \quad (liefert $-1$ wenn gleich, 0 sonst)
+		\item Vergleichsoperation: EQL adr \explain{(liefert $-1$ wenn Akku $=$ Mem(adr), 0 sonst)}
 		\item Sprünge:
 		\begin{itemize}
-			\item JMP adr
-			\item JMN adr \quad „JuMp if Negative“
+			\item JMP adr \explain{Springe zu Befehl in Adresse adr}
+			\item JMN adr \explain{Springe, falls Akku negativ \quad „JuMp if Negative“}
 		\end{itemize}
-		\item HALT
+		\item HALT \explain{Stoppt die MIMA}
 	\end{itemize}}
 \end{frame}
 
@@ -94,7 +95,7 @@
 	
 	\pause
 	\begin{block}{HALT}
-		Jedes Programm muss mit HALT enden! Sonst läuft das Programm endlos weiter! (Kostet Punkte!)
+		Jedes Programm muss mit HALT enden! Sonst läuft das Programm endlos weiter! (Kostet dann Punkte!)
 	\end{block}
 
 	\pause

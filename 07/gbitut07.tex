@@ -35,16 +35,11 @@
 
 \begin{frame}[t]{Wahr oder falsch?}
 	\Socrative
-	\FalseQuestionE{Für jede Codierung gilt $h(\eps) = \eps$.}{Das muss nur für Homomorphismen gelten.}
-	\FalseQuestion{Jeder Homomorphismus ist präfixfrei.}
-	\TrueQuestionE{Jede Huffman-Codierung ist präfixfrei.}{}
-	\FalseQuestionE{Jeder $\eps$-freie Homomorphismus ist präfixfrei.}{ Aber: Jeder präfixfreie Homomorphismus ist $\varepsilon$-frei.}		
-	\TrueQuestionE{Präfixfreie Codes sind einfach zu decodieren.}{}
 	\FalseQuestionE{$\memwrite(m,a,v) \in \Val$.}{$\memwrite(m,a,v) \in \Val^\Adr$.}
 	\FalseQuestionE{$\memread(\memwrite(m,a,v), a) = m(a)$ \quad für alle $m,a,v$.}{$\memread(\memwrite(m,a,v), a) = v$.}
 \end{frame}
 
-\input{../Bloecke/MIMA.tex}
+%\input{../Bloecke/MIMA.tex}
 
 %\input{../Bloecke/Relationen2.tex}
 
@@ -111,16 +106,7 @@
 
 }
 
-\ifnum\thisyear=2017 
-	\thassedaniel{
-		\lastframe{0.55}{30}{xkcd/processor.png}{https://www.xkcd.com/676/}
-	}{
-	\lastframe{0.50}{0}{xkcd/exploits_of_a_mom.png}{https://www.xkcd.com/327/} % Legacy
-	}
-\else
-	\errmessage{Replace xkcd with processor (mom's exploits in tut 6...)}
-\fi
-
+\xkcdframe{327}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
 
 \slideThanks
 

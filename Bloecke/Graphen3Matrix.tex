@@ -89,7 +89,7 @@
 	&\mathbf{for}\ i \gets 0\ \mathbf{to}\ n-1\ \mathbf{do} & \text{// $n$-mal...}  \\
 	&\qquad M \gets I \qqquad (I = A^0) \\
 	&\qquad\mathbf{for}\ j \gets 1\ \mathbf{to}\ i\ \mathbf{do} & \text{// $i$-mal...} \\
-	&\qquad\qquad M \gets M \· A & \text{// $n^2 \· (n + n-1)$ Operationen} \\
+	&\qquad\qquad M \gets M \* A & \text{// $n^2 \* (n + n-1)$ Operationen} \\
 	&\qquad\mathbf{od} \\
 	&\qquad W \gets W + M & \text{// $n^2$ Operationen} \\
 	&\mathbf{od} \\
@@ -125,8 +125,8 @@
 	\bigskip
 	
 	Betrachten wir nun $ F = (I + A) $ für eine Adjazenzmatrix $A$. \\  \pause 
-	So folgt $$ F^2 = (I + A) \· (I + A) = I + A + A^2 $$ \pause
-	Analog : $$ F^4 = (F^2)^2 = (I + A + A^2) \· (I + A + A^2) = I + A + A^2 + A^3 + A^4 $$ \pause 
+	So folgt $$ F^2 = (I + A) \* (I + A) = I + A + A^2 $$ \pause
+	Analog : $$ F^4 = (F^2)^2 = (I + A + A^2) \* (I + A + A^2) = I + A + A^2 + A^3 + A^4 $$ \pause 
 	Also folgt $$ F^{2^m} = \sum\limits_{i=0}^{2^m} A^i$$ \\
 	Setze $m := \lceil \log_2 n \rceil $. \pause \impl $W = \sgn\big(F^{2^m}\big)$.
 \end{frame}

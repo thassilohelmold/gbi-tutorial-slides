@@ -27,7 +27,7 @@
 \subsection{Definitionen}
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
-		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch gleich schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n \geq n_0: \ c \· f(n) \leq g(n) \leq c' \· f(n) $$
+		Zwei Funktionen $f,g: \N_0 \to \R_0^+$ wachsen asymptotisch gleich schnell, wenn es zwei Konstanten $c, c' \in \R^+$ gibt, so dass gilt $$\exists n_0 \in \N_0: \ \forall n \geq n_0: \ c \* f(n) \leq g(n) \leq c' \* f(n) $$
 		Man schreibt dafür 
 		\begin{align*}
 			f &\asymp g \\
@@ -52,7 +52,7 @@
 	$$f(n) := 2 \cdot n^2 + n \qqquad g(n) := n^2$$
 	\medskip
 	Zeige: $ f \in \Th{g} $.\\ \pause
-	Wir suchen $n_0, c, c'$ mit $\forall n \geq n_0: \ c \· g(n) \leq f(n) \leq c' \· g(n) $ \pause
+	Wir suchen $n_0, c, c'$ mit $\forall n \geq n_0: \ c \* g(n) \leq f(n) \leq c' \* g(n) $ \pause
 	\medskip
 	
 	Sei $n \geq 1$, so gilt:\\\pause
@@ -72,7 +72,7 @@
 	\textbf{Behauptung:} \quad $ [n \mapsto \sin(n) + 2] \elem \Th{n \mapsto 1} $ \\ \medskip \pause
 	\textbf{Beweis:} \quad Wähle $c := 1, \, c' := 3, \, n_0 := 0$.  \quad Dann gilt $\forall n \geq n_0$: \\
 	\begin{align*}
-	c \· 1 = 1 &\leq \sin(n) + 2 \leq 3 = c' \· 1 \\
+	c \* 1 = 1 &\leq \sin(n) + 2 \leq 3 = c' \* 1 \\
 	\text{\Gdw} \qquad  -1 &\leq \sin(n) \leq 1. \qed
 	\end{align*}
 	\pause
@@ -82,8 +82,8 @@
 \begin{frame}{Asymptotisches Wachstum}
 	\begin{Definition}
 		Für zwei Funktionen $f,g: \N_0 \to \R_0^+$ definiert man:
-		$$g \preceq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n \geq n_0: \ g(n) \leq c \· f(n)$$
-		$$g \succeq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n \geq n_0: \ g(n) \geq c \· f(n)$$
+		$$g \preceq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n \geq n_0: \ g(n) \leq c \* f(n)$$
+		$$g \succeq f \Gdw \exists c \in \R^+ \ \exists n_0 \in \N_0 \ \forall n \geq n_0: \ g(n) \geq c \* f(n)$$
 		(Schreibe analog auch $g(n) \preceq f(n)$ etc.)
 	\end{Definition} \pause
 	Diese Relationen sind \textbf{keine} Äquivalenzrelationen!
@@ -198,7 +198,7 @@
 	\begin{block}{Herleitung}
 		Es gilt $$n = a^{\log_a n}$$ \pause
 		Daraus ergibt sich: $$ \log_b n = \log_b \left(a^{\log_a n}\right) = \log_a n \; \cdot \log_b a $$ \pause 
-		Setze $c = c' = \log_b a$, dann ist $$c \· \log_a n \leq \log_b n \leq c' \· \log_a n.$$
+		Setze $c = c' = \log_b a$, dann ist $$c \* \log_a n \leq \log_b n \leq c' \* \log_a n.$$
 	\end{block}
 \end{frame}
 
