@@ -37,17 +37,32 @@
 	\Socrative
 	\FalseQuestionE{$\memwrite(m,a,v) \in \Val$.}{$\memwrite(m,a,v) \in \Val^\Adr$.}
 	\FalseQuestionE{$\memread(\memwrite(m,a,v), a) = m(a)$ \quad für alle $m,a,v$.}{$\memread(\memwrite(m,a,v), a) = v$.}
+	\FalseQuestionE{Im IR wird die Adresse des aktuellen Befehls gespeichert.}{Das geschieht im IAR – Im IR steht der Befehl selbst.}
+	%\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch.}{}
+\end{frame}
+
+\begin{frame}[t]{Wahr oder falsch?}
+	\FalseQuestionE{Der Akku führt bei der MIMA Berechnungen aus.}{Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert.}
+	\FalseQuestionE{LDC $-5$ lädt $-5$ in den Akku.}{LDC funktioniert nicht mit negativen Konstanten!}
+	\FalseQuestionE{Mit der MIMA können wir Zufallszahlen erzeugen.}{Die MIMA arbeitet rein deterministisch und damit ohne jeden Zufall. 
+		\vspace{-.8\baselineskip}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[scale=0.6]{xkcd/random_number} \\
+			%\vspace{-7pt}
+			{\url{http://xkcd.com/221}}
+		\end{figure}
+	}
 \end{frame}
 
 %\input{../Bloecke/MIMA.tex}
 
 %\input{../Bloecke/Relationen2.tex}
 
-\thassedaniel{
 \begin{frame}{Noch offen: Klammerausdrücke}
 	A long, long time ago, in a land far away:\\
 	\medskip
-	Formale Sprachen angeben durch $\set{}, \·, {}^+, {}^*$...\\
+	Formale Sprachen angeben durch $\set{}, \*, {}^+, {}^*$...\\
 	Was ist mit der \textbf{Sprache aller gültigen Klammerausdrücke}? Können wir die auch so angeben?\\[1em]
 	\pause
 	\impl Jetzt wissen wir: \textbf{Nein}, das geht nicht! (Siehe VL)\\[1em]
@@ -62,12 +77,10 @@
 
 \input{../Bloecke/Grammatiken.tex}
 
-
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
 			%\item Mehr Eigenschaften von Relationen
-			\item Wie die MIMA funktioniert und wie ihr Programme dafür schreibt
 			\item Was eine kontextfreie Grammatik ist
 			\item Wie man Sprachen mit Grammatiken beschreiben kann
 		\end{itemize}
@@ -81,30 +94,6 @@
 		\end{itemize}
 	\end{block}
 \end{frame}	
-
-}{
-
-\begin{frame}	
-	\begin{block}{Was ihr nun wissen solltet}
-		\begin{itemize}
-			%\item Mehr Eigenschaften von Relationen
-			\item Wie die MIMA funktioniert und wie ihr Programme dafür schreibt
-
-		\end{itemize}
-	\end{block}
-	
-	\begin{block}{Was nächstes Mal kommt}
-		\begin{itemize}
-			\item Was eine kontextfreie Grammatik ist
-			\item Wie man Sprachen mit Grammatiken beschreiben kann
-			%\item Noch mehr Grammatiken
-			\item Nachts sind alle Katzen grau -- Prädikatenlogik
-			%\item Algorithmen: Kochrezepte der Informatik
-		\end{itemize}
-	\end{block}
-\end{frame}	
-
-}
 
 \xkcdframe{327}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
 

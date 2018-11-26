@@ -24,16 +24,6 @@
 
 \framePrevEpisode
 
-\begin{frame}[t]{Wahr oder Falsch?}
-	\Socrative
-	Sei $G=(\{X,Y\},\, \{\word a, \word b\},\, X,\, P)$ eine kontextfreie Grammatik. \\
-	\FalseQuestion{Die Produktion $XY \to \word a$ könnte eine gültige Produktion sein.}
-	\FalseQuestion{Die Produktion $\word a \to XY$ könnte eine gültige Produktion sein.}
-	\TrueQuestionE{Die Produktion $X \to X\word aX$ könnte eine gültige Produktion sein.}{}
-	\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \derives^* w$.}{}
-	\FalseQuestionE{Wenn $X \derives^* w$ gilt, dann ist $X \to w$ eine Produktion in P.}{Sei $P=\{X \to XX \mid \word a\}$. Dann gilt $X \derives^* X\word a$, aber $X \to X\word a \notin P$.}
-\end{frame}
-
 \daniel{
 	\input{../Bloecke/Praedikatenlogik}
 }
@@ -78,12 +68,12 @@
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Alles Korrekt? – Beweise mit dem Hoare-Kalkül
+			\item Alles korrekt? – Beweise mit dem Hoare-Kalkül
 		\end{itemize}
 	\end{block}
 \end{frame}
 
-%TODO
+\xkcdframevert{835}{Frohe Weihnachten und bis nächstes Jahr! \smiley}{2.2}
 %\lastframetitled{0.47}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835}{\vspace{-1.66\baselineskip}\\Frohe Weihnachten und einen \\ guten Start ins neue Jahr! \smiley}
 \slideThanks
 

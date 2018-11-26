@@ -10,57 +10,47 @@
 \begin{document}
 \starttut{8}
 
-\begin{frame}{Schwarzes Brett}
-	\textbf{Bonusaufgaben} von Blatt 4 auch im \ILIAS im Ordner zu Tutorium~\mytutnumber\ ganz unten einreichbar! \\
-	\medskip
-	(\impl Weniger Chaos als per Mail. \smiley)
-\end{frame}
+\mycomment{
+	\begin{frame}{Schwarzes Brett}
+		\textbf{Bonusaufgaben} von Blatt 4 auch im \ILIAS im Ordner zu Tutorium~\mytutnumber\ ganz unten einreichbar! \\
+		\medskip
+		(\impl Weniger Chaos als per Mail. \smiley)
+	\end{frame}
+}
 
 \framePrevEpisode
 
-\begin{frame}{Rückblick: MIMA}
+\mycomment{
+	\begin{frame}{Rückblick: MIMA}
+		\begin{itemize}[<+->]
+			\item Ein idealisierter Prozessor
+			\item Einfach zu verstehen, aufwändig zu programmieren
+			\item Hardware-Details beachten: Keine negativen Konstanten mit LDC möglich!
+			\item Programme sind oftmals mit \enquote{Bit-Magie} einfacher und kürzer (aber auch schwerer zu verstehen)
+		\end{itemize}
+	\end{frame}
+}
+
+\begin{frame}{Rückblick: Kontextfreie Grammatiken}
 	\begin{itemize}[<+->]
-		\item Ein idealisierter Prozessor
-		\item Einfach zu verstehen, aufwändig zu programmieren
-		\item Hardware-Details beachten: Keine negativen Konstanten mit LDC möglich!
-		\item Programme sind oftmals mit \enquote{Bit-Magie} einfacher und kürzer (aber auch schwerer zu verstehen)
+		\item Ein Vier-Tupel: $G = (N, T, S, P)$
+		\item Produktionen definieren Ersetzungen eines Nichtterminals mit Wörtern über $N \cup T$
+		\item Wir wenden Produktionen in Ableitungsschritten an: $v \Rightarrow w, v \Rightarrow^* w$
+		\item $L(G)$ sind alle aus $S$ ableitbaren Wörter über $T$ (die also nur aus Terminalsymbolen bestehen)
 	\end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Wahr oder Falsch?}
 	\Socrative
-	\FalseQuestionE{Im IR der MIMA wird die Adresse des aktuellen Befehls \\ gespeichert.}{Das geschieht im IAR – Im IR steht der Befehl selbst.}
-	\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch.}{}
-	\FalseQuestionE{Der Akku führt bei der MIMA Berechnungen aus.}{Das macht die ALU. Im Akku wird das letzte Ergebnis zwischengespeichert.}
+	Sei $G=(\{X,Y\},\, \{\word a, \word b\},\, X,\, P)$ eine kontextfreie Grammatik. \\
+	\FalseQuestion{Die Produktion $XY \to \word a$ könnte eine gültige Produktion sein.}
+	\FalseQuestion{Die Produktion $\word a \to XY$ könnte eine gültige Produktion sein.}
+	\TrueQuestionE{Die Produktion $X \to X\word aX$ könnte eine gültige Produktion sein.}{}
+	\TrueQuestionE{Wenn $X \to w$ eine gültige Produktion ist, dann gilt $X \derives^* w$.}{}
+	\FalseQuestionE{Wenn $X \derives^* w$ gilt, dann ist $X \to w$ eine Produktion in P.}{Sei $P=\{X \to XX \mid \word a\}$. Dann gilt $X \derives^* X\word a$, aber $X \to X\word a \notin P$.}
 \end{frame}
 
-\begin{frame}[t]{Wahr oder Falsch?}
-	\FalseQuestionE{LDC $-5$ lädt $-5$ in den Akku.}{LDC funktioniert nicht mit negativen Konstanten!}
-	\FalseQuestionE{Mit der MIMA können wir Zufallszahlen erzeugen.}{Die MIMA arbeitet rein deterministisch und damit ohne jeden Zufall.}
-	\visible<5>{
-	\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.6]{xkcd/random_number}
-		\vspace{-7pt}
-		\caption{ \texttt{\url{http://xkcd.com/}} }
-	\end{figure} 	
-	}
-\end{frame}
-
-\thasse{
-	\begin{frame}{Rückblick: Kontextfreie Grammatiken}
-		\begin{itemize}[<+->]
-			\item Ein Vier-Tupel: $G = (N, T, S, P)$
-			\item Produktionen definieren Ersetzungen eines Nichtterminals mit Wörtern über $N \cup T$
-			\item Wir wenden Produktionen in Ableitungsschritten an: $v \Rightarrow w, v \Rightarrow^* w$
-			\item $L(G)$ sind alle aus $S$ ableitbaren Wörter über $T$ (die also nur aus Terminalsymbolen bestehen)
-		\end{itemize}
-	\end{frame}
-}
-
-\daniel{\input{../Bloecke/Grammatiken.tex}}
-
-\thasse{\input{../Bloecke/Praedikatenlogik.tex}}
+\input{../Bloecke/Praedikatenlogik.tex}
 
 % Evtl. Übung: Nicht-Palindrome?
 
@@ -95,7 +85,7 @@
 	Frohe Weihnachten und einen guten Start in das neue Jahr!}
 \end{frame}
 
-%TODO
+\xkcdframe{704}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
 %\lastframe{0.50}{0}{xkcd/logic_principle_of_explosion.png}{https://www.xkcd.com/}
 %\lastframe{0.50}{0}{xkcd/christmastree.png}{https://www.xkcd.com/835} % Dieses Jahr dürften noch genügend Tutanden beim nächsten Termin kommen
 \slideThanks
