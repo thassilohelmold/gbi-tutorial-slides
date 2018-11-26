@@ -67,7 +67,7 @@
 	\begin{itemize}[<+->] \itemizeconfig
 		\item Rechenoperationen:
 		\begin{itemize} 
-			\item ADD adr \explain{Akku $\leftarrow$ Akku + Mem(adr)}
+			\item ADD adr \explain{Akku $\leftarrow$ Akku + mem(adr)}
 			\item AND, OR, XOR adr \explain{Dasselbe mit bitweisem Und, Oder und eXclusive OR}
 			\item NOT, RAR \explain{Akku $\leftarrow$ not(Akku); \quad  Rotate-Akku-Right();}
 		\end{itemize}
@@ -77,7 +77,7 @@
 			\item LDV, STV adr \explain{(Lese/Schreibe in/vom Akku von/an Adresse)}
 			\item LDIV, STIV adr \explain{(Lese/Schreibe von/an Adresse, die an der Adresse steht)}
 		\end{itemize}
-		\item Vergleichsoperation: EQL adr \explain{(liefert $-1$ wenn Akku $=$ Mem(adr), 0 sonst)}
+		\item Vergleichsoperation: EQL adr \explain{(liefert $-1$ wenn Akku $=$ mem(adr), 0 sonst)}
 		\item Sprünge:
 		\begin{itemize}
 			\item JMP adr \explain{Springe zu Befehl in Adresse adr}
@@ -117,14 +117,16 @@
 			STV $a_2$\\
 			LDC 1\\
 			ADD $a_2$\\
-			STV $a_2$
+			STV $a_2$ \\
+			HALT
 		\end{block}
 	}
 \end{frame}
 
 \begin{frame}{Beispiele}
 	Beispiele zur Umsetzung von Anweisungen aus Hochsprachen (if, while, for....):\\
-	Siehe Übung WS 15/16
+	\bigskip
+	Siehe Übung Nr.~6 (WS 2018/19)
 \end{frame}
 
 \begin{frame}{Übung: Modulo 2 und Betrag}
