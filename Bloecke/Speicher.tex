@@ -19,14 +19,14 @@
 
 \begin{frame}{Problem: Ziffern filtern}
 	Wir wollen aus einer Ziffernfolge (Wort aus $Z^*_{10}$) Ziffern herausfiltern, die eine bestimmte Eigenschaft haben:\\
-	\visible<2->{\impl\ }\only<2-3|handout:1>{Gerade}\only<4|handout:2>{Ungerade}\only<5|handout:3>{Löst die Ungleichung $x^2 - 3x < 20$}
+	\visible<2->{\impl\ }\only<2-3|handout:1>{Gerade}\only<4|handout:2>{Ungerade}\only<5|handout:3>{Löst die Ungleichung $x^2 - 3 < 20$}
 	
 	\visible<3-> {
 		\begin{threealign}
 		\filter \from Z^*_{10} &\functionto& Z^*_{10} \\
 		\eps &\mapsto& \eps \\
 		z \cdot v &\mapsto& \begin{cases}
-		z \cdot \filter(v) &\text{falls } \only<2-3|handout:1>{z \in \{\word 2,\word 4,\word 6,\word 8,\word 0\}} \only<4|handout:2>{z \in \{\word 1,\word 3,\word 5,\word 7,\word 9\}} \only<5|handout:3>{z^2 - 3z < 20 }\\
+		z \cdot \filter(v) &\text{falls } \only<2-3|handout:1>{z \in \{\word 2,\word 4,\word 6,\word 8,\word 0\}} \only<4|handout:2>{z \in \{\word 1,\word 3,\word 5,\word 7,\word 9\}} \only<5|handout:3>{\fnum_{10}(z)^2 - 3 < 20 }\\
 		\filter(v) &\text{sonst}
 		\end{cases}\\
 		& \multicolumn{2}{l}{\text{wobei } z \in Z_{10} \text{ und } v \in Z_{10}^*.}
