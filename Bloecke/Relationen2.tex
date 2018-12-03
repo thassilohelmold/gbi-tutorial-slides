@@ -3,24 +3,24 @@
 	\begin{Definition}
 		Sei $R \subseteq A \times A$ eine (binäre) Relation auf der Menge $A$. Wir nennen $R$
 		\begin{itemize}[<+->]
-			\item \textbf{reflexiv} falls gilt $$\forall x \in A: (x,x) \in R$$
-			\item \textbf{symmetrisch} falls gilt $$\forall x,y \in A: (x,y) \in R \implies (y,x) \in R$$
-			\item \textbf{transitiv} falls gilt $$\forall x,y,z \in A: (x,y) \in R \text{ und } (y,z) \in R \implies (x,z) \in R$$
+			\item \textbf{reflexiv}, falls gilt $$\forall x \in A: (x,x) \in R$$
+			\item \textbf{symmetrisch}, falls gilt $$\forall x,y \in A: (x,y) \in R \implies (y,x) \in R$$
+			\item \textbf{transitiv}, falls gilt $$\forall x,y,z \in A: (x,y) \in R \text{ und } (y,z) \in R \implies (x,z) \in R$$
 		\end{itemize}
 	\end{Definition}
 \end{frame}
 
 \begin{frame}{Beispiele}
 	\begin{itemize}
-		\item Die Relation $=$ ist \pause reflexiv, symmetrisch und transitiv. Man nennt so etwas auch Äquivalenzrelation
-		\item \pause Die Relation $<$ ist \pause nicht reflexiv und nicht symmetrisch, aber transitiv
-		\item \pause Die Relation $\leq$ ist \pause reflexiv, nicht symmetrisch, aber transitiv
+		\item Die Relation $=$ ist \pause reflexiv, symmetrisch und transitiv. Man nennt so etwas auch \emph{Äquivalenzrelation}.
+		\item \pause Die Relation $<$ ist \pause nicht reflexiv und nicht symmetrisch, aber transitiv.
+		\item \pause Die Relation $\leq$ ist \pause reflexiv, nicht symmetrisch, aber transitiv.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Produkt}
 	\begin{Definition}
-		Das \textbf{Produkt} von zwei Relationen $R \subseteq M \times N, S \subseteq N \times L$ definieren wir als $$S \circ R = \{(x,z) \in M \times L \mid \exists y \in N \ : \ (x,y) \in R \text{ und } (y,z) \in S \}$$
+		Das \textbf{Produkt} von zwei Relationen $R \subseteq M \times N, S \subseteq N \times L$ definieren wir als $$S \circ R = \set{(x,z) \in M \times L \Mid \exists y \in N : (x,y) \in R \text{ und } (y,z) \in S }.$$
 	\end{Definition}	
 	\pause
 	
@@ -34,7 +34,7 @@
 
 	\pause
 	\begin{block}{Beobachtung}
-		Wenn $f$ und $g$ Funktionen sind (also linkstotale, rechtseindeutige Relationen), entspricht $f \circ g$ der Hintereinanderausführung von $f$ nach $g$.
+		Wenn $f$ und $g$ Funktionen sind (also linkstotale, rechtseindeutige Relationen), entspricht $f \circ g$ der Hintereinanderauswertung von $f$ nach $g$.
 	\end{block}
 \end{frame}
 

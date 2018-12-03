@@ -13,23 +13,26 @@
 % Was hat das mit MIMA zu tun? => Vllt. ans Ende?
 % \lastframe{0.40}{25}{xkcd/password_strength.png}{https://www.xkcd.com/936/}
 
-\begin{frame}{Zu Blatt \#2}
-	Durchschnitt: etwa \thassedaniel{60}{61} \% der Punkte 
-	\begin{itemize}		
-		\item Vollständige Induktion: Eine Standard-IV lautet \\
-		{\enquote{für \textbf{\alert{ein}} $n$ gilt...}}.\\
-		Für alle $n$ wollt ihr's ja \textbf{zeigen}!
-		\item \textbf{A~2.2}: IV mit „$K=L$“ funktioniert nicht: \\ 
-		Das ist ne $\forall$-Aussage wegen der $\bigcup\limits^\infty_{n=0}$-Definition \\
-		\impl Besser $K_n = L_n$ zeigen
-		\item \textbf{A~2.3}: hat 11 statt 10 Gesamtpunkte (Zenkel hat sich verrechnet...~:P) \\
-		\impl Nicht wundern, wenn ihr einen Punkt mehr habt, als ihr solltet
-		\item \textbf{A~2.3b}: IA für $n=0 \textbf{ und } 1$, \; IS: $n \?> n+\mathbf{2}$ \quad --- alles andere geht nicht
-		\item \textbf{A~2.6}: \emph{Surjektivität} per Induktion geht NICHT!
-		\item \textbf{A~2.7}: \emph{Induktive} Definitionen: KEINE Set comprehensions mit Wortlängen-Magie! (Sonst könnt ihr direkt die Def. abschreiben)
-	\end{itemize}
-	
-\end{frame}
+\mycomment{
+	\begin{frame}{Zu Blatt \#2}
+		Durchschnitt: etwa \thassedaniel{60}{61} \% der Punkte 
+		\begin{itemize}		
+			\item Vollständige Induktion: Eine Standard-IV lautet \\
+			{\enquote{für \textbf{\alert{ein}} $n$ gilt...}}.\\
+			Für alle $n$ wollt ihr's ja \textbf{zeigen}!
+			\item \textbf{A~2.2}: IV mit „$K=L$“ funktioniert nicht: \\ 
+			Das ist ne $\forall$-Aussage wegen der $\bigcup\limits^\infty_{n=0}$-Definition \\
+			\impl Besser $K_n = L_n$ zeigen
+			\item \textbf{A~2.3}: hat 11 statt 10 Gesamtpunkte (Zenkel hat sich verrechnet...~:P) \\
+			\impl Nicht wundern, wenn ihr einen Punkt mehr habt, als ihr solltet
+			\item \textbf{A~2.3b}: IA für $n=0 \textbf{ und } 1$, \; IS: $n \?> n+\mathbf{2}$ \quad --- alles andere geht nicht
+			\item \textbf{A~2.6}: \emph{Surjektivität} per Induktion geht NICHT!
+			\item \textbf{A~2.7}: \emph{Induktive} Definitionen: KEINE Set comprehensions mit Wortlängen-Magie! (Sonst könnt ihr direkt die Def. abschreiben)
+		\end{itemize}
+		
+	\end{frame}
+}
+
 
 \framePrevEpisode
 
@@ -39,6 +42,7 @@
 	\FalseQuestionE{$\memread(\memwrite(m,a,v), a) = m(a)$ \quad für alle $m,a,v$.}{$\memread(\memwrite(m,a,v), a) = v$.}
 	\FalseQuestionE{Im IR wird die Adresse des aktuellen Befehls gespeichert.}{Das geschieht im IAR – Im IR steht der Befehl selbst.}
 	%\TrueQuestionE{Die Befehlsholphase ist jede Ausführungsrunde identisch.}{}
+	\TrueQuestionE{Ein MIMA-Programm, welches von $-1$ abwärts zählt, kommt \\ irgendwann bei null raus.}{Unterlauf: Nach $-2^{23}$ kommt $2^{23}-1$.}
 \end{frame}
 
 \begin{frame}[t]{Wahr oder falsch?}
@@ -56,8 +60,6 @@
 \end{frame}
 
 %\input{../Bloecke/MIMA.tex}
-
-%\input{../Bloecke/Relationen2.tex}
 
 \begin{frame}{Noch offen: Klammerausdrücke}
 	A long, long time ago, in a land far away:\\
@@ -77,12 +79,15 @@
 
 \input{../Bloecke/Grammatiken.tex}
 
+\input{../Bloecke/Relationen2.tex}
+
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
 			%\item Mehr Eigenschaften von Relationen
 			\item Was eine kontextfreie Grammatik ist
 			\item Wie man Sprachen mit Grammatiken beschreiben kann
+			\item Welche Eigenschaften Relationen haben können
 		\end{itemize}
 	\end{block}
 	

@@ -96,7 +96,8 @@
 	Das sind also alle Wörter aus \emph{Terminalsymbolen}, die vom Startsymbol aus ableitbar sind.\\
 	\bigskip
 	Achtung: Die erzeugte Sprache kann auch \textbf{leer} sein. \\
-	Beispiel: \pause $L\left(\left(\{X\},\, \{\word a, \word b\},\, X\, ,\{X\to X\}\right)\right) = \{\}$
+	\§{Beispiele:} \pause $L\left(\left(\{X\},\, \{\word a, \word b\},\, X\, ,\{X\to X\}\right)\right) = \emptyset$ \pause \quad oder \\
+	\. $L\left(\left(\{X\},\, \{\word a, \word b\},\, X\, ,\emptyset \right)\right) = \emptyset$
 \end{frame}
 
 \begin{frame}{Erzeugte Sprache}
@@ -111,7 +112,8 @@
 	\end{Definition}
 	\medskip
 	
-	Viele Programmiersprachen sind kontextfrei. \\
+	Viele Programmiersprachen sind kontextfrei. \\ 
+	% Fun fact: Einrücksensitive Sprachen (wie Python – oder Haskell <3) sind dies streng genommen nicht! Das Lexing kann dann nicht von einem Regex-Automaten gemacht werden, der („übermächtige“ Stack-Automaten-)Lexer muss dann den Input vorverarbeiten, der daraus entstehende Tokenstream kann dann kontextfrei geparst werden.  Source: http://trevorjim.com/python-is-not-context-free/
 	Eine vereinfachte Variante der englischen Sprache auch. \smiley
 % Grob falsch:
 %	Viele \enquote{natürlich vorkommende} Sprachen sind kontextfrei.
