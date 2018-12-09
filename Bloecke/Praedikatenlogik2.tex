@@ -44,7 +44,7 @@
 		$\valDIb$ \quad „Auswertungsfunktion“ \\
 		\begin{itemize}
 			\item rechnet Werte aus für Terme \\
-			$\valDIb(\word x) = 42$, \; $\valDIb(\word{f(y)}) = 1337 + 2 = 1339$
+			$\valDIb{}_{{}_1}(\word x) = 42$, \; $\valDIb{}_{{}_1}(\word{f(y)}) = 1337 + 2 = 1339$
 			\item rechnet Wahrheitswerte aus für ganze PL-Formeln \\
 			$\valDIb(\plexists \word n \, \plka\word{prim(n)\plkz}) = \W$, \; $\valDIb(\plall \word m \, \plka \word{vorname(m)}\pleq \word{Donald} \plkz) = \F$
 			\item „wie wir's kennen“
@@ -56,16 +56,16 @@
 	\[ F := \word{R(42)} \aland \plexists \plx {\plka \plx \pleq \ply \plkz}  \]
 	Gebt eine Interpretation $(D_1 = \N_0, I_1)$ und eine Variablenbelegung $\beta_1$ so an, dass $val_{D_1, I_1, \beta_1}(F) = \W$ gilt.\\
 	\smallskip
-	$I_1(\word R) = \visible<2-|handout:2>{\{42\}}$ \qquad
-	$\beta_1 \colon \VPL \functionto D_1, \, \beta_1(\ply) = $ \visible<2-|handout:2>{$1$}
+	$I_1(\word R) = \visible<2-|handout:2>{\{42\},}$ \qquad
+	$\beta_1 \colon \VPL \functionto D_1, \, $ \visible<2-|handout:2>{$\beta_1(\ply) = 1, \beta_1(\plx) \text{ beliebig}$}
 	
 	\medskip
 	
 	\[ G := \plexists \plx {\plka \word{R(f(x))} \aland \plx \pleq \ply \plkz}  \]
 	Gebt eine Interpretation $(D_2 = \N_0, I_2)$ und eine Variablenbelegung $\beta_2$ so an, dass $val_{D_2, I_2, \beta_2}(G) = \W$ gilt.\\
 	\smallskip
-	\visible<3-|handout:2>{$I_2(\word R) = \N_0 \qquad I_2(\word f)(x) = x$ \qquad
-	$\beta_2 \colon \VPL \functionto D_2, \, \beta_2(\ply) = 1$}
+	\visible<3-|handout:2>{$I_2(\word R) = \N_0, \qquad I_2(\word f)(x) = x$, \qquad
+	$\beta_2 \colon \VPL \functionto D_2, \, \beta_2(\ply) = 1, \beta_1(\plx) \text{ beliebig}$}
 \end{frame}
 
 \begin{frame}{Aufgabe 2}

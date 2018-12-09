@@ -10,27 +10,23 @@
 \begin{document}
 \starttut{9}
 
-\begin{frame}{Zu Blatt \#3}
-	Durchschnitt: \quad etwa \thassedaniel{58}{53}~\% der Punkte \\
-	\begin{itemize}
-		\item \textbf{Induktionen}: Schreibt mir bitte die Aussage hin, über die ihr die Induktion macht. Wenn IV falsch, hab ich sonst keinen Plan, was ihr zeigen wollt.
-		\item \textbf{A3.1}: Schaut euch Injektivität/Surjektivität nochmal an...
-		\item \textbf{A3.2}: Huffman-Bäume: Es werden IMMER die zwei KLEINSTEN Knoten verbunden. Auch „über Kreuz“. 
-		\item \textbf{A3.3}: Terme mit zu vielen Pünktchen („...“) sind keine Definition. \\ Alles, was nicht rekursiv ist, muss falsch sein wegen Klammerausdrücken.
-		\item \textbf{A3.6}: Induktion über $n = \size{w_1} = \size{w_2}$, also beide Wortlängen gleichzeitig, geht NICHT! (Gibt nämlich auch Wörter, wo beide Längen nicht gleich sind... :P)
-		
-	\end{itemize}
-\end{frame}
+\mycomment{
+	\begin{frame}{Zu Blatt \#3}
+		Durchschnitt: \quad etwa \thassedaniel{58}{53}~\% der Punkte \\
+		\begin{itemize}
+			\item \textbf{Induktionen}: Schreibt mir bitte die Aussage hin, über die ihr die Induktion macht. Wenn IV falsch, hab ich sonst keinen Plan, was ihr zeigen wollt.
+			\item \textbf{A3.1}: Schaut euch Injektivität/Surjektivität nochmal an...
+			\item \textbf{A3.2}: Huffman-Bäume: Es werden IMMER die zwei KLEINSTEN Knoten verbunden. Auch „über Kreuz“. 
+			\item \textbf{A3.3}: Terme mit zu vielen Pünktchen („...“) sind keine Definition. \\ Alles, was nicht rekursiv ist, muss falsch sein wegen Klammerausdrücken.
+			\item \textbf{A3.6}: Induktion über $n = \size{w_1} = \size{w_2}$, also beide Wortlängen gleichzeitig, geht NICHT! (Gibt nämlich auch Wörter, wo beide Längen nicht gleich sind... :P)
+			
+		\end{itemize}
+	\end{frame}
+}
 
 \framePrevEpisode
 
-\daniel{
-	\input{../Bloecke/Praedikatenlogik}
-}
 
-\input{../Bloecke/Praedikatenlogik2}
-
-\thasse{
 	%	\begin{frame}{Rückblick: Prädikatenlogik}
 	%		\begin{itemize}[<+->]
 	%			\item Deutlich komplizierterer Aufbau als Aussagenlogik
@@ -39,7 +35,7 @@
 	%		\end{itemize}
 	%	\end{frame}
 	
-	\begin{frame}{Wahr oder Falsch?}
+\begin{frame}{Wahr oder Falsch?}
 	Sei $\RPL = \{R,S\}$ mit $\ar(R) = 2$ und $\ar(S) = 1$, \\
 	$\FPL = \{f,g\}$ mit $\ar(f) = 1$ und $\ar(g) = 2$ 
 	\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
@@ -49,26 +45,24 @@
 	%TODO: Eine W/F-Frage zu PL Substitution
 \end{frame}
 
-}
 
 \section{Eine Weihnachtsgeschichte}
 \input{../Bloecke/DrMetaNordpol}
 
+\input{../Bloecke/Hoare.tex}
+
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
 		\begin{itemize}
-			\daniel{
-				\item Wie prädikatenlogische Formeln aufgebaut sind
-				\item Wie man damit präzise Aussagen trifft
-				\item Syntaxkram :P
-			}
-			\item Wie prädikatenlogische Formeln ausgewertet werden
+			\item Wie der Hoare-Kalkül funktioniert
+			\item Wie man mit dem Hoare-Kalkül ein Programm beweist.
 		\end{itemize}
 	\end{block}
 	
 	\begin{block}{Was nächstes Mal kommt}
 		\begin{itemize}
-			\item Alles korrekt? – Beweise mit dem Hoare-Kalkül
+			\item Graphen -- Alles vernetzt
+			\item Systematisches Suchen und Wandern -- Algorithmen auf Graphen
 		\end{itemize}
 	\end{block}
 \end{frame}
