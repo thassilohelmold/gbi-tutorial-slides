@@ -6,10 +6,10 @@
 \subsection{Algorithmen}
 \begin{frame}{Algorithmen}
 	\begin{block}{Definition}
-		Über die Eigenschaften von Algorithmen:
+		Ein Algorithmus ist...
 		\begin{itemize}[<+->]
 			\item Eine endliche Beschreibung
-			\item aus elementaren Aussagen, 
+			\item aus elementaren Anweisungen, 
 			\item die deterministisch ($=$ ohne Zufall!) ausgeführt werden.\\
 				{\small (Manchmal auch gemischt mit (Pseudo-)Zufallselementen)}
 			\item Eine endliche Eingabe gibt endliche Ausgabe...
@@ -61,14 +61,14 @@
 		\item Fester Grundbereich (explizit angegeben oder implizit ableitbar)
 		\item Funktionen und Relationen \enquote{wie üblich} interpretiert.
 		\item Konstanten beliebig, als \enquote{Eingabe} des Programms.\\
-		Muss also für alle Möglichkeiten $=$ Eingaben gelten.
+		Muss also für alle Möglichkeiten (also Eingaben) gelten.
 	\end{itemize}
 \end{frame}
 
 %TODO
 \begin{frame}{Der Hoare-Kalkül}
 	\begin{block}{Definition}
-		Ein Hoare-Tripel $\htr{P}{S}{Q}$ ist \textbf{gültig}, wenn für jede relevante Interpretation und jede Variablenbelegung $\beta$ gilt:\\
+		Ein Hoare-Tripel $\htr{P}{S}{Q}$ ist \textbf{gültig}, wenn für jede relevante Interpretation $I$ und jede Variablenbelegung $\beta$ gilt:\\
 		Wenn vor der Ausführung $\val_{D,I,\beta}(P)=\W$ ist und die Ausführung von $S$ für $I$ und $\beta$ mit der neuen Variablenbelegung $\beta'$ endet, dann gilt anschließend auch $\val_{D,I,\beta'}(Q)=\W$. \\
 		\medskip
 		Auf Deutsch: \\
@@ -77,38 +77,40 @@
 \end{frame}
 
 \begin{frame}{Hoare-Tripel}
-	
-	\begin{minipage}{0.4\linewidth}
-			\begin{Beispiel}
-			$\assert{x = 5}$ \\
-			$x \gets x + 1$ \\
-			$\assert{x = 6}$ \\
-			ist gültig.  \\
-			
-			\bigskip
-			$\assert{x = 5}$ \\
-			$x \gets x + 1$ \\
-			$\assert{x = 42}$ \\
-			ist nicht gültig.
-		\end{Beispiel}
-	\end{minipage}
-	\pause % Hier KEINE LEERZEILE sonst verhaut es alles!
-	\begin{minipage}{0.4\linewidth}
-		\begin{block}
-			
-			$\assert{z = 5}$ \\
-			$x \gets x + 1$ \\
-			$\assert{z = 5}$ \\
-			ist gültig.  \\
-			
-			\bigskip
-			$\assert{x = x}$ \\
-			$\kw{while True do } x \gets x + 1 \kw{ od}$ \\
-			$\assert{\W = \F}$ \\
-			ist gültig (Q wird nie erreicht).
-		\end{block}
-	\end{minipage}
-	
+	\begin{Beispiel}
+		\begin{columns}[T] 
+			\begin{column}[T]{.4\textwidth} 
+				$\assert{x = 5}$ \\
+				$x \gets x + 1$ \\
+				$\assert{x = 6}$ \\
+				ist gültig.  \\
+				
+				\bigskip
+				$\assert{x = 5}$ \\
+				$x \gets x + 1$ \\
+				$\assert{x = 42}$ \\
+				ist nicht gültig.
+			\end{column}
+			\begin{column}[T]{.4\textwidth} 
+				\pause
+				$\assert{z = 5}$ \\
+				$x \gets x + 1$ \\
+				$\assert{z = 5}$ \\
+				ist gültig.  \\
+				
+				
+				\ifnum\thisyear=2018 % TODO remove \ifnum after solution to 2018:9.3 has been published!
+				\else
+				\bigskip
+				$\assert{x = x}$ \\
+				$\kw{while } 1 = 1 \kw{ do } x \gets x + 1 \kw{ od}$ \\
+				$\assert{\W = \F}$ \\
+				ist gültig (Q wird nie erreicht).
+				\fi
+			\end{column}
+		\end{columns}
+	\end{Beispiel}
+	\medskip
 	\pause
 	\begin{block}{Hoare-Kalkül}
 		Der \emph{Hoare-Kalkül} definiert Regeln, wie gültige \emph{Hoare-Tripel} schrittweise aus Axiomen abgeleitet werden können.
@@ -143,7 +145,7 @@
 
 	\begin{Beispiel}
 		Aus $\{ x = 41\} \ x \gets x + 1\ \{x = 42 \}$ können wir \\
-		$\{ x + y = 42 \aland y = 1 \} \ y \gets x + 1\ \{x \in \R \}$ ableiten.
+		$\{ x + y = 42 \land y = 1 \} \ x \gets x + 1\ \{x \in \R \}$ ableiten.
 	\end{Beispiel}
 \end{frame}
 
@@ -195,8 +197,27 @@
 \end{frame}
 
 \begin{frame}{Beispiel: Berechnung von $\vert x \vert$}
-	\vspace{-10mm}
-	\begin{align*}
+	
+	
+	\begin{minipage}{0.4\linewidth}
+		Erinnerung:
+		\vspace{-.6\baselineskip}
+		\begin{align*}
+		&\assert{ P } \\
+		& \textbf{if } B \textbf{ then} \\
+		&\hspace{2em} \assert{ P \wedge B } \\
+		&\hspace{2em} S_1 \\
+		&\hspace{2em} \assert{ Q }\\
+		&\textbf{else} \\
+		&\hspace{2em} \assert{ P \wedge \neg B } \\
+		&\hspace{2em} S_2 \\
+		&\hspace{2em} \assert{ Q }  \\
+		&\textbf{fi}\\
+		&\assert{Q }
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}{0.4\linewidth}
+		\begin{align*}
 		&\assert{ x \in\R} \\
 		&\textbf{if } x < 0 \textbf{ then } \\
 		&\hspace{2em} \assert{ \visible<6->{ x\in\R\wedge x < 0 } } \\
@@ -210,7 +231,8 @@
 		&\hspace{2em} \assert{ \visible<2->{ z = \vert x \vert } } \\
 		&\textbf{fi} \\
 		&\assert{ z = \vert x \vert } 
-	\end{align*}
+		\end{align*}
+	\end{minipage}
 \end{frame}
 
 \begin{frame}{Aufgabe}
@@ -334,7 +356,7 @@
 				\centering
 				\medskip
 				\begin{tabular}{c|cc}	 
-					i & x & y \\ 
+					Durchlauf $i$ & $x$ & $y$ \\ 
 					\hline 
 					0 & 3 & 4 \\
 					1 & 4 & 3 \\
@@ -344,15 +366,28 @@
 				\end{tabular}
 			\end{block}
 			\pause
-			Schleifeninvariante: $$ x_i + y_i = a + b $$ 
+			Schleifeninvariante: $$ x + y = a + b $$ 
 		}
 	\end{column}
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Beispiel Schleifeninvarianten}
-	\vspace{-5mm}
-	\begin{align*}
+\begin{frame}{Beispiel Schleifeninvarianten – Lösung}
+	\begin{minipage}{.4\linewidth}
+		Erinnerung HT-W:
+		\vspace{-.4\baselineskip}
+		\begin{align*}
+		&\assert{I}  \\
+		&\kw{while } B \kw{ do } \\
+		&\qquad \assert{I \land B} \\
+		&\qquad S \\
+		&\qquad \assert{I} \\
+		&\kw{od} \\
+		&\assert{I \land \lnot B}
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}{.4\linewidth}
+		\begin{align*}
 		&\assert{x=a \land y=b }  \\
 		&\assert{ x+y=a+b }  \\
 		&\kw{while } y\not=0 \kw{ do } \\
@@ -363,9 +398,11 @@
 		&\qquad x \gets x+1 \\
 		&\qquad\assert{ x+y = a+b} \\
 		&\kw{od } \\
-		&\assert{ x+y = a+b \land (y=0) } \\
+		&\assert{ x+y = a+b \land y=0 } \\
 		&\assert{x=a+b} \\
-	\end{align*}
+		\end{align*}
+	\end{minipage}
+	
 \end{frame}
 
 \begin{frame}{Exkurs: Schl.-Inv. mit Vollst. Induktion}
@@ -373,10 +410,10 @@
 	
 	\emph{Behauptung}: $$ \forall\ i \in \{0,...,b\} : x_i + y_i = a+b $$ \pause
 	\begin{block}{Induktionsanfang}
-		Für $i=0$ gilt $ x_0+y_0 = a+b $ nach Vorbedingung
+		Für $i=0$ gilt $ x_0+y_0 = a+b $ nach Vorbedingung.
 	\end{block} \pause 
 	\begin{block}{Induktionsvorrausetzung}
-		Für ein beliebig aber festes $i\in \{0,...,b\}$ gelte die Behauptung
+		Für ein beliebig aber festes $i\in \{0,...,b\}$ gelte die Behauptung.
 	\end{block}
 \end{frame}
 
@@ -398,7 +435,7 @@
 		\begin{align*}
 		x_{i+1}+y_{i+1} &= x_i +1 + y_i -1 \\
 		&= x_i + y_i \\
-		&\overset{IV}{=} a+b
+		&\overset{IV}{=} a+b.
 		\end{align*}
 	\end{block}
 \end{frame}
