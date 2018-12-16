@@ -35,21 +35,25 @@
 	%		\end{itemize}
 	%	\end{frame}
 	
-\begin{frame}{Wahr oder Falsch?}
-	Sei $\RPL = \{R,S\}$ mit $\ar(R) = 2$ und $\ar(S) = 1$, \\
-	$\FPL = \{f,g\}$ mit $\ar(f) = 1$ und $\ar(g) = 2$ 
+\begin{frame}[t]{Wahr oder Falsch?}
+	Sei $\RPL = \{\word R, \word S\}$ mit $\ar(\word R) = 2$ und $\ar(\word S) = 1$, \\
+	$\FPL = \{\word f, \word g\}$ mit $\ar(\word f) = 1$ und $\ar(\word g) = 2$ . \\
 	\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
-	\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen, da sie keinen Term, sondern eine atomare Formel darstellt.}
-	\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}) $}{Es wird nur ausgesagt, dass es mindestens ein Kind gibt, das spielt.}
+	\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen: Das geht nur mit Termen, nicht mit atomaren Formeln.}
+	\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}\plkz $}{Der Text sagt nur, dass es mindestens ein Kind gibt, das spielt.}
 	%TODO: Eine W/F-Frage zu freien/gebundenen Variablen
 	%TODO: Eine W/F-Frage zu PL Substitution
-\end{frame}
+\end{frame}	
 
 
-\section{Eine Weihnachtsgeschichte}
-\input{../Bloecke/DrMetaNordpol}
 
-\input{../Bloecke/Hoare.tex}
+\thassedaniel{
+	\input{../Bloecke/DrMetaNordpol}
+	\input{../Bloecke/Hoare.tex}
+}{
+	\input{../Bloecke/Hoare.tex}
+	\input{../Bloecke/DrMetaNordpol}
+}
 
 \begin{frame}	
 	\begin{block}{Was ihr nun wissen solltet}
