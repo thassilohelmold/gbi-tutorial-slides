@@ -41,6 +41,7 @@
 	\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
 	\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen: Das geht nur mit Termen, nicht mit atomaren Formeln.}
 	\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}\plkz $}{Der Text sagt nur, dass es mindestens ein Kind gibt, das spielt.}
+	\FalseQuestionE{\enquote{Wenn Person $a$ Person $b$ liebt, liebt $b$ nicht unbedingt $a$.} \\ $\equiv \plall \word a \plall \word b \, \plka \word{liebt(a,b)} \alimpl \alnot \word{liebt(b,a)}\plkz $}{Das hieße, dass es nur unerwiderte Gefühle gibt. \\ Richtig wäre $\alnot \plall \word a \plall \word b \,\plka \word{liebt(a,b)} \alimpl \word{liebt(b,a)}\plkz $.}
 	%TODO: Eine W/F-Frage zu freien/gebundenen Variablen
 	%TODO: Eine W/F-Frage zu PL Substitution
 \end{frame}	
