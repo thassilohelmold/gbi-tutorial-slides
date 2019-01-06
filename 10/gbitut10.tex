@@ -17,50 +17,49 @@
 
 \framePrevEpisode
 
-\thasse{
-	\begin{frame}[t]{Wahr oder Falsch?}
-		\Socrative
-		\FalseQuestionE{Die Korrektheit eines Algorithmus kann man durch Testen \\ beweisen.}{Testen kann nur Fehler aufzeigen, aber nicht Fehlerfreiheit garantieren.}
-		\FalseQuestionE{Sinnvolle Schleifeninvarianten kann man \enquote{nach Kochrezept} aufstellen.}{Das Aufstellen sinnvoller Schleifeninvarianten erfordert viel Übung und kann insbesondere \textbf{nicht} vom Rechner gelöst werden.}
-		\FalseQuestionE{Ein Algorithmus ist ein (kompilierbares/ausführbares) Programm.}{Der Algorithmus selbst ist nur die Beschreibung der (Rechen-)\\ Vorschriften, nicht die tatsächliche Umsetzung in Programmcode.}
+
+
+\begin{frame}[t]{Wahr oder Falsch?}
+	\Socrative
+	\FalseQuestionE{Die Korrektheit eines Algorithmus kann man immer durch Testen beweisen.}{{\textbf{Nein, nein, nein!}} Durch Testen sieht man höchstens, wo Fehler sind, aber nicht, ob es keine gibt.}
+	\FalseQuestionE{Sinnvolle Schleifeninvarianten kann man \enquote{nach Kochrezept} aufstellen.}{Nein, das Aufstellen sinnvoller Schleifeninvarianten erfordert viel Übung und kann insbesondere \textbf{nicht} vom Rechner gemacht werden.}
+	\FalseQuestionE{Ein Algorithmus ist ein (kompilierbares/ausführbares) Programm.}{Nein, der Algorithmus selbst ist nur die Beschreibung der (Rechen-)\\ Vorschriften, nicht die tatsächliche Umsetzung in Programmcode.}
+	\mycomment{
 		\TrueQuestion{$x = y \aland y = z \impl x = z$ ist allgemeingültig}
 		\FalseQuestion{$x = z \impl x = y \aland y = z$ ist allgemeingültig}
-	\end{frame}
-}
-
-\daniel{
-	\begin{frame}[t]{Wahr oder Falsch?}
-		Sei $\RPL = \{\word R, \word S\}$ mit $\ar(\word R) = 2$ und $\ar(\word S) = 1$, \\
-		$\FPL = \{\word f, \word g\}$ mit $\ar(\word f) = 1$ und $\ar(\word g) = 2$ . \\
-		\TrueQuestionE{$\word{R(y,g(x,y))}$ ist präd.log. syntaktisch korrekt.}{}
-		\FalseQuestionE{$\word{f(S(x))}$ ist präd.log. syntaktisch korrekt.}{Eine Relation kann nicht innerhalb einer Funktion auftauchen: Das geht nur mit Termen, nicht mit atomaren Formeln.}
-		\FalseQuestionE{\enquote{Nicht alle Kinder spielen nicht.} $\equiv \plall \word{x\,(child(x)} \alimpl \word{play(x)}\plkz $}{Der Text sagt nur, dass es mindestens ein Kind gibt, das spielt.}
-		\FalseQuestionE{In jeder Grammatik ist eine Ableitung à la $w\eps \derives w$ möglich.}{Blödsinn, das hat mit Ableitungen nix zu tun. Richtig ist: $w\eps = w$ (kein Pfeil!).}
-	\end{frame}
-}
-
-
-\begin{frame}{Zu Blatt \#4}
-	Durchschnitt: \quad etwa \thassedaniel{86 (58)}{85 (66)}~\% der Punkte (s. Bonuspunkte!)
-	\begin{itemize}
-		\item \textbf{A4.3}: Ja, LDC $x$ für Speicherstelle $x$ geht (und ist notwendig)!
-		\item \textbf{A4.5}: MuLö war falsch (Übung auch!), wurde aktualisiert. \\
-			  \textbf{Aufgabe}: \; AL-Fml. $G$ in PL-Fml. $P$ bedeutungserhaltend übersetzen. \\ 
-			  \pause
-			  \textbf{Falsche MuLö}: \; $I(\word c) = \W$ \\
-			  \quad Setze $P := G \pleq \word c$ \qquad Bsp.: \; $G = \plka \word A \aland \alnot \word B \plkz \impl P := \plka \word A \aland \alnot \word B \plkz \pleq \word c$ \\ 
-				  \pause 
-				  \quad \impl Kaputt, weil nur Terme in $\pleq$ eingesetzt werden dürfen! \\
-			  \pause
-			  \textbf{Möglicher Fix}: \; Ersetze jede AL-Variable durch Vergleich mit \word c: \\
-			  \quad $G = \word A \aland \alnot \word B \; \?> \; P := \plka \word A \pleq \word c\plkz \aland \alnot \plka \word B \pleq \word c\plkz$ \\
-			  Alternativ: S. aktualisierte MuLö.
-	\end{itemize}
+	}
 \end{frame}
 
 
+\begin{frame}[t]{Wahr oder falsch?}
+	\FalseQuestionE{HT-I wird auf Iterationen angewendet.}{HT-I bei \kw{if}-Verzweigungen.}
+	\FalseQuestionE{Ein laut Kalkül gültiges Hoare-Tripel garantiert die Korrektheit \\ des Algorithmus.}{Es muss auch gezeigt werden, dass der Algorithmus terminiert.}
+	%\TrueQuestion{Der Hoare-Kalkül hilft einem, die Korrektheit eines Algorithmus zu beweisen.}
+	%\FalseQuestionE{Der Hoare-Kalkül besteht aus den Axiomen HT-A, HT-E, HT-I, \\ HT-W, HT-S.}{Nur HT-A ist Axiom, die anderen sind Schlussregeln.}
+\end{frame}
 
-% TODO insert from 11
+\input{../Bloecke/Graphen}
+
+
+
+
+\begin{frame}	
+	\begin{block}{Was ihr nun wissen solltet}
+		\begin{itemize}
+			\item Grundbegriffe der Graphen
+			\item Zentrale Eigenschaften von Graphen
+		\end{itemize}
+	\end{block}
+	
+	\begin{block}{Was nächstes Mal kommt}
+		\begin{itemize}
+			\item Wie man Graphen darstellen kann
+			\item Warum dauert das so lange? -- Laufzeitbetrachtungen
+			%\item One to rule them all -- Das Master-Theorem
+			%\item Alles nur von Hand? -- Hier kommen die Automaten!
+		\end{itemize}
+	\end{block}
+\end{frame}
 
 \xkcdframe{974}{Danke für eure Aufmerksamkeit! \smiley}{2.5}
 %\lastframe{0.65}{0}{xkcd/the_general_problem_974.png}{http://www.xkcd.com/974}

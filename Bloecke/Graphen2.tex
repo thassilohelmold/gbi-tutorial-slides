@@ -1,4 +1,4 @@
-\section{Repräsentation von Graphen}
+\section{Repräsentationen von Graphen}
 \begin{frame}{Darstellung von Graphen}
 	\begin{block}{Auf Papier}
 		\begin{itemize}
@@ -10,7 +10,7 @@
 
 	\pause
 	\begin{block}{Im Rechner}
-		Systematisches abspeichern der Kanten notwendig.\\
+		Systematisches Abspeichern der Kanten notwendig.\\
 		Knoten werden oftmals implizit verwendet.
 		\begin{itemize}
 			\item (Kantenliste)
@@ -50,10 +50,10 @@
 	      	\end{tikzpicture}
 			\column{0.4\linewidth}
 				\pause
-				Für die Adjazentenlisten gilt 
+				Adjazenzlisten dazu:
 				\begin{table}[H]
 					\centering \vspace*{1em}
-					\begin{tabular}{c|c} 0 & 1,2,3 \\ \hline 1 & 3 \\ \hline 2 & 1,2,3 \\ \hline 3 & 2 
+					\begin{tabular}{c|c} 0 & 1, 2, 3 \\ \hline 1 & 3 \\ \hline 2 & 1, 2, 3 \\ \hline 3 & 2 
 					\end{tabular}  
 				\end{table}
 		\end{columns}
@@ -71,7 +71,7 @@
 
 \begin{frame}{Adjazenzmatrix}
 \textbf{Adjazenzmatrix} \\
-Verwende Matrix $A \in \{0, 1\}^{n \times n}$ \ mit \ $a_{ij} = 1 \gdw (i, j) \in E$
+Verwende Matrix $A \in \{0, 1\}^{n \times n}$ \ mit \ $A_{ij} = 1 \gdw (i, j) \in E$
 
 \bigskip
 \begin{columns}

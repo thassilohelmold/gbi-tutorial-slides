@@ -1,0 +1,37 @@
+%% Collection of stuff that might be deprecated or just became out of use. Saved here for later revival.
+
+%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Zu Blatt \#4}
+	Durchschnitt: \quad etwa \thassedaniel{86 (58)}{85 (66)}~\% der Punkte (s. Bonuspunkte!)
+	\begin{itemize}
+		\item \textbf{A4.3}: Ja, LDC $x$ für Speicherstelle $x$ geht (und ist notwendig)!
+		\item \textbf{A4.5}: MuLö war falsch (Übung auch!), wurde aktualisiert. \\
+			  \textbf{Aufgabe}: \; AL-Fml. $G$ in PL-Fml. $P$ bedeutungserhaltend übersetzen. \\ 
+			  \pause
+			  \textbf{Falsche MuLö}: \; $I(\word c) = \W$ \\
+			  \quad Setze $P := G \pleq \word c$ \qquad Bsp.: \; $G = \plka \word A \aland \alnot \word B \plkz \impl P := \plka \word A \aland \alnot \word B \plkz \pleq \word c$ \\ 
+				  \pause 
+				  \quad \impl Kaputt, weil nur Terme in $\pleq$ eingesetzt werden dürfen! \\
+			  \pause
+			  \textbf{Möglicher Fix}: \; Ersetze jede AL-Variable durch Vergleich mit \word c: \\
+			  \quad $G = \word A \aland \alnot \word B \; \?> \; P := \plka \word A \pleq \word c\plkz \aland \alnot \plka \word B \pleq \word c\plkz$ \\
+			  Alternativ: S. aktualisierte MuLö.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Zu Blatt \#5}
+	\textbf{Durchschnitt}: \quad etwa \thassedaniel{14}{16}~/~25~P \quad ($\hat{=}$ \thassedaniel{56}{64}~\%) \\
+	\begin{itemize}
+		\item \textbf{A5.1}: $\plall \plx \plka \word{Vogel(x)} \aland \alnot \word{schwimmfähig(x)}\plkz$... \bfalert{falsch}, \\
+		Richtig: $\plall \plx \plka \word{Vogel(x)} \underline{\alimpl} \alnot \word{schwimmfähig(x)}\plkz$...
+		\item \textbf{A5.2}: Einfache Interpretationen sind hervorragend! (z.~B. \textbf{leere} Relationen!) Grade in der Klausur! 
+		\item \textbf{A5.5b)}: $N = \set{L_i \Mid i \elem \N_0}$ geht \bfalert{NICHT!} $N$ muss endlich sein! \\
+		(War sowieso unlösbar...)
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%
+
