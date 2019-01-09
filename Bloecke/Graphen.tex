@@ -64,15 +64,21 @@
 
 	\pause
 	\begin{Definition}
-		Zwei Knoten $x$ und $y$ in einem Graphen $G$ heißen \textbf{adjazent}, wenn eine Kante von $x$ nach $y$ zeigt.
-	\end{Definition}
-	\textbf{Achtung}: Im gerichteten Fall ist diese Aussage nicht symmetrisch!
-
-	\pause
-	\begin{Definition}
 		Eine Kante mit identischem Start- und Endpunkt nennt man \textbf{Schlinge}.\\
 		Also $(x,x) \in E$ (gerichtet) bzw. $\{x\} \in E$ (ungerichtet).\\
+		\smallskip
+		
+		Zwei Knoten $x$ und $y$ in einem Graphen $G$ heißen \textbf{adjazent}, wenn eine Kante von $x$ nach $y$ zeigt.
 	\end{Definition}
+	% \textbf{Achtung}: Im gerichteten Fall ist diese Aussage nicht symmetrisch!
+	% Das stimmt zwar, hat in den letzten zwei Jahren aber mehr verwirrt als geholfen, denn dann kommt gleich die Frage "und wie rum muss man das jetzt sagen...".
+
+	\pause
+
+	\begin{block}{Hinweis}
+		Einen gerichteten Graphen $G = (V,E)$ kann man in den \textbf{zu $G$ gehörigen ungerichteten Graphen} umwandeln, indem man die Pfeilspitzen weglässt. \\
+		Andersrum: Aus einer Kante zwei machen mit Pfeilen in beide Richtungen.
+	\end{block}
 \end{frame}
 
 \begin{frame}{Beispiel}
@@ -227,7 +233,6 @@
 \end{frame}
 
 
-
 \begin{frame}{Teilgraphen}
 	\begin{Definition}
 		Ein \textbf{Teilgraph} $T = (V',E')$ von $G$ ist ein Graph, den man kriegt, wenn man aus $G$ beliebige Knoten und Kanten so wegwirft, dass keine Kante \enquote{in die Luft} zeigt.  Also (für gerichtete Graphen):
@@ -358,6 +363,26 @@
 	%Also tatsächlich \enquote{Anzahl der Berührungen von Linien mit dem Kreis}.
 \end{frame}
 
+\begin{frame}{Aufgabe: Maximale Kanten}
+	Sei $G$ ein \textbf{gerichteter} Graph mit $n$ Knoten. Wie viele Kanten kann $G$ maximal haben... \\[0.2in]
+	
+	Wenn Schlingen erlaubt sind? \pause \\ 
+	$n^2$  \\[0.3in]
+	
+	Wenn er schlingenfrei ist? \pause\\ 
+	$n^2 - n = n \* (n-1)$		
+\end{frame}
+
+\begin{frame}{Aufgabe: Maximale Kanten}
+	Sei $G$ ein \textbf{ungerichteter} Graph mit $n$ Knoten. Wie viele Kanten kann $G$ maximal haben... \\[0.2in]
+	
+	\visible<3->{Wenn Schlingen erlaubt sind? \\ }
+	\visible<4->{$\frac{n(n+1)}{2} \qquad \left( = \frac{n(n-1)}{2} + n\right)$ \\[0.3in]}
+	
+	Wenn er schlingenfrei ist? \\
+	\visible<2->{$\frac{n(n-1)}{2} $\\ Man verbindet jeden Knoten mit den jeweils anderen Knoten, fasst dann jeweils 2 gleiche Kanten zusammen.}
+\end{frame}
+
 \subsection{Pfade und Wege}
 \begin{frame}{Pfade und Wege}
 	\begin{Definition}
@@ -426,37 +451,6 @@
 %• Beachte: Knoten dürfen in Pfad mehrfach vorkommen
 %• Beispiel machen, in dem von x nach y unterschiedlich lange Pfade vorkommen
 
-\begin{frame}{Gerichtet $\leftrightsquigarrow$ ungerichtet umwandeln}
-	Einen gerichteten Graphen $G = (V,E)$ kann man in den \textbf{zu $G$ gehörigen ungerichteten Graphen} umwandeln, indem man die Pfeilspitzen weglässt. \\
-	
-	\medskip
-	Andersrum: Aus einer Kante zwei machen und Pfeile in beide Richtungen.
-	
-	%TODO (strenger) Zusammenhang
-	%\bigskip
-	%$G$ gerichtet heißt \textbf{streng zusammenhängend}.....
-\end{frame}
-
-\begin{frame}{Gerichtete Bäume}
-	\begin{Definition}
-		Ein gerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt eine \textbf{Wurzel} $r \in V$, sodass zu jedem Knoten \emph{genau ein Pfad} von $r$ aus existiert. \\
-		\smallskip
-		Diese Wurzel ist eindeutig und hat Eingangsgrad $= 0$. \\
-		\textbf{Blätter} sind Knoten mit Ausgangsgrad $= 0$. \\
-		\textbf{Innere Knoten} sind Knoten mit Ausgangsgrad $> 0$. 
-		
-	\end{Definition}
-\end{frame}
-
-\begin{frame}{Ungerichtete Bäume}
-	\begin{Definition}
-		Ein ungerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt einen gerichteten Baum, den man zum ungerichteten $T$ umwandeln kann. \\
-		\smallskip
-		Dessen Wurzel ist \textbf{nicht} eindeutig.
-		
-	\end{Definition}
-\end{frame}
-
 \begin{frame}{Isomorphie}
 	Zwei Graphen heißen \textbf{isomorph}, wenn sie \enquote{bis auf eine Umbenennung der Knoten identisch sind}, also die gleiche Struktur besitzen.\\
 	
@@ -470,7 +464,7 @@
 	
 \end{frame}
 
-\begin{frame}{Aufgabe Graphisomorphie}
+\begin{frame}{Aufgabe: Graphisomorphie}
 	\begin{block}{Aufgabe (WS 2010)}
 		Jeweils zwei der sechs Graphen sind isomorph zueinander. Geben Sie die Paare von isomorphen Graphen sowie den zugehörigen Isomorphismus ($=$~„Umbenennung“) in Tabellenform an.
 		\begin{figure}[H]
@@ -522,30 +516,27 @@
 %	Was ist $E^i$? Was ist $E^\ast$? Was heißt $E^\ast = V \times V$? 
 %\end{frame}
 
-%% Übungsaufgaben
-\section{Aufgaben}
-
-\begin{frame}{Maximale Kanten}
-	Sei $G$ ein \textbf{gerichteter} Graph mit $n$ Knoten. Wie viele Kanten kann $G$ maximal haben... \\[0.2in]
-	
-	Wenn Schlingen erlaubt sind? \pause \\ 
-	$n^2$  \\[0.3in]
-	
-	Wenn er schlingenfrei ist? \pause\\ 
-	$n^2 - n = n \* (n-1)$		
+\begin{frame}{Gerichtete Bäume}
+	\begin{Definition}
+		Ein gerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt eine \textbf{Wurzel} $r \in V$, sodass zu jedem Knoten \emph{genau ein Pfad} von $r$ aus existiert. \\
+		\smallskip
+		Diese Wurzel ist eindeutig und hat Eingangsgrad $= 0$. \\
+		\textbf{Blätter} sind Knoten mit Ausgangsgrad $= 0$. \\
+		\textbf{Innere Knoten} sind Knoten mit Ausgangsgrad $> 0$. 
+		
+	\end{Definition}
 \end{frame}
 
-\begin{frame}{Maximale Kanten}
-	Sei $G$ ein \textbf{ungerichteter} Graph mit $n$ Knoten. Wie viele Kanten kann $G$ maximal haben... \\[0.2in]
-	
-	\visible<3->{Wenn Schlingen erlaubt sind? \\ }
-	\visible<4->{$\frac{n(n+1)}{2} \qquad \left( = \frac{n(n-1)}{2} + n\right)$ \\[0.3in]}
-	
-	Wenn er schlingenfrei ist? \\
-	\visible<2->{$\frac{n(n-1)}{2} $\\ Man verbindet jeden Knoten mit den jeweils anderen Knoten, fasst dann jeweils 2 gleiche Kanten zusammen.}
+\begin{frame}{Ungerichtete Bäume}
+	\begin{Definition}
+		Ein ungerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt einen gerichteten Baum, den man zum ungerichteten $T$ umwandeln kann. \\
+		\smallskip
+		Dessen Wurzel ist \textbf{nicht} eindeutig.
+		
+	\end{Definition}
 \end{frame}
 
-\begin{frame}{Aufgabe (WS 2008)}
+\begin{frame}{Aufgabe: Bäume (WS 2008)}
 	\begin{itemize}	
 		\item Zeichnen Sie alle möglichen gerichteten Bäume mit genau vier Knoten, von denen keine zwei isomorph sind.
 		\item Zeichnen Sie alle möglichen ungerichteten Bäume mit genau fünf Knoten, von denen keine zwei isomorph sind.
