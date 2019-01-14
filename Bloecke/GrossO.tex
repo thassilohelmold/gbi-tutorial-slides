@@ -55,11 +55,12 @@
 	Wir suchen $n_0, c, c'$ mit $\forall n \geq n_0: \ c \* g(n) \leq f(n) \leq c' \* g(n) $ \pause
 	\medskip
 	
-	Sei $n \geq 1$, so gilt:\\\pause
-	$f(n) = 2 \cdot n^2 + n \leq 2 \cdot n^2 + n^2 = 3 \cdot n^2$ und \\\pause
-	$f(n) = 2 \cdot n^2 + n \geq 2 \cdot n^2$
-	\medskip
-	
+	Sei $n \geq 1$, so gilt: \pause 
+	\begin{align*}
+	f(n) &= 2 \cdot n^2 + n \leq 2 \cdot n^2 + n^2 = 3 \cdot n^2 = 3 \cdot g(n)\quad \text{ und} \\ 
+	\visible<5->{f(n) &= 2 \cdot n^2 + n \geq 2 \cdot n^2 = 2 \cdot g(n)}
+	\end{align*}
+	\pause % I hate you LaTeX. -.-
 	Mit $c := 2$, \, $c' := 3$,\, $n_0 := 1$ ist die Bedingung erfüllt. \qed \pause
 	
 	\begin{block}{Quiz}

@@ -74,6 +74,46 @@
 	\end{Beispiel}
 \end{frame}
 
+\begin{frame}{Aufgabe 1}
+	Gegeben sei folgender Graph $G$ 
+	\begin{figure}[H]
+		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
+		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=7mm,inner sep=2pt},row sep=20mm,column sep=20mm,ampersand replacement=\&]
+		{
+			|(0)| 0 \& |(1)| 1 \\
+			|(2)| 2 \& |(3)| 3 \\
+		};
+		\draw (0) -- (1);
+		\draw (0) -- (3);
+		\draw (1) -- (2);
+		\draw (1) -- (3);
+		\draw (2) -- (0);
+		\path (1) edge [loop right] ();
+		\path (2) edge [loop left] ();
+		\end{tikzpicture}
+	\end{figure}
+	Gebt die Adjazenzliste, die Adjazenzmatrix und die Wegematrix zu diesem Graphen an.
+\end{frame}
+
+\begin{frame}
+	$$ A = 
+	\begin{pmatrix} 
+	0 & 1 & 0 & 1 \\ 
+	0 & 1 & 1 & 1 \\ 
+	1 & 0 & 1 & 0 \\ 
+	0 & 0 & 0 & 0 
+	\end{pmatrix} $$ 
+	\pause 
+	
+	$$W = 
+	\begin{pmatrix} 
+	1 & 1 & 1 & 1 \\ 
+	1 & 1 & 1 & 1 \\ 
+	1 & 1 & 1 & 1 \\ 
+	0 & 0 & 0 & 1 
+	\end{pmatrix}$$
+\end{frame}
+
 \begin{frame}{Weiterführendes Material}
 	Mehr dazu:
 	GBI Übung 10, WS 15/16
@@ -150,45 +190,7 @@
 	% TODO: Evtl. doch noch anreißen, evtl. zumindest Folie dazu...
 \end{frame}
 
-\begin{frame}{Aufgabe 1}
-	Gegeben sei folgender Graph $G$ 
-	\begin{figure}[H]
-		\begin{tikzpicture}[->,>=stealth,baseline=-5mm]
-		\matrix[matrix of math nodes,nodes={draw,circle,minimum size=7mm,inner sep=2pt},row sep=20mm,column sep=20mm,ampersand replacement=\&]
-		{
-			|(0)| 0 \& |(1)| 1 \\
-			|(2)| 2 \& |(3)| 3 \\
-		};
-		\draw (0) -- (1);
-		\draw (0) -- (3);
-		\draw (1) -- (2);
-		\draw (1) -- (3);
-		\draw (2) -- (0);
-		\path (1) edge [loop right] ();
-		\path (2) edge [loop left] ();
-		\end{tikzpicture}
-	\end{figure}
-	Gebt die Adjazenzliste, die Adjazenzmatrix und die Wegematrix zu diesem Graphen an.
-\end{frame}
 
-\begin{frame}
-	$$ A = 
-	\begin{pmatrix} 
-	0 & 1 & 0 & 1 \\ 
-	0 & 1 & 1 & 1 \\ 
-	1 & 0 & 1 & 0 \\ 
-	0 & 0 & 0 & 0 
-	\end{pmatrix} $$ 
-	\pause 
-	
-	$$W = 
-	\begin{pmatrix} 
-	1 & 1 & 1 & 1 \\ 
-	1 & 1 & 1 & 1 \\ 
-	1 & 1 & 1 & 1 \\ 
-	0 & 0 & 0 & 1 
-	\end{pmatrix}$$
-\end{frame}
 
 \begin{frame}{Weitere Graphenprobleme}
 	\begin{itemize}[<+->]
