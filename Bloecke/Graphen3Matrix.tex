@@ -35,11 +35,11 @@
 	Es ist $(i,j) \elem E^* \Gdw \text{von $i$ aus ist $j$ \textbf{erreichbar}}.$ \\
 	\pause
 	Die Wegematrix lässt sich daher folgendermaßen berechnen: 
-	$$ W = \sgn\left(\summe{k=0}{n} A^k \right) $$
+	$$ W = \sgn\left(\summe{k=0}{n-1} A^k \right) $$
 	
 	\pause
-	Warum reicht es hier, in der Summe bis $n$ zu gehen?\\ \pause
-	Pfade mit einer Länge $>n$ enthalten einen Zyklus!
+	Warum reicht es hier, in der Summe bis $n-1$ zu gehen?\\ \pause
+	Pfade mit einer Länge $\geq n$ enthalten einen Zyklus!
 \end{frame}
 
 \begin{frame}{Wegematrix}
