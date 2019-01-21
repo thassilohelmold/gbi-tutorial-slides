@@ -188,13 +188,13 @@ semithick,initial text={}]
 	\end{align*}
 	\pause  \vspace{-2.5\baselineskip}
 	\begin{align*}
-		f_*(a, \word{101}) &= \hphantom{aa}a \\
-		f_{**}(a, \word{101}) &= aaa \\ 
+		f_*(a, \word{101}) &= \hphantom{aaa}a \\
+		f_{**}(a, \word{101}) &= aaaa \\ 
 	\end{align*}
 	\pause  \vspace{-2.5\baselineskip}
 	\begin{align*}
-		f_*(a, \word{1021}) &= \hphantom{aam}m \\
-		f_{**}(a, \word{1021}) &= aamm
+		f_*(a, \word{1021}) &= \hphantom{aaam}m \\
+		f_{**}(a, \word{1021}) &= aaamm
 	\end{align*}
 \end{frame}
 
@@ -356,6 +356,33 @@ semithick,initial text={}]
 	;
 	\draw[->] (A) to[out=-90,in=-90, looseness=1.87] (M) node [at start, below=55pt, right=4pt] {\word 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all.
 	\end{tikzpicture}
+\end{frame}
+
+\begin{frame}{Aufgabe: Textersetzung mit Automaten}
+	\begin{block}{Aufgabe}
+		Geg.: \quad $w \in \set{\word a, \word b}^*$, wobei $w$ nicht auf \word{ba} endet. \\
+		Wollen \word{aa} durch \word{ccc} ersetzen. \\
+		Malt einen Mealy-Automaten, der das leistet. \\
+		\pause
+		\bigskip
+	\end{block}
+	%\vspace{-2\baselineskip}
+	\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
+	semithick,initial text={}]
+	\tikzstyle{every state}=[]
+	
+	\node[initial,state] (1)                    {$1$};
+	\node[state]         (2) [right of=A] 	    {$2$};
+	
+	\path (1) edge [loop above] node {\word b|\word b} (1)
+	% edge [loop below]  node {\word 0|\word 1} (A)
+	edge 	[bend left=12]				  node {\word{a}|$\eps$} (2)
+	(2) edge [bend left=12] node  {$\stackedtight{\word b|\word{ab} \\ \word a|\word{ccc}}$} (1);
+	\end{tikzpicture} \\
+	Zustand 2 „merkt sich“, dass ein einzelnes \word a gelesen wurde. \\
+	\pause
+	\medskip
+	\Impl Beispiel:  $g_{**}(1, \word{babaabaa}) = \word{babcccbccc}$.
 \end{frame}
 
 \only<beamer:0>{
