@@ -316,8 +316,6 @@ semithick,initial text={}]
 	\end{block}
 \end{frame}
 
-
-
 \begin{frame}{Beispiel: Umwandlung von Mealy nach Moore}
 	%\vspace{-2\baselineskip}
 	\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
@@ -349,18 +347,20 @@ semithick,initial text={}]
 		(A) edge 				node {\word 1} (B)
 		(A) edge 				node [below] {\word 0} (C)
 		(B) edge [bend left=8]	node {\word 0} (C)
+		(B) edge [loop right]   node {\word 1} (B)
 		(C) edge [bend left=8]	node {\word 1} (B)
+		(C) edge [loop right]   node {\word 0} (C)
 		(B) edge 				node {\word 2} (M)
 		(C) edge 				node [below] {\word 2} (M)
 		(M) edge [loop right]	node {\word 0, \word 1, \word 2} (M)
 	;
-	\draw[->] (A) to[out=-90,in=-90, looseness=1.87] (M) node [at start, below=55pt, right=4pt] {\word 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all.
+	\draw[->] (A) to[out=-90,in=-76, looseness=1.94] (M) node [at start, below=55pt, right=4pt] { 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all.
 	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}{Aufgabe: Textersetzung mit Automaten}
 	\begin{block}{Aufgabe}
-		Geg.: \quad $w \in \set{\word a, \word b}^*$, wobei $w$ nicht auf \word{ba} endet. \\
+		Geg.: \quad $w \in \set{\word a, \word b}^*$, wobei $w$ nicht auf \word{ba} endet und $w \neq \word a$ ist. \\
 		Wollen \word{aa} durch \word{ccc} ersetzen. \\
 		Malt einen Mealy-Automaten, der das leistet. \\
 		\pause
@@ -383,6 +383,7 @@ semithick,initial text={}]
 	\pause
 	\medskip
 	\Impl Beispiel:  $g_{**}(1, \word{babaabaa}) = \word{babcccbccc}$.
+	% Einschränkungen von oben mit ba und so nötig, weil sonst das letzte a nicht ausgegeben wird (möglicher Fix: Ein End-of-Input-Zeichen, das am Ende „aufräumt“)
 \end{frame}
 
 \only<beamer:0>{
