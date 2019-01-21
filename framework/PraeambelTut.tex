@@ -70,6 +70,16 @@
 \usetikzlibrary{automata}
 \usetikzlibrary{tikzmark}
 
+% Why has no-one come up with this yet? I mean, seriously. -.-
+\tikzstyle{loop below right} = [loop, out=-60,in=-30, looseness=7]
+\tikzstyle{loop below left} = [loop, out=-150,in=-120, looseness=7]
+\tikzstyle{loop above right} = [loop, out=60,in=30, looseness=7]
+\tikzstyle{loop above left} = [loop, out=150,in=120, looseness=7]
+\tikzstyle{loop right below} = [loop below right]
+\tikzstyle{loop left below} = [loop below left]
+\tikzstyle{loop right above} = [loop above right]
+\tikzstyle{loop left above} = [loop above left]
+
 % Needed for gbi-macros
 \usepackage{xspace}
 
