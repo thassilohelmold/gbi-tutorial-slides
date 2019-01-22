@@ -169,9 +169,9 @@
 	\begin{block}{Einige Rechenregeln}
 		\begin{align*}
 			a^{\log_a n} &= n\\
-			\log_b n^a &= a \cdot \log_b n\\
-			\log_b (n \cdot m) &= \log_b n + \log_b m\\
-			a^{\log_b n} &= n^{\log_b a}
+			\visible<2-|handout:1>{\log_b (n \cdot m) &= \log_b n + \log_b m\\ 
+			\log_b n^a &= a \cdot \log_b n\\}
+			\visible<3-|handout:1>{a^{\log_b n} &= n^{\log_b a}}
 		\end{align*}
 	\end{block}
 \end{frame}
@@ -200,6 +200,24 @@
 		Es gilt $$n = a^{\log_a n}$$ \pause
 		Daraus ergibt sich: $$ \log_b n = \log_b \left(a^{\log_a n}\right) = \log_a n \; \cdot \log_b a $$ \pause 
 		Setze $c = c' = \log_b a$, dann ist $$c \* \log_a n \leq \log_b n \leq c' \* \log_a n.$$
+	\end{block}
+\end{frame}
+
+\begin{frame}{Logarithmen: Übung}
+	\begin{block}{Einige Rechenregeln}
+		\begin{align*}
+			a^{\log_a n} &= n\\
+			\log_b (n \cdot m) &= \log_b n + \log_b m\\ 
+			\log_b n^a &= a \cdot \log_b n\\
+			a^{\log_b n} &= n^{\log_b a}
+		\end{align*}
+	\end{block}
+
+	\begin{block}{Aufgabe}
+		\begin{align*}
+			\log_5(25 \cdot 125) &= \visible<2->{\log_5(25) + \log_5(125) = 2+3 = 5}\\
+			16^{\log_4(5)} &= \visible<3->{5^{\log_4(16)} = 5^2 = 25}
+		\end{align*}
 	\end{block}
 \end{frame}
 

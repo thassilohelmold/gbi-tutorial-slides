@@ -354,7 +354,7 @@ semithick,initial text={}]
 		(C) edge 				node [below] {\word 2} (M)
 		(M) edge [loop right]	node {\word 0, \word 1, \word 2} (M)
 	;
-	\draw[->] (A) to[out=-90,in=-76, looseness=1.94] (M) node [at start, below=55pt, right=4pt] { 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all.
+	\draw[->] (A) to[out=-90,in=-76, looseness=1.94] (M) node [at start, below=55pt, right=4pt] {\word 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all.
 	\end{tikzpicture}
 \end{frame}
 

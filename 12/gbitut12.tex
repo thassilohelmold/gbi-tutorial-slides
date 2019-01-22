@@ -15,6 +15,7 @@
 \begin{document}
 \starttut{12}
 
+\daniel{
 \begin{frame}{Probeklausur}
 	\daniel{Schnitt: \quad \thassedaniel{XX}{22.8}~/~38~P \quad $\hat{=}$ Note \thassedaniel{XX}{3.2} \\}
 	\begin{columns}[T] 
@@ -52,7 +53,7 @@
 	\end{columns}
 	
 \end{frame}
-
+}
 
 \mycomment{
 	\begin{frame}{Schwarzes Brett}
@@ -76,6 +77,13 @@
 		\item Beweisverfahren
 		\item Rechenregeln im O-Kalkül
 	\end{itemize}
+
+	\pause
+	\begin{block}{Typische Laufzeiten}
+		Lineare Suche: $\Th{n}$ \\
+		Binäre Suche:  $\Th{\log n}$ \\
+		Potenzmenge berechnen: $\Th{2^n}$
+	\end{block}
 \end{frame}
 
 \begin{frame}{Rückblick}
@@ -112,25 +120,6 @@
 		g$ und es gilt \textbf{erst recht nicht} $f\asymp g$.
 	}
 \end{frame}
-
-\thasse{
-	\begin{frame}{Logarithmen encore}
-		Berechnet:
-		\begin{align*}
-		\log_5(25 \cdot 125) &= \visible<2->{\log_5(25) + \log_5(125) = 2+3 = 5}\\
-		16^{\log_4(5)} &= \visible<3->{5^{\log_4(16)} = 5^2 = 25}
-		\end{align*}
-	\end{frame}
-}
-
-\thasse{
-	\begin{frame}{Laufzeiten}
-		\pause
-		Lineare Suche: \pause $\Th{n}$ \\
-		Binäre Suche:  \pause $\Th{\log n}$ \\
-		Potenzmenge berechnen: \pause $\Th{2^n}$
-	\end{frame}
-}
 
 
 \input{../Bloecke/MasterTheorem}
