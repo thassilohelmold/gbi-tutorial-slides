@@ -16,9 +16,9 @@
 	\begin{Definition} 
 		\vspace{-1.5\baselineskip}
 		\begin{align*}
-		\text{Halteproblem } H &:= \set{w \in \text{Java-Programme} \Mid w \text{ hält}} \\
-		&\:\approx \set{w \in \text{C++-Programme} \Mid w \text{ hält}} \\
-		&\:\approx \set{w \in \set{\word 0, \word 1}^* \Mid w \text{ \textbf{beschreibt Turingmaschine}, die hält!}}
+		\text{Halteproblem } H &:= \set{w \in \set{\word 0, \word 1}^* \Mid w \text{ \textbf{beschreibt Turingmaschine}, die hält!}} \\
+		&\:\approx \set{w \in \text{Java-Programme} \Mid w \text{ hält}} \\
+		&\:\approx \set{w \in \text{C++-Programme} \Mid w \text{ hält}}
 		\end{align*}
 		Diese Definition ist ungenau, damit es nicht zu kompliziert wird. \textbf{Die offizielle Definition aus der VL ist allerdings wichtig!}
 	\end{Definition}
@@ -71,7 +71,7 @@
 		Das Halteproblem ist unentscheidbar. \\
 		Beweis: VL.
 	\end{Satz}
-	Das heißt, es kann \textbf{keine Turingmaschine} gebaut werden, die für jedes Java-Programm sagen kann, ob es hält oder nicht und dabei \textbf{selbst immer eine Antwort liefert}, also hält. \\ \pause
+	Das heißt, es kann \textbf{keine Turingmaschine} gebaut werden, die für jedes Java-Programm sagen kann, ob es hält oder nicht und dabei \textbf{selbst immer eine Antwort liefert}, also hält. \\ 
 	\medskip \pause
 	Es kann auch kein Java-Programm gebaut werden, welches das tut.
 \end{frame}
@@ -115,10 +115,10 @@
 	\begin{itemize}[<+->]
 		\item Erstes Symbol \?> letztes Symbol ($n$) 
 		\item Zurück zum ersten ($n$)
-		\item Mit kürzerem Wort wiederholen ($|n-2|$)
+		\item Mit kürzerem Wort wiederholen ($n-2$)
 	\end{itemize} \pause
-	Also insgesamt $$T(n) \leq 2n + 1 + T(n-2)$$ 
-	Daraus folgern wir $$T(n) \in O(n^2)$$
+	Also insgesamt $$\|Time|(n) \leq 2n + 1 + \|Time|(n-2)$$ 
+	Daraus folgern wir $$\|Time|(n) \in O(n^2)$$
 \end{frame}
 
 \begin{frame}{Platzkomplexität}
@@ -132,7 +132,7 @@
 		\item Zurück zum ersten ($0$)
 		\item Mit kürzerem Wort wiederholen ($0$)
 	\end{itemize} \pause
-	Also insgesamt $$n+1 \in \Th{n}$$
+	Also insgesamt $$\|Space|(n) = n+1 \in \Th{n}$$
 \end{frame}
 
 \begin{frame}{Platzkomplexität}
@@ -152,7 +152,9 @@
 	\end{itemize}
 	\end{Definition}
 	\pause
-	Es ist $$\textbf{P} \subset \textbf{PSPACE}$$ \pause
+	Es ist \\ 
+	\mbox{}\hphantom{Wir wissen nicht, ob auch \qquad }$\textbf{P} \subseteq \textbf{PSPACE}.$ \\
+	\medskip\pause
 	Die andere Richtung ist \textbf{ein großes offenes Problem}:\\
 	Wir wissen nicht, ob auch \qquad $\textbf{P} \supseteq \PSPACE$. \\
 	Wir haben zwar ein Beispiel für eine TM mit polynomiellen Platz und exponentieller Zeit gesehen, aber das \textbf{Problem} (alle $\word 0$ zu $\word 1$ umwandeln) hätte man deutlich effizienter lösen können.

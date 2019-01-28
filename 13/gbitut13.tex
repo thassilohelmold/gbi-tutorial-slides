@@ -13,96 +13,30 @@
 \begin{frame}{Schwarzes Brett}
 	\begin{itemize}
 		\item Anmeldung \textbf{Klausur} $+$ \textbf{Übungsschein} nicht vergessen!
-		\item \textbf{Bonusblatt} kommt diese Woche Mittwoch raus, Bearbeitungszeit: etwa \textbf{eine} Woche
 	\end{itemize}
 \end{frame}
 
 \framePrevEpisode
 
+\begin{frame}[t]{Wahr oder Falsch?}
+	\FalseQuestionE{Das (komplizierte) Master-Theorem kann man immer anwenden.}{ Nur bei rekursiven Algorithmen, bei denen das Problem in gleich große Teilprobleme aufgeteilt wird.}
+	\FalseQuestionE{Jeder Moore-Automat kann in einen Mealy-Automaten umgewandelt werden, der für jedes Wort die gleiche Ausgabe produziert.}{ Für das leere Wort kann ein Mealy-Automat niemals eine Ausgabe produzieren.}
+	\TrueQuestionE{Endliche Akzeptoren sind Moore-Automaten mit dem Ausgabealphabet $\{\word 0,\word 1\}$.}{}
+	\FalseQuestionE{Mit endlichen Automaten kann jede beliebige Sprache erkannt \\ werden.}{Tatsächlich ist die Menge der akzeptierbaren Sprachen sogar sehr eingeschränkt.}	
+\end{frame}
 
+\input{../Bloecke/Turing}
 
-\input{../Bloecke/Regulaer}
+\input{../Bloecke/TMKomplexitaet}
 
-% Layout: Regexe vertikal zentriert neben die Automaten geht nicht... Gnarf.
-\begin{frame}{Übung: Akzeptoren und Reguläre Ausdrücke}
-	Gebt graphisch einen endlichen Akzeptor sowie einen regulären Ausdruck über dem Alphabet $X=\{\word a,\word b\}$ an, der folgende Sprache akzeptiert:
-	\begin{itemize}
-		\item \begin{tabular}{lr}
-			Die leere Menge: \visible<2-|handout:2>{\ $\lang{\rx{O}}$} \qquad \mbox{} & Die Menge des leeren Wortes: \visible<3-|handout:2>{\	$\lang{\rx{O*}}$ } \\
-			\visible<2-|handout:2>{
-				\scalebox{.8}{
-					\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,semithick,node distance=2cm,initial text={}]
-					\tikzstyle{every state}=[]
-					
-					\node[initial,state] (M)                    {$m$};
-					
-					\path (M) edge [loop right] node {\word a, \word b} (M);
-					\end{tikzpicture}
-				}
-				
-			}
-			&
-			\visible<3-|handout:2>{
-				\scalebox{.8}{
-					\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
-					semithick,initial text={}]
-					\tikzstyle{every state}=[]
-					
-					\node[initial,state,accepting] (A)                    {$a$};
-					\node[state]		 		   (M)  [right of=A]		{$m$};
-					
-					\path
-					(A) edge 			  node {\word a, \word b} (M) 
-					(M) edge [loop right] node {\word a, \word b} (M);
-					\end{tikzpicture}
-				}
-			}
-		\end{tabular}  
-		\item Die Menge aller Worte, die genau ein \word b enthalten:
-		\visible<4-|handout:2>{\ $\lang{\rx{a*ba*}}$ \\
-			\scalebox{.8}{
-				\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
-				semithick,initial text={}]
-				\tikzstyle{every state}=[]
-				
-				\node[initial,state] (A)                    {$a$};
-				\node[state,accepting] (B)  [right of=A]     {$b$};
-				\node[state]		 (M)  [right of=B]		{$m$};
-				
-				\path
-				(A) edge [loop above]  node {\word a} (A) 
-				(A) edge 			  node {\word b} (B) 
-				(B) edge [loop above]  node {\word a} (B) 
-				(B) edge 			  node {\word b} (M) 
-				(M) edge [loop above] node {\word a, \word b} (M);
-				\end{tikzpicture}
-			}
-			
-		}
-		\item Die Menge aller Worte, bei denen die Anzahl der $\word b$ durch 3 teilbar ist: 
-		\visible<5-|handout:2>{ 
-			\begin{minipage}[t]{.5\linewidth}
-				\vspace{-\ht\strutbox} \scalebox{.8}{\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2cm,
-					semithick,initial text={}]
-					\tikzstyle{every state}=[]
-					
-					\node[initial,state,accepting] (0)                    {$0$};
-					\node[state] (1)  [right of=A]     {$1$};
-					\node[state]		 (2)  [right of=B]		{$2$};
-					
-					\path
-					(0) edge [loop above]  node {\word a} (0) 
-					(0) edge 			  node {\word b} (1) 
-					(1) edge [loop above]  node {\word a} (1) 
-					(1) edge 			  node {\word b} (2) 
-					(2) edge [loop right] node {\word a} (2)
-					(2) edge [bend left]  node {\word b} (0) ;
-					\end{tikzpicture}}	
-				
-			\end{minipage} 
-			$\lang{\rx{(a*ba*ba*b)*a*}}$ 
-		}
-	\end{itemize}
+\begin{frame}{Turingmaschinen: Klausur}
+	Noch ein Hinweis zum Schluss:\\
+	Bisher kam in {\tiny fast} \textbf{jeder} Klausur eine Aufgabe zu Turingmaschinen dran.\\
+	Diese gibt meist relativ viele Punkte.\\
+	
+	\bigskip
+	Zu 99 \% wird auch dieses Mal wieder eine TM-Aufgabe drankommen.\\
+	\textbf{Also übt das!} Hier zählt vor allem Geschwindigkeit (und Präzision).
 \end{frame}
 
 % TODO ?

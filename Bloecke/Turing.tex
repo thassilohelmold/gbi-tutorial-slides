@@ -300,15 +300,156 @@
 	\end{align*}
 \end{frame}
 
+\begin{frame}{Aufgabe}
+	Was macht die folgende Turingmaschine für Eingaben aus $\{\word 0, \word 1\}^*$?
+	
+	%\smallskip
+	%\includegraphics[scale=0.65]{turing/addBin1}
+	\begin{center}
+		\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
+		semithick,initial text={}]
+		\tikzstyle{every state}=[]
+		
+		\node[initial,state] (R)                    {$r$};
+		\node[state]         (C) [right of=R] 	    {$c_0$};
+		\node[state]         (H) [right of=C] 	    {$h$};
+		
+		\path 
+		(R) edge [loop above] node {$\word 0\io\word 0R, \word 1\io\word1R$} (R)
+		edge 					  node {$\9\io\9L$} (C)
+		(C) edge [loop above] node {$\word 1\io\word 0L$} (C)
+		edge 					  node {$\stackedtight{\word 0\io\word 1L \\ \9\io\word 1L }$} (H)
+		;
+		\end{tikzpicture}
+	\end{center}
+	
+	\smallskip
+	\visible<2|handout:2>{
+		Inkrementieren der dargestellten Zahl um $1$.
+	}
+\end{frame}
+
+\begin{frame}{Aufgabe}
+	Entwerft eine Turingmaschine, die für eine Eingabe $w \in \{\word 0, \word 1\}^*$ $$\fRepr_2(\fNum_2(w) - 1)$$ berechnet. Ihr dürft davon ausgehen, dass $\fNum_2(w) > 0$ gilt.\\
+	\visible<2-|handout:2->{
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
+			semithick,initial text={}]
+			\tikzstyle{every state}=[]
+			
+			\node[initial,state] (R)                    {$r$};
+			\node[state]         (C) [right of=R] 	    {$c_0$};
+			\node[state]         (H) [right of=C] 	    {$h$};
+			
+			\visible<4-|handout:3->{
+				\node[state]         (Z) [below=1cm of H] 	    {$z$};
+			}
+			\visible<6-|handout:4->{
+				\node[state]         (L) [below=1cm of C] 	    {$\ell$};
+			}
+			
+			\path 
+			(R) edge [loop above] node {$\word 0\io\word 0R, \word 1\io\word1R$} (R)
+			edge 					  node {$\9\io\9L$} (C)
+			(C) edge [loop above] node {$\word 0\io\word 1L$} (C)
+			edge 					  node {$\word 1\io\word 0L$} (H);
+			
+			\visible<4-|handout:3->{
+				\path
+				(H) edge [loop above] node {$\word 0\io\word 0L, \word 1\io\word1L$} (H)
+				edge [left]				  node {$\9\io\9R$} (Z)
+				(Z)  edge [loop right] node {$\word 0\io\9R$} (Z);
+			}
+			
+			\visible<6-|handout:4->{
+				\path
+				(Z)  edge 				 node[below] {$\9\io\word 0L$} (L);
+			}
+			\end{tikzpicture}
+		\end{center}
+	}
+	\visible<3-|handout:3->{\§{\textbf{Achtung}:} Was passiert mit führenden Nullen?} \\ 
+	\visible<5-|handout:4->{\. Was, wenn es nur eine \word 0 gibt?} \\	
+\end{frame}
+
+\begin{frame}{Aufgabe}
+	Wie würde man eine (einfache, nicht effiziente) TM zum Addieren von zwei Zahlen in Binärdarstellung aufbauen? \\ \pause
+	\smallskip
+	\impl Inkrementiere erste Zahl, dekrementiere zweite Zahl. Wiederhole, bis zweite Zahl $= 0$.
+\end{frame}
+
+\def\bword#1{\texttt{#1}}
+\begin{frame}[t]{TM-Akzeptoren}
+	\only<all:1>{
+		Erinnerung: Inkrementieren um eins 
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
+				semithick,initial text={}]
+				\tikzstyle{every state}=[]
+				
+				\node[initial,state] (R)                    {$r$};
+				\node[state]         (C) [right of=R] 	    {$c_0$};
+				\node[state]         (H) [right of=C] 	    {$h$};
+				
+				\node[state,accepting,white]         (A) [below of=H] 	    {\phantom{$a_1$}};
+				\node[state,white]         (B) [below of=C] 	    {\phantom{$a_2$}};
+				
+				\path 
+				(R) edge [loop above] node {$\word 0\io\word 0R, \word 1\io\word 1R$} (R)
+				edge 					  node {$\9\io\9L$} (C)
+				(C) edge [loop above] node {$\word 1\io\word 0L$} (C)
+				edge 					  node {$\stackedtight{\word 0\io\word 1L \\ \9\io\word 1L}$} (H)
+				
+				(H) edge [loop above,white] node {\phantom{$\word 0\io\word 0L, \word 1\io\word 1L$}} (H)
+				(A)  edge [white]				 node[below] {\phantom{$\word 0\io\word 0L$}} (B)
+				;
+			\end{tikzpicture}
+		\end{center}
+	\mbox{}\vphantom{Welche Sprache....} \\
+	}
+	\only<all:2->{
+		\?> TM-Akzeptor: 
+		\begin{center}
+			\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
+				semithick,initial text={},every initial by arrow/.style={gray}]
+				\tikzstyle{every state}=[]
+				
+				\node[initial,state,gray] (R)                    {$r$};
+				\node[state,gray]         (C) [right of=R] 	    {$c_0$};
+				\node[state]         (H) [right of=C] 	    {$h$};
+				
+				\node[state,accepting]         (A) [below of=H] 	    {$a_1$};
+				\node[state]         (B) [below of=C] 	    {$a_2$};
+				
+				\path 
+				(R) edge [loop above,gray] node {$\bword 0\io\bword 0R, \bword 1\io\bword 1R$} (R)
+				edge [gray] 					  node {$\9\io\9L$} (C)
+				(C) edge [loop above,gray] node {$\bword 1\io\bword 0L$} (C)
+				edge [gray] 					  node {$\stackedtight{\bword 0\io\bword 1L \\ \9\io\bword 1L}$} (H)
+				
+				(H) edge [loop above] node {$\word 0\io\word 0L, \word 1\io\word 1L$} (H)
+				edge [left]				  node {$\9\io\9R$} (A)
+				(A)  edge [loop above left] node[left] {$\word 1\io\word 1R$} (A)
+				(A)  edge 				 node[below] {$\word 0\io\word 0R$} (B)
+				;
+			\end{tikzpicture}
+		\end{center}
+		Welche Sprache akzeptiert diese TM? \\
+	}
+	\medskip
+	\visible<3->{$\impl L(T) = \set{w \in \set{\word 0,\word 1}^* \Mid \fRepr_2(\fNum_2(w) + 1) \in \set{\word 1}^*}$}
+\end{frame}
+
 \begin{frame}{Turing-Maschinen vs. Supercomputer}
 	Eine TM kann \textbf{genauso viel} berechnen wie euer Handy oder ein Supercomputer von Intel. {\small (Bloß halt etwas langsamer und umständlicher!)} \\
 	\medskip
 	Es gibt kein „mächtigeres“ Maschinenmodell als Turingmaschinen. \\
-	
-	\medskip 
-	\begin{center}
-		\impl Was eine Turingmaschine nicht berechnen \\ kann, kann keiner berechnen. \smiley \\ \#Prädikatenlogik-Blatt
-	\end{center}
+	\only<beamer:0>{
+		\medskip 
+		\begin{center}
+			\impl Was eine Turingmaschine nicht berechnen \\ kann, kann keiner berechnen. \smiley \\ \#Prädikatenlogik-Blatt 2017/18
+		\end{center}
+	}
 \end{frame}
 
 \mycomment{ % Formalkram ist bähhh...
@@ -357,30 +498,10 @@
 }
 
 
-\begin{frame}{Aufgabe}
-	Was macht die folgende Turingmaschine für Eingaben aus $\{\word 0, \word 1\}^*$?
-	
-	\smallskip
-	\includegraphics[scale=0.65]{turing/addBin1}
-	
-	\smallskip
-	\visible<2|handout:2>{
-		Inkrementieren der dargestellten Zahl um $1$.
-	}
-\end{frame}
 
 
-\begin{frame}{Aufgabe}
-	Entwerft eine Turingmaschine, die für eine Eingabe $w \in \{\word 0, \word 1\}^*$ $$\fRepr_2(\fNum_2(w) - 1)$$ berechnet. Ihr dürft davon ausgehen, dass $\fNum_2(w) > 0$ gilt.\\
-	\pause
-	\textbf{Achtung}: Was passiert mit führenden Nullen?\\
-	% TODO: Lösung
-	
-	\bigskip
-	Wie würde man eine (einfache, nicht effiziente) TM zum Addieren von zwei Zahlen in Binärdarstellung aufbauen? \\ \pause
-	\smallskip
-	\impl Inkrementiere erste Zahl, dekrementiere zweite Zahl. Wiederhole, bis zweite Zahl $= 0$.
-\end{frame}
+
+
 
 
 \begin{frame}{Entscheidbarkeit}
