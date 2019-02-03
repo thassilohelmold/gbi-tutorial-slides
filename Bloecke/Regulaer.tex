@@ -1,5 +1,3 @@
-% TODO: Man sollte die Regexe anhand eines Beispiels einführen und danach die Formalien zeigen, sonst ist es unverständlich wenn man es vorzieht.
-
 % No longer todo: Fix dirty hack in thwregex.sty, where I changed line 42 to print star in math-mode
 % 		because otherwise the star was always raised in my config.
 %	COmment(Daniel): Reverted your change. No problems whatsoever.
@@ -39,40 +37,29 @@
 \end{frame}
 
 \begin{frame}{Reguläre Ausdrücke}
-	Wir können uns reguläre Ausdrücke zusammenbauen aus
-	\begin{itemize}
-		\item den einzelnen Symbolen $x$ aus $A$ \pause
-		\item zwei regulären Ausdrücken $R_1$ und $R_2$ mit $$\rx(R_1 R_2\rx) \qquad \text{ oder } \qquad \rx(R_1\rx|R_2\rx)$$ \pause
-		\item einem Stern $R\rx*$ \pause
-		\item oder dem leeren Ausdruck $\rx O$ \pause
-	\end{itemize} 
-	Klammern dürfen nach den Klammerregeln weggelassen werden:\\
-	Stern vor „Punkt“ {\small (in diesem Fall unsichtbar)} vor Strich.
+	Bislang: Beschreibung der Sprache $L$ eines endlichen Automaten aus einzelnen Mengen, Vereinigung, Konkatenation, \dots \\
+	$$ L = (\{\word{ab}\} \cdot \{\word c, \word d\})^\ast \cup \{\word e\}$$
+	\medskip \pause
+	
+	Jetzt: Ein Ausdruck $R$, um eine mit solchen Operationen \enquote{zusammengebaute} Sprache zu beschreiben.\\
+	$$ R = \rx{(ab(c|d))*|e}$$
+	
+	Wir bezeichnen die mit $R$ beschriebene Sprache mit $\lang{R}$.\\
+	Eine Sprache, für die es einen beschreibenden regulären Ausdruck gibt, nennt man \textbf{regulär}.
 \end{frame}
 
 \begin{frame}{Reguläre Ausdrücke}
-	\begin{Beispiel}
-		Sei $ A = \{ \word a, \word b, \word c\}$. Dann sind gültige reguläre Ausdrücke über $A$:\\
-		$\rx{abc}$\\
-		$\rx{a|b|c}$\\
-		$\rx{(ab)*}$\\
-		$\rx{O*}$
-	\end{Beispiel}
-\end{frame}
-
-
-\begin{frame}{Sprache eines Ausdruckes}
-	Die durch $R$ beschriebene Sprache $\lang{R}$ ist wie folgt definiert:
+	Wir können uns reguläre Ausdrücke zusammenbauen aus
 	\begin{itemize}
-		\item $\lang{\rx{O}} = \emptyset$
-		\item $\lang{x}=\{x\} \quad (\text{für }x\in A)$
-		\item $\lang{R_1 \rx| R_2} = \lang{R_1} \cup \lang{R_2}$
-		\item $\lang{R_1 R_2} = \lang{R_1} \cdot \lang{R_2}$
-		\item $\lang{R\rx*} = \lang{R}^*$
+		\item dem leeren Ausdruck $\rx O$ \qqquad $\lang{\rx{O}} = \emptyset$\pause
+		\item den einzelnen Symbolen $x \in A$ \quad $\lang{x}=\{x\}$ \pause
+		\item zwei regulären Ausdrücken $R_1$ und $R_2$ mit\\ 
+			$\rx(R_1 R_2\rx)$ \qquad $\lang{R_1 R_2} = \lang{R_1} \cdot \lang{R_2}$\\
+			$\rx(R_1\rx|R_2\rx)$ \qquad $\lang{R_1 \rx| R_2} = \lang{R_1} \cup \lang{R_2}$ \pause
+		\item einem Stern $R\rx*$ \qquad $\lang{R\rx*} = \lang{R}^*$\pause
 	\end{itemize} 
-
-	\bigskip
-	Eine Sprache, für die es einen beschreibenden regulären Ausdruck gibt, nennt man \textbf{regulär}.
+	Klammern dürfen nach den Klammerregeln weggelassen werden:\\
+	Stern vor „Punkt“ {\small (in diesem Fall unsichtbar)} vor Strich.
 \end{frame}
 
 \begin{frame}{Sprache eines Ausdruckes}
