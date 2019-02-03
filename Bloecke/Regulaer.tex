@@ -36,33 +36,33 @@
 	\end{center}
 \end{frame}
 
-\begin{frame}{Reguläre Ausdrücke}
-	Bislang: Beschreibung der Sprache $L$ eines endlichen Automaten aus einzelnen Mengen, Vereinigung, Konkatenation, \dots \\
-	$$ L = (\{\word{ab}\} \cdot \{\word c, \word d\})^\ast \cup \{\word e\}$$
+\begin{frame}{Reguläre Ausdrücke} 
+	Bislang: Beschreibung der Sprache $L$ eines endlichen Akzeptors aus einzelnen Mengen, Vereinigung, Konkatenation, \dots \\
+	$$ L = (\set{\word{ab}} \cdot \set{\word c, \word d})^\ast \cup \set{\word e}$$
 	\medskip \pause
 	
 	Jetzt: Ein Ausdruck $R$, um eine mit solchen Operationen \enquote{zusammengebaute} Sprache zu beschreiben.\\
 	$$ R = \rx{(ab(c|d))*|e}$$
 	
-	Wir bezeichnen die mit $R$ beschriebene Sprache mit $\lang{R}$.\\
+	Wir bezeichnen die von $R$ beschriebene Sprache mit $\lang{R}$.\\
 	Eine Sprache, für die es einen beschreibenden regulären Ausdruck gibt, nennt man \textbf{regulär}.
 \end{frame}
 
 \begin{frame}{Reguläre Ausdrücke}
 	Wir können uns reguläre Ausdrücke zusammenbauen aus
 	\begin{itemize}
-		\item dem leeren Ausdruck $\rx O$ \qqquad $\lang{\rx{O}} = \emptyset$\pause
-		\item den einzelnen Symbolen $x \in A$ \quad $\lang{x}=\{x\}$ \pause
+		\item \hstretchto{\q15uad}{dem leeren Ausdruck $\rx O$} $\lang{\rx{O}} = \emptyset$\pause
+		\item \hstretchto{\q15uad}{den einzelnen Symbolen $x \in A$}  $\lang{x}=\{x\}$ \pause
 		\item zwei regulären Ausdrücken $R_1$ und $R_2$ mit\\ 
-			$\rx(R_1 R_2\rx)$ \qquad $\lang{R_1 R_2} = \lang{R_1} \cdot \lang{R_2}$\\
-			$\rx(R_1\rx|R_2\rx)$ \qquad $\lang{R_1 \rx| R_2} = \lang{R_1} \cup \lang{R_2}$ \pause
-		\item einem Stern $R\rx*$ \qquad $\lang{R\rx*} = \lang{R}^*$\pause
+			\hstretchto{\q8uad}{$\rx(R_1 R_2\rx)$} $\lang{R_1 R_2} = \lang{R_1} \cdot \lang{R_2}$\\
+			\hstretchto{\q8uad}{$\rx(R_1\rx|R_2\rx)$} $\lang{R_1 \rx| R_2} = \lang{R_1} \cup \lang{R_2}$ \pause
+		\item \hstretchto{\q8uad}{einem Stern $R\rx*$} $\lang{R\rx*} = \lang{R}^*$\pause
 	\end{itemize} 
 	Klammern dürfen nach den Klammerregeln weggelassen werden:\\
 	Stern vor „Punkt“ {\small (in diesem Fall unsichtbar)} vor Strich.
 \end{frame}
 
-\begin{frame}{Sprache eines Ausdruckes}
+\begin{frame}{Sprache eines regulären Ausdrucks}
 	\begin{Beispiel}
 		\begin{itemize}
 			\item $\lang{\rx{a}} = \{\word a\}$. \pause

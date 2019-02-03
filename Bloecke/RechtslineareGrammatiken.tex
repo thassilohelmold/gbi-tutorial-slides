@@ -26,27 +26,38 @@
 
 \begin{frame}{Beispiele}
 	$G = (\{X\}, \{\word a, \word b\}, X, P )$ mit 
-	$$P = \{X \to \word aX \mid \word{ba}X \mid \word b \mid \varepsilon \}$$
+	$$P = \set{X \to \word aX \mid \word{ba}X \mid \word b \mid \varepsilon }$$
 	% Das da ist FALSCH:
 	% TODO: Nein, ist es nicht. Es entspricht genau der "Umsetzung" des Automaten
 	% Aber das könnte man noch besser herausarbeiten: Automat Tikzen und Zustände umbenennen, G' dann aus Automaten "ablesen"
 	%$$P = \{X \to aX \mid bY \mid \varepsilon, Y \to aX \mid bZ \mid \varepsilon, Z \to aZ \mid bZ\}$$ 
-	ist eine rechtslineare Grammatik. Die dadurch erzeugte Sprache ist \pause $$L(G) = \set{ w \mid \forall v_1, v_2 \in \{\word a,\word b\}^\ast: w \neq v_1 \word{bb} v_2 },$$ der sie beschreibende reguläre Ausdruck ist \pause $$R =  \rx{(a|ba)*(b|O*)}.  $$ Der Automat dazu sieht so aus:
-\end{frame}
-
-\begin{frame}
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=\linewidth]{regulaer/L1.pdf}
-	\end{figure}
+	ist eine rechtslineare Grammatik. Die dadurch erzeugte Sprache ist \pause 
+	$$L(G) = \set{ w \Mid \forall v_1, v_2 \in \{\word a,\word b\}^\ast: w \neq v_1 \word{bb} v_2 },$$ 
+	der sie beschreibende reguläre Ausdruck ist \pause 
+	$$R =  \rx{(a|ba)*(b|O*)}.  $$ 
+	Der Automat dazu sieht so aus: \\ \pause
+	\centering
+	\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,semithick,node distance=2cm,initial text={}]
+	\tikzstyle{every state}=[]
+	
+	\node[initial,state,accepting] (0)                    {$0$};
+	\node[state,accepting]         (1) [right of=0]       {$1$};
+	\node[initial,state]           (2) [right of=1]       {$2$};
+	
+	\path (0) edge [loop below] node {\word a} (0);
+	\path (0) edge [bend right] node [below] {\word b} (1);
+	\path (1) edge [bend right] node [above] {\word a} (0);
+	\path (1) edge [] node {\word b} (2);
+	\path (2) edge [loop below] node {$\word a, \word b$} (2);
+	\end{tikzpicture}
 \end{frame}
 
 
 \begin{frame}{Achtung!}
 	Eine Grammatik kann nicht rechtslinear sein und \textbf{trotzdem} eine reguläre Sprache erzeugen! \\
 	\bigskip
-	$G = (\set{A}, \set{\word a}, A, \set{A \to \alert{AA} \mid \word a \mid \eps})$, \quad (\alert{nicht} rechtslinear) \\ \pause
-	$G' = (\set{A}, \set{\word a}, A, \set{A \to \word aA \mid \eps})$; \quad (rechtslinear) \\ 
+	$G = \tuple{\set{A}, \set{\word a}, A, \set{A \to \alert{AA} \mid \word a \mid \eps}}$, \quad (\alert{nicht} rechtslinear) \\ \pause
+	$G' = \tuple{\set{A}, \set{\word a}, A, \set{A \to \word aA \mid \eps}}$; \quad (rechtslinear) \\ 
 	\medskip
 	\[\text{und } \quad L(G) = L(G') = \lang{\rx{a*}} \quad \textbf{(regulär!)}\]
 \end{frame}
