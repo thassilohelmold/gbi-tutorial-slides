@@ -350,6 +350,16 @@
 	\mbox{}\hphantom{#2}\smash{#2}\vphantom{#1}%
 }
 
+% \hstretchtocentered prints #2 centered into a box of the width of #1
+\def\hstretchtocentered#1#2{%
+	\mbox{}\vphantom{#2}\scalebox{0.5}{\hphantom{#1}}\clap{#2}\scalebox{0.5}{\hphantom{#1}}%
+}
+
+% vertical centering
+\newcommand{\vertcenter}[1]{%
+	\ensuremath{\vcenter{\hbox{#1}}}%
+}
+
 
 %requires \thisyear to be defined (s. config.tex)!
 \edef\nextyear{\the\numexpr\thisyear+1\relax}
@@ -529,7 +539,7 @@
 %% Titelinformationen
 \title[GBI-Tutorium \mytutnumber, Woche \theweeknum]{Grundbegriffe der Informatik \\ Tutorium \mytutnumber}
 
-\subtitle{Woche \theweeknum \ | \mydate{\theweeknum} \\ \myname \ \  \normalfont (\mailto{\mymail})}
+\subtitle{Woche \theweeknum\xspace |\xspace\mydate{\theweeknum} \\ \myname \ \  \normalfont (\mailto{\mymail})}
 \author[\myname]{\myname}
 \institute{KIT -- Karlsruher Institut für Technologie}
 \date{\mydate{\theweeknum}\ }
