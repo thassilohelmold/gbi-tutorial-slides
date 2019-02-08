@@ -2,7 +2,7 @@
 
 WICHTIG: Dieses Repository enthält Materialien, die ausschließlich für Tutoren der Veranstaltung „Grundbegriffe der Informatik“ am KIT gedacht sind.
 Daher dürfen diese Quellen und Rohmaterialien insbesondere nicht den Tutanden oder anderen Personen zugänglich gemacht werden!
-Vielen Dank für euere Mitarbeit!
+Vielen Dank für eure Mitarbeit!
 
 Diese Folien können sich im Laufe des Semesters noch ändern. Es lohnt sich, ab und zu zu pullen. ;-)
 
@@ -19,7 +19,7 @@ Wenn ihr Fragen habt, stellt sie gerne im Tutoren-ILIAS im entsprechenden Thread
  Ja, das Material darf beliebig weiterverwendet und modifiziert werden. Aber wenn du Fehler findest, sei so lieb und sag uns Bescheid. Danke! :o)
 2. _Da sind komische LaTeX-Tags, die ich nicht kenne. Hilfe!_  
  Ja, Standard-LaTeX ist ziemlich mickrig und umständlich, weshalb wir es etwas aufgepeppt haben. :D  
- Viele Sachen sind selbsterklärend, wenn man sie im Einsatz sieht, ansonsten lohnt sich ein Blick in die `PraeambelTut.tex` bzw. `Style_Tut.tex`. (Einige Dinge sind auch aus Herrn Worschs Feder übernommen worden, siehe `gbi-macros.tex`.)  
+ Viele Sachen sind selbsterklärend, wenn man sie im Einsatz sieht, ansonsten lohnt sich ein Blick in die `PraeambelTut.tex`. (Einige Dinge sind auch aus Herrn Worschs Feder übernommen worden, siehe `gbi-macros.tex`.)  
  Viele dieser LaTeX-Kommandos sorgen dafür, dass die Folien überwiegend das hervorragende Vorlesungsdesign und dazugehörige typografische Standards matchen und die Tutanden somit weniger verwirrt sind und weniger Probleme haben, den Stoff zu verstehen, weshalb wir schwer empfehlen, diese Features zu nutzen. :)  
  Die `\thasse{}`-, `\daniel{}`- und `\thassedaniel{}{}`-Tags geben verschiedene Versionen für Formulierungen und andere Sachen an; nicht wundern, wenn bei euch nur die „Thasse“- oder nur die „Daniel“-Variante angezeigt wird. Ihr könnt es ja nach eurem Belieben ändern.
 3. _Was ist mit dem KIT-Logo?_  
