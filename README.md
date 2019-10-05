@@ -10,7 +10,7 @@ Diese Folien können sich im Laufe des Semesters noch ändern. Es lohnt sich, ab
 Zunächst muss eine aktuelle Version des KIT-Themes installiert werden, siehe dazu das KIT-Vorlagen-Archiv im Ordner `Documents`. Es wird zwar eine leicht modifizierte Variante des KIT-Themes verwendet, diese greift aber trotzdem noch auf gewisse KIT-Packages zu, da das vollständige Entfernen aller Abhängigkeiten ein hoher (unnötiger) Aufwand wäre.
 
 Anschließend muss eine Kopie der `config_template.tex` als `config.tex` abgespeichert werden.
-Bitte alle persönlichen Modifikationen in dieser `config.tex` vornhemen **und die Datei nicht ins Git einchecken**!
+Bitte alle persönlichen Modifikationen in dieser `config.tex` vornehmen **und die Datei nicht ins Git einchecken**!
 
 Wenn ihr Fragen habt, stellt sie gerne im Tutoren-ILIAS im entsprechenden Thread oder direkt an Thassilo/Daniel.
 
