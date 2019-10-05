@@ -187,11 +187,11 @@
 \@ifclassloaded{beamer}%
 {
 	% TODO 
-	% no time...
+	% no time... later.   (= never -.-)
 	% redefine section to ignore multiple \section calls with the same title
 }%
 {
-	\errmessage{ERROR: section command redefinition outside of beamer class document! Please contact the author of this code.}
+	\errmessage{ERROR: section command redefinition outside of beamer class document! Please contact the author of this code or read the F-ing disclaimer.}
 }%
 \makeatother%
 %% DISCLAIMER END
@@ -515,7 +515,8 @@
 
 \ifnum\thisyear=2018 \else \errmessage{Old ILIAS link inside preamble. Please update.} \fi
 
-\newcommand{\ILIAS}{\urlnamed{ILIAS}{https://ilias.studium.kit.edu/ilias.php?ref\_id=855240\&cmdClass=ilrepositorygui\&cmdNode=5r\&baseClass=ilrepositorygui}\xspace}
+\newcommand{\ILIAS}{\urlnamed{ILIAS}{\myILIASurl}\xspace}
+\newcommand{\Klausurtermin}{\myKlausurtermin\xspace}
 
 \newcommand{\Socrative}{\ifdefined\mysocrativeroom \only<handout:0>{socrative.com $\quad \~~> \quad $ Student login \\ Raumname:  \mysocrativeroom\\ \medskip}\else\fi}
 

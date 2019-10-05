@@ -12,8 +12,8 @@
 				semithick,initial text={}]
 				\tikzstyle{every state}=[]
 				
-				\node[state] (A)                    {$a|\word 0$};
-				\node[state] (B) [right of=A] 	    {$b|\word 1$};
+				\node[state] (A)                    {$a\io\word 0$};
+				\node[state] (B) [right of=A] 	    {$b\io\word 1$};
 				
 				\end{tikzpicture}
 		\end{center}
@@ -53,7 +53,7 @@
 			\node[state] (B) [right of=A] {$z_1$};
 			
 			\path
-				(A) edge [loop above] node {\word a,\word b}  (A)
+				(A) edge [loop above] node {\word a, \word b}  (A)
 					edge [bend right=7] node [below] {\word c} 		  (B)
 				(B) edge [loop right] node {\word c}		  (B)
 					edge [bend right=7] node [above] {\word a, \word b} (A)

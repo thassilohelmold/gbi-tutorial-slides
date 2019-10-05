@@ -1,6 +1,6 @@
 % TODO: 
 % - Motivation - das kann man noch deutlich besser machen. (Aber wie?)
-% - Graph Zoo (K_n, C_n, P_n, ...)
+% - „Graphen-Zoo“ (K_n, C_n, P_n, ...)
 
 
 \section{Graphen}
@@ -115,7 +115,7 @@
 
 \begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_1 = (V, E_1)$ mit
-	$$V = \Z_4 \qquad E_1 = \{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)\}$$
+	$$V = \Z_4 \qquad E_1 = \set{(0,1), (0,2), (0,3), (1,2), (1,3), (2,2), (2,3), (3,2)}$$
 	
 	\pause
 	\bigskip
@@ -140,7 +140,7 @@
 
 \begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_2 = (V, E_2)$ mit
-	$$V = \Z_4 \qquad E_2 = \{\{0,1\}, \{0,2\}, \{0,3\} \}$$
+	$$V = \Z_4 \qquad E_2 = \set{\{0,1\}, \{0,2\}, \{0,3\} }$$
 	
 	\pause
 	\bigskip
@@ -214,7 +214,7 @@
 
 \begin{frame}[t]{Lösung: Graphen zeichnen}
 	Zeichnet den Graphen $G_5 = (V, E_5)$ mit
-	$$V = \Z_4 \qquad E_5 = \{ (0,1), (1,2), (1,3) \}$$
+	$$V = \Z_4 \qquad E_5 = \set{ (0,1), (1,2), (1,3) }$$
 	
 	\pause
 	\bigskip
@@ -401,7 +401,7 @@
 \end{frame}
 
 \begin{frame}[t]{Pfade}
-	Sei $G$ ein gerichteter Graph. Ein Pfad $p = (v_0, \dots, v_n)$ heißt
+	Sei $G$ ein gerichteter Graph.{\hphantom{un}} Ein Pfad $p = (v_0, \dots, v_n)$ heißt
 	\begin{tabular}{>{\itshape}rp{.7\textwidth}}
 		geschlossen & wenn $v_0 = v_n$ gilt  \\
 		Zyklus & wenn er geschlossen ist und Länge $\geq 1$ gilt \\
@@ -457,7 +457,7 @@
 	\pause
 	\medskip
 	
-	Formal: Haben $G_1 = (V_1, E_1), \, G_2 = (V_2, E_2)$. \\
+	Formal: Haben $G_1 = (V_1, E_1), \, G_2 = (V_2, E_2)$. \\ \smallskip
 	$G_1$ \textbf{isomorph} zu $G_2$, wenn es eine Bijektion $f \from V_1 \functionto V_2$ gibt mit \[\forall x,y \in V_1: \quad (x,y) \in E_1 \gdw \tuple{f(x),f(y)} \in E_2. \]
 	
 	$f$ heißt dann auch \emph{(Graph-)Isomorphismus}.
@@ -518,7 +518,7 @@
 
 \begin{frame}{Gerichtete Bäume}
 	\begin{Definition}
-		Ein gerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt eine \textbf{Wurzel} $r \in V$, sodass zu jedem Knoten \emph{genau ein Pfad} von $r$ aus existiert. \\
+		Ein gerichteter Graph $T$ heißt \textbf{Baum} :{\Gdw} Es gibt eine \textbf{Wurzel} $r \in V$, sodass zu jedem Knoten \emph{genau ein Pfad} von $r$ aus existiert. \\
 		\smallskip
 		Diese Wurzel ist eindeutig und hat Eingangsgrad $= 0$. \\
 		\textbf{Blätter} sind Knoten mit Ausgangsgrad $= 0$. \\
@@ -529,7 +529,7 @@
 
 \begin{frame}{Ungerichtete Bäume}
 	\begin{Definition}
-		Ein ungerichteter Graph $T$ heißt \textbf{Baum} \Gdw Es gibt einen gerichteten Baum, den man zum ungerichteten $T$ umwandeln kann. \\
+		Ein ungerichteter Graph $T$ heißt \textbf{Baum} :{\Gdw} Es gibt einen gerichteten Baum, den man zum ungerichteten $T$ umwandeln kann. \\
 		\smallskip
 		Dessen Wurzel ist \textbf{nicht} eindeutig.
 		

@@ -160,7 +160,11 @@
 \newcommand{\Instr}[2]{\texttt{#1}\ \textrm{#2}}
 \newcommand{\instrr}[3]{\texttt{#1}\ \textit{#2}\texttt{(#3)}}
 \newcommand{\Instrr}[3]{\texttt{#1}\ \textrm{#2}\texttt{(#3)}}
-\newcommand{\io}{\!\mid\!}
+
+% MODIFIED (DJ)
+% previously:  \newcommand{\io}{\!\mid\!}
+\newcommand{\io}{\ensuremath{\!\mid\!}}
+
 \usepackage{KITcolors}
 \newcommand{\literal}[1]{\hbox{\textcolor{blue!95!white}{\textup{\texttt{\scalebox{1.11}{#1}}}}}}
 %\newcommand{\literal}[1]{\hbox{\textcolor{KITblue!80!black}{\textup{\texttt{#1}}}}}

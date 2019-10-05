@@ -112,7 +112,8 @@
 	\end{Definition}
 	\medskip
 	
-	Viele Programmiersprachen sind kontextfrei. \\ 
+	Viele Programmiersprachen sind kontextfrei. \\  
+	% ACHTUNG, streng genommen falsch. Jede Sprache, in der nur zuvor deklarierte Bezeichner als solche gültig sind, ist eigentlich kontext-sensitiv. Aber viele solcher Sprachen werden beim Parsen mittels einer kontextfreien Grammatik zerlegt; Deklariertheit von Bezeichnern wird dann später überprüft. Daher die allgemein für solche Sprachen gängige Bezeichnung „kontextfrei“.
 	% Fun fact: Einrücksensitive Sprachen (wie Python – oder Haskell <3) sind dies streng genommen nicht! Das Lexing kann dann nicht von einem Regex-Automaten gemacht werden, der („übermächtige“ Stack-Automaten-)Lexer muss dann den Input vorverarbeiten, der daraus entstehende Tokenstream kann dann kontextfrei geparst werden.  Source: http://trevorjim.com/python-is-not-context-free/
 	Eine vereinfachte Variante der englischen Sprache auch. \smiley
 % Grob falsch:

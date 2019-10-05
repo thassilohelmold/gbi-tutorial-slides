@@ -58,23 +58,23 @@
 					node{$3$}
 					child{
 						node{$1,\word b$}
-						edge from parent node[left] {\bzero}
+						edge from parent node[left] {\word 0}
 					}
 					child {
 						node{$2,\word d$}
-						edge from parent node[right] {\bone}
+						edge from parent node[right] {\word 1}
 					}
-					edge from parent node[left] {\bzero};
+					edge from parent node[left] {\word 0};
 				}
 				child{
 					node{$2,\word c$}
-					edge from parent node[right] {\bone}
+					edge from parent node[right] {\word 1}
 				}
-				edge from parent node[left] {\bzero\ \mbox{}};
+				edge from parent node[left] {\word 0\ \mbox{}};
 			}
 			child{
 				node{$5,\word a$}
-				edge from parent node[right] {\ \bone}
+				edge from parent node[right] {\ \word 1}
 			};
 			\end{tikzpicture}
 		\end{figure}  
@@ -267,6 +267,6 @@
 		 \emph{Problem}: Dieser Codebaum kann evtl. sehr schlechte Ergebnisse liefern, da nicht für alle Wörter geeignet
 	\end{enumerate}
 
-	Diese Probleme können durch andere Codierungsverfahren gelöst werden, indem z.B. das Wörterbuch dynamisch während der Decodierung aus dem Codewort aufgebaut wird (z.B. Lempel-Ziv-Welch-Verfahren).
+	Diese Probleme können durch andere Codierungsverfahren gelöst werden, indem z.B. das Wörterbuch dynamisch während der Decodierung aus dem Codewort aufgebaut wird (z.~B. Lempel-Ziv-Welch-Verfahren).
 \end{frame}
 

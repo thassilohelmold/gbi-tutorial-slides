@@ -1,4 +1,6 @@
-Stark überarbeiten:
+﻿Stark überarbeiten:
 - Regeln vernünftig angeben
 - Material von Anderen einbinden
 - VL-Material einbinden
+
+EDIT (DJ, 2019-10): Ist das mittlerweile nicht schon geschehen? Kann das TODO hier weg?

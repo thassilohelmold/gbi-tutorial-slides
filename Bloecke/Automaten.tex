@@ -55,10 +55,10 @@ semithick,initial text={}]
 			\node[initial,state] (A)                    {$a$};
 			\node[state]         (M) [right of=A] 	    {$m$};
 			
-			\path (A) edge [loop above] node {\word 1|\word 0} (A)
-			          edge [loop below]  node {\word 0|\word 1} (A)
-			          edge 					  node {\word{2}|\word{X}} (M)
-			      (M) edge [loop right] node {$\stackedtight{\word 0|\word X \\ \word 1|\word X \\ \word 2|\word X}$} (M);
+			\path (A) edge [loop above] node {$\word 1\io\word 0$} (A)
+			          edge [loop below]  node {$\word 0\io\word 1$} (A)
+			          edge 					  node {$\word{2}\io\word{X}$} (M)
+			      (M) edge [loop right] node {$\stackedtight{\word 0\io\word X \\ \word 1\io\word X \\ \word 2\io\word X}$} (M);
 			      %(M) edge [loop right] node {\word 1|\word X} (M)
 			      %(M) edge [loop below] node {\word 2|\word X} (M);
 		\end{tikzpicture}
@@ -176,10 +176,10 @@ semithick,initial text={}]
 		\node[initial,state] (A)                    {$a$};
 		\node[state]         (M) [right of=A] 	    {$m$};
 		
-		\path (A) edge [loop above] node {\word 1|\word 0} (A)
-		edge [loop below]  node {\word 0|\word 1} (A)
-		edge 					  node {\word{2}|\word{X}} (M)
-		(M) edge [loop right] node {$\stackedtight{\word 0|\word X \\ \word 1|\word X \\ \word 2|\word X}$} (M);
+		\path (A) edge [loop above] node {$\word 1\io\word 0$} (A)
+		edge [loop below]  node {$\word 0\io\word 1$} (A)
+		edge 					  node {$\word{2}\io\word{X}$} (M)
+		(M) edge [loop right] node {$\stackedtight{\word 0\io\word X \\ \word 1\io\word X \\ \word 2\io\word X}$} (M);
 		\end{tikzpicture}
 	\end{center}
 	\begin{align*}
@@ -201,7 +201,7 @@ semithick,initial text={}]
 \begin{frame}{Ausgaben}
 	Automaten können ja was ausgeben. \\
 	\smallskip
-	Erinnerung: Die Kanten sind beschriftet mit $x \mid y$ , wobei $x\in X$ und $y\in Y^* $. \\
+	Erinnerung: Die Kanten sind beschriftet mit $x \io y$ , wobei $x\in X$ und $y\in Y^* $. \\
 	 \impl Für Eingabe $x$ wird das Wort $y$ ausgegeben. \\ 
 	Formal: $$g(z,x) = y$$
 \end{frame}
@@ -232,10 +232,10 @@ semithick,initial text={}]
 		\node[initial,state] (A)                    {$a$};
 		\node[state]         (M) [right of=A] 	    {$m$};
 		
-		\path (A) edge [loop above] node {\word 1|\word 0} (A)
-		edge [loop below]  node {\word 0|\word 1} (A)
-		edge 					  node {\word{2}|\word{X}} (M)
-		(M) edge [loop right] node {$\stackedtight{\word 0|\word X \\ \word 1|\word X \\ \word 2|\word X}$} (M);
+		\path (A) edge [loop above] node {$\word 1\io\word 0$} (A)
+		edge [loop below]  node {$\word 0\io\word 1$} (A)
+		edge 					  node {$\word{2}\io\word{X}$} (M)
+		(M) edge [loop right] node {$\stackedtight{\word 0\io\word X \\ \word 1\io\word X \\ \word 2\io\word X}$} (M);
 		\end{tikzpicture}
 	\end{center}
 	\vspace{-\baselineskip}
@@ -270,8 +270,8 @@ semithick,initial text={}]
 		\node[state,white] (X)                    {\hphantom{XXX}};
 		\node[state]         (A) [right of=X] 	    {$A$};
 		
-		\path (X) edge [bend left=9]	 node {\word a|\word 0} (A)
-				  edge [bend right=9]	 node [below] {\word b|\word 1} (A);
+		\path (X) edge [bend left=9]	 node {$\word a\io\word 0$} (A)
+				  edge [bend right=9]	 node [below] {$\word b\io\word 1$} (A);
 		\end{tikzpicture}
 		&
 		\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.8cm,
@@ -279,7 +279,7 @@ semithick,initial text={}]
 		\tikzstyle{every state}=[]
 		
 		\node[state,white] (X)                    {\hphantom{XXX}};
-		\node[state]         (A) [right of=X] 	    {$A|\word{XY}$};
+		\node[state]         (A) [right of=X] 	    {$A\io\word{XY}$};
 		
 		\path (X) edge [bend left=9]	 node {\word a } (A)
 				  edge [bend right=9]	 node [below] {\word b } (A);
@@ -312,7 +312,7 @@ semithick,initial text={}]
 	\end{block}
 
 	\begin{block}{Von Mealy zu Moore}
-		Komplizierter
+		Komplizierter.
 	\end{block}
 \end{frame}
 
@@ -325,23 +325,23 @@ semithick,initial text={}]
 	\node[initial,state] (A)                    {$a$};
 	\node[state]         (M) [right of=A] 	    {$m$};
 	
-	\path (A) edge [loop above] node {\word 1|\word 0} (A)
-	edge [loop below]  node {\word 0|\word 1} (A)
-	edge 					  node {\word{2}|\word{X}} (M)
-	(M) edge [loop right] node {$\stackedtight{\word 0|\word X \\ \word 1|\word X \\ \word 2|\word X}$} (M);
+	\path (A) edge [loop above] node {$\word 1\io\word 0$} (A)
+	edge [loop below]  node {$\word 0\io\word 1$} (A)
+	edge 					  node {$\word{2}\io\word{X}$} (M)
+	(M) edge [loop right] node {$\stackedtight{\word 0\io\word X \\ \word 1\io\word X \\ \word 2\io\word X}$} (M);
 	\end{tikzpicture}
 	\\
 	\pause  
 	\vspace{-1\baselineskip}
-	%\hspace{.6\textwidth} 
+	%\mbox{}\hspace{.6\textwidth} 
 	\begin{tikzpicture}[->,>=stealth,shorten >=1pt,auto,node distance=2.1cm,
 	semithick,initial text={}]
 	\tikzstyle{every state}=[]
 	
-	\node[initial,state] (A)                    {$a|\eps$};
-	\node[state]         (B) [above right of=A] 	    {$b|\word 0$};
-	\node[state]         (C) [below right of=A] 	    {$c|\word 1$};
-	\node[state]         (M) [below right of=B] 	    {$m|\word X$};
+	\node[initial,state] (A)                    {$a\io\eps$};
+	\node[state]         (B) [above right of=A] 	    {$b\io\word 0$};
+	\node[state]         (C) [below right of=A] 	    {$c\io\word 1$};
+	\node[state]         (M) [below right of=B] 	    {$m\io\word X$};
 	
 	\path 
 		(A) edge 				node {\word 1} (B)
@@ -354,7 +354,7 @@ semithick,initial text={}]
 		(C) edge 				node [below] {\word 2} (M)
 		(M) edge [loop right]	node {\word 0, \word 1, \word 2} (M)
 	;
-	\draw[->] (A) to[out=-90,in=-76, looseness=1.94] (M) node [at start, below=55pt, right=4pt] {\word 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all.
+	\draw[->] (A) to[out=-90,in=-76, looseness=1.94] (M) node [at start, below right = 48pt and 2pt] {\word 2}; %Fuck you, LaTeX. "midway" node option doesn't work at all. Beware: `below=48pt, right=2pt` doesn't seem to work anymore?! WTF!?
 	\end{tikzpicture}
 \end{frame}
 
@@ -374,10 +374,10 @@ semithick,initial text={}]
 	\node[initial,state] (1)                    {$1$};
 	\node[state]         (2) [right of=A] 	    {$2$};
 	
-	\path (1) edge [loop above] node {\word b|\word b} (1)
-	% edge [loop below]  node {\word 0|\word 1} (A)
-	edge 	[bend left=12]				  node {\word{a}|$\eps$} (2)
-	(2) edge [bend left=12] node  {$\stackedtight{\word b|\word{ab} \\ \word a|\word{ccc}}$} (1);
+	\path (1) edge [loop above] node {$\word b\io\word b$} (1)
+	% edge [loop below]  node {$\word 0\io\word 1$} (A)
+	edge 	[bend left=12]				  node {$\word{a}\io\eps$} (2)
+	(2) edge [bend left=12] node  {$\stackedtight{\word b\io\word{ab} \\ \word a\io\word{ccc}}$} (1);
 	\end{tikzpicture} \\
 	Zustand 2 „merkt sich“, dass ein einzelnes \word a gelesen wurde. \\
 	\pause

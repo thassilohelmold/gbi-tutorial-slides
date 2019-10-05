@@ -161,12 +161,12 @@
 \end{frame}
 
 \begin{frame}{Optimierungen}
-	Can we do better? – Matrixversion \pause
+	Can we do better? --- Matrixversion \pause
 	\bigskip
 	
 	Betrachten wir nun $ F = (I + A) $ für eine Adjazenzmatrix $A$. \\  \pause 
 	So folgt $$ F^2 = (I + A) \* (I + A) = I + A + A^2 $$ \pause
-	Analog : $$ F^4 = (F^2)^2 = (I + A + A^2) \* (I + A + A^2) = I + A + A^2 + A^3 + A^4 $$ \pause 
+	Analog : $$ F^4 = \left(F^2\right)^2 = (I + A + A^2) \* (I + A + A^2) = I + A + A^2 + A^3 + A^4 $$ \pause 
 	Also folgt $$ F^{2^m} = \sum\limits_{i=0}^{2^m} A^i$$ \\
 	Setze $m := \lceil \log_2 n \rceil $. \pause \impl $W = \sgn\big(F^{2^m}\big)$.
 \end{frame}
@@ -174,12 +174,12 @@
 \begin{frame}
 	Der Algorithmus sieht nun also folgendermaßen aus 
 	\begin{align*}
-		&F \leftarrow A + I & // n^2 \\ 
+		&F \leftarrow A + I & \text{// $n^2$} \\ 
 		&m \leftarrow \lceil \log_2 n \rceil \\
-		&\mathbf{for}\ i \leftarrow 1\ \mathbf{to} \ m \ \mathbf{do} & // \lceil \log_2 n \rceil\text{-mal} \\
-		&\hspace*{2em} F \leftarrow F \cdot F & // (n+n-1)\cdot n^2 \\
+		&\mathbf{for}\ i \leftarrow 1\ \mathbf{to} \ m \ \mathbf{do} & \text{// $\lceil \log_2 n \rceil$-mal} \\
+		&\hspace*{2em} F \leftarrow F \cdot F & \text{// $(n+n-1)\cdot n^2$} \\
 		&\mathbf{od}\\
-		& W\leftarrow \sgn(F) 	& // n^2
+		& W\leftarrow \sgn(F) 	& \text{// $n^2$}
 	\end{align*} \pause
 	Wir brauchen also nur noch $n^2 + \lceil \log_2 n \rceil \left( (2n-1)\cdot n^2 \right) +n^2 = \lceil \log_2 n \rceil \cdot 2n^3 + \dots $ Rechenoperationen  \\
 \end{frame}
@@ -188,6 +188,7 @@
 	(Noch) schnellere Berechnung der Wegematrix. Laufzeit $O(n^3)$\\
 	Mehr dazu in der Vorlesung und im Skript.
 	% TODO: Evtl. doch noch anreißen, evtl. zumindest Folie dazu...
+	% ^ Sicher? Ist das nötig?
 \end{frame}
 
 

@@ -95,6 +95,8 @@
 	\TrueQuestionE{$x^4 \in \Oh{{(x^3)}^3}$}{ $ {(x^3)}^3 = x^9$}
 	\FalseQuestionE{$\sqrt{n} \in \Om{2^n}$}{}
 	\TrueQuestionE{$log_{5000} n \in \Th{\log_2{n^4}}$}{ $ \log_2{n^4} = 4 \cdot \log_2{n}$}
+	%
+	% ACHTUNG: Sehr aufwendig zu erklären. Besser weglassen, um Zeit zu sparen!
 	\FalseQuestionE{$O(f_1) + f_2 = O(f_1 + f_2)$}{Z.~B.: \\ $\Oh{n} + 4 = \set{f(n) + 4 \Mid f(n) \in \Oh{n}} \neq \set{f(n) \Mid f(n) \in \Oh{n}} = \Oh{n+4}$. \\ \textbf{Aber} es gilt: $O(f_1) + O(f_2) = O(f_1 + f_2)$}
 \end{frame}
 

@@ -1,4 +1,60 @@
-%% Collection of stuff that might be deprecated or just became out of use. Saved here for later revival.
+%% Collection of stuff that might be deprecated or just came out of use. Saved here for later (possible) revival.
+
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%
+
+\daniel{
+	\begin{frame}{Achtung, Tut 36: Feiertag!}
+		\begin{itemize}
+			\item Nächsten Donnerstag (01. November) ist Feiertag
+			\item Daher: \textbf{Tut 36 fällt aus}!
+			\item Aber: Themen werden \textbf{NICHT} nachgeholt (Folien im ILIAS)!
+			\item Bitte anderes Tutorium besuchen 
+		\end{itemize}		 
+	\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%
+
+% From gbitut01:
+
+\thasse{ % No time.
+	\begin{frame}{Grundbegriffe?}
+		\begin{itemize}
+			\item Cloud
+			\item Künstliche Intelligenz
+			\item Compilerbau
+			\item Big Data
+			\item Apps
+			\item Roboter
+			\item Industrie~4.0
+		\end{itemize}
+		
+		\pause
+		Kommt alles noch... Aber nicht in GBI.
+	\end{frame}
+	
+	\begin{frame}{Grundbegriffe!}
+		\begin{itemize}
+			\item Mengen, Relationen, Funktionen
+			\item Wörter, Sprachen, Grammatiken
+			\item Graphen
+			\item Algorithmen
+			\item Turingmaschinen
+			\item Logik
+			\item Prozessoren
+			\item ...
+		\end{itemize}
+		\impl You have been warned. :P
+	\end{frame}
+}
 
 %%%%%%%%%%%%%%%%%%
 
@@ -34,4 +90,61 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%
+
+Wenn ihr eine Formel aufstellt, dann \textbf{prüft das Ergebnis für kleine Werte}.\\[0.2em]
+90~\% der falschen Antworten in 1.6.c) haben schon für $n \in \{0, 1\}$ nicht gestimmt.\\[0.5em]
+
+%------ Weihnachtsgebäck ------
+\mycomment{ % Kam letztes Jahr nicht gut an, ist wohl etwas "albern". - TH
+	\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+		Weihnachten steht vor der Tür, aber Geschenke sind von Jahr zu Jahr teurer geworden! Um den Staatshaushalt des Nordpols zu schonen, hat sich der Weihnachtsmann etwas einfallen lassen: Dieses Jahr bringt er nur den Haushalten Geschenke, bei denen das für ihn bereitgestellte Gebäck seinen speziellen Qualitätsanforderungen genügt.\\[1em]
+		
+		Dazu hat der Weihnachtsmann drei Gebäckarten (Lebkuchen $L$, Zimtstern $Z$, Dominostein $D$) normiert und eine kontextfreie Grammatik aufgestellt, die gültige Kombinationen beschreibt.
+	\end{frame}
+	
+	\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+		\begin{align*}
+		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
+		S &\to A \mid B\\
+		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
+		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
+		\})
+		\end{align*}
+		\begin{enumerate}
+			\item Welche Kombinationen sind gültig?\\[0.5em]
+			\item Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
+			3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
+			Stelle eine Kontextfreie Grammatik dafür auf.
+		\end{enumerate}
+	\end{frame}
+	
+	\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+		\begin{align*}
+		G &= (\{S, A, B, X, Y\}, \{L, Z, D\}, S, \{ \\
+		S &\to A \mid B\\
+		A &\to LLLLLLLLLLX, \qquad X \to LX \mid e\\
+		B &\to ZYZ \mid DYD, \qquad Y \to Z \mid D \mid L\\
+		\})
+		\end{align*}
+		
+		Welche Kombinationen sind gültig?\\[0.5em] \pause
+		$\{ L^n \mid n \geq 10\} \cup \{w \mid \text{w ist Palindrom und } |w|_L \leq 1\}$
+	\end{frame}
+	
+	\begin{frame}{Zum Aufwärmen: Weihnachtsgebäck}
+		Der Weihnachtsmann muss auf seine Figur achten. Deswegen möchte er für nächstes Jahr eine neue, kalorienarme Kombination von Gebäck:\\
+		3 Folgen mit 42, 17 und 41 x ein Zimtstern oder ein Dominostein. Die einzelnen Folgen sollen durch Lebkuchen getrennt werden.\\
+		Stelle eine Kontextfreie Grammatik dafür auf.
+		
+		\pause
+		\begin{align*}
+		G &= (\{S\} \cup \{F_i \mid 0 \leq i \leq 42 \}, \{L, Z, D\}, S, P)\\
+		P &= \{S \to F_{42}LF_{17}LF_{41} \}\\
+		&\cup \{F_i \to ZF_{i-1}, F_i \to DF_{i-1} \mid 1 \leq i \leq 42 \} \\
+		&\cup \{F_0 \to \eps \}
+		\end{align*}
+	\end{frame}
+}
+
+%------------------------------
 

@@ -27,9 +27,7 @@
 \begin{frame}{Beispiele}
 	$G = (\{X\}, \{\word a, \word b\}, X, P )$ mit 
 	$$P = \set{X \to \word aX \mid \word{ba}X \mid \word b \mid \varepsilon }$$
-	% Das da ist FALSCH:
-	% TODO: Nein, ist es nicht. Es entspricht genau der "Umsetzung" des Automaten
-	% Aber das könnte man noch besser herausarbeiten: Automat Tikzen und Zustände umbenennen, G' dann aus Automaten "ablesen"
+	% Kompliziertere Fassung von P, welche näher am Automaten ist: 
 	%$$P = \{X \to aX \mid bY \mid \varepsilon, Y \to aX \mid bZ \mid \varepsilon, Z \to aZ \mid bZ\}$$ 
 	ist eine rechtslineare Grammatik. Die dadurch erzeugte Sprache ist \pause 
 	$$L(G) = \set{ w \Mid \forall v_1, v_2 \in \{\word a,\word b\}^\ast: w \neq v_1 \word{bb} v_2 },$$ 

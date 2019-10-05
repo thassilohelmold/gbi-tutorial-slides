@@ -1,12 +1,15 @@
 
-% This is a configuration file with private, tutor specific information.
-% It is therefore excluded from the Git repository so changes in this file will not conflict in git commits.
+% This is a configuration file with personal tutor information.
+% It is therefore excluded from the git repository, so changes in this file will not conflict in git commits.
 
-% Copy this Template, rename to config.tex and add your information below.
+% Copy this template, rename to config.tex and add your information below.
 
 \newcommand{\myname}{Max Mustermann}
-\newcommand{\mymail}{uXXXX@student.kit.edu} % Consider using your named student Mail address to keep your u-Account private.
+\newcommand{\mymail}{uXXXX@student.kit.edu} % Consider using your named student mail address to keep your u**** account private.
 \newcommand{\mytutnumber}{00}
+
+% Don't forget to update ILIAS url. WARNING: Underscores '_' and Ampersands '&' have to be escaped with backslashes '\'. Blame TeX, not me.
+\newcommand{\myILIASurl}{https://ilias.studium.kit.edu/ilias.php?ref\_id=855240\&cmdClass=ilrepositorygui\&cmdNode=5r\&baseClass=ilrepositorygui}
 
 % Uncommenting this will print Socrative info with here defined roomname whenever \Socrative is called.
 % (Otherwise, \Socrative will remain silent.)
@@ -18,13 +21,17 @@
 \newcommand{\aboutMeFrame}{
 	\begin{frame}{Über mich}
 		\myname \\
-		Informatik, X. Fachsemester (Bachelor)
+		Informatik, X. Fachsemester (BachelorOderMaster)
 		% Lebensgeschichte...
 		% Stammbaum...
+		% Aufarbeitung der eigenen Todesser-Vergangenheit...
 	\end{frame}
 }
 
-\def\thisyear{2018}
+\def\thisyear{2019}
+
+% Update date of exam
+\def\myKlausurtermin{19.~März~2019, 11:00–13:00~Uhr}
 
 \def\mydate#1{
 		  \ifnum#1=1\relax	  23. Oktober \thisyear \
@@ -60,14 +67,14 @@
 \setbeamercolor{alerted text}{fg=myalertcolor}
 
 % Flag to toggle display of KIT Logo.
-% If you want to conform to the official logo guidlines, 
+% If you want to conform to the official logo guidelines, 
 % you are not allowed to use the logo and should disable it
 % using the following flag. Just saying.
 % (But it's too beautiful, so best leave this commented. :P)
 %\newcommand{\noKITLogo}{}
 
-% Toggle handout mode by including the following line before including style_tut
-% and removing the % at the start (but do NOT remove it here, otherwise handout mode will always be on!)
+% Toggle handout mode by including the following line before including PraeambelTut
+% and removing the % at the start (but do NOT remove the % char here, otherwise handout mode will always be on!)
 % Please keep handout mode off in all commits!
 
 % \newcommand{\handout}{}
